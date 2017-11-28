@@ -1,0 +1,155 @@
+\documentclass[12pt]{article}
+
+
+\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.75in]{geometry}
+\usepackage{cite}
+\usepackage{slashed}
+\usepackage{graphicx}
+\usepackage{amsmath}
+
+\usepackage[american,fulldiode]{circuitikz}
+\usetikzlibrary{calc}
+
+\begin{document}
+\ctikzset{bipoles/thickness=1}
+\ctikzset{bipoles/length=.6cm}
+
+\title{AM Radio}
+
+\maketitle
+
+\section{Introduction}
+
+In this lab, you will build an AM radio receiver and audio power amplifier.
+
+\section{RF Amplifier}
+
+\begin{figure}[htbp]
+\begin{center}
+\begin{circuitikz}[american,line width=1pt]
+\draw
+(0,0) node[npn](npn1){}
+++(0,2) node[npn](npn2){} 
+(npn2.E) to[short] (npn1.C)
+(npn2.C) to[short,*-o] ++(0.5,0) node[right]{$v_{\rm out}$}
+(npn2.C) to[R,l=$R_5$,-*] ++(0,1.5) coordinate(X) to[short,*-o] ++(0,0.5) node[right]{$V_{\rm CC}$}
+(X) to[short] ++(-3.0,0) to[R,l_=$R_1$] ++(0,-1.5) coordinate(X)
+let \p1 = (npn2.B), \p2=(X) in coordinate(Y) at (\x2,\y1)
+(X) to[short] (Y) coordinate(X)
+(npn2.B) to[short,-*] (X) to[C,l=$C_1$] ++(-1.5,0) node[ground,yscale=2.0]{}
+let \p1 = (npn1.B), \p2=(X) in coordinate(Y) at (\x2,\y1)
+(X) to[R,l=$R_2$] (Y)  coordinate(X)
+;
+\path (X) ++ (1.5,0) coordinate(A);
+\draw
+(A) to[short] (npn1.B)
+(A) to[short] (X) to[C,l=$C_2$,-o] ++(-1.5,0) node[left]{$v_{\rm in}$}
+(A) to[R,l=$R_4$,*-*] ++(0,-1.5) coordinate(B)
+let \p1 = (npn1.E), \p2=(B) in coordinate(C) at (\x1,\y2)
+(B) to[C,l_=$C_3$,-*] (C) to[short] (npn1.E)
+let \p1 = (B), \p2=(X) in coordinate(Y) at (\x2,\y1)
+(B) to[short,-*] (Y)
+(X) to[short] (Y) to[R,l_=$R_3$] ++(0,-1.5) coordinate(X)
+(C) to[R,l=$R_6$] ++(0,-1.5) coordinate(D) to[R,l=$R_7$,-*] ++(0,-1.5) coordinate(E) node[ground,yscale=2.0]{} 
+(X) |- (E)
+(D) to[short,*-] ++(-1.5,0) to[C,l_=$C_4$,-*] ++(0,-1.5)
+;
+\end{circuitikz} 
+\caption{Cascode amplifier with bootstrap.}
+\label{fig:beta}
+\end{center}
+\end{figure}
+
+$R_4$ is boot-strapped so $R_4+R_3||R_2$ does not decrease input impedance for the HF signal.  But still hard to get high gain without lower transistor being high beta:  $R_6$ needs to be about 
+$4.6~\rm k\Omega$ but then $R_5 \sim 46~\rm k\Omega$ limits $I_C^Q \sim 0.1~\rm mA$, which is on low end for the 2N3904.
+
+Maybe use a Darlington pair?  With high beta, probably a single emitter resistor suffices with no capacitor.
+
+\section{RF Amplifier 2}
+
+\begin{figure}[htbp]
+\begin{center}
+\begin{circuitikz}[american,line width=1pt]
+\draw
+(0,0) node[npn](npn1){}
+++(0,2) node[npn](npn2){} 
+(npn2.E) to[short] (npn1.C)
+(npn2.C) to[short,*-o] ++(0.5,0) node[right]{$v_{\rm out}$}
+(npn2.C) to[R,l=$R_5$,-*] ++(0,1.5) coordinate(X) to[short,*-o] ++(0,0.5) node[right]{$V_{\rm CC}$}
+(X) to[short] ++(-3.0,0) to[R,l_=$R_1$] ++(0,-1.5) coordinate(X)
+let \p1 = (npn2.B), \p2=(X) in coordinate(Y) at (\x2,\y1)
+(X) to[short] (Y) coordinate(X)
+(npn2.B) to[short,-*] (X) to[C,l=$C_1$] ++(-1.5,0) node[ground,yscale=2.0]{}
+let \p1 = (npn1.B), \p2=(X) in coordinate(Y) at (\x2,\y1)
+(X) to[R,l=$R_2$] (Y)  coordinate(X)
+;
+\path (X) ++ (1.5,0) coordinate(A);
+\draw
+(A) to[short] (npn1.B)
+(A) to[short] (X) to[C,l=$C_2$,-o] ++(-1.5,0) node[left]{$v_{\rm in}$}
+(A) to[R,l=$R_4$,*-*] ++(0,-1.5) coordinate(B)
+let \p1 = (npn1.E), \p2=(B) in coordinate(C) at (\x1,\y2)
+(B) to[C,l_=$C_3$,-*] (C) to[short] (npn1.E)
+let \p1 = (B), \p2=(X) in coordinate(Y) at (\x2,\y1)
+(B) to[short,-*] (Y)
+(X) to[short] (Y) to[R,l_=$R_3$] ++(0,-1.5) coordinate(X)
+(C) to[R,l=$R_6$] ++(0,-1.5) coordinate(D) to[R,l=$R_7$,-*] ++(0,-1.5) coordinate(E) node[ground,yscale=2.0]{} 
+(X) |- (E)
+(D) to[short,*-] ++(-1.5,0) to[C,l_=$C_4$,-*] ++(0,-1.5)
+;
+\end{circuitikz} 
+\caption{Cascode amplifier with bootstrap.}
+\label{fig:beta}
+\end{center}
+\end{figure}
+
+\newpage
+
+\section{RF Amplifier 2}
+
+\begin{figure}[htbp]
+\begin{center}
+\begin{circuitikz}[american,line width=1pt]
+\draw
+(0,0) node[npn](npn){}
+(2,0) node[pnp,xscale=-1](pnp){} 
+(-2,0.75) node[njfet](fet){} 
+(npn.C) to[short] ++(1,0) coordinate(X) to[short] (pnp.E)
+(X) to[short,*-] ++(0,0.75) to[R,l=$R_4$] ++(0,0.75) to[short,-*] ++(0,0.5) coordinate(A) 
+let \p1 = (pnp.B), \p2=(A) in coordinate(X) at (\x1,\y2)
+(A) to[short] (X) to[short,-o] ++(0.5,0) node[right]{$V_{\rm CC}$}
+(X) to[short,*-] ++(0,-0.5) to[R,l_=$R_{8}$] ++(0,-0.75) to[short,-*] (pnp.B)
+(npn.E) to[R,l=$R_{5}$] ++(0,-1.25) coordinate(X) to[R,l=$R_{6}$] ++(0,-1.25) coordinate(B)
+(X) to[short,*-] ++(-0.75,0) to[C,l_=$C_2$,-*] ++(0,-1.25)
+(pnp.C) to[R,l_=$R_{7}$] ++(0,-2.5) coordinate(X)
+(X) to[short,*-*] (B)
+let \p1 = (pnp.B), \p2=(X) in coordinate(Y) at (\x1,\y2)
+(X) to[short,-*] (Y) to[short,-o] ++(0.5,0) node[right]{$V_{\rm EE}$}
+(Y) to[R,l_=$R_{9}$] ++(0,2.5) to[short] (pnp.B)
+;
+\path (pnp.B) ++ (0,0.5) coordinate(X);
+\draw
+(X) to[C,l_=$C_3$,*-] ++(1.5,0) node[ground,yscale=2.0]{}
+(pnp.C) to[short,*-o] ++(3,0) node[right]{$v_{\rm out}$}
+% tie in the JFET at (A) and (B)
+(fet.D) to[R,l=$R_2$] ++(0,0.75) to[short] ++(0,0.5) coordinate(X)
+(A) to[short] (X) coordinate (A)
+(fet.S) to[short] ++(0,-0.75) to[R,l=$R_3$] ++(0,-1.25) to[short] ++(0,-1.25) coordinate(X)
+(fet.S) to[short,*-] (npn.B)
+(B) to[short] (X) coordinate(B)
+let \p1 = (fet.G), \p2=(npn.E) in coordinate(X) at (\x1,\y2)
+(fet.G) to[short] (X) to[R,l_=$R_1$] ++(0,-1.25) to[short] ++(0,-1.25) to[short,-*] (B)
+(fet.G)  to[C,l=$C_1$,*-o] ++(-1.25,0) node[left]{$v_{\rm in}$}
+;
+\end{circuitikz} 
+\caption{Folded cascode amplifier with FET input buffer.}
+\label{fig:beta}
+\end{center}
+\end{figure}
+
+
+\section{Lab Report}
+
+Your report should include all of your measurements and a comparison with your calculation.
+ 
+\end{document}
