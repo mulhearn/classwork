@@ -7,6 +7,10 @@
 \usepackage{graphicx}
 \usepackage{amsmath}
 
+\usepackage[T1]{fontenc}
+\usepackage[ttdefault=true]{AnonymousPro}
+\usepackage{fancyvrb}
+
 \begin{document}
 
 
@@ -22,7 +26,7 @@ width modulation (PWM):  the output is always at the digital logic level (0
 or VCC) but the duty cycle varies according to the specified one-byte
 output level (from 0 to 255).  For an analog write output level of 0,
 the duty cycle is $0\%$ (always off).  For 255, the duty cycle is
-$100\%$ (always on).  For 122, the duty cycle is $50\%$ (half on, half
+$100\%$ (always on).  For 127, the duty cycle is $50\%$ (half on, half
 off).
 
 The software you develop for your Arduino microprocessor will provide 
@@ -46,19 +50,21 @@ Connect the oscilloscope to the output of pin 5.  Describe what you see.  What i
 
 \item {\bf Step 3:} The PWM frequency will ultimately limit the frequency of the output functions we can generate.  To speed up the PWM frequency we will use low-level commands to adjust the divisor used for the clock which drives the PWM output on these pins.  Place the following command in the setup function for your sketch:
 \begin{verbatim}
-    // set 3 LSB bits of TCCR0B to 1, setting clock divisor to 1, for fastest PWM mode on pins 5,6;
+    // set 3 LSB bits of TCCR0B to 1, setting clock divisor to 1,
+    // for fastest PWM mode on pins 5,6;
     TCCR0B = (TCCR0B & 0xb1111000) | 0b001;
 \end{verbatim}
 You should see the PWM frequency increase substantially.  This has the unintended side effect of speeding up the "micros" function as well.  We can't have that!  So when speeding up this clock, you'll want to use a corrected version of the micros function for measuring time intervals, like this one:
 
 \begin{verbatim}
-// fix micros to give correct answer, even after we mess with the clock speed.
-unsigned long corrected_micros(){
-  unsigned long divisor_mode = TCCR0B & 0x7;
-  unsigned long fudge = 1;
-  if (divisor_mode == 1){ fudge = 64; }  
-  return micros()/fudge;
-}
+    // fix micros to give correct answer,
+    // even after we mess with the clock speed.
+    unsigned long corrected_micros(){
+      unsigned long divisor_mode = TCCR0B & 0x7;
+      unsigned long fudge = 1;
+      if (divisor_mode == 1){ fudge = 64; }  
+      return micros()/fudge;
+    }
 \end{verbatim}
 
 \end{itemize}
