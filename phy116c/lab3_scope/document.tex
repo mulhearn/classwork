@@ -6,205 +6,127 @@
 \usepackage{graphicx}
 \usepackage{amsmath}
 
+\usepackage[T1]{fontenc}
+\usepackage[ttdefault=true]{AnonymousPro}
+\usepackage{fancyvrb}
+
 \begin{document}
+
+
+\title{Arduino Digital Scope} 
+
+\maketitle
 
 \section{Introduction}
 
-In this lab, you will construct your own digital oscilloscope.  The Arduino microprocessor will perform two roles: it will act as a function generator to provide an input signal, and will acquire waveforms from its analog input, storing both the time and voltage read on the analog input.  This data is downloaded to a PC via the same serial USB connection which you use to program the Arduino.  The waveforms are then plotted using the matplotlib utility of Python.
+In this lab, you will construct a single-channel digital oscilloscope using the analog-to-digital converter (ADC) on the Arduino Uno.  You oscilloscope will not complete with LeCroy or Tektronix just yet, but for \$30 it will cover the entire audio range.  Not bad!
 
-Your scope will be nearly fully featured.  It will have a trigger requirement, that will cause data to be collected only when the signal passes above a programmable threshold.  It will have a delay feature, so that some number of samples collected before the trigger requirement is met will be included in the wave form.
+\section{Free-Running ADC Mode}
 
-\section{Serial Output of the Arduino}
+An initial sketch {\tt Scope} is provided with this lab to get you started.  To achieve the fastest possible sample rate, your scope will operate the ADC in free-running mode.  In this mode, the ADC continuously samples the input, and an interrupt is sent as soon as a new sample is available.  The driver commands to set the ADC to sample analog pin 0 in free running mode on the Uno are already included in the ``Scope" sketch:
+ \begin{verbatim}
+  ADCSRA = 0;             // clear ADCSRA register
+  ADCSRB = 0;             // clear ADCSRB register
+  ADMUX |= (adc & 0x07);    // set A0 analog input pin
+  ADMUX |= (1 << REFS0);  // set reference voltage
+  ADMUX |= (1 << ADLAR);  // left align ADC value to 8 bits from ADCH register
+  // sampling rate is [ADC clock] / [prescaler] / [conversion clock cycles]
+  // for Arduino Uno ADC clock is 16 MHz and a conversion takes 13 clock cycles
+  ADCSRA |= (1 << ADPS2);                     // 16 prescaler for 76.9 KHz
+  ADCSRA |= (1 << ADATE); // enable auto trigger
+  ADCSRA |= (1 << ADIE);  // enable interrupts when measurement complete
+  ADCSRA |= (1 << ADEN);  // enable ADC
+  ADCSRA |= (1 << ADSC);  // start ADC measurements
+\end{verbatim}
+Where $\rm adc=0$ specified elsewhere sets the ADC channel to A0.  The interrupt routine which handles each new sample is also provided:
+\begin{verbatim}
+ISR(ADC_vect){
+  if (isamp < max_samples){
+    buf[isamp++]=ADCH;
+  }
+}    
+\end{verbatim}
+Each time a new sample is available, it is added to the buffer, until the entire buffer is full. 
+
+This initial version of your scope has no trigger.  Whenever the buffer is full, it simply dumps the first 500 samples to the serial output, which can then be plotted using the Serial Plotter, which has a fixed 500 sample width.
+
+\section{Using the Scope Sketch}
+
+{\bf We won't be building an analog front-end for this digital scope, so you'll need to be careful not to damage the ADC by driving it outside of the $0$ to $5~\rm{V}$ range!}
 
 \noindent
-From the course website, download the ``DigitalScopeStart.ino'' Arduino sketch and upload it to your Arduino using the Arduino software (Since this is only a file, the software should prompt you about making a directory folder to contain this sketch, which you should allow.)  This program is a useful starting point for building your own digital oscilloscope.  It includes the function generator from the previous lab, and includes a shell for the Digital Scope program, including a circular data buffer and the complete serial interface for requesting and receiving the scope data on the PC over the USB serial port.
+{\bf Step 1:}  Make certain the your function generator is set to ``high impedance output" under setup and set it to deliver a $1~\rm kHz$ sine wave with high value of $5~\rm V$ and a low value of $0~\rm V$.  Double check that you have the settings correct before connecting it!  In particular, you want to make sure your a sending an {\bf offset} sine wave, which ranges from $0$ to $5~\rm V$, and not, e.g., one from $-2.5~\rm V$ to $2.5~\rm V$!   Once your function generator is setup properly (and confirmed!) configure your Uno with the Scope sketch.  Connect the ground of your function generator to ground on your Arduino, and connect the signal to analog pin 0.
 
-To see how the serial interface works on the Arduino side, open a serial monitor using the Arduino software on your PC (making sure it is set to the same
-rate as the program: 9600 baud).  When you open the serial connection, the Arduino initializes, which (in this sketch) includes sending the message ``Arduino Initialized'' on the serial port.  This informs you that the Arduino is now ready and listening to the serial port for commands.
+{\bf Step 2:}  Open the serial plotter tool.  The serial plotter simply plots the most recent 500 lines received on the serial port.  The Scope sketch initializes the serial port with a baud rate of 115200, so you'll need to set the serial plotter baud rate to the same value.
 
-Send a single ``a'' character on the serial monitor (the "a" stands for "acquire data").  The Arduino receives this command, and,
-in response, sends back a payload of data to the PC via the serial link, which you should see in the serial monitor.  The format of the payload is a single integer N (in this case 50) which tells the PC how many x and y coordinates will follow, then N lines of containing one x and one y coordinate.  At this moment, we
-are just testing the Arduino serial input and output, so the payload consists of fake data (Your job will be to turn this into real scope data).
+\begin{figure}[htbp]
+\begin{center}
+{\includegraphics[width=0.75\textwidth]{figs/tracea.png}}
+{\includegraphics[width=0.75\textwidth]{figs/traceb.png}}
+\end{center}
+\caption{\label{fig:traces} two example wave forms captured from the {\rm scope}  sketch.  Note that the phase of the waveform varies from sample to sample, due to the lack of trigger.}
+\end{figure}
 
-{\bf Code Details:~~}
-The code which controls the serial interface includes these lines, which initialize the serial interface to 9600 baud, then prints an initialization message to the serial output:
-\begin{verbatim}
-// initialize serial interface:
-Serial.begin(9600);
-Serial.print("Arduino Initialized\n");
-\end{verbatim}
-The handling of the "a" serial input, which causes data to be sent on the serial 
-port is handled in the following special function:
-\begin{verbatim}
-void serialEvent() {
-  while (Serial.available()) {
-    char inChar = (char) Serial.read();
-    if (inChar == 'a'){
-      // this command overrides current state, we go to ACQUIRE:
-      scope_state = ACQUIRE;
-      digitalWrite(led, HIGH);
-      return;
-    }
-  }
-}
-\end{verbatim}
-The {\tt serialEvent()} function is called after each call to loop if serial input is available.  So this loop simply looks for the "a" character, and sets the state of the digital scope to {\tt ACQUIRE} mode if it is found.  The led is set high and will remain lit until the requested data has been sent to the PC.
+You should observe sine waves like those in Fig.~\ref{fig:traces} in the serial plotter tool.  Note that the phase changes from one waveform to the next, because this sketch has no trigger requirement, it is simply displaying the waveform at a randomly time.
 
-When the digital scope's circular buffer is full (a complete waveform has been captured) the scope state moves to FULL, and the timestamps and ADC input stored in the circular buffer ({\tt cbuf\_time} and {\tt cbuf\_adc}) is sent to the PC over the serial link:
-\begin{verbatim}  
-  if (scope_state == FULL) {
-    char line[50];
-    sprintf(line, "\%d\n", cbuf_size);
-    Serial.print(line);     
-    for(int i=0; i<cbuf_size; i++){
-      sprintf(line, "\%ld \%d\n", cbuf_time[i], cbuf_adc[i]);
-      Serial.print(line); 
-    }
-    //data has been overloaded, go back to standby:
-    scope_state = STANDBY;
-    digitalWrite(led, LOW);
-  }
-\end{verbatim}
+\section{Digital Trigger}
 
-\section{PC Driver for the Arduino Digital Scope}
-
-{\bf Close your serial monitor before proceeding!}  You cannot access the serial port through the python tools described in this section if you already have a serial monitor open in the Arduino IDE.  
-
-We want to automate the communication between the PC and the
-Arduino (in the previous section, you controlled the Arduino from the serial monitor).  
-This driver code is handled by a second Python program running on the PC.
-Download the ``serial\_eg.py'' Python script from the course site.  Run this
-script from the command line as ``python serial\_eg.py'' from the directory
-(e.g. Desktop) where you have downloaded the serial\_eg.py file to.
-
-The program will prompt you for the serial port address, which you can usually read off from the bottom of the Arduino program which you ran in the previous step.
-
-After connecting to the serial port you select, the python script will wait to
-receive the ``Arduino Initialized'' message from the Arduino.  Then it will
-prompt you to press enter when you are ready to acquire data.  Press Enter.  The
-python script will send the acquire command (a character 'a' send over the
-serial port) and the Arduino will send its payload of x and y coordinates.
-
-After receiving the data from the Arduino, the python script uses matplotlib to
-plot the data.  If this works, you now have a way to acquire data that
-originated on the Arduino and display it on your PC.  In other words, you have a
-data acquisition system.  
-
-{\bf For Convenience:}  If you are tired of entering the serial port address by hand, you can modify the {\tt serial\_eg.py} script to use a constant value appropriate for your setup instead of prompting the user each time.   Just remember to change this if you serial port changes location!
-
-{\bf Code Details:}  Note: if you want to use this serial python script on your laptop, you will
-need to make sure that you have {\tt pyserial}, {\tt matplotlib}, and {\tt numpy} installed.  You won't need to modify the python code to complete this lab, but for the curious, the code which handles the serial interface includes waiting for the initialization message ``Arduino Initialized"):
-\begin{verbatim}
-print ser.readline().strip()
-\end{verbatim}
-send the``a" character to the serial output:
-\begin{verbatim}
-ser.write('a')
-\end{verbatim}
-read the size $n$ of the input data:
-\begin{verbatim}
-n = int(ser.readline().strip())
-\end{verbatim}
-and finally read and parse $n$ lines of input: 
-\begin{verbatim}
-str = ser.readline().strip()
-x,y = str.split()
-\end{verbatim}
-
-\section{Using the Function Generator Feature}
-
-{\bf Do not send signal from a lab function generator (or any other external power source) to the Arduino.}  If we had more time, we could devise circuits which map an arbitrary input voltage to the 0-5V range the Arduino analog inputs are capable of digitizing.  Instead, we are only going to send signals that originate on the Arduino (and are already in this allowed range) as input to the analog inputs.
-
-This sketch includes the complete function generator from the previous lab, on output pin 5.  By default it is outputting a sine wave.  Reproduce the low pass filter from the previous lab and check, with a lab scope, that you have a nice 10 Hz sine wave at the output of the filter.  
-
-Using a small wire, simply connect the output of your function generator filter circuit to the input of your Arduino, at, say, Analog Input 0.
-
-\section{Programing the Arduino Digital Scope}
-
-\noindent
-{\bf Do not send signal from a lab function generator (or any other external power source) to the Arduino.}  If we had more time, we could devise circuits which map an arbitrary input voltage to the 0-5V range the Arduino analog inputs are capable of digitizing.  Instead, we are only going to send signals that originate on the Arduino (and are already in this allowed range) as input to the analog inputs.
-
-The data for this demonstration code is fake data, as you can see from these lines in the {\tt setup()} function which fill the circular buffer used to store the scope data:
-\begin{verbatim}
- // fill scope buffer with fake data:
-  for (int i=0; i<cbuf_size; i++){
-     cbuf_time[i] = i;
-     cbuf_adc[i] = 10*(i%25);
-  }
-\end{verbatim}
-When the scope sees an acquire request on the serial port (a single character ``a") this fake data is immediately sent on the serial port.  No actual data is transmitted.
-
-Your task for this lab is to replace this fake data payload with real data acquired by the
-Arduino using the analog inputs.  You'll need to use {\tt analogRead()} which you learned about in the first lab.
-{\bf Trouble Shooting:~~}  Some of the Arduinos have broken A0 or A1 inputs.  In this case, just
-use another input (e.g. A5).  The reading of this input is already implemented in the loop() function:
-\begin{verbatim}
-  unsigned long current_time = corrected_micros();
-  unsigned current_input = analogRead(inp);  
-\end{verbatim}
-but the {\tt current\_input} isn't yet used.
-
-To make this all work, you'll need to understand the Digital Scope state machine we'll be using, which has the following steps already defined:
-\begin{verbatim}
-enum State {STANDBY,ACQUIRE, ENABLED, TRIGGERED, FULL};
-State scope_state;
-\end{verbatim}
-but not all states are yet implemented.  Here's the description and status of each state.
+Your first task is to add a trigger requirement to the display of the waveform.  You trigger should have a few adjustable parameters as follows:
 \begin{itemize}
-\item {\tt STANDBY} awaiting acquisition request on serial port (already implemented).
-\item {\tt ACQUIRE} acquire request has been received on serial port ({\bf partially implemented}).
-\item {\tt ENABLED} we've already collected enough data to cover the delay period (before trigger) so we can now enable a trigger ({\bf not yet implemented})
-\item {\tt TRIGGERED} the trigger requirement has been met ({\bf not yet implemented})
-\item {\tt FULL} the circular buffer contains the complete waveform, offloading to the PC.
+ \item {\bf threshold}:  trigger just at the point when waveform goes above this threshold
+ \item {\bf offset}:  you should display an adjustable number of samples before the trigger
 \end{itemize}
-The demonstration you've been given does not correctly implement the {\tt ACQUIRE}, {\tt ENABLED} or {\tt TRIGGERED} state.  Instead, as soon as it enters the {\tt ACQUIRE} state, it immediately goes to {\tt FULL} state and begins downloading the fake data:
+
+The serial plotter is convenient, but a bit clunky.  Keep in mind that it displays the most recent 500 lines, so you'll always want to output your waveform as exactly 500 samples written on 500 lines.
+
+For the first iteration, you should simply check if and where the trigger condition is met in the buffer, once it is complete.  Do not try to keep up with the interrupt routine in the loop!  Instead, wait until the buffer is full, then check for a trigger.  You should only trigger if the condition occurs where there are enough samples available before the trigger to provide the specified offset, and enough samples available after to provide a complete waveform (500 samples wide, including offset).
+
+Once your trigger is working, you should see that the output is always at the same phase, and that you can adjust this phase with the offset parameter.  If you {\em carefully} adjust the voltage from the function generator so that it stays below your threshold, you should no longer trigger.
+
+Once the normal trigger mode is working, see if you can implement an automatic trigger mode.  This will output the normal triggered output if available, otherwise, it will simply output the waveform from a randomly chosen time (such as the start of the buffer, as in the initial version.)
+
+\section{A Deadtime-less Design}
+
+The design above, where we capture samples as fast as possible until the buffer is full, and then examine the buffer contents at our leisure, is an efficient design, particularly when the available CPU speed is limited, and often this is the best we can do, particularly if the digital signal processing stage is quite extensive.  It comes with a serious drawback, however!  While the full buffer is being processed, the incoming waveform is ignored.  This is no problem for periodic functions like the sine wave, but if we are using this scope to say, trigger on a cosmic ray muon, this so-called {\em deadtime} is a serious drawback!
+
+Fortunately, checking for our trigger condition is not too computationally extensive, if we are careful about it!  In this mode of running, the interrupt service routine for the ADC should start as something like this:
+
 \begin{verbatim}
-// for now, simply send buffer as is when acquire received:
-  if (scope_state == ACQUIRE){
-    scope_state = FULL;
-  }  
-\end{verbatim} 
-You'll want to comment out these lines of code and replace it will your own logic, which we'll discuss in the next sections.
-
-\section{No Trigger Requirement}
-
-For the first step, we can ignore the trigger and delay requirements and simply start collecting data immediately upon entering the ACQUIRE state.  To do this, I would leave the {\tt ENABLED} and {\tt TRIGGERED} states unimplemented.  
-Replace the ACQUIRE state logic with something like:
-\begin{verbatim}
- if (scope_state == ACQUIRE){
-    if (current_time > (last_sample_time + sample_period)){
-      last_sample_time = current_time;
-      cbuf_time[icbuf] = current_time;
-      cbuf_adc[icbuf] = current_input;      
-      sample_count++;
-      icbuf++;
-      if (icbuf >= cbuf_size) icbuf=0;
-    }
- }
- \end{verbatim}
-Make sure you understand what this step does.  It checks if enough time has passed to take another sample,  If so, it records the time and adc value in the circular buffer at location {\tt icbuf}.  Then it increments this location.  As this is a circular buffer, if the index reaches the end, it simply places this index back to the beginning.  It also sets the {\tt last\_sample\_time} to the {\tt current\_time} so that the next sample will be taken after a sufficiently long interval, and increments the {\tt sample\_count}.
-
-To complete this portion, simply add logic to move the state from {\tt ACQUIRE} to {\tt FULL} when the {\tt sample\_count} is sufficiently large.  The code already implements the {\tt FULL} state, which downloads the data and returns the state to {\tt STANDBY}.
-
-When this stage is working, you should see nice sine wave output when you run {\tt serial\_eg.py}.  However, you should notice that the phase of the function is completely random (it changes each time) because you have no trigger requirement.
-
-\section{Add a Trigger and Delay Requirement}
-
-For a fully featured scope, you need a trigger requirement and delay (ability to show wave form for some time before trigger requirement was met).
-
-This should be implemented by using the {\tt ENABLED} and {\tt TRIGGERED} state as follows.  You enter the {\tt ENABLED} state after you have collected at least {\tt delay\_samples} samples.  Once in the {\tt ENABLED} state, you are simply waiting for the trigger requirement to be met.  You continue to update the circular buffer exactly as for the {\tt ACQUIRE} state.  In fact, you should use that same block of code for all the states which collect data, by extending the condition to 
-\begin{verbatim}
- if ((scope_state==ACQUIRE)||(scope_state==ENABLED)||(scope_state==TRIGGERED)){
-  //...
- }
+ISR(ADC_vect){
+  if (count < samples_post){
+    buf[isamp++]=ADCH;
+    if (isamp == max_samples){
+      isamp = 0;
+    }  
+  }
 \end{verbatim}
-and moving the state logic specific to each of these states into separate blocks.
 
-Within the {\tt ENABLED} state, if the trigger threshold is met, the {\tt sample\_count} is set back to zero, and the {\tt TRIGGERED} state is entered.
-Within the {\tt TRIGGERED} state, you continue to update the circular buffer, but, when you've collected enough events to fill the circular buffer (including the already collected {\tt delay\_samples}!) you move to the {\tt FULL} state.
+This turns the buffer into a {\em circular buffer}.  When it is full, it simply begins writing again at the bottom.
 
-\section{Collect Sine Wave, Square Wave, and Saw Wave Data}
+Your task now is to add a trigger requirement to the circular buffer in a way that does not incur any deadtime.  Here's why this is a serious challenge.  You might first be tempted to simply check the contents of the circular buffer from within the loop function, to avoid interfering with the time critical sample collection.  This is a healthy impulse to keep the ISR routine as simple as possible, and a solid design, except that you will likely find that the loop falls behind the interrupt driven sample collection.  However, if on the other hand, you load down your ISR too heavily with additional trigger requirements, your sample rate slows down and becomes jittery:  an unacceptable outcome for a scope with our name on it!  What worked for me was to put a carefully chosen subset of small, time critical operations into the ISR, and leave as much as possible to the loop.
 
-Once you have your scope working, collect some different wave forms by adjusting the mode of the function generator.  Check that you can adjust the phase by adjusting the number of delay samples collected.  Check that you can adjust the timescale by adjusting the {\tt sample\_period}.
+In my design, I extended the above ISR to do the following:
+\begin{itemize}
+\item {\tt boolean buffered}:  whenever the roll-over of isamp occurs, {\tt buffered} is set to true.   This flag tells me if the circular buffer has filled at least once, which ensures that my offset for the trigger is covered.
+I leave resetting this to false (for the next trigger acquisition) to the loop routine!
+\item {\tt boolean current}:  I check if the current sample is above a threshold.  I do this using the {\tt AND} operation, instead of the slower $>=$ operation:
+\begin{verbatim}
+boolean current  = buf[isamp] & 0b10000000;
+\end{verbatim} 
+\item {\tt boolean trigger}: my trigger condition is  {\tt buffered \& previous \& current}.  If this condition is not met, I set previous=!current for the next interrupt.
+\item {\tt int count} If the trigger flag is true, I increment the count.  When the count reaches the required number of post trigger samples, the ISR stops filling the buffer to allow for readout.  (Readout deadtime is acceptable!)  The resetting of count for the next trigger is handled in the loop.
+\end{itemize} 
+Readout and then resetting of the flags for the next trigger is all handled in the loop, when the count reaches the designed number.  This design worked well for me, but there are certainly other ways.  See what you can do!
+
+\section{Bandwidth Limitations}
+
+When the frequency of your input signal exceeds the frequency of your sampling rate, you will begin to see aliasing such as in Fig.~\ref{fig:aliasing}.  Increase the frequency of your input function and observe the onset of aliasing.  What is the approximate bandwidth of your scope? 
+\begin{figure}[htbp]
+\begin{center}
+{\includegraphics[width=0.75\textwidth]{figs/aliasing.png}}
+\end{center}
+\caption{\label{fig:aliasing} Aliasing of a high-frequency input.}
+\end{figure}
+
 
 \end{document}
