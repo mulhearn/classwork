@@ -19,7 +19,7 @@
 
 \section{Introduction}
 
-In this lab, you will construct a single-channel digital oscilloscope using the analog-to-digital converter (ADC) on the Arduino Uno.  You oscilloscope will not complete with LeCroy or Tektronix just yet, but for \$30 it will cover the entire audio range.  Not bad!
+In this lab, you will construct a single-channel digital oscilloscope using the analog-to-digital converter (ADC) on the Arduino Uno.  You oscilloscope will not compete with LeCroy or Tektronix just yet, but for \$30 it will cover the entire audio range.  Not bad!
 
 \section{Free-Running ADC Mode}
 
@@ -40,11 +40,11 @@ An initial sketch {\tt Scope} is provided with this lab to get you started.  To 
 \end{verbatim}
 Where $\rm adc=0$ specified elsewhere sets the ADC channel to A0.  The interrupt routine which handles each new sample is also provided:
 \begin{verbatim}
-ISR(ADC_vect){
-  if (isamp < max_samples){
-    buf[isamp++]=ADCH;
-  }
-}    
+  ISR(ADC_vect){
+    if (isamp < max_samples){
+      buf[isamp++]=ADCH;
+    }
+  }    
 \end{verbatim}
 Each time a new sample is available, it is added to the buffer, until the entire buffer is full. 
 
@@ -67,7 +67,7 @@ This initial version of your scope has no trigger.  Whenever the buffer is full,
 \caption{\label{fig:traces} two example wave forms captured from the {\rm scope}  sketch.  Note that the phase of the waveform varies from sample to sample, due to the lack of trigger.}
 \end{figure}
 
-You should observe sine waves like those in Fig.~\ref{fig:traces} in the serial plotter tool.  Note that the phase changes from one waveform to the next, because this sketch has no trigger requirement, it is simply displaying the waveform at a randomly time.
+You should observe sine waves like those in Fig.~\ref{fig:traces} in the serial plotter tool.  Note that the phase changes from one waveform to the next, because this sketch has no trigger requirement, it is simply displaying the waveform at a random time.
 
 \section{Digital Trigger}
 
@@ -92,12 +92,13 @@ The design above, where we capture samples as fast as possible until the buffer 
 Fortunately, checking for our trigger condition is not too computationally extensive, if we are careful about it!  In this mode of running, the interrupt service routine for the ADC should start as something like this:
 
 \begin{verbatim}
-ISR(ADC_vect){
-  if (count < samples_post){
-    buf[isamp++]=ADCH;
-    if (isamp == max_samples){
-      isamp = 0;
-    }  
+  ISR(ADC_vect){
+    if (count < samples_post){
+      buf[isamp++]=ADCH;
+      if (isamp == max_samples){
+        isamp = 0;
+      }  
+    }
   }
 \end{verbatim}
 
@@ -111,7 +112,7 @@ In my design, I extended the above ISR to do the following:
 I leave resetting this to false (for the next trigger acquisition) to the loop routine!
 \item {\tt boolean current}:  I check if the current sample is above a threshold.  I do this using the {\tt AND} operation, instead of the slower $>=$ operation:
 \begin{verbatim}
-boolean current  = buf[isamp] & 0b10000000;
+  boolean current  = buf[isamp] & 0b10000000;
 \end{verbatim} 
 \item {\tt boolean trigger}: my trigger condition is  {\tt buffered \& previous \& current}.  If this condition is not met, I set previous=!current for the next interrupt.
 \item {\tt int count} If the trigger flag is true, I increment the count.  When the count reaches the required number of post trigger samples, the ISR stops filling the buffer to allow for readout.  (Readout deadtime is acceptable!)  The resetting of count for the next trigger is handled in the loop.
