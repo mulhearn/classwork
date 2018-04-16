@@ -9,8 +9,9 @@ lab*/*
 !*.pdf
 !lab*/figs
 !lab*/figs/*
-#!lab*/code
-#!lab*/code/*
+!lab*/code
+!lab*/code/*
+!lab*/code/*/*.ino
 !lab*/*.tex
 !lab*/*.pdf
 !.gitignore
