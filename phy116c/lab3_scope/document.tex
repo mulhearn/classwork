@@ -94,18 +94,14 @@ Once the normal trigger mode is working, see if you can implement an automatic t
 The design above, where we capture samples as fast as possible until the buffer is full, and then examine the buffer contents at our leisure, is an efficient design, particularly when the available CPU speed is limited, and often this is the best we can do, particularly if the digital signal processing stage is quite extensive.  It comes with a serious drawback, however!  While the full buffer is being processed, the incoming waveform is ignored.  This is no problem for periodic functions like the sine wave, but if we are using this scope to say, trigger on a cosmic ray muon, this so-called {\em deadtime} is a serious drawback!
 
 Fortunately, checking for our trigger condition is not too computationally extensive, if we are careful about it!  In this mode of running, the interrupt service routine for the ADC should start as something like this:
-
 \begin{verbatim}
   ISR(ADC_vect){
-    if (count < samples_post){
-      buf[isamp++]=ADCH;
-      if (isamp == max_samples){
-        isamp = 0;
-      }  
-    }
+     buf[isamp++]=ADCH;
+     if (isamp == max_samples){
+       isamp = 0;
+     }  
   }
 \end{verbatim}
-
 This turns the buffer into a {\em circular buffer}.  When it is full, it simply begins writing again at the bottom.
 
 Your task now is to add a trigger requirement to the circular buffer in a way that does not incur any deadtime.  Here's why this is a serious challenge.  You might first be tempted to simply check the contents of the circular buffer from within the loop function, to avoid interfering with the time critical sample collection.  This is a healthy impulse to keep the ISR routine as simple as possible, and a solid design, except that you will likely find that the loop falls behind the interrupt driven sample collection.  However, if on the other hand, you load down your ISR too heavily with additional trigger requirements, your sample rate slows down and becomes jittery:  an unacceptable outcome for a scope with our name on it!  What worked for me was to put a carefully chosen subset of small, time critical operations into the ISR, and leave as much as possible to the loop.
@@ -121,7 +117,7 @@ I leave resetting this to false (for the next trigger acquisition) to the loop r
 \item {\tt boolean trigger}: my trigger condition is  {\tt buffered \& previous \& current}.  If this condition is not met, I set previous=!current for the next interrupt.
 \item {\tt int count:}  if the trigger flag is true, I increment the count.  When the count reaches the required number of post trigger samples, the ISR stops filling the buffer to allow for readout.  (Readout deadtime is acceptable!)  The resetting of count for the next trigger is handled in the loop.
 \end{itemize} 
-Readout and then resetting of the flags for the next trigger is all handled in the loop, when the count reaches the designed number.  This design worked well for me, but there are certainly other ways.  See what you can do!
+Readout and then resetting of the flags for the next trigger is all handled in the loop, once the post-trigger {\tt count} reaches the desired number of post-trigger samples.  This design worked well for me, but there are certainly other ways.  See what you can do!
 
 \section{Bandwidth Limitations}
 
