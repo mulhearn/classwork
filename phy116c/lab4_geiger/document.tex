@@ -7,7 +7,12 @@
 \usepackage{graphicx}
 \usepackage{amsmath}
 
+
+\usepackage[american,fulldiode]{circuitikz}
+
 \begin{document}
+\ctikzset{bipoles/thickness=1}
+\ctikzset{bipoles/length=.6cm}
 
 \section{Introduction}
 
@@ -66,48 +71,81 @@ python, and report everything in a long writeup.
 \item Further information on radiation safety can be found in Melissinos and Napolitano.
 \end{itemize}
 
-\section{AC-coupled Schmitt trigger discriminator}
+\section{AC-coupled Schmitt Trigger}
 
-The first stage of the DAQ will be an analog-to-digital converter stage that you will build yourself based on a Schmitt trigger.  Your discriminator circuit is AC coupled, to remove the 5 volt pedestal included with the signal.  This AC coupling allows us to test the circuit efficiently using a square wave input.  The high-pass-filter converts the square wave input into current pulses much like those from the Geiger counter, but at a constant, known rate, as shown in Fig.~ref{fig:fakepulse}.
+\begin{figure}[thbp]
+\begin{center}
+{\includegraphics[height=0.2\textheight]{figs/LM311-scheme.png}} 
+\caption{\label{fig:lm311} The LM311 schematic.}
+\end{center}
+\end{figure}
+
+\begin{figure}[thbp]
+\begin{center}
+\begin{tabular}{cc}
+{\includegraphics[height=0.2\textheight]{figs/LM311.png}} &
+{\includegraphics[height=0.2\textheight]{figs/LM311-trans.png}} \\
+(a) & (b) \\
+\end{tabular}
+\caption{\label{fig:lm311pin} The LM311 in 8-pin PDIP as (a) conventionally and somewhat deceptively shown, and (b) with the output transistor explicitly shown.  The version (b) is still deceptive, as it leaves out the not operation between the op-amp and the transistor base, as shown in the device schematic.}
+\end{center}
+\end{figure}
+
+The first stage of the DAQ is a Schmitt trigger discriminator based on the LM311 that you will build yourself.
+The LM311 is intended for TTL ($5~V$) logic and can be driven with a single-ended voltage all the way down to $5~\rm V$.  This makes it an ideal component to use with our $5~\rm V$ Arduino Uno.  We can power the LM311 from the Arduino $5~\rm V$ supply and send it's output directly to the Arduino.  There is no need to get out the bench-top DC supplies!
+
+As shown in Fig.~\ref{fig:lm311}, the LM311 is an open-emitter open-collector comparator, that is, an op-amp driving the base of an NPN diode with both the collector and emitter available as outputs.   Typically the emitter of the output transistor is tied to ground and the collector output is therefore either grounded or high-impedance.  For this reason, a pull-up resistor is generally needed at the the collector output, so that the output is either $V_{\rm CC}$ or ground, depending on which of the two inputs is largest.
 
 \begin{figure}[htbp]
 \begin{center}
-{\includegraphics[width=0.55\textwidth]{figs/fake_pulse.jpg}}
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) node[op amp, yscale=-1](opamp){}  ++(2,0) node[not port](not){} ++(2,0) node[npn](npn){};
+\draw (opamp.out) to[short] (not.in);
+\draw (not.out) to[short] (npn.B);
+\draw (npn.C) node[right]{$(7)$} to[short,-*] ++(0,0.5) coordinate(X) to[short,-o] ++(1.0,0) node[right]{$v_{\rm out}$} ;
+\draw (X) to[R,l_=$R_4$,-*] ++(-5.5,0) coordinate(Y) |- (opamp.+); 
+\draw (X) to[R,l_=$R_5$] ++(0.0,1.5) coordinate(X) to[short,-o] ++(0.5,0) node[right]{$V_{\rm CC}$} ; 
+\draw (X) to[short,*-] ++(-6.0,0.0) to[R,l_=$R_2$] ++(0.0,-1.5) coordinate(X) to[short] (Y);
+\draw (X) to[R,l_=$R_3$,*-] ++(0.0,-1.5) coordinate(Y);
+\draw (npn.E) node[right]{$(1)$} to[short,-*] ++(0,-1.5) coordinate(X) node[ground, yscale=2.0]{};
+\draw (X) to [short,-*] ++(-6.0,0) coordinate(X) to[short](Y);
+\draw (opamp.-) node[below]{$(3)$} to[short,-*] ++(-2.0,0) coordinate(Y) to[R,l=$R_1$] ++(0.0,-1.5) |- (X);
+\draw (opamp.+) node[above]{$(2)$};
+\draw (Y) to[C,l=$C_1$,-o] ++(-1.5,0.0) node[left]{$v_{\rm in}$};
+\draw (1.0,-0.75) node[below]{LM311};
+\draw (5.5,-1.15) node[above]{$(4)$} node[ground,yscale=2.0]{};
+\draw (6.5,-0.4) node[below]{$(8)$} to[short,-o] ++(0,0.5) node[right]{$V_{\rm CC}$};
+\end{circuitikz} 
+\caption{An AC-coupled inverting Schmitt trigger based on the LM311.  The LM311 IC provides both the operational amplifier and the transistor. The numbers in parenthesis are pin numbers.}
+\label{fig:discrim}
 \end{center}
-\caption{\label{fig:fakepulse} Typical pulse (CH1) resulting from the square wave input compared to an actual pulse (CH2) from Geiger counter.
-These are measured at the non-inverting input (pin 3 of the LM311 in the discriminator circuit below.)  The inverted pulses, which result from the falling edge of square wave function, are ignored by the circuit.}
 \end{figure}
 
-\begin{figure}[thbp]
-\begin{center}
-{\includegraphics[width=0.75\textwidth]{figs/discrim.pdf}}
-\end{center}
-\caption{\label{fig:filter} Circuit diagram.}
-\end{figure}
-
-\begin{figure}[thbp]
-\begin{center}
-{\includegraphics[width=0.35\textwidth]{figs/7404_pinout.png}}
-{\includegraphics[width=0.25\textwidth]{figs/7404_scheme.png}}
-\caption{\label{fig:7404} The 74XX04 in 14-pin DIP}
-\end{center}
-\end{figure}
-
-\begin{figure}[thbp]
-\begin{center}
-{\includegraphics[width=0.40\textwidth]{figs/LM311.png}}
-\caption{\label{fig:lm311} The LM311 in 8-pin PDIP.}
-\end{center}
-\end{figure}
+The discriminator circuit you will be building is shown in Fig.~\ref{fig:discrim}.  The input to the discriminator
+is AC coupled by $R_1$ and $C_1$, which is needed to remove the pedestal (DC offset) present at the Geiger counter output.  This input is compared to a threshold predominantly set by the voltage divider $R_2$ and $R_3$.  When the input signal (at the {\em inverting} input) exceeds this threshold, the base of the transistor is driven high (note the NOT) and so the output is pulled to ground.  When the input signal is below the threshold, the base of the transistor is driven low, and the output is at $V_{\rm CC}$, due to pull-up resistor $R_{\rm 5}$.  The feedback resistor $R_4$ add hysteresis to the circuit, providing stability by pulling the threshold slightly higher once the output is high, and slightly lower once the output is low.
 
 \begin{figure}[htbp]
 \begin{center}
-{\includegraphics[width=0.55\textwidth]{figs/discrim_out.jpg}}
+{\includegraphics[width=0.55\textwidth]{figs/discrim.pdf}}
 \end{center}
-\caption{\label{fig:typout} Typical output (CH2) of the discriminator circuit (measured at $V_{\rm out}$) compared to the input (measured at the non-inverting input, pin 3 of the LM311.) }
+\caption{\label{fig:typout} Typical output $v_{\rm out}$ of the discriminator circuit (at pin 7 of the LM311) compared to the input $v_{\rm in}$ (at pin3 of the LM311).}
 \end{figure}
 
-Build the circuit shown in Fig.~\ref{fig:filter} using the components in Figs.~\ref{fig:7404} and \ref{fig:lm311}.  For debugging, drive the circuit at $V_{\rm in}$ with a 1~kHz square-wave at 2 volts peak-to-peak.  Typical output from the circuit is shown in Fig.~\ref{fig:typout}.  Note the different scale:  the output is 5 volt TTL digital logic, easily handled by a microprocessor.
+\begin{figure}[thbp]
+\begin{center}
+\begin{tabular}{cc}
+{\includegraphics[height=0.25\textheight]{figs/schmitty.pdf}} &
+{\includegraphics[height=0.25\textheight]{figs/bouncy.pdf}} \\
+(a) & (b) \\
+\end{tabular}
+\caption{\label{fig:bounce} Single trace for the rising edge of the discriminator circuit (a) as designed, and (b) with feedback resistor $R_4$ removed from the circuit.  Without feedback, there is no hysteresis, and the output is jumpy.  Once you have your DAQ working, you can check what removing this resistor would do to the stability and accuracy of your rate measurement.  Spoiler alert:  you need it!}
+\end{center}
+\end{figure}
+
+Build the circuit shown in Fig.~\ref{fig:filter} using $R_1=4.7~{\rm k\Omega}$, $C_1=10~{\rm nF}$,
+$R_2=8.2~{\rm k\Omega}$, $R_3=1.1~{\rm k\Omega}$, $R_4=82~{\rm k\Omega}$, $R_5=1.1~{\rm k\Omega}$.
+
+using the components in Figs.~\ref{fig:7404} and \ref{fig:lm311}.  For debugging, drive the circuit at $V_{\rm in}$ with a 1~kHz square-wave at 2 volts peak-to-peak.  Typical output from the circuit is shown in Fig.~\ref{fig:typout}.  Note the different scale:  the output is 5 volt TTL digital logic, easily handled by a microprocessor.
 
 \section{Arduino Based DAQ}
 
@@ -147,15 +185,7 @@ Look at the ``SCOPE" output of the Geiger counter controller on your oscilloscop
 
 \section{Connect the DAQ}
 
-Connect the "SCOPE" output of the Geiger counter controller to the input of your discriminator circuit.  It is useful to use a BNC Tee connection at the scope so that you can continue to trigger and monitor Geiger counter pulses and drive your discriminator with the same input.  Now check the output of your discriminator and verify that you have the expected TTL output pulse, as in Fig.~\ref{fig:geigerdigitized}.  If the width of the TTL output pulse is less than 10 microseconds, your Arduino may have trouble keeping up.   If this is the case, seek help from the TA.  Together, you can try increasing the HV (but do not exceed 1000 V) and (if that fails) you could try adjusting the capacitance of the high-pass filter stage.
-
-\begin{figure}[htbp]
-\begin{center}
-{\includegraphics[width=0.55\textwidth]{figs/geiger_digitized.jpg}}
-\end{center}
-\caption{\label{fig:geigerdigitized} Response of the discriminator stage (CH2) to a pulse from the Geiger counter (CH1).}
-\end{figure}
-
+Connect the "SCOPE" output of the Geiger counter controller to the input of your discriminator circuit.  It is useful to use a BNC Tee connection at the scope so that you can continue to trigger and monitor Geiger counter pulses and drive your discriminator with the same input.  Now check the output of your discriminator and verify that you have the expected TTL output pulse.  If the width of the TTL output pulse is less than 10 microseconds, your Arduino may have trouble keeping up.   If this is the case, seek help from the TA.  Together, you can try increasing the HV (but do not exceed 1000 V) and (if that fails) you could try adjusting the capacitance of the high-pass filter stage.
 
 With the shape of the digital input pulse verified, plug this in as input to your Arduino DAQ.  Verify that the rate you obtain with the Aruduino is within about $20\%$ of the rate you estimated with the timer and counter features.
  
