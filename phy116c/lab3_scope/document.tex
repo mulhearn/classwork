@@ -23,7 +23,12 @@ In this lab, you will construct a single-channel digital oscilloscope using the 
 
 \section{Free-Running ADC Mode}
 
-An initial sketch {\tt Scope} is provided with this lab to get you started.  To achieve the fastest possible sample rate, your scope will operate the ADC in free-running mode.  In this mode, the ADC continuously samples the input, and an interrupt is sent as soon as a new sample is available.  The driver commands to set the ADC to sample analog pin 0 in free running mode on the Uno are already included in the ``Scope" sketch:
+An initial sketch {\tt Scope} is provided with this lab to get you started.  To achieve the fastest possible sample rate, your scope will operate the ADC in free-running mode.  In this mode, the ADC continuously samples the input, and the new sample is processed immediately after it becomes available.
+
+The primary way that processors handle time critical operations is through interrupts.  An interrupt is a hardware signal sent to the processor indicating that an event has occurred.  The code the processor is currently running is temporarily halted and instead specialized code contained in an interrupt service routine programmed to handle that particular event is executed.   When the interrupt service routine exits, the processors returns to executing the code that was running before the interrupt.   Generally, one wants the interrupt service routine to be as lightweight as possible, handling only the time critical task.
+
+In this case, we first use driver commands to configure the hardware to run the ADC continuously and send the appropriate interrupt, then we provide an interrupt service routine to process the new sample.
+The driver commands to set the ADC to sample analog pin 0 in free running mode on the Uno are already included in the ``Scope" sketch:
  \begin{verbatim}
   ADCSRA = 0;             // clear ADCSRA register
   ADCSRB = 0;             // clear ADCSRB register
@@ -38,7 +43,7 @@ An initial sketch {\tt Scope} is provided with this lab to get you started.  To 
   ADCSRA |= (1 << ADEN);  // enable ADC
   ADCSRA |= (1 << ADSC);  // start ADC measurements
 \end{verbatim}
-Where $\rm adc=0$ specified elsewhere sets the ADC channel to A0.  The interrupt routine which handles each new sample is also provided:
+Where $\rm adc=0$ specified elsewhere sets the ADC channel to A0.  The interrupt service routine which handles each new sample is also provided:
 \begin{verbatim}
   ISR(ADC_vect){
     if (isamp < max_samples){
@@ -46,18 +51,17 @@ Where $\rm adc=0$ specified elsewhere sets the ADC channel to A0.  The interrupt
     }
   }    
 \end{verbatim}
-Each time a new sample is available, it is added to the buffer, until the entire buffer is full. 
-
-This initial version of your scope has no trigger.  Whenever the buffer is full, it simply dumps the first 500 samples to the serial output, which can then be plotted using the Serial Plotter, which has a fixed 500 sample width.
+This code is executed every time the hardware has completed a new sample, and it simply copies the sample into the next place in a buffer.  This initial version of your scope has no. When the buffer is full, it simply dumps the first 500 samples to the serial output, which can then be plotted using the Serial Plotter provided by the Arduino IDE.  The serial plotter has a fixed width of 500 entries, so by sending exactly 500 samples, we display one captured wave form at a time.
 
 \section{Using the Scope Sketch}
 
-{\bf We won't be building an analog front-end for this digital scope, so you'll need to be careful not to damage the ADC by driving it outside of the $0$ to $5~\rm{V}$ range!}
+{\bf We won't be building an analog front-end for this digital scope, so you'll need to be careful not to damage the ADC by driving it outside of the $0$ to $5~\rm{V}$ range!} \\ 
 
 \noindent
-{\bf Step 1:}  Make certain the your function generator is set to ``high impedance output" under setup and set it to deliver a $1~\rm kHz$ sine wave with high value of $5~\rm V$ and a low value of $0~\rm V$.  Double check that you have the settings correct before connecting it!  In particular, you want to make sure your a sending an {\bf offset} sine wave, which ranges from $0$ to $5~\rm V$, and not, e.g., one from $-2.5~\rm V$ to $2.5~\rm V$!   Once your function generator is setup properly (and confirmed!) configure your Uno with the Scope sketch.  Connect the ground of your function generator to ground on your Arduino, and connect the signal to analog pin 0.
+{\bf Step 1:}  Make certain the your function generator is set to ``high impedance output" under setup and set it to deliver a $1~\rm kHz$ sine wave with high value of $5~\rm V$ and a low value of $0~\rm V$.  Double check that you have the settings correct before connecting it!  In particular, you want to make sure your a sending an {\bf offset} sine wave, which ranges from $0$ to $5~\rm V$, and not, e.g., one from $-2.5~\rm V$ to $2.5~\rm V$!   Once your function generator is setup properly (and confirmed!) configure your Uno with the Scope sketch.  Connect the ground of your function generator to ground on your Arduino, and connect the signal to analog pin 0.\\
 
-{\bf Step 2:}  Open the serial plotter tool.  The serial plotter simply plots the most recent 500 lines received on the serial port.  The Scope sketch initializes the serial port with a baud rate of 115200, so you'll need to set the serial plotter baud rate to the same value.
+\noindent
+{\bf Step 2:}  Open the serial plotter tool.  The serial plotter simply plots the most recent 500 lines received on the serial port.  The Scope sketch initializes the serial port with a baud rate of 115200, so you'll need to set the serial plotter baud rate to the same value. \\
 
 \begin{figure}[htbp]
 \begin{center}
@@ -110,12 +114,12 @@ In my design, I extended the above ISR to do the following:
 \begin{itemize}
 \item {\tt boolean buffered}:  whenever the roll-over of isamp occurs, {\tt buffered} is set to true.   This flag tells me if the circular buffer has filled at least once, which ensures that my offset for the trigger is covered.
 I leave resetting this to false (for the next trigger acquisition) to the loop routine!
-\item {\tt boolean current}:  I check if the current sample is above a threshold.  I do this using the {\tt AND} operation, instead of the slower $>=$ operation:
+\item {\tt boolean current}:  I check if the current sample is above threshold, for example:
 \begin{verbatim}
-  boolean current  = buf[isamp] & 0b10000000;
+  boolean current  = buf[isamp] > 128;
 \end{verbatim} 
 \item {\tt boolean trigger}: my trigger condition is  {\tt buffered \& previous \& current}.  If this condition is not met, I set previous=!current for the next interrupt.
-\item {\tt int count} If the trigger flag is true, I increment the count.  When the count reaches the required number of post trigger samples, the ISR stops filling the buffer to allow for readout.  (Readout deadtime is acceptable!)  The resetting of count for the next trigger is handled in the loop.
+\item {\tt int count:}  if the trigger flag is true, I increment the count.  When the count reaches the required number of post trigger samples, the ISR stops filling the buffer to allow for readout.  (Readout deadtime is acceptable!)  The resetting of count for the next trigger is handled in the loop.
 \end{itemize} 
 Readout and then resetting of the flags for the next trigger is all handled in the loop, when the count reaches the designed number.  This design worked well for me, but there are certainly other ways.  See what you can do!
 
