@@ -119,7 +119,7 @@ The LM311 is an open-emitter open-collector comparator, that is, an op-amp drivi
 The discriminator circuit you will be building is shown in Fig.~\ref{fig:discrim}.  The input to the discriminator
 is AC coupled by $R_1$ and $C_1$, which is needed to remove the pedestal (DC offset) present at the Geiger counter output.  This input is compared to a threshold predominantly set by the voltage divider $R_2$ and $R_3$.  When the input signal (at the {\em inverting} input) exceeds this threshold, the base of the transistor is driven high (note the NOT) and so the output is pulled to ground.  When the input signal is below the threshold, the base of the transistor is driven low, and the output is at $V_{\rm CC}$, due to pull-up resistor $R_{\rm 5}$.  The feedback resistor $R_4$ add hysteresis to the circuit, providing stability by pulling the threshold slightly higher once the output is high, and slightly lower once the output is low.
 
-Build the circuit shown in Fig.~\ref{fig:filter} using $R_1=4.7~{\rm k\Omega}$, $C_1=10~{\rm nF}$,
+Build the circuit shown in Fig.~\ref{fig:discrim} using $R_1=4.7~{\rm k\Omega}$, $C_1=10~{\rm nF}$,
 $R_2=8.2~{\rm k\Omega}$, $R_3=1.1~{\rm k\Omega}$, $R_4=82~{\rm k\Omega}$, $R_5=1.1~{\rm k\Omega}$.  
 
 \begin{figure}[htbp]
