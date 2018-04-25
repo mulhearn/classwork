@@ -8,11 +8,15 @@
 \usepackage{amsmath}
 
 
-\usepackage[american,fulldiode]{circuitikz}
+\usepackage[american,fulldiode,betterproportions]{circuitikz}
 
 \begin{document}
 \ctikzset{bipoles/thickness=1}
-\ctikzset{bipoles/length=.6cm}
+\ctikzset{bipoles/resistor/height=.115}
+\ctikzset{bipoles/resistor/width=.3}
+\ctikzset{bipoles/capacitor/height=.2}
+\ctikzset{bipoles/capacitor/width=.06}
+%\ctikzset{bipoles/length=.6cm}
 
 
 \title{Radioactive Decay}
@@ -124,7 +128,7 @@ The LM311 is an open-emitter open-collector comparator, that is, an op-amp drivi
 The discriminator circuit you will be building is shown in Fig.~\ref{fig:discrim}.  The input to the discriminator
 is AC coupled by $R_1$ and $C_1$, which is needed to remove the pedestal (DC offset) present at the Geiger counter output.  This input is compared to a threshold predominantly set by the voltage divider $R_2$ and $R_3$.  When the input signal (at the {\em inverting} input) exceeds this threshold, the base of the transistor is driven high (note the NOT) and so the output is pulled to ground.  When the input signal is below the threshold, the base of the transistor is driven low, and the output is at $V_{\rm CC}$, due to pull-up resistor $R_{\rm 5}$.  The feedback resistor $R_4$ add hysteresis to the circuit, providing stability by pulling the threshold slightly higher once the output is high, and slightly lower once the output is low.
 
-Build the circuit shown in Fig.~\ref{fig:filter} using $R_1=4.7~{\rm k\Omega}$, $C_1=10~{\rm nF}$,
+Build the circuit shown in Fig.~\ref{fig:discrim} using $R_1=4.7~{\rm k\Omega}$, $C_1=10~{\rm nF}$,
 $R_2=8.2~{\rm k\Omega}$, $R_3=1.1~{\rm k\Omega}$, $R_4=82~{\rm k\Omega}$, $R_5=1.1~{\rm k\Omega}$.  
 
 \begin{figure}[htbp]
@@ -135,7 +139,7 @@ $R_2=8.2~{\rm k\Omega}$, $R_3=1.1~{\rm k\Omega}$, $R_4=82~{\rm k\Omega}$, $R_5=1
 \end{figure}
 
 For testing, you will need a reliable test signal that resembles the Geiger counter output.  Use your Tektronix AFG1022 function generator, and select the ``ExpDecay'' from Arb/Others/Built-in/Maths.
-Set the frequency to $1~\rm kHz$ and the amplitude to $2~\rm V$ peak-to-peak.  A side-by-side comparison of the exponential decay function and actual output from the Geiger counter is shown in Fig.~\ref{fig:fake}.  Typical output from the discriminator is shown in Fig.~\ref{fig:typout}.  Once you circuit is working properly, it is amusing to remove the feedback resistor $R_4$ and observe the resulting instability, as shown in Fig.~\ref{fig:bounce}.
+Set the frequency to $1~\rm kHz$ and the amplitude to $2~\rm V$ peak-to-peak.  A side-by-side comparison of the exponential decay function and actual output from the Geiger counter is shown in Fig.~\ref{fig:fake}.  Typical output from the discriminator is shown in Fig.~\ref{fig:typout}.  Once your circuit is working properly, it is amusing to remove the feedback resistor $R_4$ and observe the resulting instability, as shown in Fig.~\ref{fig:bounce}.
 
 \begin{figure}[htbp]
 \begin{center}
@@ -184,7 +188,7 @@ void blink() {
 }
 \end{verbatim}
 
-This simple sketch sets up an interrupt service routine ({\tt blink}) to handle interrupts on the rising edge of transition on digital pin 2.  Every rising edge will cause the led to change state.  If you connect your discriminant output to the Arduino digital pin 2, and turn the frequency of the function generator down to $1 Hz$, you should observe the led to blink at 1 Hz.
+This simple sketch sets up an interrupt service routine ({\tt blink}) to handle interrupts on the rising edge of transition on digital pin 2.  Every rising edge will cause the led to change state.  If you connect your discriminant output to the Arduino digital pin 2, and turn the frequency of the function generator down to $1~\rm Hz$, you should observe the led to blink at $1~\rm Hz$.
 
 Once you have this working, you should modify the blink interrupt service routine (suitably renamed!) to
 \begin{itemize}
@@ -206,11 +210,11 @@ volatile int count = 0;
 
 \section{The Geiger Counter}
 
-On the Geiger Controller, start with the HV set to zero at both the analog knob and the HV on-off switch.   Turn on the device and set the mode to``Test".  In this mode, the counter will be incremented at a fixed rate of 60 Hz.   While in this mode, play around with the ``Count", ``Reset", and ``Lab-Chron" analog timer reset dial until you understand how all of these features work.
+On the Geiger Controller, start with the HV set to zero at both the analog knob and the HV on-off switch.   Turn on the device and set the mode to``Test".  In this mode, the counter will be incremented at a fixed rate of $60~\rm Hz$.   While in this mode, play around with the ``Count", ``Reset", and ``Lab-Chron" analog timer reset dial until you understand how all of these features work.
 
 Next check that you have a source in the second highest drawer of the Geiger Counter holder, asking the TA for help if this is not the case.  Switch the mode back to ``Use", which will now use the Geiger counter as input to the count.  With the HV still off, place the controller in ``Count" mode, and verify that the rate, with no HV, is zero.  Now, with the controller still in ``Count" mode, turn on the HV and turn the dial until you first see the counter incrementing.  Turn up the voltage to the next interval of 50 volts (e.g. if it first starts incrementing at 730 volts, set the dial to 750 volts).
 
-Tabulate the number of counts in a 10 seconds interval, twice for each voltage level, in 50 volt steps from your starting voltage up to 1000 volts.  Do not exceed 1000 volts.  From the data, select the start of the plateau region, where increasing the voltage by 50 volts raises the rate by less than $10\%$.  With another measurement, confirm that the rate at this plateau is of order 100 Hz (this will vary from source to source).
+Tabulate the number of counts in a 10 seconds interval, twice for each voltage level, in 50 volt steps from your starting voltage up to 1000 volts.  Do not exceed 1000 volts.  From the data, select the start of the plateau region, where increasing the voltage by 50 volts raises the rate by less than $10\%$.  With another measurement, confirm that the rate at this plateau is of order $100~\rm Hz$ (this will vary from source to source).
 
 Look at the ``SCOPE" output of the Geiger counter controller on your oscilloscope, with AC coupling, and verify that you see output pulses similar to those in Fig.~\ref{fig:geigerpulse}.
 
@@ -231,7 +235,7 @@ Now you are ready to collect the data you will use for your analysis.  From your
 
 \section{Long Report}
 
-This lab report requires a long write-up.  Your TA will provide a Latex template for the report.  
+This lab report requires a long write-up.  Your TA will provide a \LaTeX template for the report.  
 
 You should include an introduction describing the goals of the experiment and what you expect to observe, a discussion of your lab setup and procedure, plots and results from a toy Monte Carlo model for this experiment that you will develop with scientific python, numerical analysis of your experimental data, and a conclusion.  You should also provide an appendix with your code listing and raw data.
 
