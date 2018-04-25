@@ -14,11 +14,16 @@
 \ctikzset{bipoles/thickness=1}
 \ctikzset{bipoles/length=.6cm}
 
+
+\title{Radioactive Decay}
+
+\maketitle
+
+
 \section{Introduction}
 
 In this two-week long lab, which will require a long lab write-up, you
-will build the data acquisition (DAQ) unit for a Geiger counter.  You
-will compare the data you collect using your custom DAQ to compare
+will build the data acquisition (DAQ) unit for a Geiger counter which you will use to count decays of a radioactive element.  You will compare the data you collect using your custom DAQ to compare
 with the theoretical expectations for Poisson and Gaussian distributed
 random variables.
 
@@ -222,7 +227,7 @@ With the shape of the digital input pulse verified, plug this in as input to you
  
 \section{Collect and Analyze your Data}
 
-Now you are ready to collect the data you will use for your analysis.  From your measured rate, estimate the $\tau$ and therefore $N_I$ needed to collect a mean $N_C$ of $1$,$5$, and $10$.  At each of these four values of $\tau$, collect the count for 100 individual runs.  Before leaving, verify that the mean value for each run is near the target mean value!  You could easily program your Arduino to take this average for you!  If time permits, also collect data from 1000 individual runs at each value of $\tau$.
+Now you are ready to collect the data you will use for your analysis.  From your measured rate, estimate the sampling time interval needed to collect a mean number of events of $1$,$5$, and $10$.  For each of these sampling time intervals, collect the count for 100 individual runs.  Before leaving, verify that the mean value for each run is near the target mean value (but it does not need to exact, the idea is to have three samples {\em near} 1, 5, and 10 for comparison.)  You could easily program your Arduino to take this average for you.  If time permits, also collect data from 1000 individual runs at each value of $\tau$.
 
 \section{Long Report}
 
