@@ -6,19 +6,13 @@ const int plotter_window = 500; // fixed num of lines used by serial plotter
 const int max_samples = 1500; // the size of the sample buffer
 byte buf[max_samples]; // the sample buffer
 int isamp = 0;  // the current position in the circular buffer
-int islow = 0;  // additional counter used to slow down the sample rate 
-                // if needed.
-
-int dt=1; // the number of ADC samples per recorded sample
 
 // the ADC read interrupt:
 //  -> simply write every sample to the buffer until full
 ISR(ADC_vect){
   if (isamp < max_samples){
     buf[isamp]=ADCH;
-    if (!((islow++)%dt)){      
-      isamp++;      
-    }
+    isamp++;      
   }
 }    
 
@@ -43,7 +37,6 @@ void setup()
 
   isamp = 0;
 }
-
   
 void loop()
 {
@@ -61,7 +54,7 @@ void loop()
         }
       }     
       digitalWrite(led, LOW);
-      delay(500);  // display refresh rate   
+      delay(1500);  // display refresh rate   
       isamp = 0;
   }
 }

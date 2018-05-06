@@ -20,10 +20,11 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 #SERIAL_PORT="COM4"
-SERIAL_PORT="/dev/cu.usbmodem1421"
-#SERIAL_PORT=raw_input("Enter the serial port for the Arduino (e.g. COM4):  ")
+#SERIAL_PORT="/dev/cu.usbmodem1421"
+SERIAL_PORT=raw_input("Enter the serial port for the Arduino (e.g. COM4):  ")
 
 print "connecting to the Arduino..."
+
 
 # open the serial connection
 ser = serial.Serial(SERIAL_PORT, 115200)
@@ -32,23 +33,22 @@ time.sleep(1)
 # that resets Arduino, so first we wait to receive initializing string from Arduino
 print ser.readline().strip()
 
+
 # Now wait for a key press to acquire the data:
-raw_input("Press Enter to Acquire...")
-
+raw_input("Press Enter to Acquire...")    
 # Now we can send our acquire data signal:
-nrun=3
-dt = 1
-ser.write('a ' + str(nrun) + " " + str(dt))
-
+nrun=int(1)
+dt = int(1)
+print nrun
+print dt
+ser.write("a {1:d} {1:d}".format(nrun, dt))
 # first line is the length of the payload:
 nsamp = int(ser.readline().strip())
 nrun  = int(ser.readline().strip())
 
 xl = np.zeros((nrun,nsamp), dtype=float)
 yl = np.zeros((nrun,nsamp), dtype=float)
-
 print "receiving payload from Arduion of length ", nsamp, " x ", nrun, "\n";
-
 
 for i in range(nrun):
     for j in range(nsamp):
@@ -59,15 +59,16 @@ for i in range(nrun):
             print "x: ", x, "y: ", y
         xl[i][j] = x;
         yl[i][j] = y;
+ser.close()
 
-ser.close();
-
+tau = dt/76.9
+xl = tau * xl
 for i in range(nrun):
-    if (i<5):
-        plt.plot(xl[i], yl[i])
+    plt.plot(xl[i], yl[i])
+    plt.xlabel("time [milliseconds]")
+    plt.savefig('waveform.png')
+    np.savetxt('waveform.txt', np.column_stack((xl,yl)))
+    plt.show();
 
 
-np.savetxt('waveform.txt', np.column_stack((xl,yl)))
-
-plt.xlabel("time [milliseconds]")
-plt.show();
+#ser.close()

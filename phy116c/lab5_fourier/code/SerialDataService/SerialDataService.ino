@@ -20,10 +20,10 @@ int led = LED_BUILTIN;
 // the serial driver command interface:
 boolean acquire = false;  // was data requested on the serial port?
 int nruns = 0; // number of waveforms requested
-int dt = 0; // example timing series parameter
+int dt = 0; // example timing parameter (default 1)
 
 // the sample buffer:
-const int max_samples = 200; // the size of the sample buffer
+const int max_samples = 10; // the size of the sample buffer
 byte buf[max_samples]; // the sample buffer
 int isamp = 0;  // the current position in the circular buffer
 
@@ -72,7 +72,7 @@ void loop() {
     count++;
   }
 
-  if (count > nruns){
+  if (count >= nruns){
     acquire = false;
     digitalWrite(led, LOW);
   }
