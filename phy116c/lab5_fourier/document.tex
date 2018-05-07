@@ -83,7 +83,7 @@ There's enough room in the Arduino for a 1500 byte buffer.  Therefore, our perio
 
 \section{Microphone IC}
 
-The microphone IC (Fig.~\ref{fig:mic} includes a microphone and a gain 60 pre-amplifier.  This IC is designed for use with Arduino and is very convenient.  You simply connect VCC to $5~\rm V$, GND to Arduino ground, and AUD is audio output in the $0$ to $5~\rm V$ range, suitable for sampling with an analog input.
+The microphone IC (Fig.~\ref{fig:mic}) includes a microphone and a gain 60 pre-amplifier.  This IC is designed for use with Arduino and is very convenient.  You simply connect VCC to $5~\rm V$, GND to Arduino ground, and AUD is audio output in the $0$ to $5~\rm V$ range, suitable for sampling with an analog input.
 
 To test your microphone initially, connect VCC and GND, but measure AUD with your scope.  Whistling should produce a decent sine wave, or find a fixed tone generator online.
 
@@ -162,7 +162,7 @@ void serialEvent() {
   //Serial.println(param_t);
 }
 \end{verbatim}
-Here we check for our one implemented driver command acquire and two parameters.  The first parameter ({\tt nruns} specifies how many complete wave forms should be send back for this acquire command.  The second parameter {\tt dt} is an example timing parameter.   The acquire command is send as the single letter "a" followed by integer values for the two parameters, which should be both one, at least initially.
+Here we check for our one implemented driver command acquire and two parameters.  The first parameter ({\tt nruns} specifies how many complete wave forms should be send back for this acquire command.  The second parameter {\tt dt} is an example timing parameter.   The acquire command is send as the single letter ``a" followed by integer values for the two parameters, which should be both one, at least initially.
 Upon receiving this command on the serial interface, the variable {\tt acquire} is set to 1, and the loop function begins filling the buffer, printing it to the serial interface when full.
 \begin{verbatim}
 void loop() {    
@@ -199,7 +199,7 @@ void write_buffer_to_serial_port(){
 \end{verbatim}
 
 
-You can test out the serial driver interface by hand in the Serial Interface by sending the ascii command "a 1 1" as in Fig.~\ref{fig:send}.  The reply from the Arduino is in  Fig.~\ref{fig:reply}.
+You can test out the serial driver interface by hand in the Serial Interface by sending the ascii command ``a 1 1" as in Fig.~\ref{fig:send}.  The reply from the Arduino is in  Fig.~\ref{fig:reply}.
 
 \begin{figure}[htbp]
 \begin{center}
