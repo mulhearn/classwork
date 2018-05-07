@@ -1,4 +1,3 @@
-const int led  = LED_BUILTIN; 
 // note, A0 is sampled in free running ADC mode, below.
 const int adc = 0;
 
@@ -19,8 +18,6 @@ ISR(ADC_vect){
 void setup()
 {
   Serial.begin(115200);
-
-  pinMode(led, OUTPUT);
   
   ADCSRA = 0;             // clear ADCSRA register
   ADCSRB = 0;             // clear ADCSRB register
@@ -42,7 +39,6 @@ void loop()
 {
    // check if buffer is full:   
   if (isamp == max_samples){
-      digitalWrite(led, HIGH);
       for(int i=0;i<plotter_window;i++){
         //The following two lines will add a sample index, for debugging the plotter
         //Serial.print(i);
@@ -53,7 +49,6 @@ void loop()
           Serial.println(0);
         }
       }     
-      digitalWrite(led, LOW);
       delay(1500);  // display refresh rate   
       isamp = 0;
   }

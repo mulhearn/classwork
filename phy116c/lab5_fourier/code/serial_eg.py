@@ -57,18 +57,18 @@ for i in range(nrun):
         x,y = str.split()
         if ((i<5) and (j<5)):
             print "x: ", x, "y: ", y
-        xl[i][j] = x;
-        yl[i][j] = y;
+        xl[i][j] = float(x);
+        yl[i][j] = float(y);
 ser.close()
 
 tau = dt/76.9
 xl = tau * xl
 for i in range(nrun):
     plt.plot(xl[i], yl[i])
-    plt.xlabel("time [milliseconds]")
-    plt.savefig('waveform.png')
-    np.savetxt('waveform.txt', np.column_stack((xl,yl)))
-    plt.show();
+plt.xlabel("time [milliseconds]")
+plt.savefig('waveform.png')
+np.savetxt('waveform.txt', np.column_stack((xl,yl)))
+plt.show();
 
 
 #ser.close()

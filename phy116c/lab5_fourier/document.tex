@@ -17,6 +17,15 @@
 
 In this lab, we will construct an audio spectrum analyzer.  The output from a microphone and amplifier, contained on a integrated circuit, will be digitized by an Arduino microprocessor using the ADC in free-running mode and stored in a buffer.  When the buffer is full, the data will be uploaded to your PC over the serial port for Fourier analysis.  The PC will be driving the data collection, requesting the samples from the Arduino via a custom hardware driver interface.
 
+\begin{figure}[htbp]
+\begin{center}
+{\includegraphics[width=0.55\textwidth]{figs/poor100hz.png}} \\
+{\includegraphics[width=0.55\textwidth]{figs/poor800hz.png}}\\
+{\includegraphics[width=0.55\textwidth]{figs/poor1200hz.png}}
+\end{center}
+\caption{\label{fig:firstpass} The spectrum analyzer tested with 100, 800 and 1200 Hz tones.  (The resolution and noise can both be further improved, as discussed in the Improvements section.)}
+\end{figure}
+
 In this lab, you will learn about hardware integration.  Most interesting technical feats are broken down into manageable components, often designed by different teams.  Someday, you may have the challenging job of integrating your colleagues components together into a working system.   The system that your colleagues (aka me) will provide are:
 \begin{itemize}
 \item A microphone IC, with $5~\rm V$ output, specifically designed for use with the Arduino.
@@ -25,7 +34,7 @@ In this lab, you will learn about hardware integration.  Most interesting techni
 \item A scientific python driver (serial\_driver\.py), which requests data from the serial data service and plots it.
 \item A Scientific Python code snippet demonstrating the scientific python Periodogram feature, which reports the magnitude of the Fourier coefficients for a discreetly sampled waveform.
 \end{itemize}
-Your job will be to put all of these working components\footnote{Here we differ from the real world, where often you get components that don't work as intended!} together and construct an audio spectrum analyzer, which you can use to check the tuning of a guitar. 
+Your job will be to put all of these working components\footnote{Here we differ from the real world, where often you get components that don't work as intended!} together and construct an audio spectrum analyzer. 
 
 Here's one way to go about the integration:  
 \begin{itemize}
@@ -33,9 +42,8 @@ Here's one way to go about the integration:
 \item Next, I would get the serial data service sketch working with the scientific python code snippet.
 \item Next, I would modify the python driver code to calculate and plot the periodogram, and test it using the fake data from the serial data service... it's much easier to debug on test patterns!
 \item Last, I would modify the serial data service to use the microphone data, by importing the relevant code from the Scope sketch.  (I would keep the ability to use test patterns instead, in case debugging is needed!)
-\item If I had time, I would provide the Periodogram that results from averaging several samples, which should boost the signal to noise ratio.
 \end{itemize}
-The following sections will describe the theory behind the Periodogram, and the inner workings of the individual components.  Putting it all together will be left to you!
+The following sections will describe the theory behind the Periodogram, and the inner workings of the individual components.  Putting it all together will be left to you!  Example output from a working spectrum analyzer is shown in Fig.~\ref{fig:firstpass}.
 
 \section{Fourier Series for Discreet Data}
 
@@ -269,11 +277,9 @@ An example ipython notebook using scientific python to create a periodogram is a
 \end{figure}
 
 
+\section{Further Improvements}
 
-
-\section{Improvements}
-
-There are several possible improvements that you can pursue if you have time.\\
+There are two improvements that you should pursue if you have time.\\
 
 \noindent
 {\bf Frequency Resolution:}  We worked hard to get the ADC sampling rate as high as possible.  But, we are limited to about 1500 samples, and this limits our sampling period to about $19.5~\rm ms$ and our frequency resolution ($f_1$) to about $50~\rm Hz$.  That's enough to tell the difference between guitar strings, but not to tune them.
@@ -284,6 +290,16 @@ But there's something better we can do.  If we simply average $n$ samples and sa
 
 \noindent
 {\bf Boosting Signal To Noise:}  Averaging the periodograms from several waveforms should increase the signal to noise ratio by eliminating random noise.  The driver interface already includes a parameter (currently set to one) for the number of buffers to send.
+
+\begin{figure}[htbp]
+\begin{center}
+{\includegraphics[width=0.65\textwidth]{figs/res100hz.png}} \\
+{\includegraphics[width=0.65\textwidth]{figs/avg100hz.png}}
+\end{center}
+\caption{\label{fig:periodogram} Periodogram for 100~Hz sound with (top) just resolution improvements, and (bottom) averaging to reduce background noise. }
+\end{figure}
+
+
 
 \end{document}
 

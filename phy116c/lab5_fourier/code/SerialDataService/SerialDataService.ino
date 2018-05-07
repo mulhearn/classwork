@@ -1,11 +1,22 @@
 /*
-  Serial Data Request Example
+  Serial Data Service Example
 
   A program to demonstrate serial handshaking in order to transmit data from the Arduino 
   to a PC over the serial connection.
 
   The Arduino sends a message to the serial link after initialization is
-  complete.  It then waits until it receives an acquire signal (char 'c' over
+  complete.  It then waits until it receives an acquire command over the serial 
+  interface:  
+  
+     a <nruns> <dt>
+
+  the parameters are:
+    integer <nruns> the number of full buffers to send
+    integer <dt>  time sampling slow down factor
+    the time sampling, 
+    (1 is full speed) 
+  
+  (char 'c' over
   serial link).  Upon receiving this signal, it sends the size of its payload
   (n) followed by n lines containing one x and one y coordinate on each line.
 
@@ -14,8 +25,6 @@
   by Michael Mulhearn
  
  */
-
-int led = LED_BUILTIN;
 
 // the serial driver command interface:
 boolean acquire = false;  // was data requested on the serial port?
@@ -58,8 +67,6 @@ void write_buffer_to_serial_port(){
 void setup() {
   // initialize serial:
   Serial.begin(115200);
-  pinMode(led, OUTPUT);
-  digitalWrite(led, LOW);
   Serial.print("Arduino Initialized\n");
 }
 
@@ -74,7 +81,6 @@ void loop() {
 
   if (count >= nruns){
     acquire = false;
-    digitalWrite(led, LOW);
   }
 }
 
@@ -87,7 +93,6 @@ void serialEvent() {
       nruns = (int) Serial.parseInt();
       dt = (int) Serial.parseInt();        
       acquire = 1;
-      digitalWrite(led, HIGH);
       isamp = 0;
   }
   while(Serial.available()){
