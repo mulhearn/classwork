@@ -25,7 +25,6 @@ SERIAL_PORT=raw_input("Enter the serial port for the Arduino (e.g. COM4):  ")
 
 print "connecting to the Arduino..."
 
-
 # open the serial connection
 ser = serial.Serial(SERIAL_PORT, 115200)
 time.sleep(1)
@@ -41,7 +40,8 @@ nrun=int(1)
 dt = int(1)
 print nrun
 print dt
-ser.write("a {1:d} {1:d}".format(nrun, dt))
+s = "a {0:d} {1:d}".format(nrun, dt)
+ser.write(s)
 # first line is the length of the payload:
 nsamp = int(ser.readline().strip())
 nrun  = int(ser.readline().strip())
@@ -57,8 +57,8 @@ for i in range(nrun):
         x,y = str.split()
         if ((i<5) and (j<5)):
             print "x: ", x, "y: ", y
-        xl[i][j] = float(x);
-        yl[i][j] = float(y);
+        xl[i][j] = float(x)
+        yl[i][j] = float(y)
 ser.close()
 
 tau = dt/76.9
@@ -71,4 +71,4 @@ np.savetxt('waveform.txt', np.column_stack((xl,yl)))
 plt.show();
 
 
-#ser.close()
+
