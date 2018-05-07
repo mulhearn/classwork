@@ -31,7 +31,7 @@ In this lab, you will learn about hardware integration.  Most interesting techni
 \item A microphone IC, with $5~\rm V$ output, specifically designed for use with the Arduino.
 \item An Arduino Digital Scope sketch (Scope), which will be used to sample the microphone.
 \item An Arduino serial data service sketch (SerialDataService) which, upon request over the serial interface, fills a buffer with fake data and reports it on the serial interface.
-\item A scientific python driver (serial\_driver\.py), which requests data from the serial data service and plots it.
+\item A scientific python driver (serial\_driver.py), which requests data from the serial data service and plots it.
 \item A Scientific Python code snippet demonstrating the scientific python Periodogram feature, which reports the magnitude of the Fourier coefficients for a discreetly sampled waveform.
 \end{itemize}
 Your job will be to put all of these working components\footnote{Here we differ from the real world, where often you get components that don't work as intended!} together and construct an audio spectrum analyzer. 
@@ -83,7 +83,7 @@ There's enough room in the Arduino for a 1500 byte buffer.  Therefore, our perio
 
 \section{Microphone IC}
 
-The microphone IC (Fig.~\ref{fig:mic} includes a microphone and a gain 60 pre-amplifier.  This IC is designed for use with Arduino and is very convenient.  You simply connect VCC to $5~\rm V$, GND to Arduino ground, and AUD is audio output in the $0$ to $5~\rm V$ range, suitable for sampling with an analog input.
+The microphone IC (Fig.~\ref{fig:mic}) includes a microphone and a gain 60 pre-amplifier.  This IC is designed for use with Arduino and is very convenient.  You simply connect VCC to $5~\rm V$, GND to Arduino ground, and AUD is audio output in the $0$ to $5~\rm V$ range, suitable for sampling with an analog input.
 
 To test your microphone initially, connect VCC and GND, but measure AUD with your scope.  Whistling should produce a decent sine wave, or find a fixed tone generator online.
 
@@ -162,7 +162,7 @@ void serialEvent() {
   //Serial.println(param_t);
 }
 \end{verbatim}
-Here we check for our one implemented driver command acquire and two parameters.  The first parameter ({\tt nruns} specifies how many complete wave forms should be send back for this acquire command.  The second parameter {\tt dt} is an example timing parameter.   The acquire command is send as the single letter "a" followed by integer values for the two parameters, which should be both one, at least initially.
+Here we check for our one implemented driver command acquire and two parameters.  The first parameter ({\tt nruns} specifies how many complete wave forms should be send back for this acquire command.  The second parameter {\tt dt} is an example timing parameter.   The acquire command is send as the single letter ``a" followed by integer values for the two parameters, which should be both one, at least initially.
 Upon receiving this command on the serial interface, the variable {\tt acquire} is set to 1, and the loop function begins filling the buffer, printing it to the serial interface when full.
 \begin{verbatim}
 void loop() {    
@@ -199,7 +199,7 @@ void write_buffer_to_serial_port(){
 \end{verbatim}
 
 
-You can test out the serial driver interface by hand in the Serial Interface by sending the ascii command "a 1 1" as in Fig.~\ref{fig:send}.  The reply from the Arduino is in  Fig.~\ref{fig:reply}.
+You can test out the serial driver interface by hand in the Serial Interface by sending the ascii command ``a 1 1" as in Fig.~\ref{fig:send}.  The reply from the Arduino is in  Fig.~\ref{fig:reply}.
 
 \begin{figure}[htbp]
 \begin{center}
@@ -218,7 +218,7 @@ The buffer size ({\tt max\_samples} is set to ten initially, to avoid overwhelmi
 
 \section{Python Serial Driver Code}
 
-?he python serial driver code will prompt you for the serial port that the Arduino is located on.  If you get tired of being prompted for this, you can replace the prompt with a hard coded value:
+The python serial driver code will prompt you for the serial port that the Arduino is located on.  If you get tired of being prompted for this, you can replace the prompt with a hard coded value:
 \begin{verbatim}
 #SERIAL_PORT="COM4"                                                                                                     
 #SERIAL_PORT="/dev/cu.usbmodem1421"                                                                                     
@@ -266,7 +266,7 @@ An example ipython notebook using scientific python to create a periodogram is a
 \begin{center}
 {\includegraphics[width=0.65\textwidth]{figs/testpattern.png}}
 \end{center}
-\caption{\label{fig:testpattern} Creating a test pattern for the periodogram.}
+\caption{\label{fig:testpatterns} Creating a test pattern for the periodogram.}
 \end{figure}
 
 \begin{figure}[htbp]
@@ -296,7 +296,7 @@ But there's something better we can do.  If we simply average $n$ samples and sa
 {\includegraphics[width=0.65\textwidth]{figs/res100hz.png}} \\
 {\includegraphics[width=0.65\textwidth]{figs/avg100hz.png}}
 \end{center}
-\caption{\label{fig:periodogram} Periodogram for 100~Hz sound with (top) just resolution improvements, and (bottom) averaging to reduce background noise. }
+\caption{\label{fig:periodogram2} Periodogram for 100~Hz sound with (top) just resolution improvements, and (bottom) averaging to reduce background noise. }
 \end{figure}
 
 
