@@ -22,7 +22,7 @@ then
 fi
 
 #Look for undefined references in all *.log files
-find -name '*.log' -exec grep '\(LaTeX Warning: There were undefined references.\|LaTeX Warning: There were multiply-defined labels.\)' '{}' \+ && { 
+find . -name '*.log' -exec grep '\(LaTeX Warning: There were undefined references.\|LaTeX Warning: There were multiply-defined labels.\)' '{}' \+ && { 
     echo "Undefined references and/or multiply-defined labels found in project. Commit rejected." 
     exit 1
 }
