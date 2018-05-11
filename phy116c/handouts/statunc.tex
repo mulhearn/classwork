@@ -1,0 +1,713 @@
+\documentclass[12pt]{article}
+
+
+\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.5in]{geometry}
+\usepackage{cite}
+\usepackage{slashed}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{braket}
+\begin{document}
+
+\title{The Statistics of Experimental Uncertainties}
+\author{Michael Mulhearn}
+
+\maketitle
+
+\section{Statistics of Experiments}
+
+A primary purpose of science is to predict the results of experiments.  Consider a simple experiment with four possible outcomes which we repeat twenty times.  If our theoretical prediction is that each of these four outcomes is equally probable, than our prediction for a typical series of twenty experiments would be for each outcome to occur five times.  Now suppose we perform the experiment twenty times and tabulate the results like this:
+
+\begin{figure}[htbp]
+\begin{center}
+{\includegraphics[width=0.75\textwidth]{figs/pred.pdf}}
+\end{center}
+\caption{\label{fig:hist} Comparison of experimental results with a prediction.}
+\end{figure}
+
+Scientist almost never display data this way (in bar graphs) because it is nearly impossible to answer the crucial question {\em is this data consistent with this prediction?}  Even if every outcome has an equal probability, the results of individual experiments experience statistical fluctuations.  So even if the theory is correct, we well seldom reproduce exactly the theory prediction.
+
+To interpret scientific experiments, it isn't enough to have a single prediction for the outcome of an experiment, instead, you need a prediction for the statistical distribution of outcomes: a probability distribution function.  We'll start this discussion, therefore, by deriving three of the most frequently encountered probability distributions:  the Binomial Distribution, the Poisson Distribution, and the Gaussian Distribution.
+
+\section{The  Binomial Distribution}
+
+The Binomial Distribution is the most general of the distributions we'll consider, but it is a bit cumbersome to use in practice.  The more familiar Poisson and Gaussian distributions are limiting cases of this distribution.  
+
+Suppose you repeat a particular process $n$ times, and each time you have the same probability $\epsilon$ of a particular outcome, which, without losing generality, we'll call ``success".  The probability of having exactly $m$ successes after $n$ trials is simply given by:
+\begin{displaymath}
+P = \sum_i p_i
+\end{displaymath}
+where $i$ runs over all specific outcomes with $m$ successes and $p_i$ is the probability of each specific outcome.   However, as these specific outcomes all contain exactly $m$ successes, they share the same probability, namely:
+\begin{displaymath}
+p_i = \epsilon^m (1 - \epsilon)^{n-m}
+\end{displaymath}
+and so we are left to consider simply the total number of specific outcomes containing $m$ successes.  
+
+The quantity we need is provided by the binomial theorem from mathematics, which states that:
+\begin{equation}
+\label{eqn:binomt}
+(p+q)^n = \sum_{m=0}^{n} \binom{n}{m} \, p^m \, q^{n-m}
+\end{equation}
+where the binomial coefficients are defined by
+\begin{equation}
+\label{eqn:binomc}
+\binom{n}{m} = \frac{n!}{m! \, (n-m)!}
+\end{equation}
+and are also often referred to in other contexts as $n$-choose-$m$.  The binomial coefficient simply tells us how many times we can choose $m$ instances of $p$ instead of $q$, from $n$ factors, and so it is precisely the combinatoric factor that we need.
+
+The probability of obtaining $m$ successes after $n$ trials with probability $\epsilon$ is therefore given by:
+\begin{equation}
+\label{eqn:binom}
+P(m; \, n ,\epsilon) = \binom{n}{m} \, \epsilon^m \, (1 - \epsilon)^{n-m}
+\end{equation}
+which is called the Binomial Distribution.
+
+\section{Mean and Variance}
+
+Given a probability distribution, the most urgent questions are generally ``what is the mean value we can expect from this distribution?" and ``how close to the mean value are most of the outcomes?"  The first answer localizes the distribution while the second answer describes its width.
+
+To calculate the mean value in answer to the first question, we simply calculate a weighted average:
+\begin{equation}
+\braket{m} \equiv \bar{m} \equiv \sum_m m \, P(m) 
+\end{equation}
+For a continuous probability distribution, we would integrate instead:
+\begin{equation}
+\braket{x} \equiv \bar{x} \equiv \int x \, P(x) \, dx 
+\end{equation}
+We usually answer the second question in terms of the variance, $\sigma^2$, of the distribution:
+\begin{displaymath}
+\sigma^2 \equiv \braket{(x-\bar{x})^2}
+\end{displaymath}
+Other answers have problems, e.g. $\braket{x-\bar{x}}$ can be zero or nearly so, even for wide distributions, as long as it is symmetric.  You could fix this by calculating $\braket{|x-\bar{x}|}$ but this is generally much harder to calculate, and less useful, than the variance.  For instance, it is left as an exercise to show that:
+\begin{equation}
+\label{eqn:varhw}
+\braket{(x-\bar{x})^2} = \braket{x^2} -\bar{x}^2
+\end{equation}
+using the fact that $\bar{x}$ is simply a number, and so $\braket{\bar{x}} = \bar{x}$.  We often write this result equivalently as:
+\begin{equation}
+\label{eqn:variance}
+\sigma^2 \equiv \braket{(x-\braket{x})^2} = \braket{x^2} - \braket{x}^2
+\end{equation}
+Which shows explicitly that we need only calculate $\braket{x}$ and $\braket{x^2}$ in order to determine the variance of a distribution.
+
+\section{Mean and Variance of the Binomial Distribution}
+
+The mean value of Binomial Distribution is given by:
+\begin{eqnarray*}
+\bar{m} &=& \sum_{m=0}^n \; m \, P(m) \\
+&=& \sum_{m=0}^n \; m \, \binom{n}{m} \epsilon^m (1-\epsilon)^{n-m} \\
+\end{eqnarray*}
+which looks rather daunting!  The trick is to use the Binomial Theorem (\ref{eqn:binomt}) and define a function of two independent variables p and q given by:
+\begin{displaymath}
+f(p,q) = (p+q)^n = \sum_{m=0}^n \binom{n}{m} p^m q^{n-m}
+\end{displaymath}
+We then calculate:
+\begin{displaymath}
+\frac{\partial f}{\partial p} = n(p+q)^{n-1} = \sum_{m=0}^n m \binom{n}{m} p^{m-1} q^{n-m} \\
+\end{displaymath}
+and multiplying by $p$ we have:
+\begin{displaymath}
+np(p+q)^{n+1} = \sum_{m=0}^n m \binom{n}{m} p^m q^{n-m}
+\end{displaymath}
+which is true for any $p$ and $q$.  We now substitute the particular values $p=\epsilon$ and $q=1-\epsilon$ and find that:
+\begin{displaymath}
+n \epsilon = \sum_{m=0}^n m \binom{n}{m} \epsilon^m (1-\epsilon)^{n-m} \equiv \sum_{m=0}^n m P(m) = \bar{m}
+\end{displaymath}
+So the mean value is given by:
+\begin{equation}
+\bar{m} = n \epsilon
+\end{equation}
+or the total number of trials times the probability of success for each trial, a wholly plausible answer.
+
+For the variance, we use a variation of the same trick, this time using the second partial derivative:
+\begin{displaymath}
+p^2 \cdot \frac{\partial^2 f}{\partial p^2} = n(n-1)p^2(p+q)^{n-2} = \sum_{m=0}^n m (m-1) \binom{n}{m} p^{m} q^{n-m} \\
+\end{displaymath}
+and again putting $p=\epsilon$ and $q=1-\epsilon$ to find that:
+\begin{eqnarray*}
+n(n-1)\epsilon^2 &=& \sum_{m=0}^n (m^2 -m) \binom{n}{m} p^{m} q^{n-m} \\[5pt]
+&=& \sum_{m=0}^n (m^2 -m) P(m) \\[5pt]
+&=& \braket{m^2-m} = \braket{m^2}-\braket{m}
+\end{eqnarray*}
+and as $\braket{m} = n \epsilon$ we have:
+\begin{displaymath}
+\braket{m^2} = n(n-1)\epsilon^2 + n \epsilon
+\end{displaymath}
+And so:
+\begin{displaymath}
+\sigma^2 = \braket{m^2} - \braket{m}^2 = n(n-1)\epsilon^2 + n \epsilon - n^2\epsilon^2
+\end{displaymath}
+or simply:
+\begin{equation}
+\sigma^2 = n \, \epsilon \, (1 - \epsilon)
+\end{equation}
+Note that if $\epsilon=0$ or $\epsilon=1$, there is only one outcome (all failures or all success) and so the variation is zero.
+
+\section{The Poisson Distribution}
+
+Suppose we have some time interval over which we expect to observe a mean number of events $\lambda$.  The events must be independent of one another:  an event occurring at a particular time cannot effect the time at which the next event occurs.  We divide the time interval over which the $\lambda$ events are expected to occur into into $n$ sub-intervals, each with an equal probability to contain an event.  These intervals will be all the same size if the events are uniformly distributed in time, but if the events are not uniformly distributed, the sub-intervals are simply chosen to ensure the probability is the same in each interval.  Once cast this way, we can interpret this as a binomial distribution, with probability to contain an event, by construction, given by $\epsilon = \lambda / n$:
+\begin{eqnarray*}
+P(m) &=& \binom{n}{m} \epsilon^m (1-\epsilon)^{n-m} \\[5pt]
+  &=& \frac{n!}{m! \, (n-m)!} \; \left( \frac{\lambda}{n} \right)^m \left( 1 - \frac{\lambda}{n}\right)^{n-m} \\[5pt]
+  &=& \left( \frac{\lambda^m}{m!} \right) \left(1-\frac{\lambda}{n} \right)^n \left[ \frac{n!}{(n-m)!} \cdot \frac{1}{n^m}\right]_1 \left[ \left( 1 - \frac{\lambda}{n}\right)^{-m}\right]_2
+\end{eqnarray*}
+It is left as an exercise to show that both $[\dots]_1 \to 1$ and $[\dots]_2 \to 1$ as $n \to \infty$.  Recalling that
+\begin{displaymath}
+\lim_{n \to \infty} \left(1 - \frac{\lambda}{n} \right)^n = e^{-\lambda}
+\end{displaymath}
+we obtain the Poisson distribution, the probability for observing $m$ events for a mean of $\lambda$:
+\begin{equation}
+\label{eqn:poisson}
+P(m\; ; \; \lambda) = \frac{\lambda^m}{m!} \, e^{-\lambda}
+\end{equation}
+Notice that there is no longer a parameter $n$, since we took $n \to \infty$, and so $m$ now ranges from 0 to $\infty$.
+
+\section{Mean and Variance of The Poisson Distribution}
+
+The mean of the Poisson distribution is given by:
+\begin{eqnarray*}
+\bar{m} &=& \sum_{m \geq 0} \; m \, P(m) \\
+&=& \sum_{m \geq 0} \; m \, \frac{\lambda^m}{m!} \, e^{-\lambda}\\
+\end{eqnarray*}
+Since the first term ($m=0$) is zero, we have:
+\begin{eqnarray}
+\bar{m} &=& e^{-\lambda} \sum_{m \geq 1} \; \frac{\lambda^m}{(m-1)!} \notag \\
+             &=& \lambda e^{-\lambda} \sum_{m \geq 1} \; \frac{\lambda^{m-1}}{(m-1)!} \notag \\
+             &=& \lambda e^{-\lambda} \sum_{n \geq 0} \; \frac{\lambda^{n}}{n!} \notag \\
+             &=& \lambda e^{-\lambda} e^\lambda \notag \\
+\bar{m}  &=& \lambda
+\end{eqnarray}
+which should come as no surprise, as the assumption in the derivation was the that mean number of events was $\lambda$.
+
+For the variance, we use a similar manipulation to calculate:
+\begin{eqnarray*}
+\braket{m^2} &=& \sum_{m \geq 0} \; m^2 \, P(m) \\
+&=& \sum_{m \geq 0} \; m^2 \, \frac{\lambda^m}{m!} \, e^{-\lambda}\\
+&=& \lambda \sum_{m \geq 1} \; m \, \frac{\lambda^{m-1}}{(m-1)!} \, e^{-\lambda}\\
+&=& \lambda \sum_{n \geq 0} \; (n+1) \, \frac{\lambda^{n}}{(n)!} \, e^{-\lambda}\\
+&=& \lambda \braket{m+1} = \lambda \, (\lambda+1)
+\end{eqnarray*}
+And so:
+\begin{eqnarray}
+\sigma^2 &=& \braket{m^2} - \braket{m}^2 \notag \\
+&=& \lambda \, (\lambda+1) - \lambda^2 \notag \\
+\sigma^2 &=& \lambda. 
+\end{eqnarray}
+That is, the variance of a Poisson distribution is simply the mean.
+
+\section{The Gaussian Distribution}
+
+Next, we consider the Poisson Distribution in the limit $\lambda \to \infty$.  In this case, we can apply the Stirling Approximation:
+\begin{displaymath}
+\lim_{n \to \infty} n! = \sqrt{2 \pi n} \; e^{-n} \; n^n
+\end{displaymath}
+to the Poisson distribution as follows:
+\begin{eqnarray*}
+P(m) &=& \frac{\lambda^m}{m!} \, e^{-\lambda} \\[5pt]
+ &\to& \frac{\lambda^m e^{-\lambda}}{\sqrt{2 \pi m} \; e^{-m} \; m^m} \\[5pt]
+ &=& \frac{e^{m-\lambda}}{\sqrt{2\pi\lambda}} \left( \frac{\lambda}{m}\right)^{m+\frac{1}{2}}\\
+\end{eqnarray*}
+Now we consider a new variable $\delta$, defined by
+\begin{displaymath}
+\delta \equiv \frac{m-\lambda}{\lambda}
+\end{displaymath}
+which measures the difference between the value $m$ and the mean of the distribution, as a fraction of the mean.  Intuitively, the function is getting very narrow, and so we expect this to be a small quantity, but let's check this.  First we have:
+\begin{displaymath}
+\braket{\delta} = \frac{\braket{m}- \lambda}{\lambda} = \frac{\lambda - \lambda}{\lambda} = 0
+\end{displaymath}
+but also:
+\begin{displaymath}
+\braket{\delta^2} = \frac{\braket{(m-\lambda)^2}}{\lambda^2} = \frac{\lambda}{\lambda^2} = \frac{1}{\lambda}
+\end{displaymath}
+where we have used the fact that the variance is given by $\braket{(m-\lambda)^2} = \lambda$, and so as $\lambda \to \infty $ we have
+\begin{displaymath}
+\braket{\delta^2} \to 0
+\end{displaymath}
+So we can write:
+\begin{equation} \label{eqn:mdef}
+m = \lambda (1 + \delta)
+\end{equation}
+where we expect the approximation $\delta \to 0$ to hold as long as we require $\lambda \to \infty$.  So now we can write the distribution in terms of the small quantity $\delta$ and the large quantity $\lambda$ as:
+\begin{eqnarray}
+\label{eqn:pdelt}
+P(\delta) &=& \frac{e^{\lambda\delta}}{\sqrt{2\pi\lambda}} \left( \frac{\lambda}{\lambda (1+\delta)} \right)^{\lambda(1+\delta)+\frac{1}{2}} \notag \\[5pt]
+ &=& \frac{e^{\lambda\delta}}{\sqrt{2\pi\lambda}} \cdot \frac{1}{X}
+\end{eqnarray}
+where we define the quantity:
+\begin{displaymath}
+X = (1+\delta)^{\lambda(1+\delta)+\frac{1}{2}}
+\end{displaymath}
+which can be approximated as follows:
+\begin{eqnarray*}
+\ln X &=& \left( \lambda (1+\delta) + \frac{1}{2} \right) \cdot \ln(1+\delta) \\[5pt]
+&=& \left( \lambda (1+\delta) + \frac{1}{2} \right) \cdot \left( \delta - \frac{\delta^2}{2} + \mathcal{O}(\delta^3)\right) \\[5pt]
+\frac{\ln X}{\lambda}&=& \left( 1+\delta + \frac{1}{2\lambda} \right) \cdot \left( \delta - \frac{\delta^2}{2} + \mathcal{O}(\delta^3)\right) \\[5pt]
+&=& \left( 1+\delta + \mathcal{O}\left(\delta^2\right) \right) \cdot \left( \delta - \frac{\delta^2}{2} + \mathcal{O}(\delta^3)\right) \\[5pt]
+&=& \delta + \frac{\delta^2}{2}+ \mathcal{O}(\delta^3),
+\end{eqnarray*}
+where in the second to last step we used $\mathcal{O}\left(\frac{1}{\lambda}\right) \sim \mathcal{O}\left(\delta^2\right)$.  Neglecting the small quantities, we can approximate
+\begin{displaymath}
+X = \exp\left( \lambda\delta + \lambda\frac{\delta^2}{2} \right) 
+\end{displaymath}
+which, when plugged backed into Equation~\ref{eqn:pdelt} yields:
+\begin{eqnarray}
+\label{eqn:almost}
+P(\delta) &=& \frac{e^{\lambda\delta}}{\sqrt{2\pi\lambda}} \cdot \frac{1}{\exp\left( \lambda\delta + \lambda\frac{\delta^2}{2} \right)} \notag \\[5pt]
+&=& \frac{1}{\sqrt{2\pi\lambda}} \cdot \exp\left( -\lambda \frac{\delta^2}{2}\right)
+\end{eqnarray}
+Now notice that Equation~\ref{eqn:mdef} implies that $m$ is quite large, and so may now be treated as a continuous variable, which we will rename $x$ (since $m$ looks like an integer value), hence we have:
+\begin{displaymath}
+\delta \equiv \frac{m - \lambda}{\lambda} = \frac{x - \lambda}{\lambda}
+\end{displaymath}
+and likewise we know that the variance of the original Poisson distribution is given by $\sigma^2 = \lambda$, and so we can rewrite Equation~\ref{eqn:almost}
+in the (hopefully) more familiar form:
+\begin{equation}
+\label{eqn:gaussian}
+P(x) = \frac{1}{\sqrt{2\pi} \sigma} \cdot \exp\left( - \frac{(x - \lambda)^2}{2 \sigma^2}\right)
+\end{equation}
+Which is a Gaussian distribution with mean value $\lambda$ and variance $\sigma^2$.  The proof that these quantities are indeed the mean and the variance is left as an exercise.
+
+\section{Histograms and Distributions in Scientific Python}
+
+The experimental analog to a theoretical probability distribution function is a histogram:  a graphical representation of the distribution of numerical data.  Suppose we measure a continuous quantity $x$ and wish to compare the outcome of many measurements of $x$ with our theoretical prediction.  The probability of any  particular outcome, say x=1.24567392874, is vanishing small.  Which is why our prediction is in the form of a probability distribution function $p(x)$, where $p(x) dx$ gives the infinitesimal probability for an outcome between $x$ and $x+dx$.
+
+To display our data in a histogram, we divide the range of $x$ into several bins, and simply tabulate how many experiments yielded a result in each bin.
+
+To predict the number of events in a bin with edges $x_{\rm lower}$ and $x_{\rm upper}$, in principle we need to integrate the PDF and normalize to the number of experiments:
+\begin{displaymath}
+N_{\rm pred} = N_{\rm meas} \int^{x_{\rm upper}}_{x_{\rm lower}} p(x) dx
+\end{displaymath}
+In practice, we generally choose the bin sizes small enough that the PDF is approximately constant during the entire bin, and in this case, the prediction can be taken as:
+\begin{displaymath}
+N_{\rm pred} = N_{\rm meas} \; \Delta x \; p(x)
+\end{displaymath}
+where $\Delta x$ is the width of each bin.  This scale factor $N_{\rm meas} \; \Delta x$ allows us to compare a continuous function to data collected in discrete bins, as shown in Fig.~\ref{fig:hist}.
+
+To aid in the comparison between the data and theoretical prediction, we put error bars on each data point.  In this case, we have used one-sigma uncertainties from the poisson variance $\sigma^2 = N$.  That is, we have taken the square root of the total number of events in each bin as the statistical uncertainty.  We'll see in the next section that this is consistent with the standard interpretation of uncertainties.
+
+\begin{figure}[htbp]
+\begin{center}
+{\includegraphics[width=0.95\textwidth]{figs/scipy_hist.png}}
+\end{center}
+\caption{\label{fig:hist} Histogram.}
+\end{figure}
+
+\newpage
+\section{Exercises for Distributions}
+
+\noindent
+{\bf Problem 1:} Show that the Binomial distribution, $P(m)$, in Equation~\ref{eqn:binom} is properly normalized:
+\begin{displaymath}
+\sum_{m=0}^n P(m) = 1
+\end{displaymath}
+as a consequence of the Binomial Theorem (Equation~\ref{eqn:binomt}).
+
+\vskip 1cm
+\noindent
+{\bf Problem 2:} Show that Equation~\ref{eqn:varhw} is correct.
+
+\vskip 1cm
+\noindent
+{\bf Problem 3:} Show that the Poisson distribution, $P(m)$, in Equation~\ref{eqn:poisson} is properly normalized:
+\begin{displaymath}
+\sum_{m \geq 0} P(m) = 1.
+\end{displaymath}
+Hint: recall the Taylor series expansion for $e^\lambda$.
+
+\vskip 1cm
+\noindent
+{\bf Problem 4:} Show that the Gaussian distribution, $P(x)$, in Equation~\ref{eqn:gaussian} is properly normalized:
+\begin{displaymath}
+\int_{-\infty}^{\infty} P(x) dx = 1.
+\end{displaymath}
+
+\vskip 1cm
+\noindent
+{\bf Problem 5:} Show that the mean of the Gaussian distribution has been correctly identified in Equation~\ref{eqn:gaussian}.  That is, show explicitly that:
+\begin{displaymath}
+\int_{-\infty}^{\infty} x P(x) dx = \lambda 
+\end{displaymath}
+
+\vskip 1cm
+\noindent
+{\bf Problem 6:} Show that the variance of the Gaussian distribution has been correctly identified in Equation~\ref{eqn:gaussian}.  That is, show explicitly that:
+\begin{displaymath}
+\int_{-\infty}^{\infty} x^2 P(x) dx = \sigma^2 
+\end{displaymath}
+when we take $\lambda=0$ (which is equivalent to simply changing variables $y=x-\lambda$.)
+   
+%\section{Challenges (Not Assigned)}
+%
+%\noindent
+%{\bf Problem 1:} Prove by induction the formula for the binomial coefficients in (Equation~\ref{eqn:binomc}).
+
+\newpage
+
+\section{Experimental Uncertainties}
+
+A scientific measurement is meaningless without an associated uncertainty.  The convention is to report only one significant digit worth of uncertainty (or two if the first digit is a 1 or 2).  So we don't report $x = 1.234 \pm 0.303~\rm{m}$, but instead would report $x= 1.2 \pm 0.3~\rm{m}$ or $t = 4.76 \pm 0.13~\rm{s}$. 
+
+The uncertainty is intended to indicate how close the true value for measured quantities is to the best estimate.  The Central Limit Theorem informs us that the sum of a large number of random variables approaches a Gaussian distribution.  Since experimental measurements are often repeated many times, and the sources of noise causing the measurement to differ from the true value are numerous, most often the experimental uncertainties can be treated as coming from a Gaussian distribution.  That is to say that the true value of the measured quantity is assumed to be described by a Gaussian distribution with mean value at the best estimated value and with $\sigma$ given by the reported uncertainty.
+
+\section{The Error Function}
+
+Suppose we measure the speed of light in vacuum to be:
+\begin{displaymath}
+3.3 \pm 0.2 \times 10^8~{\rm m}/{\rm s}^2
+\end{displaymath}
+How consistent is this with the generally accepted value:
+\begin{displaymath}
+3.0 \times 10^8~{\rm m}/{\rm s}^2
+\end{displaymath}
+where we have omitted the uncertainty here because it is much smaller than our uncertainty!   The interpretation of the uncertainty as the $\sigma$ of a Gaussian distribution allows us to give quite precise answers.  To begin we might say that it is consistent within:
+\begin{displaymath}
+\frac{3.3 - 3.0}{0.2} = 1.5 \; \sigma.
+\end{displaymath}
+but we can also ask, what is the probability enclosed in $1.5 \sigma$.  To  answer this question, we use the error function:
+\begin{displaymath}
+{\rm erf}(x) = \frac{1}{\sqrt{\pi}} \int^x_{-x} \exp\left(-t^2 \right) dt
+\end{displaymath}
+which is simply the integral from $-x$ to $x$ of a Gaussian with $\sigma = 1/sqrt{2}$.  So if we want to calculate the probability contained in $n~\rm sigma$ we would calculate:
+\begin{displaymath}
+ {\rm erf}(n \cdot \frac{1}{\sqrt{2}})
+\end{displaymath}
+which is tabulated in Table~\ref{tbl:erf}.\\
+
+\begin{table}[thb]
+\begin{center}
+\begin{tabular}{lll}
+interval & error function & integrated probability \\ 
+\hline
+$\pm1 \sigma$ & ${\rm erf}\left( \frac{1}{\sqrt{2}} \right)$ & 68.3\% \\
+$\pm2 \sigma$ & ${\rm erf}\left( \frac{2}{\sqrt{2}} \right)$ & 95.4\% \\
+$\pm3 \sigma$ & ${\rm erf}\left( \frac{3}{\sqrt{2}} \right)$ & 98.5\% \\
+$\pm4 \sigma$ & ${\rm erf}\left( \frac{4}{\sqrt{2}} \right)$ & 99.5\% \\
+$\pm5 \sigma$ & ${\rm erf}\left( \frac{5}{\sqrt{2}} \right)$ & 99.8\% \\ 
+\end{tabular}
+\caption{\label{tbl:erf} The integrated probability for a Gaussian distribution within the stated bounds.} 
+\end{center}
+\end{table}
+
+\section{Mean and Variance of a Sum}
+
+So far we've been calculating expectation values of functions of one random variable: 
+\begin{displaymath}
+\braket{f(x)} = \int f(x) \; P(x) \; dx
+\end{displaymath}
+but this easily generalizes to two or more random variables:
+\begin{displaymath}
+\braket{f(x,y)} = \int \int f(x,y) \; P(x,y) dx \, dy 
+\end{displaymath}
+If the random variables are independent, then we have $P(x,y) = P(x) \, P(y)$ and so
+\begin{displaymath}
+\braket{f(x,y)} = \int f(x,y) \; P(x) \, P(y) \; dx \, dy
+\end{displaymath}
+And also we have
+\begin{eqnarray*}
+\braket{f(x)+g(y)} &=& \int \int dx \, dy \; P(x) \, P(y) \;\; (f(x) + g(y)) \\
+&=& \left(\int P(y) \; dy \right) \cdot \left( \int P(x) \; f(x) \; dx  \right) 
++ \left(\int P(x) \; dx \right) \cdot \left( \int P(y) \; f(y) \; dy  \right)\\
+&=& 1 \cdot \int P(x) \; f(x) \; dx  + 1 \; \cdot \int P(y) \; f(y) \; dy \\
+\end{eqnarray*}
+which we can write much more simply as:
+\begin{displaymath}
+\braket{f(x)+g(y)} = \braket{f(x)}+\braket{g(y)}
+\end{displaymath}
+revealing the power of the expectation value notation for tackling independent random variables.  In the homework you will show that similarly:
+\begin{equation}
+\braket{f(x) \cdot g(y)} = \braket{f(x)} \cdot \braket{g(y)} \label{eqn:expprod}
+\end{equation}
+We can therefore conclude that the mean of a sum of two random variables:
+\begin{displaymath}
+\braket{x + y} = \braket{x} + \braket{y} 
+\end{displaymath}
+is just the sum of the mean.  Supposing that $\braket{x} = \braket{y} = 0$ we also have:
+\begin{eqnarray*}
+\braket{(x + y)^2} &=& \braket{x^2 + 2*x*y + y^2} \\
+&=& \braket{x^2} + 2*\braket{x}*\braket{y} + \braket{y^2} \\
+&=& \braket{x^2} + \braket{y^2} \\
+\end{eqnarray*}
+In the exercises you will show using expectation values that the variance of the sum of two independent random variables is just the sum of their variances:
+\begin{displaymath}
+\sigma^2(x+y) = \sigma^2_x + \sigma^2_y
+\end{displaymath}
+
+\section{Uncertainties Add in Quadrature}
+
+In the previous section, we discussed that the variance of the sum of two random variables drawn from any distribution is just the sum of their variances:
+\begin{displaymath}
+\sigma^2(x+y) = \sigma^2_x + \sigma^2_y
+\end{displaymath}
+This is a quite general result.  In the context of experimental uncertainties, we consider experimental measurements to be drawn from a Gaussian distribution and the square-root of the variance ($\sigma$) is called the uncertainty.
+
+If we calculate the sum $s$ of two independent measurements $x$ and $y$ with uncertainties $\sigma_x$ and $\sigma_y$, it's clear that the variance of the sum will be simply $\sigma^2_x + \sigma^2_y$.  If the resulting distribution of $x+y$ is a Gaussian distribution, as seems probable due to the Central Limit Theorem, then the uncertainties simply add in quadrature:
+\begin{displaymath}
+\sigma_{x+y} = \sqrt{\sigma^2_x + \sigma^2_y}.
+\end{displaymath}
+
+Let's show explicitly that this is the case.  If we wish to know the probability that two random variables $x$ and $y$ add to some particular value $u = x + y$, we simply integrate the total probability of $x$ and $y$ subject to the requirement $u = x + y$:
+\begin{eqnarray*}
+P(u) &=& \int dx \int dy \; P_x(x) \, P_y(y) \, \delta\left(u-(x+y)\right) \\
+        &=& \int dx \; P_x(x) \, P_y(u-x)
+\end{eqnarray*}
+If we make the (very often valid) assumption that $x$ and $y$ are Gaussian distributed, and, for simplicity, assume that the mean values are zero (or simply change coordinates), so that we have:
+\begin{eqnarray*}
+P_x(x) &=& \frac{1}{\sqrt{2\pi} a} \exp\left( -\frac{x^2}{2a^2} \right) \\
+P_y(y) &=& \frac{1}{\sqrt{2\pi} a} \exp\left( -\frac{y^2}{2b^2} \right) 
+\end{eqnarray*}
+And so the mean value probability distribution function for $u$ is now:
+\begin{eqnarray*}
+P(u) &=& \frac{1}{2\pi a b} \int dx \; \exp\left( -\frac{x^2}{2a^2}\right) \exp\left( -\frac{(u-x)^2}{2b^2}\right) \\
+&=& \frac{1}{2\pi a b} \int dx \; \exp \left( -\frac{a^2+b^2}{2a^2b^2} \, \left\{ x^2 - \frac{2a^2}{a^2+b^2}ux + \frac{a^2}{a^2+b^2}u^2\right\}_1 \right) 
+\end{eqnarray*}
+We deal with the term in brackets ($\{\}_1$) by completing the square.  Simply note that
+\begin{equation}
+\left(x-\frac{a^2}{a^2+b^2}u\right)^2 = x^2-\frac{2a^2}{a^2+b^2}ux + \frac{a^4}{(a^2+b^2)^2}u^2
+\end{equation}
+reproduces the first and second terms, so we can replace:
+\begin{equation}
+x^2-\frac{2a^2}{a^2+b^2}ux  = \left(x-\frac{a^2}{a^2+b^2}u\right)^2 -  \frac{a^4}{(a^2+b^2)^2}u^2
+\end{equation}
+to obtain:
+\begin{eqnarray*}
+\{\}_1 &=& \left(x-\frac{a^2}{a^2+b^2}u\right)^2 -  \frac{a^4}{(a^2+b^2)^2}u^2 + \frac{a^2}{a^2+b^2}u^2\\
+&=& \left(x-\frac{a^2}{a^2+b^2}u\right)^2 + \frac{a^2b^2}{(a^2+b^2)^2}u^2\\
+\end{eqnarray*}
+and substituting back into the original expression we obtain:
+\begin{eqnarray*}
+P(u) &=& \frac{1}{2\pi a b} \left\{ \int_{-\infty}^{+\infty} dx \;  \exp \left( -\frac{a^2+b^2}{2a^2b^2} \, \left(x-\frac{a^2}{a^2+b^2}u\right)^2 \right) \right\}_2
+\exp \left( -\frac{1}{2} \frac{u^2}{a^2+b^2} \right)
+\end{eqnarray*}
+making a substitution of variables ($u$ is constant during the integration):
+\begin{equation*}
+y = x-\frac{a^2}{a^2+b^2}u
+\end{equation*}
+the definite integral in brackets yields:
+\begin{equation}
+\{\}_2 = \sqrt(2 \pi) \frac{a b}{\sqrt{a^2+b^2}}
+\end{equation}
+and we have at last:
+\begin{eqnarray*}
+P(u) &=& \frac{1}{\sqrt{2\pi} \sqrt{a^2+b^2}}  \exp \left( -\frac{1}{2} \frac{u^2}{a^2+b^2} \right)
+\end{eqnarray*}
+which is a Gaussian distribution with variance:
+\begin{eqnarray*}
+\sigma^2 = a^2 + b^2,
+\end{eqnarray*}
+that is, uncertainties add in quadrature.
+
+\section{Handling Constants}
+
+When adding a known constant to a measured quantity:
+\begin{equation*}
+y = x + C
+\end{equation*}
+we can consider the constant to have uncertainty $\sigma=0$.  And therefore, from the addition in quadrature rule:
+\begin{equation*}
+\sigma_y = \sigma_x
+\end{equation*}
+
+If we multiply a measured quantity by a known constant 
+\begin{equation*}
+y = k x 
+\end{equation*}
+we consider that:
+\begin{displaymath}
+dx \frac{1}{\sqrt{2\pi} \sigma} \exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right) = d(kx) \frac{1}{\sqrt{2\pi} k\sigma} \exp\left(-\frac{(kx-k\mu)^2}{2(k\sigma)^2}\right)
+\end{displaymath}
+and conclude that:
+\begin{equation*}
+\sigma_y = k \sigma_x
+\end{equation*}
+
+\section{General Propagation of Uncertainties}
+We are now ready to handle propagation of uncertainties for a general function.  Suppose we measure $x = x_0 \pm \sigma_x$ and $y = y_0 \pm \sigma_y$ and we wish to know the resulting uncertainty on the calculated quantity $f(x,y)$.
+
+Now we Taylor expand the function about the measured values $x_0$ and $y_0$:
+\begin{equation*}
+f(x,y) = f(x_0+\Delta x,y_0 + \Delta y) \sim f(x_0,y_0) + \left.\frac{df}{dx}\right|_{x_0,y_0} \Delta x + \left.\frac{df}{dy}\right|_{x_0,y_0} \Delta y 
+\end{equation*}
+We note that 
+\begin{eqnarray*}
+\Delta x \equiv x - x_0 \\
+\Delta y \equiv y - y_0 \\
+\end{eqnarray*}
+where we can consider $x_0$ and $y_0$ to be precisely known constants that happen to coincide with our best measured value of $x$ and $y$.  In this case, our measurement amounts to:
+\begin{eqnarray*}
+\Delta x &=& 0 \pm \sigma_x\\
+\Delta y &=& 0 \pm \sigma_y\\
+\end{eqnarray*}
+and our uncertainties are associated with $\Delta x$ and $\Delta y$, not the ``constants" $x_0$ and $y_0$.
+
+Turning back to the Taylor expansion, we see now that:
+\begin{equation*}
+f(x,y) \sim A + B \Delta x + C \Delta y 
+\end{equation*}
+where the constants are:
+\begin{eqnarray*}
+A  &=& f(x_0,y_0)\\
+B  &=& \left.\frac{df}{dx}\right|_{x_0,y_0}\\
+C  &=& \left.\frac{df}{dy}\right|_{x_0,y_0}\\
+\end{eqnarray*}
+We know how to propagate uncertainties in this case, which involves scaling, adding in quadrature, and adding a constant:
+\begin{equation*}
+\sigma_f^2 =   B^2 \sigma_x^2 + C^2 \sigma_y^2 
+\end{equation*}
+And plugging in the constants:
+\begin{equation*}
+\sigma^2_f = \left(\left.\frac{df}{dx}\right|_{x_0 y_0} \right)^2 \sigma^2_x  + \left( \left.\frac{df}{dy} \right|_{x_0 y_0} \right)^2 \sigma^2_y
+\end{equation*}   
+
+\section{Variance of the Mean}
+
+Suppose we have an apparatus that can measure a quantity $x$ with uncertainty $\sigma$, and we make a series of $N$ measurements $x_1$, $x_2$, $x_3$, \ldots, $x_N$.
+
+We can calculate the mean value:
+\begin{displaymath}
+X = \frac{x_1 + x_2 + x_3 + \ldots + x_N}{N}
+\end{displaymath}
+
+The uncertainty on the mean value can be calculated by propagating the uncertainties in the usual way:
+\begin{eqnarray*}
+\sigma_X &=& \sqrt{\left(\frac{dX}{dx_1} \sigma \right)^2 
++ \left(\frac{dX}{dx_2} \sigma \right)^2 +  \ldots + \left(\frac{dX}{dx_N} \sigma \right)^2 } \\
+&=& \sqrt{N \left(\frac{\sigma}{N} \right)^2}\\ 
+&=& \frac{\sigma}{\sqrt{N}} \\
+\end{eqnarray*}
+If we assume that the mean value is approaching the true value of the quantity $x$, then repeating the measurement $N$ times reduces the uncertainty by a factor $\sqrt{N}$.
+
+It would seem, therefore, that by simply repeating the same experiment many times, we could reach very high precision even with very lousy equipment.  But this is, unfortunately, not generally the case, as has been conclusively demonstrated by many years of running Physics 116.  The statistical uncertainties which we have considered here due indeed diminish with more data.  But there are also systematic uncertainties, which are the same for each measurement.  The mean of many measurements tends toward the true value plus some constant (and unknown) offset known as the systematic uncertainty.  
+
+Generally in the early stages, experiments are statistics limited, and taking more data helps reduce the overall uncertainty.  But at a later stage, the experiment becomes systematics limited.  More data does not help unless the apparatus is improved.  Often, in complicated experiments, increased statistics also gives the experimenter a better handle on the systematic uncertainties, allowing for improvements to both the statistical and systematic uncertainties.
+
+newpage
+\section{Exercises for Uncertainties}
+
+\noindent
+{\bf Problem 1:}  Suppose you measure an RMS voltage as $V = 43.2145~\rm mV$ and you calculate the uncertainty on this measurement to be $0.471~\rm mV$.  How should you report this measurement?  How about if the uncertainty were $1.07~\rm mV$? \\ \vskip 0.25cm
+
+\noindent
+{\bf Problem 2:}  Show that Equation~\ref{eqn:expprod} is valid. \\ \vskip 0.25cm
+
+\noindent
+{\bf Problem 3:}  Show that for independent random variables $x$ and $y$:
+\begin{displaymath}
+\braket{(x+y)^2} - \braket{x+y}^2 = \braket{x^2} - \braket{x}^2 + \braket{y^2} - \braket{y}^2.
+\end{displaymath}
+What does this imply about the uncertainty on the sum of two variables, assuming all of the PDFs are Gaussian? \\ \vskip 0.25cm
+
+\noindent
+{\bf Problem 4:}  For a measurement $x_0 \pm \sigma$ we define the fractional uncertainty as $\sigma/x_0$.  Use the general formula for propagating uncertainties to show that for products and ratios, the {\em fractional} uncertainties add in quadrature.  \\ \vskip 0.25cm
+
+\noindent
+{\bf Problem 5:}  Suppose you measure the system gain for your new ionization chamber to be $12~\rm mV$ per collected electron.  Suppose you measure a pulse with a height of $6.2~\rm V$.  First estimate the uncertainty on this measured value due to statistical fluctuations from the number of electrons.   Next, suppose your pre-amplifier adds about $300~\rm mV$ of noise to this measurement.  What is the total uncertainty for this measurement? \\ \vskip 0.25cm
+
+\noindent
+{\bf Problem 6:}  The rare decay of the Higgs boson ($m \sim125~\rm GeV$ in units where $c=1$) into pairs of photons played a crucial role in its discovery at the Large Hadron Collider.  The invariant mass of a particle that decays into two massless particles $p_1$ and $p_2$ can be calculated from:
+\begin{displaymath}
+m = \sqrt{2  p_1 p_2 (1 - \cos\theta)}
+\end{displaymath}
+Suppose you were sitting in the control and saw a nice looking two photon event with 
+$p_1=53 \pm 2~\rm GeV$, $p_2=75 \pm 3~\rm GeV$ and $\theta = 2.8 \pm 0.1$.   Calculate the invariant mass of these two photons (answer in GeV) and the uncertainty. \\ \vskip 0.25cm
+
+\noindent
+{\bf Problem 7:}  A perennial problem with drawing data in histograms is what to do about bins that have zero events in them.  Those crazy people that insist that data has no statistical uncertainty (only predictions have statistical uncertainty!) laugh maniacally when we struggle with what to do in these bins.  This is where our highly useful fiction that data has an associated uncertainty manifestly falls apart! 
+
+The canonical way to draw uncertainties on histogram data is to take the uncertainty in a bin as $\sqrt{n}$ when $n$ is the number of entries in the bin.  But for $n=0$, this implies the uncertainty is zero!  If you take this too literally during the statistical analysis of your data, it will cause serious problems (as we'll see when we get to curve fitting.)   But for histogram plotting purposes, it is standard practice to put zero uncertainty on bins with zero events:  anything else tends to clutter a plot without adding much useful information. 
+
+Another proposal one sees occasionally is to draw the data point at 0 with an error bar going from 0 to 1.  I must admit, I never understand this proposal, as there is a far better choice that we will work out here.
+When we draw typical error bars corresponding to the uncertainty $\pm\sigma$ we are integrating $68.3\%$ of the Gaussian PDF.  At zero events, the Gaussian distribution is not the right distribution, and we should instead use the Poisson distribution suitable for small numbers of events.  We observed 0 events, so we'll start our range at $\lambda = 0$.  We want to find the largest value of lambda that keeps the probability $p$ of observing 0 events (as we have) at  $p \geq 1-0.683$.  Find this value of lambda. \\
+\vskip 0.25cm
+
+\noindent
+{\bf Problem 8:}  Those crazy people that think only predictions should be drawn with uncertainties argue like this: the Poisson distribution has one parameter $\lambda$ which is both the mean and the variance.  We expect to see $\lambda$ events on average with fluctuations of about $\sigma = \sqrt{\lambda}$, leading to some observed value $n$.  When we plot uncertainties of $\sqrt{n}$ we are plotting the wrong uncertainty, which should be $\sqrt{\lambda}$.  Calculate how much these two estimates vary for a typical one sigma fluctuation, up and down, for $\lambda=10$ and $\lambda=100$.  Do the crazy people have a point? \\ \vskip 0.25cm
+
+\noindent
+{\bf Problem 9:}  In particle physics, we always need to understand the efficiency of our detectors.  For instance, if $n$ muons are produced by collisions, we'd like to know how many are actually recorded successfully by our muon detectors.  If we measure $m$ muons that are actually detected, we know that our efficiency is $\epsilon = m/n$.  No problem here!
+
+You will often see young particle physicists (and occasionally old!) run into problems estimating the uncertainty of this estimate.  They reason like this:  $n$ is just a constant, with no uncertainty.  I could pick to study exactly 1000 events, for instance.  The only number which I actually measure is $m$, and that should fluctuate by $\sigma_m = \sqrt{m}$.  So my uncertainty on the efficiency is just $\sigma_\epsilon = \sigma_m/n = \sqrt{m}/n$.  Problems arise because we often build good detectors with high efficiency.  So consider, for instance $n=100$ and $m=95$.  This leads to a measurement of the efficiency as $0.95 \pm 0.10$ which seems to include the impossible value $\epsilon = 1.05$.
+
+One way out of this embarrassment is to realize that this problem is more appropriate for the binomial distribution which has two parameters, the number of trials $n$ and the success rate $\epsilon$ which is precisely the efficiency we are attempting to measure, and for which we all agree our best estimate is $\epsilon = m/n$.  Unlike our incorrect assumption that $\sigma_m = \sqrt{m}$, for the Binomial distribution
+$\sigma_m = \sqrt{n \epsilon (1 - \epsilon))}$.  Calculate the resulting uncertainty on the efficiency 
+$\epsilon$ and check that there is no longer a problem for $n=100$ and $m=95$.
+
+There's another way to solve this problem, and that is to realize that $m$ and $n$ are not independent variables, because $m > n$ is impossible.  If we instead think of this in terms of the number of events $p$ that pass, and the number of events $f$ that fail, these variable are independent.  Calculate the uncertainty on the efficiency: 
+\begin{displaymath}
+\epsilon = \frac{p}{p+f}
+\end{displaymath}
+using standard propagation of uncertainties and the fact that $\sigma_p = \sqrt{p}$ and $\sigma_f = \sqrt{f}$.  You should be able to reproduce the same answer as above. \\ \vskip 0.25cm
+   
+%\section{Challenges (Not Assigned)}
+%
+%\noindent
+%{\bf Problem 1:} Prove by induction the formula for the binomial coefficients in (Equation~\ref{eqn:binomc}).
+
+\newpage
+
+\section{Appendix:  The Central Limit Theorem}
+
+First we'll need to define the characteristic functions of a probability distribution function (PDF), which is simply the expectation value of the complex exponential:
+\begin{equation*}   
+\phi(t) \equiv \braket{\exp(itx)}  
+\end{equation*}  
+this is, equivalently, just the Fourier Transform of the PDF:
+\begin{equation*}
+\braket{\exp(itx)} = \int_{-\infty}^{+\infty} dx \; p(x) \exp(itx)
+\end{equation*}
+The characteristic function of a Gaussian PDF with $\sigma=1$ and mean value $\mu=0$ is then:
+\begin{eqnarray*}
+\phi(t) &=& \braket{\exp(itx)}\\
+&=& \int_{-\infty}^{+\infty} dx \; \frac{1}{\sqrt{2\pi}} \exp\left(-\frac{x^2}{2}\right)\exp(itx)\\
+&=& \int_{-\infty}^{+\infty} dx \; \frac{1}{\sqrt{2\pi}} \exp\left(-\frac{x^2-i2tx}{2}\right)
+\end{eqnarray*}
+And now completing the square by noting:
+\begin{eqnarray*}
+(x-it)^2 &=& x^2 - i2tx + (it)^2 
+\end{eqnarray*}
+so that the characteristic function is:
+\begin{eqnarray*}
+\phi(t) &=& \int_{-\infty}^{+\infty} dx \; \frac{1}{\sqrt{2\pi}} \exp\left(-\frac{(x-it)^2+(it)^2}{2}\right)\\
+&=& \exp\left(\frac{1}{2}t^2\right)\int_{-\infty}^{+\infty} dx \; \frac{1}{\sqrt{2\pi}} \exp\left(-\frac{(x-it)^2}{2}\right)
+\end{eqnarray*}   
+where the integral is now simply the integral of a Gaussian distribution (albeit one with a complex mean value) which integrates to simply 1.  And so the characteristic function of the Gaussian distribution is:
+\begin{equation}
+\phi(t) = \exp\left(\frac{1}{2}t^2\right) \label{eqn:cfn}
+\end{equation}
+ The proof of the Central Limit Theorem amounts to showing that the characteristic function of a sum of random variables, from any PDF, with finite variance converges to the characteristic function for the Gaussian distribution.  Due to Levy's Continuity Theorem, the proof of which we'll leave to the mathematicians, this means that the PDF for the sum of random variables converges to the Gaussian distribution.
+
+We can assume, without losing generality, that we have $n$ independent random variables $x_i$ identically distributed with mean $\mu=0$ and $\sigma=1$.  We consider the random variable $z$ which is the sum of these random variables:
+\begin{displaymath}
+z = \frac{1}{\sqrt{n}}\sum x_i 
+\end{displaymath}
+The expectation value for a function of $z$ is therefore an integral over all of the $x_i$ variables each weighted by the PDF:
+\begin{equation}
+\braket{f(z)}_z = \int \; \left( \prod_i dx_i \; p(x_i) \right) \; f\left( \frac{1}{\sqrt{n}}\sum x_i \right) 
+\end{equation} 
+ The characteristic function of the random variable $z$ is therefore:
+\begin{eqnarray*}
+\phi(t) &=& \braket{\exp(itz)}_z \\
+           &=& \int \left( \prod_i dx_i \; p(x_i) \right)  \exp\left( \frac{it}{\sqrt{n}}\sum_i x_i \right) \\
+           &=& \int \left( \prod_i dx_i \; p(x_i) \right)  \left( \prod_i \exp\left(\frac{itx_i}{\sqrt{n}}\right) \right)\\           
+           &=& \prod_i \int dx_i \; p(x_i) \exp\left(\frac{itx_i}{\sqrt{n}}\right) \\                      
+           &=& \prod_i \braket{\exp\left(\frac{itx_i}{\sqrt{n}}\right)} \\
+           &=& \left[\braket{\exp\left(\frac{itx}{\sqrt{n}}\right)}\right]^n
+\end{eqnarray*}
+where in the last step we have used the fact that the $x_i$ are identical independent random variables.  Now expanding the exponential as a Taylor series:
+\begin{eqnarray*}
+\phi(t) &=& \left[\braket{1 + \frac{it}{\sqrt{n}}x+\frac{(it)^2}{2n}x^2+\ldots}\right]^n\\
+&=& \left[1 + \frac{it}{\sqrt{n}}\braket{x}+\frac{(it)^2}{2n}\braket{x^2}\right]^n \\
+&=& \left[1 -\frac{t^2}{2n}\right]^n
+\end{eqnarray*}
+ Now in the limit $n \to \infty$ this becomes:
+\begin{eqnarray*}
+\phi(t) &=& \lim_{n \to \infty} \left[1 -\frac{t^2}{2n}\right]^n \\
+          &=& \exp\left( \frac{1}{2}t^2\right)
+\end{eqnarray*}
+which is the characteristic function from the Gaussian distribution.
+
+
+\end{document}
+
+
+
+
