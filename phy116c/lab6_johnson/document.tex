@@ -213,40 +213,41 @@ Turn the knob to select a resistor, and note the RMS voltage from the scope.  Re
 
 These measurements, plus the gain measurement, should allow you to calculate $\kb$.
 
-\section{Arduino Voltage Interface}
+\section{Coming Next Week...}
 
-The Arduino analog inputs have an input voltage range from 0 to 5 V, but our signals after amplification can reach the supply levels as $\pm12~{\rm V}$.  We'll need an interface circuit to provide these signals at a voltage level appropriate for the Arduino.  
+Next week, we will build an Arduino Based power spectrum analyzer, which will allow us to study Johnson Noise qualitatively, as well as determine $\kb$ directly from the power spectrum distribution.  Also, we will be able to measure the gain at a particular frequency, minimizing a major source of systematic uncertainty.
 
-\begin{figure}[htbp]
-\begin{center}
-%\begin{overpic}[width=0.5\textwidth,grid,tics=10]{adder.pdf}
-\begin{overpic}[width=0.5\textwidth]{figs/adder.pdf}  
- \put (23,52) {$R_1$}
- \put (23,41) {$R_2$}
- \put (23,24) {$R_3$}
- \put (63,24) {$R_4$}
- \put (60,45) {LM324}
- \put (6,47) {$V_{\rm in}$}
- \put (6,34) {$V_{\rm ref}$}
- \put (82,35) {$V_{\rm out}$}
-\end{overpic}
+
+%\section{Arduino Voltage Interface}
+
+%The Arduino analog inputs have an input voltage range from 0 to 5 V, but our signals after amplification can reach the supply levels as $\pm12~{\rm V}$.  We'll need an interface circuit to provide these signals at a voltage level appropriate for the Arduino.  
+
+%\begin{figure}[htbp]
+%\begin{center}
+%\begin{overpic}[width=0.5\textwidth]{figs/adder.pdf}  
+ %\put (23,52) {$R_1$}
+ %\put (23,41) {$R_2$}
+ %\put (23,24) {$R_3$}
+ %\put (63,24) {$R_4$}
+ %\put (60,45) {LM324}
+ %\put (6,47) {$V_{\rm in}$}
+ %\put (6,34) {$V_{\rm ref}$}
+ %\put (82,35) {$V_{\rm out}$}
+%\end{overpic}
 %{\includegraphics[width=0.65\textwidth]{adder.pdf}}
-\end{center}
-\caption{\label{fig:offset} A DC level-shifter with unit gain.}
-\end{figure}
+%\end{center}
+%\caption{\label{fig:offset} A DC level-shifter with unit gain.}
+%\end{figure}
 
-An appropriate circuit is shown in Fig.~\ref{fig:offset}, where you can use $R_1=R_4=15~{\rm k\Omega}$, 
-$R_2=R_3=30~{\rm k\Omega}$. 
+%An appropriate circuit is shown in Fig.~\ref{fig:offset}, where you can use $R_1=R_4=15~{\rm k\Omega}$, 
+%$R_2=R_3=30~{\rm k\Omega}$. 
  
-
-\section{Gain Determination}
-
-For calibration, note that the peak of periodogram resulting from a sine wave with amplitude A will be:
-\begin{displaymath}
-\frac{T}{2}|A|^2
-\end{displaymath}
-
-\section{Power Spectrum Analysis}
+%\section{Gain Determination}
+%For calibration, note that the peak of periodogram resulting from a sine wave with amplitude A will be:
+%\begin{displaymath}
+%\frac{T}{2}|A|^2
+%\end{displaymath}
+%\section{Power Spectrum Analysis}
 
 \end{document}
 
