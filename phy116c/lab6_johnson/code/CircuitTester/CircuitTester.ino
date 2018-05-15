@@ -6,7 +6,7 @@
 
 // You should only have to edit these parameters, if at all...
 
-const float CALIB_MV = 4675;   // Calibrated MV scale (nominal 5000 mV)
+const float CALIB_MV = 4800;   // Calibrated MV scale (nominal 5000 mV)
 const int MAX_SCALE    = 220;  // Calibrated full scale: minimal clipping
 const int MIN_SCALE    = 40;   // Calibrated min scale: ADC fails below
 const int RUN_SCALE    = 40;

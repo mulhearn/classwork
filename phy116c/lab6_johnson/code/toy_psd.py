@@ -1,74 +1,31 @@
-#
-# psd.py
-#
-# An example program for acquiring data from an Arduino over the serial link and 
-# graphically displaying it with SciPy.
-#
-# 1) Opens a serial connection (you will probably need to adjust this) 
-# 2) Waits for Arduino init message.
-# 3) Waits for user to press enter to acquire data.
-# 4) Sends acquire signal to Arduino
-# 5) Retrieves data of the serial link
-# 6) Plots the data
-#
-# *** Requires on Anaconda (SciPy) and PySerial libraries. ***
-#
 
-import time, serial
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy import signal
 from matplotlib import ticker
 
 nrun=1  # number of full buffers to request with acquire
-dt = 1  # time resolution requested (1 is as fast as possible - 76.9 kHz)
+dt = 4  # time resolution requested (1 is as fast as possible - 76.9 kHz)
 
-#SERIAL_PORT="COM4"
-#SERIAL_PORT="/dev/cu.usbmodem1421"
-#SERIAL_PORT="/dev/tty.usbmodem1411"
-SERIAL_PORT=raw_input("Enter the serial port for the Arduino (e.g. COM4):  ")
-
-print "connecting to the Arduino..."
-
-
-# open the serial connection
-ser = serial.Serial(SERIAL_PORT, 115200)
-time.sleep(1)
-
-# that resets Arduino, so first we wait to receive initializing string from Arduino
-print ser.readline().strip()
-
-
-# Now wait for a key press to acquire the data:
-raw_input("Press Enter to Acquire...")    
-# Now we can send our acquire data signal:
 print nrun
 print dt
-s = "a {0:d} {1:d}".format(nrun, dt)
-print "sending acquire command:  " + s 
-ser.write(s)
-# first line is the length of the payload:
-nsamp = int(ser.readline().strip())
-nrun  = int(ser.readline().strip())
-scale = int(ser.readline().strip())
+
+nsamp = 1500
+scale = 220
 mv    = (4675/255.0)*(scale/255.0)
+
+A = 2**0.5*100/mv;
 
 xl = np.zeros((nrun,nsamp), dtype=float)
 yl = np.zeros((nrun,nsamp), dtype=float)
-print "receiving payload from Arduion of length ", nsamp, " x ", nrun, "\n"
+print "simulating payload from Arduion of length ", nsamp, " x ", nrun, "\n"
 print "voltage scale is ", scale
 
 for i in range(nrun):
     print "run ", i
     for j in range(nsamp):
-        str = ser.readline().strip()
-        # print str
-        x,y = str.split()
-        if ((i<5) and (j<5)):
-            print "x: ", x, "y: ", y
-        xl[i][j] = float(x);
-        yl[i][j] = float(y)
-ser.close()
+        xl[i][j] = j;
+        yl[i][j] = A*np.sin(2*np.pi*j*dt*4/nsamp)
 
 tau = dt/76.9
 xl = tau * xl
@@ -146,4 +103,4 @@ plt.savefig('psd.png')
 plt.show()
 
 
-
+#ser.close()

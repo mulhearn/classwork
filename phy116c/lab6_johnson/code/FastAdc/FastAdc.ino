@@ -34,12 +34,36 @@ const int pwm = 5;
 // the ADC read interrupt:
 //  -> simply write every sample to the buffer until full
 ISR(ADC_vect){
-  if (isamp < max_samples){
-      buf[isamp]=ADCH;
-      isamp++;
+  if (isamp >= max_samples) return;
+  
+  switch(dt){
+    case 1:
+        buf[isamp]=ADCH;
+        isamp++;
+        return;
+    case 2:
+      sum += ADCH;
+      isum++;
+      if (isum == dt){
+        buf[isamp]=(byte) (sum>>1);
+        isamp++;
+        isum=0;
+        sum = 0; 
+      }     
+      return;
+    default:
+      sum += ADCH;
+      isum++;
+      if (isum == dt){
+        buf[isamp]=(byte) (sum/dt);
+        isamp++;
+        isum=0;
+        sum = 0; 
+      }
+      return;         
   }
-}    
-
+}
+  
 const int NOMINAL_SCALE = 255;
 int current_scale = MAX_SCALE;
 void set_voltage_scale(int scale){
@@ -80,6 +104,8 @@ void setup()
     analogRead(A0);  
     start_adc(0);
   }    
+  isum = 0;
+  sum = 0;
   isamp = 0;
 }
   
@@ -138,6 +164,8 @@ void serialEvent() {
       nruns = (int) Serial.parseInt();
       dt = (int) Serial.parseInt();        
       isamp = 0;
+      sum = 0;
+      isum = 0;
       acquire = true;
   }
   while(Serial.available()){
