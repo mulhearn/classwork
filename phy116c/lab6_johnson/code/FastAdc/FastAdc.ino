@@ -5,10 +5,9 @@
 
 // You should only have to edit these parameters, if at all...
 
-const float CALIB_MV = 4675;   // Calibrated MV scale (nominal 5000 mV)
 const int MAX_SCALE    = 220;  // Calibrated full scale: minimal clipping
 const int MIN_SCALE    = 40;   // Calibrated min scale: ADC fails below
-const int RUN_SCALE    = 220;
+const int RUN_SCALE    = 80;
 const bool TEST_PATTERN = false;
 //
 // You shouldn't have to change anything below here...
@@ -21,7 +20,8 @@ int nruns = 0; // number of waveforms requested
 int dt = 0; // example timing parameter (default 1)
 
 // the sample buffer:
-const int max_samples = 1500; // the size of the sample buffer
+const int max_samples = 1538; // the size of the sample buffer
+                              // 1538 => f0 = 50 Hz
 byte buf[max_samples]; // the sample buffer
 int sum = 0; // sum, for digital low-pass filter
 int isum = 0;
@@ -71,9 +71,6 @@ void set_voltage_scale(int scale){
   analogWrite(pwm, current_scale); 
 }
 
-float mv(){
-  return CALIB_MV * current_scale / NOMINAL_SCALE / NOMINAL_SCALE;    
-}
 
 void start_adc(int adc){    
   ADCSRA = 0;             // clear ADCSRA register

@@ -20,13 +20,18 @@ import numpy as np
 from scipy import signal
 from matplotlib import ticker
 
-nrun=1  # number of full buffers to request with acquire
-dt = 1  # time resolution requested (1 is as fast as possible - 76.9 kHz)
-
+calib_mv = 4750
+nrun    = 10  # number of full buffers to request with acquire
+dt      = 1  # time resolution requested (1 is as fast as possible - 76.9 kHz)
+nnarrow = 10*dt  # narrow peak integral (1 kHz width)
+nwide   = 30*dt  # wide peak integral (3 kHz width)
+fup     = 40 # maximum frequency (kHz) to display in periodogram
+fa      = 5 # min of PSD integration window (kHz)
+fb      = 10 # max of PSD integration window (kHz) 
 #SERIAL_PORT="COM4"
 #SERIAL_PORT="/dev/cu.usbmodem1421"
-#SERIAL_PORT="/dev/tty.usbmodem1411"
-SERIAL_PORT=raw_input("Enter the serial port for the Arduino (e.g. COM4):  ")
+SERIAL_PORT="/dev/tty.usbmodem1411"
+#SERIAL_PORT=raw_input("Enter the serial port for the Arduino (e.g. COM4):  ")
 
 print "connecting to the Arduino..."
 
@@ -51,10 +56,11 @@ ser.write(s)
 nsamp = int(ser.readline().strip())
 nrun  = int(ser.readline().strip())
 scale = int(ser.readline().strip())
-mv    = (4675/255.0)*(scale/255.0)
+mv    = (calib_mv/255.0)*(scale/255.0)
 
 xl = np.zeros((nrun,nsamp), dtype=float)
 yl = np.zeros((nrun,nsamp), dtype=float)
+sat = 0
 print "receiving payload from Arduion of length ", nsamp, " x ", nrun, "\n"
 print "voltage scale is ", scale
 
@@ -64,6 +70,8 @@ for i in range(nrun):
         str = ser.readline().strip()
         # print str
         x,y = str.split()
+        if ((int(y)==0) or (int(y)==255)):
+            sat = sat + 1
         if ((i<5) and (j<5)):
             print "x: ", x, "y: ", y
         xl[i][j] = float(x);
@@ -111,27 +119,26 @@ print "peak at f=", fmax, " with Vrms=", vmax
 
 print imax
 
-narrow = 10/dt
-wide   = 30/dt
 # integrals near peak:
-an = max(0, imax-narrow)
-bn = min(len(f),imax + narrow)
+an = max(0, imax-nnarrow)
+bn = min(len(f),imax + nnarrow)
 vintn = (np.sum(pavg[an:bn])*fs/nsamp)**0.5
 # wider integral:
-aw = max(0, imax-wide)
-bw = min(len(f),imax + wide)
+aw = max(0, imax-nwide)
+bw = min(len(f),imax + nwide)
 vintw = (np.sum(pavg[aw:bw])*fs/nsamp)**0.5
 
 # total:
 vtot = (np.sum(pavg)*fs/nsamp)**0.5
 
+print "saturated count is ", sat
 print "total integrated rms is ", vtot
 print "in narrow region of peak is ", vintn
 print "in wide region of peak is ", vintw
 
 print "mean of PSD:  ", np.mean(pavg), "mV^2/kHz"
-ia = (1.0/fs)*nsamp
-ib = (5.0/fs)*nsamp
+ia = (fa/fs)*nsamp
+ib = (fb/fs)*nsamp
 print "mean of PSD in region:  ", np.mean(pavg[ia:ib]), "mV^2/kHz"
 
 fig, ax = plt.subplots(1,1)
@@ -139,7 +146,7 @@ ax.semilogy(f, pavg)
 ax.set_xlabel('frequency [kHz]')
 ax.set_ylabel('PSD [mV^2/kHz]')
 ax.set_ylim(1E-10, 1E10)
-ax.set_xlim(0, 10.0)
+ax.set_xlim(0, fup)
 tick_spacing = 0.1
 ax.xaxis.set_minor_locator(ticker.MultipleLocator(tick_spacing))
 plt.savefig('psd.png')

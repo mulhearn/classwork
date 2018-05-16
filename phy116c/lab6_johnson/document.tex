@@ -6,11 +6,17 @@
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{braket}
-\usepackage[percent]{overpic}
+
+\usepackage[american,fulldiode]{circuitikz}
+\usetikzlibrary{calc}
 
 \newcommand{\kb}{k_{\rm b}}
 \begin{document}
-
+\ctikzset{bipoles/thickness=1}
+\ctikzset{bipoles/resistor/height=.115}
+\ctikzset{bipoles/resistor/width=.3}
+\ctikzset{bipoles/capacitor/height=.2}
+\ctikzset{bipoles/capacitor/width=.06}
 
 \title{Johnson Noise}
 \author{Michael Mulhearn}
@@ -171,7 +177,7 @@ In the first week of this experiment, you will measure the gain of the Johnson N
 
 In the second week of this experiment, you will build a power spectrum analyzer, which will allow you to qualitatively investigate the (flat) Johnson noise spectrum, as well as extract $\kb$ more directly from the average PSD.
 
-\section{Determine System Gain}
+\section{Johnson Noise Device Gain Measurement}
 
 \begin{figure}[htbp]
 \begin{center}
@@ -206,48 +212,95 @@ While making the gain measurement, you will see that the output of the Johnson N
 You might be tempted to try and use your DMM to measure the RMS voltage of your signal, but this is a mistake.  Your DMM is designed to measure 60~\rm Hz AC.
 
 \section{Johnson Noise Measurement}
+You are now ready to make your first-pass Johnson Noise measurement:
+\begin{itemize}
+\item Turn down the function generator and disconnect it from the JN device.
 
-Turn down the function generator and disconnect it from the JN device.
+\item Turn the knob to select a resistor, and note the RMS voltage from the scope.  Repeat this measurement for every resistance.  
+\end{itemize}
 
-Turn the knob to select a resistor, and note the RMS voltage from the scope.  Repeat this measurement for every resistance.  
+These measurements, combined with the gain measurement, should allow you to calculate $\kb$.
+Before leaving, do make certain that the data you have collected is reasonable.  At this stage, within an order of magnitude of $\kb$ is acceptable.  {\bf This is the end point for week one.}  
 
-These measurements, plus the gain measurement, should allow you to calculate $\kb$.
+\section{Digital Dynamic Range Adjustment}
 
-\section{Coming Next Week...}
+In the second week of the lab, you will build a digital spectrum analyzer based on the Arduino Uno.
+The Arduino's analog inputs have an input voltage range from 0 to 5 V, but our signals are ground referenced (symmetric about $0~\rm V$).  A DC level shifter is therefore needed to map the ground referenced output of the Johnson Noise device to the $0$ to $5~\rm V$ range expected by the Arduino analog inputs.  
 
-Next week, we will build an Arduino Based power spectrum analyzer, which will allow us to study Johnson Noise qualitatively, as well as determine $\kb$ directly from the power spectrum distribution.  Also, we will be able to measure the gain at a particular frequency, minimizing a major source of systematic uncertainty.
+Of course we'll be running the ADC as fast as possible which comes at the price of reduced resolution to 8 bits.  That would result in a voltage precision of $5~\rm V/ 2^8 \sim 20~\rm mV$.  Considering we will be looking at $\sim 100~\rm mV$ signals, this is just not enough precision.  Fortunately, we have one last trick up our sleeve!  The ADC has an (optional) external voltage reference, which sets the scale used by the ADC.  Experimentation showed that the ADC works reliably down to a voltage reference of $\sim 780~mV$, which, at 8-bit precision, would give us a $3~\rm mv$ voltage precision, plenty good enough!
+
+The low-pass filter in Fig.~\ref{fig:pwm} is used to convert PWM output (on pin 5 of the Arduino) into a DC reference voltage $V_{\rm ref}$.  This reference voltage is used as (1) the reference for the ADC, at pin AREF, setting the dynamic range of the ADC, and (2) the reference to the DC level shifter circuit in Fig.~\ref{fig:offset} so that input to the ADC is referenced to $V_{\rm ref}/2$.  In this way, we can adjust $V_{\rm ref}$ to match the dynamic range of our signal, and the DC offset will be set to the middle of this range.  This will ensure that even for small signals, the full 8-bit precision of the ADC is being put to use.
+
+\begin{figure}[htbp]
+\begin{center}
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) node[ground]{} to[pC,l=$C_1$,/tikz/circuitikz/bipoles/length=0.6cm] ++(0,1.5) coordinate(X);
+\draw (X) to[R,l=$R_5$] ++(0,1.5) to[short,-o] ++ (-1.0,0) node[left]{$(5) \to V_{\rm pwm}$};
+\draw (X) to[short,*-o] ++(1.0,0) node[right]{$V_{\rm ref} \to ({\rm AREF}) $};
+\end{circuitikz} 
+\end{center}
+\caption{\label{fig:pwm} A low pass filter used to convert the Arduino PWM output (on pin 5) to an analog DC reference voltage (sent to pin AREF and also used by the DC level shifter.)}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) node[op amp, yscale=-1](opamp){}; 
+\draw (opamp.-) to[short] ++(0.0,-1.0) coordinate(X) to[short] ++(1.0,0) to[R,l=$R_4$] ++(1.0,0) -| (opamp.out);
+\draw (opamp.out) to[short,-o] ++(0.5,0) node[right]{$V_{\rm out} \to \rm (A0)$};
+\draw (X) to[R,l_=$R_3$] ++(-1.5,0) node[ground]{};
+\draw (opamp.+) to[short] ++(0,0.5) to[R,l_=$R_1$] ++(-1.5,0) to[short,-o] ++(0,0) node[left]{$V_{\rm in}$};
+\draw (opamp.+) to[short] ++(0,-0.5) to[R,l_=$R_2$] ++(-1.5,0) to[short,-o] ++(0,0) node[left]{$({\rm AREF}) \to V_{\rm ref} $};
+\end{circuitikz} 
+\end{center}
+\caption{\label{fig:offset} A DC level-shifter with unit gain.  The points (AREF) and (A0) refer to the Arduino pins, which should be connected as shown.}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+{\includegraphics[width=0.65\textwidth]{figs/lm358.png}}
+\end{center}
+\caption{\label{fig:lm358} Pinout for the LM358 dual-op-amp with single-ended supply.  We'll only need one of the op-amps.}
+\end{figure}
+
+For our op-amp we will use a LM358 low-power dual op-amp IC with pinout in Fig.~\ref{fig:lm358}.
+The LM358 is designed to run off a single supply down to $5~\rm V$, so we can power this circuit entirely from the Arduino.  This is not just convenient, it also ensures that it's output cannot exceed the $0$ to $5~\rm V$ range expected by the Arduino.
+
+You will build the circuits in Fig.~\ref{fig:pwm}  and \ref{fig:offset} using $R_1 = R_4 = 33~\rm k\Omega$, $R_2 = R_3 = 15~\rm k\Omega$, $R_5=1~k\Omega$.  For $C_1$ use a large polarized capacitor ($C_1=330~\rm  \mu F$) and {\bf make certain that the negative terminal is connected (as shown in the circuit) to ground.}  Connect the positive supply of the Op Amp to the $5~V$ supply of the Arduino and the $0~V$ supply to the Arduino ground.  
+
+A light-weight sketch {\rm CircuitTester} is provided which is useful while developing your circuit.  This sketch implements an RMS voltmeter (significantly better, if less durable, than the one provided by your DMM.) based on the circuit your are building.  It provides control of the PWM on pin 5, reads the analog input on A0, and regularly reports the RMS voltage (and other useful quantities) on the serial output.
+The level of the PWM is specified in the parameter {\rm RUN\_SCALE}.  A value of 0 results in $0\%$ duty-cycle for the PWM, a value of 255 corresponds to $100\%$ duty-cycle.
+
+While testing your circuit, you should use your function generator to drive the input $V_{\rm in}$ directly.  A $5~\rm kHz$ sine function with an RMS amplitude of $100~\rm mV$ is a good starting point.  Make sure the ground of the function generator is connected to the ground of your Arduino.
+
+By now we've learned to divide and conquer technical challenges!  I'd propose something like:
+\begin{itemize}
+\item Leave the Arduino unpowered.
+\item Build the level shifter as shown but at first (1) set the reference voltage to $5~\rm V$ and (2) connect the output to channel one on your scope instead of pin A0.
+\item Power up the Arduino.
+\item On your scope you should see the function generator referenced to approximately $2.5~\rm V$.
+\item Power down the Arduino.
+\item Build the lowpass filter as shown, but  connect $V_{\rm ref}$ to channel two on our scope instead of to pin {\tt AREF}.
+\item Power up the Arduino and download the {\rm CircuitTester} sketch, setting the parameter {\tt RUN\_SCALE} to 112.
+\item On your scope, you should observe $V_{\rm ref}$, it should be at about $2.5~\rm V$ with very little ripple (use AC line trigger and DC offset).
+\item Adjust the {\tt RUN\_SCALE} parameter and ensure you have the expected behavior.
+\item Power down the Arduino.
+\item Connect the lowpass filter output $V_{\rm ref}$ to both $({\rm AREF})$ and the DC level-shifter input $V_{\rm ref}$.
+\item Power up the Arduino.
+\item Check that level-shifter output has the correct DC level when you adjust {\tt RUN\_SCALE}.
+\item Connect the output of the DC level-shifter to the Arduino analog input A0.
+\item Start the Serial Monitor.
+\end{itemize}
+
+Once the whole circuit is built, the Arduino is running the {\tt CircuitTester} sketch, and the Serial Monitor is open, you should observe periodic RMS voltage readings that should correspond approximately with the output of the function generator.
+
+\section{Calibration of Arduino Circuit}
+
+\section{Improved Johnson Noise Device Gain Measurement}
 
 
-%\section{Arduino Voltage Interface}
+\section{Johnson Noise Measurement}
 
-%The Arduino analog inputs have an input voltage range from 0 to 5 V, but our signals after amplification can reach the supply levels as $\pm12~{\rm V}$.  We'll need an interface circuit to provide these signals at a voltage level appropriate for the Arduino.  
-
-%\begin{figure}[htbp]
-%\begin{center}
-%\begin{overpic}[width=0.5\textwidth]{figs/adder.pdf}  
- %\put (23,52) {$R_1$}
- %\put (23,41) {$R_2$}
- %\put (23,24) {$R_3$}
- %\put (63,24) {$R_4$}
- %\put (60,45) {LM324}
- %\put (6,47) {$V_{\rm in}$}
- %\put (6,34) {$V_{\rm ref}$}
- %\put (82,35) {$V_{\rm out}$}
-%\end{overpic}
-%{\includegraphics[width=0.65\textwidth]{adder.pdf}}
-%\end{center}
-%\caption{\label{fig:offset} A DC level-shifter with unit gain.}
-%\end{figure}
-
-%An appropriate circuit is shown in Fig.~\ref{fig:offset}, where you can use $R_1=R_4=15~{\rm k\Omega}$, 
-%$R_2=R_3=30~{\rm k\Omega}$. 
- 
-%\section{Gain Determination}
-%For calibration, note that the peak of periodogram resulting from a sine wave with amplitude A will be:
-%\begin{displaymath}
-%\frac{T}{2}|A|^2
-%\end{displaymath}
-%\section{Power Spectrum Analysis}
 
 \end{document}
 
