@@ -39,7 +39,7 @@ with the uncertainty in parenthesis.
 
 The signal $V(t)$ associated with random noise does not have a Fourier Transform, and so the obvious mechanism for finding the frequency spectrum associated with $V(t)$ is ruled out.  Instead, we define the autocorrelation by:
 \begin{equation}
-\mathcal{R}(\tau) \equiv \lim_{T \to \infty } \frac{1}{T} \int_{0}^{T} dt \; V(t) V(t-\tau) = \braket{V(t) V(t-\tau)}
+\mathcal{R}(\tau) \equiv \lim_{T \to \infty } \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} dt \; V(t) V(t-\tau) = \braket{V(t) V(t-\tau)}
 \label{eqn:autopower}
 \end{equation}
 which is part of a Fourier transform pair:
@@ -104,13 +104,13 @@ Assuming each electron is uncorrelated with the other electrons,
 \end{displaymath}
 for $i \neq j$ and so:
 \begin{displaymath}
-\braket{V^2(t)} =  \sum_{ij}  \braket{ V_i(t) V_j(t) } = R^2 \frac{N e^2}{m L^2} kT,
+\braket{V^2(t)} =  \sum_{ij}  \braket{ V_i(t) V_j(t) } = \sum_{i}  \braket{ V^2_i(t) } = R^2 \frac{N e^2}{m L^2} kT,
 \end{displaymath}
 where $N$ is the number of electrons.
 
 The Fourier transform of $V(t)$ is not defined for continuous random noise.  However, we can still determine the power spectral distribution from the autocorrelation function, as discussed above.  In this case, the electrons are subject to collisions which alter their trajectory on a timescale $\tau_{\rm c}$, and we therefore expect the signal to become uncorrelated on that timescale:
 \begin{displaymath}
-\mathcal{R}(\tau) \equiv \braket{V(t) V(t-\tau)} =  A \exp(-\tau/\tau_+)
+\mathcal{R}(\tau) \equiv \braket{V(t) V(t-\tau)} =  A \exp(-\tau/\tau_{\rm c})
 \end{displaymath} 
 for $\tau \geq 0$, which is all we will need.  We note that by definition
 \begin{displaymath}
@@ -118,7 +118,7 @@ for $\tau \geq 0$, which is all we will need.  We note that by definition
 \end{displaymath}
 and so we must have:
 \begin{displaymath}
-\mathcal{R}(\tau) = R^2 \frac{N e^2}{m L^2} kT \exp(-\tau/\tau_+).
+\mathcal{R}(\tau) = R^2 \frac{N e^2}{m L^2} kT \exp(-\tau/\tau_{\rm c}).
 \end{displaymath} 
 With the autocorrelation function in hand, the one-sided power spectrum distribution is only an integral away:
 \begin{eqnarray*}
