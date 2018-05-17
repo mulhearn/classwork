@@ -181,20 +181,20 @@ In the second week of this experiment, you will build a power spectrum analyzer,
 
 \begin{figure}[htbp]
 \begin{center}
-{\includegraphics[width=0.65\textwidth]{figs/jn_setup.jpg}}
+{\includegraphics[width=0.65\textwidth]{figs/antenna_grounded.jpg}}
 \end{center}
-\caption{\label{fig:plan} Connections to the Johnson Noise device.  Note the banana plug used to reduce noise from the knob acting as an antenna!}
+\caption{\label{fig:plan} Connections to the Johnson Noise device.  Note the grounding wire used to reduce noise from the knob acting as an antenna!}
 \end{figure}
 
 In this section, we will measure the gain of the Johnson Noise device as function of frequency.
 
-Obtain a Johnson Noise (JN) measurement device (Model JN-A or JN-B) and note the serial number (e.g. \#4).  These are high gain devices that are very susceptible to damage.  Do not drive them directly from a function generator, but use a 1000:1 attenuated, taking care that the small resistor is toward the JN device (else you will reduce voltage by a factor 999/1000, and likely damage the equipment!)  
+Obtain a Johnson Noise (JN) measurement device (Model JN-A or JN-B) and note the serial number (e.g. \#4).  These are high gain devices that are very susceptible to damage.  Do not drive them directly from a function generator, but use a 1000:1 attenuator, taking care that the small resistor is toward the JN device (else you will reduce voltage by a factor 999/1000, and likely damage the equipment!)  
 
 The JN devices are very sensitive, easily pickup noise, and ring at a characteristic frequency of about $27~{\rm kHz}$.  The tuning knob in particular picks up noise.  An old version banana plug cable plugged into the knob at the set screw grounds the knob, eliminated this source of noise.  The effect can be quite dramatic. 
 
 Adjust the supply levels on your bench-top supply to $+12~{\rm V}$ and $-12~{\rm V}$.  Then, with the supply turned off, connect the JN device to power and ground, as labeled on the wires.  Once connected, power the device on and adjust the current thresholds to just slightly above where the supplies become current limited.  Under normal operation, the JN device should draw about $20~\rm mA$ from each supply... keep an eye on it.  If one of the supplies is inadvertently disconnected, the circuit latches in a high current state, which should be avoided if possible.
 
-Set your function generator to produce a sine wave with $V_{\rm rms} = 100~\rm mV$ and $f = 1~\rm kHz$.  Connect the function generator to channel 1 of your scope, then to the $1000:1$ attenuator, and then to your JN device,  The output of the JN device should then be plugged directly into the scope channel 2.
+Set your function generator to produce a sine wave with $V_{\rm rms} = 100~\rm mV$ and $f = 1~\rm kHz$.  Connect the function generator to channel 1 of your scope, then to the $1000:1$ attenuator, and then to your JN device.  Make certain that the JN device is set to the ``External'' mode.  The output of the JN device should then be plugged directly into the scope channel 2.
 
 \begin{figure}[htbp]
 \begin{center}
@@ -227,7 +227,7 @@ Before leaving, do make certain that the data you have collected is reasonable. 
 In the second week of the lab, you will build a digital spectrum analyzer based on the Arduino Uno.
 The Arduino's analog inputs have an input voltage range from 0 to 5 V, but our signals are ground referenced (symmetric about $0~\rm V$).  A DC level shifter is therefore needed to map the ground referenced output of the Johnson Noise device to the $0$ to $5~\rm V$ range expected by the Arduino analog inputs.  
 
-Of course we'll be running the ADC as fast as possible which comes at the price of reduced resolution to 8 bits.  That would result in a voltage precision of $5~\rm V/ 2^8 \sim 20~\rm mV$.  Considering we will be looking at $\sim 100~\rm mV$ signals, this is just not enough precision.  Fortunately, we have one last trick up our sleeve!  The ADC has an (optional) external voltage reference, which sets the scale used by the ADC.  Experimentation showed that the ADC works reliably down to a voltage reference of $\sim 780~mV$, which, at 8-bit precision, would give us a $3~\rm mv$ voltage precision, plenty good enough!
+Of course we'll be running the ADC as fast as possible which comes at the price of reduced resolution to 8 bits.  That would result in a voltage precision of $5~\rm V/ 2^8 \sim 20~\rm mV$.  Considering we will be looking at $\sim 100~\rm mV$ signals, this is just not enough precision.  Fortunately, we have one last trick up our sleeve!  The ADC has an (optional) external voltage reference, which sets the scale used by the ADC.  Experimentation showed that the ADC works reliably down to a voltage reference of $\sim 780~\rm mV$, which, at 8-bit precision, would give us a $3~\rm mv$ voltage precision, plenty good enough!
 
 The low-pass filter in Fig.~\ref{fig:pwm} is used to convert PWM output (on pin 5 of the Arduino) into a DC reference voltage $V_{\rm ref}$.  This reference voltage is used as (1) the reference for the ADC, at pin AREF, setting the dynamic range of the ADC, and (2) the reference to the DC level shifter circuit in Fig.~\ref{fig:offset} so that input to the ADC is referenced to $V_{\rm ref}/2$.  In this way, we can adjust $V_{\rm ref}$ to match the dynamic range of our signal, and the DC offset will be set to the middle of this range.  This will ensure that even for small signals, the full 8-bit precision of the ADC is being put to use.
 
