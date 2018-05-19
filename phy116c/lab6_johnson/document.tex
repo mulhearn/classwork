@@ -194,7 +194,8 @@ The JN devices are very sensitive, easily pickup noise, and ring at a characteri
 
 Adjust the supply levels on your bench-top supply to $+12~{\rm V}$ and $-12~{\rm V}$.  Then, with the supply turned off, connect the JN device to power and ground, as labeled on the wires.  Once connected, power the device on and adjust the current thresholds to just slightly above where the supplies become current limited.  Under normal operation, the JN device should draw about $20~\rm mA$ from each supply... keep an eye on it.  If one of the supplies is inadvertently disconnected, the circuit latches in a high current state, which should be avoided if possible.
 
-Set your function generator to produce a sine wave with $V_{\rm rms} = 100~\rm mV$ and $f = 1~\rm kHz$.  Connect the function generator to channel 1 of your scope, then to the $1000:1$ attenuator, and then to your JN device.  Make certain that the JN device is set to the ``External'' mode.  The output of the JN device should then be plugged directly into the scope channel 2.
+Set your function generator to produce a sine wave with $V_{\rm rms} = 1~\rm V$ and $f = 1~\rm kHz$.  
+Connect the function generator to channel 1 of your scope, then to the $1000:1$ attenuator, and then to your JN device.  Make certain that the JN device is set to the ``External'' mode.  The output of the JN device should then be plugged directly into the scope channel 2.  This configuration puts significantly larger voltage at the JN device than a typical Johnson Noise signal.  Fortunately, the devices are quite linear, and this additional voltage will help overcome some sources of noise.
 
 \begin{figure}[htbp]
 \begin{center}
@@ -229,7 +230,7 @@ The Arduino's analog inputs have an input voltage range from 0 to 5 V, but our s
 
 Of course we'll be running the ADC as fast as possible which comes at the price of reduced resolution to 8 bits.  That would result in a voltage precision of $5~\rm V/ 2^8 \sim 20~\rm mV$.  Considering we will be looking at $\sim 100~\rm mV$ signals, this is just not enough precision.  Fortunately, we have one last trick up our sleeve!  The ADC has an (optional) external voltage reference, which sets the scale used by the ADC.  Experimentation showed that the ADC works reliably down to a voltage reference of $\sim 780~\rm mV$, which, at 8-bit precision, would give us a $3~\rm mv$ voltage precision, plenty good enough!
 
-The low-pass filter in Fig.~\ref{fig:pwm} is used to convert PWM output (on pin 5 of the Arduino) into a DC reference voltage $V_{\rm ref}$.  This reference voltage is used as (1) the reference for the ADC, at pin AREF, setting the dynamic range of the ADC, and (2) the reference to the DC level shifter circuit in Fig.~\ref{fig:offset} so that input to the ADC is referenced to $V_{\rm ref}/2$.  In this way, we can adjust $V_{\rm ref}$ to match the dynamic range of our signal, and the DC offset will be set to the middle of this range.  This will ensure that even for small signals, the full 8-bit precision of the ADC is being put to use.
+The low-pass filter in Fig.~\ref{fig:pwmfilt} is used to convert PWM output (on pin 5 of the Arduino) into a DC reference voltage $V_{\rm ref}$.  This reference voltage is used as (1) the reference for the ADC, at pin AREF, setting the dynamic range of the ADC, and (2) the reference to the DC level shifter circuit in Fig.~\ref{fig:offset} so that input to the ADC is referenced to $V_{\rm ref}/2$.  In this way, we can adjust $V_{\rm ref}$ to match the dynamic range of our signal, and the DC offset will be set to the middle of this range.  This will ensure that even for small signals, the full 8-bit precision of the ADC is being put to use.
 
 \begin{figure}[htbp]
 \begin{center}
@@ -239,7 +240,7 @@ The low-pass filter in Fig.~\ref{fig:pwm} is used to convert PWM output (on pin 
 \draw (X) to[short,*-o] ++(1.0,0) node[right]{$V_{\rm ref} \to ({\rm AREF}) $};
 \end{circuitikz} 
 \end{center}
-\caption{\label{fig:pwm} A low pass filter used to convert the Arduino PWM output (on pin 5) to an analog DC reference voltage (sent to pin AREF and also used by the DC level shifter.)}
+\caption{\label{fig:pwmfilt} A low pass filter used to convert the Arduino PWM output (on pin 5) to an analog DC reference voltage (sent to pin AREF and also used by the DC level shifter.)}
 \end{figure}
 
 \begin{figure}[htbp]
@@ -266,7 +267,7 @@ The low-pass filter in Fig.~\ref{fig:pwm} is used to convert PWM output (on pin 
 For our op-amp we will use a LM358 low-power dual op-amp IC with pinout in Fig.~\ref{fig:lm358}.
 The LM358 is designed to run off a single supply down to $5~\rm V$, so we can power this circuit entirely from the Arduino.  This is not just convenient, it also ensures that it's output cannot exceed the $0$ to $5~\rm V$ range expected by the Arduino.
 
-You will build the circuits in Fig.~\ref{fig:pwm}  and \ref{fig:offset} using $R_1 = R_4 = 33~\rm k\Omega$, $R_2 = R_3 = 15~\rm k\Omega$, $R_5=1~k\Omega$.  For $C_1$ use a large polarized capacitor ($C_1=330~\rm  \mu F$) and {\bf make certain that the negative terminal is connected (as shown in the circuit) to ground.}  Connect the positive supply of the Op Amp to the $5~V$ supply of the Arduino and the $0~V$ supply to the Arduino ground.  
+You will build the circuits in Fig.~\ref{fig:pwmfilt}  and \ref{fig:offset} using $R_1 = R_4 = 33~\rm k\Omega$, $R_2 = R_3 = 15~\rm k\Omega$, $R_5=1~k\Omega$.  For $C_1$ use a large polarized capacitor ($C_1=330~\rm  \mu F$) and {\bf make certain that the negative terminal is connected (as shown in the circuit) to ground.}  Connect the positive supply of the Op Amp to the $5~V$ supply of the Arduino and the $0~V$ supply to the Arduino ground.  
 
 A light-weight sketch {\rm CircuitTester} is provided which is useful while developing your circuit.  This sketch implements an RMS voltmeter (significantly better, if less durable, than the one provided by your DMM.) based on the circuit your are building.  It provides control of the PWM on pin 5, reads the analog input on A0, and regularly reports the RMS voltage (and other useful quantities) on the serial output.
 The level of the PWM is specified in the parameter {\rm RUN\_SCALE}.  A value of 0 results in $0\%$ duty-cycle for the PWM, a value of 255 corresponds to $100\%$ duty-cycle.
@@ -296,10 +297,110 @@ Once the whole circuit is built, the Arduino is running the {\tt CircuitTester} 
 
 \section{Calibration of Arduino Circuit}
 
+\begin{figure}[htbp]
+\begin{center}
+\begin{tabular}{cc}
+{\includegraphics[width=0.45\textwidth]{figs/pwm255_1_3Vrms.JPG}} &
+{\includegraphics[width=0.45\textwidth]{figs/pwm220_1_3Vrms.JPG}} \\
+(a) PWM=255, $V_{\rm rms}=1.3~\rm V$ & (b) PWM=220, $V_{\rm rms}=1.3~\rm V$ \\
+{\includegraphics[width=0.45\textwidth]{figs/pwm220_300mVrms.JPG}} &
+{\includegraphics[width=0.45\textwidth]{figs/pwm80_300mVrms.JPG}} \\
+(c) PWM=220, $V_{\rm rms}=300~\rm mV$ & (d) PWM=80, $V_{\rm rms}=300~\rm V$ \\
+\end{tabular}
+\end{center}
+\caption{\label{fig:pwmdemo}  Output of DC level-shifter compared to $V_{\rm ref}$ for various settings of the PWM analog output level and the function generator input RMS voltage.
+}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+{\includegraphics[width=0.65\textwidth]{figs/uncalibrated.png}}
+\end{center}
+\caption{\label{fig:uncalib} Serial Monitor output for an input signal with $V_{\rm rms} = 300~\rm mV$.   It is systematically off at $318~\rm mV$ due to full scale being different than nominal $5~\rm V$.  The calibration is made by changing the value of {\tt CALIB\_MV} from 5000 to something more appropriate.
+The mean, in RAW counts, is right where it should be:  near 255/2.
+}\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\begin{tabular}{cccc}
+{\includegraphics[height=0.30\textheight]{figs/caliba.png}} &
+{\includegraphics[height=0.30\textheight]{figs/calibb.png}} &
+{\includegraphics[height=0.30\textheight]{figs/calibc.png}} &
+{\includegraphics[height=0.30\textheight]{figs/calibd.png}} \\
+(a) & (b) & (c) & (d) \\
+\end{tabular}
+\end{center}
+\caption{\label{fig:calib}   Post-calibration output for an input signal with (a) $V_{\rm rms}=300~\rm mV$ (b) $V_{\rm rms}=100~\rm mV$ (c) $V_{\rm rms}=20~\rm mV$ (d) $V_{\rm rms}=20~\rm mV$.  In (a)-(c), the PWM analog output level is set to 80, a good choice for the gain calibration.  In (d) the range has been reduced to 40, resulting in better precision.  Also note that, for example, $186/10~\rm mV$ should be read as $18.6~\rm mV$... it seems {\tt sprintf} with float is not supported by the Arduino IDE.}
+\end{figure}
+
+
+\begin{figure}[htbp]
+\begin{center}
+{\includegraphics[width=0.65\textwidth]{figs/psd_driver.png}}\\
+{\includegraphics[width=0.65\textwidth]{figs/psd_5k.png}}
+\end{center}
+\caption{\label{fig:driver}  The python serial driver psd.py as seen at the command line (top) and the (bottom) corresponding power spectral distribution plot.}\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+{\includegraphics[width=0.45\textwidth]{figs/test_circuit.png}}\\
+{\includegraphics[width=0.45\textwidth]{figs/fast_adc.png}}
+\end{center}
+\caption{\label{fig:sketches}  The lab has two sketches.   CircuitTester is essentially an RMS voltmeter that outputs directly to the Serial Monitor.  You will calibrate CALIB\_MV set initially to the nominal $5~\rm V$ scale to match the actual full scale on your Arduino.  The scale refers to the PWM output which determines the reference voltage for the ADC.  A good all-around working point for this experiment is 80.
+The FastAdc sketch is used together with the psd.py python driver on your PC.  The sketch only uses raw adc counts, but the calibration calib\_mv in psd.py should match what you determine with CircuitTester.  Apart from the parameters at the top of the sketches and driver, you shouldn't need to edit the code.}\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+{\includegraphics[width=0.65\textwidth]{figs/response.png}}
+\end{center}
+\caption{\label{fig:response}  The response of the Arduino PSD.}\end{figure}
+
+
+\newpage
+
 \section{Improved Johnson Noise Device Gain Measurement}
 
+The scope gain measurement is quite imprecise due to the presence of significant (few volts) low-frequency noise whenever the function generator is connected to the JN device.  This noise is unambiguously due to an unavoidable (with your available test equipment) small ground loop between the function generator and your bench-top DC power supply.  The tiny amount of noise due to this ground loop is amplified by the JN device by a factor of 1000.  High gain instruments are a challenge!  Fortunately, by moving this analysis into frequency space, we can largely avoid the low frequency noise in our measurement.
+
+Using your Arduino spectrum analyzer, collect data for a range of frequencies, as shown in Fig.~\ref{fig:gain_raw}.  You will use these samples to determine the gain of the JN device as function of frequency.
+
+\begin{figure}[htbp]
+\begin{center}
+{\includegraphics[width=0.65\textwidth]{figs/gain_raw.png}}
+\end{center}
+\caption{\label{fig:gain_raw}  Data collected for gain versus frequency scan.}\end{figure}
+
+Unfortunately, the ground loop noise is not completely overcome by the power spectral analysis.   The noise is so large that it saturates the ADC during some portion of the sample collection, effectively filtering out the higher frequency signal of interest, and systematically reducing our gain estimate.
+
+Using an isolating transformer to break the ground loop by floating the function generator ground effectively eliminates this noise.  Each JN device  has been calibrated using this technique, and the measured gains at $5~\rm kHz$ and $10~\rm kHz$ are recorded below.  The shape of your gain as a function of frequency can be inferred reliably from your data, but your should apply an overall scale factor to match one of the benchmarks at the benchmark frequency.  This will give you a reliable Gain curve, accurate to about $5\%$.
+
+\begin{tabular}{lll}
+Device & $5~\rm kHz$ & $10~\rm kHz$ \\ 
+JN-A-\#6 & 3.77 & 3.49 \\
+JN-A-\#1 & 3.82 & 3.51 \\
+JN-A-\#3 & 3.83 & 3.60 \\
+JN-A-\#3 & 3.86 & 3.61 \\
+JN-A-\#2 & 3.85 & 3.55 \\
+JN-B-\#9 & 2.47 & 2.39 \\
+JN-B-\#7 & 2.57 & 2.75 \\
+
+\end{tabular}
 
 \section{Johnson Noise Measurement}
+
+\begin{figure}[htbp]
+\begin{center}
+{\includegraphics[width=0.65\textwidth]{figs/compare_psd.png}}
+\end{center}
+\caption{\label{fig:compare_psd}  Data collected for Johnson Noise measurement.}\end{figure}
+
+
+\begin{figure}[htbp]
+\begin{center}
+{\includegraphics[width=0.65\textwidth]{figs/noise.png}}
+\end{center}
+\caption{\label{fig:noise}  Instructor-level final plot.}\end{figure}
+
 
 
 \end{document}
