@@ -211,6 +211,82 @@ You are now ready to make your first-pass Johnson Noise measurement:
 These measurements, combined with the gain measurement, should allow you to calculate $\kb$.
 Before leaving, do make certain that the data you have collected is reasonable.  At this stage, within an order of magnitude of $\kb$ is acceptable.  {\bf This is the end point for week one.}  
 
+\section{The Periodogram}
+
+Suppose $V(t)$ is continuous with some period $T$ so that it is represented by a Fourier Series:
+\begin{displaymath}
+V(t) = \sum_{n=-\infty}^{\infty} c_n \exp(i2\pi f_n t)
+\end{displaymath}
+where $f_n = n / T$.  The Fourier coefficients are determined from:
+\begin{equation}
+c_n = \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} dt \; V(t) \exp(-i2\pi f_n t), \label{eqn:freqcoeff}
+\end{equation}
+and in this context Parseval's theorem is:
+\begin{displaymath}
+\frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} |V(t)|^2 = \sum_n |c_n|^2
+\end{displaymath}
+or equivalently:
+\begin{displaymath}
+P_{\rm avg} \equiv \braket{|V(t)|^2} = \sum_n |c_n|^2
+\end{displaymath}
+which we can interpret to mean that $|c_n|^2$ represents the average power $P_{\rm avg}^{(n)}$ at frequency $f_n$.  Since the frequencies associated with each coefficient are discrete values separated by $\Delta f = f_{n+1} - f_{n} = 1/T $, the power spectral distribution for the discrete Fourier Series is
+\begin{displaymath}
+\mathcal{S}(f_n) = \frac{P_{\rm avg}^{(n)}}{\Delta f} = T |c_n|^2.
+\end{displaymath}
+Furthermore, since we often do not care about the {\em phase} information in the two-sided power spectral distribution, that is, we don't care to distinguish between power at $f_n$ and power at $-f_n$, the one-sided power spectral distribution is:
+\begin{equation}
+\mathcal{S}_{+}(f_n) = \frac{P_{\rm avg}^{(n)}}{\Delta f} = T (|c_n|^2 + |c_{-n}|^2) \label{eqn:discretepsd}
+\end{equation}
+It is left as an exercise to show that for
+\begin{displaymath}
+f(t) = A \cos( 2 \pi f_n t)
+\end{displaymath}
+the one-sided power spectral distribution is:
+\begin{equation}
+\mathcal{S}_{+}(f_n) = \frac{T}{2} |A|^2 \label{eqn:psdcalib}
+\end{equation}
+which is absolutely essential for calibrating a PSD using a function generator!
+
+%
+% Note also:  A_rms = sqrt(S/T) in keeping with S = V_rms^2 / dF
+%
+
+\begin{figure}[thb]
+\begin{center}
+{\includegraphics[width=0.55\textwidth]{figs/periodogram_ts.png}}\\
+{\includegraphics[width=0.55\textwidth]{figs/periodogram_eg.png}}
+\end{center}
+\caption{\label{fig:periodogram}  An example periodogram calculated from 20 samples over $3~\rm ms$ from a signal composed of two sine waves with amplitudes $10~\rm mV$ and $20~\rm mV$.  There are two peaks in the periodogram with PSD values $\mathcal{S}_{+}(f_n) = 150$ and $600~{\rm mV^2} / {\rm kHz}$ as expected from Equation~\ref{eqn:psdcalib}.
+}
+\end{figure}
+
+In many cases, we wish to estimate the PSD from a discrete data set.  Instead of a continuous function of time $f(t)$ on the interval $T$ we instead have $N$ samples of $f$ each separated by time $\tau = T/N$, which we record as $x_i$.  We can replace $f(t)$ with its discrete version:
+\begin{equation}
+f(t) \to \sum_{m=0}^{N-1} x_m \; \delta(t - i\tau) \; \tau \label{eqn:discretef}
+\end{equation}
+so chosen because any integral over the discrete version
+\begin{displaymath}
+\int_{t_1}^{t_2} dt \sum_{m=0}^{N-1} x_m \; \delta(t - i\tau) \; \tau = \sum_{m=m_1}^{m_2} x_m  \tau
+\to \int_{t_1}^{t_2} dt f(t)  
+\end{displaymath}
+approaches the integral over the continuous function in the limit $N \to \infty$.  Note that $m$ in the middle sum runs over the indices of the samples in the time interval $t_1$ to $t_2$.
+
+Simply inserting the discrete version of $f(t)$ from Equation~\ref{eqn:discretef} into the formula for determining the coefficients of the Fourier series Equation~\ref{eqn:freqcoeff}:
+\begin{eqnarray}
+c_n &=& \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} dt \; V(t) \exp(-i2\pi f_n t) \nonumber \\
+&=& \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} dt \; \exp\left(\frac{-i2\pi n t}{T} \right) \sum_{m=0}^{N-1} x_m\; 
+\delta(t - i\tau) \; \tau \nonumber \\
+&=& \frac{\tau}{T}  \sum_{m=0}^{N-1} \exp\left(\frac{-i2\pi n m \tau }{T} \right)  x_m \nonumber \\
+&=& \frac{1}{N}  \sum_{m=0}^{N-1} \exp\left(\frac{-i2\pi n m }{N} \right)  x_m \label{eqn:dft}
+\end{eqnarray}
+This is an example of a discrete Fourier Transform (DFT).  There are more computationally efficient methods to calculate the coefficients $c_n$, but they all reproduce this calculation.  
+
+The Nyquist-Shannon sampling theorem states that if the highest frequency component of a signal is $f_0$, and the signal is sampled at a rate $1/\tau \geq 2f_0$ then no information is lost.  The Fourier coefficients determined from the DFT can be used to exactly reproduce the original signal at any time.  This may seem surprising at first glance.  But consider that we are already familiar with a continous function being exactly represented by a discrete set of Fourier coefficients.  If a signal has a maximum frequency component $f_0$, we can think of it's Fourier transform as a periodic function on the interval $(-f_0, f_0)$.  It's inverse Fourier transform will then be discrete!
+
+Given N samples $x_i$ taken at sample rate $1/\tau$, we calculate the DFT as the coefficients in Equation~\ref{eqn:dft}, then we calculate the one-sided power spectrum distribution as in Equation~\ref{eqn:discretepsd}.  If we have satisfied the Nyquist-Shannon sampling theorem, only the coefficients corresponding to $1/2\tau$ will be non-zero, so we need only report $\mathcal{S}_{+}(f_n)$ at the $N/2$ values from $f=1/T$ to $f=N/2T=1/2\tau$.  The plot of $\mathcal{S}_{+}(f_n)$ versus $f_n$ for these $N/2$ values is known as periodogram, and is a staple of digital signal processing.  An example periodogram resulting from a sine wave is shown in Fig.~\ref{fig:periodogram}.
+
+Our initial assumption was that the function was periodic with time $T$, but often we apply periodograms to non-periodic signals, or signals with unknown periodicity.  In this case, there is a resolution loss if $1/T$.  This effect is mitigated by making $T$ as large as is feasible. 
+
 \section{Digital Dynamic Range Adjustment}
 
 In the second week of the lab, you will build a digital spectrum analyzer based on the Arduino Uno.
