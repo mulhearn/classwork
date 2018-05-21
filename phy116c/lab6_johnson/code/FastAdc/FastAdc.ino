@@ -1,14 +1,13 @@
-
 //
-// blurb needed...
+// Fast ADC with PWM controlled ADC dynamic range adjustment.
 //
 
 // You should only have to edit these parameters, if at all...
 
 const int MAX_SCALE    = 220;  // Calibrated full scale: minimal clipping
 const int MIN_SCALE    = 40;   // Calibrated min scale: ADC fails below
-const int RUN_SCALE    = 80;
-const bool TEST_PATTERN = false;
+const int RUN_SCALE    = 80;   // User selected value for PWM 
+const bool TEST_PATTERN = false; // Send test pattern instead of ADC data
 //
 // You shouldn't have to change anything below here...
 //

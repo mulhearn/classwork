@@ -17,14 +17,9 @@ def get_psd(filename):
     return f, pavg
 
 
-fup = 10
+fup = 20
 
-f,pavg_2k get_psd("data_2k.npy")
-f,pavg_5k get_psd("data_5k.npy")
-f,pavg_8k get_psd("data_8k.npy")
-
-
-
+f,pavg = get_psd("data.npy")
 
 fig, ax = plt.subplots(1,1)
 ax.semilogy(f, pavg)

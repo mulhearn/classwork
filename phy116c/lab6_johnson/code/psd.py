@@ -20,18 +20,28 @@ import numpy as np
 from scipy import signal
 from matplotlib import ticker
 
-calib_mv = 4750
-nrun    = 10  # number of full buffers to request with acquire
-dt      = 1  # time resolution requested (1 is as fast as possible - 76.9 kHz)
+#
+# User settable parameters
+#
+
+calib_mv = 5000  # calibrated Arduino full scale determined with CircuitTester
+nrun    = 1      # number of full buffers to request with acquire
+dt      = 1      # time resolution requested (1 is as fast as possible - 76.9 kHz)
+fmin    = 1      # minimum frequency to consider for peak finding
 nnarrow = 10*dt  # narrow peak integral (1 kHz width)
 nwide   = 30*dt  # wide peak integral (3 kHz width)
-fup     = 40 # maximum frequency (kHz) to display in periodogram
-fa      = 5 # min of PSD integration window (kHz)
-fb      = 10 # max of PSD integration window (kHz) 
+fup     = 40     # maximum frequency (kHz) to display in periodogram
+fa      = 5      # min of PSD integration window (kHz)
+fb      = 10     # max of PSD integration window (kHz) 
+
 #SERIAL_PORT="COM4"
 #SERIAL_PORT="/dev/cu.usbmodem1421"
-SERIAL_PORT="/dev/tty.usbmodem1411"
-#SERIAL_PORT=raw_input("Enter the serial port for the Arduino (e.g. COM4):  ")
+#SERIAL_PORT="/dev/tty.usbmodem1411"
+SERIAL_PORT=raw_input("Enter the serial port for the Arduino (e.g. COM4):  ")
+
+#
+# You shouldn't have to change anything below here...
+#
 
 print "connecting to the Arduino..."
 
@@ -42,7 +52,6 @@ time.sleep(1)
 
 # that resets Arduino, so first we wait to receive initializing string from Arduino
 print ser.readline().strip()
-
 
 # Now wait for a key press to acquire the data:
 raw_input("Press Enter to Acquire...")    
@@ -87,7 +96,7 @@ for i in range(nrun):
 plt.xlabel("time [milliseconds]")
 plt.ylabel("voltage m[V]")
 plt.savefig('waveform.png')
-np.savetxt('waveform.txt', np.column_stack((xl,yl)))
+np.savetxt('raw_waveforms.txt', np.column_stack((xl,yl)))
 plt.show();
 
 fs = 76.9/dt;
@@ -110,7 +119,9 @@ rms  = (var**0.5)
 #print favg
 #print pavg
 
-imax = np.argmax(pavg)
+# find maximum excluding low end
+imin = (fmin/fs)*nsamp
+imax = imin + np.argmax(pavg[imin:])
 pmax = pavg[imax]
 fmax = f[imax]
 vmax = (pmax*fs/nsamp)**0.5
@@ -153,4 +164,5 @@ plt.savefig('psd.png')
 plt.show()
 
 
-
+outfile = open("data.npy", "w")
+np.savez(outfile,f,pavg,xl,yl)
