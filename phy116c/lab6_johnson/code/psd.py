@@ -36,8 +36,8 @@ fb      = 10     # max of PSD integration window (kHz)
 
 #SERIAL_PORT="COM4"
 #SERIAL_PORT="/dev/cu.usbmodem1421"
-#SERIAL_PORT="/dev/tty.usbmodem1411"
-SERIAL_PORT=raw_input("Enter the serial port for the Arduino (e.g. COM4):  ")
+SERIAL_PORT="/dev/tty.usbmodem1411"
+#SERIAL_PORT=raw_input("Enter the serial port for the Arduino (e.g. COM4):  ")
 
 #
 # You shouldn't have to change anything below here...
@@ -54,7 +54,16 @@ time.sleep(1)
 print ser.readline().strip()
 
 # Now wait for a key press to acquire the data:
-raw_input("Press Enter to Acquire...")    
+tag = raw_input("Enter a text tag for this run (or just press enter):  ")    
+tag = tag.rstrip()
+if (tag != ""):
+    tag = "_" + tag
+    print "using tag:  ", tag
+outfilename = "raw_waveforms" + tag + ".txt"
+print "will save output to file ", outfilename
+
+
+
 # Now we can send our acquire data signal:
 print nrun
 print dt
@@ -95,8 +104,7 @@ for i in range(nrun):
     plt.plot(xl[i], yl[i])
 plt.xlabel("time [milliseconds]")
 plt.ylabel("voltage m[V]")
-plt.savefig('waveform.png')
-np.savetxt('raw_waveforms.txt', np.column_stack((xl,yl)))
+np.savetxt(outfilename, np.column_stack((xl,yl)))
 plt.show();
 
 fs = 76.9/dt;
@@ -160,9 +168,4 @@ ax.set_ylim(1E-10, 1E10)
 ax.set_xlim(0, fup)
 tick_spacing = 0.1
 ax.xaxis.set_minor_locator(ticker.MultipleLocator(tick_spacing))
-plt.savefig('psd.png')
 plt.show()
-
-
-outfile = open("data.npy", "w")
-np.savez(outfile,f,pavg,xl,yl)

@@ -331,7 +331,7 @@ The low-pass filter in Fig.~\ref{fig:pwmfilt} is used to convert PWM output (on 
 For our op-amp we will use a LM358 low-power dual op-amp IC with pinout in Fig.~\ref{fig:lm358}.
 The LM358 is designed to run off a single supply down to $5~\rm V$, so we can power this circuit entirely from the Arduino.  This is not just convenient, it also ensures that it's output cannot exceed the $0$ to $5~\rm V$ range expected by the Arduino.
 
-You will build the circuits in Fig.~\ref{fig:pwmfilt}  and \ref{fig:offset} using $R_1 = R_4 = 33~\rm k\Omega$, $R_2 = R_3 = 15~\rm k\Omega$, $R_5=1~k\Omega$.  For $C_1$ use a large polarized capacitor ($C_1=330~\rm  \mu F$) and {\bf make certain that the negative terminal is connected (as shown in the circuit) to ground.}  Connect the positive supply of the Op Amp to the $5~V$ supply of the Arduino and the $0~V$ supply to the Arduino ground.  
+You will build the circuits in Fig.~\ref{fig:pwmfilt}  and \ref{fig:offset} using $R_1 = R_4 = 15~\rm k\Omega$, $R_2 = R_3 = 33~\rm k\Omega$, $R_5=1~k\Omega$.  For $C_1$ use a large polarized capacitor ($C_1=330~\rm  \mu F$) and {\bf make certain that the negative terminal is connected (as shown in the circuit) to ground.}  Connect the positive supply of the Op Amp to the $5~V$ supply of the Arduino and the $0~V$ supply to the Arduino ground.  
 
 \begin{figure}[htbp]
 \begin{center}
@@ -416,7 +416,7 @@ The mean, in RAW counts, is right where it should be:  near 255/2.}
 When your circuit is working and calibrated, you are ready to update the software to provide the Power Spectral Analyzer capability.  There is a new sketch (FastAdc) and a command line python driver (psd.py)
 to provide this capability (see Fig.~\ref{fig:fastadc}.  The FastAdc sketch has the RUN\_SCALE parameter used to set the analog voltage scale, but the conversion to millivolts is done in the python driver, so you should set calib\_mv to the value your calibrated value.  As in the Fourier lab, if you tire of entering your COM port each time, you can hard code it in the driver.   Example output from running the python driver is shown in Fig.~\ref{fig:driver}.  As shown in Fig.~\ref{fig:response} the PSD performance is quite respectable, you can see this by scanning the frequency at a constant amplitude.  
 
-Take the time to examine the output when the frequency goes above the Nyquist frequency (one half the sampling frequency, which is $39.8~\rm kHz$ in our case).  You should see clear aliasing of the high-frequency signal at a lower frequency.  Fortunately, the low-pass filter in the Johnson Noise device eliminates problematic high-frequency aliasing during our experiment.
+Take the time to examine the output when the frequency goes above the Nyquist frequency ($38.45~\rm kHz$ in our case).  You should see clear aliasing of the high-frequency signal at a lower frequency.  Fortunately, the low-pass filter in the Johnson Noise device eliminates problematic high-frequency aliasing during our experiment.
 
 \begin{figure}[htbp]
 \begin{center}
@@ -446,7 +446,9 @@ A good all-around working point for this experiment is 80.
 
 The scope gain measurement is quite imprecise due to the presence of significant (few volts) low-frequency noise whenever the function generator is connected to the JN device.  This noise is unambiguously due to an unavoidable (with your available test equipment) small ground loop between the function generator and your bench-top DC power supply.  The tiny amount of noise due to this ground loop is amplified by the JN device by a factor of 1000.  High gain instruments are a challenge!  
 
-By moving this analysis into frequency space, we can largely avoid the low frequency noise in our measurement.  Using your Arduino spectrum analyzer, collect data for a range of frequencies, as shown in Fig.~\ref{fig:gain_raw}.  You should use the nruns parameter in the python sketch to average 10 runs per measurement (default is one run only), reducing statistical fluctuations in your power spectrum.  You will use these samples to determine the gain of the JN device as function of frequency.  The python driver always saves the data it collected from the Arduino to the file "data.npy".  You'll simply have to rename this file to something else for each sample you collect, before taking the next sample.  Example python for plotting the data saved in such a file is included on the course website (plot.py). 
+By moving this analysis into frequency space, we can largely avoid the low frequency noise in our measurement.  Using your Arduino spectrum analyzer, collect data for a range of frequencies, as shown in Fig.~\ref{fig:gain_raw}.  You should use the nruns parameter in the python sketch to average 10 runs per measurement (default is one run only), reducing statistical fluctuations in your power spectrum.  You will use these samples to determine the gain of the JN device as function of frequency.  
+
+By default, the python driver saves the raw data it collected from the Arduino to the txt file "raw\_waveforms.txt".   If you enter a tag like "10khz" or "r100k" instead of just pressing enter when prompted prior to data acquisition, the output file will have your tag appended in the name (to avoid confusion, don't include any whitespace in your tag).  An example python for plotting the data saved in such a file is included on the course website (plottxt.py). 
 
 \begin{figure}[htbp]
 \begin{center}
@@ -474,6 +476,10 @@ JN-B-\#7 & 2.57 & 2.75 \\
 
 Using an isolating transformer to break the ground loop by floating the function generator ground effectively eliminates this noise.  Each JN device has been calibrated using this technique, and the measured gains at $5~\rm kHz$ and $10~\rm kHz$ are recorded in Table~\ref{tbl:gain}.  The shape of your gain as a function of frequency can be inferred reliably from your data, but your should apply an overall scale factor to match one of the benchmarks at the benchmark frequency.  This will give you a reliable Gain curve, accurate to about $5\%$.
 
+Note that the python driver allows for averaging across multiple runs, which helps reduce the impact of low frequency noise.  When making your gain measurement, you should average across at least 10 runs.
+
+Also make certain that your function generator is set to high impedance output... otherwise you gain will be off by a factor of two, which will be hard to plausibly reconcile with the benchmarks.
+
 \section{Johnson Noise Measurement}
 
 With your instrument calibrated, you are ready to collect Johnson noise data
@@ -483,7 +489,7 @@ You should attempt to demonstrate at least the following three things:
 \item The linear relation between Johnson Noise and the resistance. 
 \item An experimental measurement of $\kb$, including an uncertainty.
 \end{itemize}
-With a bit of luck (and an isolation transformer!) I was able to measure $\kb$ to within 1\% of it's value (See Fig.~\ref{fig:noise}).
+Remember to average across multiple runs to reduce statistical fluctuations!  With a bit of luck (and an isolation transformer!) I was able to measure $\kb$ to within 1\% of it's value (See Fig.~\ref{fig:noise}).
 
 \begin{figure}[htbp]
 \begin{center}
