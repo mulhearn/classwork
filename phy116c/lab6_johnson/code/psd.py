@@ -33,11 +33,13 @@ nwide   = 30*dt  # wide peak integral (3 kHz width)
 fup     = 40     # maximum frequency (kHz) to display in periodogram
 fa      = 5      # min of PSD integration window (kHz)
 fb      = 10     # max of PSD integration window (kHz) 
+ta      = 0.0    # min plotting limits for time series data (ms)
+tb      = 0.5    # max plotting limits for time series data (ms)
 
 #SERIAL_PORT="COM4"
 #SERIAL_PORT="/dev/cu.usbmodem1421"
-SERIAL_PORT="/dev/tty.usbmodem1411"
-#SERIAL_PORT=raw_input("Enter the serial port for the Arduino (e.g. COM4):  ")
+#SERIAL_PORT="/dev/tty.usbmodem1411"
+SERIAL_PORT=raw_input("Enter the serial port for the Arduino (e.g. COM4):  ")
 
 #
 # You shouldn't have to change anything below here...
@@ -102,6 +104,7 @@ mean = np.mean(yl)
 yl = mv * (yl-mean)
 for i in range(nrun):
     plt.plot(xl[i], yl[i])
+plt.xlim(ta, tb)
 plt.xlabel("time [milliseconds]")
 plt.ylabel("voltage m[V]")
 np.savetxt(outfilename, np.column_stack((xl,yl)))
