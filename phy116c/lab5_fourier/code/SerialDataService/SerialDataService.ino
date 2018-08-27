@@ -94,6 +94,7 @@ void serialEvent() {
       dt = (int) Serial.parseInt();        
       acquire = 1;
       isamp = 0;
+      count = 0;
   }
   while(Serial.available()){
     char inChar = (char) Serial.read();  
