@@ -5,6 +5,5 @@
 *.synctex.gz
 *.aux
 *.log
-answers
-hide
-junk
+*lab*/data
+BROKEN
