@@ -8,7 +8,7 @@
 \usepackage{amsmath}
 
 
-\usepackage[american,fulldiode,betterproportions]{circuitikz}
+\usepackage[american,fulldiode]{circuitikz}
 
 \begin{document}
 \ctikzset{bipoles/thickness=1}
@@ -208,6 +208,8 @@ Technically, you should warn the compiler that the {\tt count} global variable i
 volatile int count = 0;
 \end{verbatim}
 
+Once you have the counter working, you should verify that it is functioning properly by comparing the rate you measure with the Arduino to the rate your are sending with the function generator.
+
 \section{The Geiger Counter}
 
 On the Geiger Controller, start with the HV set to zero at both the analog knob and the HV on-off switch.   Turn on the device and set the mode to``Test".  In this mode, the counter will be incremented at a fixed rate of $60~\rm Hz$.   While in this mode, play around with the ``Count", ``Reset", and ``Lab-Chron" analog timer reset dial until you understand how all of these features work.
@@ -237,6 +239,19 @@ Now you are ready to collect the data you will use for your analysis.  From your
 
 This lab report requires a long write-up.  Your TA will provide a \LaTeX template for the report.  
 
-You should include an introduction describing the goals of the experiment and what you expect to observe, a discussion of your lab setup and procedure, plots and results from a toy Monte Carlo model for this experiment that you will develop with scientific python, numerical analysis of your experimental data, and a conclusion.  You should also provide an appendix with your code listing and raw data.
+You should have the following sections:
+\begin{itemize}
+\item  {\bf Introduction:} Overview of experiment and its objective.
+\item {\bf Methods:} Setup of the experiment, and calibration (e.g. Geiger HV setting) results, validation results (tests of basic functionality).
+\item {\bf Monte Carlo Studies: } Test of your analysis procedure on simulated data (Monte Carlo).
+\item {\bf Results: }  Analysis of your experimental data.  Compare collected data to appropriately chosen Poisson and Gaussian PDFs.
+\item {\bf Conclusion:  }  Top-level summary of your results and what conclusions we can draw from them.
+\item {\bf Appendix:  }  Code listing.
+\end{itemize}
+
+
+
+
+
 
 \end{document}

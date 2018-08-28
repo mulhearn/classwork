@@ -1,0 +1,109 @@
+\documentclass[12pt]{article}
+
+
+\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.5in]{geometry}
+\usepackage{cite}
+\usepackage{slashed}
+\usepackage{graphicx}
+\usepackage{amsmath}
+
+
+\usepackage[american,fulldiode]{circuitikz}
+
+\begin{document}
+\ctikzset{bipoles/thickness=1}
+\ctikzset{bipoles/resistor/height=.115}
+\ctikzset{bipoles/resistor/width=.3}
+\ctikzset{bipoles/capacitor/height=.2}
+\ctikzset{bipoles/capacitor/width=.06}
+%\ctikzset{bipoles/length=.6cm}
+
+
+\title{Geiger Lab Feedback}
+
+\maketitle
+
+
+
+\section{Analysis}
+\begin{itemize}
+\item Monte Carlo studies should be produced to mimic data that was actually collected (ideally, they should be indistinguishable apart from the label.)  Throw e.g. 100 or 1000 random events according to a poisson distribution with lambda = 1,5, and 10 (or even slightly different, as in real data!)  Analyze this fake data using same procedure as used on real data, so as to validate your analysis.
+
+\item Compare data to a Poisson with a lambda calculated from the mean of the collected (or generated) data.  
+
+\item Compare data to a Gaussian with a mean calculated from the mean of the collected (or generated) data and a sigma which is the square root of the mean, as appropriate for statistical uncertainties in a count.
+
+\item For the comparisons, use the Poisson and Gaussian PDFs appropriately normalized, not MC generated according to the PDF, which will suffer from statistical fluctuations.
+
+\item Describe the analysis procedures in the text (how the parameters were calculated, how the PDF was normalized...)
+
+\item If fitting, report fit values and their uncertainties.
+\end{itemize}
+
+\section{Error Analysis}
+Many people discussed why the means they collected differed from the targets $\lambda = 1,5,10$.  This is fine, and evidence of good scientific impulse to scrutinize and understand your data.  But consider:
+\begin{itemize}
+\item We nearly always measure better than we can set a quantity, so such discrepancies are always present on some level.  There's no error associated with measuring a quantity at 1.1 instead of 1.0, as long as your report that the measurement was made at 1.1.
+\item In some cases, students used the Geiger Control control unit measurements (with analog timer and built-in counter) to estimate the rate.  This is perfectly acceptable but it has it's own internal threshold used to determine which pulses count.  The threshold programmed into your custom build circuit is likely different, and so your rates will differ slightly.
+\item If the initial estimate of the rate was calculated with limited statistics, the actual rate, and subsequent measurements, may differ significantly from the target.
+\end{itemize}
+
+\section{Plots}
+\begin{itemize}
+\item Graphs should have labeled x and y axes.
+\item Graphs should have a legend.
+\item Data points should have uncertainties.
+\end{itemize}
+
+
+\section{Writing Style}
+\begin{itemize}
+\item In many cases, the style was too informal for scientific purposes.
+\item Scientific writing should be concise but comprehensive.  In principle, your reader should be able to reproduce your results after reading your paper.  They should have the information they need to judge the validity of your results.
+\item You can choose between Active or Passive voice, and mix them.
+\item Passive Voice:  "The output of the Geiger counter was connected to the digital Oscilloscope."
+\item Active Voice:  "We connected the output of the Geiger counter to the input of the digital oscilloscope."
+\item One problem with the passive voice is that it tends to be more easily abused to produce vague statements like "The signals were viewed on the digital Oscilloscope" (imprecise).
+\item When scrutinize your voice and phrasing for vagueness, you often discover details are lacking.  For instance, suppose you were discussing grounds loops, you might write as "Coaxial cable was used to connect the output of the Geiger counter to the input of the digital oscilloscope."
+\item Try to avoid unnecessary use of "We" when using the active voice:  "The voltage divider formed by R1 and R2 sets the discriminator threshold" as opposed to "We set the discriminator threshold by choosing R1 and R2". 
+\item Imperative voice should be avoided as sophomoric: "Connect the Geiger counter to the digital Oscilloscope".
+\end{itemize}
+I tend to write first mostly in the passive voice, then edit to make sentences more active, more concise, and more clear.  I try to reserve the use of "We" for when it's awkward not to, e.g. "We only collected 100 samples because we ran out of time to collect more."  is much better than "Only 100 samples were collected due to limited time." in my opinion.  The main goal here is to remove vagueness, but this often goes hand in hand with concise and technically accurate statements.
+
+
+\section{Scientific Content}
+\begin{itemize}
+\item Scientific writing should be concise but comprehensive.  In principle, your reader should be able to reproduce your results after reading your paper.  They should have the information they need to judge the validity of your results.
+\item Most students provided too little detail.
+\item Very for students provided extraneous details.
+\item Your personal experiences, except in rare instances where they effect the results, are not pertinent: "We struggled to build the circuit" is an irrelevant detail, but "We ran out of time to collect enough samples because we struggled to build the circuit during much of the lab time" is OK.
+\item There will be no more length requirements.  This was clearly a distraction.  The goal should be to provide the needed documentation as concisely as possible.
+\end{itemize}
+
+
+\section{Plots}
+\begin{itemize}
+\item Graphs should have labeled x and y axes.
+\item Graphs should have a legend.
+\item Data points should have uncertainties.
+\item Refer to plots at appropriate point in the text.  "Fig.~1 demonstrate the circuit was working properly" or "As can be seen in Fig.~1, the circuit produces a TTL pulse which is low while the input is above threshold."
+\end{itemize}
+
+\section{Misc}
+\begin{itemize}
+\item This years circuit diagram is available on the course website.  
+\item Graphs should have a legend.
+\item Data points should have uncertainties.
+\end{itemize}
+
+
+\end{document}
+
+
+
+
+
+
+
+
+\end{document}
