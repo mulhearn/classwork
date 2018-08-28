@@ -1,0 +1,62 @@
+\documentclass[12pt]{article}
+
+
+\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.75in]{geometry}
+\usepackage{cite}
+\usepackage{slashed}
+\usepackage{graphicx}
+\usepackage{amsmath}
+
+\usepackage[american,fulldiode]{circuitikz}
+\usetikzlibrary{calc}
+
+\begin{document}
+\ctikzset{bipoles/thickness=1}
+\ctikzset{bipoles/length=.6cm}
+
+\section{Alternative Design}
+
+This is an alternative for the RF amplifier stage.
+
+\begin{figure}[htbp]
+\begin{center}
+\begin{circuitikz}[american,line width=1pt]
+\draw
+(0,0) node[npn](npn){}
+(2,0) node[pnp,xscale=-1](pnp){} 
+(-2,0.75) node[njfet](fet){} 
+(npn.C) to[short] ++(1,0) coordinate(X) to[short] (pnp.E)
+(X) to[short,*-] ++(0,0.75) to[R,l=$R_4$] ++(0,0.75) to[short,-*] ++(0,0.5) coordinate(A) 
+let \p1 = (pnp.B), \p2=(A) in coordinate(X) at (\x1,\y2)
+(A) to[short] (X) to[short,-o] ++(0.5,0) node[right]{$V_{\rm CC}$}
+(X) to[short,*-] ++(0,-0.5) to[R,l_=$R_{8}$] ++(0,-0.75) to[short,-*] (pnp.B)
+(npn.E) to[R,l=$R_{5}$] ++(0,-1.25) coordinate(X) to[R,l=$R_{6}$] ++(0,-1.25) coordinate(B)
+(X) to[short,*-] ++(-0.75,0) to[C,l_=$C_2$,-*] ++(0,-1.25)
+(pnp.C) to[R,l_=$R_{7}$] ++(0,-2.5) coordinate(X)
+(X) to[short,*-*] (B)
+let \p1 = (pnp.B), \p2=(X) in coordinate(Y) at (\x1,\y2)
+(X) to[short,-*] (Y) to[short,-o] ++(0.5,0) node[right]{$V_{\rm EE}$}
+(Y) to[R,l_=$R_{9}$] ++(0,2.5) to[short] (pnp.B)
+;
+\path (pnp.B) ++ (0,0.5) coordinate(X);
+\draw
+(X) to[C,l_=$C_3$,*-] ++(1.5,0) node[ground,yscale=2.0]{}
+(pnp.C) to[short,*-o] ++(3,0) node[right]{$v_{\rm out}$}
+% tie in the JFET at (A) and (B)
+(fet.D) to[R,l=$R_2$] ++(0,0.75) to[short] ++(0,0.5) coordinate(X)
+(A) to[short] (X) coordinate (A)
+(fet.S) to[short] ++(0,-0.75) to[R,l=$R_3$] ++(0,-1.25) to[short] ++(0,-1.25) coordinate(X)
+(fet.S) to[short,*-] (npn.B)
+(B) to[short] (X) coordinate(B)
+let \p1 = (fet.G), \p2=(npn.E) in coordinate(X) at (\x1,\y2)
+(fet.G) to[short] (X) to[R,l_=$R_1$] ++(0,-1.25) to[short] ++(0,-1.25) to[short,-*] (B)
+(fet.G)  to[C,l=$C_1$,*-o] ++(-1.25,0) node[left]{$v_{\rm in}$}
+;
+\end{circuitikz} 
+\caption{Folded cascode amplifier with FET input buffer.}
+\label{fig:beta}
+\end{center}
+\end{figure}
+
+
+\end{document}

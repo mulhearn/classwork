@@ -1,0 +1,27 @@
+
+1) Lab circuit diagrams and descriptions have been debugged through two
+rounds of students.  But pre-lab calculations could be expanded in
+most cases, and more guidance on the write-ups would be helpful.
+
+2) For the diode lab, Brian is building some transformer assemblies
+that will be safe for the students to use (they will only have access
+to stepped-down secondary.)  This should drop in while making the
+rectification portion of the lab a bit more realistic than as written,
+(using a function generator).
+
+3) Last year, every group brought in an external broadcast in the AM
+radio lab, so I guess the circuit is good enough.  But: (a) The audio
+amplifier portion has the embarrassing tendency to motor-boat, due to
+multiple AC coupled stages, a sure-sign of an amateur amplifier design
+(b) I bet this would be alot easier on the students if the outside
+antenna had a battery powered pre-amplifier, (c) in alternate.tex
+there is a folded cascode design that worked beautifully, but I
+decided was too complicated for the students.
+
+
+
+
+
+
+
+ 
