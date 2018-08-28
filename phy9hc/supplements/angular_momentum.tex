@@ -1,0 +1,66 @@
+\documentclass[12pt]{article}
+
+
+\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.5in]{geometry}
+\usepackage{cite}
+\usepackage{slashed}
+\usepackage{graphicx}
+\usepackage{amsmath}
+
+\begin{document}
+
+\title{Addendum to Moore's Treatment of Quanum Angular Momentum}
+\author{Michael Mulhearn}
+
+\maketitle
+
+\section{Lessons from the Bohr Model}
+
+The Bohr model, which is not entirely correct but very insiteful, can be derived from just three equations:
+\begin{eqnarray*}
+m \frac{v^2}{r} &=& \frac{k e^2}{ r } \\
+p &=& \frac{h}{\lambda} \\
+2 \pi r &=& m \lambda \\
+\end{eqnarray*}
+The first is the classical equation of motion for an electron orbiting a proton.  The second is the De Broglie hypothesis.  The third is the deep insite that the wave function for an electron orbiting the nucleus must be single valued, and so must complete exactly one or more entire period ($m \lambda$) as we evaluate it across the entire circumference of the orbit ($2\pi r$).  We can derive the correct energy levels for the hydrogen atom in this way, but for our purposes here, we need only the second and third equations to calculate:
+
+\begin{equation*}
+p = \frac{h}{\lambda} = \frac{m h }{2 \pi r} = \frac{m \hbar}{r}
+\end{equation*}
+If we assume that the orbit is in the $x$-$y$ plane, then the angular momentum in the $z$ direction is simply:
+\begin{equation*}
+L_z = pr = m \hbar
+\end{equation*}
+In other words, angular momentum is quantized in units of $\hbar$.
+
+\section{Quantum Number for angular momentum}
+
+In your next Quantum Mechanics class, you will solve the full 3-dimensional Schrodinger equation for the Coulomb potential.  We will find that there are two quantum numbers associated with angular momentum $\ell$ and $m$.  The magnitude of the total angular momentum is given by:
+\begin{equation*}
+|L| = \sqrt{\ell (\ell + 1)} \hbar ~~~~~(\ell=0,1,2,...)
+\end{equation*}
+while the $z$ component of the angular momentum is:
+\begin{equation*}
+L_z = m \hbar, ~~~(m=-\ell, -\ell+1, ..., \ell-1, \ell).
+\end{equation*}
+The choice of $z$ is arbitrary:  we could have picked any axis.  However, while we can measure $|L|$ and $L_z$ simultaneously, we cannot measure $L_x$ or $L_y$ without disturbing $L_z$.  We say that $L$ and $L_z$ are compatible observables.
+
+\section{Spin}
+
+The Stern-Gerlach experiments show that the electron has an intrinsic angular momentum with exactly two states when you  measure the $z$ component (we call these states up and down).  We cannot accommodate this with orbital angular momentum, as $L_z$ has one state ($m=0$) for $\ell=0$ but already three states ($m=-1,0,1$) for $\ell=1$.
+It turns out that intrinsic angular momentum, which we call spin, is a mathematical generalization of angular momentum, but it comes in units of $\frac{1}{2} \hbar$.  It has quantum numbers $s$ and $m_s$:
+\begin{equation*}
+|S| = \sqrt{s (s + 1)} \hbar ~~~~~(s=0,\frac{1}{2},1,\frac{3}{2},...)
+\end{equation*}
+while the $z$ component of the angular momentum is:
+\begin{equation*}
+S_z = m_s \hbar, ~~~(m_s=-s, -s+1, ..., s-1, s).
+\end{equation*}
+The electron, which has spin $s=\frac{1}{2}$ therefore has two eigenstates of $S_z$, they are $m_s = +\frac{1}{2}$ (up) and $m_s = -\frac{1}{2}$ (down).
+Just as for orbital angular momentum $|S|$ and $S_z$ are compatible observables.
+
+\end{document}
+
+
+
+
