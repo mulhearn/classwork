@@ -1,0 +1,53 @@
+
+\chapter{Passive Filters and Resonance}
+\section{Introduction}
+In this lab you will use two essential new pieces of lab equipment (scope and function generator) to study the transient response of resistors and capacitors.
+
+\section{RC Low-pass and High-pass Filters}
+
+\begin{figure}[htbp]
+\begin{center}
+\begin{tabular}{c@{\hskip 2cm}c}
+
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) to[sinusoidal voltage source,bipoles/length=1.5cm] ++(0,4.0) to[short] ++(2.0,0)
+to[R,-*] ++(0,-2.0) coordinate(X) to[short,*-o] ++(1.0,0) node[right]{A};
+\draw (X) to[C,-*] ++(0,-2.0) coordinate(X) to[short,-o] ++(1.0,0) node[right]{B};
+\draw (X) to[short,-*] ++(-2.0,0) node[ground,yscale=2.0]{};
+\end{circuitikz}  &
+
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) to[sinusoidal voltage source,bipoles/length=1.5cm] ++(0,4.0) to[short] ++(2.0,0)
+to[R,-*] ++(0,-2.0) coordinate(X) to[short,*-o] ++(1.0,0) node[right]{A};
+\draw (X) to[C,-*] ++(0,-2.0) coordinate(X) to[short,-o] ++(1.0,0) node[right]{B};
+\draw (X) to[short,-*] ++(-2.0,0) node[ground,yscale=2.0]{};
+\end{circuitikz}  \\
+
+
+(a) & (b) \\
+\end{tabular}
+\caption{A function generator driving a resistor.}
+\label{fig:mycirc}
+\end{center}
+\end{figure}
+
+
+\section{Resonant Band-pass Filter}
+
+\begin{figure}[htbp]
+\begin{center}
+
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) to[sinusoidal voltage source,bipoles/length=1.5cm] ++(0,3.0) 
+to[R,-*] ++(2.0,0) coordinate(X) to[short,*-*] ++(1.5,0) coordinate(Y) to[short,-o] ++(1.0,0) node[right]{A};
+\draw (X) to[C,-*] ++(0,-3.0)  to[short,-*] ++(-2.0,0) node[ground,yscale=2.0]{};
+\draw (Y) to[L,-*] ++(0,-3.0)  coordinate(X) to[short,-*] ++(-1.5,0);
+\draw (X) to[short,-o] ++(1.0,0) node[right]{B};
+\end{circuitikz}  
+\caption{A function generator driving a resistor.}
+\label{fig:mycirc}
+\end{center}
+\end{figure}
+
+
+
