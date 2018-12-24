@@ -1,3 +1,65 @@
 \chapter{RC and RL Transient Signals}
 
+\section{Pre-lab Calculation}
+
+1) Show that for an exponential decay with time constant $\tau$, the rise-time, when defined as the time interval between $10\%$ and $90\%$ values, is given by:
+\begin{displaymath}
+t_{90} = {\rm ln}(9) \; \tau \sim 2.2 \tau
+\end{displaymath}
+
+2) Calculate the inductance of a solenoid with N=20 turns, length $\ell=4~\rm cm$, a radius of $1~\rm cm^2$ using the formula:
+\begin{displaymath}
+L = \frac{\mu N^2 A}{\ell}
+\end{displaymath}
+where $A$ is the cross-sectional area and $\mu = 1.257 \times 10^{-6}$.
+
+
+\begin{figure}[htbp]
+\begin{center}
+\begin{tabular}{cc}
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) to[sinusoidal voltage source,bipoles/length=1.5cm] ++(0,4.0) to[short] ++(2.0,0)
+to[R,-*] ++(0,-2.0) coordinate(X) to[short,*-o] ++(1.0,0) node[right]{A};
+\draw (X) to[C,-*] ++(0,-2.0) coordinate(X) to[short,-o] ++(1.0,0) node[right]{B};
+\draw (X) to[short,-*] ++(-2.0,0) node[ground,yscale=2.0]{};
+\end{circuitikz}  &
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) to[sinusoidal voltage source,bipoles/length=1.5cm] ++(0,4.0) to[short] ++(2.0,0)
+to[R,-*] ++(0,-2.0) coordinate(X) to[short,*-o] ++(1.0,0) node[right]{A};
+\draw (X) to[L,-*] ++(0,-2.0) coordinate(X) to[short,-o] ++(1.0,0) node[right]{B};
+\draw (X) to[short,-*] ++(-2.0,0) node[ground,yscale=2.0]{};
+\end{circuitikz}  \\
+(a) & (b) \\
+\end{tabular}
+
+\caption{A function generator driving an RC circuit.}
+\label{fig:rlc-circuits}
+\end{center}
+\end{figure}
+
+\section{Transient response of an RC circuit}
+
+Build the circuit in Fig.~\ref{fig:rlc-circuits}a using a precision $R=10~\rm k\Omega$ resistor and an $1~\rm nF$ capacitor.
+Window appropriately.
+Measure time dependence, rise time according to procedure, and using automated measure function.
+Determine time constant.
+(Plot exponential.)
+
+% measured lifetime around 22 microseconds.
+
+\section{Transient response of an RL circuit}
+
+
+Wrap an inductor around the provided dowel, and estimate it's inductance by modifying your pre-lab calculation accordingly.
+
+Turn down the supply to $2.5~\rm V$ peak-to-peak.  Build the circuit in Fig.~\ref{fig:rlc-circuits}b using your homemade inductor and a resistor of $R=47~\rm Ohms.$
+
+Determine the inductance of your coil and compare to your theoretical estimate.
+
+
+\section{Analysis}
+
+Plot your collected data and compare with an exponential function using the measured life-time.
+
+% measure lifetime values value around 120 ns
 

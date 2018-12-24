@@ -1,5 +1,15 @@
 \chapter{The Diode}
 
+\section{Pre-lab Calculations}
+\noindent
+1) Suppose a diode is in forward bias with a resistor $R=10~k\Omega$ in series while connected to a $10~\rm V$ DC source.  Estimate the effective resistance of the diode.  Hint: assume a typical diode drop of $0.6~\rm V$ and consider an equivalent voltage divider consisting entirely of resistors. \\ 
+
+\noindent
+2) Consider the circuit in Fig.~\ref{fig:diodecircuits}a and assume $R_1=1.8~\rm k \Omega$ and the peak-to-peak voltage is $V_{\rm pp} = 5~\rm V$.  What is the peak current through the diode?  The math is easier if you assume a diode drop of $0.7~V$, so go ahead and do so! \\
+
+\noindent
+3) What is the ripple current for an AC source with amplitude $10~\rm V$ and frequency $100~\rm Hz$ driving a load of $R_L=18~\rm k\Omega$ in the circuit in Fig.~\ref{fig:fwrectc} for (A) $C=1~\mu F$ and (B) $C=100~\mu F$?
+
 \section{Introduction}
 
 In this lab, you will measure the IV curve of a diode, use it to predict the operating point of a circuit, and use rectification to provide a DC current source with low ripple voltage.   In the process, you will learn how to use the Math mode of your scope to make a differential voltage measurement.
@@ -45,9 +55,9 @@ Build the circuit in Fig.~\ref{fig:diodecircuits}b using a 1N914 fast switching 
 \begin{figure}[htbp]
 \begin{center}
 \begin{tabular}{c@{\hskip 2cm}c}
-\includegraphics[height=0.25\textheight]{figs/1N914.png} &
+\includegraphics[height=0.25\textheight]{figs/labs/diode/1N914.png} &
 \begin{picture}(200,100)
-\put(0,0){\includegraphics[height=0.25\textheight]{figs/diodeiv.png}}
+\put(0,0){\includegraphics[height=0.25\textheight]{figs/labs/diode/diodeiv.png}}
 \put(10,52){$0~mA$}
 \put(10,70){$0.2~mA$}
 \put(10,88){$0.4~mA$}
@@ -151,5 +161,8 @@ For the last tweak, you are going to use a large electrolytic capacitor.  {\bf T
 \end{center}
 \end{figure}
 
+\section{Lab Report}
 
+Your report should include all of your measurements and a comparison with your calculation.
+ 
 
