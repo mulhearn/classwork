@@ -1,4 +1,4 @@
-\documentclass[12pt]{book}
+\documentclass[12pt,oneside]{book}
 
 \usepackage[dvips,letterpaper,margin=0.75in,bottom=0.5in]{geometry}
 \usepackage{cite}
@@ -6,9 +6,6 @@
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{latexsym,amssymb,amsmath}
-
-
-
 
 \usepackage[american,fulldiode]{circuitikz}
 \tikzset{component/.style={draw,thick,circle,fill=white,minimum size =0.75cm,inner sep=0pt}}
@@ -26,22 +23,22 @@
 
 \section{The Electric Field}
 
-Suppose there are two particles of charge $q_1$ and $q_2$ located a distance $r$ apart.
+Suppose there are two particles of charge $q_1$ and $q_2$ located a distance $r_{12}$ apart.
 The force on particle 2 is given by:
 \begin{displaymath}
-\vec{F}_{21} = k_e \frac{q_1 q_2}{r^2} \cdot \hat{r}_{21}
+\vec{F}_{12} = k_e \frac{q_1 q_2}{r_{12}^2} \cdot \hat{r}_{12}
 \end{displaymath}
-where $k_e$ is Coulomb's constant and $\hat{r}_{21}$ is a unit vector pointing from particle 1 to particle 2.
+where $k_e$ is Coulomb's constant and $\hat{r}_{12}$ is a unit vector pointing from particle 1 to particle 2.
 
 Now consider the force $\vec{F}$ on a particle of charge $Q$ due to $N$ particles, which will be the sum:
 \begin{displaymath}
 \vec{F} = Q \, k_e \, \sum_{i=1}^N \frac{q_i}{r_{i}^2} \hat{r}_{i}
 \end{displaymath}
-where $r_i$ is the distance between the particle of charge $Q$ and the $i$th particle, and $\hat{r}_i$ is the unit vector pointing from the $i$th particle toward the charge $Q$.  If the charge $Q$ is small enough not to disturb the location of the $N$ other charges, then the ratio of the force $F$ to the charge $Q$ is independent of the charge $Q$, and we call this quantity the electric field:
+where $r_i$ is the distance between the particle of charge $Q$ and the $i$th particle, and $\hat{r}_i$ is the unit vector pointing from the $i$th particle toward the charge $Q$.  The ratio of the force $F$ to the charge $Q$ is independent of the charge $Q$, and we call this quantity the electric field:
 \begin{displaymath}
-\vec{E} \equiv \lim_{Q \to 0} \frac{\vec{F}}{Q}
+\vec{E} \equiv \frac{\vec{F}}{Q}
 \end{displaymath}
-The importance of this distinction is that the electric field is due solely due to the source charges, independent of the particle of charge $Q$ experiencing the force.  The electric field exists whether or not anything is there to experience a force!  The force experienced by a particle of charge $Q$ in an electric field $\vec{E}$, we simply calculate:
+The importance of this distinction is that the electric field is due solely due to the source charges, independent of the particle of charge $Q$ experiencing the force.  The electric field exists whether or not anything is there to experience a force!  The force experienced by a particle of charge $Q$ in an electric field $\vec{E}$ is given by:
 \begin{displaymath}
 \vec{F} = Q \vec{E}.
 \end{displaymath}
@@ -50,7 +47,7 @@ The importance of this distinction is that the electric field is due solely due 
 
 For a conservative force the change in potential energy that results from moving a particle from $x=a$ to $x=b$ is defined as the negative of the work done by the conservative force:
 \begin{displaymath}
-U_{ba} \equiv -W_{\rm CSV} = - \int_a^b F_x \cdot dx
+U_{ab} \equiv -W_{\rm CSV} = - \int_a^b F_x \cdot dx
 \end{displaymath}
 As discussed above, the Coulomb force $\vec{F}$ experienced by a 
 particle of charge $Q$ in an electric field $\vec{E}$ is given by:
@@ -59,7 +56,7 @@ particle of charge $Q$ in an electric field $\vec{E}$ is given by:
 \end{displaymath}
 which is a conservative force proportional to the charge $Q$.   If we consider moving a particle of charge $Q$ moving along the $x$-axis from $x=a$ to $x=b$, we can define a quantity $V_{ba}$ called the electric potential difference which is simply the change in potential energy divided by the charge of the particle:
 \begin{displaymath}
-V_{ba} \equiv \frac{U_{ba}}{Q}  = - \int_a^b E_x \cdot dx
+V_{ab} \equiv \frac{U_{ab}}{Q}  = - \int_a^b E_x \cdot dx
 \end{displaymath}
 The unit of electrical potential difference is the Volt (V), where $1~\rm{V} = 1~\rm{J / C}$, and a difference in electrical potential is often informally referred to as simply the voltage.  This definition generalizes to three dimensions, but is tedious (you simply add additional identical integrals for $y$ and $z$) without vector calculus, which we won't use in this  course.   In this case the points $b$ and $a$ are simply any two points in space.
 
@@ -86,10 +83,6 @@ The unit of electrical potential difference is the Volt (V), where $1~\rm{V} = 1
 \label{fig:dcsymbols}
 \end{figure}
 
-The battery is a frequently encountered electrical component that imposes a constant electrical potential difference between two points (the two terminals of the battery).  Batteries are devices that exploit different chemical potentials of two metals.  A cell consisting of zinc and copper will have a characteristic voltage of $1.1~\rm V$.  To build batteries of different voltages, multiple cells can be combined.  In lab, you will use a bench-top DC voltage supply, a more complicated piece of equipment that uses electrical power provided by the wall outlets to maintain a fixed voltage between its terminals.  All real devices have limitations.  For instance, batteries drop in voltage as they become discharged.  
-
-Because these devices supply a fixed voltage which is approximately constant with time, they produce circuits with currents in one direction only.   As a result, these are called direct current (DC) sources.
-The electrical symbols for various DC voltage sources are shown in Fig.~\ref{fig:dcsymbols}
 
 \begin{figure}[htbp]
 \begin{center}
@@ -112,8 +105,14 @@ coordinate(B) to[voltage source,bipoles/length=1.5cm,l_=2~\rm V] ++(0,+2.0) coor
 \label{fig:poteg}
 \end{figure}
 
+The battery is a frequently encountered electrical component that imposes a constant electrical potential difference between two points (the two terminals of the battery).  Batteries are devices that exploit different chemical potentials of two metals.  A cell consisting of zinc and copper will have a characteristic voltage of $1.1~\rm V$.  To build batteries of different voltages, multiple cells can be combined.  In lab, you will use a bench-top DC voltage supply, a more complicated piece of equipment that uses electrical power provided by the wall outlets to maintain a fixed voltage between its terminals.  All real devices have limitations.  For instance, batteries drop in voltage as they become discharged.  
+
+Because these devices supply a fixed voltage which is approximately constant with time, they produce circuits with currents in one direction only.   As a result, these are called direct current (DC) sources.
+The electrical symbols for various DC voltage sources are shown in Fig.~\ref{fig:dcsymbols}
+
+
 By definition, a conservative force has a single value for the relative potential $U_{ba}$ which is independent of the path taken from point $a$ to point $b$.   The same holds for $V_{ba}$.
-This implies that $V_{ab} = -V_{ba}$ which is why terminals of any voltage source have a polarity.  If we specify a reference point, we can define the electrical potential as the electrical potential difference of the point of interest and the reference point.   Most often, the reference point chosen is the earth ground, which has it's own symbol, shown in Fig.~\ref{fig:poteg}a.  In the circuit diagram of Fig.~\ref{fig:poteg}b, examples of electrical potential differences are $V_{\rm BA} = 3~{\rm V}$, $V_{\rm BC} = 2~{\rm V}$,  and $V_{\rm AB}= -3~{\rm V}$, while examples of electrical potentials are $V_A = 0$, $V_B = 3~\rm V$ $V_C = 5~\rm V$.
+This implies that $V_{ab} = -V_{ba}$ which is why terminals of any voltage source have a polarity.  If we specify a reference point, we can define the electrical potential as the electrical potential difference of the point of interest and the reference point.   Most often, the reference point chosen is the earth ground, which has it's own symbol, shown in Fig.~\ref{fig:poteg}a.  In the circuit diagram of Fig.~\ref{fig:poteg}b, examples of electrical potential differences are $V_{\rm AB} = 3~{\rm V}$, $V_{\rm BC} = 2~{\rm V}$,  and $V_{\rm BA}= -3~{\rm V}$, while examples of electrical potentials are $V_A = 0$, $V_B = 3~\rm V$ $V_C = 5~\rm V$.
 
 \section{Conductors and Resistors}
 
@@ -145,10 +144,10 @@ V = I R
 \end{displaymath}
 This relationship is referred to as Ohm's Law, and the unit of resistance is the Ohm ($\rm \Omega$) where $1~{\rm \Omega} = 1~{\rm V / A}$.
 
-\section{Kirchoff's Laws}
+\section{Kirchhoff's Laws}
 
 The circuits we have encountered so far are quite simple, containing at most a single closed loop with only one current to consider.  More complicated circuits can include multiple circuits.
-Ultimately the behavior of the circuit is governed by the laws of electrostatics, but Kirchhoffs Laws conveniently cast the important results from electrostatics into a form that can be applied to any circuit.
+Ultimately the behavior of the circuit is governed by the laws of electrostatics, but Kirchhoff's Laws conveniently cast the important results from electrostatics into a form that can be applied to any circuit.
 
 \begin{figure}[htbp]
 \begin{center}
@@ -315,63 +314,140 @@ In electrostatics, the superposition principle states that the electric field cr
 
 In circuit analysis, the laws of electrostatics govern our circuits as well.  When considering a circuit with multiple voltage sources, we can consider one voltage source at a time, short circuiting other voltage sources.  The complete solution is simply the sum of each partial solution.
 
-\section{Sources, Loads, and I-V Curves}
+\section{Sources, Loads, $I$-$V$ Curves, and Power}
+
+Analyzing complicated circuits inevitably involves breaking them down into smaller parts that are more easily understood.   A particularly useful way to divide circuits is in terms of sources and loads.  Consider first the simple circuit consisting of a battery connected to a resistor.  As illustrated in Fig.~\ref{fig:source_load}, both the voltage source and the resistor can be considered as two separate two terminal networks.  If we wish to connect these two networks together, we must agree on a definition for the direction of the current $I$.  One of the networks will have positive current $I$ leaving the positive terminal (A), and we call this network the ``source".  The other network will have positive current entering the positive terminal, and we call this network the ``load".  
 
 \begin{figure}[htbp]
 \begin{center}
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 \begin{circuitikz}[line width=1pt]
-\draw (0,0) node[right]{B} to[short,o-] ++(-1.0,0) to[battery,bipoles/length=1.5cm,l=$V$] ++(0,+4.0) to[short, i>=$I$,-o] ++(1.0,0) node[right]{A};
+\draw (0,0) node[right]{A} to[short,o-] ++(-1.0,0) to[battery,bipoles/length=1.5cm,l=$V_1$] ++(0,+4.0) to[short, i>=$I$,-o] ++(1.0,0) node[right]{B};
+\draw (1, 0.0) to [open,v_>=$V$] (1,4.0);
 \end{circuitikz} &
 \begin{circuitikz}[line width=1pt]
-\draw (0,0) node[left]{B} to[short,o-] ++(1.0,0) to[R,l=$R_1$] ++(0,+4.0) to[short, i<=$I$,-o] ++(-1.0,0) node[left]{A};
-\end{circuitikz} &
+\draw (0,0) node[left]{A} to[short,o-] ++(1.0,0) to[R,l=$R_1$] ++(0,+4.0) to[short, i<=$I$,-o] ++(-1.0,0) node[left]{B};
+\end{circuitikz} \\
+(a) & (b) \\
+\end{tabular}
+\caption{ Two terminal network diagrams for (a) an ideal voltage as a source, and (b) as a resistor as load.}
+\label{fig:source_load}
+\end{center}
+\end{figure}
+
+When considered separately, we can imagine connecting various resistors or even additional batteries to the two terminal voltage source.  However, as long as we don't do anything that breaks the voltage source, it will keep the voltage between A and B at the fixed value $V_1$ no matter what we do, providing any amount of current needed.  We can also consider connecting batteries of different sizes to the two-terminal load network.  In this case, the resistor will allow a current to flow consistent with Ohm's law, in this case:  $V = I R_1$.  We can consider both the source network and load network as having separate curves in the 
+$I$-$V$ plane, as shown in Fig.~\ref{fig:vr_iv} .  The source curve is the vertical line $V=V_1$ while the load curve is a line of slope $1/R_1$ with zero intercept.
+
+The intersection of the source $I$-$V$ curve with the load $I$-$V$ curve is the operating point for the circuit that results form connecting the load to the source.  A source providing a current $I$ while maintaining  a potential difference $V$ across it's two terminals is powering the circuit with power:
+\begin{displaymath}
+P \equiv \frac{dU}{dt} = frac{VdQ}{dt} = V \frac{dQ}{dT} = V I
+\end{displaymath}
+Meanwhile, the load is consuming power $P = VI$.  It is instructive to consider what would happen if you called the battery the load and the resistor the source.  In this case, the current simply changes sign, and you would find that at the operating point the so-called supply is providing negative power.  In other contexts you might find that both the current $I$ and the voltage $V$ are negative, so that the power provided by the source is positive.  In this case, you have likely correctly identified the roles of source and load while making a poor choice for the polarity.
+
+\begin{figure}[htbp]
+\begin{center}
 \includegraphics[height=0.3\textheight]{figs/thev_ideal.pdf} \\
-(a) & (b) & (c) \\
-\end{tabular}
-\caption{ Electrical networks (a) for an ideal voltage source as source and (b) for a resistor as load, and (c) their corresponding $I-V$ curves.  The operating point for the circuit when the load is connected to the source is the intersection of these two curves.}
-\label{fig:iv_ideal}
+\caption{ The source $I-V$ curve for an ideal $12~\rm V$ voltage source, and the load $I-V$ curve for a $4~\rm k\Omega$ resistor.   The operating point for the circuit when the load is connected to the source is the intersection of these two curves at point $Q$.  The power provided by the source and consumed by the load is the product $IV$ at the operating point.}
+\label{fig:vr_iv}
 \end{center}
 \end{figure}
-
 
 \begin{figure}[htbp]
 \begin{center}
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 \begin{circuitikz}[line width=1pt]
-\draw (0,0) node[right]{B} to[short,o-] ++(-1.0,0) to[battery,bipoles/length=1.5cm,l=$V$] ++(0,+2.0) 
-to[R, l=$R_{\rm src}$] ++(0,+2.0) to[short, i>=$I$,-o] ++(1.0,0) node[right]{A};
+\draw (0,0) node[right]{A} to[short,o-] ++(-1.0,0) to[battery,bipoles/length=1.5cm,l=$V_1$] ++(0,+2.0) 
+to[R, l=$R_{\rm src}$] ++(0,+2.0) to[short, i>=$I$,-o] ++(1.0,0) node[right]{B};
+\draw (1, 0.0) to [open,v_>=$V$] (1,4.0);
 \end{circuitikz} &
 \begin{circuitikz}[line width=1pt]
-\draw (0,0) node[left]{B} to[short,o-] ++(1.0,0) to[R,l=$R_1$] ++(0,+4.0) to[short, i<=$I$,-o] ++(-1.0,0) node[left]{A};
-\end{circuitikz} &
-\includegraphics[height=0.3\textheight]{figs/thev_nonideal.pdf} \\
-(a) & (b) & (c) \\
+\draw (0,0) node[left]{A} to[short,o-] ++(1.0,0) to[R,l=$R_1$] ++(0,+4.0) to[short, i<=$I$,-o] ++(-1.0,0) node[left]{B};
+\end{circuitikz} \\
+(a) & (b) \\
 \end{tabular}
-\caption{ Electrical networks (a) for a voltage source include source impedance and (b) for a resistor, and (c) their corresponding $I-V$ curves.  The operating point for the circuit when the load is connected to the source is the intersection of these two curves.}
-\label{fig:iv_ideal}
+\caption{ Two terminal network diagrams (a) for a voltage source include source resistance $R_{src}$ as the source, and (b) a load resistor.}
+\label{fig:vrr}
 \end{center}
 \end{figure}
 
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[height=0.3\textheight]{figs/thev_nonideal.pdf} \\
+\caption{ $I-V$ curves for a non-ideal $12~\rm V$ source which includes a source resistance of $R_{\rm src} = 3~\rm k\Omega$ and a load resistance of $4~\rm k\Omega$.  The short-circuit current and open-circuit voltage, which fully constrain the line, are shown.  The intersection of the two curves at point $Q$ is the operating point of the circuit consisting of the source plus the load.}
+\label{fig:vrr_iv}
+\end{center}
+\end{figure}
 
+So far, we have only considered ideal voltage sources.  All real voltage sources have additional parasitic features.  For instance, real batteries provide a voltage but also have an internal resistance.  In fact all voltage source you will encounter in ordinary circuits will have some source resistance, which is modeled as an additional resistor in series with an ideal source, as shown in Fig.~\ref{fig:vrr}a.  What is the $I$-$V$ curve of such an object?  If you leave the two terminals isolated from each other (an open circuit) no current will flow, so the voltage drop across the resistor $R_{\rm src}$ is zero, and the voltage is simple $V = V_1$.
+If you short circuit the terminals A and B, a current $I_{sc} = V_1 / R_{\rm src}$ will flow.  Ohm's Law ensures a linear relationship between I and V, so that these two points fully define the $I$-$V$ curve for this device, as shown in Fig.~\ref{fig:vrr_iv}.  It is left as an exercise to show that the slope of the source $IV$ curve in this case is $-1/R_{\rm src}$, in entirely reasonable result, since the slope of a load resistor $IV$ curve, with current in the opposite direction, is $1/R$.
+
+\begin{figure}[htbp]
+\begin{center}
+ \begin{circuitikz} [american voltages, baseline=(current bounding box.center)]
+    \ctikzset { label/align = straight }
+    \draw (0,0)
+
+    % fake resistor, using for voltage label only
+    (3.5, 1.8) to [open,v=$V$] (3.5,0.2)
+
+    (1.5,2) to[short, -o] (1.5,2)
+    (1.5,2) to[short,i=$I$, -o] (5,2)
+    to[short] (4.5,2)
+    (1.5,0) to[short, -o] (1.5,0)
+    (1.5,0) to[short, -o] (5,0)
+    to[short] (4.5,0);
+    \node[draw,minimum width=2cm,minimum height=2.4cm,anchor=south west] at (4.5,-0.2){Load};
+    \node[draw,minimum width=2cm,minimum height=2.4cm,anchor=south west] at (0, -0.2){Source};
+  \end{circuitikz}
+\end{center}
+\caption{A generic source and load.}
+\label{fig:generic_source_load}
+\end{figure}
+
+No matter how complicated the actual circuit is, if one part is connected to the next by only two connections, the source and load analysis can be applied.  This is shown conceptually in Fig.~\ref{fig:generic_source_load}.  In fact, even if there are more than two connections, this analysis can be used if the additional connections have a negligible effect on the voltage and current that is under consideration.  Very often, the second connection is simply the common ground.  A very common arrangement for a complicated circuit is one that receives a signal and processes it in some way, e.g. amplifying it, before passing the output to the next stage, which further processes the signal, e.g. applying a filter, before passing it to the next stage.  When analyzing such a circuit, each stage is a load for the previous stage, and source for the next stage.
 
 \section{Thevenin Equivalent Circuit}
 
+There's a tremendously powerful tool that we get, essentially for free, from our understanding of $I-V$ curves for two-terminal networks.
+
+If you set out to build the most complicated two-terminal network that you can imagine which includes resistors, voltages source, and wires, you have at your disposal:   Ohm's Law, Kirchoff's Laws, and the Superposition principle.  These are all linear equations, and so the source $I$-$V$ curve of your circuit, despite all your efforts, will always remain a straight line, such as that of Fig.~\ref{fig:thevenin_source}.  But we can construct any straight line we wish using only a single voltage source in series with a single resistor.  This means that any two-terminal network of resistors and voltage sources can be considered equivalently, with respect to those two-terminals, as a single voltage source in series with a single resistor.  An example is shown in Fig.~\ref{fig:thev_eg}.
+
+Conceptually, we can imagine making two measurements of any two-terminal network to determine it's Thevenin equivalent.  Measuring the open-circuit voltage across terminals A and B reveals the Thevenin equivalent voltage $V_{\rm th}$.  Measuring the current $I_{\rm sc}$ that flows when we short-circuit terminals A and B allows us to determine $R_{\rm th}$ from:
+\begin{displaymath}
+V_{\rm th} = R_{\rm th} I_{\rm sc}.
+\end{displaymath}
+
+In practice, it's almost always easiest to make effective use of the superposition principle.  The Thevenin equivalent resistance is simply the equivalent resistance if all voltage sources are replaced with short-circuits.  If there are multiple voltage sources, it's usually easiest to consider only one voltage source at a time, setting all other voltage source to short-circuits.  The Thevenin equivalent voltage is then the sum of these partial solutions.
+
 \begin{figure}[htbp]
 \begin{center}
-\begin{tabular}{ccc}
-\begin{circuitikz}[line width=1pt]
-\draw (0,0) node[right]{B} to[short,o-] ++(-1.0,0) to[battery,bipoles/length=1.5cm,l=$V_{\rm th}$] ++(0,+2.0) 
-to[R, l=$R_{\rm th}$] ++(0,+2.0) to[short, i>=$I$,-o] ++(1.0,0) node[right]{A};
-\end{circuitikz} &
-\includegraphics[height=0.3\textheight]{figs/thev.pdf} \\
-(a) & (b) & (c) \\
-\end{tabular}
-\caption{ Electrical networks (a) for a voltage source include source impedance and (b) for a resistor, and (c) their corresponding $I-V$ curves.  The operating point for the circuit when the load is connected to the source is the intersection of these two curves.}
-\label{fig:iv_ideal}
+\includegraphics[height=0.3\textheight]{figs/thevenin.pdf} 
+\caption{ The source IV curve for an arbitrary two terminal network.}
+\label{fig:thevenin_source}
 \end{center}
 \end{figure}
 
+\begin{figure}[htbp]
+\begin{center}
+\begin{tabular}{cc}
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) node[right]{A} to[short,o-*] ++(-1.0,0) coordinate(X) to[resistor,l_=$R_8$] ++(0,2.0)
+to[resistor,l_=$R_7$] ++(0,2.0) to[resistor,l_=$R_6$] ++(0,2.0) to[short,-o] ++(1.0,0) node[right]{B};
+\draw (X) to[resistor,l=$R_5$] ++(-2.0,0) coordinate(X);
+\draw (X) to[voltage source,bipoles/length=1.5cm,l=$V_1$] ++(0,+2.0) coordinate(X) to[resistor,l=$R_4$,*-*] ++(2.0,0);
+\draw (X) to[voltage source,bipoles/length=1.5cm,l=$V_2$] ++(0,+2.0) coordinate(X) to[resistor,l=$R_3$,*-*] ++(2.0,0);
+\draw (X) to[resistor,l=$R_1$] ++(0,+2.0) to[resistor,l=$R_2$,-*] ++(2.0,0);
+\end{circuitikz} &
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) node[right]{A} to[short,o-] ++(-1.0,0) to[voltage source,bipoles/length=1.5cm,l=$V_{\rm th}$] ++(0,+2.0) 
+to[R, l=$R_{\rm th}$] ++(0,+2.0) to[short, i>=$I$,-o] ++(1.0,0) node[right]{B};
+\end{circuitikz} \\
+(a) & (b) \\
+\end{tabular}
+\caption{ Two-terminal network diagrams for (a) a fairly complicated network, and (b) it's Thevenin equivalent.}
+\label{fig:thev_eg}
+\end{center}
+\end{figure}
 
 \section{Exercises}
 
@@ -381,17 +457,42 @@ to[R, l=$R_{\rm th}$] ++(0,+2.0) to[short, i>=$I$,-o] ++(1.0,0) node[right]{A};
 
 \item Derive Equations~\ref{eqn:idivider}.
 
-\end{enumerate}
+\item Show that the power consumed by a resistor of resistance $R$ conducting a current $I$ is:
+\begin{displaymath}
+P = I^2R
+\end{displaymath}
 
+\item Show that the power consumed by a resistor of resistance $R$ held at a voltage $V$ is:
+\begin{displaymath}
+P = V^2/R
+\end{displaymath}
+
+\item Using circuit analysis, determine the operating point (Q) of the circuit in Fig.~\ref{fig:vrr_iv} and compare with the value you read off from the plot.
+
+\item Draw the $IV$ curve for an ideal voltage source and a short-circuit.  Do they intersect?  What do you suppose would happen if you attempted to short-circuit an ideal voltage source?  Now draw an open circuit ($I=0$).  What is the operating point of a voltage source with it's terminals left open?  Complete this sentence:  "It's easy for an ideal voltage source to handle (an open/ a short) circuit, but impossible for it to handle (an open / a short) circuit.
+
+\item We already discussed ideal voltage sources which will provide any necessary current to maintain a constant voltage across two terminals.  Another linear circuit element source is an ideal current source, which provides any necessary voltage to maintain a constant current through its two terminals.  Sketch the $IV$ curve for a constant voltage source and a constant current source.  Ideal voltage sources have zero intrinsic resistance.  What intrinsic resistance does an ideal current source have?  (Hint:  look at the IV curve and recall the relationship between slope and resistance.)  One way to make a current source is to place a very large resistor in series with a very large voltage.  
+
+\item Draw the $IV diagrams$ for an ideal current source and an open-circuit (I=0).  Do they intersect?  What do you suppose would happen if you attempted to leave the terminals of an ideal voltage source open?  Now draw a short circuit.  What is the operating point of a voltage source with it's terminals left open?  Complete this sentence:  "It's easy for an ideal voltage source to handle (an open/ a short) circuit, but impossible for it to handle (an open / a short) circuit.
+
+\item Find the Thevenin Equivalent voltage, resistance, and short-circuit current, for the two-terminal network in Fig.~\ref{fig:thev_eg}, assuming all the resistors are $10~\rm k\Omega$ and all the voltages source are $10~\rm V$.
+
+\item Find the Thevenin Equivalent circuit for the following:
+\begin{center}
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) node[right]{A} to[short,o-*] coordinate(X) ++(-1.0,0) coordinate(X) to[resistor,l_=$R_2$] ++(0,2.0) to[short,-o] ++(1.0,0) node[right]{B};
+\draw (X) to[short,*-] ++ (-2.0,0) to[voltage source,bipoles/length=1.5cm,l=$V_1$] ++(0,+2.0) to[resistor,l=$R_1$] ++(2.0,0)
+to[short] ++(1.0,0);
+\end{circuitikz} 
+\end{center}
+
+\end{enumerate}
 
 \chapter{Alternating Current Circuits and Impedance}
 
 \section{Capacitors}
 
 \section{Inductors}
-
-
-
 
 \end{document}
 
