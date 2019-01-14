@@ -340,7 +340,7 @@ $I$-$V$ plane, as shown in Fig.~\ref{fig:vr_iv} .  The source curve is the verti
 
 The intersection of the source $I$-$V$ curve with the load $I$-$V$ curve is the operating point for the circuit that results form connecting the load to the source.  A source providing a current $I$ while maintaining  a potential difference $V$ across it's two terminals is powering the circuit with power:
 \begin{displaymath}
-P \equiv \frac{dU}{dt} = frac{VdQ}{dt} = V \frac{dQ}{dT} = V I
+P \equiv \frac{dU}{dt} = \frac{VdQ}{dt} = V \frac{dQ}{dT} = V I
 \end{displaymath}
 Meanwhile, the load is consuming power $P = VI$.  It is instructive to consider what would happen if you called the battery the load and the resistor the source.  In this case, the current simply changes sign, and you would find that at the operating point the so-called supply is providing negative power.  In other contexts you might find that both the current $I$ and the voltage $V$ are negative, so that the power provided by the source is positive.  In this case, you have likely correctly identified the roles of source and load while making a poor choice for the polarity.
 
@@ -449,6 +449,7 @@ to[R, l=$R_{\rm th}$] ++(0,+2.0) to[short, i>=$I$,-o] ++(1.0,0) node[right]{B};
 \end{center}
 \end{figure}
 
+
 \section{Exercises}
 
 \begin{enumerate}
@@ -490,9 +491,173 @@ to[short] ++(1.0,0);
 
 \chapter{Alternating Current Circuits and Impedance}
 
-\section{Capacitors}
+\section{Resistors, Capacitors, and Inductors}
 
-\section{Inductors}
+\begin{figure}[htbp]
+\begin{center}
+\begin{tabular}{ccc}
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) node[left]{A} to[short,o-] ++(1.0,0) to[R,l=$R$] ++(0,+4.0) to[short, i<=$I$,-o] ++(-1.0,0) node[left]{B};
+\draw (0,-1) node[]{$V_{AB} = IR$};
+\end{circuitikz} &
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) node[left]{A} to[short,o-] ++(1.0,0) to[C,l=$C$] ++(0,+4.0) to[short, i<=$I$,-o] ++(-1.0,0) node[left]{B};
+\draw (1.7,2.4) node[left]{$Q$};
+\draw (0,-1) node[]{$V_{AB} = \frac{Q}{C}$};
+\end{circuitikz} &
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) node[left]{A} to[short,o-] ++(1.0,0) to[L,l=$L$] ++(0,+4.0) to[short, i<=$I$,-o] ++(-1.0,0) node[left]{B};
+\draw (0,-1) node[]{$V_{AB} = L \frac{dI}{dt}$};
+\end{circuitikz} \\
+(a) & (b) & (c) \\
+\end{tabular}
+\caption{The voltage across a (a) resistor, (b) capacitor, and (c) inductor.  The sign convention for all of these relationships implies that the component is being treated as a load, with current $I$ entering the positive terminal.  The charge $Q$ is the charge which builds up on the upper plate, while the lower plate will have charge $-Q$.}
+\label{fig:rlc}
+\end{center}
+\end{figure}
+
+We've already encountered our first two terminal electrical component, the resistor, which obeys Ohm's law.  When considering the sign of Ohm's law, one must remember that the definition implies that the resistor is being considered  as a load, as shown in Fig.~\ref{fig:rlc}a.
+
+A capacitor is a two terminal electrical component which stores energy in an electric field.  The electric field is the result of a built of charge, positive on one terminal of the capacitor and negative on the other, which produces the electric charge.  When considered as a load, with charge $Q$ on the upper terminal (and charge $-Q$ on the lower terminal) the voltage across a capacitor is:
+\begin{displaymath}
+V = \frac{Q}{C}
+\end{displaymath}
+
+An inductor is a two terminal electrical component which stores energy in a magnetic field when an electrical current passes through it.  Because of the property of self-inductance, an inductor tends to resist changes in current.  When considered as a load, the voltage across an inductor is:
+\begin{displaymath}
+V = L\frac{dI}{dt}
+\end{displaymath}
+
+While the capacitor and the inductor have the capability to store energy, none of these three components are capable of adding power to a circuit, and are therefore called passive components.
+
+\section{Time dependence of a Capacitive Circuit}
+
+\begin{figure}[htbp]
+\begin{center}
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) node[right]{A} to[short,o-*] coordinate(X) ++(-1.0,0) coordinate(X) to[C,l=$C$,i<=$I$] ++(0,4.0) to[short,-o] ++(1.0,0) node[right]{B};
+\draw (X) to[short,*-] ++ (-2.0,0) to[voltage source,bipoles/length=1.5cm,l=$V$] ++(0,+2.0)
+to[cspst, bipoles/length=2.0cm] ++(0,2.0) to[resistor,l=$R$] ++(2.0,0);
+\draw (-0.4,2.3) node[left]{$Q$};
+\end{circuitikz} 
+\caption{Circuits for considering the behavior of a capacitor.}
+\label{fig:rc}
+\end{center}
+\end{figure}
+
+Consider the $RC$ circuit of Fig.~\ref{fig:rc} with the switch closed.  From KVL:
+\begin{displaymath}
+0 = V - IR - \frac{Q}{C}
+\end{displaymath}
+or matching source voltage to load voltage:
+\begin{displaymath}
+V = IR + \frac{Q}{C}
+\end{displaymath}
+The charge as a function of time $Q(t)$ therefore obeys the differential equation:
+\begin{equation} \label{eqn:icap}
+V = \frac{dQ}{dt}R + \frac{Q(t)}{C}
+\end{equation}
+Our physical intuition leads us to try first for a steady-state solution of the form $Q(t) = Q_{\rm F}$ for some constant $Q_{\rm F}$, so that:
+\begin{displaymath}
+\frac{dQ}{dt} = 0
+\end{displaymath}
+and so Equation~\ref{eqn:icap} leads to:
+\begin{displaymath}
+Q_{\rm F} = CV.
+\end{displaymath}
+After enough time, the capacitor will always charge to $CV$, the voltage across it will be $V$ exactly matching the voltage supplied, and no current will flow.  This is the steady-state behavior for this circuit.
+
+However, imagine that at time $t=0$, the capacitor is initially uncharged with $Q=0$.  How will the circuit reach the steady-state?  Since the differential equation is linear, any solution to the homogenous version  (with $V=0$):
+\begin{equation} \label{eqn:hcap}
+0 = \frac{dQ}{dt}R + \frac{Q(t)}{C}
+\end{equation}
+can be added to the steady-state solution to provide a solution to the non-homogenous version (with $V \ne 0$).  Differential equations which relate the rate of change of a quantity to the quantity itself invariably lead to the exponential function, and we are led to try:
+\begin{displaymath}
+Q(t) = A \exp(B t)
+\end{displaymath}
+for constants $A$ and $B$.  Applying Equation~\ref{eqn:hcap} leads to:
+\begin{eqnarray*}
+0 &=& R B A \, \exp(B t)  + \frac{Q(t)}{C}\\
+0 &=& \left( RB + \frac{1}{C}\right) Q(t)
+\end{eqnarray*}
+which will be true provided that:
+\begin{displaymath}
+B = -\frac{1}{RC}
+\end{displaymath}
+That is solutions of the form:
+\begin{displaymath}
+Q(t) = A \, \exp(- t/\tau)
+\end{displaymath}
+with $\tau = RC$ satisfy Equation~\ref{eqn:hcap} and can be added to the steady state solution to obtain:
+\begin{displaymath}
+Q(t) = CV + A \, \exp(- t / \tau)
+\end{displaymath}
+which is the general solution to Equation~\ref{eqn:icap}.  (You can confirm this for yourself)
+
+For the specific case that $Q(0) = 0$, we conclude that $A = -CV$ and so:
+\begin{displaymath}
+Q(t) = CV \left(1 - \exp(- t / \tau) \right)
+\end{displaymath}
+which describes a capacitor charging with a time constant $\tau = RC$ asymptotically approaching the steady-state $Q = CV$.  If instead, we specify that $V=0$ and $Q(0) = Q_0$, we obtain:
+\begin{displaymath}
+Q(t) = Q_0 \, \exp(-t / \tau)
+\end{displaymath}
+which describes a capacitor discharging with the same time constant, asymptotically approaching the steady-state $Q = 0$.
+
+
+\section{Time dependence of an Inductive Circuit}
+
+\begin{figure}[htbp]
+\begin{center}
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) node[right]{A} to[short,o-*] coordinate(X) ++(-1.0,0) coordinate(X) to[L,l=$L$,i<=$I$] ++(0,4.0) to[short,-o] ++(1.0,0) node[right]{B};
+\draw (X) to[short,*-] ++ (-2.0,0) to[voltage source,bipoles/length=1.5cm,l=$V$] ++(0,+2.0)
+to[cspst, bipoles/length=2.0cm] ++(0,2.0) to[resistor,l=$R$] ++(2.0,0);
+\end{circuitikz} 
+\caption{Circuit for considering the behavior of an inductor.}
+\label{fig:rl}
+\end{center}
+\end{figure}
+
+Consider the $RL$ circuit of Fig.~\ref{fig:rl} with the switch closed.  From KVL:
+\begin{displaymath}
+0 = V - IR - L\frac{dI}{dt}
+\end{displaymath}
+or matching source voltage to load voltage:
+\begin{displaymath}
+V = IR + L\frac{dI}{dt}
+\end{displaymath}
+The current as a function of time $I(t)$ therefore obeys the differential equation:
+\begin{equation} \label{eqn:iinductor}
+V = R I(t) + L \frac{dI}{dt}
+\end{equation}
+It is left as an exercise to show that the steady-state solution is the constant current:
+\begin{displaymath}
+I = V / R
+\end{displaymath}
+and the general solution to Equation~\ref{eqn:iinductor} is 
+\begin{displaymath}
+I(t) = (V / R) + A \, \exp(-t/\tau) 
+\end{displaymath}
+with $\tau = L / R$.
+
+For the specific case that $I(0) = 0$, we conclude that $A = -V/R$ and so:
+\begin{displaymath}
+I(t) = (V/R) \, (1 - \exp(-t / \tau)).
+\end{displaymath}
+
+
+ 
+
+
+\section{Exercises}
+\begin{enumerate}
+\item Derive $V = q/C$ for parallel plate and show C = X.
+\item Derive $V = L \frac{dI}{dt}$ for a long solenoid and show L = X.
+\item Derive equivalent C for two capacitors in series and parallel.
+\item Derive equivalent L for two inductors in series and parallel.
+\item Derive the steady-state equation X and the general solution Y for the LR circuit of Fig. X.
+\end{enumerate}
 
 \end{document}
 
