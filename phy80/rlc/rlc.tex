@@ -1,6 +1,6 @@
 \documentclass[12pt,oneside]{book}
 
-\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.5in]{geometry}
+\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.75in]{geometry}
 \usepackage{cite}
 \usepackage{slashed}
 \usepackage{graphicx}
@@ -166,11 +166,13 @@ The conservation of charge implies that the total current into a node must equal
 \begin{displaymath}
 \sum_k I_k = 0.
 \end{displaymath}
+This is referred to as Kirchhoff's Current Law (KCL).
+
 The electric field is conservative which implies that the net electric potential when traversing any closed loop is zero.  If the voltage drop across each electric component is defined in the direction of the closed loop, this law can be written simply as:
 \begin{displaymath}
 \sum_k V_k = 0.
 \end{displaymath}
-When determining the drop across a resistor from Ohm's law, one must remember the orientation of current and voltage (as in Fig.~\ref{fig:ohms}) when determining the sign.  You should be able to reason that when traversing a resistor in the same direction as the current, you drop in voltage (so add a term $-IR$ when using KVL).  When traversing a resistor in the opposite direction as the current, you rise in voltage (so add a term $IR$ when using KVL.) 
+This is referred to as Kirchhoff's Voltage Law (KVL).  When determining the drop across a resistor from Ohm's law, one must remember the orientation of current and voltage (as in Fig.~\ref{fig:ohms}) when determining the sign.  You should be able to reason that when traversing a resistor in the same direction as the current, you drop in voltage (so add a term $-IR$ when using KVL).  When traversing a resistor in the opposite direction as the current, you rise in voltage (so add a term $IR$ when using KVL.) 
 
 \begin{figure}[htbp]
 \begin{center}
@@ -197,7 +199,7 @@ while from KVL we traverse the loop labeled "1" to obtain:
 \end{displaymath}
 and we traverse the loop labeled "2" to obtain
 \begin{displaymath}
-0 = I_1 R_1 - I_2 R_2
+0 = I_2 R_2 - I_3 R_3
 \end{displaymath}
 Pay close attention to the signs of the voltage drops across the resistors and make sure you can reproduce them!
 
@@ -468,24 +470,62 @@ P = I^2R
 P = V^2/R
 \end{displaymath}
 
-\item Using circuit analysis, determine the operating point (Q) of the circuit in Fig.~\ref{fig:vrr_iv} and compare with the value you read off from the plot.
+\item Using circuit analysis, determine the operating point (Q) of the
+  circuit in Fig.~\ref{fig:vrr_iv} and compare with the value you read
+  off from the plot.
 
-\item Draw the $IV$ curve for an ideal voltage source and a short-circuit.  Do they intersect?  What do you suppose would happen if you attempted to short-circuit an ideal voltage source?  Now draw an open circuit ($I=0$).  What is the operating point of a voltage source with it's terminals left open?  Complete this sentence:  "It's easy for an ideal voltage source to handle (an open/ a short) circuit, but impossible for it to handle (an open / a short) circuit.
+%\item Draw the $IV$ curve for an ideal voltage source and a
+%  short-circuit.  Do they intersect?  What do you suppose would happen
+%  if you attempted to short-circuit an ideal voltage source?  Now draw
+%  an open circuit ($I=0$).  What is the operating point of a voltage
+%  source with it's terminals left open?  
 
-\item We already discussed ideal voltage sources which will provide any necessary current to maintain a constant voltage across two terminals.  Another linear circuit element source is an ideal current source, which provides any necessary voltage to maintain a constant current through its two terminals.  Sketch the $IV$ curve for a constant voltage source and a constant current source.  Ideal voltage sources have zero intrinsic resistance.  What intrinsic resistance does an ideal current source have?  (Hint:  look at the IV curve and recall the relationship between slope and resistance.)  One way to make a current source is to place a very large resistor in series with a very large voltage.  
 
-\item Draw the $IV diagrams$ for an ideal current source and an open-circuit (I=0).  Do they intersect?  What do you suppose would happen if you attempted to leave the terminals of an ideal voltage source open?  Now draw a short circuit.  What is the operating point of a voltage source with it's terminals left open?  Complete this sentence:  "It's easy for an ideal voltage source to handle (an open/ a short) circuit, but impossible for it to handle (an open / a short) circuit.
+\item We already discussed ideal voltage sources which will provide
+  any necessary current to maintain a constant voltage across two
+  terminals.  Another linear circuit element source is an ideal
+  current source, which provides any necessary voltage to maintain a
+  constant current through its two terminals.  Sketch the $IV$ curve
+  for a constant voltage source and a constant current source.  Ideal
+  voltage sources have zero intrinsic resistance.  What intrinsic
+  resistance does an ideal current source have?  (Hint: look at the IV
+  curve and recall the relationship between slope and resistance.)
+  One way to make a current source is to place a very large resistor
+  in series with a very large voltage source.  Is this consistent with
+  your answer?
 
-\item Find the Thevenin Equivalent voltage, resistance, and short-circuit current, for the two-terminal network in Fig.~\ref{fig:thev_eg}, assuming all the resistors are $10~\rm k\Omega$ and all the voltages source are $10~\rm V$.
+%\item Draw the $IV diagrams$ for an ideal current source and an open-circuit (I=0).  Do they intersect?  What do you suppose would happen if you attempted to leave the terminals of an ideal voltage source open?  Now draw a short circuit.  What is the operating point of a voltage source with it's terminals left open?  
 
-\item Find the Thevenin Equivalent circuit for the following:
+\item Find the Thevenin Equivalent voltage, resistance, and short-circuit current for the following two terminal network:
 \begin{center}
 \begin{circuitikz}[line width=1pt]
-\draw (0,0) node[right]{A} to[short,o-*] coordinate(X) ++(-1.0,0) coordinate(X) to[resistor,l_=$R_2$] ++(0,2.0) to[short,-o] ++(1.0,0) node[right]{B};
-\draw (X) to[short,*-] ++ (-2.0,0) to[voltage source,bipoles/length=1.5cm,l=$V_1$] ++(0,+2.0) to[resistor,l=$R_1$] ++(2.0,0)
-to[short] ++(1.0,0);
-\end{circuitikz} 
+\draw (0,0) node[right]{A} to[short,o-*] coordinate(X) ++(-1.0,0) coordinate(X) to[resistor,l_=$R_2$] ++(0,2.0) to[short,*-o] ++(1.0,0) node[right]{B};
+\draw (X) to[short,*-] ++ (-2.0,0) to[voltage source,bipoles/length=1.5cm,l=$V_1$] ++(0,+2.0) to[resistor,l=$R_1$] ++(2.0,0);
+\end{circuitikz} \\
 \end{center}
+Leave your answer in terms of $R_1$, $R_2$, and $V_1$.
+
+\item Find the Thevenin Equivalent voltage and resistance for the following two-terminal network:
+\begin{center}
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) node[right]{A} to[short,o-] ++(-1.0,0) coordinate(X) 
+to[voltage source,bipoles/length=1.5cm,l=$V_3$] ++(0,2.0) to[R,l=$R_3$] ++(0,2.0) 
+to[short,-o] ++(1.0,0) node[right]{B};
+\draw (X) to[short,*-] ++(-2.0,0) coordinate(X) 
+to[voltage source,bipoles/length=1.5cm,l=$V_2$] ++(0,2.0) to[R,l=$R_2$] ++(0,2.0) 
+to[short,-*] ++(2.0,0);
+\draw (X) to[short,*-] ++(-2.0,0) coordinate(X) 
+to[voltage source,bipoles/length=1.5cm,l=$V_1$] ++(0,2.0) to[R,l=$R_1$] ++(0,2.0) 
+to[short,-*] ++(2.0,0);
+
+
+%\draw (X) to[short,*-] ++ (-2.0,0) to[voltage source,bipoles/length=1.5cm,l=$V_1$] ++(0,+2.0) to[resistor,l=$R_1$] ++(2.0,0)
+%to[short] ++(1.0,0);
+\end{circuitikz} \\
+\end{center}
+Leave your answer in terms of $R_1$, $R_2$, $R_3$, $V_1$, $V_2$ and $V_3$.  In fact you can state the result quite 
+
+\item  When you ask why they are late with their share of the rent (again), your roommate explains that they would like to invest the money into buying inexpensive force sensors for about \$10 each.  They think they can use these to make cheap electronic drum kits and sell them at a profit.   The idea is to connect a force sensor acting as a switch between a $9~\rm V$ battery and an old $50~\rm \Omega$ (load resistance) speaker.  Each customer will supply their own battery and speaker, and the wire will be pilfered from Physics 80 lab.  While perusing the specs for the force sensor, you notice that they have a typical source resistance of about $100~\rm k\Omega$.    Model the proposal as a DC voltage divider, which is sufficient analysis to see what a terrible design your roommate has concocted.  What's the maximum voltage you would see across the speaker given the source resistance and load resistance?  What's the maximum power that would be consumed by the speaker?  Compare this with the power consumed by the speaker at typical operating voltages of at least $1~\rm V$.   Whatever you do, do not leave the room without the rent money in cash!!!
 
 \end{enumerate}
 
@@ -535,27 +575,27 @@ While the capacitor and the inductor have the capability to store energy, none o
 \begin{figure}[htbp]
 \begin{center}
 \begin{circuitikz}[line width=1pt]
-\draw (0,0) node[right]{A} to[short,o-*] coordinate(X) ++(-1.0,0) coordinate(X) to[C,l=$C$,i<=$I$] ++(0,4.0) to[short,-o] ++(1.0,0) node[right]{B};
-\draw (X) to[short,*-] ++ (-2.0,0) to[voltage source,bipoles/length=1.5cm,l=$V$] ++(0,+2.0)
+\draw (0,0) node[right]{A} to[short,o-*] coordinate(X) ++(-1.0,0) coordinate(X) to[C,l=$C$,i<=$I(t)$] ++(0,4.0) to[short,-o] ++(1.0,0) node[right]{B};
+\draw (X) to[short,*-] ++ (-2.0,0) to[voltage source,bipoles/length=1.5cm,l=$V_0$] ++(0,+2.0)
 to[cspst, bipoles/length=2.0cm] ++(0,2.0) to[resistor,l=$R$] ++(2.0,0);
-\draw (-0.4,2.3) node[left]{$Q$};
+\draw (-1.0,2.3) node[right]{$Q(t)$};
 \end{circuitikz} 
-\caption{Circuits for considering the behavior of a capacitor.}
+\caption{Circuit for considering the behavior of a capacitor.}
 \label{fig:rc}
 \end{center}
 \end{figure}
 
 Consider the $RC$ circuit of Fig.~\ref{fig:rc} with the switch closed.  From KVL:
 \begin{displaymath}
-0 = V - IR - \frac{Q}{C}
+0 = V_0 - IR - \frac{Q}{C}
 \end{displaymath}
 or matching source voltage to load voltage:
 \begin{displaymath}
-V = IR + \frac{Q}{C}
+V_0 = IR + \frac{Q}{C}
 \end{displaymath}
 The charge as a function of time $Q(t)$ therefore obeys the differential equation:
 \begin{equation} \label{eqn:icap}
-V = \frac{dQ}{dt}R + \frac{Q(t)}{C}
+V_0 = \frac{dQ}{dt}R + \frac{Q(t)}{C}
 \end{equation}
 Our physical intuition leads us to try first for a steady-state solution of the form $Q(t) = Q_{\rm F}$ for some constant $Q_{\rm F}$, so that:
 \begin{displaymath}
@@ -563,11 +603,11 @@ Our physical intuition leads us to try first for a steady-state solution of the 
 \end{displaymath}
 and so Equation~\ref{eqn:icap} leads to:
 \begin{displaymath}
-Q_{\rm F} = CV.
+Q_{\rm F} = C V_0.
 \end{displaymath}
-After enough time, the capacitor will always charge to $CV$, the voltage across it will be $V$ exactly matching the voltage supplied, and no current will flow.  This is the steady-state behavior for this circuit.
+After enough time, the capacitor will charge to $CV_0$, the voltage across the capacitor will be equal to the applied voltage $V_0$, and so no current flow.  This is the steady-state behavior for this circuit.
 
-However, imagine that at time $t=0$, the capacitor is initially uncharged with $Q=0$.  How will the circuit reach the steady-state?  Since the differential equation is linear, any solution to the homogenous version  (with $V=0$):
+However, imagine that at time $t=0$, the capacitor is initially uncharged with $Q=0$.  How will the circuit reach the steady-state?  Since the differential equation is linear, any solution to the homogenous version  (obtained by setting $V_0=0$):
 \begin{equation} \label{eqn:hcap}
 0 = \frac{dQ}{dt}R + \frac{Q(t)}{C}
 \end{equation}
@@ -592,17 +632,32 @@ with $\tau = RC$ satisfy Equation~\ref{eqn:hcap} and can be added to the steady 
 \begin{displaymath}
 Q(t) = CV + A \, \exp(- t / \tau)
 \end{displaymath}
-which is the general solution to Equation~\ref{eqn:icap}.  (You can confirm this for yourself)
+which is the general solution to Equation~\ref{eqn:icap}.  (You can confirm this for yourself if this is the first time you have seen this approach used.)
 
 For the specific case that $Q(0) = 0$, we conclude that $A = -CV$ and so:
 \begin{displaymath}
-Q(t) = CV \left(1 - \exp(- t / \tau) \right)
+Q(t) = CV_0 \left(1 - \exp(- t / \tau) \right)
 \end{displaymath}
-which describes a capacitor charging with a time constant $\tau = RC$ asymptotically approaching the steady-state $Q = CV$.  If instead, we specify that $V=0$ and $Q(0) = Q_0$, we obtain:
+which describes a capacitor charging with a time constant $\tau = RC$ asymptotically approaching the steady-state $Q = CV_0$.  If follows that the voltage across the capacitor as a function of time is:
 \begin{displaymath}
-Q(t) = Q_0 \, \exp(-t / \tau)
+V(t) = \frac{Q(t)}{C} = V_0 \left(1 - \exp(- t / \tau) \right)
 \end{displaymath}
-which describes a capacitor discharging with the same time constant, asymptotically approaching the steady-state $Q = 0$.
+while the current as a function of time is:
+\begin{displaymath}
+I(t) = \frac{dQ}{dt} = \frac{V_0}{R} \exp(- t / \tau) 
+\end{displaymath}
+
+The voltage and current as function of time for a charing capacitor is shown in Fig.~\ref{fig:vit_cap}
+Notice that at $t=0$, we have simply $I = V_0/R$, as there is no voltage across the capacitor while $Q=0$.
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[height=0.3\textheight]{figs/transient_cap.pdf} \\
+\caption{ blah blah blah...}
+\label{fig:vit_trans}
+\end{center}
+\end{figure}
+
 
 
 \section{Time dependence of an Inductive Circuit}
@@ -643,13 +698,528 @@ with $\tau = L / R$.
 
 For the specific case that $I(0) = 0$, we conclude that $A = -V/R$ and so:
 \begin{displaymath}
-I(t) = (V/R) \, (1 - \exp(-t / \tau)).
+I(t) = (V_0/R) \, (1 - \exp(-t / \tau)).
+\end{displaymath}
+Notice that at $t=0$, we have simply $I = V_0/R$, as there is no voltage across the capacitor while $Q=0$.
+
+\section{Alternating Current}
+ 
+ We've seen now that voltages can be a function of time $V(t)$.    If the steady-state voltage levels in a circuit are constant with time, it is referred to as a direct current (DC) circuit, because the currents that result tend to flow in the same direction.   A circuit with a time-dependence which averages to zero by oscillating back and forth is referred to as an alternating current (AC).   If the voltage is changing with time, but does not average to zero, the signal is a mixture of AC and DC.  The DC contribution is the average value, and the AC component is what remains when this DC component is removed.  We will use a convention that lower-case variables, such as $v$ and $i$ refer to AC quantities, and upper case variables, such as $V$ and $I$ refer to DC quantities.  Transients responses, which are often ignored in AC and DC circuit analysis, will remain as time-dependent upper case variables, such as $V(t)$ and $I(t)$.
+   
+ Of particular importance, is a sinusoidal voltage of the form:
+ \begin{displaymath}
+ v(t) = v_{\rm p} \cos(\omega t + \phi).
+ \end{displaymath}
+ The parameter $v_p$ in this equation is called the peak AC voltage.  The parameter $\omega$ is the angular frequency, related to the frequency $f$ by $\omega = 2 \pi f$.  The parameter $\phi$ determines the phase of the voltage.
+
+Other common measurements of the AC voltage level are the peak-to-peak AC voltage, which for a pure sine wave is:
+\begin{displaymath}
+v_{\rm pp} = 2 v_{\rm p}.
+\end{displaymath}
+And the root-mean-square (RMS) average AC voltage:
+\begin{displaymath}
+v_{\rm rms} = \sqrt{\langle v^2(t) \rangle}
+\end{displaymath}
+where $\langle f(t) \rangle$ denotes the time average:
+\begin{displaymath}
+\langle f(t) \rangle \equiv \frac{1}{T}\int_{-T/2}^{T/2} f(t)
+\end{displaymath}
+It is left as an exercise to show that for a pure sine wave:
+\begin{displaymath}
+v_{\rm rms} = v_{\rm p} / \sqrt{2}
+\end{displaymath}
+When left unspecified, an AC voltage usually refers to an RMS voltage.  So when we refer to a $120~\rm V$ household outlet, we mean specifically a $120~\rm V$~(AC) RMS voltage.  
+
+Understanding the response of circuits to AC voltages is of paramount importance.  This is not just because our power arrives as an AC voltage.  Much of modern electronics, both at home and in the lab, is used for signal processing of time dependent signals encoded as $V(t)$.  Fourier's Theorem informs us that any time-dependent signal can be interpreted as a sum of sine and cosine functions of different frequencies.  So if we can understand the response of our circuit to DC plus AC sine waves of any frequency, we know everything there is to know about the circuit.
+
+\section{Passive Components and Alternating Current}
+
+\begin{figure}[htbp]
+\begin{center}
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) coordinate(X) to[sinusoidal voltage source,bipoles/length=1.5cm] ++(0,+2.0) 
+to [short,i=$i$] ++(1.5,0) to[R,l_=$R$] ++(0,-2.0) to[short] ++(-1.5,0);
+\draw (X) node[ground,yscale=2.0]{};
+\draw (0.0,1.7) node[left]{$v(t)$};
+\end{circuitikz} 
+\caption{An AC voltage source applied to a resistor.}
+\label{fig:acr}
+\end{center}
+\end{figure}
+
+We are now ready to consider what happens to resistors, capacitors, and inductors when an AC voltage is applied across them.  We'll start with the easiest case, the resistor, and the circuit illustrated in Fig.~\ref{fig:acr}.  We've introduced a new symbol, the AC voltage source.  We'll adopt the convention that the positive terminal is always at the top.  We'll also reference the negative terminal to ground, because the function generator you use in lab is referenced to ground.  To reinforce the convention that the positive terminal is at the top, that is where we will label the time dependent voltage provided, which we will take in most cases as:
+\begin{displaymath}
+v(t) = v_{\rm p} \cos(\omega t).
+\end{displaymath}
+In the case of the resistor, Ohm's law informs us immediately that:
+\begin{displaymath}
+i(t) = v(t) / R = (1/R) \, v_{\rm p} \cos(\omega t)
+\end{displaymath}
+If we are only concerned with the RMS current and voltage, we find:
+\begin{displaymath}
+v_{\rm rms}/i_{\rm rms} = R 
+\end{displaymath}
+Ohm's law is alive and well for AC circuits!
+
+
+\begin{figure}[htbp]
+\begin{center}
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) coordinate(X) to[sinusoidal voltage source,bipoles/length=1.5cm] ++(0,+2.0) 
+to [short,i=$i$] ++(1.5,0) to[C,l_=$C$] ++(0,-2.0) to[short] ++(-1.5,0);
+\draw (X) node[ground,yscale=2.0]{};
+\draw (0.0,1.7) node[left]{$v(t)$};
+\end{circuitikz} 
+\caption{An AC voltage source applied to a capacitor.}
+\label{fig:acr}
+\end{center}
+\end{figure}
+
+The capacitance relates the voltage to the charge on the capacitor:
+\begin{displaymath}
+q(t)  = C v(t)
+\end{displaymath}
+and so taking the derivative with respect to time:
+\begin{displaymath}
+i = \frac{dq}{dt} = C \frac{dv}{dt}
+\end{displaymath}
+So in this case, with $v(t) = v_p \cos(\omega t)$
+\begin{eqnarray*}
+i &=& C (-\omega v_p \sin(\omega t))\\
+ &=& (\omega C) \cos \left( \omega t + \frac{\pi}{2} \right) \\
+\end{eqnarray*}
+The RMS values are related by:
+\begin{displaymath}
+v_{\rm rms}/i_{\rm rms} = \frac{1}{\omega C}
+\end{displaymath}
+but the phase of the current differs from the voltage by $\Delta \phi = \pi/2$.
+
+\begin{figure}[htbp]
+\begin{center}
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) coordinate(X) to[sinusoidal voltage source,bipoles/length=1.5cm] ++(0,+2.0) 
+to [short,i=$i$] ++(1.5,0) to[L,l_=$L$] ++(0,-2.0) to[short] ++(-1.5,0);
+\draw (X) node[ground,yscale=2.0]{};
+\draw (0.0,1.7) node[left]{$v(t)$};
+\end{circuitikz} 
+\caption{An AC voltage source applied to a inductor.}
+\label{fig:acr}
+\end{center}
+\end{figure}
+
+The inductance relates the voltage to the rate of change of the current:
+\begin{displaymath}
+\frac{di}{dt}  =\frac{1}{L} v(t)
+\end{displaymath}
+and so integrating with respect to time:
+\begin{displaymath}
+i = \frac{1}{L} \int dt \; v(t) 
+\end{displaymath}
+So in this case, with $v(t) = v_p \cos(\omega t)$
+\begin{eqnarray*}
+i &=& \frac{1}{L}  \int dt \; v_p \cos(\omega t)\\ 
+&=& \frac{1}{L} \left( \frac{v_p}{\omega} \sin(\omega t) \right) + I_0\\
+&=& \frac{1}{\omega L} \cos \left( \omega t - \frac{\pi}{2} \right)  + I_0\\
+\end{eqnarray*}
+The constant of integration $I_0$ is a constant direct current.  Indeed, with no resistance in this idealized circuit, a DC current could flow indefinitely, with no DC voltage drop anywhere in the circuit.  Of course, in a real circuit with resistance, such a current would quickly disappear.  We'll simply assume $I_0=0$ for our purpose of understanding the AC response, and so:
+\begin{eqnarray*}
+i &=& \frac{1}{\omega L} \cos \left( \omega t - \frac{\pi}{2} \right)\\
+\end{eqnarray*}
+The RMS values are related by:
+\begin{displaymath}
+v_{\rm rms}/i_{\rm rms} = \omega L
+\end{displaymath}
+but the phase of the current differs from the voltage by $\Delta \phi = -\pi/2$.
+
+
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[height=0.3\textheight]{figs/vit_res.pdf} \\
+\includegraphics[height=0.3\textheight]{figs/vit_cap.pdf} \\
+\includegraphics[height=0.3\textheight]{figs/vit_ind.pdf} \\
+
+
+\caption{ blah blah blah...}
+\label{fig:vit}
+\end{center}
+\end{figure}
+
+
+
+\begin{table}
+\caption{Summary or relationship between current and voltage for AC signals.}
+\label{tbl:rmsimp}
+\begin{center}
+\begin{tabular}{lrr}
+component & $v_{\rm rms} / i_{\rm rms} $ & $\Delta \phi$ \\
+\hline
+\\
+resistor ($R$) & $R$ & $0$ \\
+\\
+capacitor ($C$) & $\displaystyle \frac{1}{\omega C}$ & +$\displaystyle \frac{\pi}{2}$ \\
+\\
+inductor ($L$) & $\omega L$ & $\displaystyle +\frac{\pi}{2}$ \\
+\\
+\end{tabular}
+\end{center}
+\end{table}
+
+The present situation is summarized in Table~\ref{tbl:rmsimp}, and it's tempting to think we are finished.
+After all, we've found an Ohm's Law like relationship between $v_{\rm rms}$ and $i_{\rm rms}$ for capacitors and inductors, so shouldn't we able to analyze AC circuits just like DC circuits?  The problem is that we do not yet have an equivalent for Kirchoff's Laws.  DC voltages and currents simply add, but now our voltages have a phase, so we can't, for instance, simply add RMS voltages.  Faced with a more complicated circuit, we could derive a new, more complicated differential equation, and solve that.  Fortunately, there's an easier way!
+
+\section{Phasors}
+
+Recall Euler's Formula, which Feynman called "our jewel":
+\begin{displaymath}
+e^{j\phi} = \cos \phi + j \sin \phi 
+\end{displaymath}
+where we will use $j$ as the unit imaginary number, to avoid confusion with the AC current $i$.  In particular, we can relate the cosine function to the real part of an imaginary number:
+\begin{displaymath}
+r \cos \phi = \Re \{ r e^{j\phi} \}. 
+\end{displaymath}
+We can therefore associate to any AC signal:
+\begin{displaymath}
+v(t) = v_{\rm p} \cos ( \omega t + \phi)
+\end{displaymath}
+with the real part of a time-dependent complex number:
+\begin{displaymath}
+v(t) = \Re \{ v_{\rm p} \exp ( j (\omega t + \phi))\}
+\end{displaymath}
+the whole trick to what follows is noticing that we can rearrange this complex number as follows:
+\begin{displaymath}
+v(t) = \Re \{ v_{\rm p} e^{j\phi} \cdot e^{j \omega t} \}
+\end{displaymath}
+the quantity:
+\begin{displaymath}
+\tilde{v} \equiv v_{\rm p} e^{j\phi}  
+\end{displaymath}
+is a complex number that contains the magnitude and phase information for the particular AC signal we are considering.  It is simply a complex number, with no time dependence.  The time-dependent part of the entire expression comes from the term $e^{j \omega t}$, and is the same for every AC signal of frequency $\omega$.  Once we have specified the frequency of an AC circuit, there is a one-to-one corresponds with time dependent functions like v(t), and a complex number $\tilde{v}$ called the phase vector or just phasor.
+The phasor for an AC signal $v(t) = v_{\rm p} cos(\omega t + \phi)$ is given by:
+\begin{equation}
+\tilde{v} = v_{\rm p} e^{j \phi}
+\end{equation}
+and to obtain the time-dependent signal from a phasor we simply calculate:
+\begin{equation}
+v(t) = \Re \{ \tilde{v} e^{j \omega t} \}
+\end{equation}
+
+
+\section{Impedance}
+
+\begin{figure}[htbp]
+\begin{center}
+\begin{tabular}{ccc}
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) coordinate(X) to[sinusoidal voltage source,bipoles/length=1.5cm] ++(0,+2.0) 
+to [short,i=$\tilde{i}$] ++(1.5,0) to[R,l_=$R$] ++(0,-2.0) to[short] ++(-1.5,0);
+\draw (X) node[ground,yscale=2.0]{};
+\draw (0.0,1.7) node[left]{$\tilde{v}$};
+\end{circuitikz} &
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) coordinate(X) to[sinusoidal voltage source,bipoles/length=1.5cm] ++(0,+2.0) 
+to [short,i=$\tilde{i}$] ++(1.5,0) to[C,l_=$C$] ++(0,-2.0) to[short] ++(-1.5,0);
+\draw (X) node[ground,yscale=2.0]{};
+\draw (0.0,1.7) node[left]{$\tilde{v}$};
+\end{circuitikz} &
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) coordinate(X) to[sinusoidal voltage source,bipoles/length=1.5cm] ++(0,+2.0) 
+to [short,i=$\tilde{i}$] ++(1.5,0) to[L,l_=$L$] ++(0,-2.0) to[short] ++(-1.5,0);
+\draw (X) node[ground,yscale=2.0]{};
+\draw (0.0,1.7) node[left]{$\tilde{v}$};
+\end{circuitikz} \\
+(a) & (b) & (c) \\
+\end{tabular}
+\caption{An AC voltage source applied to (a) a resistor, (b) a capacitor, and (c) an inductor.}
+\label{fig:aclcr}
+\end{center}
+\end{figure}
+
+For a resistor driven by a sinusoidal voltage source as in Fig.~\ref{fig:aclcr}a, Ohm's law states that:
+\begin{displaymath}
+i(t) = v(t) / R 
+\end{displaymath}
+If we write v(t) in terms of its associated phasor $\tilde{v}$:
+\begin{eqnarray*}
+i(t) &=& \frac{\Re \{ \tilde{v} \; e^{j \omega t}\}}{R} \\
+&=& \Re \left\{ \frac{\tilde{v}}{R} \; e^{j \omega t} \right\} \\
+\end{eqnarray*}
+we can see that $i(t)$ is itself associated with the phasor:
+\begin{displaymath}
+\tilde{i} = \frac{\tilde{v}}{R}
+\end{displaymath}
+and so there is an Ohm's Law relationship between the phasors:
+\begin{displaymath}
+\tilde{v} = R \; \tilde{i}
+\end{displaymath}
+
+For a capacitor driven by a sinusoidal voltage source as in Fig.~\ref{fig:aclcr}b, we showed above that the current is related to the derivative of the voltage:
+\begin{displaymath}
+i(t) = C \, \frac{dv}{dt}
+\end{displaymath}
+If we write v(t) in terms of its associated phasor $\tilde{v}$:
+\begin{eqnarray*}
+i(t) &=& C \, \frac{d}{dt} \, \Re \{ \tilde{v} \; e^{j \omega t}\} \\
+&=& \Re \left\{ \tilde{v} C \frac{d}{dt} \; e^{j \omega t} \right\} \\
+&=& \Re \left\{ \tilde{v} j \omega C \; e^{j \omega t} \right\} \\
+\end{eqnarray*}
+where in the last step we have used the fact that:
+\begin{displaymath}
+\frac{d}{dt} e^{\alpha t} = \alpha e^{\alpha t}.
+\end{displaymath}
+From:
+\begin{eqnarray*}
+i(t) &=& \Re \left\{ \tilde{v} j \omega C \; e^{j \omega t} \right\} \\
+\end{eqnarray*}
+we can see that $i(t)$ is associated with the phasor:
+\begin{displaymath}
+\tilde{i} = j \omega C \tilde{v}
+\end{displaymath}
+which we can think of as Ohm's Law for a capacitor:
+\begin{displaymath}
+\tilde{v} = \frac{1}{j \omega C} \tilde{i}
+\end{displaymath}
+It's worth taking a moment to marvel over what we have accomplished here:  we replaced the differential equation describing the relations between $v(t)$ and $i(t)$ with mere multiplication of a phasor by a complex number.  We can analyze circuits simply according to the phasors, and convert our answer to time dependent signals whenever needed.  We already knew that the magnitude of the voltage and current were simply related.  By using phasors, one complex number describes the change in magnitude and the change in phase.
+
+Now let's turn to the inductor, driven by a sinusoidal voltage source as in Fig.~\ref{fig:aclcr}c, for which we already determined that current is related to the integral of the voltage:
+\begin{displaymath}
+i = \frac{1}{L} \int dt \; v(t) 
+\end{displaymath}
+It is left as an exercise to show that the phasors for current and voltage are related by:
+\begin{displaymath}
+\tilde{v} = j \omega L \tilde{i}.
+\end{displaymath}
+
+\begin{table}
+\caption{Impedances of passive-components}
+\label{tbl:impedance}
+\begin{center}
+\begin{tabular}{ccc}
+Component & Impedance & $\Delta \phi$ \\
+\hline
+\\
+$R$ & $R$ & 0 \\
+\\
+$C$ & $\displaystyle \frac{1}{j \omega C}$ & $\displaystyle + \frac{\pi}{2}$ \\
+\\
+$L$ & $j \omega L$ & $\displaystyle -\frac{\pi}{2}$ \\
+
+\end{tabular}
+\end{center}
+\end{table}
+
+We've now shown that for all three of our passive components ($R$, $C$, and $L$) the phasor for voltage is simply the product of the phasor for the current times a complex number, which we call the impedance, $Z$.  We call the imaginary part of the impedance the reactance $X$, and the real part the resistance:
+\begin{eqnarray*}
+({\rm impedance}) &=& ({\rm resistance}) + j ({\rm reactance} ) \\
+Z &=& R + j X \\
+\end{eqnarray*}
+These results are summarized in Table~\ref{tbl:impedance}.  
+
+Impedances can be added in series and parallels just as resistor.
+
+\section{Passive Filters}
+
+
+\begin{figure}[htbp]
+\begin{center}
+\begin{tabular}{cc}
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) node[ground,yscale=2.0]{} to[sinusoidal voltage source,bipoles/length=1.5cm] ++(0,+4.0) 
+to [short,i=$\tilde{i}$] ++(1.5,0) to[R,l_=$R$] ++(0,-2.0) coordinate(B)
+to[C,l_=$C$] ++(0,-2.0) coordinate(A) to[short] ++(-1.5,0);
+\draw (0.0,2.75) node[left]{$\tilde{v}_{\rm in}$};
+\draw (B) to[short,*-o] ++(1.5,0) node[right]{$\tilde{v}_{\rm out}$};
+\end{circuitikz} &
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) node[ground,yscale=2.0]{} to[sinusoidal voltage source,bipoles/length=1.5cm] ++(0,+4.0) 
+to [short,i=$\tilde{i}$] ++(1.5,0) to[C,l_=$C$] ++(0,-2.0) coordinate(B)
+to[R,l_=$R$] ++(0,-2.0) coordinate(A) to[short] ++(-1.5,0);
+\draw (0.0,2.75) node[left]{$\tilde{v}_{\rm in}$};
+\draw (B) to[short,*-o] ++(1.5,0) node[right]{$\tilde{v}_{\rm out}$};
+\end{circuitikz} \\
+(a) & (b) \\
+\end{tabular}
+\caption{Passive $RC$ (a) low-pass, and (b) high-pass filters.  Note that $\tilde{v}_{\rm in}$ and $\tilde{v}_{\rm out}$ are phasors corresponding to AC voltages referenced to ground.}
+\label{fig:rcfilters}
+\end{center}
+\end{figure}
+
+A simple but widely used circuit consists of an AC voltage divider constructed from a capacitor in series with a resistor, as shown in Fig.~\ref{fig:rcfilters}.
+
+In the case of the low-pass filter in Fig.~\ref{fig:rcfilters} the output voltage is simply the output of a voltage divider, with the complex impedance taking the place of the resistance in our previous result:
+\begin{displaymath}
+\tilde{v}_{\rm out} = \tilde{v}_{\rm in} \frac{Z_C}{Z_R + Z_C}
+\end{displaymath}
+And inserting the impedance of each device in terms of $R$ and $C$:
+\begin{eqnarray*}
+\tilde{v}_{\rm out} &=& \tilde{v}_{\rm in} \, \frac{\frac{1}{j \omega C}}{R + \frac{1}{j \omega C}}\\
+&=& \tilde{v}_{\rm in} \, \frac{1}{1 + j \omega/\omega_0}\\
+\end{eqnarray*}
+Where we have defined the corner angular frequency 
+\begin{equation*}
+\omega_0 = \frac{1}{RC}.
+\end{equation*}  
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[height=0.3\textheight]{figs/rcgain.pdf} \\
+\caption{ The gain of an RC filter.}
+\label{fig:rcgain}
+\end{center}
+\end{figure}
+
+We are particularly interesting in the ratio of the output phasor to the input phasor, which defines the complex valued transfer function for the circuit $H(\omega)$:
+\begin{equation*}
+H(\omega) \equiv \frac{\tilde{v}_{\rm out}}{\tilde{v}_{\rm in}} = \frac{1}{1 + j \omega/\omega_0}\\
+\end{equation*}
+Our primary concern is generally the ratio of the amplitude of the output voltage to the amplitude of the input voltage, without concern for phase, which we call the gain $G(\omega)$:
+\begin{equation*}
+G(\omega) \equiv \frac{|\tilde{v}_{\rm out}|}{|\tilde{v}_{\rm in}|} = |H(\omega)| 
+\end{equation*}
+which is in this case:
+\begin{eqnarray*}
+G(\omega) &=& |H| = \frac{1}{|1 - j \omega/\omega_0 |}\\
+&=& \frac{1}{\sqrt{1+\omega^2/\omega_0^2}}
+\end{eqnarray*}
+Notice that the gain is a positive real value that depends on the angular frequency $\omega$.
+For the filter discussed here, at $\omega=0$, we see that $G=1$, while for $\omega \to \infty$, $G \to 0$.
+At the corner frequency $\omega = \omega_0$, we see that $G = 1/\sqrt{2}$.
+The function is plotted across five orders of magnitude in Fig.~\ref{fig:rcgain}.
+We can see that below the corner frequency, the gain is everywhere nearly one, while above the corner frequency, the gain falls to zero.  Low-pass filters attenuate frequencies below the corner frequency while passing frequencies below the corner frequency unchanged.
+
+It is left as an exercise to show that for the high-pass filter, with the roles of $R$ and $C$ interchanged, the transfer function is:
+\begin{equation*}
+H(\omega) \equiv \frac{\tilde{v}_{\rm out}}{\tilde{v}_{\rm in}} = \frac{1}{1 - j \omega_0/\omega}\\
+\end{equation*}
+with the corner angular frequency $\omega_0$ defined as before.  The gain is therefore:
+\begin{equation*}
+G(\omega) = \frac{1}{\sqrt{1+\omega_0^2/\omega^2}}
+\end{equation*}
+As shown in Fig.~\ref{fig:rcgain} the response of the high-pass filter is complementary to the low-pass filter:  the high-pass filter tends to reject frequencies below the corner frequency while passing frequencies above the corner frequency unchanged.
+
+\section{Decibels}
+
+The decibel is an often confusing, yet widely used system of measurement used to express the ratio of one value to another on a logarithmic scale.  Decibels were originally used to describe relative power in telecommunications systems, where the definition is:
+\begin{equation}
+dB = 10 \, \log_{10}(P_1 / P_0)
+\end{equation}
+where $P_1$ is the power we are describing relative to the power $P_0$.  In many system there is a quadratic relation between the power and another quantity, which is called a root-power quantity.
+For instance, the power in a resistor is $P=V^2/R$.  When using a root-power quantity such as $V$, the definition of a dB is adjusted by a factor of two:
+\begin{equation}
+dB = 20 \, \log_{10}(V_1 / V_0)
+\end{equation}
+This allows us to refer to e.g. the $X$ dB point in a way that is independent of whether we refer to power or amplitude, an advantage of dubious value.
+
+Things tend to get a bit more confusing when we move from using decibels to describe a ratio to describing a single quantity.  In this case, the reference value is added to the unit, e.g. dBV is decibel calculated with respect to a one Volt reference.   The special case of measuring power in milliWatts is given the unit dBm.  It is basically a nightmare of implicit definitions as a work-around for the inconvenient fact that the log function insists on a dimensionless quantity.
+
+If you pick a nice sunny day, and linger outside Kemper hall long enough, you are all but guaranteed to hear someone mention ``the three dB point".   This benchmark point result from the unhappy\footnote{for those of that wish dB did not exist.} coincidence that:
+\begin{equation*}
+10 \log_{10} 2 = 3.01
+\end{equation*}
+In an $RC$ filter at the corner frequency with $\omega = \omega_0$, the voltage gain is $1/sqrt{2}$ and the power gain is $1/2$, so the gain in dB is nearly -3.  For an RC circuit, the corner frequency is the "negative three dB point."
+
+Undoubtably one reason the dB persists as a unit is that knowing the negative three dB point and then the easily calculated powers of 10 allows one to estimate the response of a system across a wide range:
+\begin{eqnarray*}
+20 \log_{10} \frac{1}{\sqrt{2}} &\sim& -3~\rm dB\\
+20 \log_{10} \frac{1}{10} &=& -20~\rm dB\\
+20 \log_{10} \frac{1}{100} &=& -40~\rm dB\\
+\end{eqnarray*}
+See Fig.~X.
+
+\section{Phase Change in Passive Filters}
+
+So far we've considered only the effect of an $RC$ filter on the magnitude of the voltage.  We've yet to consider the phase.  This phase information is contained in complex valued transfer function:
+\begin{displaymath}
+H = \sim{v}_in / \sim{v}_out
+\end{displaymath}
+The change in phase of the output relative to input is simply the polar coordinate $\phi$ of the complex number $H$:
+\begin{displaymath}
+\phi(H) = \tan\left( \frac{\Im{H}}{\Re{H}}\right)
 \end{displaymath}
 
 
+\begin{eqnarray*}
+\tan^{-1}(1)  &=& \frac{\pi}{4} = 45^\circ\\
+\tan^{-1}(0.1)  &=& 6^\circ\\
+\tan^{-1}(10.0)  &=& 90 - 6^\circ\\
+\end{eqnarray*}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[height=0.3\textheight]{figs/rcgaindb.pdf} \\
+\includegraphics[height=0.3\textheight]{figs/rcphase.pdf} \\
+\caption{ The upper plot shows the gain in decibels of an RC filter as a function of frequency, while the lower plot shows the corresponding phase shifts.  Together, these are referred to as the Bode plots for the filter (pronounced ``boh-dee".)}
+\label{fig:rcgaindb}
+\end{center}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{figure}[htbp]
+\begin{center}
+\begin{tabular}{cc}
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) node[ground,yscale=2.0]{} to[sinusoidal voltage source,bipoles/length=1.5cm] ++(0,+4.0) 
+to [short,i=$\tilde{i}$] ++(1.5,0) to[R,l_=$R$] ++(0,-2.0) coordinate(B)
+to[C,l_=$C$] ++(0,-2.0) coordinate(A) to[short] ++(-1.5,0);
+\draw (0.0,2.75) node[left]{$\tilde{v}_{\rm in}$};
+\draw (B) to[short,*-o] ++(1.5,0) node[right]{$\tilde{v}_{\rm out}$};
+\end{circuitikz} &
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) node[ground,yscale=2.0]{} to[sinusoidal voltage source,bipoles/length=1.5cm] ++(0,+4.0) 
+to [short,i=$\tilde{i}$] ++(1.5,0) to[C,l_=$C$] ++(0,-2.0) coordinate(B)
+to[R,l_=$R$] ++(0,-2.0) coordinate(A) to[short] ++(-1.5,0);
+\draw (0.0,2.75) node[left]{$\tilde{v}_{\rm in}$};
+\draw (B) to[short,*-o] ++(1.5,0) node[right]{$\tilde{v}_{\rm out}$};
+\end{circuitikz} \\
+(a) & (b) \\
+\end{tabular}
+\caption{Passive $RC$ (a) low-pass, and (b) high-pass filters.  Note that $\tilde{v}_{\rm in}$ and $\tilde{v}_{\rm out}$ are phasors corresponding to AC voltages referenced to ground.}
+\label{fig:rcfilters}
+\end{center}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  
-
-
+ 
+ 
 \section{Exercises}
 \begin{enumerate}
 \item Derive $V = q/C$ for parallel plate and show C = X.
@@ -657,6 +1227,8 @@ I(t) = (V/R) \, (1 - \exp(-t / \tau)).
 \item Derive equivalent C for two capacitors in series and parallel.
 \item Derive equivalent L for two inductors in series and parallel.
 \item Derive the steady-state equation X and the general solution Y for the LR circuit of Fig. X.
+\item Show $v_{\rm rms} = v_{\rm p} / \sqrt{2}$.
+\item Derive impedance of Inductor.
 \end{enumerate}
 
 \end{document}
