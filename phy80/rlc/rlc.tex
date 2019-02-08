@@ -458,7 +458,7 @@ to[R, l=$R_{\rm th}$] ++(0,+2.0) to[short, i>=$I$,-o] ++(1.0,0) node[right]{B};
 
 \item Derive Equations~\ref{eqn:rseries} and \ref{eqn:rparallel}.
 
-\item Derive Equations~\ref{eqn:idivider}.
+\item Derive Equation~\ref{eqn:idivider}.
 
 \item Show that the power consumed by a resistor of resistance $R$ conducting a current $I$ is:
 \begin{displaymath}
@@ -517,13 +517,9 @@ to[short,-*] ++(2.0,0);
 \draw (X) to[short,*-] ++(-2.0,0) coordinate(X) 
 to[voltage source,bipoles/length=1.5cm,l=$V_1$] ++(0,2.0) to[R,l=$R_1$] ++(0,2.0) 
 to[short,-*] ++(2.0,0);
-
-
-%\draw (X) to[short,*-] ++ (-2.0,0) to[voltage source,bipoles/length=1.5cm,l=$V_1$] ++(0,+2.0) to[resistor,l=$R_1$] ++(2.0,0)
-%to[short] ++(1.0,0);
 \end{circuitikz} \\
 \end{center}
-Leave your answer in terms of $R_1$, $R_2$, $R_3$, $V_1$, $V_2$ and $V_3$.  In fact you can state the result quite 
+Leave your answer in terms of $R_1$, $R_2$, $R_3$, $V_1$, $V_2$ and $V_3$.  
 
 \item  When you ask why they are late with their share of the rent (again), your roommate explains that they would like to invest the money into buying inexpensive force sensors for about \$10 each.  They think they can use these to make cheap electronic drum kits and sell them at a profit.   The idea is to connect a force sensor acting as a switch between a $9~\rm V$ battery and an old $50~\rm \Omega$ (load resistance) speaker.  Each customer will supply their own battery and speaker, and the wire will be pilfered from Physics 80 lab.  While perusing the specs for the force sensor, you notice that they have a typical source resistance of about $100~\rm k\Omega$.    Model the proposal as a DC voltage divider, which is sufficient analysis to see what a terrible design your roommate has concocted.  What's the maximum voltage you would see across the speaker given the source resistance and load resistance?  What's the maximum power that would be consumed by the speaker?  Compare this with the power consumed by the speaker at typical operating voltages of at least $1~\rm V$.   Whatever you do, do not leave the room without the rent money in cash!!!
 
@@ -556,9 +552,9 @@ Leave your answer in terms of $R_1$, $R_2$, $R_3$, $V_1$, $V_2$ and $V_3$.  In f
 \end{center}
 \end{figure}
 
-We've already encountered our first two terminal electrical component, the resistor, which obeys Ohm's law.  When considering the sign of Ohm's law, one must remember that the definition implies that the resistor is being considered  as a load, as shown in Fig.~\ref{fig:rlc}a.
+We've already encountered our first two terminal electrical component, the resistor, which obeys Ohm's law.  When considering the sign of Ohm's law, one must remember that the definition implies that the resistor is being considered  as a load, as shown in Fig.~\ref{fig:rlc}a, with positive current directed into the positive terminal defining the voltage drop across the component.
 
-A capacitor is a two terminal electrical component which stores energy in an electric field.  The electric field is the result of a built of charge, positive on one terminal of the capacitor and negative on the other, which produces the electric charge.  When considered as a load, with charge $Q$ on the upper terminal (and charge $-Q$ on the lower terminal) the voltage across a capacitor is:
+A capacitor is a two terminal electrical component which stores energy in an electric field.  The electric field is the result of a build up of charge, positive on one terminal of the capacitor and negative on the other, which produces the electric field.  When considered as a load, with charge $Q$ on the upper terminal (and charge $-Q$ on the lower terminal) the voltage across a capacitor is:
 \begin{displaymath}
 V = \frac{Q}{C}
 \end{displaymath}
@@ -647,18 +643,16 @@ while the current as a function of time is:
 I(t) = \frac{dQ}{dt} = \frac{V_0}{R} \exp(- t / \tau) 
 \end{displaymath}
 
-The voltage and current as function of time for a charing capacitor is shown in Fig.~\ref{fig:vit_cap}
+The voltage and current as function of time for a charging capacitor is shown in Fig.~\ref{fig:vit_trans}
 Notice that at $t=0$, we have simply $I = V_0/R$, as there is no voltage across the capacitor while $Q=0$.
 
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[height=0.3\textheight]{figs/transient_cap.pdf} \\
-\caption{ blah blah blah...}
+\caption{Current and voltage across a charging capacitor as a function of time.}
 \label{fig:vit_trans}
 \end{center}
 \end{figure}
-
-
 
 \section{Time dependence of an Inductive Circuit}
 
@@ -666,34 +660,33 @@ Notice that at $t=0$, we have simply $I = V_0/R$, as there is no voltage across 
 \begin{center}
 \begin{circuitikz}[line width=1pt]
 \draw (0,0) node[right]{A} to[short,o-*] coordinate(X) ++(-1.0,0) coordinate(X) to[L,l=$L$,i<=$I$] ++(0,4.0) to[short,-o] ++(1.0,0) node[right]{B};
-\draw (X) to[short,*-] ++ (-2.0,0) to[voltage source,bipoles/length=1.5cm,l=$V$] ++(0,+2.0)
+\draw (X) to[short,*-] ++ (-2.0,0) to[voltage source,bipoles/length=1.5cm,l=$V_0$] ++(0,+2.0)
 to[cspst, bipoles/length=2.0cm] ++(0,2.0) to[resistor,l=$R$] ++(2.0,0);
 \end{circuitikz} 
-\caption{Circuit for considering the behavior of an inductor.}
-\label{fig:rl}
+\caption{\label{fig:rl} Circuit for considering the behavior of an inductor.}
 \end{center}
 \end{figure}
 
 Consider the $RL$ circuit of Fig.~\ref{fig:rl} with the switch closed.  From KVL:
 \begin{displaymath}
-0 = V - IR - L\frac{dI}{dt}
+0 = V_0 - IR - L\frac{dI}{dt}
 \end{displaymath}
 or matching source voltage to load voltage:
 \begin{displaymath}
-V = IR + L\frac{dI}{dt}
+V_0 = IR + L\frac{dI}{dt}
 \end{displaymath}
 The current as a function of time $I(t)$ therefore obeys the differential equation:
-\begin{equation} \label{eqn:iinductor}
-V = R I(t) + L \frac{dI}{dt}
+\begin{equation} 
+V_0 = R I(t) + L \frac{dI}{dt}
 \end{equation}
 It is left as an exercise to show that the steady-state solution is the constant current:
-\begin{displaymath}
-I = V / R
-\end{displaymath}
-and the general solution to Equation~\ref{eqn:iinductor} is 
-\begin{displaymath}
-I(t) = (V / R) + A \, \exp(-t/\tau) 
-\end{displaymath}
+\begin{equation} \label{eqn:inductorss}
+I = V_0 / R
+\end{equation}
+and the general solution is 
+\begin{equation} \label{eqn:inductorgen}
+I(t) = (V_0 / R) + A \, \exp(-t/\tau) 
+\end{equation}
 with $\tau = L / R$.
 
 For the specific case that $I(0) = 0$, we conclude that $A = -V/R$ and so:
@@ -761,7 +754,6 @@ v_{\rm rms}/i_{\rm rms} = R
 \end{displaymath}
 Ohm's law is alive and well for AC circuits!
 
-
 \begin{figure}[htbp]
 \begin{center}
 \begin{circuitikz}[line width=1pt]
@@ -786,13 +778,13 @@ i = \frac{dq}{dt} = C \frac{dv}{dt}
 So in this case, with $v(t) = v_p \cos(\omega t)$
 \begin{eqnarray*}
 i &=& C (-\omega v_p \sin(\omega t))\\
- &=& (\omega C) \cos \left( \omega t + \frac{\pi}{2} \right) \\
+ &=& (\omega C) v_p \cos \left( \omega t + \frac{\pi}{2} \right) \\
 \end{eqnarray*}
 The RMS values are related by:
 \begin{displaymath}
 v_{\rm rms}/i_{\rm rms} = \frac{1}{\omega C}
 \end{displaymath}
-but the phase of the current differs from the voltage by $\Delta \phi = \pi/2$.
+but the phase of the voltage relative to the current is $\Delta \phi = -\pi/2$ (due to the $+\pi/2$ term in the current.)
 
 \begin{figure}[htbp]
 \begin{center}
@@ -829,18 +821,14 @@ The RMS values are related by:
 \begin{displaymath}
 v_{\rm rms}/i_{\rm rms} = \omega L
 \end{displaymath}
-but the phase of the current differs from the voltage by $\Delta \phi = -\pi/2$.
-
-
+but the phase of the voltage relative to the current is $\Delta \phi = \pi/2$ (due to the $-\pi/2$ term in the current.)
 
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[height=0.3\textheight]{figs/vit_res.pdf} \\
 \includegraphics[height=0.3\textheight]{figs/vit_cap.pdf} \\
 \includegraphics[height=0.3\textheight]{figs/vit_ind.pdf} \\
-
-
-\caption{ blah blah blah...}
+\caption{ Time dependence of AC voltage and current in a resistor, capacitor, or inductor.}
 \label{fig:vit}
 \end{center}
 \end{figure}
@@ -857,7 +845,7 @@ component & $v_{\rm rms} / i_{\rm rms} $ & $\Delta \phi$ \\
 \\
 resistor ($R$) & $R$ & $0$ \\
 \\
-capacitor ($C$) & $\displaystyle \frac{1}{\omega C}$ & +$\displaystyle \frac{\pi}{2}$ \\
+capacitor ($C$) & $\displaystyle \frac{1}{\omega C}$ & $\displaystyle -\frac{\pi}{2}$ \\
 \\
 inductor ($L$) & $\omega L$ & $\displaystyle +\frac{\pi}{2}$ \\
 \\
@@ -865,45 +853,49 @@ inductor ($L$) & $\omega L$ & $\displaystyle +\frac{\pi}{2}$ \\
 \end{center}
 \end{table}
 
-The present situation is summarized in Table~\ref{tbl:rmsimp}, and it's tempting to think we are finished.
-After all, we've found an Ohm's Law like relationship between $v_{\rm rms}$ and $i_{\rm rms}$ for capacitors and inductors, so shouldn't we able to analyze AC circuits just like DC circuits?  The problem is that we do not yet have an equivalent for Kirchoff's Laws.  DC voltages and currents simply add, but now our voltages have a phase, so we can't, for instance, simply add RMS voltages.  Faced with a more complicated circuit, we could derive a new, more complicated differential equation, and solve that.  Fortunately, there's an easier way!
+The present situation is summarized in Table~\ref{tbl:rmsimp} and Fig.~\ref{fig:vit}, and it is tempting to think we are finished.  After all, we've found an Ohm's Law like relationship between $v_{\rm rms}$ and $i_{\rm rms}$ for capacitors and inductors, so shouldn't we able to analyze AC circuits just like DC circuits?  The problem is that we do not yet have an equivalent for Kirchoff's Laws.  DC voltages and currents simply add, but now our voltages have a phase, so we can't, for instance, simply add RMS voltages.  Faced with a more complicated circuit, we could derive a new, more complicated differential equation, and solve that.  Fortunately, there's an easier way!
 
 \section{Phasors}
 
-Recall Euler's Formula, which Feynman called "our jewel":
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[height=0.3\textheight]{figs/complex.pdf} \\
+\caption{ The geometry of the complex plane.}
+\label{fig:complex}
+\end{center}
+\end{figure}
+
+Recall Euler's Formula, which Feynman called ``our jewel'':
 \begin{displaymath}
 e^{j\phi} = \cos \phi + j \sin \phi 
 \end{displaymath}
-where we will use $j$ as the unit imaginary number, to avoid confusion with the AC current $i$.  In particular, we can relate the cosine function to the real part of an imaginary number:
+where we will use $j$ as the unit imaginary number, to avoid confusion with the AC current $i$.  This result has a beautiful geometric interpretation that allows us to consider the real and imaginary parts of a complex number as two components of a vector which has a magnitude and phase.  In particular, we can relate the cosine function to the real part of an imaginary number:
 \begin{displaymath}
 r \cos \phi = \Re \{ r e^{j\phi} \}. 
 \end{displaymath}
-We can therefore associate to any AC signal:
+We can therefore consider any AC signal:
 \begin{displaymath}
 v(t) = v_{\rm p} \cos ( \omega t + \phi)
 \end{displaymath}
-with the real part of a time-dependent complex number:
+to be the real part of a time-dependent complex number:
 \begin{displaymath}
-v(t) = \Re \{ v_{\rm p} \exp ( j (\omega t + \phi))\}
+v(t) = \Re \{ v_{\rm p} \exp ( j (\omega t + \phi))\}.
 \end{displaymath}
-the whole trick to what follows is noticing that we can rearrange this complex number as follows:
-\begin{displaymath}
-v(t) = \Re \{ v_{\rm p} e^{j\phi} \cdot e^{j \omega t} \}
-\end{displaymath}
-the quantity:
-\begin{displaymath}
-\tilde{v} \equiv v_{\rm p} e^{j\phi}  
-\end{displaymath}
-is a complex number that contains the magnitude and phase information for the particular AC signal we are considering.  It is simply a complex number, with no time dependence.  The time-dependent part of the entire expression comes from the term $e^{j \omega t}$, and is the same for every AC signal of frequency $\omega$.  Once we have specified the frequency of an AC circuit, there is a one-to-one corresponds with time dependent functions like v(t), and a complex number $\tilde{v}$ called the phase vector or just phasor.
-The phasor for an AC signal $v(t) = v_{\rm p} cos(\omega t + \phi)$ is given by:
+We can rearrange this complex number as:
+\begin{eqnarray*}
+v(t) &=& \Re \{ v_{\rm p} e^{j\phi} \cdot e^{j \omega t} \} \\
+&=& \Re \{ \tilde{v} \cdot e^{j \omega t} \} \\
+\end{eqnarray*}
+where we have defined the quantity:
 \begin{equation}
-\tilde{v} = v_{\rm p} e^{j \phi}
+\tilde{v} \equiv v_{\rm p} e^{j \phi}
+\label{eqn:phasor}
 \end{equation}
-and to obtain the time-dependent signal from a phasor we simply calculate:
+
+which we call a phase vector or simply phasor.  The phasor is a complex number that contains the magnitude and phase information for the particular AC signal we are considering.  It is simply a complex number, with no time dependence.  The time-dependent part of the entire expression comes from the term $e^{j \omega t}$, and is the same for every AC signal of frequency $\omega$.  Once we have specified the frequency of an AC circuit, there is a one-to-one corresponds with time dependent functions like v(t), and the phasor.  The phasor for an AC signal $v(t) = v_{\rm p} cos(\omega t + \phi)$ is given by the definition in Equation~\ref{eqn:phasor}.  To obtain the time-dependent signal from a phasor we simply calculate:
 \begin{equation}
 v(t) = \Re \{ \tilde{v} e^{j \omega t} \}
 \end{equation}
-
 
 \section{Impedance}
 
@@ -1000,9 +992,9 @@ Component & Impedance & $\Delta \phi$ \\
 \\
 $R$ & $R$ & 0 \\
 \\
-$C$ & $\displaystyle \frac{1}{j \omega C}$ & $\displaystyle + \frac{\pi}{2}$ \\
+$C$ & $\displaystyle \frac{1}{j \omega C}$ & $\displaystyle -\frac{\pi}{2}$ \\
 \\
-$L$ & $j \omega L$ & $\displaystyle -\frac{\pi}{2}$ \\
+$L$ & $j \omega L$ & $\displaystyle +\frac{\pi}{2}$ \\
 
 \end{tabular}
 \end{center}
@@ -1015,10 +1007,23 @@ Z &=& R + j X \\
 \end{eqnarray*}
 These results are summarized in Table~\ref{tbl:impedance}.  
 
-Impedances can be added in series and parallels just as resistor.
+Kirchhoff's Voltage Laws and Kirchhoff's Current Law continue to hold for the time dependent voltages and currents, but they apply equally to the (constant valued) complex phasors.  A new Ohm's Law, which applies to all passive components states that:
+\begin{displaymath}
+\tilde{v} = Z \tilde{i}
+\end{displaymath}
+All of our previous results therefore apply with resistance replaced by impedance.  In particular, the impedance of components in series adds linearly:
+\begin{equation} \label{eqn:zseries}
+Z_{\rm eq} = \sum_i Z_i. 
+\end{equation}
+whereas for components in parallel:
+\begin{equation} \label{eqn:zseries}
+\frac{1}{Z_{\rm eq}} = \sum_i \frac{1}{Z_i}. 
+\end{equation}
+
+
+
 
 \section{Passive Filters}
-
 
 \begin{figure}[htbp]
 \begin{center}
@@ -1044,9 +1049,7 @@ to[R,l_=$R$] ++(0,-2.0) coordinate(A) to[short] ++(-1.5,0);
 \end{center}
 \end{figure}
 
-A simple but widely used circuit consists of an AC voltage divider constructed from a capacitor in series with a resistor, as shown in Fig.~\ref{fig:rcfilters}.
-
-In the case of the low-pass filter in Fig.~\ref{fig:rcfilters} the output voltage is simply the output of a voltage divider, with the complex impedance taking the place of the resistance in our previous result:
+Consider the low-pass filter of Fig.~\ref{fig:rcfilters}a.   The output voltage $v_{\rm out}$ is simply the output of a voltage divider, but with the complex impedance taking the place of the resistance:
 \begin{displaymath}
 \tilde{v}_{\rm out} = \tilde{v}_{\rm in} \frac{Z_C}{Z_R + Z_C}
 \end{displaymath}
@@ -1055,11 +1058,14 @@ And inserting the impedance of each device in terms of $R$ and $C$:
 \tilde{v}_{\rm out} &=& \tilde{v}_{\rm in} \, \frac{\frac{1}{j \omega C}}{R + \frac{1}{j \omega C}}\\
 &=& \tilde{v}_{\rm in} \, \frac{1}{1 + j \omega/\omega_0}\\
 \end{eqnarray*}
-Where we have defined the corner angular frequency 
+Where we have defined the corner angular frequency: 
 \begin{equation*}
-\omega_0 = \frac{1}{RC}.
+\omega_0 = \frac{1}{RC}
 \end{equation*}  
-
+with corresponding corner frequency:
+\begin{equation*}
+f_0  \equiv \frac{\omega_0}{2\pi} = \frac{1}{2 \pi RC}.
+\end{equation*}  
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[height=0.3\textheight]{figs/rcgain.pdf} \\
@@ -1067,8 +1073,7 @@ Where we have defined the corner angular frequency
 \label{fig:rcgain}
 \end{center}
 \end{figure}
-
-We are particularly interesting in the ratio of the output phasor to the input phasor, which defines the complex valued transfer function for the circuit $H(\omega)$:
+We are particularly interested in the ratio of the output phasor to the input phasor, which defines the complex valued transfer function for the circuit $H(\omega)$:
 \begin{equation*}
 H(\omega) \equiv \frac{\tilde{v}_{\rm out}}{\tilde{v}_{\rm in}} = \frac{1}{1 + j \omega/\omega_0}\\
 \end{equation*}
@@ -1095,11 +1100,11 @@ with the corner angular frequency $\omega_0$ defined as before.  The gain is the
 \begin{equation*}
 G(\omega) = \frac{1}{\sqrt{1+\omega_0^2/\omega^2}}
 \end{equation*}
-As shown in Fig.~\ref{fig:rcgain} the response of the high-pass filter is complementary to the low-pass filter:  the high-pass filter tends to reject frequencies below the corner frequency while passing frequencies above the corner frequency unchanged.
+As shown in Fig.~\ref{fig:rcgain} the response of the high-pass filter is complementary to the low-pass filter:  the high-pass filter tends to reject signals with frequencies below the corner frequency while leaving signals with frequencies above the corner frequency unchanged.
 
 \section{Decibels}
 
-The decibel is an often confusing, yet widely used system of measurement used to express the ratio of one value to another on a logarithmic scale.  Decibels were originally used to describe relative power in telecommunications systems, where the definition is:
+The decibel is an often confusing, yet widely used, system of measurement used to express the ratio of one value to another on a logarithmic scale.  Decibels were originally used to describe relative power in telecommunications systems, where the definition is:
 \begin{equation}
 dB = 10 \, \log_{10}(P_1 / P_0)
 \end{equation}
@@ -1116,7 +1121,7 @@ If you pick a nice sunny day, and linger outside Kemper hall long enough, you ar
 \begin{equation*}
 10 \log_{10} 2 = 3.01
 \end{equation*}
-In an $RC$ filter at the corner frequency with $\omega = \omega_0$, the voltage gain is $1/sqrt{2}$ and the power gain is $1/2$, so the gain in dB is nearly -3.  For an RC circuit, the corner frequency is the "negative three dB point."
+In an $RC$ filter at the corner frequency with $\omega = \omega_0$, the voltage gain is $1/\sqrt{2}$ and the power gain is $1/2$, so the gain in dB is nearly -3.  For an RC circuit, the corner frequency is the ``negative three dB point.''
 
 Undoubtably one reason the dB persists as a unit is that knowing the negative three dB point and then the easily calculated powers of 10 allows one to estimate the response of a system across a wide range:
 \begin{eqnarray*}
@@ -1124,111 +1129,83 @@ Undoubtably one reason the dB persists as a unit is that knowing the negative th
 20 \log_{10} \frac{1}{10} &=& -20~\rm dB\\
 20 \log_{10} \frac{1}{100} &=& -40~\rm dB\\
 \end{eqnarray*}
-See Fig.~X.
+See Fig.~\ref{fig:rcbode}.
 
 \section{Phase Change in Passive Filters}
 
 So far we've considered only the effect of an $RC$ filter on the magnitude of the voltage.  We've yet to consider the phase.  This phase information is contained in complex valued transfer function:
 \begin{displaymath}
-H = \sim{v}_in / \sim{v}_out
+H = \frac{\tilde{v}_{\rm out}}{\tilde{v}_{\rm in}} 
 \end{displaymath}
 The change in phase of the output relative to input is simply the polar coordinate $\phi$ of the complex number $H$:
 \begin{displaymath}
-\phi(H) = \tan\left( \frac{\Im{H}}{\Re{H}}\right)
+\phi(H) = \tan^{-1}\left( \frac{\Im{H}}{\Re{H}}\right)
 \end{displaymath}
-
-
+Which in the case of a low-pass filter, results in the phase change:
+\begin{displaymath}
+\phi = -\tan^{-1} \left( \frac{\omega}{\omega_0}\right)
+\end{displaymath}
+and for the high-pass filter:
+\begin{displaymath}
+\phi = \tan^{-1} \left( \frac{\omega_0}{\omega}\right)
+\end{displaymath}
+as illustrated in Fig.~\ref{fig:rcbode}.  When considering phase changes, it's useful to consider the following benchmarks:
 \begin{eqnarray*}
 \tan^{-1}(1)  &=& \frac{\pi}{4} = 45^\circ\\
 \tan^{-1}(0.1)  &=& 6^\circ\\
 \tan^{-1}(10.0)  &=& 90 - 6^\circ\\
 \end{eqnarray*}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+So we can see that the phase change at the corner frequency is $45^\circ$ and is within $6^\circ$ of the asymptotic value after 1 order of magnitude in frequency.
 
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[height=0.3\textheight]{figs/rcgaindb.pdf} \\
 \includegraphics[height=0.3\textheight]{figs/rcphase.pdf} \\
 \caption{ The upper plot shows the gain in decibels of an RC filter as a function of frequency, while the lower plot shows the corresponding phase shifts.  Together, these are referred to as the Bode plots for the filter (pronounced ``boh-dee".)}
-\label{fig:rcgaindb}
+\label{fig:rcbode}
 \end{center}
 \end{figure}
 
-
-
-
-
-
-
-
-
-
-
-
-\begin{figure}[htbp]
-\begin{center}
-\begin{tabular}{cc}
-\begin{circuitikz}[line width=1pt]
-\draw (0,0) node[ground,yscale=2.0]{} to[sinusoidal voltage source,bipoles/length=1.5cm] ++(0,+4.0) 
-to [short,i=$\tilde{i}$] ++(1.5,0) to[R,l_=$R$] ++(0,-2.0) coordinate(B)
-to[C,l_=$C$] ++(0,-2.0) coordinate(A) to[short] ++(-1.5,0);
-\draw (0.0,2.75) node[left]{$\tilde{v}_{\rm in}$};
-\draw (B) to[short,*-o] ++(1.5,0) node[right]{$\tilde{v}_{\rm out}$};
-\end{circuitikz} &
-\begin{circuitikz}[line width=1pt]
-\draw (0,0) node[ground,yscale=2.0]{} to[sinusoidal voltage source,bipoles/length=1.5cm] ++(0,+4.0) 
-to [short,i=$\tilde{i}$] ++(1.5,0) to[C,l_=$C$] ++(0,-2.0) coordinate(B)
-to[R,l_=$R$] ++(0,-2.0) coordinate(A) to[short] ++(-1.5,0);
-\draw (0.0,2.75) node[left]{$\tilde{v}_{\rm in}$};
-\draw (B) to[short,*-o] ++(1.5,0) node[right]{$\tilde{v}_{\rm out}$};
-\end{circuitikz} \\
-(a) & (b) \\
-\end{tabular}
-\caption{Passive $RC$ (a) low-pass, and (b) high-pass filters.  Note that $\tilde{v}_{\rm in}$ and $\tilde{v}_{\rm out}$ are phasors corresponding to AC voltages referenced to ground.}
-\label{fig:rcfilters}
-\end{center}
-\end{figure}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
- 
- 
 \section{Exercises}
 \begin{enumerate}
-\item Derive $V = q/C$ for parallel plate and show C = X.
-\item Derive $V = L \frac{dI}{dt}$ for a long solenoid and show L = X.
-\item Derive equivalent C for two capacitors in series and parallel.
-\item Derive equivalent L for two inductors in series and parallel.
-\item Derive the steady-state equation X and the general solution Y for the LR circuit of Fig. X.
-\item Show $v_{\rm rms} = v_{\rm p} / \sqrt{2}$.
-\item Derive impedance of Inductor.
+\item Show that for a sinusoidal AC voltage $v_{\rm rms} = v_{\rm p} / \sqrt{2}$.
+\item Derive the steady-state solution Equation~\ref{eqn:inductorss} and the general solution Equation~\ref{eqn:inductorgen} for the LR circuit of Fig.~\ref{fig:rl}.
+
+
+\item Use the impedance formula for capacitors $Z=1/j \omega C $ plus the formulas for equivalent impedance of parallel and series impedances to derive the usual formulas for the equivalent capacitance  of two capacitors in parallel:
+\begin{displaymath}
+C_{\rm eq} = C_1 + C_2
+\end{displaymath}
+and in series:
+\begin{displaymath}
+\frac{1}{C_{\rm eq}} = \frac{1}{C_1} + \frac{1}{C_2}
+\end{displaymath}
+
+\item Use the impedance formula for inductors $Z=j \omega L $ plus the formulas for equivalent impedance of parallel and series impedances to derive the usual formulas for the equivalent capacitance  of two inductors in parallel:
+\begin{displaymath}
+\frac{1}{L_{\rm eq}} = \frac{1}{L_1} + \frac{1}{L_2}
+\end{displaymath}
+and in series:
+\begin{displaymath}
+L_{\rm eq} = L_1 + L_2
+\end{displaymath}
+\item On the complex plane, draw three vectors for the impedance of an inductor, resistor, and capacitor and show that phase factors from Table~\ref{tbl:impedance} can be read directly from plot.
+\item Show that you can construct a low-pass and high-pass filter using an inductor and resistor in series and determine the corner angular frequency $\omega_0$ in terms of the inductance $L$ and the resistance $R$.  Note that such filters are rarely used, because real inductors are expensive and generally have more non-ideal characteristics.
+\begin{figure}[htbp]
+\begin{center}
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) to[sinusoidal voltage source,bipoles/length=1.5cm] ++(0,3.0) 
+to[R,-*,l_=$R$] ++(2.0,0) coordinate(X) to[short,*-*] ++(1.5,0) coordinate(Y) to[short,-o] ++(1.0,0) node[right]{$\tilde{v}_{\rm out}$};
+\draw (0.0,2.25) node[left]{$\tilde{v}_{\rm in}$};
+\draw (X) to[C,-*,l=$C$] ++(0,-3.0)  to[short,-*] ++(-2.0,0) node[ground,yscale=2.0]{};
+\draw (Y) to[L,-*,l=$L$] ++(0,-3.0)  coordinate(X) to[short,-*] ++(-1.5,0);
+%\draw (X) to[short,-o] ++(1.0,0) node[right]{A};
+\end{circuitikz}  
+\caption{A function generator driving a resistor.}
+\label{fig:rlccircuit}
+\end{center}
+\end{figure}
+\item Consider the RLC filter of Fig.~\ref{fig:rlccircuit}.  Derive the transfer function for the circuit and find the resonant angular frequency $\omega_0$ for which the gain is 1.
 \end{enumerate}
 
 \end{document}
