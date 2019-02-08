@@ -21,7 +21,7 @@ A primary purpose of science is to predict the results of experiments.  Consider
 
 \begin{figure}[htbp]
 \begin{center}
-{\includegraphics[width=0.45\textwidth]{figs/chap_dist_intro.pdf}}
+{\includegraphics[width=0.45\textwidth]{figs/intro.pdf}}
 \end{center}
 \caption{\label{fig:intro} Comparison of experimental results with a prediction.}
 \end{figure}
@@ -38,8 +38,8 @@ The Binomial Distribution is the most general of the distributions we'll conside
 \begin{figure}[htbp]
 \begin{center}
 \begin{tabular}{cc}
-{\includegraphics[width=0.47\textwidth]{figs/chap_dist_binom_n.pdf}} &
-{\includegraphics[width=0.47\textwidth]{figs/chap_dist_binom_eps.pdf}} \\
+{\includegraphics[width=0.47\textwidth]{figs/binom_n.pdf}} &
+{\includegraphics[width=0.47\textwidth]{figs/binom_eps.pdf}} \\
 (a) & (b) \\
 \end{tabular}
 \end{center}
@@ -160,7 +160,7 @@ Note that if $\epsilon=0$ or $\epsilon=1$, there is only one outcome (all failur
 
 \begin{figure}[htbp]
 \begin{center}
-{\includegraphics[width=0.45\textwidth]{figs/chap_dist_poisson.pdf}}
+{\includegraphics[width=0.45\textwidth]{figs/poisson.pdf}}
 \end{center}
 \caption{\label{fig:poisson}  The Poisson distribution for several values of parameter $\lambda$.}
 \end{figure}
@@ -220,7 +220,7 @@ That is, the variance of a Poisson distribution is simply the mean.
 
 \begin{figure}[htbp]
 \begin{center}
-{\includegraphics[width=0.45\textwidth]{figs/chap_dist_gaussian.pdf}}
+{\includegraphics[width=0.45\textwidth]{figs/gaussian.pdf}}
 \end{center}
 \caption{\label{fig:poisson}  The Gaussian distribution for a mean of 10 and several values of parameter $\sigma$.}
 \end{figure}
@@ -297,31 +297,121 @@ Which is a Gaussian distribution with mean value $\lambda$ and variance $\sigma^
 
 \subsection{Continuous versus Discrete Distributions}
 
-\ldots
+The Binomial and Poisson distributions are not continuous functions:  they describe the probability of outcomes which are integer quantities.   The Poisson probability for having 2.31 events is either undefined or taken to be zero.  The value of the Binomial and Poisson distribution function at a particular integer value is simply the probability of that particular outcome.  To determine the probability that an outcome is within a range of integers, say $m_1$ to $m_2$ the probability distribution function is simply added:
+\begin{displaymath}
+P = \sum_{m=m_1}^{m_2} P(m).
+\end{displaymath}
 
-\subsection{Histograms and Distributions in Scientific Python}
+The Gaussian distribution is a continuous function: it describes the probability density function of a particular value of $x$.  The probability of any particular outcome, say $x=1.24323$, is vanishing small.  But the probability that the value lies within a range of values can be non-zero, and is determined by integrating:
+\begin{displaymath}
+P = \int_{x_{\rm min}}^{x_{\rm max}} P(x) \, dx
+\end{displaymath}
+The probability distribution function is normalized so that:
+\begin{displaymath}
+\int_{-\infty}^{+\infty} P(x) \, dx = 1
+\end{displaymath}
+To determine the mean value of a function $f(x)$ we likewise integrate:
+\begin{displaymath}
+\braket{f(x)} \equiv \int_{-\infty}^{+\infty} f(x) P(x) \, dx = 1
+\end{displaymath}
+In particular the mean value of $x$ is:
+\begin{displaymath}
+\braket{x} \equiv \int_{-\infty}^{+\infty} x P(x) \, dx = 1
+\end{displaymath}
+and:
+\begin{displaymath}
+\braket{x^2} \equiv \int_{-\infty}^{+\infty} x^2 P(x) \, dx = 1
+\end{displaymath}
+with:
+\begin{displaymath}
+\sigma^2 = \braket{x^2} -\braket{x}^2.
+\end{displaymath}
 
-The experimental analog to a theoretical probability distribution function is a histogram:  a graphical representation of the distribution of numerical data.  Suppose we measure a continuous quantity $x$ and wish to compare the outcome of many measurements of $x$ with our theoretical prediction.  The probability of any  particular outcome, say x=1.24567392874, is vanishing small.  Which is why our prediction is in the form of a probability distribution function $p(x)$, where $p(x) dx$ gives the infinitesimal probability for an outcome between $x$ and $x+dx$.
+The Gaussian distribution is a probability density function (PDF), because it reports a probability density.  A discrete probability distribution is sometimes referred to as probability mass function (PMF), to draw upon an analogy with physical mass and density.
 
-To display our data in a histogram, we divide the range of $x$ into several bins, and simply tabulate how many experiments yielded a result in each bin.
+\subsection{Histograms in Scientific Python}
+
+\begin{figure}[htbp]
+\begin{center}
+\begin{tabular}{cc}
+{\includegraphics[width=0.45\textwidth]{figs/raw.pdf}} &
+{\includegraphics[width=0.45\textwidth]{figs/histeg.pdf}} \\
+(a) & (b) \\
+\end{tabular}
+\end{center}
+\caption{\label{fig:histeg} The 1000 measurements of variable $x$ in (a) are used to produce the histogram in (b).  The red data point in (b) is the count of the number of entries in range indicated by the red dashed lines in (a).}
+\end{figure}
+
+Suppose a particular variable $x$ is measured 1000 times.  One way to visualize the collected data is shown in Fig.~\ref{fig:histeg}a, which simply plots each measurement value above the measurement number (from 0 to 1000).  In this example, the number of measurements that occur within the range from $x=100$ to $x=105$ is 181.  This count is plotted as the red data point in Fig.~\ref{fig:histeg}b, 181 entries located above $x=102.5$, the center of the range.  If we repeat this exercise across a number or ranges, the resulting plot in Fig.~\ref{fig:histeg}b is called a histogram.  A histogram reports the number of entries that occur within each of a sequence of consecutive ranges of $x$-values.  Each range considered is called a histogram  bin, and the choice of which bins to use is at the discretion of the analyzer.
+
+The content of each bin is a single number, a count, and is therefore subject to the Poisson distribution.
+We can estimate the mean of the Poisson distribution by the measured value, so that $\lambda = N$.
+For the Poisson distribution, the variance $\sigma^2 = \lambda$, and so $\sigma = \sqrt{N}$.  It is customary to draw a line of size $\sqrt{N}$ when plotting a histogram value $N$. This is an example of an error bar, which indicates how well our measurement has determined a particular value.
+
+\begin{figure}[htbp]
+\begin{center}
+{\includegraphics[width=0.85\textwidth]{figs/makehisteg.png}} 
+\end{center}
+\caption{\label{fig:makehisteg} Example producing a histogram in Scientific Python.}
+\end{figure}
+
+An example producing a histogram in Scientific Python is shown in Fig.~\ref{fig:makehisteg}.
+The data to plot is simply a sequence of 1000 values randomly and uniformly chosen in the range $[0,20]$:
+\begin{verbatim}
+x = np.random.uniform(high=20.0,size=1000)
+\end{verbatim}
+To create a histogram from these 1000 values, we use the {\tt np.histogram} function:
+\begin{verbatim}
+counts,edges = np.histogram(x,bins=10,range=(0,20))
+\end{verbatim}
+where we have specified 10 bins, uniformly covering the range from 0 to 20.  The 
+function returns to arrays, which we save as {\tt counts} and {\tt edges}.  The {\tt counts} array contains the bin contents, the count of the number of values in each bin: 
+\begin{verbatim}
+counts:   [ 92  82 123  96  85 106 105  99  99 113]
+\end{verbatim}
+The edges array contains the edges of the bins:
+\begin{verbatim}
+edges:    [ 0.  2.  4.  6.  8. 10. 12. 14. 16. 18. 20.]
+\end{verbatim}
+You'll notice that 10 consecutive bins have 11 edges.  For plotting continuous data, one choice is to plot the contents at the center of each bin:
+\begin{verbatim}
+cbins = (edges[:-1] + edges[1:])/2.0
+\end{verbatim}
+the two slices {\tt edges[:-1]} and {\tt edges[1:]} are all but the last and all but the first.  The average of the two is the center of each bin:
+\begin{verbatim}
+cbins:    [ 1.  3.  5.  7.  9. 11. 13. 15. 17. 19.]
+\end{verbatim}
+The error bar values are chosen as the square root of the bin values:
+\begin{verbatim}
+err   = counts**0.5
+\end{verbatim}
+The histogram is plotted using the {\tt plt.errorbar} function:
+\begin{verbatim}
+plt.errorbar(cbins,counts,yerr=err,fmt="ko")
+\end{verbatim}
+which plots the bin contents {\tt counts} at the bin center values {\tt cbins} using the square root error bars in the array {\tt err}, using the format {\tt "ko"} for black circles.
+
+\subsection{Comparing a Histogram to a Probability Distribution Function}
+
+Our theoretical models often predict a PDF for some observable variable $x$.  As experimentalists, we are often therefore concerned with the question as to whether our collected data for an observable $x$ is consistent with the theoretical PDF.  A visual approach to answering this question is to plot the data in a histogram, and to draw the PDF as a curve normalized to the histogram.
 
 To predict the number of events in a bin with edges $x_{\rm lower}$ and $x_{\rm upper}$, in principle we need to integrate the PDF and normalize to the number of experiments:
 \begin{displaymath}
-N_{\rm pred} = N_{\rm meas} \int^{x_{\rm upper}}_{x_{\rm lower}} p(x) dx
+N_{\rm pred} = N_{\rm meas} \int^{x_{\rm upper}}_{x_{\rm lower}} p(x) \, dx
 \end{displaymath}
 In practice, we generally choose the bin sizes small enough that the PDF is approximately constant during the entire bin, and in this case, the prediction can be taken as:
 \begin{displaymath}
 N_{\rm pred} = N_{\rm meas} \; \Delta x \; p(x)
 \end{displaymath}
-where $\Delta x$ is the width of each bin.  This scale factor $N_{\rm meas} \; \Delta x$ allows us to compare a continuous function to data collected in discrete bins, as shown in Fig.~\ref{fig:sphist}.
-
-To aid in the comparison between the data and theoretical prediction, we put error bars on each data point.  In this case, we have used one-sigma uncertainties from the poisson variance $\sigma^2 = N$.  That is, we have taken the square root of the total number of events in each bin as the statistical uncertainty.  We'll see in the next section that this is consistent with the standard interpretation of uncertainties.
+where $\Delta x$ is the width of each bin.  This scale factor $N_{\rm meas} \; \Delta x$ allows us to compare a continuous function to data collected in discrete bins, as shown in Fig.~\ref{fig:histpdf}.
 
 \begin{figure}[htbp]
 \begin{center}
-{\includegraphics[width=0.95\textwidth]{figs/scipy_hist.png}}
+{\includegraphics[width=0.65\textwidth]{figs/compare.pdf}}
 \end{center}
-\caption{\label{fig:sphist} Histogram.}
+\caption{\label{fig:histpdf} The Gaussian PDF scaled to compare to data from a Gaussian distribution.
+In this case, there are 1000 total entries in the histogram and the bin size is 0.5, for a scale factor of 500.
+}
 \end{figure}
 
 \newpage
@@ -373,14 +463,7 @@ when we take $\lambda=0$ (which is equivalent to simply changing variables $y=x-
 %\noindent
 %{\bf Problem 1:} Prove by induction the formula for the binomial coefficients in (Equation~\ref{eqn:binomc}).
 
-\newpage
-\subsection{Scientific Python Exercises for Distributions}
-
-{\bf Problem 1:}  (Basic plotting of distributions)
-
-{\bf Problem 2:}  (Show the limit of sum of many flat distribution results in Gaussian)
-
-\ldots
+\end{document}
 
 \newpage
 
