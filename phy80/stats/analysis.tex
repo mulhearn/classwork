@@ -181,7 +181,7 @@ we obtain the Poisson distribution, the probability for observing $m$ events for
 \label{eqn:poisson}
 P(m\; ; \; \lambda) = \frac{\lambda^m}{m!} \, e^{-\lambda}
 \end{equation}
-Notice that there is no longer a parameter $n$, since we took $n \to \infty$, and so $m$ now ranges from 0 to $\infty$.
+Notice that there is no longer a parameter $n$, since we took $n \to \infty$, and so $m$ now ranges from 0 to $\infty$.  Note also that $\lambda$ is a real number, not necessarily an integer, even though it is the mean of integer values.  For example, the mean of the integers 1 and 2 is the real value 1.5.
 
 \subsection{Mean and Variance of The Poisson Distribution}
 
@@ -198,7 +198,7 @@ Since the first term ($m=0$) is zero, we have:
              &=& \lambda e^{-\lambda} e^\lambda \notag \\
 \bar{m}  &=& \lambda
 \end{eqnarray}
-which should come as no surprise, as the assumption in the derivation was the that mean number of events was $\lambda$.
+which should come as no surprise, as the assumption in the derivation was the that mean number of events was $\lambda$. 
 
 For the variance, we use a similar manipulation to calculate:
 \begin{eqnarray*}
@@ -222,10 +222,49 @@ That is, the variance of a Poisson distribution is simply the mean.
 \begin{center}
 {\includegraphics[width=0.45\textwidth]{figs/gaussian.pdf}}
 \end{center}
-\caption{\label{fig:poisson}  The Gaussian distribution for a mean of 10 and several values of parameter $\sigma$.}
+\caption{\label{fig:gaussian}  The Gaussian distribution for a mean of 10 and several values of parameter $\sigma$.}
 \end{figure}
 
-Next, we consider the Poisson Distribution in the limit $\lambda \to \infty$.  In this case, we can apply the Stirling Approximation:
+The last and most important probability distribution we will consider is the Gaussian distribution:
+\begin{equation}
+\label{eqn:gaussian}
+P(x) = \frac{1}{\sqrt{2\pi} \sigma} \cdot \exp\left( - \frac{(x - \lambda)^2}{2 \sigma^2}\right)
+\end{equation}
+which is plotted in Fig.~\ref{fig:gaussian}.  The Gaussian distribution (also sometimes called the normal distribution) appears frequently as a consequence of the central limit theorem, which states that the sum of independent random variables, when appropriately average (such as by taking the mean value) approaches a Gaussian distribution.  As one example of the CLT, we'll show in the next section that the Gaussian distribution emerges from the Poisson distribution in the limit that $\lambda \to \infty$.
+
+The Binomial and Poisson distributions are discrete functions:  they describe the probability of outcomes which are integer quantities.   The Poisson probability for having 2.31 events is either undefined or taken to be zero.  The value of the Binomial and Poisson distribution function at a particular integer value is simply the probability of that particular outcome.  To determine the probability that an outcome is within a range of integers, say $m_1$ to $m_2$ the probability distribution function is simply added:
+\begin{displaymath}
+P = \sum_{m=m_1}^{m_2} P(m).
+\end{displaymath}
+
+The Gaussian distribution is a continuous function that describes the probability {\em density} at each position $x$.  The probability of any particular outcome, say $x=1.24323$, is vanishing small.  But the probability that the value lies within a range of values is non-zero, and is determined by integrating:
+\begin{displaymath}
+P = \int_{x_{\rm min}}^{x_{\rm max}} P(x;\lambda,\sigma) \, dx
+\end{displaymath}
+The Gaussian distribution is called a probability density function (PDF).  A discrete probability distribution is sometimes referred to as probability mass function (PMF), to draw upon an analogy with physical mass and density:  a PDF is probability per unit volume while a PMF is simply a probability.
+
+The Gaussian distribution is normalized so that:
+\begin{displaymath}
+\int_{-\infty}^{+\infty} P(x) \, dx = 1
+\end{displaymath}
+To determine the mean value of a function $f(x)$ we likewise integrate:
+\begin{displaymath}
+\braket{f(x)} \equiv \int_{-\infty}^{+\infty} f(x) P(x) \, dx = 1
+\end{displaymath}
+In particular the mean value of $x$ is:
+\begin{displaymath}
+\braket{x} \equiv \int_{-\infty}^{+\infty} x P(x) \, dx = 1
+\end{displaymath}
+and:
+\begin{displaymath}
+\braket{x^2} \equiv \int_{-\infty}^{+\infty} x^2 P(x) \, dx = 1
+\end{displaymath}
+We have defined the Gaussian distribution with the suggestive parameters $\lambda$ and $\sigma$.   It is left as an exercise to show that indeed, the mean is $\lambda$ and the variance is $\sigma^2$.
+
+\subsection{The Gaussian Distribution as a Limiting Case}
+
+As expected from the Central Limit Theorem, the Poisson Distribution in the limit $\lambda \to \infty$
+approaches the Gaussian distribution.  In this case, we can apply the Stirling Approximation:
 \begin{displaymath}
 \lim_{n \to \infty} n! = \sqrt{2 \pi n} \; e^{-n} \; n^n
 \end{displaymath}
@@ -283,51 +322,21 @@ which, when plugged backed into Equation~\ref{eqn:pdelt} yields:
 P(\delta) &=& \frac{e^{\lambda\delta}}{\sqrt{2\pi\lambda}} \cdot \frac{1}{\exp\left( \lambda\delta + \lambda\frac{\delta^2}{2} \right)} \notag \\[5pt]
 &=& \frac{1}{\sqrt{2\pi\lambda}} \cdot \exp\left( -\lambda \frac{\delta^2}{2}\right)
 \end{eqnarray}
-Now notice that Equation~\ref{eqn:mdef} implies that $m$ is quite large, and so may now be treated as a continuous variable, which we will rename $x$ (since $m$ looks like an integer value), hence we have:
+Recalling that:
 \begin{displaymath}
-\delta \equiv \frac{m - \lambda}{\lambda} = \frac{x - \lambda}{\lambda}
+\delta \equiv \frac{m - \lambda}{\lambda} 
 \end{displaymath}
-and likewise we know that the variance of the original Poisson distribution is given by $\sigma^2 = \lambda$, and so we can rewrite Equation~\ref{eqn:almost}
-in the (hopefully) more familiar form:
 \begin{equation}
-\label{eqn:gaussian}
-P(x) = \frac{1}{\sqrt{2\pi} \sigma} \cdot \exp\left( - \frac{(x - \lambda)^2}{2 \sigma^2}\right)
+P(x) = \frac{1}{\sqrt{2\pi \lambda}} \cdot \exp\left( - \frac{(m - \lambda)^2}{2 \lambda}\right)
 \end{equation}
-Which is a Gaussian distribution with mean value $\lambda$ and variance $\sigma^2$.  The proof that these quantities are indeed the mean and the variance is left as an exercise.
+Which we can identify as a special case of the Gaussian distribution of Equation~\ref{eqn:gaussian} with 
+$\sigma^2 = \lambda$ and $x = m$:
 
-\subsection{Continuous versus Discrete Distributions}
-
-The Binomial and Poisson distributions are not continuous functions:  they describe the probability of outcomes which are integer quantities.   The Poisson probability for having 2.31 events is either undefined or taken to be zero.  The value of the Binomial and Poisson distribution function at a particular integer value is simply the probability of that particular outcome.  To determine the probability that an outcome is within a range of integers, say $m_1$ to $m_2$ the probability distribution function is simply added:
-\begin{displaymath}
-P = \sum_{m=m_1}^{m_2} P(m).
-\end{displaymath}
-
-The Gaussian distribution is a continuous function: it describes the probability density function of a particular value of $x$.  The probability of any particular outcome, say $x=1.24323$, is vanishing small.  But the probability that the value lies within a range of values can be non-zero, and is determined by integrating:
-\begin{displaymath}
-P = \int_{x_{\rm min}}^{x_{\rm max}} P(x) \, dx
-\end{displaymath}
-The probability distribution function is normalized so that:
-\begin{displaymath}
-\int_{-\infty}^{+\infty} P(x) \, dx = 1
-\end{displaymath}
-To determine the mean value of a function $f(x)$ we likewise integrate:
-\begin{displaymath}
-\braket{f(x)} \equiv \int_{-\infty}^{+\infty} f(x) P(x) \, dx = 1
-\end{displaymath}
-In particular the mean value of $x$ is:
-\begin{displaymath}
-\braket{x} \equiv \int_{-\infty}^{+\infty} x P(x) \, dx = 1
-\end{displaymath}
-and:
-\begin{displaymath}
-\braket{x^2} \equiv \int_{-\infty}^{+\infty} x^2 P(x) \, dx = 1
-\end{displaymath}
-with:
-\begin{displaymath}
-\sigma^2 = \braket{x^2} -\braket{x}^2.
-\end{displaymath}
-
-The Gaussian distribution is a probability density function (PDF), because it reports a probability density.  A discrete probability distribution is sometimes referred to as probability mass function (PMF), to draw upon an analogy with physical mass and density.
+\begin{equation*}
+P(x) = \frac{1}{\sqrt{2\pi} \sigma} \cdot \exp\left( - \frac{(x - \lambda)^2}{2 \sigma^2}\right)
+\end{equation*}
+It may trouble you that $x$ is continuous while $m$ here was an integer.  But note that in the limit 
+$\lambda \to \infty$, the difference between $m/\lambda$ and $(m+1)/\lambda$ is infinitesimal, and so this is effectively a continuous function, consistent with the Gaussian distribution.
 
 \subsection{Histograms in Scientific Python}
 
@@ -463,22 +472,45 @@ when we take $\lambda=0$ (which is equivalent to simply changing variables $y=x-
 %\noindent
 %{\bf Problem 1:} Prove by induction the formula for the binomial coefficients in (Equation~\ref{eqn:binomc}).
 
-\end{document}
-
 \newpage
 
 \section{Statistical Uncertainties}
 
-\subsection{Precision versus Accuracy}
-
-\ldots
-\subsection{Importance of the Gaussian Distribution}
-
 \subsection{Reporting Experimental Uncertainties}
 
-A scientific measurement is meaningless without an associated uncertainty.  The convention is to report only one significant digit worth of uncertainty (or two if the first digit is a 1 or 2).  So we don't report $x = 1.234 \pm 0.303~\rm{m}$, but instead would report $x= 1.2 \pm 0.3~\rm{m}$ or $t = 4.76 \pm 0.13~\rm{s}$. 
+\begin{figure}[htbp]
+\begin{center}
+{\includegraphics[width=0.45\textwidth]{figs/measuretime.pdf}}
+\end{center}
+\caption{\label{fig:measuretime}  The evolution of a measurement of a quantity $x$ over time.}
+\end{figure}
 
-The uncertainty is intended to indicate how close the true value for measured quantities is to the best estimate.  The Central Limit Theorem informs us that the sum of a large number of random variables approaches a Gaussian distribution.  Since experimental measurements are often repeated many times, and the sources of noise causing the measurement to differ from the true value are numerous, most often the experimental uncertainties can be treated as coming from a Gaussian distribution.  That is to say that the true value of the measured quantity is assumed to be described by a Gaussian distribution with mean value at the best estimated value and with $\sigma$ given by the reported uncertainty.
+A scientific measurement is meaningless without an associated uncertainty.   For instance, we might report a measured distance as:
+\begin{displaymath}
+x = 1.2 \pm 0.3~\rm m
+\end{displaymath}
+and a time as:
+\begin{displaymath}
+t = 4.76 \pm 0.13~\rm \mu s.
+\end{displaymath}
+When reporting a number with an associated uncertainty, we round both the value and the uncertainty to one significant digit in the uncertainty, so:
+\begin{displaymath}
+x = 1.245 \pm 0.313~{\rm m} \to x = 1.2 \pm 0.3~{\rm m} 
+\end{displaymath}
+If the first nonzero digit in the uncertainty is a zero or one, we keep two digits instead:
+\begin{displaymath}
+x = 1.245 \pm 0.113~{\rm m} \to x = 1.25 \pm 0.11~{\rm m}.
+\end{displaymath}
+We'll define this uncertainty quite precisely, but let's start with a conceptual definition.  Each particular measurement of a quantity $x$ makes a claim about where the true value of $x$ is most likely to lie.  If we assume that measurements improve with time and better reproduce the true value, we expect a series of measurements to proceed like in Fig.~\ref{fig:measuretime}, with future measurements shown to be consistent with the uncertainties reported by previous experiments.
+
+\begin{figure}[htbp]
+\begin{center}
+{\includegraphics[width=0.45\textwidth]{figs/stdunc.pdf}}
+\end{center}
+\caption{\label{fig:stdunc}  The interpretation of experimental uncertainties as the parameters of a Gaussian distribution for the true value.}
+\end{figure}
+
+We can therefore think of a measurement and it's uncertainty as describing a PDF for the outcome of  experiments in the distant future with uncertainties so small as to effectively measure the true value of the quantity.  Because most measured quantities have many independent sources of uncertainties, the Central Limit Theorem implies that the true value of the measured quantity is best described by a Gaussian  Distribution.  We define the measured value $x$ as the mean of this distribution, and the uncertainty as the $\sigma$ of the Gaussian.
 
 \subsection{The Error Function}
 
@@ -552,16 +584,28 @@ We can therefore conclude that the mean of a sum of two random variables:
 \begin{displaymath}
 \braket{x + y} = \braket{x} + \braket{y} 
 \end{displaymath}
-is just the sum of the mean.  Supposing that $\braket{x} = \braket{y} = 0$ we also have:
+is just the sum of the mean.  
+
+For simplicity let's assume that $\braket{x} = \braket{y} = 0$, and so:
 \begin{eqnarray*}
-\braket{(x + y)^2} &=& \braket{x^2 + 2*x*y + y^2} \\
-&=& \braket{x^2} + 2*\braket{x}*\braket{y} + \braket{y^2} \\
+\braket{(x + y)^2} &=& \braket{x^2 + 2xy + y^2} \\
+&=& \braket{x^2} + 2\braket{xy} + \braket{y^2} \\
+&=& \braket{x^2} + 2\braket{x}\braket{y} + \braket{y^2} \\
 &=& \braket{x^2} + \braket{y^2} \\
 \end{eqnarray*}
-In the exercises you will show using expectation values that the variance of the sum of two independent random variables is just the sum of their variances:
+from which it follows that:
+\begin{eqnarray*}
+\sigma^2(x+y) &=& \braket{(x+y)^2} - \left( \braket{x+y} \right) ^2\\
+&=& \braket{(x+y)^2}\\
+&=& \braket{x^2} + \braket{y^2} \\
+&=& \sigma^2_x + \sigma^2_y\\
+\end{eqnarray*}
+
+In the exercises you will show that even if $\braket{x}$ and $\braket{y}$ are non-zero, we still obtain:
 \begin{displaymath}
 \sigma^2(x+y) = \sigma^2_x + \sigma^2_y
 \end{displaymath}
+that is, the uncertainties in a sum add in quadrature.
 
 \subsection{Uncertainties Add in Quadrature}
 
@@ -707,11 +751,12 @@ The uncertainty on the mean value can be calculated by propagating the uncertain
 \end{eqnarray*}
 If we assume that the mean value is approaching the true value of the quantity $x$, then repeating the measurement $N$ times reduces the uncertainty by a factor $\sqrt{N}$.
 
-It would seem, therefore, that by simply repeating the same experiment many times, we could reach very high precision even with very lousy equipment.  But this is, unfortunately, not generally the case, as has been conclusively demonstrated by many years of running Physics 116.  The statistical uncertainties which we have considered here due indeed diminish with more data.  But there are also systematic uncertainties, which are the same for each measurement.  The mean of many measurements tends toward the true value plus some constant (and unknown) offset known as the systematic uncertainty.  
+It would seem, therefore, that by simply repeating the same experiment many times, we could reach very high precision even with very lousy equipment.  But this is, unfortunately, not generally the case.  The statistical uncertainties which we have considered here do indeed diminish with more data.  But there are also systematic uncertainties, which are the same for each measurement.  The mean of many measurements tends toward the true value plus some constant (and generally unknown) offset known as the systematic uncertainty.  
 
 Generally in the early stages, experiments are statistics limited, and taking more data helps reduce the overall uncertainty.  But at a later stage, the experiment becomes systematics limited.  More data does not help unless the apparatus is improved.  Often, in complicated experiments, increased statistics also gives the experimenter a better handle on the systematic uncertainties, allowing for improvements to both the statistical and systematic uncertainties.
 
-\subsection{Uncertainties in Scientific Python}
+\end{document}
+
 
 \subsection{Exercises for Uncertainties}
 
@@ -776,6 +821,7 @@ using standard propagation of uncertainties and the fact that $\sigma_p = \sqrt{
 
 \newpage
 
+\end{document}
 
 \section{Statistical Analysis}
 
