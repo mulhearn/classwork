@@ -1447,7 +1447,7 @@ Now consider what happens if we apply a forward-bias voltage as illustrated in F
 
 \begin{figure}[htbp]
 \begin{center}
-\begin{tabular}{p{2cm}p{2cm}p{2cm}}
+\begin{tabular}{p{2cm}p{2cm}p{2cm}c}
 \begin{circuitikz}[line width=1pt]
 \draw(0,0) to[D] ++(0,-3);
 \end{circuitikz} &
@@ -1457,10 +1457,11 @@ Now consider what happens if we apply a forward-bias voltage as illustrated in F
 \end{circuitikz} &
 \begin{circuitikz}[line width=1pt]
 \draw(0,0) to[voltage source,bipoles/length=1.5cm,l=$V_{\rm d}$] ++(0,3);
-\end{circuitikz} \\
-(a) & (b) & (c) \\
+\end{circuitikz} &
+\includegraphics[width=0.45\textwidth]{figs/diodeop.pdf} \\
+(a) & (b) & (c) & (d) \\
 \end{tabular}
-\caption{Circuit diagram from a (a) diode and equivalent circuits for (a) reverse bias and (b) forward bias.}
+\caption{Circuit diagram from a (a) diode, equivalent circuits for (b) reverse bias and (c) forward bias, and   the corresponding (d) IV curve.  For a typical silicon diode $V_{\rm D}$ is between $0.6$ and $0.7~\rm V$.}
 \label{fig:diodeeqv}
 \end{center}
 \end{figure}
@@ -1468,14 +1469,6 @@ Now consider what happens if we apply a forward-bias voltage as illustrated in F
 A diode, therefore, has the very useful feature that it only allows current to flow in one direction.  As shown in Fig.~\ref{fig:diodeeqv} under reverse-bias the diode is equivalent to an open circuit.  Our discussion so far might lead you to think that under forward-bias, the diode is equivalent to a short circuit.  The situation is in fact slightly more complicated.  Absent any applied voltage, thermal fluctuations cause electrons and holes to bump into each other and combine at the pn junction, which causes a small depletion zone to form.   Meanwhile, thermal fluctuations also cause electrons in the valence band to reach the conduction band, creating electron-hole pairs.  The depletion zone increases until an equilibrium is reached between recombination and pair production.  This intrinsic depletion zone is effectively an voltage drop that must be overcome before any current can flow.  The equivalent circuit for a diode in forward bias is therefore a small voltage drop $V_{\rm d}$ as shown in Fig.~\ref{fig:diodeeqv}.  For typical silicon diodes, $V_{\rm d}$ is $0.6$ to $0.7~\rm V$.  Note that the direction of the allowed current in the diode assures us that the diode always consumes power.  It is a passive component and cannot be used to add power to a circuit.
 
 \section{Current Rectification}
-
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=0.45\textwidth]{figs/diodeop.pdf} 
-\caption{ Diode $I$-$V$ curves in the basic operational model.  For a typical silicon diode $V_{\rm D} = 0.6~\rm V$.}
-\label{fig:diodebasic}
-\end{center}
-\end{figure}
 
 \begin{figure}[htbp]
 \begin{center}
@@ -1495,7 +1488,7 @@ to[D] ++(3.0,0) coordinate(X) to[R,l=$R_{\rm L}$] ++(0,-3) to[short,-*] ++(-3,0)
 \end{center}
 \end{figure}
 
-In the previous section, we discussed that operationally, a diode is an open circuit under reverse bias, and  a constant voltage drop $V_D$ under forward bias.  The IV curve for this operational model of the diode shown in Fig.~\ref{fig:diodebasic} is usually sufficient for understanding the behavior of circuits involving diodes.  The rectification feature of a diode is illustrated in Fig.~\ref{fig:basicrect}.  The voltage across the resistor is the positive half of the source AC voltage, reduced by one diode drop.
+In the previous section, we discussed that operationally, a diode is an open circuit under reverse bias, and  a constant voltage drop $V_D$ under forward bias.  The IV curve for this operational model of the diode shown in Fig.~\ref{fig:diodeeqv} is usually sufficient for understanding the behavior of circuits involving diodes.  The rectification feature of a diode is illustrated in Fig.~\ref{fig:basicrect}.  The voltage across the resistor is the positive half of the source AC voltage, reduced by one diode drop.
 
 \begin{figure}[htbp]
 \begin{center}
@@ -1512,10 +1505,23 @@ to[D] ++(2.0,0) coordinate(X) to[C,l=$C$] ++(0,-3) to[short,-*] ++(-2,0);
 (a) & (b) \\
 \end{tabular}
 \caption{ Half-wave rectifier with capacitor.}
-\label{fig:breakdown}
+\label{fig:ripple}
 \end{center}
 \end{figure}
 
+The voltage across the resistor $R_{\rm L}$ (and corresponding current) for the half-wave rectifier circuit in Fig.~\ref{fig:basic} has a non-zero DC component, but it varies significantly as a function of time.  To produce a more constant DC voltage, a capacitor can be used as in Fig.~\ref{fig:ripple}.  The capacitor provides current to the load during the portion of the cycle when the rectified AC voltage is too low.
+As the capacitor provides current to the load, it's voltage sags, resulting in AC ripple current in addition to the DC voltage.  The ripple current can be reduced by increasing the size of the capacitor.  We can estimate the size of the ripple current by considering that the voltage sag $\Delta v$ is given by:
+\begin{displaymath}
+\Delta v = \frac{\Delta q}{C}.
+\end{displaymath}
+Meanwhile, the most the capacitor can discharge during the cycle of frequency $f=1/T$ is:
+\begin{displaymath}
+\Delta q = I_{\rm max} \, T = \frac{I_{\rm max}}{f}  
+\end{displaymath}
+And so the voltage sag is:
+\begin{displaymath}
+\Delta v = \frac{I_{\rm max}}{fC} = \frac{V_{\rm max}}{fRC}.
+\end{displaymath}
 
 \section{Real Diodes}
 
@@ -1528,12 +1534,13 @@ to[D] ++(2.0,0) coordinate(X) to[C,l=$C$] ++(0,-3) to[short,-*] ++(-2,0);
 (b) \\
 \end{tabular}
 \caption{Diode $I$-$V$ curve (a) from the Schockley equations, and (b) from the Schockley equations at wider scale and including breakdown.  Typical values of $V_{\rm T} = 26~\rm mV$, $I_{\rm S} = 5~\rm \mu A$, $V_{\rm D}=0.6~\rm V$}
-\label{fig:breakdown}
+\label{fig:diodeeqs}
 \end{center}
 \end{figure}
 
-
 The useful operational model of the diode differs from real diodes in several ways.  While under reverse bias, thermal fluctuations in the depletion band of diode produce a small but constant supply of mobile charge carriers, which allows a small current to flow under reverse bias.  This current, called the saturation current $I_{\rm S}$ is quite small.  For the 1N914 diode, $I_{\rm S} = 5~\rm \mu A$.
+If the reverse bias voltage is increased sufficiently, the small number of mobile charge carriers forming the saturation current are accelerated enough to produce additional electron-hole pairs through collisions, creating a cascade that dramatically increases the reverse current.   Diodes typically have a breakdown voltage below which they will conduct in reverse-bias.  Instead of avalanche breakdown, some diodes breakdown due to quantum tunnelng, by an effect called Zener breakdown.  Zener diodes are specifically designed to provide a nearly constant voltage under reverse bias, and are often used to regulate DC voltage levels.
+
 A full thermodynamic treatment of the pn junction in a diode yields the Schockley diode equation:
 \begin{displaymath}
 I(V) = I_{\rm S} \left( \exp\left( \frac{V}{V_{\rm T}}\right) - 1 \right)
@@ -1542,9 +1549,7 @@ where $V_{\rm T}$ is the thermal voltage, defined by
 \begin{displaymath}
 V_{\rm T} = \frac{kT}{e},
 \end{displaymath}
-which has the value $26~\rm mV$ at room temperature.
-
-
+which has the value $26~\rm mV$ at room temperature.  The diode equation is plotted in Fig.~\ref{fig:diodeeqs}a at a scale where the exponential behavior and reverse current are visible.  In Fig.~\ref{fig:diodeeqs}b the scale is adjusted to typical scale for circuit parameters, and the curve much more closely resembles the simple operational model. 
 
 \end{document}
 
