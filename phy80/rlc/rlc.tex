@@ -14,7 +14,7 @@
 \ctikzset{bipoles/thickness=1}
 \ctikzset{bipoles/length=.6cm}
 
-\title{Lecture Notes:  RLC Circuits}
+\title{Lecture Notes:  Passive Electronics}
 \author{Michael Mulhearn}
 
 \maketitle
@@ -1207,6 +1207,344 @@ to[R,-*,l_=$R$] ++(2.0,0) coordinate(X) to[short,*-*] ++(1.5,0) coordinate(Y) to
 \end{figure}
 \item Consider the RLC filter of Fig.~\ref{fig:rlccircuit}.  Derive the transfer function for the circuit and find the resonant angular frequency $\omega_0$ for which the gain is 1.
 \end{enumerate}
+
+\chapter{The Diode}
+
+\section{Semiconductors}
+
+\begin{figure}[htbp]
+\begin{center}
+\begin{tikzpicture}
+%\draw[step=1cm,gray,very thin] (0,0) grid (12,5);
+\draw (1,1) circle (0.5cm) node{A};
+\draw (11,1) circle (0.5cm) node{B};
+\draw (5.5,1) circle (0.5cm) node{A};
+\draw (6.5,1) circle (0.5cm) node{B};
+\draw (0,3) -- ++(2,0);
+\draw (10,3) -- ++(2,0);
+\draw (5,2) -- ++(2,0);
+\draw (5,4) -- ++(2,0);
+\draw[dashed] (2,3) -- (5,2);
+\draw[dashed] (2,3) -- (5,4);
+\draw[dashed] (10,3) -- (7,2);
+\draw[dashed] (10,3) -- (7,4);
+\draw[thick,->] (0.5,3) -- ++(0,0.5);
+\draw[thick,<-] (10.5,3) -- ++(0,0.5);
+\draw[thick,->] (5.5,2) -- ++(0,0.5);
+\draw[thick,<-] (6.5,2) -- ++(0,0.5);
+%\node at (1,1) {A};
+\end{tikzpicture}
+\caption{When two identical atoms A and B are brought close together, the two degenerate energy eigenstates for an electron (located at atom A or B) are replaced with two states of differing energy, equally shared between atoms A and B.}
+\label{fig:bond}
+\end{center}
+\end{figure}
+
+Consider the simple quantum mechanical model illustrated in Fig.~\ref{fig:bond}.  When two identical atoms, A and B, are very far apart, they can be considered separately, and the energy eigenstates are degenerate in energy.  For each solution for an electron located at atom A, there is a solution of equal energy for an electron located at atom B.  When the atoms A and B are brought close enough together, a particle located at atom A can quantum mechanically tunnel to atom B, and so these states are no longer energy eigenstates.  Instead, the eigenstates share the electron equally between A and B, in either a symmetric or antisymmetric wave function.  The symmetric wave function has lower energy than the antisymmetric wave function, so that the energy levels are no longer degenerate.  If the outer most level is not full, this results in a lower total energy through sharing, which is the quantum mechanical explanation for a covalent bond.
+
+\begin{figure}[htbp]
+\begin{center}
+\begin{tikzpicture}
+\draw (0,3) -- ++(1,0);
+\draw (2,4) -- ++(1,0);
+\draw (2,2) -- ++(1,0);
+\draw (4,4.5) -- ++(1,0);
+\draw (4,3.5) -- ++(1,0);
+\draw (4,2.5) -- ++(1,0);
+\draw (4,1.5) -- ++(1,0);
+\draw (6,1.0) -- ++(1,0);
+\draw (6,1.5) -- ++(1,0);
+\draw (6,2.0) -- ++(1,0);
+\draw (6,2.5) -- ++(1,0);
+\draw (6,3.0) -- ++(1,0);
+\draw (6,3.5) -- ++(1,0);
+\draw (6,4.0) -- ++(1,0);
+\draw (6,4.5) -- ++(1,0);
+\draw (6,5.0) -- ++(1,0);
+\node at (0.5,0.5) {$n=1$};
+\node at (2.5,0.5) {$2$};
+\node at (4.5,0.5) {$4$};
+\node at (6.5,0.5) {$8$};
+\node at (8.5,0.5) {$10^{23}$};
+\draw[thick] (8,0.75) rectangle (9,5.25);
+\end{tikzpicture}
+\caption{As more and more identical atoms are brought close together, the number of distinct energy levels increases until there is an effectively continuous band of available energies.}
+\label{fig:bands}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\begin{tikzpicture}
+%\draw[step=1cm,gray,very thin] (0,0) grid (6,6);
+\fill[black!30!white] (0,1) rectangle ++(1,2);
+\draw[thick] (0,1) rectangle ++(1,2);
+\draw[thick] (0,4) rectangle ++(1,2);
+\fill[black!30!white] (2,1) rectangle ++(1,1);
+\draw[thick] (2,1) rectangle ++(1,2);
+\draw[thick] (2,4) rectangle ++(1,2);
+\fill[black!30!white] (4,1) rectangle ++(1,1.8);
+\fill[black!30!white] (4,3.25) rectangle ++(1,0.2);
+\draw[thick] (4,1) rectangle ++(1,2);
+\draw[thick] (4,3.25) rectangle ++(1,2);
+\node[left, align=right] at (0,4.5) {Conduction \\ Band};
+\node[left, align=right] at (0,2) {Valence \\Band};
+\node at (0.5,0.5) {Insulator};
+\node at (2.5,0.5) {Metal};
+\node at (5.0,0.5) {Semiconductor};
+\end{tikzpicture}
+\caption{The valance and conduction bands for insulators, metals, and semiconductor.  The shared regions indicate electrons}
+\label{fig:materials}
+\end{center}
+\end{figure}
+
+
+
+
+Now consider what happens when an Avagadro's number ($\sim 10^{23}$) of molecules or atoms are brought together to form a periodic lattice.  As illustrated in Fig.~\ref{fig:bands} each discrete energy level in the single atom is replaced by a nearly continuous band of available energies in the lattice.  Many of the important properties of materials can be understood by considering only the energy band that contains the highest energy electron (called the valance band) and the band directly above it (called the conduction band).  
+
+As shown in Fig.~\ref{fig:materials}, an insulator consists of a full valence band separated from the conduction band by a large gap.  The complete set of possible wave functions for an electron in the valance band can be though of as left-traveling and right-traveling waves.  From symmetry there are an equal number of left and right traveling waves.  When a band is full, there are therefore always an equal number of left and right traveling waves and no net current.  A metal has a partially full valance band, and therefore no difficulty conducting charge.
+
+A semiconductor contains a full valance band separated from the conductor by a small band gap.  As a result, thermal fluctuations allow electrons in the valance band to gain sufficient energy to enter the conduction band, leaving an unfilled state in the valance band.  The electrons in the conduction band can conduct electricity.  The vacant states in the valance band can also conduct electricity, as the absence of a negative charge acts like a mobile positive charge, which is called a hole.
+
+Intrinsic semiconductors have an equal number of electrons and holes.  However, in a process called doping, different molecules are added periodically to the semiconductor lattice that tend to provide additional electrons to the conduction material or absorb additional electrons from the valance band.  This leads to either an excess of holes in $p$-type semiconductors and an excess in electrons in $n$-type semiconductors.  Semiconductors are the core technology upon which the entire modern electronics industry is based.
+
+\section{The Diode}
+
+\begin{figure}[htbp]
+\begin{center}
+\begin{tabular}{cc}
+\begin{circuitikz}[line width=1pt]
+%\draw (0,0) to[voltage source,bipoles/length=1.5cm,l=$V$] ++(0,+3.0) to[D] ++(3.0,0);
+\draw(0,0) to[D] ++(3,0);
+\end{circuitikz} &
+\begin{tikzpicture}
+%\draw[step=1cm,gray,very thin] (0,0) grid (6,3);
+\fill[black!30!white] (0,1) rectangle ++(3,2);
+\draw[thick] (0,1) rectangle ++(3,2);
+\draw[thick] (3,1) rectangle ++(3,2);
+\fill[white] (0.5,1.5) circle (0.10);
+\fill[white] (0.5,2.5) circle (0.10);
+\fill[white] (1.5,1.5) circle (0.10);
+\fill[white] (1.5,2.5) circle (0.10);
+\fill[white] (2.5,1.5) circle (0.10);
+\fill[white] (2.5,2.5) circle (0.10);
+\fill[white] (1,2) circle (0.10);
+\fill[white] (2,2) circle (0.10);
+\fill[black!30!white] (3.5,1.5) circle (0.10);
+\fill[black!30!white] (3.5,2.5) circle (0.10);
+\fill[black!30!white] (4.5,1.5) circle (0.10);
+\fill[black!30!white] (4.5,2.5) circle (0.10);
+\fill[black!30!white] (5.5,1.5) circle (0.10);
+\fill[black!30!white] (5.5,2.5) circle (0.10);
+\fill[black!30!white] (4,2) circle (0.10);
+\fill[black!30!white] (5,2) circle (0.10);
+\node at (1.5,0.5) {p-type};
+\node at (4.5,0.5) {n-type};
+\end{tikzpicture}
+\\
+(a)&
+(b)\\
+\end{tabular}
+\caption{The diode (a) circuit diagram, and (b) as a junction between p-type and n-type semiconductor.  The white circles represent holes and the gray circles represent electrons.}
+\label{fig:diode}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\begin{tabular}{cc}
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) to[short,i<=$I$] ++(0,+3.0) to[D] ++(3.0,0);
+\draw (0,0) to[short] ++(3,0) to[voltage source,bipoles/length=1.5cm] ++(0,3);
+\end{circuitikz} &
+\begin{tikzpicture}
+%\draw[step=1cm,gray,very thin] (0,0) grid (6,3);
+\fill[black!30!white] (0,1) rectangle ++(3,2);
+\draw[thick] (0,1) rectangle ++(3,2);
+\draw[thick] (3,1) rectangle ++(3,2);
+\fill[white] (0.5,1.5) circle (0.10);
+\fill[white] (0.5,2.5) circle (0.10);
+\fill[white] (1.5,1.5) circle (0.10);
+\fill[white] (1.5,2.5) circle (0.10);
+%\fill[white] (2.5,1.5) circle (0.10);
+%\fill[white] (2.5,2.5) circle (0.10);
+\node at (2.5,1.5) {$-$};
+\node at (2.5,2.5) {$-$};
+\fill[white] (1,2) circle (0.10);
+\fill[white] (2,2) circle (0.10);
+%\fill[black!30!white] (3.5,1.5) circle (0.10);
+%\fill[black!30!white] (3.5,2.5) circle (0.10);
+\node at (3.5,1.5) {$+$};
+\node at (3.5,2.5) {$+$};
+\fill[black!30!white] (4.5,1.5) circle (0.10);
+\fill[black!30!white] (4.5,2.5) circle (0.10);
+\fill[black!30!white] (5.5,1.5) circle (0.10);
+\fill[black!30!white] (5.5,2.5) circle (0.10);
+\fill[black!30!white] (4,2) circle (0.10);
+\fill[black!30!white] (5,2) circle (0.10);
+\draw[thick,->] (4,2) -- ++(0.5,0);
+\draw[thick,->] (2,2) -- ++(-0.5,0);
+\node at (1.5,0.5) {p-type};
+\node at (4.5,0.5) {n-type};
+\end{tikzpicture}
+\\
+(a)&
+(b)\\
+\end{tabular}
+\caption{The diode is in reverse bias when the (a) the applied voltage directs a positive current through the diode opposite the arrow in the diode diagram, and (b) which tends to pull mobile holes and electrons away from the p-n junction, creating a depletion zone.}
+\label{fig:dioderev}
+\end{center}
+\end{figure}
+
+
+\begin{figure}[htbp]
+\begin{center}
+\begin{tabular}{cc}
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) to[voltage source,bipoles/length=1.5cm,i>=$I$] ++(0,+3.0) to[D] ++(3.0,0) |- (0,0);
+\end{circuitikz} &
+\begin{tikzpicture}
+%\draw[step=1cm,gray,very thin] (0,0) grid (6,3);
+\fill[black!30!white] (0,1) rectangle ++(3,2);
+\draw[thick] (0,1) rectangle ++(3,2);
+\draw[thick] (3,1) rectangle ++(3,2);
+\fill[white] (0.5,1.5) circle (0.10);
+\fill[white] (0.5,2.5) circle (0.10);
+\fill[white] (1.5,1.5) circle (0.10);
+\fill[white] (1.5,2.5) circle (0.10);
+\fill[white] (2.5,1.5) circle (0.10);
+\fill[white] (2.5,2.5) circle (0.10);
+\fill[white] (1,2) circle (0.10);
+\fill[white] (2,2) circle (0.10);
+\fill[black!30!white] (3.5,1.5) circle (0.10);
+\fill[black!30!white] (3.5,2.5) circle (0.10);
+\fill[black!30!white] (4.5,1.5) circle (0.10);
+\fill[black!30!white] (4.5,2.5) circle (0.10);
+\fill[black!30!white] (5.5,1.5) circle (0.10);
+\fill[black!30!white] (5.5,2.5) circle (0.10);
+\fill[black!30!white] (4,2) circle (0.10);
+\fill[black!30!white] (5,2) circle (0.10);
+\node at (1.5,0.5) {p-type};
+\node at (4.5,0.5) {n-type};
+\draw[thick,->] (2.5,1.5) -- (3.0,1.5);
+\draw[thick,->] (2.5,2.5) -- (3.0,2.5);
+\draw[thick,->] (3.5,1.5) -- (3.0,1.5);
+\draw[thick,->] (3.5,2.5) -- (3.0,2.5);
+\end{tikzpicture}
+\\
+(a)&
+(b)\\
+\end{tabular}
+\caption{The diode is in forward bias when the (a) applied voltage directs a positive current in the same direction as the arrow in the diode symbol, and (b) tends to move electrons and holes toward the pn junction, where they recombine. }
+\label{fig:diodefwd}
+\end{center}
+\end{figure}
+
+A diode is a junction of $p$-type and $n$-type semiconductor as shown in Fig.~\ref{fig:diode}.   The diode has an interesting and useful $V$-$I$ curve that depends on the polarity of the applied voltage.  Consider first what happens if we apply a reverse-bias voltage as illustrated in Fig.~\ref{fig:dioderev}.  In this configuration, the applied voltage initially creates a current which move holes to left and electrons to right, which in both cases moves the mobile charge carriers away from the pn junction.  This creates a depletion zone at the junction with no mobile charge carriers.  Because the semiconductors initially had no net charge, as holes move out of the depletion zone in the p-type semiconductor, they leave behind a fixed negative charge.  Likewise, as electrons move out of the depletion zone in the n-type semiconductor, the leave behind a fixed positive charge.  The fixed charges create an electric field which results in a voltage across the depletion zone.  The depletion zone widens until the voltage across the depletion zone equals the applied voltage, at which point no current flows.  In the steady-state, a diode in reverse bias passes no current.  
+
+Now consider what happens if we apply a forward-bias voltage as illustrated in Fig.~\ref{fig:dioderev}.  In this configuration, the applied voltage produces a current which moves holes to right and electrons to the left, which in both cases moves the mobile charge carriers toward the pn junction.  At this junction, the electrons recombine with holes, which allows a current in this direction to continue as long as the voltage is applied.
+
+
+\begin{figure}[htbp]
+\begin{center}
+\begin{tabular}{p{2cm}p{2cm}p{2cm}}
+\begin{circuitikz}[line width=1pt]
+\draw(0,0) to[D] ++(0,-3);
+\end{circuitikz} &
+\begin{circuitikz}[line width=1pt]
+\draw(0,0) to[short,-o] ++(0,1);
+\draw(0,2) to[short,o-] ++(0,1);
+\end{circuitikz} &
+\begin{circuitikz}[line width=1pt]
+\draw(0,0) to[voltage source,bipoles/length=1.5cm,l=$V_{\rm d}$] ++(0,3);
+\end{circuitikz} \\
+(a) & (b) & (c) \\
+\end{tabular}
+\caption{Circuit diagram from a (a) diode and equivalent circuits for (a) reverse bias and (b) forward bias.}
+\label{fig:diodeeqv}
+\end{center}
+\end{figure}
+
+A diode, therefore, has the very useful feature that it only allows current to flow in one direction.  As shown in Fig.~\ref{fig:diodeeqv} under reverse-bias the diode is equivalent to an open circuit.  Our discussion so far might lead you to think that under forward-bias, the diode is equivalent to a short circuit.  The situation is in fact slightly more complicated.  Absent any applied voltage, thermal fluctuations cause electrons and holes to bump into each other and combine at the pn junction, which causes a small depletion zone to form.   Meanwhile, thermal fluctuations also cause electrons in the valence band to reach the conduction band, creating electron-hole pairs.  The depletion zone increases until an equilibrium is reached between recombination and pair production.  This intrinsic depletion zone is effectively an voltage drop that must be overcome before any current can flow.  The equivalent circuit for a diode in forward bias is therefore a small voltage drop $V_{\rm d}$ as shown in Fig.~\ref{fig:diodeeqv}.  For typical silicon diodes, $V_{\rm d}$ is $0.6$ to $0.7~\rm V$.  Note that the direction of the allowed current in the diode assures us that the diode always consumes power.  It is a passive component and cannot be used to add power to a circuit.
+
+\section{Current Rectification}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=0.45\textwidth]{figs/diodeop.pdf} 
+\caption{ Diode $I$-$V$ curves in the basic operational model.  For a typical silicon diode $V_{\rm D} = 0.6~\rm V$.}
+\label{fig:diodebasic}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\begin{tabular}{cc}
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) node[ground,yscale=2.0]{} to[sinusoidal voltage source,bipoles/length=1.5cm] ++(0,+3.0) 
+to[D] ++(3.0,0) coordinate(X) to[R,l=$R_{\rm L}$] ++(0,-3) to[short,-*] ++(-3,0);
+\draw (X) to[short,*-o] ++(0.75,0) node[right]{$v_{\rm R}(t)$};
+\draw (0.0,2.2) node[left]{$v_{\rm S}(t)$};
+\end{circuitikz} &
+\includegraphics[width=0.55\textwidth]{figs/rectification.pdf} 
+\\
+(a) & (b) \\
+\end{tabular}
+\caption{ Half-wave rectifier}
+\label{fig:basicrect}
+\end{center}
+\end{figure}
+
+In the previous section, we discussed that operationally, a diode is an open circuit under reverse bias, and  a constant voltage drop $V_D$ under forward bias.  The IV curve for this operational model of the diode shown in Fig.~\ref{fig:diodebasic} is usually sufficient for understanding the behavior of circuits involving diodes.  The rectification feature of a diode is illustrated in Fig.~\ref{fig:basicrect}.  The voltage across the resistor is the positive half of the source AC voltage, reduced by one diode drop.
+
+\begin{figure}[htbp]
+\begin{center}
+\begin{tabular}{cc}
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) node[ground,yscale=2.0]{} to[sinusoidal voltage source,bipoles/length=1.5cm] ++(0,+3.0) 
+to[D] ++(2.0,0) coordinate(X) to[C,l=$C$] ++(0,-3) to[short,-*] ++(-2,0);
+\draw (X) to[short,*-] ++(1.0,0) coordinate(X) to[R,l=$R_{\rm L}$] ++(0,-3) to[short,-*] ++(-1,0);
+\draw (X) to[short,*-o] ++(0.75,0) node[right]{$v_{\rm R}(t)$};
+\draw (0.0,2.2) node[left]{$v_{\rm S}(t)$};
+\end{circuitikz} &
+\includegraphics[width=0.55\textwidth]{figs/ripple.pdf} 
+\\
+(a) & (b) \\
+\end{tabular}
+\caption{ Half-wave rectifier with capacitor.}
+\label{fig:breakdown}
+\end{center}
+\end{figure}
+
+
+\section{Real Diodes}
+
+\begin{figure}[htbp]
+\begin{center}
+\begin{tabular}{cc}
+\includegraphics[width=0.45\textwidth]{figs/diodeeq.pdf} &
+\includegraphics[width=0.45\textwidth]{figs/breakdown.pdf} \\
+(a) &
+(b) \\
+\end{tabular}
+\caption{Diode $I$-$V$ curve (a) from the Schockley equations, and (b) from the Schockley equations at wider scale and including breakdown.  Typical values of $V_{\rm T} = 26~\rm mV$, $I_{\rm S} = 5~\rm \mu A$, $V_{\rm D}=0.6~\rm V$}
+\label{fig:breakdown}
+\end{center}
+\end{figure}
+
+
+The useful operational model of the diode differs from real diodes in several ways.  While under reverse bias, thermal fluctuations in the depletion band of diode produce a small but constant supply of mobile charge carriers, which allows a small current to flow under reverse bias.  This current, called the saturation current $I_{\rm S}$ is quite small.  For the 1N914 diode, $I_{\rm S} = 5~\rm \mu A$.
+A full thermodynamic treatment of the pn junction in a diode yields the Schockley diode equation:
+\begin{displaymath}
+I(V) = I_{\rm S} \left( \exp\left( \frac{V}{V_{\rm T}}\right) - 1 \right)
+\end{displaymath}
+where $V_{\rm T}$ is the thermal voltage, defined by 
+\begin{displaymath}
+V_{\rm T} = \frac{kT}{e},
+\end{displaymath}
+which has the value $26~\rm mV$ at room temperature.
+
+
 
 \end{document}
 
