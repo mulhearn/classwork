@@ -6,6 +6,8 @@
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{braket}
+\usepackage{multicol}
+
 \begin{document}
 
 \title{Analysis of Experimental Data}
@@ -251,13 +253,13 @@ To determine the mean value of a function $f(x)$ we likewise integrate:
 \begin{displaymath}
 \braket{f(x)} \equiv \int_{-\infty}^{+\infty} f(x) P(x) \, dx = 1
 \end{displaymath}
-In particular the mean value of $x$ is:
+In particular the mean value of $x$ can be calculated by:
 \begin{displaymath}
-\braket{x} \equiv \int_{-\infty}^{+\infty} x P(x) \, dx = 1
+\braket{x} \equiv \int_{-\infty}^{+\infty} x P(x) \, dx 
 \end{displaymath}
 and:
 \begin{displaymath}
-\braket{x^2} \equiv \int_{-\infty}^{+\infty} x^2 P(x) \, dx = 1
+\braket{x^2}  \equiv \int_{-\infty}^{+\infty} x^2 P(x) \, dx 
 \end{displaymath}
 We have defined the Gaussian distribution with the suggestive parameters $\lambda$ and $\sigma$.   It is left as an exercise to show that indeed, the mean is $\lambda$ and the variance is $\sigma^2$.
 
@@ -394,6 +396,10 @@ The error bar values are chosen as the square root of the bin values:
 \begin{verbatim}
 err   = counts**0.5
 \end{verbatim}
+
+
+
+
 The histogram is plotted using the {\tt plt.errorbar} function:
 \begin{verbatim}
 plt.errorbar(cbins,counts,yerr=err,fmt="ko")
@@ -469,7 +475,7 @@ when we take $\lambda=0$ (which is equivalent to simply changing variables $y=x-
    
 \newpage
 
-\chapter{Statistical Uncertainties}
+\chapter{Experimental Uncertainties}
 
 \section{Reporting Experimental Uncertainties}
 
@@ -538,9 +544,9 @@ interval & error function & integrated probability \\
 \hline
 $\pm1 \sigma$ & ${\rm erf}\left( \frac{1}{\sqrt{2}} \right)$ & 68.3\% \\
 $\pm2 \sigma$ & ${\rm erf}\left( \frac{2}{\sqrt{2}} \right)$ & 95.4\% \\
-$\pm3 \sigma$ & ${\rm erf}\left( \frac{3}{\sqrt{2}} \right)$ & 98.5\% \\
-$\pm4 \sigma$ & ${\rm erf}\left( \frac{4}{\sqrt{2}} \right)$ & 99.5\% \\
-$\pm5 \sigma$ & ${\rm erf}\left( \frac{5}{\sqrt{2}} \right)$ & 99.8\% \\ 
+$\pm3 \sigma$ & ${\rm erf}\left( \frac{3}{\sqrt{2}} \right)$ & 99.7\% \\
+$\pm4 \sigma$ & ${\rm erf}\left( \frac{4}{\sqrt{2}} \right)$ & 99.993\% \\
+$\pm5 \sigma$ & ${\rm erf}\left( \frac{5}{\sqrt{2}} \right)$ & 99.99994\% \\ 
 \end{tabular}
 \caption{\label{tbl:erf} The integrated probability for a Gaussian distribution within the stated bounds.} 
 \end{center}
@@ -744,11 +750,33 @@ The uncertainty on the mean value can be calculated by propagating the uncertain
 &=& \sqrt{N \left(\frac{\sigma}{N} \right)^2}\\ 
 &=& \frac{\sigma}{\sqrt{N}} \\
 \end{eqnarray*}
-If we assume that the mean value is approaching the true value of the quantity $x$, then repeating the measurement $N$ times reduces the uncertainty by a factor $\sqrt{N}$.
+If we assume that the mean value is approaching the true value of the quantity $x$, then repeating the measurement $N$ times reduces the statistical uncertainty by a factor $\sqrt{N}$.
 
-It would seem, therefore, that by simply repeating the same experiment many times, we could reach very high precision even with very lousy equipment.  But this is, unfortunately, not generally the case.  The statistical uncertainties which we have considered here do indeed diminish with more data.  But there are also systematic uncertainties, which are the same for each measurement.  The mean of many measurements tends toward the true value plus some constant (and generally unknown) offset known as the systematic uncertainty.  
+\section{Systematic Uncertainties}
 
-Generally in the early stages, experiments are statistics limited, and taking more data helps reduce the overall uncertainty.  But at a later stage, the experiment becomes systematics limited.  More data does not help unless the apparatus is improved.  Often, in complicated experiments, increased statistics also gives the experimenter a better handle on the systematic uncertainties, allowing for improvements to both the statistical and systematic uncertainties.
+If by repeating an experiment $N$ times we can reduce the statistical uncertainty by a factor of $\sqrt{N}$, it might seem that we can reach any desired level of experimental uncertainty simply by repeating an experiment many times.  Unfortunately, statistical uncertainty is just one component of experimental uncertainty, there is also systematic uncertainty.
+
+Our derivation of the Binomial, Poisson, and Gaussian distributions all shared a common assumption:  that each outcome is independent of previous outcomes.  But real measurements are also biased from the correct value by a  {\bf constant} but unknown amount.  We describe the expected size of this bias as an additional uncertainty called the systematic uncertainty.  Since the bias away from the true value is constant, and not subject to statistical fluctuations, repeating an experiment does nothing to reduce systematic uncertainties.  The only way to reduce systematic uncertainties is to design a better experiment.vvGenerally in the early stages, experiments are statistics limited, and taking more data helps reduce the overall uncertainty.  But at a later stage, the experiment becomes systematics limited.  More data does not help unless the apparatus is improved.  Often, in complicated experiments, increased statistics also gives the experimenter a better handle on the systematic uncertainties, allowing for improvements to both the statistical and systematic uncertainties.
+
+The treatment of systematic uncertainties is one of the greatest challenges that an experimenter faces.  
+Often scientific results report a measurement with both the statistical and a systematic uncertainty, e.g.:
+\begin{displaymath}
+ x = 1.21 \pm 0.03 ({\rm stat}) \pm 0.05 ({\rm syst})
+\end{displaymath}
+Systematic uncertainties and statistical uncertainties are considered to be independent, so the total experimental uncertainty is their sum in quadrature:
+\begin{displaymath}
+\sigma_{\rm total} = \sqrt{\sigma^2_{\rm syst} + \sigma^2_{\rm stat}}.
+\end{displaymath}
+
+Often, systematic uncertainties are the result of something outside the experimenters direct control.  One common example is when a measurement depends on a measured value determined by another experiment.  For example, suppose you determine a position $x$ from your measurement of a time $t$ by the relation $x = v t$.  But you do not measure the velocity $v$ yourself and instead rely on a previous measurement of $v$ with total uncertainty $\sigma_v$.  In this case, by standard propagation of uncertainties, we find that:
+\begin{displaymath}
+\frac{\sigma_x}{x} = \frac{\sigma_v}{v}.
+\end{displaymath}
+So a $10\%$ uncertainty on the value $v$ would lead to a $10\%$ systematic uncertainty on our measured value $x$.
+
+Another common source of systematic uncertainties is when a measured value depends on something outside the experimenters direct control.   These types of uncertainties are usually estimated by determining how much the uncontrolled quantity is likely to vary, and the effect this variation has on the measured value.  For example, suppose a measurement was sensitive to the amount of light that leaks into the apparatus, which is different depending on the weather and time of day.  In this case, you might estimate the systematic by comparing results of measurements made at noon to similar measurements made at midnight.
+
+Apart from building a better experiment, the most common way to improve systematics is by calibration.  You could eliminate the systematic due to the velocity $v$ in the first example by measuring the relationship between $x$ and $t$ yourself.  In the light leakage example, you could record the time each measurement was made, and correct for the effect of light leakage.  
 
 \section{Exercises for Uncertainties}
 
@@ -782,17 +810,10 @@ $p_1=53 \pm 2~\rm GeV$, $p_2=75 \pm 3~\rm GeV$ and $\theta = 2.8 \pm 0.1$.   Cal
 \noindent
 {\bf Problem 7:}  A perennial problem with drawing data in histograms is what to do about bins that have zero events in them.  Those crazy people that insist that data has no statistical uncertainty (only predictions have statistical uncertainty!) laugh maniacally when we struggle with what to do in these bins.  This is where our highly useful fiction that data has an associated uncertainty manifestly falls apart! 
 
-The canonical way to draw uncertainties on histogram data is to take the uncertainty in a bin as $\sqrt{n}$ when $n$ is the number of entries in the bin.  But for $n=0$, this implies the uncertainty is zero!  If you take this too literally during the statistical analysis of your data, it will cause serious problems (as we'll see when we get to curve fitting.)   But for histogram plotting purposes, it is standard practice to put zero uncertainty on bins with zero events:  anything else tends to clutter a plot without adding much useful information. 
-
-Another proposal one sees occasionally is to draw the data point at 0 with an error bar going from 0 to 1.  I must admit, I never understand this proposal, as there is a far better choice that we will work out here.
-When we draw typical error bars corresponding to the uncertainty $\pm\sigma$ we are integrating $68.3\%$ of the Gaussian PDF.  At zero events, the Gaussian distribution is not the right distribution, and we should instead use the Poisson distribution suitable for small numbers of events.  We observed 0 events, so we'll start our range at $\lambda = 0$.  We want to find the largest value of lambda that keeps the probability $p$ of observing 0 events (as we have) at  $p \geq 1-0.683$.  Find this value of lambda. \\
-\vskip 0.25cm
+The crazy people argue like this: the Poisson distribution has one parameter $\lambda$ which is both the mean and the variance.  We expect to see $\lambda$ events on average with fluctuations of about $\sigma = \sqrt{\lambda}$, leading to some observed value $n$.  When we plot uncertainties of $\sqrt{n}$ we are plotting the wrong uncertainty, which should be $\sqrt{\lambda}$.  Calculate how much these two estimates vary for a typical one sigma fluctuation, up and down, for $\lambda=10$ and $\lambda=100$.  Do the crazy people have a point? \\ \vskip 0.25cm
 
 \noindent
-{\bf Problem 8:}  Those crazy people that think only predictions should be drawn with uncertainties argue like this: the Poisson distribution has one parameter $\lambda$ which is both the mean and the variance.  We expect to see $\lambda$ events on average with fluctuations of about $\sigma = \sqrt{\lambda}$, leading to some observed value $n$.  When we plot uncertainties of $\sqrt{n}$ we are plotting the wrong uncertainty, which should be $\sqrt{\lambda}$.  Calculate how much these two estimates vary for a typical one sigma fluctuation, up and down, for $\lambda=10$ and $\lambda=100$.  Do the crazy people have a point? \\ \vskip 0.25cm
-
-\noindent
-{\bf Problem 9:}  In particle physics, we always need to understand the efficiency of our detectors.  For instance, if $n$ muons are produced by collisions, we'd like to know how many are actually recorded successfully by our muon detectors.  If we measure $m$ muons that are actually detected, we know that our efficiency is $\epsilon = m/n$.  No problem here!
+{\bf Problem 8:}  In particle physics, we always need to understand the efficiency of our detectors.  For instance, if $n$ muons are produced by collisions, we'd like to know how many are actually recorded successfully by our muon detectors.  If we measure $m$ muons that are actually detected, we know that our efficiency is $\epsilon = m/n$.  No problem here!
 
 You will often see young particle physicists (and occasionally old!) run into problems estimating the uncertainty of this estimate.  They reason like this:  $n$ is just a constant, with no uncertainty.  I could pick to study exactly 1000 events, for instance.  The only number which I actually measure is $m$, and that should fluctuate by $\sigma_m = \sqrt{m}$.  So my uncertainty on the efficiency is just $\sigma_\epsilon = \sigma_m/n = \sqrt{m}/n$.  Problems arise because we often build good detectors with high efficiency.  So consider, for instance $n=100$ and $m=95$.  This leads to a measurement of the efficiency as $0.95 \pm 0.10$ which seems to include the impossible value $\epsilon = 1.05$.
 
@@ -1027,112 +1048,71 @@ but this quantity is simply the $\chi^2$ per degree of freedom for $\sigma_i = 1
 \end{displaymath}
 So if we do not know the uncertainties, we can set $\sigma_i = 1$, and then simply scale the squares of the uncertainties by the $\chi^2$ per degree of freedom at the best fit values for the parameter.  
 
-\end{document}
+\appendix
 
-\section{Numerical Least Squares Fitting}
+\chapter{Practice Problems}
+\section{Experimental Uncertainties}
 
-The $\chi^2$ formalism lends itself easily to numerical solutions, since the problem amounts to the optimization problem of finding the minimum of a function.  A popular approach is the gradient descent approach.  The minimum is approached in steps, with the gradient calculated at each step, and used to point the direction of the next step.  The size of the step can be chosen so that the gradient is approximately constant during the step, such as by estimating the second derivative.  Once at the minimum, the uncertainties can be estimated from the second derivative according to Equation~\ref{eqn:chisqunc}.
+\begin{enumerate}
 
-The major limitation of the steepest descent approach is that it will generally find only the nearest {\em local} minimum.  There is no guarantee that the global minimum has been reached.  This limitation is generally avoided by making an initial guess which is known to be near the actual minimum.  Also, the results of fits should always be evaluated to make certain they are sensible... local minimums that are not the absolute minimum almost always look ridiculous when plotted against the data!
+\item You make four independent measurements of the same quantity $x$:
+\begin{displaymath}
+\{ x_i \} = \{ 5,6,4,5\}
+\end{displaymath}
+what is your best estimate for the value of $x$?  If the uncertainty on each measurement of $x$ was $\sigma = 1$, what is the uncertainty on your best estimate of $x$?
 
-A complete example implementing a straight line fit in scientific python is included below.  Note a few snippets in particular:
-\begin{verbatim}
-def func(x, a, b):
-    return a*x + b
-popt, pcov = curve_fit(func, x, y, sigma=yunc, p0=[1,1],absolute_sigma=True)
-\end{verbatim}
-The fit function is the user defined function "func", which in this case, takes two parameters ($a$ and $b$).  The call to curve\_fit is where the actual fit is performed.  Notice that the uncertainties are provided explicitly, the initial guesses are provided, and the uncertainties are specified as absolute.
+\item You make two independent measurements of the same quantity $x$.  The first measurement was $x = 5 \pm \sqrt{2}$ and the second was $x = 8 \pm 1$.  What is your best estimate for the value of $x$?  
 
-The default behavior of curve\_fit is rather unscientific and intended for the general public.  It simply assumes all uncertainties are equal (if sigma is unspecified) and scales the uncertainties by an amount that gives a reasonable $\chi^2$ at the minimum.  This is seldom what a physicists wants.
+\item You make 100 independent measurements of the quantity $x$ and find that your collected data has a mean of 23.2341 and a variance of 25.  What is your best estimate for $x$ and the uncertainty on this estimate?
 
-You obtain the fitted parameters and their uncertainties from the return values of the functions:
-\begin{verbatim}
-# report the fitted values:
-print "fitted values:  ", popt
+\item You measure the speed of light $v$ by measuring a time $t$ and distance $x$ according to the formula:
+\begin{displaymath}
+v = x / t
+\end{displaymath}
+Derive an expression for fractional uncertainty $\sigma(v)/v$ in terms of the fractional uncertainties of $x$ and $t$.
 
-# report the uncertainties, determined from the diagonals of the covariance matrix:
-perr = np.sqrt(np.diag(pcov))
-print "statistical uncertainties:  ", perr
-\end{verbatim}
-The non-diagonal elements are beyond the scope of this course, but generally provide information about how the fit parameters are correlated.  Generally speaking, highly correlated parameters should be avoided by choosing a more appropriate parameterization.
+\item The relationship between the kinetic energy of a particle $K$ and a measured voltage $V$ has been calibrated as:
+\begin{displaymath}
+K = a V + b.
+\end{displaymath}
+Derive an expression for the uncertainty on the value $K$ from the uncertainties on $a$, $b$, and $V$.
 
-The full example is here:
+\item Suppose you measure the energy $U$ from a voltage $V$ and a capacitance $C$ from the expression:
+\begin{displaymath}
+U = \frac{1}{2} C V^2
+\end{displaymath}
+(a) If the fractional uncertainty on $C$ is $3\%$ and the factional uncertainty on $V$ is $2\%$, what is the fractional uncertainty on the energy $U$?  (b) Suppose you repeat the measurement of $V$ many times, using the same capacitor $C$.   What is the best uncertainty you could hope to achieve on the energy $U$?
 
-\begin{verbatim}
-#
-# fiteg.py
-#
-# An example program for fitting a straight line to data with uncertainties:
-# 
+\item The funding agencies give you one million dollars based on your celebrated measurement of the quantity $x$ which had $12\%$ statistical uncertainty and a $3\%$ systematic uncertainty.  You can spend the money on either: (a) repeating the experiment an additional eight times (for a total of 9), or (b) reduce the systematic uncertainty to $1\%$ without repeating the experiment.  Which option is the best use of the money?
 
-import matplotlib.pyplot as plt
-import numpy as np
-from scipy.optimize import curve_fit
+\item The funding agencies give you ten million dollars based on your controversial measurement of the quantity $y$ which had $1\%$ statistical uncertainty and a $10\%$ systematic uncertainty.  You can spend the money on either: (a) repeating the experiment one million times, or (b) reducing the systematic uncertainty from $10\%$ to $8\%$ without repeating the experiment.  Which option is the best use of the money?
 
-# generate simulated data y = a*x + b according to:
-a = 3;
-b = 5;
-x = np.arange(0,10)
-y = a*x + b
-yunc = 0.5 + y*0.03
-# smear data by the uncertainties yunc
-y = y + np.random.normal(scale=yunc)
+\item In the US, blood pressure varies by about $\sim 10\%$.  A cereal manufacturer conducts a study of $N=100$ participants who ate their cereal daily for one year.  The study found that the average blood pressure of this group was $1~\%$  lower than the average for the US population.  Does their claim that ``Super Choco Bloxs lowers blood pressure!'' have scientific merit?
 
-# plot the simulated data with uncertainties:
-fig, ax = plt.subplots(1,1)
-ax.set_xlabel('x')
-ax.set_ylabel('y')
-ax.errorbar(x,y,yunc,fmt="ko")
+\item Typical IQs are in the range from $100 \pm 10\%$ in the total US population.  A study of 100 college students that regularly drank beer found that the average IQ of this group was 110.  Is this result statistically significant?  Is there a likely source of systematic uncertainty?
 
-# fit the data to the straight line implemented in "func":
-# note we provide explicitly:
-# - the uncertanities on y (sigma = yunc)
-# - the starting guess for our parameters (p0=[1,1])
-# - we specify the sigmas are absolute, not just relative, when determining statistical 
-#   uncertainties (absolute_sigma=True)  A good test is to set this False and make 
-#   certain it doesn't dramatically change your results, which would be evidence that 
-#   either your uncertainties are inaccurate or the model is poor.
-
-def func(x, a, b):
-    return a*x + b
-popt, pcov = curve_fit(func, x, y, sigma=yunc, p0=[1,1],absolute_sigma=True)
-
-# report the fitted values:
-print "fitted values:  ", popt
-
-# report the uncertainties, determined from the diagonals of the covariance matrix:
-perr = np.sqrt(np.diag(pcov))
-print "statistical uncertainties:  ", perr
-\end{verbatim}
+\end{enumerate}
 
 
-\end{document}
+\newpage
+\section{Answers}
 
+\begin{multicols}{2}
+\begin{enumerate}
+\item $5.0 \pm 0.5$
+\item $7$
+\item $23.2 \pm 0.5$
+\item $$ \hspace*{-4cm} \frac{\sigma_v}{v} = \sqrt{ \left( \frac{\sigma_x}{x} \right)^2  + \left( \frac{\sigma_t}{t} \right)^2 }$$
+\item $ \sigma_K = \sqrt{V^2\sigma^2_a + a^2 \sigma^2_V + \sigma_b^2 } $
+\item $5\%$
+\item option a
+\item option b
+\item No.
+\item Statistically significant, but major systematic due to comparison of college students to general population.
+\end{enumerate}
+\end{multicols}
 
-
-
-\chapter{More Exercises}
-
-{\bf Exercise} Calculate a general solution for the best fit parameters of the straight line fit $f = a x + b$.
-
-
-\chapter{Systematic Uncertainties}
-
-\section{The Difference Between Statistical and Systematic Uncertainties}
-
-The Poisson distribution has the widely appreciated feature that the mean equals the variance, or equivalently, that $\sigma \sim \frac{1}{\sqrt{n}}$.  We interpret this uncertainty as resulting from the statistical fluctuations of $n$ events, and we call this uncertainty $\sigma$ the {\it statistical} uncertainty.  A crucial assumption in the derivation of the Poisson distribution was that the events are independent.
-{ldots}
-
-
-\section{Numerical Least Squares Fitting}
-
-The $\chi^2$ formalism lends itself easily to numerical solutions, since the problem amounts to the optimization problem of finding the minimum of a function.  A popular approach is the gradient descent approach.  The minimum is approached in steps, with the gradient calculated at each step, and used to point the direction of the next step.  The size of the step can be chosen so that the gradient is approximately constant during the step, such as by estimating the second derivative.  Once at the minimum, the uncertainties can be estimated from the second derivative according to Equation~\ref{eqn:chisqunc}.
-
-The major limitation of the steepest descent approach is that it will generally find only the nearest {\em local} minimum.  There is no guarantee that the global minimum has been reached.  This limitation is generally avoided by making an initial guess which is known to be near the actual minimum.  Also, the results of fits should always be evaluated to make certain they are sensible... local minimums that are not the absolute minimum almost always look ridiculous when plotted against the data!
-
-(See Lab)
-
-\chapter{Appendix:  The Central Limit Theorem}
+\chapter{The Central Limit Theorem}
 
 First we'll need to define the characteristic functions of a probability distribution function (PDF), which is simply the expectation value of the complex exponential:
 \begin{equation*}   
@@ -1193,9 +1173,6 @@ where in the last step we have used the fact that the $x_i$ are identical indepe
 \end{eqnarray*}
 which is the characteristic function from the Gaussian distribution.
 
-
 \end{document}
-
-
 
 
