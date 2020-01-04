@@ -1,0 +1,350 @@
+\documentclass[12pt]{article}
+
+\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.75in]{geometry}
+\usepackage{cite}
+\usepackage{slashed}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{braket}
+\usepackage{latexsym,amssymb,amsmath}
+\usepackage{pdfpages}
+\usepackage{xcolor}
+
+
+\usepackage[american,fulldiode]{circuitikz}
+\tikzset{component/.style={draw,thick,circle,fill=white,minimum size =0.75cm,inner sep=0pt}}
+
+\begin{document}
+\ctikzset{bipoles/thickness=1}
+\ctikzset{bipoles/length=.6cm}
+
+\title{Straw Man Proposal for the \\ Undergraduate Physics Curriculum}
+\author{Michael Mulhearn}
+
+\maketitle
+
+\section{Objectives}
+
+\begin{table}
+\caption{Typical schedule for undergraduate physics majors, taking the 9H series, in the fall quarter.}
+\label{tbl:current-honors}
+\begin{center}
+\begin{tabular}{|l|l|l|l|}
+\hline
+year      & fall    & winter & spring  \\
+\hline
+Freshman  & 9HA  & 9HB  & 9HC \\
+\hline
+Sophomore & 9HD  & 9HE   & 40     \\
+          &      &        &        \\
+\hline
+Junior    & 104A & 105B & 110B\\
+          & 105A & 110A & 115A\\
+\hline
+Senior    & 115B &        & \\
+          & 110C &        & \\
+          & 112  &        & \\
+
+\hline 
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}
+\caption{Typical schedule for undergraduate physics majors that transfer to UC Davis in their Junior year.}
+\label{tbl:current-transfers}
+\begin{center}
+\begin{tabular}{|l|l|l|l|}
+\hline
+year      & fall    & winter & spring  \\
+\hline
+Junior    & 9D/9HD  &    & 40     \\
+          & 104A & 105B & 110B\\
+          & 105A & 110A & 115A\\
+          & 102 &       & \\
+\hline
+Senior    & 115B &        & \\
+          & 112  &        & \\
+\hline 
+\end{tabular}
+\end{center}
+\end{table}
+
+The current typical schedule of student coursework is shown in Table~\ref{tbl:current-honors} for honors students.  The schedule for transfer students that arrive at UC Davis for their Junior year is shown in Table~\ref{tbl:current-transfers}.  There are of course many students taking different trajectories through our program, but most are some variation on these two.  This proposal aims to improve upon this course of study, to achieve the following aims:
+\begin{itemize}
+
+\item Physics majors that complete 9HD or 9D in the fall of their sophomore year have little to do for the rest of the year.  The honors students have 9HE, but this is effectively an elective and does little to further prepare them for upper division course work.  The recent addition of 40 and 80 helps somewhat, but not enough.  The result of this stalling is that the junior and senior year are a race to complete the degree requirements, leaving very little flexibility or time for advanced electives.
+
+\item Transfer students that arrive at UC Davis for their Junior year face a wall of coursework that they have to handle in the first quarter: math methods, mechanics, and modern physics.  Many also take Physics 102, which is nominally a one credit course, but generally nearly as much work as a four credit course.  For many of the transfer students these courses are the first physics courses that require solving challenging homework problems, and they face effectively 16 credits.  We have two trains of students running through our program (transfers and honors students) and the fall of their junior year is the train wreck where they collide.
+
+\item The current curriculum does not include sufficient computing practice for our students.  It's useful to consider what a physics degree would like if we taught calculus the same way we teach computing.  Students would arrive their Freshman year and take an introductory calculus course.  Then, they would take their physics courses, which would never mention calculus.  At some point in their Junior or Senior year, they would take a one quarter course called "Calculus in Physics" that would attempt to show all the ways we use calculus in physics.  Our students are experts at calculus because they learn how to use the tool, and then apply it, again and again, throughout their coursework.  To remain relevant in the modern world (or even the world from 20 years ago, to be honest) our majors need more practice in the use of computing as a tool for solving physics problems.
+
+\item We are allowed to require a maximum of 110 credits from the college of Letters and Science, which is one half the maximum number of credits students are allowed to take.  Fitting the canon of undergraduate physics into such a tight space is extremely challenging.  Students complain that we waste time teaching some topics again and again (e.g. Special Relativity from scratch) while completely dropping other topics (e.g. Classical Hamiltonians).
+
+\item There is very little flexibility for students once they start their Junior year.
+
+\end{itemize}
+
+A proposal to improve on all of these issues is detailed in the next section followed by a discussion that considers non-lab coursework, computational lab work, and experimental lab work, separately.
+\newpage
+
+\section{B.S. Requirements (Minimal)}
+
+\noindent
+{\bf Preparatory Subject Matter: 49-50} (*: recommended)\\ \vskip -0.25cm
+
+\noindent
+\begin{tabular}{|llllll|}
+\hline
+PHY & 9A & 5 & F,S & & Classical Physics {\it (Class. Mech.)}\\ 
+    & 9B & 5 & F,W & & Classical Physics {\it (Waves, Thermo., Optics.)}\\ 
+    & 9C & 5 & W,S & & Classical Physics {\it (Elec. and Magn.)}\\ 
+    & 9D & 4 & F,S & & Modern Physics {\it (Rel. and Quant. Mech.)}\\ 
+\hline
+&or&&\\
+\hline
+PHY & 9HA & 5 & F & & Honors Physics {\it (Class. Mech.)}\\ 
+    & 9HB & 5 & W & & Honors Physics {\it (Rel. and Stat. Mech.)}\\ 
+    & 9HC & 5 & S & & Honors Physics {\it (Waves and Quant. Mech.)}\\ 
+    & 9HD & 5 & F & & Honors Physics {\it (Elec. and Magn.)}\\ 
+\hline
+\hline
+MAT & 21A & 4 & F & &\\ 
+    & 21B & 4 & W & &\\ 
+    & 21C & 4 & S & &\\ 
+    & 21D & 4 & F & &\\ 
+    & 22A & 3 & F & &\\ 
+    & 22B & 3 & F & &\\ 
+PHY & 40  & 4 & W,S & & Introduction to Physics Computation \\ 
+    & 80  & 4 & F,W,S & 40,9D or 9HD & Experimental Techniques \\ 
+PHY & 185* & 1 & S & & \\ 
+    & 190* & 1 & F & & \\ 
+\hline
+\end{tabular}
+
+\newpage
+
+\noindent
+{\bf Core Subject Matter: 46-50} (*: recommended)\\ \vskip -0.25cm
+\noindent
+\begin{tabular}{|llllll|}
+\hline
+PHY & 104A & 4 & F & C:9D or C:9HD & Mathematical Physics \\ 
+    & 104B & 4 & S & 40, C:105B or C:105H& Computational Physics\\
+    & 105A & 4 & W & 104A & Classical Mechanics I\\
+    & 105B & 4 & S & 105A & Classical Mechanics II\\ 
+    & 110A & 4 & W & 104A & Electricity and Magnetism I\\
+    & 110B & 4 & S & 110A&  Electricity and Magnetism II\\
+    & 115A & 4 & F & 104B,105B & Quantum Mechanics I \\
+    & 115B & 4 & W & 115A & Quantum Mechanics II \\
+    & 115C & 4 & S & 115B & Applications of Quantum Mechanics\\ 
+    & 112  & 4 & F & 104B & Thermodynamics and Statistical Mechanics\\    
+\hline
+PHY & 116A & 4 &  W & 80   & Instrumentation with Discrete Electronics  \\
+    & 116B & 4 &  S & 116B & Instrumentation with Integrated Electronics\\ 
+\hline
+    & or & & & & \\
+\hline
+PHY & 122A or B & 4 & F,W,S & & Advanced Physics Laboratory \\  
+\hline
+ & Any two of & & & & (all three recommended): \\
+\hline 
+PHY & 105L & 1 & F & 104B,105B & Computational Lab in Mechanics \\
+    & 110L & 1 & S & 104B,110B & Computational Lab in E+M \\ 
+    & 115L & 1 & W & 104B,115B & Computational Lab in Quantum Mechanics \\ 
+\hline
+\end{tabular}\\ \vskip 0.25cm
+
+\noindent
+{\bf Electives:} an additional 15 credits of electives is required, 12 credits from advanced (capstone) topics.\\
+\noindent
+{\bf Total Units:} 110-115
+\newpage
+\onecolumn
+
+\newpage
+\section{Discussion of Non-Lab Coursework}
+
+\begin{table}
+\caption{Example schedule for undergraduate physics majors taking the 9H series. Italicized entries can be taken at alternative times.  E is an elective course.  Rate is 5-9 credits per quarter.}
+\label{tbl:proposed-honors}
+\begin{center}
+\begin{tabular}{|l|l|l|l|}
+\hline
+year      & fall    & winter & spring \\
+\hline
+Freshman  & 9HA(5)  & 9HB(5)  & 9HC(5) \\
+          &         &         & 40(4)  \\
+\hline
+Sophomore & 9HD(5)  & 105A(4) &  105B(4) \\
+          & 104A(4) & 80(4)   &  104B(4) \\
+          &         &         &  \\
+\hline
+Junior    & 115A(4) & 115B(4)  & 115C(4)\\
+          & 112(4)  & 110A(4)  & 110B(4)\\
+		  & 105L(1) & 115L(1)  & 110L(1)\\
+\hline
+Senior    & E(4)    & 115A(4)  & 115B(4) \\
+          & E(4)    & E(4)     & E(4) \\
+
+\hline  
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}
+
+\caption{Proposed schedule for for undergraduate physics majors that transfer to UC Davis in their Junior year.  Rate is 12-13 credits per quarter.}
+\label{tbl:proposed-transfers}
+\begin{center}
+\begin{tabular}{|l|l|l|l|}
+\hline
+year      & fall    & winter & spring \\
+\hline
+Junior   & 9D(4)     & 105A(4)       & 105B(4) \\
+         & 104A(4)   & {\it 110A(4)} & {\it 110B(4)} \\         
+         & E(3)      & 40(4)         & 104B(4) \\
+\hline
+Senior   & 115A(4)   & 115B(4)       & 115C(4) \\
+         & 112(4)    & 80(4)         & 122A(4) \\
+         & E(4)      & E(4)          & E(4)  \\
+		 & 105L(1)  & 115L(1)        & 110L(1) \\
+
+
+\hline 
+\end{tabular}
+\end{center}
+\end{table}
+
+The typical schedule of courses for the proposed new curriculum is shown in Table~\ref{tbl:proposed-honors} for honors physics and Table~\ref{tbl:proposed-transfers} for Junior transfer students.
+The primary feature is that incoming transfer students now overlap mostly with sophomore honors physics students.  This eliminates the stalling of our honors students while relieving some of the intense academic pressure on incoming transfer students.  Our experience has been that the best of the transfer students perform as well as our four-year students once they have sufficient time to adjust, and this proposal gives them that time.  Accelerating the honors students also provides tremendous additional flexibility to their schedule.  Transfer students that wish to complete their degree in two-years are still highly constrained, but instead of facing a 13 credit brick wall, they start with only eight credits of required coursework in their first fall quarter at UCD.
+
+Several new classes have been added:
+\begin{itemize}
+\item 105L, 110L, and 115L are one credit computing lab courses, designed to be taking after completing the 105B, 110B, and 115B. They provide additional computational practice to supplement the course work.
+\item 115C is an additional quarter in the quantum mechanics sequence, allowing more time to include computational techniques throughout the sequence, and to cover advanced material and new topics (e.g. QIT). 
+\end{itemize}
+
+Several classes have been dropped from the required courses:
+\begin{itemize}
+\item 9HE:  This course is effectively an elective, with content that varies from instructor to instructor.  By removing it, we allow the Honors students to start toward the core material sooner, leaving more time for advanced electives. With more relaxed schedule in their senior year, it seems highly plausible that physics majors will take more electives.  
+.
+\item 102:  This course was only one unit, which was either insufficient or taught more like a three unit course.  Now every student is required to take 104B.
+\item 110C:  A third quarter of E+M is simply too much to allocate to this topic, given the other needs of the curriculum.   This is a good candidate for reworking as an elective.  110A and B will need some adjustment to make certain that the vector potential and special relativity are covered.
+\end{itemize}
+
+There are some fine adjustments, for example:
+\begin{itemize}
+\item 105B is now a pre-req for 115A.  This insures that classical angular momentum and central forces are covered before taking QM.  This might have to be revisited for other specializations (e.g. Astrophysics).
+\end{itemize}
+
+\section{Discussion of Computational Physics}
+One of the major objectives of this curriculum overhaul is to better integrated computational physics throughout the curriculum, and this is accomplished in a number of ways:
+\begin{itemize}
+\item The one credit Physics 102 course is eliminated.  Now every major takes Physics 40 and Physics 140B for eight credits of introductory programming and computational physics. 
+\item Physics 80 is required for all majors and includes extensive use of scientific python for data analysis and presentation.
+\item There are three new one-credit computational lab courses (105L, 110L, 115L) as stand-alone computational problem solving labs related to mechanics, E+M, and quantum mechanics.  These are each offered in a different quarters, so students get three credits of computational problem-solving spread across an entire year.  These courses will have one hour of lecture on Monday to introduce a problem which the students will solve over the rest of the week.  We anticipate that often the same instructor will teach all three credits in the same year to receive credit for one course.  Due to credit limits, we only require two of these courses, but all three are recommended.
+\item The Physics 115 sequence and Physics 112 have 104B (computational physics) as a pre-requisite.  Computational problems will be fully integrated into these courses.
+\end{itemize}
+
+\section{Discussion of Labs}
+
+Physics 80 was introduced in 2018, and is currently a pre-req for 122A and 122B.  It is anticipated that this will relieve some of the time pressure in this one quarter course.
+
+In this proposal, Physics 80 is a pre-requisite for the 116 (Instrumentation) sequence.  Physics 80 covers some of the content in 116A (passive analog electronics) and some of the content in 116C (computation with scientific python and statistical analysis).  Therefore, the three quarter 116 sequence (A,B, and C) can become a two quarter sequence, 116A covers discrete electronics (analog and digital), and 116B can cover integrated electronics (microprocessors and FPGAs).
+
+\newpage
+\section{Detailed course listings - Preparatory Material}
+
+A summary of the content in the core required courses:
+\begin{itemize}
+
+\item {\bf PHY 9A - Classical Physics (5)}
+{\it Lecture—3 hours; laboratory—2.5 hours; discussion—1 hour. Prerequisite: Mathematics 21B. Introduction to general principles and analytical methods used in physics for physical science and engineering majors. Classical mechanics. Only 2 units of credit to students who have completed course 1A or 7B. Not open for credit to students who have completed course 9HA. GE credit: SciEng | SE. - III. (III.)}
+
+\item {\bf PHY 9B - Classical Physics (5)}
+{\it Lecture - 3 hours; laboratory - 2.5 hours; discussion - 1 hour. Prerequisite: course 9A [or 9HA], Mathematics 21C, 21D (may be taken concurrently). Continuation of course 9A. Fluid mechanics, thermodynamics, wave phenomena, optics. Only 2 units of credit to students who have completed course 7A. Not open for credit to students who have completed course 9HB, 9HC, or Engineering 105. - I. (I.)}
+
+\item {\bf PHY 9C - Classical Physics (5)}
+{\it Lecture - 3 hours; laboratory - 2.5 hours; discussion - 1 hour. Prerequisite; course 9B [or 9HC], Mathematics 21D, 22A (may be taken concurrently). Electricity and magnetism including circuits and Maxwell’s equations. Only 3 units of credit to students who have completed course 7C. Not open for credit to students who have completed course 9HD. GE credit: SciEng | SE. - II. (II.)}
+
+\item {\bf PHY 9D - Modern Physics (4)}
+{\it Lecture - 3 hours; discussion - 1.5 hours. Prerequisite: course 9C [or 9HD] and Mathematics 22A; Mathematics 22B recommended (may be taken concurrently). Introduction to physics concepts developed since 1900. Special relativity, quantum mechanics, atoms, molecules, condensed matter, nuclear and particle physics. Not open for credit to students who have completed course 9HB, 9HC, or 9HE. GE credit: SciEng | SE.- III. (III.)}
+
+\item {\bf PHY 9HA - Honors Physics (5)}
+{\it Lecture - 3 hours; discussion/laboratory - 4 hours. Prerequisite: Mathematics 21B (may be taken concurrently) or consent of instructor. Classical mechanics. Same material as course 9A in greater depth. For students in physical sciences, mathematics, and engineering. Only 2 units of credit to students who have completed course 7B. Not open for credit to students who have completed course 9A. GE credit: SciEng | SE. - I. (I.)}
+
+\item {\bf 9HB - Honors Physics (5)}
+{\it Lecture - 3 hours; discussion/laboratory - 4 hours. Prerequisite: Physics 9HA or 9A, Mathematics 21C (may be taken concurrently). Special relativity, thermal physics. Continuation of course 9HA. Only 2 units of credit to students who have completed course 7A. Not open for credit to students who have completed course 9B or 9D. GE credit: SciEng | SE. - II. (II.)}
+
+\item {\bf 9HC - Honors Physics (5)}
+{\it Lecture - 3 hours; discussion/laboratory - 4 hours. Prerequisite: course 9HB and Mathematics 21D (may be taken concurrently). Waves, sound, optics, quantum physics. Continuation of Physics 9HB. Only 2 units of credit to students who have completed course 7C. Not open for credit to students who have completed course 9B or 9D. GE credit: SciEng | SE.- III. (III.)
+Recent Syllabi and More Complete Descriptions}
+
+\item {\bf 9HD - Honors Physics (5)}
+{\it Lecture - 3 hours; discussion/laboratory - 4 hours. Prerequisite: course 9HC and Mathematics 21D. Electricity and magnetism. Continuation of Physics 9HC. Not open for credit to students who have completed course 9C. GE credit: SciEng | SE. - I. (I.)}
+
+\item {\bf 9HE - Honors Physics (5)}
+{\it Lecture - 3 hours; discussion/laboratory - 4 hours. Prerequisite: course 9HD and Mathematics 22B (may be taken concurrently). Application of quantum mechanics. Not open for credit to students who have completed course 9D. GE credit: SciEng | SE. - II. (II.)}
+
+\item {\bf PHY 40 — Introduction to Physics Computation (4)}
+{\it Lecture—2 hour(s); Laboratory—4 hour(s). Introduction to programming using C++ with examples from computational physics. Introduction to modern tools used for scientific analysis, including Scientific computing with Python. GE credit: SE. Effective: 2018 Summer Session 2.}
+
+\item {\bf PHY 80 — Experimental Techniques (4)}
+{\it Lecture—2 hour(s); Laboratory—5 hour(s). Prerequisite(s): PHY 009D or PHY 009HD. Open to Physics and Applied Physics majors only. Experimental techniques. Design of circuits. Data analysis, sources of noise, statistical and systematic uncertainties. Light sources, detection, and measurement in basic optical systems. Effective: 2017 Fall Quarter.}
+
+\end{itemize}
+
+\section{Detailed course listings - Core Subject Matter}
+
+\begin{itemize}
+\item {\bf PHY 104A - Introductory Methods of Mathematical Physics}
+{\it Lecture - 3 hours; extensive problem solving. Prerequisite: courses 9B, 9C, 9D [or 9HB, 9HC, 9HD] and Mathematics 21D, 22A, and 22B with grade C- or better or consent of instructor. Introduction to the mathematics used in upper-division physics courses, including applications of vector spaces, Fourier analysis, partial differential equations. - I. (I.)}
+
+Recently taught by Scalettar and Luty.  Luty teaches this as a boot camp for upper division courses:  vectors, expansion in small parameters, and PDEs.  All topics which are in principle should have been seen before, but students clearly need practice with problems.
+
+\item {\bf PHY 105A - Analytical Mechanics}
+{\it Lecture - 3 hours; extensive problem solving. Prerequisite: courses 9B, 9C, 9D [or 9HB, 9HC, 9HD] and Mathematics 21D, 22A, and 22B passed with grade C– or better; or consent of department; course 104A and 105A passed with a grade C– or better or consent of department required for 105B. Principles and applications of Newtonian mechanics; introduction to Lagrange’s and Hamilton’s equations. - I-II. (I-II.)}
+
+Recently taught by Calderon, Cebra, Svoboda, and Conway.  Covers Morin 1-5.  This course is heavy on problem solving.  Morin focuses more on challenging problems, and less on mathematical formalism (e.g. leaves out Hamiltonian)
+Not all instructors reach 5 in first quarter.
+
+\item {\bf PHY 105B - Analytical Mechanics}
+{\it Lecture - 3 hours; extensive problem solving. Prerequisite: courses 9B, 9C, 9D [or 9HB, 9HC, 9HD] and Mathematics 21D, 22A, and 22B passed with grade C– or better; or consent of department; course 104A and 105A passed with a grade C– or better or consent of department required for 105B. Principles and applications of Newtonian mechanics; introduction to Lagrange’s and Hamilton’s equations. - I-II. (I-II.)}
+
+Recently taught by Pickett, Conway.  Covers Morin 6-11.  Picket supplement chapter 5 with supplemental material for Hamiltonian.
+
+\item {\bf PHY 110A - Electricity and Magnetism}
+{\it Lecture - 3 hours; extensive problem solving. Prerequisite: courses 9B, 9C, 9D [or 9HB, 9HC, 9HD] and Mathematics 21D, 22A, and 22B passed with grade C– or better, or consent of department; prerequisite for 110B is courses 110A and 104A passed with a grade of C– or better or consent of department; prerequisite for course 110C is courses 110B and 104B passed with a grade of C– or better, or consent of department. Theory of electrostatics, electromagnetism, Maxwell’s equations, electromagnetic waves. - II-III-I. (II-III-I.)}
+
+Recently taught by Da Silva Neto and Yu.  Covers Griffiths 1-4.  Yu extends to include complex analysis of La Place's equation.  Includes a recap of vector calculus, but Da Silva Neto reports a benefit from 104A  (Math Methods.)
+
+\item {\bf PHY 110B - Electricity and Magnetism}
+{\it Lecture - 3 hours; extensive problem solving. Prerequisite: courses 9B, 9C, 9D [or 9HB, 9HC, 9HD] and Mathematics 21D, 22A, and 22B passed with grade C– or better, or consent of department; prerequisite for 110B is courses 110A and 104A passed with a grade of C– or better or consent of department; prerequisite for course 110C is courses 110B and 104B passed with a grade of C– or better, or consent of department. Theory of electrostatics, electromagnetism, Maxwell’s equations, electromagnetic waves. - II-III-I. (II-III-I.)}
+
+Recently taught by Yu.  Griffiths 5-9.  Rapid pace for subject matter, so problem solving is left mainly for homework.  No breathing room for computational physics.
+
+\item {\bf PHY 110C - Electricity and Magnetism}
+{\it Lecture - 3 hours; extensive problem solving. Prerequisite: courses 9B, 9C, 9D [or 9HB, 9HC, 9HD] and Mathematics 21D, 22A, and 22B passed with grade C– or better, or consent of department; prerequisite for 110B is courses 110A and 104A passed with a grade of C– or better or consent of department; prerequisite for course 110C is courses 110B and 104B passed with a grade of C– or better, or consent of department. Theory of electrostatics, electromagnetism, Maxwell’s equations, electromagnetic waves. - II-III-I. (II-III-I.)}
+
+Recently taught by Yu and Luty.  Rest of Griffiths.   Potentials (including vector potential), radiation in matter, special relativity.
+
+\item {\bf PHY 112 - Thermodynamics and Statistical Mechanics}
+{\it Lecture - 3 hours; extensive problem solving. Prerequisite: course 115A or the equivalent. Introduction to classical and quantum statistical mechanics and their connections with thermodynamics. The theory is developed for the ideal gas model and simple magnetic models and then extended to studies of solids, quantum fluids, and chemical equilibria. - I. (I.)}
+
+Recently taught by Singh, Da Silva Neto.  Based on Shroeder.  
+Fast review of 1 (Thermodynamics), full coverage of 2 and 3 (Entropy/Temperature starting from quantum systems up to ideal gas) skip 4 (Heat engines), Free energy part of 5, full coverage of 6+7 (Boltzman and Quantum statistics).
+
+\item {\bf PHY 115A - Foundation of Quantum Mechanics}
+{\it Lecture - 3 hours; extensive problem solving. Prerequisite: courses 104A and 105A with grade C- of better, or consent of instructor. Introduction to the methods of quantum mechanics with applications to atomic, molecular, solid state, nuclear and elementary particle physics. - III. (III.)} 
+
+Recently taught by Fong,Curro.  Townsend for undergraduate version of Sakurai's spin-first approach.  Chapters 1-5, sometimes 6.
+
+\item {\bf PHY 115B - Applications of Quantum Mechanics}
+{\it Lecture - 3 hours; extensive problem solving. Prerequisite: course 115A passed with a grade of C– of better, or consent of department. Angular momentum and spin; hydrogen atom and atomic spectra; perturbation theory; scattering theory. - I. (I.)}
+
+Recently taught by Curro.  Townsend 6,7, skip 8 (path integrals), then 9-10.
+Leaves off perturbation theory, identical particles, scattering.
+
+\end{itemize}
+\end{document}

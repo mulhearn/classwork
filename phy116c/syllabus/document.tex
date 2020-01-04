@@ -13,11 +13,12 @@
 % Course information
 \begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} r}
   & \multirow{3}{*}{\includegraphics[height=1.0in]{logo.jpg}} \\
-  \large 116C Title & \\
-  \large Spring Quarter 2018 & \\
+  \large Computers in Physics Exps. & \\
+  \large Spring Quarter 2019 & \\
   \large Physics 116C & \\
 \end{tabular*}
 \vspace{10mm}
+
 
 % Professor information
 \begin{tabular}{ l l }
@@ -30,35 +31,39 @@
 \end{tabular}
 \vskip 0.5cm
 \noindent
-\textbf {Lectures:} M,W,F 12:10-1:00 PM in Rm. 140 Physics
 \begin{tabbing}
-\hspace*{3em}\= \hspace*{5em} \= \kill % set the tabbings
-\textbf {Lab:}    \> Section 1: \>  M 2:10-5:00 PM in Rm. 152 Roessler \\
-                        \> Section 2: \> W 3:10-6:00 PM in Rm. 152 Roessler \\
+\hspace*{9em}\= \hspace*{10em} \= \hspace*{6em} \= \kill % set the tabbings
+\textbf {Lectures:} \> MWF  1:10-2:00 PM \> 140 Physics \\
+%\> \> 152 Roessler \> (F) \\
+\hspace*{9em}\= \hspace*{5em} \= \hspace*{8em} \= \kill % set the tabbings
+\\
+\textbf {Lab:}    \> Section 1: \>  M 4:10-7:00 PM \>152 Roessler \\
+                        \> Section 2: \> W 3:10-6:00 PM \> 152 Roessler \\
+\\
+\hspace*{9em}\= \kill % set the tabbings
+\textbf {References:}  \>  {\tt https://www.scipy-lectures.org} \\
+\> Online lecture notes on data analysis. \\
+\\
+\textbf{Office Hours:} \> Monday 2:00-3:30 in Room 317 \\
+\textbf{Lab Instructor:} \> Rahim Ullah \\
+\textbf{Midterm Exam:} \> May 22, 2019 (during lecture)  \\ 
+\textbf{Final Exam:} \> June 13, 2019 at 1:00 PM in Physics 140 \\
 \end{tabbing}
 
 \noindent
-\textbf {Texts:} \emph{The Art of Electronics}, 3\textsuperscript{rd} Edition, Horowitz and Hill\\
-\emph{An Introduction to Error Analysis}, 2\textsuperscript{nd} Edition, John R. Taylor\\
-{\tt https://www.scipy-lectures.org/\_downloads/ScipyLectures-simple.pdf} \\
-\noindent
-\textbf{Office Hours:} W 2:00-3:00 PM in 152 Roessler, and also often available during most lab sessions.\\
-\noindent
-\textbf{Lab Instructor:} Christopher Brainerd, cbbrainerd@ucdavis.edu \\
-\noindent
-\textbf{Midterm Exams:} Two Midterm Exams:  \\ 
-These will be in-class, due to cheating in the spring quarter.  Tentative date for first midterm in 4 May.\\
-
-\textbf{Final Exam:} June 11, 2018 at 6:00 PM in Physics 140 \\
-\textbf{Homework:}  There will be approximately five homework assignments.\\
-
-\noindent
 \textbf {Course Description:}  
-Use of computing in physics experimentation.  The normal, binomial, and poisson distributions;  the propagation and statistical analysis of experimental uncertainties;  least squares fitting; Fourier transforms.\\
+Modern experiments rely heavily on microprocessors to acquire and analyze experimental data.  This course uses the Arduino microprocessor as a platform for creating data acquisition systems in different experimental contexts.   We will use Scientific Python for analysis of experimental data.  Topics include statistical distributions, experimental uncertainties, statistical analysis, Fourier analysis, and noise.\\
 
 \noindent
-\textbf {Course Objections:} 
-You will gain proficiency in Arduino microprocessor programing and data analysis with Scientific Python.\\
+\textbf {Friday Exercises:} 
+As much as possible, Friday lectures will be used for in-class exercises using Scientific Python.   Bring a laptop to class on Friday.  If this presents a personal financial hardship, please contact the instructor.  Completed Scipy notebooks should be exported to PDF and submitted to the course website for grading.  \\
+
+\noindent
+\textbf{Homework:}  There will be approximately three homework assignments covering the lecture material.\\
+
+\noindent
+\textbf {Labs:} 
+You are expected to attend every lab session.  The TA will take attendance at the start of each lab. If you arrive late, you should check in with the TA.   Most labs have one or more sign-off points where you are expected to show the TA your setup.  If time permits, the TA may ask a questions of each lab partner.  For example, to describe the purpose of a particular line of code.  When appropriate, you may be assigned a grade for neatness of your experimental setup and/or code.\\
 
 \noindent
 \textbf {Lab Safety:} 
@@ -67,44 +72,46 @@ You should complete the online course for Electrical Safety at \\
 
 \noindent
 \textbf {Lab Reports:} 
-There will be three long lab reports for the Geiger Lab, Johnson Noise Lab, and the (floating) Muon Lifetime lab.  The remaining labs include instructions for a report, generally much shorter with fewer requirements.
+There will be three long lab reports for the Geiger Lab, Johnson Noise Lab, and the Muon Lifetime lab.  The remaining labs include instructions for a report, generally much shorter with fewer requirements.
 
+\begin{samepage}
 \vskip 0.5cm
 \noindent
-\textbf {Tentative Course Outline}:
-
-The weekly coverage might change as it depends on the progress of the class.    Most weeks we'll need to cover some additional material to prepare for the upcoming labs.
-
-
+\textbf {Course Outline}:
+In addition two the listed topic, most weeks we'll need to cover some additional material in lecture to prepare for the upcoming labs.  Labs marked (LW) have a long write-up.  The muon lifetime lab is data analysis only.
 
 \begin{table}[h!]
-\normalsize % The size of the table text can be changed depending on content. Remove if desired.
-\begin{tabular}{ llll }
+\begin{tabular}{ lllll }
 \hline
-\textbf{Week} & \textbf{Dates} & \textbf{Lecture} & \textbf{Lab} \\
+\textbf{Week} & \textbf{Dates} & \textbf{Lecture} & \textbf{Lab}  & \textbf{Exercise}\\
 \hline
-1 & 2,4,6 Apr & Microprocessors and Assembly & 1) Intro to Arduino and Scipy \\
+1 & 1,3,5 Apr & Distributions & Intro to Arduino & Plotting \\
 \hline
-2 & 9,11,13 Apr &  & 2) Arduino Function Generator \\
+2 & 8,10,12 Apr &  Uncertainties& Geiger Counter (LW) & Histograms \\
 \hline
-3 & 16,18,20 Apr & Statistical Distributions & 3) Arduino Digital Scope  \\
+3 & 15,17,19 Apr &  Statistical Analysis & Geiger Counter (cont.)  & \\
 \hline
-4 & 23,25,27 Apr & Uncertainties & 4) Geiger Counter \\
+4 & 22,24,26 Apr &  & Arduino Function Generator & \\
+% F:  Fourier Analysis
 \hline
-5 & 30 Apr 2,4 May & Fourier Transform & 4) Geiger Counter \\
+5 & 29 Apr 1,3 May & & Arduino Digital Scope & Fitting \\
 \hline
-6 & 7,9,11 May & Noise & 5) Fast Fourier Transform \\
+6 & 6,8,10 May & Fourier Analysis & Arduino Spectrum Analyzer & Muon (LW)\\
 \hline
-7 & 14,16,18 May & Statistical Analysis  & 6) Johnson Noise \\
+7 & 13,15,17 May & Noise & Johnson Noise (LW) \\
+% F: 
 \hline
-8 & 21,23,25 May & & 6) Johnson Noise\\
+8 & 20,22,24 May & Microprocessors & Johnson Noise (cont.)\\
+% F:  LMC Emulation
 \hline
-9 & (28),30 May,1 Jun & &  No Lab \\
+9 & (27),29 31 May &  &  No Lab \\
+% F: 
 \hline
-10 &  4,6 Jun &  & 7)  Arithmetic Logic Unit\\
+10 &  3,5 Jun &  Review & Arithmetic Logic Unit\\
+% F: 
 \hline
 \end{tabular} 
 \end{table}
-
+\end{samepage}
 \end{document}
 

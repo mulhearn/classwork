@@ -141,80 +141,120 @@ V_{\rm rms} = \sqrt{\braket{V^2(t)}} = \sqrt{P_{\rm avg}}
 \end{displaymath}
 To make a quantitative prediction for the result of this measurement, we integrate the power spectral distribution across the entire bandwidth for the circuit (all electronic circuits cut off at some high-frequency).
 
+\begin{figure}[htbp]
+\begin{center}
+{\includegraphics[width=0.65\textwidth]{figs/scope_1M.pdf}}
+\end{center}
+\caption{\label{fig:scope1m} The amplified Johnson noise in a resistor with $R=1~\rm M\Omega$.}
+\end{figure}
+
 In the case of Johnson noise we found that:
 \begin{equation}
 \mathcal{S}_{+}(f) = 4 R \kb T.
 \end{equation}
 which is flat in frequency space.  Note that at room temperature:
 \begin{displaymath}
-4 \kb T =  1.64 \times 10^{-5} \frac{{\rm mV}^2}{\rm kHz \, M\Omega}
+4 \kb T =  16.4 \frac{{\rm \mu V}^2}{\rm kHz \, M\Omega}
 \end{displaymath}
-so even with a $1~\rm M\Omega$ and a $10~\rm kHz$ bandwidth, the RMS voltage due to Johnson Noise will be much smaller than $1~\rm mV$.  We will need to amplify this signal with very high gain in order to see the effect of Johnson Noise.  Our gain will have a frequency dependence, even though our power spectral distribution does not, so we have:
+so even with a $1~\rm M\Omega$ and a $10~\rm kHz$ bandwidth, the RMS voltage due to Johnson Noise will be much smaller than $1~\rm mV$.  We will need to amplify this signal with very high gain in order to see the effect of Johnson Noise.  Our gain will have a frequency dependence, even though our power spectral distribution does not, so to calculate the RMS voltage in circuit with gain we must integrate:
 \begin{eqnarray*}
 V_{\rm rms}^2  &=& \int_{0}^{\infty} df \; g^2(f) \mathcal{S}_+(f)\\
 &=& 4 \kb T R \int_{0}^{\infty} df \; g^2(f)
 \end{eqnarray*}
-If we approximate our circuit as having a constant gain G across a bandwidth $\Delta f$, we have:
-\begin{displaymath}
-V_{\rm rms}^2  = 4 \kb T R G^2 \Delta f
-\end{displaymath}
-The high gain devices we will be using have a bandwidth of about $10~\rm kHz$ and a fairly constant gain in the range $3000-5000$.   The devices allow you to select between many different resistor values, a short circuit, or an external input. 
+The factor:
+\begin{eqnarray*}
+F \equiv \int_{0}^{\infty} df \; g^2(f)
+\end{eqnarray*}
+is the integral of the gain squared of our circuit across all frequencies.  We will determine $g(f)$ for our circuit experimentally using our function generator to input sine waves at fixed frequencies $f$ and measuring the ratio of the output amplitude to the input amplitude.  Typical gains for our circuit are from 2000 to 3000 up to a frequency of about $10~\rm kHz$, where the gain starts to fall off.  The gain integral $F$ is typically in the range $50 \times 10^6$ to   $300 \times 10^6 ~\rm kHz$. 
+For an $R=1~\rm M\Omega$ resistor, theory therefore predicts that our setup would measure an RMS voltage of $V_{\rm rms}$ in the range from $28$ to $70~\rm mV$.  In example is shown in Fig.~\ref{fig:scope1m}.
 
-For a gain in the range $G=3500$ to $4000$ and $R=1~\rm M\Omega$ this would yield a power spectral density in the range of:
+For a particular resistance $R$, we can measure the average spectral density from the gain integral $F$ and the RMS voltage $V_{\rm rms}$ as:
 \begin{displaymath}
-200-262~\rm mV^2/kHz
+S_{\rm meas} = \frac{V^2_{\rm rms}}{F}
 \end{displaymath}
-For a $10~\rm kHz$ bandwidth, the corresponding expected RMS voltage would be $44-51~\rm mV$.
+which we expect to follow:
+\begin{displaymath}
+S_{\rm meas} = 4 k T R.
+\end{displaymath}
 
-In the first week of this experiment, you will measure the gain of the Johnson Noise circuit as a function of frequency using the attenuated output from your function generator.  You will then measure the RMS voltage resulting from amplified Johnson noise and use this to determine $\kb$.  In the second week of this experiment, you will build a power spectrum analyzer, which will allow you to qualitatively investigate the (flat) Johnson noise spectrum, as well as extract $\kb$ more directly from the average PSD.
+In the first week of this experiment, you will measure the gain of the Johnson Noise circuit as a function of frequency using the attenuated output from your function generator.   This will allow you to calculate the gain integral $F$.  You will then measure the RMS voltage resulting from amplified Johnson noise for a series of different resistors to determine the average spectral density as function of resistance, as in Fig.~\ref{fig:smeas}.  By fitting your data to a straight line, you will make your own measurement of Boltzman's constant $k_{\rm b}$.
 
 \section{Johnson Noise Device Gain Measurement}
 
 \begin{figure}[htbp]
 \begin{center}
-{\includegraphics[width=0.65\textwidth]{figs/antenna_grounded.jpg}}
+{\includegraphics[width=0.65\textwidth]{figs/setup.jpg}}
 \end{center}
-\caption{\label{fig:plan} Connections to the Johnson Noise device.  Note the grounding wire used to reduce noise from the knob acting as an antenna!}
+\caption{\label{fig:plan} Connections to the Johnson Noise device.  Note the green grounding wire used to reduce noise from the knob acting as an antenna!}
 \end{figure}
 
-In this section, we will measure the gain of the Johnson Noise device as function of frequency.
+\begin{figure}[htbp]
+\begin{center}
+{\includegraphics[width=0.65\textwidth]{figs/gain.jpg}}
+\end{center}
+\caption{\label{fig:plan} When measuring the gain of the amplifier, you apply an external signal from your function generator (left cable) and turn the dial to external.   The external signal is attenuated in the device by a factor of 500. }
+\end{figure}
 
-Obtain a Johnson Noise (JN) measurement device (Model JN-A or JN-B) and note the serial number (e.g. \#4).  These are high gain devices that are very susceptible to damage.  Do not drive them directly from a function generator, but use a 1000:1 attenuator, taking care that the small resistor is toward the JN device (else you will reduce voltage by a factor 999/1000, and likely damage the equipment!)  
+In this section, we will measure the gain of the Johnson Noise device as function of frequency, which will allow you to determine the gain integral $F$.  Obtain a Johnson Noise (JN) measurement device (Model JN-A or JN-B) and note the serial number (e.g. \#4).  These are high gain devices (factors of several thousand ) that are susceptible to damage.  When driven externally, for calibration, an internal 500:1 attenuator is applied to external signal.
 
-The JN devices are very sensitive, easily pickup noise, and ring at a characteristic frequency of about $27~{\rm kHz}$.  The tuning knob in particular picks up noise.  An old version banana plug cable plugged into the knob at the set screw grounds the knob, eliminated this source of noise.  The effect can be quite dramatic. 
+The JN devices are very sensitive, easily pickup noise, and ring at a characteristic frequency of about $27~{\rm kHz}$.  The tuning knob in particular picks up noise.  A segment of wire, grounded at one end, can be held against the set screw to ground the knob, or wrapped around the post under the knob, eliminating this source of noise.  The effect can be quite dramatic, particularly later in the experiment, when you are measuring Johnson Noise.
 
-Adjust the supply levels on your bench-top supply to $+12~{\rm V}$ and $-12~{\rm V}$.  Then, with the supply turned off, connect the JN device to power and ground, as labeled on the wires.  Once connected, power the device on and adjust the current thresholds to just slightly above where the supplies become current limited.  Under normal operation, the JN device should draw about $20~\rm mA$ from each supply... keep an eye on it.  If one of the supplies is inadvertently disconnected, the circuit latches in a high current state, which should be avoided if possible.
+\begin{figure}[htbp]
+\begin{center}
+{\includegraphics[width=0.65\textwidth]{figs/scope_gain.pdf}}
+\end{center}
+\caption{\label{fig:scopegain}  Example gain measurement at $10~\rm kHz$.}
+\end{figure}
 
-Set your function generator to produce a sine wave with $V_{\rm rms} = 1~\rm V$ and $f = 1~\rm kHz$.  
-Connect the function generator to channel 1 of your scope, then to the $1000:1$ attenuator, and then to your JN device.  Make certain that the JN device is set to the ``External'' mode.  The output of the JN device should then be plugged directly into the scope channel 2.  This configuration puts significantly larger voltage at the JN device than a typical Johnson Noise signal.  Fortunately, the devices are quite linear, and this additional voltage will help overcome some sources of noise.
+Adjust the supply levels on your bench-top supply to $+12~{\rm V}$ and $-12~{\rm V}$.  Then, with the supply turned off, connect the JN device to power and ground.  Each device should have three banana plugs.  The red plug is positive, the black is negative, and the green or white is neutral.  Ignore the color of the wires themselves (which vary from device to device).  Once connected, power the device on and adjust the current thresholds to just slightly above where the supplies become current limited.  Under normal operation, the JN device should draw about $10-20~\rm mA$ from each supply... keep an eye on it.  If one of the supplies is inadvertently disconnected, the circuit latches in a high current state, which should be avoided if possible.
+
+Set your function generator to produce a sine wave with $V_{\rm rms} = 50~\rm mV$ and $f = 10~\rm kHz$.  Connect the function generator to channel 1 of your scope and to the external input of your JN device using a BNC tee connector.  Make certain that the JN device dial is set to the ``External'' mode.  The output of the JN device should then be plugged directly into the scope channel 2.  Use your scope to measure the RMS voltage of the input and output voltage.  When calculating the gain, remember that the external signal has been attenuated by a factor of 500.  So for instance, an apparent gain of 4 would in fact be a gain of 2000.  Measure the gain as a function of frequency for at least the values $f=1,5,10,15,20,25,30,35,40~\rm kHz$.  You might be tempted to try and use your DMM to measure the RMS voltage of your signal, but this is a mistake.  But your DMM is designed to measure 60~\rm Hz AC.  Use your scope's built-in RMS voltage measurement.
+
+\begin{figure}[htbp]
+\begin{center}
+{\includegraphics[width=0.65\textwidth]{figs/gain_4.pdf}}
+\end{center}
+\caption{\label{fig:gain}  Example gain measurement.}
+\end{figure}
 
 \begin{figure}[htbp]
 \begin{center}
 {\includegraphics[width=0.65\textwidth]{figs/gaintrouble.jpg}}
 \end{center}
-\caption{\label{fig:gaintrouble} The output of the Johnson Noise device bounces around a lot due to low frequency noise.  Here the output is shown with display persistance.}
+\caption{\label{fig:gaintrouble}  In the past, UCD students using these devices wrestled with horrific ground loop noise, as shown here.  Fortunately for you, your instructor has dispatched this unwanted source of noise by attenuating the external input inside the device.}
 \end{figure}
 
-Make a series of gain measurements at different frequencies that will allow to determine the integral
+Make a series of gain measurements at different frequencies which will allow to accurately determine the integral
 \begin{displaymath}
-\int_{-\infty}^{\infty} df g(f)^2.
+F = \int_{-\infty}^{\infty} df g(f)^2.
 \end{displaymath}
-While making the gain measurement, you will see that the output of the Johnson Noise seems to bounce around.  The effect can be seen if Fig.~\ref{fig:gaintrouble}.  There is a significant amount of low frequency noise in the output.  I found the best approach was to trigger on the AC line, which allows you to find a region of the plot with relatively little 60 Hz noise.  Use the scopes Measure capability to find the RMS voltage of the input and output of the Johnson Noise.  This is likely the major systematic uncertainty in your measurement, so spend some time thinking about how to quantify it. 
-
-You might be tempted to try and use your DMM to measure the RMS voltage of your signal, but this is a mistake.  Your DMM is designed to measure 60~\rm Hz AC.
+A reasonable choice for the frequencies to measure are $f=1,5,10,15,20,25,30,35,40~\rm kHz$.  An example gain measurement is shown in Fig.~\ref{fig:gain}.  The gain measurement is introduces a major systematic uncertainty in your measurement, so spend some time thinking about how to quantify it.  For example, at one frequency, you should measure the gain factor for input signals larger and smaller than the nominal $50~\rm mV$ input.  
 
 \section{Johnson Noise Measurement}
-You are now ready to make your first-pass Johnson Noise measurement:
-\begin{itemize}
-\item Turn down the function generator and disconnect it from the JN device.
 
-\item Turn the knob to select a resistor, and note the RMS voltage from the scope.  Repeat this measurement for every resistance.  
-\end{itemize}
+You are now ready to make your first-pass Johnson Noise measurement.  Turn down the function generator and disconnect it from the JN device.  Turn the knob to select a resistor, and note the RMS voltage from the scope.  Repeat this measurement, for every resistor in the range $1~M\Omega$ to $30~\rm k\Omega$.  For each measurement, observe the amount that the RMS values fluctuates to estimate a statistical uncertainty.
 
-These measurements, combined with the gain measurement, should allow you to calculate $\kb$.
-Before leaving, do make certain that the data you have collected is reasonable.  At this stage, within an order of magnitude of $\kb$ is acceptable.  {\bf This is the end point for week one.}  
+These measurements, combined with the gain measurement, will allow you to calculate $\kb$.
+From your gain measurements, you can calculate $F$ as described above.  For each RMS voltage measurement $V_{\rm rms}$ at a particular value of $R$ you can calculate your measured value of the average power spectral density:
+\begin{displaymath}
+S_{\rm meas} = \frac{V^2_{\rm rms}}{F} 
+\end{displaymath}
+because this is related to the resistance $R$ by:
+\begin{displaymath}
+S_{\rm meas} = 4 k _bT R 
+\end{displaymath}
+you can experimentally determine $4 k_b T$ from the slope of $S_{\rm meas}$ versus $R$, as shown in Fig.~\ref{fig:fit}.  {\bf This is the end point for week one.}  
 
-\section{The Periodogram}
+\begin{figure}[htbp]
+\begin{center}
+{\includegraphics[width=0.65\textwidth]{figs/fit_4.pdf}}
+\end{center}
+\caption{\label{fig:fit}  Example fit to determine $4 k_b T$.}
+\end{figure}
+
+\section{The Arduino Power Spectral Analyzer}
+
+To further study the features of Johnson Noise, in particular, the flat frequency dependence, you will use an Arduino microprocessor to build a spectrum analyzer.  The Arduino will work as a fast digitizer, providing discrete time series data to the PC for further analysis.  The PC analysis will use the periodogram feature of Scientific Python to calculate the power spectral density from the discrete time series data.  
 
 Suppose $V(t)$ is continuous with some period $T$ so that it is represented by a Fourier Series:
 \begin{displaymath}
@@ -246,9 +286,9 @@ f(t) = A \cos( 2 \pi f_n t)
 \end{displaymath}
 the one-sided power spectral distribution is:
 \begin{equation}
-\mathcal{S}_{+}(f_n) = \frac{T}{2} |A|^2 \label{eqn:psdcalib}
+\mathcal{S}_{+}(f_n) = \frac{T}{2} |A|^2  = T A^2_{\rm rms} \label{eqn:psdcalib}.
 \end{equation}
-which is absolutely essential for calibrating a PSD using a function generator!
+We have noted that  $A_{\rm rms} = |A|/\sqrt{2}$  This is essential for calibrating a PSD using a function generator set to a specific RMS voltage.
 
 %
 % Note also:  A_rms = sqrt(S/T) in keeping with S = V_rms^2 / dF
@@ -288,14 +328,13 @@ The Nyquist-Shannon sampling theorem states that if the highest frequency compon
 
 Given N samples $x_i$ taken at sample rate $1/\tau$, we calculate the DFT as the coefficients in Equation~\ref{eqn:dft}, then we calculate the one-sided power spectrum distribution as in Equation~\ref{eqn:discretepsd}.  If we have satisfied the Nyquist-Shannon sampling theorem, only the coefficients corresponding to $1/2\tau$ will be non-zero, so we need only report $\mathcal{S}_{+}(f_n)$ at the $N/2$ values from $f=1/T$ to $f=N/2T=1/2\tau$.  The plot of $\mathcal{S}_{+}(f_n)$ versus $f_n$ for these $N/2$ values is known as periodogram, and is a staple of digital signal processing.  An example periodogram resulting from a sine wave is shown in Fig.~\ref{fig:periodogram}.
 
-Our initial assumption was that the function was periodic with time $T$, but often we apply periodograms to non-periodic signals, or signals with unknown periodicity.  In this case, there is a resolution loss if $1/T$.  This effect is mitigated by making $T$ as large as is feasible. 
+Our initial assumption was that the function was periodic with time $T$, but often we apply periodograms to non-periodic signals, or signals with unknown periodicity.  In this case, there is a resolution loss of $1/T$.  This effect is mitigated by making $T$ as large as is feasible. 
 
-\section{Digital Dynamic Range Adjustment}
+\section{Analog Level Shifter and Dynamic Range Adjustment}
 
-In the second week of the lab, you will build a digital spectrum analyzer based on the Arduino Uno.
 The Arduino's analog inputs have an input voltage range from 0 to 5 V, but our signals are ground referenced (symmetric about $0~\rm V$).  A DC level shifter is therefore needed to map the ground referenced output of the Johnson Noise device to the $0$ to $5~\rm V$ range expected by the Arduino analog inputs.  
 
-Of course we'll be running the ADC as fast as possible which comes at the price of reduced resolution to 8 bits.  That would result in a voltage precision of $5~\rm V/ 2^8 \sim 20~\rm mV$.  Considering we will be looking at $\sim 100~\rm mV$ signals, this is just not enough precision.  Fortunately, we have one last trick up our sleeve!  The ADC has an (optional) external voltage reference, which sets the scale used by the ADC.  Experimentation showed that the ADC works reliably down to a voltage reference of $\sim 780~\rm mV$, which, at 8-bit precision, would give us a $3~\rm mv$ voltage precision, plenty good enough!
+Of course we'll be running the ADC as fast as possible which comes at the price of reduced resolution to 8 bits.  That would result in a voltage precision of $5~\rm V/ 2^8 \sim 20~\rm mV$.  Considering we will be looking at $\sim 100~\rm mV$ signals and smaller, this is simply not enough precision.  Fortunately, we have one last trick up our sleeve!  The ADC has an (optional) external voltage reference, which sets the scale used by the ADC.  Experimentation showed that the ADC works reliably down to a voltage reference of $\sim 780~\rm mV$, which, at 8-bit precision, would give us a $3~\rm mv$ voltage precision.
 
 The low-pass filter in Fig.~\ref{fig:pwmfilt} is used to convert PWM output (on pin 5 of the Arduino) into a DC reference voltage $V_{\rm ref}$.  This reference voltage is used as (1) the reference for the ADC, at pin AREF, setting the dynamic range of the ADC, and (2) the reference to the DC level shifter circuit in Fig.~\ref{fig:offset} so that input to the ADC is referenced to $V_{\rm ref}/2$.  In this way, we can adjust $V_{\rm ref}$ to match the dynamic range of our signal, and the DC offset will be set to the middle of this range.  This will ensure that even for small signals, the full 8-bit precision of the ADC is being put to use.
 
@@ -338,9 +377,9 @@ You will build the circuits in Fig.~\ref{fig:pwmfilt}  and \ref{fig:offset} usin
 
 \begin{figure}[htbp]
 \begin{center}
-{\includegraphics[width=0.45\textwidth]{figs/test_circuit.png}}\\
+{\includegraphics[width=0.75\textwidth]{figs/test_circuit.png}}\\
 \end{center}
-\caption{\label{fig:sketches}  The CircuitTester sketch is useful for developing, testing, and calibrating your circuit.  The sketch implements an RMS voltmeter that outputs directly to the Serial Monitor.  In the calibration section below you will calibrate CALIB\_MV which is set initially to the nominal $5~\rm V$ scale to match the actual full scale on your Arduino.  The scale refers to the PWM output which determines the reference voltage for the ADC.  A good all-around working point for this experiment is 80.}
+\caption{\label{fig:sketches}  The CircuitTester sketch is useful for developing, testing, and calibrating your circuit.  The sketch implements an RMS voltmeter that outputs directly to the Serial Monitor.  In the calibration section below you will calibrate {\tt CALIB\_MV} which is set initially to the nominal $5~\rm V$ scale to match the actual full scale on your Arduino.  The scale refers to the PWM output which determines the reference voltage for the ADC.  A good all-around working point for this experiment is 80.}
 \end{figure}
 
 \begin{figure}[htbp]
@@ -363,7 +402,7 @@ there is still wasted dynamic range.  In (d) the PWM setting at 80 matches the d
 \end{figure}
 
 
-A light-weight sketch {\rm CircuitTester} is provided which is useful while developing your circuit.  This sketch implements an RMS voltmeter (significantly better, if less durable, than the one provided by your DMM.) based on the circuit your are building.  It provides control of the PWM on pin 5, reads the analog input on A0, and regularly reports the RMS voltage (and other useful quantities) on the serial output.
+A light-weight sketch {\rm CircuitTester} is provided which is useful while developing your circuit.  This sketch implements an RMS voltmeter (significantly better, if less durable, than the one provided by your DMM.) based on the circuit you are are building.  It provides control of the PWM on pin 5, reads the analog input on A0, and regularly reports the RMS voltage (and other useful quantities) on the serial output.
 The level of the PWM is specified in the parameter {\rm RUN\_SCALE}.  A value of 0 results in $0\%$ duty-cycle for the PWM, a value of 255 corresponds to $100\%$ duty-cycle.
 
 While testing your circuit, you should use your function generator to drive the input $V_{\rm in}$ directly.  A $5~\rm kHz$ sine function with an RMS amplitude of $100~\rm mV$ is a good starting point.  Make sure the ground of the function generator is connected to the ground of your Arduino.
@@ -375,8 +414,8 @@ By now we've learned to divide and conquer technical challenges!  I'd propose so
 \item Power up the Arduino.
 \item On your scope you should see the function generator referenced to approximately $2.5~\rm V$.
 \item Power down the Arduino.
-\item Build the lowpass filter as shown, but  connect $V_{\rm ref}$ to channel two on your scope instead of to pin {\tt AREF}.
-\item Power up the Arduino and download the {\rm CircuitTester} sketch, setting the parameter {\tt RUN\_SCALE} to 112.
+\item Build the lowpass filter as shown, including driving the circuit from the PWM pin (pin 5) of the Arduino, but  connect $V_{\rm ref}$ to channel two on your scope instead of to pin {\tt AREF}.
+\item Power up the Arduino and download the {\rm CircuitTester} sketch, setting the parameter {\tt RUN\_SCALE} to 124 (one-half duty cycle)
 \item On your scope, you should observe $V_{\rm ref}$, it should be at about $2.5~\rm V$ with very little ripple (use AC line trigger and DC offset).
 \item Adjust the {\tt RUN\_SCALE} parameter and ensure you have the expected behavior.
 \item Power down the Arduino.
@@ -391,7 +430,7 @@ Once the whole circuit is built, the Arduino is running the {\tt CircuitTester} 
 
 \section{Calibration of Arduino Circuit}
 
-An example of uncalibrated output from the CircuitTester sketch when connected to a $V_{\rm rms} = 300~\rm mV$ input signal is shown in Fig.~\ref{fig:uncalib}.   By design, the mean in raw ADC counts should be near $255/2$ within the accuracy of out $10\%$ resistors.  But the calibrated output in millivolts will be systematic off to start.  To calibrate, simply note the discrepancy and scale the CALIB\_MV parameter accordingly.  Once calibrated, you should get accurate measurements across a range of frequencies, amplitudes, and even $RUN_SCALE$ settings, as shown in Fig.~\ref{fig:calib}.  Take note of the value of CALIB\_MV as you will need to use it in the PSD python driver as well.
+An example of uncalibrated output from the CircuitTester sketch when connected to a $V_{\rm rms} = 300~\rm mV$ input signal is shown in Fig.~\ref{fig:uncalib}.   By design, the mean in raw ADC counts should be near $255/2$ within the accuracy of out $10\%$ resistors.  But the calibrated output in millivolts will be systematically off from the correct value to start.  To calibrate, simply note the discrepancy and scale the {\tt CALIB\_MV} parameter accordingly.  Once calibrated, you should get accurate measurements across a range of frequencies, amplitudes, and even {\tt RUN\_SCALE} settings, as shown in Fig.~\ref{fig:calib}.  Take note of the value of CALIB\_MV as you will need to use it in the PSD python driver as well.
 
 \begin{figure}[htbp]
 \begin{center}
@@ -414,21 +453,21 @@ The mean, in RAW counts, is right where it should be:  near 255/2.}
 \caption{\label{fig:calib}   Post-calibration output for an input signal with (a) $V_{\rm rms}=300~\rm mV$ (b) $V_{\rm rms}=100~\rm mV$ (c) $V_{\rm rms}=20~\rm mV$ (d) $V_{\rm rms}=20~\rm mV$.  In (a)-(c), the PWM analog output level is set to 80, a good choice for the gain calibration.  In (d) the range has been reduced to 40, resulting in better precision.  Also note that, for example, $186/10~\rm mV$ should be read as $18.6~\rm mV$... it seems {\tt sprintf} with float is not supported by the Arduino IDE.}
 \end{figure}
 
-\section{The Arduino Power Spectral Analyzer}
+\section{Using the Arduino Power Spectral Analyzer}
 
 When your circuit is working and calibrated, you are ready to update the software to provide the Power Spectral Analyzer capability.  There is a new sketch (FastAdc) and a command line python driver (psd.py)
-to provide this capability (see Fig.~\ref{fig:fastadc}.  The FastAdc sketch has the RUN\_SCALE parameter used to set the analog voltage scale, but the conversion to millivolts is done in the python driver, so you should set calib\_mv to the value your calibrated value.  As in the Fourier lab, if you tire of entering your COM port each time, you can hard code it in the driver.   Example output from running the python driver is shown in Fig.~\ref{fig:driver}.  As shown in Fig.~\ref{fig:response} the PSD performance is quite respectable, you can see this by scanning the frequency at a constant amplitude.  
+to provide this capability (see Fig.~\ref{fig:fastadc}).  The FastAdc sketch has the {\tt RUN\_SCALE} parameter used to set the analog voltage scale, but the conversion to millivolts is done in the python driver, so you should set {\tt calib\_mv} in the file {\tt psd.py} to the calibrated value you determined in the previous section.  As in the Fourier lab, if you tire of entering your COM port each time, you can hard code it in the python driver.   Example output from running the python driver is shown in Fig.~\ref{fig:driver}.  As shown in Fig.~\ref{fig:response} the PSD performance is quite respectable, which you can see by scanning the frequency at a constant amplitude.  
 
-Take the time to examine the output when the frequency goes above the Nyquist frequency ($38.45~\rm kHz$ in our case).  You should see clear aliasing of the high-frequency signal at a lower frequency.  Fortunately, the low-pass filter in the Johnson Noise device eliminates problematic high-frequency aliasing during our experiment.
+You should examine the output when the frequency goes above the Nyquist frequency ($38.45~\rm kHz$ in our case).  You should see clear aliasing of the high-frequency signal at a lower frequency.  Fortunately, the low-pass filter in the Johnson Noise device eliminates problematic high-frequency aliasing during our experiment.
 
 \begin{figure}[htbp]
 \begin{center}
-{\includegraphics[width=0.45\textwidth]{figs/fast_adc.png}}
+{\includegraphics[width=0.75\textwidth]{figs/fast_adc.png}}
 \end{center}
 \caption{\label{fig:fastadc}    
 The FastAdc sketch is used together with the psd.py python driver on your PC.  The sketch only uses raw adc counts, but the calibration calib\_mv in psd.py should match what you determine with CircuitTester.  
 The PWM output which controls the analog voltage reference is controlled by the RUN\_SCALE parameter.
-A good all-around working point for this experiment is 80.
+A good all-around working point for this experiment is 80.  Note that you can optionally send test pattern data instead of the analog input, for example to test the PC interface, by setting the {\tt TEST\_PATTERN} flag to true.
 }\end{figure}
 
 \begin{figure}[htbp]
@@ -447,64 +486,45 @@ A good all-around working point for this experiment is 80.
 
 \section{Improved Johnson Noise Device Gain Measurement}
 
-The scope gain measurement is quite imprecise due to the presence of significant (few volts) low-frequency noise whenever the function generator is connected to the JN device.  This noise is unambiguously due to an unavoidable (with your available test equipment) small ground loop between the function generator and your bench-top DC power supply.  The tiny amount of noise due to this ground loop is amplified by the JN device by a factor of 1000.  High gain instruments are a challenge!  
+In this section, you will use your spectrum analyzer to determine the gain curve more precisely than in the previous week.  Setup the Johnson Noise device (ideally the same one you used the previous week) for an external input, taken from the function generator at 10~\rm kHz and an RMS voltage of $50~\rm mV$.
+Connect the output of the Johnson Noise device to the input of your Arduino spectrum analyzer.
 
-By moving this analysis into frequency space, we can largely avoid the low frequency noise in our measurement.  Using your Arduino spectrum analyzer, collect data for a range of frequencies, as shown in Fig.~\ref{fig:gain_raw}.  You should use the nruns parameter in the python sketch to average 10 runs per measurement (default is one run only), reducing statistical fluctuations in your power spectrum.  You will use these samples to determine the gain of the JN device as function of frequency.  
 
-By default, the python driver saves the raw data it collected from the Arduino to the txt file "raw\_waveforms.txt".   If you enter a tag like "10khz" or "r100k" instead of just pressing enter when prompted prior to data acquisition, the output file will have your tag appended in the name (to avoid confusion, don't include any whitespace in your tag).  An example python for plotting the data saved in such a file is included on the course website (plottxt.py). 
+Using your Arduino spectrum analyzer
+, as shown in Fig.~\ref{fig:gain_raw}.  In the {\tt psd.py} file, you should set the {\tt nruns} parameter to 10 to average 10 runs per measurement (default is one run only), reducing statistical fluctuations in your power spectrum.  You will use these samples to determine the gain of the JN device as function of frequency.  
+
+By default, the python driver saves the raw data it collected from the Arduino to the txt file {\tt raw\_waveforms.txt}.   If you enter a tag like {\tt g10khz} or {\tt r100k} instead of just pressing enter when prompted prior to data acquisition, the output file will have your tag appended in the name (to avoid confusion, don't include any whitespace in your tag).  This is convenient for the gain calibration where you will be collecting lots of samples at different frequencies.   An example python notebook for reproducing the PSD and time series plots from the data saved in such a text file is included on the course website ({\tt plottxt.ipynb}).
 
 \begin{figure}[htbp]
 \begin{center}
-{\includegraphics[width=0.65\textwidth]{figs/gain_raw.png}}
+{\includegraphics[width=0.65\textwidth]{figs/gain_raw.pdf}}
 \end{center}
 \caption{\label{fig:gain_raw}  Data collected for gain versus frequency scan.}\end{figure}
 
-Unfortunately, the ground loop noise is not completely overcome by the power spectral analysis.   The noise is so large that it saturates the ADC during some portion of the sample collection, effectively filtering out the higher frequency signal of interest, and systematically reducing our gain estimate.
-
-\begin{table}[htbp]
-\begin{center}
-\begin{tabular}{lll}
-Device & $5~\rm kHz$ & $10~\rm kHz$ \\ 
-JN-A-\#6 & 3.77 & 3.49 \\
-JN-A-\#1 & 3.82 & 3.51 \\
-JN-A-\#3 & 3.83 & 3.60 \\
-JN-A-\#3 & 3.86 & 3.61 \\
-JN-A-\#2 & 3.85 & 3.55 \\
-JN-B-\#9 & 2.47 & 2.39 \\
-JN-B-\#7 & 2.57 & 2.75 \\
-\end{tabular}
-\end{center}
-\caption{\label{tbl:gain} Measured gain for each device at two benchmark frequencies.   These gains are accurate to better than $5\%$.}
-\end{table}
-
-Using an isolating transformer to break the ground loop by floating the function generator ground effectively eliminates this noise.  Each JN device has been calibrated using this technique, and the measured gains at $5~\rm kHz$ and $10~\rm kHz$ are recorded in Table~\ref{tbl:gain}.  The shape of your gain as a function of frequency can be inferred reliably from your data, but your should apply an overall scale factor to match one of the benchmarks at the benchmark frequency.  This will give you a reliable Gain curve, accurate to about $5\%$.
-
-Note that the python driver allows for averaging across multiple runs, which helps reduce the impact of low frequency noise.  When making your gain measurement, you should average across at least 10 runs.
 
 Also make certain that your function generator is set to high impedance output... otherwise you gain will be off by a factor of two, which will be hard to plausibly reconcile with the benchmarks.
 
 \section{Johnson Noise Measurement}
 
-With your instrument calibrated, you are ready to collect Johnson noise data
-You should attempt to demonstrate at least the following three things:
+With your instrument calibrated, you are ready to collect Johnson noise data with your spectrum analyzer for a number of different resistor values.  Example data is shown in Fig.~\ref{fig:compare_psd}.  You should attempt to demonstrate at least the following three things:
 \begin{itemize}
-\item The flat frequency spectrum of Johnson Noise.
+\item The flat frequency spectrum of Johnson Noise, as far out as you can, as in Fig.~\ref{fig:final}
 \item The linear relation between Johnson Noise and the resistance. 
 \item An experimental measurement of $\kb$, including an uncertainty.
 \end{itemize}
-Remember to average across multiple runs to reduce statistical fluctuations!  With a bit of luck (and an isolation transformer!) I was able to measure $\kb$ to within 1\% of it's value (See Fig.~\ref{fig:noise}).
+Remember to average across multiple runs to reduce statistical fluctuations, and use the tagging feature to keep the raw data file organized.
 
 \begin{figure}[htbp]
 \begin{center}
-{\includegraphics[width=0.65\textwidth]{figs/compare_psd.png}}
+{\includegraphics[width=0.65\textwidth]{figs/noise_vs_pred.pdf}}
 \end{center}
 \caption{\label{fig:compare_psd}  Example data collected for Johnson Noise measurement, compared to the expectation including the measured gain.}\end{figure}
 
 \begin{figure}[htbp]
 \begin{center}
-{\includegraphics[width=0.65\textwidth]{figs/noise.png}}
+{\includegraphics[width=0.65\textwidth]{figs/final.pdf}}
 \end{center}
-\caption{\label{fig:noise}  Not bad! }\end{figure}
+\caption{\label{fig:final}  The flat response of Johnson Noise and measured value of $4kT$. }\end{figure}
 
 \end{document}
 

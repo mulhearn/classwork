@@ -13,23 +13,28 @@
 \ctikzset{bipoles/thickness=1}
 \ctikzset{bipoles/length=.6cm}
 
-\title{Introduction to the Arduino and Scientific Python} 
+\title{Introduction to the Arduino} 
 
 \maketitle
 
 \section{Introduction}
 
-In this lab, we will learn to use the Arduino microprocessor and scientific python, two tools we will be using through out this course.
+\begin{figure}[htbp]
+\begin{center}
+ \includegraphics[width=0.55\textwidth]{figs/uno.jpg};
+\caption{\label{fig:uno} The Arduino Uno microprocessor.}
+\end{center}
+\end{figure}
 
+In this lab, we will learn to use the Arduino microprocessor, which we
+will be using throughout the course to collect experimental data.  The model we will
+use is the Arduino Uno.  The Arduino Uno is fairly robust and
+inexpensive, so you should definitely be comfortable to experiment
+with them.  However, to avoid the potential to damage the boards, you
+should *NOT* supply any external power to the Arduino (e.g. from your
+proto-board PB-503, bench-top power supply, or function generator.)
 
-\section{Introduction to the Arduino}
-
-For this lab, we will use Arduino Uno.  The Arduino Uno is fairly robust and inexpensive, so you should definitely be comfortable to experiment with them.  However, to avoid the potential to damage the boards, you should *NOT* supply any external power to the Arduino (e.g. from your proto-board PB-503, bench-top power supply, or function generator.)  
-
-
-https://www.arduino.cc/en/Guide/ArduinoUno
-
-\vspace{0.5 cm}
+\section{The Arduino}
 
 \noindent
 {\bf Step 1:} The main Arduino website, which includes lots of
@@ -72,7 +77,7 @@ pushbutton switch labeled S1 on the Prototype Shield v.5, note that hole labeled
 \vspace{0.5 cm}
 
 \noindent
-{\bf Step 6:} Modify it to only output to the serial port after a change in value.
+{\bf Step 6:} Modify it to only output to the serial port after a change in value. This is the {\bf sign-off} point for the lab.
 \vspace{0.5 cm}
 
 \noindent
@@ -83,24 +88,8 @@ pushbutton switch labeled S1 on the Prototype Shield v.5, note that hole labeled
 {\bf Step 8:} Read, build, and upload the Analog Input example. \\
 \vspace{0.5 cm}
 
-\section{Introduction to Scientific Python}
-%{\tt https://www.scipy-lectures.org/\_downloads/ScipyLectures-simple.pdf}\\
-
-
-Much of our work will be using scientific python in an interactive notebook environment.  On some of the newer lab PCs, this is called ``Jupyter Notebook" while on some of the older PCs, this is installed under it's older name as ``IPython Notebook".  Simply find the icon on your Desktop to start the notebook, click it, and start a new notebook.  Most often, we will want inline plots that show up as output in your notebook.  You enable this by using the special command {\tt \%pylab inline} at the start of your notebook, as demonstrated in Fig.~\ref{fig:notebook}.  This command also imports matplotlib and numpy as ``plt" and ``np" so you will be able to work through the tutorial here:\\
-{\tt https://matplotlib.org/users/pyplot\_tutorial.html}\\
-by simply omitting the ``import" directives from the example code snippets.
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=0.95\textwidth]{figs/notebook.png}\\
-\caption{\label{fig:notebook}
-Using Jupyter notebook in inline mode to start the Matplotlib tutorial.}
-\end{center}
-\end{figure}
-Note that some of the code snippets are not complete examples.  You should only try to run the complete examples which include the expected output and begin with an ``import" command (which you will omit.)  Also, note that our installation does not include the {\tt logit} scale, so simply replace {\tt logit} with {\tt log} for the last example.   See Fig.~\ref{fig:notebook} to get started.
-
 \section{Lab Report}
 
-There is no lab report for this lab, simply inform your TA when you have completed everything.
+There is no lab report for this lab.
  
 \end{document}
