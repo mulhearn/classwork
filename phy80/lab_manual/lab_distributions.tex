@@ -10,7 +10,8 @@
 In this lab, you will create your own numerical simulation of a binomial
 process, and compare the results of your simulation with the PDFs for
 the binomial, Poisson, and Gaussian processes in the appropriate
-limits.  
+limits.  For this lab there are only jupyter notebook entries. 
+
 
 This lab includes a number of code snippets to illustrate the ideas
 that are being discussed.  However, the entire source listing is not
@@ -61,7 +62,7 @@ In the first simulated experiment, only the second trial was
 successful.  In the second experiment, only the last trial successful.
 And so on.
 
-\item Next, count the number of trials that were successful in each experiment.  The result will be a 1-D array of length $n_{\rm exp}$.  Consider using the {\tt np.sum} function with the {\tt axis} parameter.  In this example, we obtain the array of outcomes $m$:
+\item Next, count the number of trials that were successful in each experiment.  The result will be a 1-D array of length $n_{\rm exp}$.  Consider using the {\tt np.sum} function with the {\tt axis} parameter (If documentation is unclear to you, check the examples).    In this example, we obtain the array of outcomes $m$:
 \begin{verbatim} 
 [1 1 0 3 2]
 \end{verbatim}
@@ -105,17 +106,26 @@ $\epsilon$ and $n_{\rm try}$ can be compared to the mean and variance
 of the outcome array $m$ from your simulation, calculated using the numpy functions {\tt np.mean} and {\tt np.var}.  A
 comparison with $n_{\rm exp}=1000$, $n_{\rm try}=10$, and
 $\epsilon=0.5$ should result in something like:\\
-\includegraphics[width=0.85\textwidth]{figs/labs/distributions/validate.png}\\ 
-Produce a large number of pseudo-experiments by setting $n_{\rm exp} =
+\includegraphics[width=0.8\textwidth]{figs/labs/distributions/validate.png}\\ 
+
+\begin{print} Produce a large number of pseudo-experiments by setting $n_{\rm exp} =
 1000$ and comment out any debugging print statements which will get
-very long.  Pick five well chosen test cases with different values of
+very long.  Pick two  well chosen test cases with different values of
 $n_{\rm try}$ and $\epsilon$ and compare the expected and simulated
-mean and variances.  The simulated values will fluctuate by a
+mean and variances. 
+
+%Not really visual since it fluctuates and one would need to study the average behaviour for this
+%Print also the values for the percent error for mean and variance
+%\begin{equation}
+%\mbox{percent error}= \frac{|\mbox{expected}-\mbox{simulated}|*100\%}{\mbox{expected}}
+%\end{equation}
+
+ The simulated values will fluctuate by a
 fractional amount $1/\sqrt{n_{\rm exp}}$.  So for $n_{\rm exp} =
 1000$, we expect the expected and simulated values to agree within
 about $3\%$.  If you increase to $n_{\rm exp} = 100000$, the agreement
-should improve to better than $1\%$.  Be certain to record your test
-cases and the results in your logbook.
+should improve to better than $1\%$.  Be certain to print your test
+cases and the results in a clear way in your notebook. \end{print}
 
 \section{Histogram for the Binomial Process}
 
@@ -127,16 +137,16 @@ success rate $\epsilon=0.25$.  There are eleven possible outcomes for
 each of these experiments: $0,1,2,\ldots,10$.  We want to know how
 often each of these outcomes occurred.
 
-Construct a histogram from your simulated results in array $m$ using the 
-{\tt np.histogram} function:\\ 
-\includegraphics[width=0.85\textwidth]{figs/labs/distributions/makehist.png}\\ 
+\begin{plot} Construct and plot a histogram from your simulated results in array $m$ using the 
+{\tt np.histogram} function: \end{plot}
+\includegraphics[width=0.8\textwidth]{figs/labs/distributions/makehist.png}\\ 
 This calculates a histogram with eleven bins covering the range
 from zero to eleven, and reports the number of outcomes from $m$ that
 occur in each bin.  It returns two arrays, which we save as 
 {\tt counts} and {\tt edges}.  We interpret the {\tt counts} array as
 follows: the first entry tells us that 65 experiments had zero
 successes, the second entry that 172 experiments had one success, the
-third entry that 284 experiments had two successes,and so on.  The
+third entry that 284 experiments had two successes, and so on.  The
 exact values will vary each time you run the simulation, but in all
 cases the sum across all bins will equal the total number of
 experiments $n_{\rm exp} = 1000$.
@@ -158,12 +168,12 @@ All the entries in the first bin are from experiments with the outcome
 zero, while all the entries in the second bin are from the outcome
 one.  The best way to plot this histogram, therefore, is
 to associate each count with the leading bin edge, that is:\\
-\includegraphics[width=0.85\textwidth]{figs/labs/distributions/plothist.png} \\
+\includegraphics[width=0.8\textwidth]{figs/labs/distributions/plothist.png} \\
 Notice the essential trick for plotting histogram with discrete data in integer bins is to use the slice {\tt edges[:-1]} of the bin edges data
 \begin{verbatim}
    edges[:-1]:   [ 0.  1.  2.  3.  4.  5.  6.  7.  8.  9. 10.]
 \end{verbatim}
-as the $x$ values for plotting the occurances of each outcome.  This
+as the $x$ values for plotting the occurrences of each outcome.  This
 slice (all but the last entry) essentially throws out the superfluous
 bin edge 11.  As we will see later, this trick only works for discrete
 data in integer bins.  Notice that in resulting plot, we have the number of occurances
@@ -172,6 +182,8 @@ numbers $0,1,2,\ldots,10.$
 
 \section{Error Bars}
 
+\begin{plot} Add error bars to your histogram and make a new plot.
+\end{plot}
 Run your simulation a few times and you will observe that the
 simulated values fluctuate slightly each time you run your code.  But
 how much should we expect these values to fluctuate?  If you consider
@@ -189,20 +201,21 @@ we expect each bin to fluctuate by adding to the data point an ``error
 bar'' with a length equal to the square root of the size of the number
 of events in the
 bin:\\ 
-\includegraphics[width=0.85\textwidth]{figs/labs/distributions/plotbars.png}\\ 
+\includegraphics[width=0.8\textwidth]{figs/labs/distributions/plotbars.png}\\ 
 This provides an intuitive visual indication for the size of the
 statistical fluctuations associated with the counts reported by the
 histogram.  Notice that the poorly named {\tt errorbar} function plots
 {\em both} the data point and the error part, so it is a replacement
 for the {\tt plot} function, not something you must call in addition.
 
+
 \section{Comparison with Binomial PDF}
 
-Next we'd like to compare our Monte Carlo simulation with the PDF for
+ Next we'd like to compare our Monte Carlo simulation with the PDF for
 the binomial distribution.  We'll use the {\tt scipy.stats.binom.pmf}
 function, which is the PDF for the discrete binomial distribution
 available in Scientific Python.  This PDF is only non-zero at integer
-values, so we'll simply evaluate it at each discrete occurance,
+values, so we'll simply evaluate it at each discrete occurrence,
 i.e. the same slice {\tt edges[0:-1]} which we used to plot the
 histogram:\\
 \includegraphics[width=0.85\textwidth]{figs/labs/distributions/compare.png}
@@ -211,10 +224,12 @@ histogram:\\
 single experiment, but we are plotting the number of occurrences for
 $n_{\rm exp}$ experiments.
 
-{\bf Plots 1-3:} Compare the output of your Monte Carlo simulation
+\begin{plot} Compare the output of your Monte Carlo simulation
 with the Binomial distribution PDF with $n_{\rm exp} = 1000$ and
-$n_{\rm try} = 10$, and for three different values of $\epsilon$:
-0.25, 0.5, and 0.75.  For example, Plot 1 should look like the plot above.
+$n_{\rm try} = 10$, and $\epsilon = 0.75$. See example for $\epsilon = 0.25$ in the plot above.
+%and for three different values of $\epsilon$:
+%0.25, 0.5, and 0.75.  For example, Plot 1 should look like the plot above. 
+\end{plot}
 
 
 \section{The Poisson Limit}
@@ -251,18 +266,21 @@ in python, and so you cannot use it as a variable name.
 \begin{center}
 \includegraphics[height=0.22\textheight]{figs/labs/distributions/poisson.pdf}
 \end{center}
-\caption{\label{fig:poisson} The expected result for {\bf Plot 4}. }
+\caption{\label{fig:poisson} Example of the expected result for the Monte Carlo simulation data in comparison to the Poisson PDF for for $\lambda=2$. }
 \end{figure}
 
-{\bf Plots 4-5:}  In the Poisson limit, compare the output of your Monte Carlo simulation to the Poisson PDF
-for two different values of $\lambda$:  2.0, 5.2.  Plot the histogram with 15 bins for the outcomes: 0,1,2,3,...,14.  
-An example is shown in Fig.~\ref{fig:poisson}.
+\begin{plot} In the Poisson limit, compare the output of your Monte Carlo simulation to the Poisson PDF
+for $\lambda=5.2$.
+%for two different values of $\lambda$:  2.0, 5.2.  
+Plot the histogram with 15 bins for the outcomes: 0,1,2,3,...,14.  
+An example for $\lambda=2$ is shown in Fig.~\ref{fig:poisson}.
+\end{plot}
 
 %Using {\tt np.mean} and {\tt np.var}, check that mean and variance of
 %your distributions is as you expect in each case, and record the
 %results in your log book.
 
-This is a {\tt sign-off} point for this lab.  Make certain you can
+This is a \textbf{sign-off point} for this lab.  Make certain you can
 explain your code, and that it is as neat and organized as you can
 manage.
 
@@ -276,7 +294,7 @@ manage.
 (a) & (b) \\
 \end{tabular}
 \end{center}
-\caption{\label{fig:gauss} The expected result for {\bf Plot 4}. }
+\caption{\label{fig:gauss} Example of the expected result for the Monte Carlo simulation data in comparison to the Gaussian PDF for $\lambda=100$. }
 \end{figure}
 
 As the mean value $\lambda$ of the Poisson distribution gets larger,
@@ -287,7 +305,7 @@ integer bins inclusively in the range 70 to 130, e.g.:
 \begin{verbatim}
 counts,edges = np.histogram(m,bins=60,range=(70,130))
 \end{verbatim}
-and compare with the Gaussian distribution PDF (also called normal distribution), e.g.:
+and compare with the Gaussian (also called normal) distribution PDF, e.g.:
 {\tt scipy.stats.norm.pdf} function:
 \begin{verbatim}
 from scipy.stats import norm
@@ -295,10 +313,10 @@ xpred = edges[:-1]
 ypred = nexp * norm.pdf(xpred, loc=lamb, scale=lamb**0.5). 
 \end{verbatim}
 
-Set the parameter {\tt loc} to the mean value, and the parameter {\tt
+\begin{plot} Set the parameter {\tt loc} to the mean value, and the parameter {\tt
   scale} to $\sigma$.  Recall that in the Poisson limit $\sigma^2 =
 \lambda$, which is why we set {\tt scale=lamb**0.5} in the example.
-This should reproduce the plot in Fig.~ref{fig:gauss}a.  
+This should reproduce the plot in Fig.~\ref{fig:gauss}a. \end{plot}
 
 You should see that 60 bins is rather unwieldy.  We'll reduce the number
 of bins, but that's actually a bit more complicated than you might
@@ -306,19 +324,19 @@ expect: non-integer bins with discrete data is about the most
 challenging binning you can tackle.  You'll have to do the following:
 \begin{itemize}
 \item While keeping the range of 70 to 130, set the number bins to {\tt bins=20} when filling your histogram.
-\item Our trick to use edges[:-1] will no longer work, since now the data for each bin is associated with a range of values in the bin.  If we live this as is, the data will be plotted with an observable bias.  For continuous data, we often simply use the middle of the bin:
+\item Our trick to use edges[:-1] will no longer work, since now the data for each bin is associated with a range of values in the bin.  Each bin is now 3 integers wide. If we live this as is, edges[:-1] will position the x value of the bin at its leading edge: 70, 73, 76 , ......  and the data will be plotted with an observable bias.  For continuous data, we often simply use the middle of the bin:
 \begin{verbatim}
-cbins = (edges[:-1] + edges[1:])/2 
+cbins = (edges[:-1] + edges[1:])/2.  
 \end{verbatim}
-but that is slightly biased in this case of discrete data which doesn't extend  all the way to the right edge.  To be precise, the x position we should use for plotting the contents of each bin is:
+This would position the x value of the bins at 71.5, 74.5. 77.5, ..... and that seems more reasonable choice. 
+In this specific case of discrete data which doesn't extend  all the way to the right edge this is still slightly biased. The first bin in our example represents the count of all outcomes in the range from 70 (inclusive) to below 73 (exclusive). So its center should be at 71.  To be precise for this specific case, the x position we should use for plotting the contents of each bin is:
 \begin{verbatim}
 cbins = (edges[:-1] + edges[1:] -1 )/2 
 \end{verbatim}
-\item The normalization of the PDF to the data now requires an additional scale factor to account for the wider bins (which integrate more probability).  You need to scale by an additional factor of 3 to account for the fact that each bin is now 3 integers wide.
+\item The normalization of the PDF to the data now requires an additional scale factor to account for the wider bins (which integrate more probability).  You need to scale by an additional factor of 3 to account for the fact that each bin is 3 integers wide.
 \end{itemize}
-{\bf }
 
-{\bf Plots 6} Using the techniques described above, reproduce Fig~\ref{fig:gauss}b, which shows that the Binomial distributions becomes a Gaussian distribution as the mean value of the distribution becomes large.
+\begin{plot} Using the techniques described above, reproduce Fig~\ref{fig:gauss}b, which shows that the Binomial distributions becomes a Gaussian distribution as the mean value of the distribution becomes large. \end{plot}
 
 
 

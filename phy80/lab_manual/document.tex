@@ -6,24 +6,34 @@
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{enumitem}
+\usepackage{amsthm}
+\theoremstyle{definition}
 
 \usepackage[american,fulldiode]{circuitikz}
 \tikzset{component/.style={draw,thick,circle,fill=white,minimum size =0.75cm,inner sep=0pt}}
+%\newtheorem{env-name}[other_env]{label-text}
+\newtheorem{measurement}{Measurement}[chapter]
+\newtheorem{plot}{Plot}[chapter]
+\newtheorem{example}{Example}[chapter]
+\newtheorem{print}{Print}[chapter]
+\newtheorem{calculation}{Calculation}[chapter]
+
 
 \begin{document}
 \ctikzset{bipoles/thickness=1}
 \ctikzset{bipoles/length=.6cm}
 
 \title{Physics 80 Lab Manual}
-
+\author{version 13.5}
 \maketitle
-
+%\input{intro_python.tex}
 \input{lab_plotting.tex}
 \input{lab_dc_circuits.tex}
 \input{lab_thevenin.tex}
 \input{lab_time_varying.tex}
 \input{lab_transients.tex}
 \input{lab_filters.tex}
+\input{lab_resonance.tex}
 \input{lab_distributions.tex}
 \input{lab_geiger.tex}
 \input{lab_uncertainties.tex}

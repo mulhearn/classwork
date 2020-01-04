@@ -7,13 +7,12 @@
 
 \section{Introduction}
 
-In this lab, you will learn how to use your digital multimeter (DMM)
-and bench-top DC power supply to explore DC circuits involving
-resistors.  You will experimentally verify Ohm's law and the
-equivalent resistance for resistors in series and parallel.
+In this lab, you will learn how to use your digital multimeter (DMM) and bench-top DC power supply to explore DC circuits involving
+resistors.  You will experimentally verify Ohm's law and the equivalent resistance for resistors in series and parallel. For this lab there are both logbook and jupyter notebook entries. Please check Physics 80 Lab logbook and equipment guide in a separate pdf file. 
 
-If time permits, you will also solder two resistor circuits to explore
-the $\Delta$-$Y$ transformation for three terminal networks.
+
+
+%If time permits, you will also solder two resistor circuits to explore the $\Delta$-$Y$ transformation for three terminal networks.
 
 \section{Benchtop Power Supply}
 
@@ -130,30 +129,24 @@ experiment.
 \end{center}
 \end{figure}
 
-Your primary digital multimeter (DMM), the Triplett 9007 shown in
-Fig~\ref{fig:triplett}, can be used to make a number of measurements
-including resistance, DC current, and DC voltage.  We'll measure a DC
-voltage to start.  This lab will be most convenient if you use
-alligator clip probes in your DMM.  Install a black alligator clip
-probe in the ``Common'' terminal, and a red alligator clip probe in
-the ``Voltage'' terminal directly above the Common terminal.  Clip the
-alligator clips together so that you expect to measure $0~\rm V$.  Now
-power the DMM by pressing the power button, and turn the voltage dial
-to the DC voltage measurement, the $V$ with one straight and one
-dashed line next to it.  Most measurements on your DMM have a number
-of different full range settings.  For the highest precision, you
-should use the smallest full-range setting larger than your
-measurement.  We'll be measuring $10~\rm V$, so use the $20~\rm V$
-(DC) setting.
+Your primary digital multimeter (DMM), the Triplett 9007 shown in Fig~\ref{fig:triplett}, can be used to make a number of measurements
+including resistance, DC current, and DC voltage.  We'll measure a DC voltage to start.  This lab will be most convenient if you use
+alligator clip probes in your DMM.  Install a black alligator clip probe in the ``Common'' terminal, and a red alligator clip probe in
+the ``Voltage'' terminal directly above the Common terminal.  Clip the alligator clips together so that you expect to measure $0~\rm V$.  Now
+power the DMM by pressing the power button, and turn the voltage dial to the DC voltage measurement, the $V$ with one straight and one
+dashed line next to it.  Most measurements on your DMM have a number of different full range settings.  For the highest precision, you
+should use the smallest full-range setting larger than your measurement.  We'll be measuring $10~\rm V$, so use the $20~\rm V$
+(DC) setting. The accuracy of your DMM for the DC Voltage reading is listed in table~\ref{tbl:accuracy}. 
 
-With the alligator clip probes connected together, your DMM should
-read $0.00~\rm V$.  Now touch the probes to the terminals on your
+
+\begin{measurement} With the alligator clip probes connected together, your DMM should
+read about $0.00~\rm V$.  Record your reading together with accuracy.  Now touch the probes to the terminals on your
 bench-top DC voltage supply: red probe to red terminal, and black
-probe to black terminal.  You should read $10~\rm V$.  Next touch red
+probe to black terminal.  You should read about $10~\rm V$. Record your reading together with accuracy.  Next touch red
 probe to black terminal and black probe to red terminal.  You should
 read $-10~\rm V$.  This is because the ``Common'' (black) probe is the
 reference point for the measurement, and the red probe is currently
-connected to a point $10~\rm V$ lower than this reference point.
+connected to a point $10~\rm V$ lower than this reference point. \end{measurement} 
 
 \section{Resistance Measurement}
 
@@ -165,17 +158,40 @@ connected to a point $10~\rm V$ lower than this reference point.
 \end{center}
 \end{figure}
 
-Pick two different resistors from the random collection of resistors
-at the front of the lab.  Connect the alligator clip across one of the
-resistors, and turn the dial to the resistance measurement, marked
-$\Omega$.  When the measurement reads ``1'' the resistance is larger
-than the full range.  Find the smallest range larger than your
-resistor and record the measured value.  Using the resistor color
-coding guide in Fig.~\ref{fig:rcolor}, determine the nominal
-resistance of your selected resistor.  In your logbook, record your
-resistor color pattern, the nominal value you determined, and the
-measured value.  Repeat this for a second resistor.
+\begin{table}[h!]
+\normalsize % The size of the table text can be changed depending on content. Remove if desired.
+\begin{tabular}{ lllll }
+\hline
+\textbf{Instrument} &\textbf{Range} & \textbf{Accuracy}  \\
+\hline
+Triplet & $200~\rm mV$- $200.0~\rm V$ (DC) & $\pm (0.5\% \times \mbox{Reading}+ 2~\mbox{LSDs})$. \\
+\hline
+Mastech & $200~\rm mV$- $200.0~\rm V$ (DC) & $\pm (0.5\% \times \mbox{Reading}+ 1~\mbox{LSDs})$. \\
+\hline
+Triplet & $200.0~\rm \Omega$ & $\pm (1\% \times (\mbox{Reading-Residual Resistance} )+ 4~\mbox{LSDs})$. \\
+\hline
+Triplet & $2.000~\rm k\Omega$ & $\pm (1\% \times \mbox{Reading} + 2~\mbox{LSDs})$  \\
+\hline
+Triplet & $20.00~\rm k\Omega$ -$2.000~\rm M\Omega$ & $\pm (1.2\% \times \mbox{Reading} + 2~\mbox{LSDs})$  \\
+\hline
+Triplet & $20.00~\rm M\Omega$ & $\pm (2\% \times \mbox{Reading} + 5~\mbox{LSDs})$  \\
+\hline
+Triplet & $20.00~\rm nF$ & $\pm (4\% \times \mbox{Reading} + 3~\mbox{LSDs})$  \\
+\hline
+\end{tabular} 
+\caption{The accuracy of the Triplett 9007 and Mastech MS8264 multimeters. LSDs indicates Least Significant Digits}
+\label{tbl:accuracy}
+\end{table}
 
+
+\begin{measurement} Pick a random resistor pile (about 8-10 of resistors) from the random collection of resistors at the front of the lab.  Connect the alligators clip probes  together (short the probes) to measure residual resistance. Record the measured value together with the accuracy. Connect the alligator clip across one of the resistors from the pile, and turn the dial to the resistance measurement, marked $\Omega$.  When the measurement reads ``1'' the resistance is larger
+than the full range.  Find the smallest range larger than your resistor and record the measured value together with the accuracy. The accuracy of your DMM for Resistance reading is listed in table~\ref{tbl:accuracy}. 
+
+Using the resistor color coding guide in Fig.~\ref{fig:rcolor}, determine the nominal resistance and tolerance of your selected resistor.  In your logbook, record your resistor color pattern, the nominal value you determined, maximum and minimum value. Compare this findings to your measured value. Does your measured value fall between the maximum and minimum value of resistor?
+\end{measurement}
+
+\begin{measurement} Measure the resistance of 5 resistors from the pile you picked. In your logbook record all of them. Calculate the mean value and the standard error of the mean value and record them in the logbook. Use calculator and show your work in the logbook. Take care of the significant digits and rounding. 
+\end{measurement}
 
 \section{Current Measurement}
 
@@ -227,7 +243,7 @@ introduce an unintentionally large current by connecting a voltage
 across the terminals, as if to measure a voltage.  Even experience is no
 sure remedy for this common lab mishap.
 
-Instead, we will use the Mastech MS8264 which features a resettable
+Instead, we will use the Mastech MS8264 DMM which features a resettable
 fuse for making current measurements.
 
 \section{Breadboard}
@@ -257,7 +273,7 @@ strips inside the breadboard that connect with additional holes.
 The short terminal strips are used to make electrical connections
 between components.  The longer bus strips are a convenient way to
 bring in ground or voltage supplies that need to connect to many
-places in circuit.
+places in circuit. Take time to familiarize yourself with the breadboard. 
 
 \section{Verification of Ohm's Law}
 
@@ -284,19 +300,15 @@ equipment.}
 \end{figure}
 
 Build the circuit in Fig.~\ref{fig:ohmslaw}.  Use a resistor $R_1 =
-1.0~{\rm k\Omega}$ with a $1\%$ tolerance.  Use your Triplett 9007 as
+1.0~{\rm k\Omega}$ with a $1\%$ tolerance (which you can take at the  front desk).  Use your Triplett 9007 as
 the voltmeter and the Mastech MS8624 as the current meter.  Use your
 benchtop power supply to provide the DC voltage.  Use banana plug
 connectors for the current measurement, installing the Mastech MS8624
 between the supply and the breadboard.
 
-By adjusting the voltage setting of the power supply, take a series of
-voltage and current measurements with voltage across the resistor at
-target voltages from $1$ to $10~\rm V$ in steps of $1~\rm V$.
-Generally, you can measure more precisely than you can control, so
-never fuss about trying to measure the voltage at exactly the target
-value, instead, simply record e.g. $V=1.04~\rm V$ along with your
-current measurement and move on to the next target value.
+\begin{measurement}: By adjusting the voltage setting of the power supply, take a series of voltage and current measurements with voltage across the resistor at target voltages from $1$ to $10~\rm V$ in steps of $1~\rm V$. Generally, you can measure more precisely than you can control, so
+never fuss about trying to measure the voltage at exactly the target value, instead, simply record e.g. $V=1.04~\rm V$ along with your
+current measurement and move on to the next target value. Record these values and the sketch of the circuit in the logbook. \end{measurement}
 
 While recording data, check that the current values you measure are
 consistent with what you expect given the voltage across the resistor
@@ -304,38 +316,26 @@ and resistance.  You should {\em always} make quick sanity
 calculations when collecting data, otherwise you risk wasting time
 collecting useless data!
 
-{\bf Plot 1:} Plot the current versus voltage of your ten data points
+%{\bf Plot 1:} 
+\begin{plot} Plot the current versus voltage of your ten data points
 (using option {\tt "o"}).  Draw a line (using option {\tt "-"}) for
 the current versus voltage curve of a $1.0~\rm k\Omega$ resistor.
 Make certain your plot has appropriate axis labels, including
 appropriate units in parenthesis, and a legend distinguishing data
-from your expectation (``expected").  
+from your expectation (``expected").  \end{plot}
 
-{\bf Measurement 1:} After taking your last measurement, leave all the
+%{\bf Measurement 1:} 
+\begin{measurement}: After taking your last measurement, leave all the
 connections in place and the power-supply at $10~\rm V$.  Record in
-your log book the resistance of the resistor $R_1$ reported by your
-DMM.  Is this a reasonable measurement?  {\bf Measurement 2:} Turn off
+your logbook the resistance of the resistor $R_1$ reported by your
+DMM.  Is this a reasonable measurement? Record your comments in the logbook. \end{measurement}
+
+% {\bf Measurement 2:} 
+ \begin{measurement}: Turn off
 the DC supply and record the resistance reported by the DMM.  Is this
-accurate?  {\bf Measurement 3:} Remove the resistor from your circuit
-and measure the resistance with your DMM.  Is this accurate?
-
-\section{Voltage Divider}
-One circuit you will encounter again and again is the humble voltage
-divider circuit of Fig.~\ref{fig:dividers} a.  Modify your setup to
-include an additional resistor $R_2 = 4.7~\rm k\Omega$ in series with
-your resistor $R_1 = ~\rm 1~\rm k\Omega$.  Before installing it in
-your circuit, record the actual value of your resistor $R_2$ in your
-log book.
-
-{\bf Measurement 4:} adjust the supply voltage to $10~\rm V$ and
-record the voltage across resistor $R_1$, the voltage across resistor
-$R_2$, and the current through the divider.  Compare these measured
-values to your expectation.
-
-Now adjust your circuit so that $R_1$ and $R_2$ are in parallel and
-set the supply to $10~\rm V$ {\bf Measurement 5:} Record the voltage
-across the resistors $R_1$ and $R_2$ and the current through each
-resistor.  Compare the measured currents to your expectation.
+accurate? Record your comments in the logbook.  \end{measurement}
+\begin{measurement}: Remove the resistor from your circuit
+and measure the resistance with your DMM.  Is this accurate? Record your comments in the logbook. \end{measurement}
 
 \begin{figure}[htbp]
 \begin{center}
@@ -358,7 +358,30 @@ resistor.  Compare the measured currents to your expectation.
 \end{center}
 \end{figure}
 
+\section{Voltage Divider and resistors in parallel}
+One circuit you will encounter again and again is the humble voltage
+divider circuit of Fig.~\ref{fig:dividers} a.  Modify your setup to
+include an additional resistor $R_2 = 4.7~\rm k\Omega$ in series with
+your resistor $R_1 = ~\rm 1~\rm k\Omega$.  
 
+%{\bf Measurement 4:} 
+ \begin{measurement}:  Before installing it in
+your circuit, record the actual value of your resistor $R_2$ in your
+logbook. Adjust the supply voltage to $10~\rm V$ and
+record the voltage across resistor $R_1$, the voltage across resistor
+$R_2$, and the current through the divider.  Record the sketch of your circuit in the logbook. Compare these measured
+values to your expectation. \end{measurement}
+
+\noindent
+This is a \textbf{sign-off point} for this lab. 
+
+\begin{measurement}: Now adjust your circuit so that $R_1$ and $R_2$ are in parallel and
+set the supply to $10~\rm V$ Record the voltage across the resistors $R_1$ and $R_2$ and the current through each
+resistor.  Record the sketch of your circuit in the logbook. Compare the measured currents to your expectation. \end{measurement}
+
+
+\noindent
+Please return all the components you took and cables to their place. Leave you workstation clean. 
 
 
 

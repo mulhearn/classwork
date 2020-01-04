@@ -10,7 +10,7 @@
 \end{center}
 \end{figure}
 
-In this lab, you will use a Geiger Counter to study the statistics of radioactive decays.
+In this lab, you will use a Geiger Counter to study the statistics of radioactive decays.  For this lab there are both logbook and jupyter notebook entries.
 
 \section{Precautions}
 
@@ -88,9 +88,7 @@ intervals.
 \section{High-Voltage Calibration}
 
 When you are confident that you know how to operate the timer, switch
-the left red switch to ``USE'' mode.  Ask the TA to provide you with a
-sealed radioactive source in the second shelf from the top of your
-Geiger tube holder.  Switch the right switch to ``COUNT'' mode.  With
+the left red switch to ``USE'' mode.  Unless a sealed radioactive source is already in place, ask the TA to provide you with a source in the second shelf from the top of your Geiger tube holder.  Switch the right switch to ``COUNT'' mode.  With
 the HV off, you should not see any pulses.  Turn the HV up until you
 begin to see counts increment on the display, and continue to the next
 interval of 50 volts (e.g. if it first starts incrementing at 730
@@ -100,11 +98,11 @@ ten second interval.
 Repeat this measurement, twice for each voltage setting, in 50 volt
 steps up to 1000 volts.  Do not exceed 1000 volts.
 
-{\bf Plot 1: } Plot the rate (in Hz) as a function of high voltage.
+\begin{plot} Plot the rate (in Hz) as a function of high voltage.
 You should see a plateau region (a leveling off) which indicates the
 onset of the Geiger mode within the Geiger tube.  From your plot,
 chose a high-voltage near the beginning of the Geiger mode, and set
-the high-voltage to this calibrated value.
+the high-voltage to this calibrated value. \end{plot}
 
 \begin{figure}[htbp]
 \begin{center}
@@ -120,7 +118,10 @@ output contains a DC component in addition to the AC pulse, so you
 will want to use your scope in AC coupling mode which will remove the
 DC component and allow you to see the pulse.  You will also want to
 see the attenuation to 1X because you are not using an attenuating
-probe.  The rate of the 
+probe. 
+
+\begin{measurement} Record in your logbook the sketch of the setup and a sketch of a typical Geiger counter pulse you are observing. In sketch of the pulse clearly indicate the duration of the pulse and its amplitude. Record also the biasing voltage. 
+\end{measurement}
 
 
 
@@ -145,13 +146,13 @@ actually be counterproductive (if you consider the effect of a roughly
 constant reaction time.) 
 
 Practice your routine a few times, and make sure your count is near 1000 events in
-a ten second interval.  Then record 200 data points.
+a ten second interval.  Then record 120 data points.
 
 When you have finished recording your data with the radioactive
 source, ask your TA to remove the source and return it to the
 radioactive locker.
 
-Now record an additional 200 data points with no source, to measure
+Now record an additional 120 data points with no source, to measure
 the background radiation rate.  You should record around 3 background
 counts per 10 second interval.
 
@@ -176,13 +177,14 @@ background data, plot the histogram for eleven bins: 0,1,2,...,10.
 For the source data, plot about 20 bins covering a few hundred counts
 around the mean value.
 
-Compare your collected background data to a Poisson distribution,
-appropriately normalized, with a mean set to the mean of your data.
-Compare your collected source data to a Gaussian distribution,
+\begin{plot} Compare your collected background data to a Poisson distribution,
+appropriately normalized, with a mean set to the mean of your data. \end{plot}
+\begin{plot} Compare your collected source data to a Gaussian distribution,
 appropriately normalized, with a mean set to the mean value of your
-data, and sigma set to the square root of your mean.
+data, and sigma set to the square root of your mean. \end{plot}
 
-
+This is a \textbf{sign-off point} for this lab. 
+%move this earlier have them take data with source and analyze then sign off point plus data taking for only background plus analysis; so if they are late they get some plots that could be discussed.
 
 
 
