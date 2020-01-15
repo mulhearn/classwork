@@ -8,7 +8,7 @@
 \usepackage{latexsym,amssymb,amsmath}
 \usepackage{multicol}
 
-\usepackage[american,fulldiode]{circuitikz}
+\usepackage[american,fulldiode,oldvoltagedirection]{circuitikz}
 \tikzset{component/.style={draw,thick,circle,fill=white,minimum size =0.75cm,inner sep=0pt}}
 
 \begin{document}
@@ -17,7 +17,6 @@
 
 \title{Lecture Notes:  Passive Electronics}
 \author{Michael Mulhearn}
-
 \maketitle
 
 \chapter{Direct Current Circuits and Resistance}
@@ -236,7 +235,7 @@ which can be solved to obtain:
 \begin{displaymath}
 R_{\rm eq} = R_1 + R_2.
 \end{displaymath}
-It is left as an exercise to show that for any number of resistors wired in series, the equivalent resistance
+It is left as an exercise to show that for any number of resistors wired in parallel, the equivalent resistance
 is given by:
 \begin{equation} \label{eqn:rseries}
 R_{\rm eq} = \sum_i R_i. 
@@ -608,7 +607,7 @@ However, imagine that at time $t=0$, the capacitor is initially uncharged with $
 \begin{equation} \label{eqn:hcap}
 0 = \frac{dQ}{dt}R + \frac{Q(t)}{C}
 \end{equation}
-can be added to the steady-state solution to provide a solution to the non-homogenous version (with $V \ne 0$).  Differential equations which relate the rate of change of a quantity to the quantity itself invariably lead to the exponential function, and we are led to try:
+can be added to the steady-state solution to provide a solution to the non-homogenous version (with $V_0 \ne 0$).  Differential equations which relate the rate of change of a quantity to the quantity itself invariably lead to the exponential function, and we are led to try:
 \begin{displaymath}
 Q(t) = A \exp(B t)
 \end{displaymath}
@@ -627,11 +626,11 @@ Q(t) = A \, \exp(- t/\tau)
 \end{displaymath}
 with $\tau = RC$ satisfy Equation~\ref{eqn:hcap} and can be added to the steady state solution to obtain:
 \begin{displaymath}
-Q(t) = CV + A \, \exp(- t / \tau)
+Q(t) = CV_0 + A \, \exp(- t / \tau)
 \end{displaymath}
 which is the general solution to Equation~\ref{eqn:icap}.  (You can confirm this for yourself if this is the first time you have seen this approach used.)
 
-For the specific case that $Q(0) = 0$, we conclude that $A = -CV$ and so:
+For the specific case that $Q(0) = 0$, we conclude that $A = -CV_0$ and so:
 \begin{displaymath}
 Q(t) = CV_0 \left(1 - \exp(- t / \tau) \right)
 \end{displaymath}
@@ -1111,7 +1110,7 @@ dB = 10 \, \log_{10}(P_1 / P_0)
 \end{equation}
 where $P_1$ is the power we are describing relative to the power $P_0$.  In many system there is a quadratic relation between the power and another quantity, which is called a root-power quantity.
 For instance, the power in a resistor is $P=V^2/R$.  When using a root-power quantity such as $V$, the definition of a dB is adjusted by a factor of two:
-\begin{equation}
+xo\begin{equation}
 dB = 20 \, \log_{10}(V_1 / V_0)
 \end{equation}
 This allows us to refer to e.g. the $X$ dB point in a way that is independent of whether we refer to power or amplitude, an advantage of dubious value.
@@ -1167,6 +1166,71 @@ So we can see that the phase change at the corner frequency is $45^\circ$ and is
 \end{center}
 \end{figure}
 
+
+\section{Band Pass Filters}
+
+
+\begin{figure}[htbp]
+\begin{center}
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) node[ground,yscale=2.0]{} to[sinusoidal voltage source,bipoles/length=1.5cm] ++(0,+4.0) 
+to [short,i=$\tilde{i}$] ++(1.5,0) to[R,l_=$R$] ++(0,-1.5) coordinate(B) to[short]++(0,-0.5) coordinate(C) to[short]++(-0.5,0) coordinate(D) to[short]++(1,0) coordinate(E);
+\draw (E) to [C,l_=$C$] ++(0,-1.5) coordinate(A) to [short]++(-0.5,0)  to [short]++(0,-0.5) to [short]++(-1.5,0);
+\draw(D) to [L,l_=$L$]++(0,-1.5) coordinate(A) to [short]++(0.5,0);
+%to[C,l_=$C$] ++(0,-2.0) coordinate(A) to[short] ++(-1.5,0);
+%\draw (X) to[C,-*,l=$C_1$] ++(0,-3.0)  to[short,-*] ++(-2.0,0) node[ground,yscale=2.0]{};
+\draw (0.0,2.75) node[left]{$\tilde{v}_{\rm in}$};
+\draw (B) to[short,*-o] ++(1.5,0) node[right]{$\tilde{v}_{\rm out}$};
+\end{circuitikz} 
+\caption{Passive $RLC$ band-pass filter: R in series with L parallel to  $\tilde{v}_{\rm in}$ and $\tilde{v}_{\rm out}$ are phasors corresponding to AC voltages referenced to ground.}
+\label{fig:rlcfilter}
+\end{center}
+\end{figure}
+
+Band-pass filters are widely used when bandpass characteristics are required for inter-stage matching or filtering. Note there are many resonant circuits in the literature so always look  at the circuit diagram. Consider the band-pass filter of Fig.~\ref{fig:rlcfilter}.  The output voltage $v_{\rm out}$ is simply the output of a voltage divider. Hence  the transfer function is:
+\begin{displaymath}
+H(\omega) = \frac{Z_L\parallel Z_C}{Z_R + Z_L\parallel Z_C}=\frac{1}{1+\frac{R}{Z_L \parallel Z_C}}
+\end{displaymath}
+And inserting the impedance of each device in terms of $R$, $C$ and $L$:
+\begin{eqnarray*}
+ H(\omega) = \frac{1}{1+j \omega RC(1-\frac{1}{\omega^2 LC})} = \frac{1}{1+j \tau \omega_0 (\frac{\omega}{\omega_0}-\frac{\omega_0}{\omega})},
+\end{eqnarray*}
+where $\tau=RC$ to emphasize it has units of a time constant and  $\omega_0 = \frac{1}{\sqrt{LC}} $ is resonant angular frequency. Frequency at which the response amplitude is at  maximum is known as resonant frequency:  at $\omega_0$ is $ H(\omega=\omega_0)=1$. At this angular frequency, the RLC resonant circuit has unit gain and no phase shift.  As the frequency moves away from the resonant frequency, the gain drops. The impedance seen by the voltage source is 
+\begin{eqnarray*}
+ Z =Z_R + Z_L\parallel Z_C = R+\frac{j\omega L}{1-\omega^2 LC}
+\end{eqnarray*}
+At the resonance frequency  reactances are equal and opposite and the  total impedance (for this ideal circuit) becomes infinite. In other words, $L\parallel C$ combination resembles an open circuit.  The gain of this ideal $RLC$ filter is given as:
+\begin{displaymath}
+G(\omega) = \frac{1}{1+ (\tau \omega_0)^2 (\frac{\omega}{\omega_0}-\frac{\omega_0}{\omega})^2}
+\end{displaymath}
+The shape of the $RLC$ filter gain  is known as Lorentzian function, Cauchy distribution or Breit-Wigner distribution.
+% This function is used to describe  universal response curve for damped oscillators and for many atomic systems. 
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[height=0.3\textheight]{figs/rlcgain.pdf} \\
+\caption{ The gain of the $RLC$ filter from Fig.~\ref{fig:rlcfilter}.}
+\label{fig:rlcgain}
+\end{center}
+\end{figure}
+
+
+Let's define two points $\omega_+$ and $\omega_-$ as the two
+frequencies, one above and one below $\omega_0$, at which the gain
+drops below $1/\sqrt{2}$.  These are the two $-3~\rm dB$ points which
+define the bandwidth of the system.  The quality of the
+resonance is defined by the ratio of resonant frequency to this bandwidth:
+
+\begin{displaymath}
+Q = \frac{\omega_0}{\omega_+ - \omega_-} = \frac{f_0}{f_+-f_-}
+\end{displaymath}
+
+The quality factor describes how under-damped a resonator is: the higher the Q factor the less damping there is. In $RLC$ circuit damping is caused by the loss of energy in resistive components. Quality factor can also be described as 
+\begin{displaymath}
+Q \propto \frac{\mbox{Maximum Energy Stored}}{\mbox{Energy Loss per cycle at resonance }}
+\end{displaymath}
+For the $RLC$ filter from Fig.~\ref{fig:rlcfilter}, $Q=\omega_0 \tau$. For a fixed values of $L$ and $C$, the quality factor of this circuit increases with increasing $R$. In reality, there will always be some parasitic resistance parallel and in series to $C$ and $L$, and this will lower the quality factor of the circuit.
+
 \section{Exercises}
 \begin{enumerate}
 \item Show that for a sinusoidal AC voltage $v_{\rm rms} = v_{\rm p} / \sqrt{2}$.
@@ -1208,6 +1272,8 @@ to[R,-*,l_=$R$] ++(2.0,0) coordinate(X) to[short,*-*] ++(1.5,0) coordinate(Y) to
 \end{figure}
 \item Consider the RLC filter of Fig.~\ref{fig:rlccircuit}.  Derive the transfer function for the circuit and find the resonant angular frequency $\omega_0$ for which the gain is 1.
 \end{enumerate}
+
+
 
 \chapter{The Diode}
 
