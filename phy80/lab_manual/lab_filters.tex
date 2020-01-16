@@ -8,6 +8,9 @@ circuit with the impedance model derived in class and shown in
 Fig.~\ref{fig:bode}.  For this lab there are both logbook and jupyter notebook entries.
 
 
+You will also  build and measure the performance of a $RLC$ band-pass filter and determine its resonant frequency and quality (Q) factor. For this lab there are both logbook and jupyter notebook entries.
+
+
 \begin{figure}[htbp]
 \begin{center}
 %\begin{tabular}{c@{\hskip 0.25in}c}
@@ -185,6 +188,132 @@ and low-pass filter, and compare to the expected response (using measured values
 Make sure to have
 appropriate axis labels and a legend indicating ``Data'',``Prediction'',.... .
 Use a more descriptive wording instead of Data and Prediction (given here only as example). \end{plot}
+
+\noindent
+This is a \textbf{sign-off point} for this lab.
+
+
+\section{Band-pass Filter}
+
+\begin{figure}[htbp]
+\begin{center}
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) to[sinusoidal voltage source,bipoles/length=1.5cm] ++(0,3.0) 
+to[R,-*,l_=$R_1$] ++(2.0,0) coordinate(X) to[short,*-*] ++(1.5,0) coordinate(Y) to[short,-o] ++(1.0,0) node[right]{B};
+\draw (X) to[C,-*,l=$C_1$] ++(0,-3.0)  to[short,-*] ++(-2.0,0) node[ground,yscale=2.0]{};
+\draw (Y) to[L,-*,l=$L_1$] ++(0,-3.0)  coordinate(X) to[short,-*] ++(-1.5,0);
+\draw (X) to[short,-o] ++(1.0,0) node[right]{A};
+\end{circuitikz}  
+\caption{Circuit diagram for RLC band-pass filter.}
+\label{fig:rlc_circuit}
+\end{center}
+\end{figure}
+
+
+%\begin{figure}[htbp]
+%\begin{center}
+%%\begin{tabular}{c@{\hskip 0.25in}c}
+%\begin{tabular}{cc}
+%\includegraphics[height=0.22\textheight]{figs/labs/filters/rcgaindb.pdf}
+%&
+%\includegraphics[height=0.22\textheight]{figs/labs/filters/rcphase.pdf} \\
+%(a) & (b) \\
+%\end{tabular}
+%\end{center}
+%\caption{\label{fig:bode} Bode plots for band-pass filter showing the (a) gain on a dB scale, and (b) phase, both as a function of the ratio of frequency $f$ to the crossover frequency $f_0$ on a log scale.}
+%\end{figure}
+
+%
+%\begin{measurement} Calculate the resonant frequency:
+%\begin{equation}
+%f_0 = \frac{1}{2\pi \sqrt{LC}}. 
+%\end{equation}
+%of the resonant circuit in Fig.~\ref{fig:rlc_circuit}
+%for $R_1=1.5~\rm k\Omega$, $C_1=10~\rm nF$, and $L_1 = 1~\rm mH$.
+%\end{measurement}
+
+
+%In lecture, we showed that the resonant angular frequency of an RLC
+%band-pass filter is given by
+%\begin{equation}
+%\omega_0 = \frac{1}{\sqrt{LC}}. 
+%\end{equation}
+%At this frequency, the RLC resonant circuit has unit gain and no phase
+%shift.  As the frequency moves away from the resonant frequency, the
+%gain drops.  We define two points $\omega_+$ and $\omega_-$ as the two
+%frequencies, one above and one below $\omega_0$, at which the gain
+%drops below $1/\sqrt{2}$.  These are the two $-3~\rm dB$ points which
+%define the bandwidth of the system.  We define the quality of the
+%resonance by the ratio of resonant frequency to this bandwidth:
+%
+%\begin{displaymath}
+%Q = \frac{\omega_0}{\omega_+ - \omega_-} = \frac{f_0}{f_+-f_-}
+%\end{displaymath}
+
+%For the RLC resonant circuit, we showed in lecture that:
+%\begin{equation}
+%Q = \omega_0 RC
+%\end{equation}
+
+\noindent Build the circuit in Fig.~\ref{fig:rlc_circuit} using $R=1.5~{\rm k \Omega}$ ,
+$C=10~\rm{n F}$, and $L=1~\rm mH$. 
+\begin{measurement} Using your DMM, measure and record
+the actual resistance and capacitance of your components before
+installing them. Use an LCR meter (BK Precision 878B)  to measure the actual inductance of the inductor and record it. Sketch the setup in your logbook.
+Calculate $f_0$ using the measured values of your components. 
+\begin{equation}
+f_0 = \frac{1}{2\pi \sqrt{LC}}. 
+\end{equation}
+\end{measurement} 
+
+\noindent Set the frequency of the function generator to $f_0$ and the peak-to-peak
+voltage to $4~\rm V$.
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=0.50\textwidth]{figs/labs/filters/scope_xy.pdf}
+\end{center}
+\caption{\label{fig:scopexy} 
+Expected scope traces in $XY$ display mode for a relative phase $\phi=\pi/2$, 
+$\phi=\pi/4$, and $\phi=0$.  It is easy, accurate, and somehow deeply satisfying to tune the frequency until the ellipse collapses into itself, forming a line.}
+\end{figure}
+
+We'll measure the actual resonant frequency using a trick: an $XY$ mode of the scope.  
+%During normal use, your oscilloscope displays the voltage of each channel versus
+%time.  But there is an $XY$ mode available under the display options.
+%In this mode, the scope displays the voltage of channel one versus the
+%voltage of channel two.  
+When in $XY$ mode, two out-of-phase signals
+yield an ellipse.  But, as shown in Fig.~\ref{fig:scopexy} when both
+channels are perfectly in phase, the ellipse collapses to make a
+diagonal line. 
+\begin{measurement} You can set you scope in XY mode and adjust the
+frequency until the ellipse collapses to quickly and accurately find
+the resonance frequency. Record the value in your logbook. Add comment in your logbook about how this measurement  compares to the calculated resonance frequency.
+\end{measurement}
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=0.45\textwidth]{figs/labs/filters/qscope.jpg}
+\end{center}
+\caption{\label{fig:qscope} Set Cursor 1 to the peak of Signal 2 at the resonant frequency, then set Cursor 2 to this value times $1/\sqrt{2}$.  The frequencies $f_+$ and $f_-$ can be determined by adjusting the frequency until the output amplitude reaches the level of Cursor 2, as shown here for $f_-$.
+}
+\end{figure}
+
+
+\begin{measurement} One you determine the resonant frequency, switch back to the normal
+display mode and determine the bandwidth.  The easiest way to obtain
+this is to use the cursors to measure the peak voltage of your output
+signal.  Multiply this by a factor of $1/\sqrt{2}$ to determine
+the $-3~\rm dB$ amplitude and set the second cursor at this value, as
+shown in Fig.~\ref{fig:qscope}.  Now adjust the frequency above and
+below the resonant frequency and record at which frequencies the
+amplitude reaches this line. Calculate the bandwidth and record it in your logbook.
+\end{measurement}
+
+\begin{measurement} From your measurement of $f_0$, $f_+$, and $f_-$ calculate the
+measured $Q$-factor of your circuit. Record this value in your logbook. 
+\end{measurement}
+
 
 \noindent
 This is a \textbf{sign-off point} for this lab. 

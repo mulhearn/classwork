@@ -19,7 +19,13 @@
 
 \section{Statistics of Experiments}
 
-A primary purpose of science is to predict the results of experiments.  Consider a simple experiment with five possible outcomes which we repeat ten times.  If our theoretical prediction is that each of these five outcomes is equally probable, than our prediction for a typical series of ten experiments would be for each outcome to occur two times.  Now suppose we perform the experiment ten times and present the results like this:
+A primary purpose of science is to predict the results of experiments.
+Consider a simple experiment with five possible outcomes which we
+repeat ten times.  If our theoretical prediction is that each of these
+five outcomes is equally probable, than our prediction for a typical
+series of ten experiments would be for each outcome to occur two
+times.  Now suppose we perform the experiment ten times and present
+the results like this:
 
 \begin{figure}[htbp]
 \begin{center}
@@ -28,14 +34,29 @@ A primary purpose of science is to predict the results of experiments.  Consider
 \caption{\label{fig:intro} Comparison of experimental results with a prediction.}
 \end{figure}
 
-Scientist almost never display experimental data this way (as a bar graph) because it is nearly impossible to answer the crucial question {\em is this data consistent with this prediction?}  Even if every outcome has an equal probability, the results of individual experiments experience statistical fluctuations.  So even if the theory is correct, we well seldom reproduce exactly the theory prediction.
+Scientist almost never display experimental data this way (as a bar
+graph) because it is nearly impossible to answer the crucial question
+{\em is this data consistent with this prediction?}  Even if every
+outcome has an equal probability, the results of individual
+experiments experience statistical fluctuations.  So even if the
+theory is correct, we well seldom reproduce exactly the theory
+prediction.
 
-To interpret scientific experiments, it isn't enough to have a single prediction for the outcome of an experiment, instead, you need a prediction for the statistical distribution of outcomes: a probability distribution function.  We'll start this discussion, therefore, by deriving three of the most frequently encountered probability distributions:  the Binomial Distribution, the Poisson Distribution, and the Gaussian Distribution.
+To interpret scientific experiments, it isn't enough to have a single
+prediction for the outcome of an experiment, instead, you need a
+prediction for the statistical distribution of outcomes: a probability
+distribution function.  We'll start this discussion, therefore, by
+deriving three of the most frequently encountered probability
+distributions: the Binomial Distribution, the Poisson Distribution,
+and the Gaussian Distribution.
 
 
 \section{The  Binomial Distribution}
 
-The Binomial Distribution is the most general of the distributions we'll consider, but it is a bit cumbersome to use in practice.  The more familiar Poisson and Gaussian distributions are limiting cases of this distribution.  
+The Binomial Distribution is the most general of the distributions
+we'll consider, but it is a bit cumbersome to use in practice.  The
+more familiar Poisson and Gaussian distributions are limiting cases of
+this distribution.
 
 \begin{figure}[htbp]
 \begin{center}
@@ -48,11 +69,17 @@ The Binomial Distribution is the most general of the distributions we'll conside
 \caption{\label{fig:binom} The binomial distribution for several different values of the parameters (a) $n$ and (b) $\epsilon$.}
 \end{figure}
 
-Suppose you repeat a particular process $n$ times, and each time you have the same probability $\epsilon$ of a particular outcome, which, without losing generality, we'll call ``success".  The probability of having exactly $m$ successes after $n$ trials is simply given by:
+Suppose you repeat a particular process $n$ times, and each time you
+have the same probability $\epsilon$ of a particular outcome, which,
+without losing generality, we'll call ``success".  The probability of
+having exactly $m$ successes after $n$ trials is simply given by:
 \begin{displaymath}
 P = \sum_i p_i
 \end{displaymath}
-where $i$ runs over all specific outcomes with $m$ successes and $p_i$ is the probability of each specific outcome.   However, as these specific outcomes all contain exactly $m$ successes, they share the same probability, namely:
+where $i$ runs over all specific outcomes with $m$ successes and $p_i$
+is the probability of each specific outcome.  However, as these
+specific outcomes all contain exactly $m$ successes, they share the
+same probability, namely:
 \begin{displaymath}
 p_i = \epsilon^m (1 - \epsilon)^{n-m}
 \end{displaymath}
@@ -158,65 +185,6 @@ or simply:
 \end{equation}
 Note that if $\epsilon=0$ or $\epsilon=1$, there is only one outcome (all failures or all success) and so the variation is zero.
 
-\section{The Poisson Distribution}
-
-\begin{figure}[htbp]
-\begin{center}
-{\includegraphics[width=0.45\textwidth]{figs/poisson.pdf}}
-\end{center}
-\caption{\label{fig:poisson}  The Poisson distribution for several values of parameter $\lambda$.}
-\end{figure}
-
-
-Suppose we have some time interval over which we expect to observe a mean number of events $\lambda$.  The events must be independent of one another:  an event occurring at a particular time cannot affect the time at which the next event occurs.  We divide the time interval over which the $\lambda$ events are expected to occur into into $n$ sub-intervals, each with an equal probability to contain an event.  These intervals will be all the same size if the events are uniformly distributed in time, but if the events are not uniformly distributed, the sub-intervals are simply chosen to ensure the probability is the same in each interval.  Once cast this way, we can interpret this as a binomial distribution, with probability to contain an event, by construction, given by $\epsilon = \lambda / n$:
-\begin{eqnarray*}
-P(m) &=& \binom{n}{m} \epsilon^m (1-\epsilon)^{n-m} \\[5pt]
-  &=& \frac{n!}{m! \, (n-m)!} \; \left( \frac{\lambda}{n} \right)^m \left( 1 - \frac{\lambda}{n}\right)^{n-m} \\[5pt]
-  &=& \left( \frac{\lambda^m}{m!} \right) \left(1-\frac{\lambda}{n} \right)^n \left[ \frac{n!}{(n-m)!} \cdot \frac{1}{n^m}\right]_1 \left[ \left( 1 - \frac{\lambda}{n}\right)^{-m}\right]_2
-\end{eqnarray*}
-We obtain the Poisson distribution by considering the limit that  $n \to \infty$.   It is left as an exercise to show that both $[\dots]_1 \to 1$ and $[\dots]_2 \to 1$ as $n \to \infty$.  Recalling that
-\begin{displaymath}
-\lim_{n \to \infty} \left(1 - \frac{\lambda}{n} \right)^n = e^{-\lambda}
-\end{displaymath}
-we obtain the Poisson distribution, the probability for observing $m$ events for a mean of $\lambda$:
-\begin{equation}
-\label{eqn:poisson}
-P(m\; ; \; \lambda) = \frac{\lambda^m}{m!} \, e^{-\lambda}
-\end{equation}
-Notice that there is no longer a parameter $n$, since we took $n \to \infty$, and so $m$ now ranges from 0 to $\infty$.  Note also that $\lambda$ is a real number, not necessarily an integer, even though it is the mean of integer values.  For example, the mean of the integers 1 and 2 is the real value 1.5.
-
-\section{Mean and Variance of The Poisson Distribution}
-
-The mean of the Poisson distribution is given by:
-\begin{eqnarray*}
-\bar{m} &=& \sum_{m \geq 0} \; m \, P(m) \\
-&=& \sum_{m \geq 0} \; m \, \frac{\lambda^m}{m!} \, e^{-\lambda}\\
-\end{eqnarray*}
-Since the first term ($m=0$) is zero, we have:
-\begin{eqnarray}
-\bar{m} &=& e^{-\lambda} \sum_{m \geq 1} \; \frac{\lambda^m}{(m-1)!} \notag \\
-             &=& \lambda e^{-\lambda} \sum_{m \geq 1} \; \frac{\lambda^{m-1}}{(m-1)!} \notag \\
-             &=& \lambda e^{-\lambda} \sum_{n \geq 0} \; \frac{\lambda^{n}}{n!} \notag \\
-             &=& \lambda e^{-\lambda} e^\lambda \notag \\
-\bar{m}  &=& \lambda
-\end{eqnarray}
-which should come as no surprise, as the assumption in the derivation was the that mean number of events was $\lambda$. 
-
-For the variance, we use a similar manipulation to calculate:
-\begin{eqnarray*}
-\braket{m^2} &=& \sum_{m \geq 0} \; m^2 \, P(m) \\
-&=& \sum_{m \geq 0} \; m^2 \, \frac{\lambda^m}{m!} \, e^{-\lambda}\\
-&=& \lambda \sum_{m \geq 1} \; m \, \frac{\lambda^{m-1}}{(m-1)!} \, e^{-\lambda}\\
-&=& \lambda \sum_{n \geq 0} \; (n+1) \, \frac{\lambda^{n}}{(n)!} \, e^{-\lambda}\\
-&=& \lambda \braket{m+1} = \lambda \, (\lambda+1)
-\end{eqnarray*}
-And so:
-\begin{eqnarray}
-\sigma^2 &=& \braket{m^2} - \braket{m}^2 \notag \\
-&=& \lambda \, (\lambda+1) - \lambda^2 \notag \\
-\sigma^2 &=& \lambda. 
-\end{eqnarray}
-That is, the variance of a Poisson distribution is simply the mean.
 
 \section{The Gaussian Distribution}
 
@@ -227,23 +195,45 @@ That is, the variance of a Poisson distribution is simply the mean.
 \caption{\label{fig:gaussian}  The Gaussian distribution for a mean of 10 and several values of parameter $\sigma$.}
 \end{figure}
 
-The last and most important probability distribution we will consider is the Gaussian distribution:
+The next distribution we will consider is the Gaussian distribution:
 \begin{equation}
 \label{eqn:gaussian}
 P(x) = \frac{1}{\sqrt{2\pi} \sigma} \cdot \exp\left( - \frac{(x - \lambda)^2}{2 \sigma^2}\right)
 \end{equation}
-which is plotted in Fig.~\ref{fig:gaussian}.  The Gaussian distribution (also sometimes called the normal distribution) appears frequently as a consequence of the central limit theorem, which states that the sum of independent random variables, when appropriately average (such as by taking the mean value) approaches a Gaussian distribution.  As one example of the CLT, we'll show in the next section that the Gaussian distribution emerges from the Poisson distribution in the limit that $\lambda \to \infty$.
+which is plotted in Fig.~\ref{fig:gaussian}.  The Gaussian
+distribution (also sometimes called the normal distribution) appears
+frequently as a consequence of the central limit theorem, which states
+that the sum of independent random variables, when appropriately
+average (such as by taking the mean value) approaches a Gaussian
+distribution.  As one example of the CLT, we'll show later that the
+Gaussian distribution emerges from the Poisson distribution in the
+limit that $\lambda \to \infty$.
 
-The Binomial and Poisson distributions are discrete functions:  they describe the probability of outcomes which are integer quantities.   The Poisson probability for having 2.31 events is either undefined or taken to be zero.  The value of the Binomial and Poisson distribution function at a particular integer value is simply the probability of that particular outcome.  To determine the probability that an outcome is within a range of integers, say $m_1$ to $m_2$ the probability distribution function is simply added:
+The Binomial distribution is a discrete functions: it describes the
+probability of outcomes which are integer quantities.  The Binomial
+probability for having 2.31 successes is either undefined or taken to be
+zero.  The value of the Binomial distribution function at
+a particular integer value is simply the probability of that
+particular outcome.  To determine the probability that an outcome is
+within a range of integers, say $m_1$ to $m_2$ the probability
+distribution function is simply added:
 \begin{displaymath}
 P = \sum_{m=m_1}^{m_2} P(m).
 \end{displaymath}
 
-The Gaussian distribution is a continuous function that describes the probability {\em density} at each position $x$.  The probability of any particular outcome, say $x=1.24323$, is vanishing small.  But the probability that the value lies within a range of values is non-zero, and is determined by integrating:
+The Gaussian distribution is a continuous function that describes the
+probability {\em density} at each position $x$.  The probability of
+any particular outcome, say $x=1.24323$, is vanishing small.  But the
+probability that the value lies within a range of values is non-zero,
+and is determined by integrating:
 \begin{displaymath}
 P = \int_{x_{\rm min}}^{x_{\rm max}} P(x;\lambda,\sigma) \, dx
 \end{displaymath}
-The Gaussian distribution is called a probability density function (PDF).  A discrete probability distribution is sometimes referred to as probability mass function (PMF), to draw upon an analogy with physical mass and density:  a PDF is probability per unit volume while a PMF is simply a probability.
+The Gaussian distribution is called a probability density function
+(PDF).  A discrete probability distribution is sometimes referred to
+as probability mass function (PMF), to draw upon an analogy with
+physical mass and density: a PDF is probability per unit volume while
+a PMF is simply a probability.
 
 The Gaussian distribution is normalized so that:
 \begin{displaymath}
@@ -261,84 +251,10 @@ and:
 \begin{displaymath}
 \braket{x^2}  \equiv \int_{-\infty}^{+\infty} x^2 P(x) \, dx 
 \end{displaymath}
-We have defined the Gaussian distribution with the suggestive parameters $\lambda$ and $\sigma$.   It is left as an exercise to show that indeed, the mean is $\lambda$ and the variance is $\sigma^2$.
+We have defined the Gaussian distribution with the suggestive
+parameters $\lambda$ and $\sigma$.  It is left as an exercise to show
+that indeed, the mean is $\lambda$ and the variance is $\sigma^2$.
 
-\section{The Gaussian Distribution as a Limiting Case}
-
-As expected from the Central Limit Theorem, the Poisson Distribution in the limit $\lambda \to \infty$
-approaches the Gaussian distribution.  In this case, we can apply the Stirling Approximation:
-\begin{displaymath}
-\lim_{n \to \infty} n! = \sqrt{2 \pi n} \; e^{-n} \; n^n
-\end{displaymath}
-to the Poisson distribution as follows:
-\begin{eqnarray*}
-P(m) &=& \frac{\lambda^m}{m!} \, e^{-\lambda} \\[5pt]
- &\to& \frac{\lambda^m e^{-\lambda}}{\sqrt{2 \pi m} \; e^{-m} \; m^m} \\[5pt]
- &=& \frac{e^{m-\lambda}}{\sqrt{2\pi\lambda}} \left( \frac{\lambda}{m}\right)^{m+\frac{1}{2}}\\
-\end{eqnarray*}
-Now we consider a new variable $\delta$, defined by
-\begin{displaymath}
-\delta \equiv \frac{m-\lambda}{\lambda}
-\end{displaymath}
-which measures the difference between the observed number of events $m$ and the mean of the distribution, as a fraction of the mean.  Intuitively, the function is getting very narrow, and so we expect this to be a small quantity, but let's check this.  First we have:
-\begin{displaymath}
-\braket{\delta} = \frac{\braket{m}- \lambda}{\lambda} = \frac{\lambda - \lambda}{\lambda} = 0
-\end{displaymath}
-but also:
-\begin{displaymath}
-\braket{\delta^2} = \frac{\braket{(m-\lambda)^2}}{\lambda^2} = \frac{\lambda}{\lambda^2} = \frac{1}{\lambda}
-\end{displaymath}
-where we have used the fact that the variance is given by $\braket{(m-\lambda)^2} = \lambda$, and so as $\lambda \to \infty $ we have
-\begin{displaymath}
-\braket{\delta^2} \to 0
-\end{displaymath}
-So we can write:
-\begin{equation} \label{eqn:mdef}
-m = \lambda (1 + \delta)
-\end{equation}
-where we expect the approximation $\delta \to 0$ to hold as long as we require $\lambda \to \infty$.  So now we can write the distribution in terms of the small quantity $\delta$ and the large quantity $\lambda$ as:
-\begin{eqnarray}
-\label{eqn:pdelt}
-P(\delta) &=& \frac{e^{\lambda\delta}}{\sqrt{2\pi\lambda}} \left( \frac{\lambda}{\lambda (1+\delta)} \right)^{\lambda(1+\delta)+\frac{1}{2}} \notag \\[5pt]
- &=& \frac{e^{\lambda\delta}}{\sqrt{2\pi\lambda}} \cdot \frac{1}{X}
-\end{eqnarray}
-where we define the quantity:
-\begin{displaymath}
-X = (1+\delta)^{\lambda(1+\delta)+\frac{1}{2}}
-\end{displaymath}
-which can be approximated as follows:
-\begin{eqnarray*}
-\ln X &=& \left( \lambda (1+\delta) + \frac{1}{2} \right) \cdot \ln(1+\delta) \\[5pt]
-&=& \left( \lambda (1+\delta) + \frac{1}{2} \right) \cdot \left( \delta - \frac{\delta^2}{2} + \mathcal{O}(\delta^3)\right) \\[5pt]
-\frac{\ln X}{\lambda}&=& \left( 1+\delta + \frac{1}{2\lambda} \right) \cdot \left( \delta - \frac{\delta^2}{2} + \mathcal{O}(\delta^3)\right) \\[5pt]
-&=& \left( 1+\delta + \mathcal{O}\left(\delta^2\right) \right) \cdot \left( \delta - \frac{\delta^2}{2} + \mathcal{O}(\delta^3)\right) \\[5pt]
-&=& \delta + \frac{\delta^2}{2}+ \mathcal{O}(\delta^3),
-\end{eqnarray*}
-where in the second to last step we used $\mathcal{O}\left(\frac{1}{\lambda}\right) \sim \mathcal{O}\left(\delta^2\right)$.  Neglecting the small quantities, we can approximate
-\begin{displaymath}
-X = \exp\left( \lambda\delta + \lambda\frac{\delta^2}{2} \right) 
-\end{displaymath}
-which, when plugged backed into Equation~\ref{eqn:pdelt} yields:
-\begin{eqnarray}
-\label{eqn:almost}
-P(\delta) &=& \frac{e^{\lambda\delta}}{\sqrt{2\pi\lambda}} \cdot \frac{1}{\exp\left( \lambda\delta + \lambda\frac{\delta^2}{2} \right)} \notag \\[5pt]
-&=& \frac{1}{\sqrt{2\pi\lambda}} \cdot \exp\left( -\lambda \frac{\delta^2}{2}\right)
-\end{eqnarray}
-Recalling that:
-\begin{displaymath}
-\delta \equiv \frac{m - \lambda}{\lambda} 
-\end{displaymath}
-\begin{equation}
-P(x) = \frac{1}{\sqrt{2\pi \lambda}} \cdot \exp\left( - \frac{(m - \lambda)^2}{2 \lambda}\right)
-\end{equation}
-Which we can identify as a special case of the Gaussian distribution of Equation~\ref{eqn:gaussian} with 
-$\sigma^2 = \lambda$ and $x = m$:
-
-\begin{equation*}
-P(x) = \frac{1}{\sqrt{2\pi} \sigma} \cdot \exp\left( - \frac{(x - \lambda)^2}{2 \sigma^2}\right)
-\end{equation*}
-It may trouble you that $x$ is continuous while $m$ here was an integer.  But note that in the limit 
-$\lambda \to \infty$, the difference between $m/\lambda$ and $(m+1)/\lambda$ is infinitesimal, and so this is effectively a continuous function, consistent with the Gaussian distribution.
 
 \section{Histograms in Scientific Python}
 
@@ -428,6 +344,145 @@ where $\Delta x$ is the width of each bin.  This scale factor $N_{\rm meas} \; \
 In this case, there are 1000 total entries in the histogram and the bin size is 0.5, for a scale factor of 500.
 }
 \end{figure}
+
+\section{The Poisson Distribution}
+
+\begin{figure}[htbp]
+\begin{center}
+{\includegraphics[width=0.45\textwidth]{figs/poisson.pdf}}
+\end{center}
+\caption{\label{fig:poisson}  The Poisson distribution for several values of parameter $\lambda$.}
+\end{figure}
+
+
+Suppose we have some time interval over which we expect to observe a mean number of events $\lambda$.  The events must be independent of one another:  an event occurring at a particular time cannot affect the time at which the next event occurs.  We divide the time interval over which the $\lambda$ events are expected to occur into into $n$ sub-intervals, each with an equal probability to contain an event.  These intervals will be all the same size if the events are uniformly distributed in time, but if the events are not uniformly distributed, the sub-intervals are simply chosen to ensure the probability is the same in each interval.  Once cast this way, we can interpret this as a binomial distribution, with probability to contain an event, by construction, given by $\epsilon = \lambda / n$:
+\begin{eqnarray*}
+P(m) &=& \binom{n}{m} \epsilon^m (1-\epsilon)^{n-m} \\[5pt]
+  &=& \frac{n!}{m! \, (n-m)!} \; \left( \frac{\lambda}{n} \right)^m \left( 1 - \frac{\lambda}{n}\right)^{n-m} \\[5pt]
+  &=& \left( \frac{\lambda^m}{m!} \right) \left(1-\frac{\lambda}{n} \right)^n \left[ \frac{n!}{(n-m)!} \cdot \frac{1}{n^m}\right]_1 \left[ \left( 1 - \frac{\lambda}{n}\right)^{-m}\right]_2
+\end{eqnarray*}
+We obtain the Poisson distribution by considering the limit that  $n \to \infty$.   It is left as an exercise to show that both $[\dots]_1 \to 1$ and $[\dots]_2 \to 1$ as $n \to \infty$.  Recalling that
+\begin{displaymath}
+\lim_{n \to \infty} \left(1 - \frac{\lambda}{n} \right)^n = e^{-\lambda}
+\end{displaymath}
+we obtain the Poisson distribution, the probability for observing $m$ events for a mean of $\lambda$:
+\begin{equation}
+\label{eqn:poisson}
+P(m\; ; \; \lambda) = \frac{\lambda^m}{m!} \, e^{-\lambda}
+\end{equation}
+Notice that there is no longer a parameter $n$, since we took $n \to \infty$, and so $m$ now ranges from 0 to $\infty$.  Note also that $\lambda$ is a real number, not necessarily an integer, even though it is the mean of integer values.  For example, the mean of the integers 1 and 2 is the real value 1.5.
+
+\section{Mean and Variance of The Poisson Distribution}
+
+The mean of the Poisson distribution is given by:
+\begin{eqnarray*}
+\bar{m} &=& \sum_{m \geq 0} \; m \, P(m) \\
+&=& \sum_{m \geq 0} \; m \, \frac{\lambda^m}{m!} \, e^{-\lambda}\\
+\end{eqnarray*}
+Since the first term ($m=0$) is zero, we have:
+\begin{eqnarray}
+\bar{m} &=& e^{-\lambda} \sum_{m \geq 1} \; \frac{\lambda^m}{(m-1)!} \notag \\
+             &=& \lambda e^{-\lambda} \sum_{m \geq 1} \; \frac{\lambda^{m-1}}{(m-1)!} \notag \\
+             &=& \lambda e^{-\lambda} \sum_{n \geq 0} \; \frac{\lambda^{n}}{n!} \notag \\
+             &=& \lambda e^{-\lambda} e^\lambda \notag \\
+\bar{m}  &=& \lambda
+\end{eqnarray}
+which should come as no surprise, as the assumption in the derivation was the that mean number of events was $\lambda$. 
+
+For the variance, we use a similar manipulation to calculate:
+\begin{eqnarray*}
+\braket{m^2} &=& \sum_{m \geq 0} \; m^2 \, P(m) \\
+&=& \sum_{m \geq 0} \; m^2 \, \frac{\lambda^m}{m!} \, e^{-\lambda}\\
+&=& \lambda \sum_{m \geq 1} \; m \, \frac{\lambda^{m-1}}{(m-1)!} \, e^{-\lambda}\\
+&=& \lambda \sum_{n \geq 0} \; (n+1) \, \frac{\lambda^{n}}{(n)!} \, e^{-\lambda}\\
+&=& \lambda \braket{m+1} = \lambda \, (\lambda+1)
+\end{eqnarray*}
+And so:
+\begin{eqnarray}
+\sigma^2 &=& \braket{m^2} - \braket{m}^2 \notag \\
+&=& \lambda \, (\lambda+1) - \lambda^2 \notag \\
+\sigma^2 &=& \lambda. 
+\end{eqnarray}
+That is, the variance of a Poisson distribution is simply the mean.
+
+
+\section{The Gaussian Distribution as a Limiting Case}
+
+As expected from the Central Limit Theorem, the Poisson Distribution in the limit $\lambda \to \infty$
+approaches the Gaussian distribution.  In this case, we can apply the Stirling Approximation:
+\begin{displaymath}
+\lim_{n \to \infty} n! = \sqrt{2 \pi n} \; e^{-n} \; n^n
+\end{displaymath}
+to the Poisson distribution as follows:
+\begin{eqnarray*}
+P(m) &=& \frac{\lambda^m}{m!} \, e^{-\lambda} \\[5pt]
+ &\to& \frac{\lambda^m e^{-\lambda}}{\sqrt{2 \pi m} \; e^{-m} \; m^m} \\[5pt]
+ &=& \frac{e^{m-\lambda}}{\sqrt{2\pi\lambda}} \left( \frac{\lambda}{m}\right)^{m+\frac{1}{2}}\\
+\end{eqnarray*}
+Now we consider a new variable $\delta$, defined by
+\begin{displaymath}
+\delta \equiv \frac{m-\lambda}{\lambda}
+\end{displaymath}
+which measures the difference between the observed number of events $m$ and the mean of the distribution, as a fraction of the mean.  Intuitively, the function is getting very narrow, and so we expect this to be a small quantity, but let's check this.  First we have:
+\begin{displaymath}
+\braket{\delta} = \frac{\braket{m}- \lambda}{\lambda} = \frac{\lambda - \lambda}{\lambda} = 0
+\end{displaymath}
+but also:
+\begin{displaymath}
+\braket{\delta^2} = \frac{\braket{(m-\lambda)^2}}{\lambda^2} = \frac{\lambda}{\lambda^2} = \frac{1}{\lambda}
+\end{displaymath}
+where we have used the fact that the variance is given by $\braket{(m-\lambda)^2} = \lambda$, and so as $\lambda \to \infty $ we have
+\begin{displaymath}
+\braket{\delta^2} \to 0
+\end{displaymath}
+So we can write:
+\begin{equation} \label{eqn:mdef}
+m = \lambda (1 + \delta)
+\end{equation}
+where we expect the approximation $\delta \to 0$ to hold as long as we require $\lambda \to \infty$.  So now we can write the distribution in terms of the small quantity $\delta$ and the large quantity $\lambda$ as:
+\begin{eqnarray}
+\label{eqn:pdelt}
+P(\delta) &=& \frac{e^{\lambda\delta}}{\sqrt{2\pi\lambda}} \left( \frac{\lambda}{\lambda (1+\delta)} \right)^{\lambda(1+\delta)+\frac{1}{2}} \notag \\[5pt]
+ &=& \frac{e^{\lambda\delta}}{\sqrt{2\pi\lambda}} \cdot \frac{1}{X}
+\end{eqnarray}
+where we define the quantity:
+\begin{displaymath}
+X = (1+\delta)^{\lambda(1+\delta)+\frac{1}{2}}
+\end{displaymath}
+which can be approximated as follows:
+\begin{eqnarray*}
+\ln X &=& \left( \lambda (1+\delta) + \frac{1}{2} \right) \cdot \ln(1+\delta) \\[5pt]
+&=& \left( \lambda (1+\delta) + \frac{1}{2} \right) \cdot \left( \delta - \frac{\delta^2}{2} + \mathcal{O}(\delta^3)\right) \\[5pt]
+\frac{\ln X}{\lambda}&=& \left( 1+\delta + \frac{1}{2\lambda} \right) \cdot \left( \delta - \frac{\delta^2}{2} + \mathcal{O}(\delta^3)\right) \\[5pt]
+&=& \left( 1+\delta + \mathcal{O}\left(\delta^2\right) \right) \cdot \left( \delta - \frac{\delta^2}{2} + \mathcal{O}(\delta^3)\right) \\[5pt]
+&=& \delta + \frac{\delta^2}{2}+ \mathcal{O}(\delta^3),
+\end{eqnarray*}
+where in the second to last step we used $\mathcal{O}\left(\frac{1}{\lambda}\right) \sim \mathcal{O}\left(\delta^2\right)$.  Neglecting the small quantities, we can approximate
+\begin{displaymath}
+X = \exp\left( \lambda\delta + \lambda\frac{\delta^2}{2} \right) 
+\end{displaymath}
+which, when plugged backed into Equation~\ref{eqn:pdelt} yields:
+\begin{eqnarray}
+\label{eqn:almost}
+P(\delta) &=& \frac{e^{\lambda\delta}}{\sqrt{2\pi\lambda}} \cdot \frac{1}{\exp\left( \lambda\delta + \lambda\frac{\delta^2}{2} \right)} \notag \\[5pt]
+&=& \frac{1}{\sqrt{2\pi\lambda}} \cdot \exp\left( -\lambda \frac{\delta^2}{2}\right)
+\end{eqnarray}
+Recalling that:
+\begin{displaymath}
+\delta \equiv \frac{m - \lambda}{\lambda} 
+\end{displaymath}
+\begin{equation}
+P(x) = \frac{1}{\sqrt{2\pi \lambda}} \cdot \exp\left( - \frac{(m - \lambda)^2}{2 \lambda}\right)
+\end{equation}
+Which we can identify as a special case of the Gaussian distribution of Equation~\ref{eqn:gaussian} with 
+$\sigma^2 = \lambda$ and $x = m$:
+
+\begin{equation*}
+P(x) = \frac{1}{\sqrt{2\pi} \sigma} \cdot \exp\left( - \frac{(x - \lambda)^2}{2 \sigma^2}\right)
+\end{equation*}
+It may trouble you that $x$ is continuous while $m$ here was an integer.  But note that in the limit 
+$\lambda \to \infty$, the difference between $m/\lambda$ and $(m+1)/\lambda$ is infinitesimal, and so this is effectively a continuous function, consistent with the Gaussian distribution.
+
 
 \newpage
 \section{Homework Exercises for Distributions}

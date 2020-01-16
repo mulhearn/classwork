@@ -4,11 +4,29 @@
 
 In this lab you will use two essential new pieces of lab equipment:
 the digital oscilloscope and the function generator.  You will learn
-how to measure AC voltages with your DMM, how to view
-time-dependent wave forms on your digital oscilloscope and how to trigger digital oscilloscope. For this lab there are both logbook and jupyter notebook entries.
+how to measure AC voltages with your DMM, how to trigger on and view
+time-dependent wave forms on your digital oscilloscope.  For this lab
+there are both logbook and Jupyter notebook entries.
 
 
 \section{Function Generator}
+
+This section introduces you to your Function Generator and illustrates
+some of the common used features and pitfalls.  It should not take
+more than about one-half hour to complete.
+
+Connect the output of Channel 1 directly to the Voltage measurement
+input of your Triplett 9007 DMM, using a coaxial cable with BNC
+connectors, and a BNC to banana plug adapter as shown in
+Fig.~\ref{fig:dmm_setup}.  BNC is a type of quick connector often used
+for coaxial cable.  Coaxial cable is a type of electrical cable that
+can transmit high frequency signals with low losses. It has an inner
+conductor surrounded by an insulating layer, surrounded by a
+conducting shield.  Coaxial cable has a characteristic impedance,
+which specifies the resistance that should be placed at the receiving
+end of the cable to minimize reflections, which can degrade high
+frequency signals.  Your coaxial cable has a characteristic impedance
+of $50~\rm \Omega$.
 
 \begin{figure}[htbp]
 \begin{center}
@@ -18,12 +36,8 @@ time-dependent wave forms on your digital oscilloscope and how to trigger digita
 \end{center}
 \end{figure}
 
- Connect the output of Channel 1 directly to the Voltage measurement
-input of your Triplett 9007 DMM, using a coaxial cable with BNC connectors, and a BNC to banana plug adapter as
-shown in Fig.~\ref{fig:dmm_setup}.  BNC is a type of quick connector often used for coaxial cable.  Coaxial cable is a type of electrical cable that can transmit high frequency signals with low losses. It has an inner conductor surrounded by a insulating layer, surrounded by a conducting shield. Every coaxial cable has a characteristic impedance and the one you will use in the lab has $50~\rm \Omega$. 
-
-Turn on power to the function
-generator.  Then set your function generator to the factory default:
+Turn on power to the function generator.  Then set your function
+generator to the factory default:
 \begin{displaymath}
 \rm Utility\;Button \to System \to Set\;to\;Default \to Select.
 \end{displaymath}
@@ -73,13 +87,16 @@ And you should now measure the AC voltage
 \begin{displaymath}
 v_{\rm rms} = 0.707~\rm V \sim \frac{1}{\sqrt{2}}~\rm V
 \end{displaymath} 
-Record the measured value and instrumental uncertainty in your logbook together with the sketch of your circuit and short info. 
+Record the measured value in your logbook with a sketch of
+your circuit.
 \end{measurement}
-However, recalling the relationships between the peak-to-peak voltage, the peak-voltage, and the RMS voltage of an AC sine wave:
+However, recalling the relationships between the peak-to-peak voltage,
+the peak-voltage, and the RMS voltage of an AC sine wave:
 \begin{displaymath}
 v_{\rm pp} = 2 \, v_{\rm p} = 2 \sqrt{2} \, v_{\rm rms}
 \end{displaymath}
-we expect our function generator, set to $v_{\rm pp} = 1.0$, to produce output with:
+we expect our function generator, set to $v_{\rm pp} = 1.0$, to
+produce output with:
 \begin{displaymath}
 v_{\rm rms} = \frac{v_{\rm pp}}{2\sqrt{2}} \sim 0.353~\rm V
 \end{displaymath}
@@ -121,7 +138,7 @@ Your DMM should now read the expected value:
 \begin{displaymath}
 v_{\rm rms} \sim 0.353~\rm V
 \end{displaymath}
-Record the measured value and instrumental uncertainty in your logbook together with a short comment. 
+Record the measured value in your logbook, and explain, in your own words, why this differs from the previous measurement.
 \end{measurement}
 
 Press the button next to Ampl a couple of times.  There is a slightly
@@ -137,35 +154,53 @@ is mind, set your function generator to produce $1~\rm V$ RMS output:
 \begin{displaymath}
 \rm Ampl \to 1 \to Vrms.
 \end{displaymath}
-Now your DMM should also read a value quite close to one. Record this value and instrumental uncertainty in your logbook. 
+Now your DMM should also read a value quite close to one. Record this
+value and instrumental uncertainty in your logbook.
 \end{measurement}
 
-\begin{measurement} Now let's adjust the frequency. Highlight the frequency parameter by pressing the button next to the ``Freq'' option until it is highlighted:
+\begin{measurement}
+Now let's adjust the frequency. Highlight the frequency parameter by
+pressing the button next to the ``Freq'' option until it is
+highlighted:
 \begin{displaymath}
 \rm Freq \to 10 \to kHz.
 \end{displaymath}
 You can also adjust the selected parameter with the multipurpose knob.
 Turn the multipurpose knob until the frequency is around $100~\rm kHz$
-and observe what happens to your DMM measurement.  Record your observation in your logbook. The reason your measurement is now inconsistent with the setting in the function generator, is that your DMM is only rated to $2~\rm kHz$.  It isn't intended for measuring
-high-frequency AC signals.  Turn the frequency back down to $1~\rm kHz$. \end{measurement}
+and observe what happens to your DMM measurement.  Record your
+observation in your logbook. The reason your measurement is now
+inconsistent with the setting in the function generator, is that your
+DMM is only rated to $2~\rm kHz$.  It isn't intended for measuring
+high-frequency AC signals.  Turn the frequency back down to $1~\rm
+kHz$.
+\end{measurement}
 
-\begin{measurement} Next highlight the Offset parameter on your function generator and
+\begin{measurement}
+Next highlight the Offset parameter on your function generator and
 adjust it to $2~\rm V$.  This will add a DC offset to your function
 generator output.  After settling down, the measured value of the AC
 voltage on your DMM should be unchanged at $1~\rm V$.  Switch your DMM
 to measure the DC voltage and you should now measure the $2~\rm V$ DC
-offset. Record the measured value in your logbook together with a comment.  Pay attention to the sign.  If you see a negative value, it
-is because you installed your BNC-to-banana adapter incorrectly. 
-Notice that one side of the adapter has a small raised tab, indicating
-which side connects to the coaxial cable shield.  The side with the
-raised tab should be plugged into the Common socket.  Whether you got
-lucky this time or not, change the orientation of the adapter a few
-times and observe how the sign of the voltage changes, finally
-plugging it back in with the correct orientation. Now adjust the DC
-level with the multipurpose knob and observe the change on your DMM.
-When satisfied, set the offset back to zero. \end{measurement}
+offset.  Record the measured AC and DC voltages that you have measured
+and sketch the waveform ($V(t)$) for one period, which is $1~\rm ms$
+for this $1~\rm kHz$ signal.
+
+Pay attention to the sign.  If you see a negative value, it is because
+you installed your BNC-to-banana adapter incorrectly.  Notice that one
+side of the adapter has a small raised tab, indicating which side
+connects to the coaxial cable shield.  The side with the raised tab
+should be plugged into the Common socket.  Whether you got lucky this
+time or not, change the orientation of the adapter a few times and
+observe how the sign of the voltage changes, finally plugging it back
+in with the correct orientation. Now adjust the DC level with the
+multipurpose knob and observe the change on your DMM.  When satisfied,
+set the offset back to zero. 
+\end{measurement}
 
 \section{Oscilloscope}
+
+This section introduces you to your Oscilloscope.  It should not take
+more than about one-half hour to complete.
 
 \begin{figure}[htbp]
 \begin{center}
@@ -210,7 +245,7 @@ V$.  Clearly someone is lying to us!
 Although we won't be using them in this lab, most sensitive
 measurements with an oscilloscope are made using a scope probe, as
 shown in Fig.~\ref{fig:probe}.  To protect the circuit being measured
-from being effected by the insertion of the probe, there is usually a
+from being affected by the insertion of the probe, there is usually a
 large resistance in the probe.  This means that the oscilloscope
 itself measures the output of a voltage divider, and the signal is
 attenuated, most often by a factor of 10.  The oscilloscope simply
@@ -256,147 +291,164 @@ Then adjust the voltage between about $100~\rm mV$ and $2~\rm V$
 peak-to-peak.  When finished, leave the function generator producing a
 $5~\rm kHz$ sine wave with $600~\rm mV$ peak-to-peak voltage.  Your
 scope should remain at a voltage scale of $200~\rm mV$ and time scale
-of $100~\rm \mu s$.  Next, set the DC offset of the signal on the function generator by pressing:
+of $100~\rm \mu s$.  Next, set the DC offset of the signal on the
+function generator by pressing:
 \begin{displaymath}
 {\rm Offset \to 10 \to mV}
 \end{displaymath}
 Turn the multipurpose knob to adjust the DC offset between $-100~\rm
 mV$ and $100~\rm mV$.  Your waveform will rise and fall on your scope
-display.  By default, your scope includes the DC offset, but often this
-is not what you want.  On your scope, press the button labeled
+display.  By default, your scope includes the DC offset, but often
+this is not what you want.  On your scope, press the button labeled
 ``Coupling DC'', until the DC becomes AC.  When AC coupled, the DC
-component of your waveform is ignored.  AC coupling consists of using a capacitor to filter out the DC signal component from a signal with both AC and DC components. The capacitor must be in series with the signal. When AC coupled, observe that
+component of your waveform is removed.  When AC coupled, observe that
 changing the DC offset on the function generator does not change the
 position of the waveform.
 
-You can adjust the position of the waveform on your scope display using the small knobs
-labeled ``Position'' to adjust the offset in vertical and horizontal.
-Try this out.  To return a waveform to (0,0), notice that the offset is displayed while you are turning the knob.
+You can adjust the position of the waveform on your scope display
+using the small knobs labeled ``Position'' to adjust the offset in
+vertical and horizontal.  Try this out.  To return a waveform to
+(0,0), notice that the offset is displayed while you are turning the
+knob.
 
-\begin{plot} Save a scope trace with non zero vertical and horizontal offset. Insert your USB drive into the scope and press the Save button. 
+\begin{plot}
+Save a scope trace of a sine wave with a non-zero vertical and horizontal
+offset. Insert your USB drive into the scope and press the Save button
+(it takes few seconds to save).  Whenever you save a scope trace in
+this class, make certain that there is a a date printed on the trace.
+This ensures that you have your own scope traces, as they can be
+confused with those from other sections.
 \end{plot}
 
 On your function generator, set the output to a $5~\rm V$ peak-to-peak
 sine wave with frequency of $100~\rm kHz$.  Adjust the voltage scale
 and time scale until you can clearly see the sine wave.
 
-\section{Oscilloscope Trigger}
+\section{Lissajous Figures}
 
 \begin{figure}[htbp]
 \begin{center}
 \begin{tabular}{cc}
-\includegraphics[width=0.40\textwidth]{figs/labs/transients/ramp_setup.jpg}  &
-\begin{tikzpicture}
-    \node[anchor=south west,inner sep=0] (image) at (0,0,0) {\includegraphics[height=0.25\textheight]{figs/labs/transients/trigger_ramp.jpg}};
-    \node[left](X) at (0,5.3) {$t=0$};
-    \draw (X.east) -- (3.3,5.7);
-    \node[right](X) at (8.0,5.0) {\parbox{1cm}{Trigger \\ Threshold}};
-    \draw (X.west) -- (6.5,3.9);
-\end{tikzpicture}\\
+\includegraphics[width=0.45\textwidth]{figs/labs/lissajous/scope_lissajous.jpg} & 
+\includegraphics[width=0.45\textwidth]{figs/labs/lissajous/scope_crown.jpg} \\
 (a) & (b) \\
 \end{tabular}
-\caption{(a) Setup for the scope trigger measurement, and (b) A scope trace triggered by the rising edge of ramp function.  The point $t=0$ is the location where the waveform first crosses the trigger thresholds, which is indicated by the arrow to the right.}
-\label{fig:ramp_setup}
+\caption{Scope traces from Lissajous figures from settings for (a) start, and (b) crown.}
+\label{fig:tracelissajous}
+\end{center}
+\end{figure}
+Lissajous figures are the graph of system of two parameterized functions:
+\begin{eqnarray*}
+x &=& A_1 \sin(2 \pi f_1 t + \delta) \\
+y &=& A_2 \sin(2 \pi f_2 t) 
+\end{eqnarray*}
+which produces a closed loop if the ratio $A_1 / A_2$ is rational.  The appearance of the figure is of a 3 dimensional knot with the viewing angle determined by the parameter $\delta$.  Two examples are shown in Fig.~\ref{fig:tracelissajous}.
+
+To produce these figures on your scope, we'll need to use two
+channels.  To begin, enable the output of both Channel 1 and Channel 2
+on your function generator, and set them both to produce sine waves
+with amplitude $3~\rm V$ peak-to-peak.  Adjust the frequency of
+channel 1 to $2~\rm kHz$ and the channel 2 to $3~\rm kHz$.  Note that
+you can switch between the Channel 1 and Channel 2 parameter menus on the function generator
+with the button labeled ``Ch1/2''.
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=0.45\textwidth]{figs/labs/lissajous/two_sine.jpg} 
+\caption{Correctly scaled scope output.}
+\label{fig:twosine}
 \end{center}
 \end{figure}
 
-Connect the output of Channel 1 on your function generator directly to
-Channel 1 of your oscilloscope with a BNC cable, as in
-Fig.~\ref{fig:ramp_setup}a.  Set your function generator to produce a
-$1~\rm kHz$ Ramp function with a peak-to-peak amplitude of $600~\rm
-mV$. While the Ramp function is selected, you will have an option
-``Symmetry'' available.  Press the menu button next to Symmetry and
-set the value to 100\%.  Turn on your oscilloscope and press the
-``Default Setup'' button.  Recall that you need to
-remember to (1) set your function generator to expect high-impedance
-output, (2) enable the function generator output by pressing the
-``On/Off'' button above the BNC connector for the channel, so that
-button is lit (this is the last time these steps will be explicitly
-mentioned.)  The ramp function should be immediately visible on your
-scope.  Adjust the attenuation factor of Channel 1 to unity (X1)
-appropriate for BNC cable and confirm the peak to peak amplitude and
-the period are as expected (Leave Channel 2 alone for now.)
+On your scope, switch to the Channel 2 parameter menu by pressing the
+blue button labeled ``2''.  Set the coupling of Channel 2 to AC, and
+probe attenuation to 1x, just as you did previously for Channel 1.
+Next adjust the voltage scales of each channel to $500~\rm mV$ and set
+the common time scale to something appropriate, so that you can view
+both Sine waves on the scope display.  As shown in Fig.~\ref{fig:twosine},
+you will see two versions of the Channel 2 output, inverted with
+respect to each other, because the frequency of Channel 2 is 1.5 times
+the frequency of Channel 1. You can check this but changing slightly the frequency of 
+Channel 2 but return it to prescribe values to continue with the lab.
 
-Your scope is continuously updating the display with the most recently
-collected waveform, which at $1~\rm kHz$ is effectively instantaneous.
-You may have wondered how these images all appear on the oscilloscope
-with the exact same phase.  This crucial feature of your scope is a
-result of its trigger feature, which we'll explore now.  Turn the knob
-labeled ``Trigger Level'' and you should see the phase of your
-waveform change. Notice that the trigger value and trigger type 
-is displayed. Trigger value will be changing while you are turning the knob. 
+The relative phase between the two output channels of your function
+generator shifts whenever you adjust the frequency of one of the
+signals.  For consistent results with offline plots and the scope
+traces shown here, you'll need to align the phase of the two channels
+every time you adjust the frequency on the function generator:
+\begin{displaymath}
+\rm Inter Ch button \to AlignPhase.
+\end{displaymath}
 
-As shown in Fig.~\ref{fig:ramp_setup}b, your scope display has an arrow at
-the top of the display which indicates the point at which the trigger
-condition was met for the current waveform, which is taken as $t=0$.
-A second arrow, along the right side, indicates the trigger threshold.
-Your scope is configured to trigger on the rising edge, which means it
-will trigger at the instant where the trigger first goes above the
-trigger threshold.
+Usually, scopes are used to display the inputs as a function of time.
+In this case, the voltage level is along the $y$-axis, and time is the
+$x$-axis.  This mode is called YT mode.  Occasionally, however, it is
+useful to display things in XY mode.  In this mode, the $x$-axis is
+used for the voltage of Channel 1 and the $y$-axis is used for the
+voltage of Channel 2.  Each point on the curve represents a particular
+point in time.  Switch to XY mode by pressing the Display button and
+then pressing the button next to the Format menu item until the mode
+is XY.  You should reproduce Fig.~\ref{fig:tracelissajous}a
+exactly.  If not, check that you have aligned the phase as described
+above and that frequencies are set correctly as in Table.
 
-As you adjust the trigger threshold, the point at which the waveform
-reaches this threshold changes.  Since $t=0$ is defined by the instant
-at which the trigger condition is met, this effectively changes the
-phase of your waveform.  As you adjust the threshold up and down, the
-waveform moves forward and backward along the time axis.  This is an
-example of an effect called ``time-slewing'', which is important to
-consider when making time dependent measurements of wave forms, as we
-will be doing today.
+\begin{table}
+\begin{center}
+\caption{Settings for various Lissajous figures.}
+\label{tbl:lissajous}
+\begin{tabular}{llll}
+pattern & $f_1~\rm(kHz)$ & $f_2~\rm(kHz)$ & $\delta_1$ \\
+start & 2 & 3 & 0 \\
+fish & 2 & 3 & $135^\circ$ \\
+parabola & 1 & 2 & $45^\circ$ \\
+lace & 13 & 12 & 0 \\
+crown & $1~\rm kHz$ & $4~\rm kHz$ & 0 \\
+\end{tabular}
+\end{center}
+\end{table}
 
-Notice what happens if you dial the threshold until it exceeds the
-amplitude of your waveform.  Suddenly, your waveform will appear to
-dance across the screen.  This is because your scope trigger is set to
-``Auto'' trigger.  In this trigger mode, when too much time has passed
-without the trigger condition being met, a waveform is displayed for
-the current input using a random time for $t=0$.  This can be
-convenient for finding a signal of unknown size and location.  Press
-the ``Trigger Menu'' button, and then set the Trigger Mode to
-``Normal'' by pressing the corresponding menu button.  In this Mode,
-the waveform is not updated until a trigger is received.  While the
-scope is in the Normal trigger mode, adjust the threshold so that it
-is above the amplitude of the waveform.  You will notice that when the
-trigger condition is not being met, the scope indicates the state
-``Ready'' at the top of the screen, meaning that the scope is armed to
-collect data when the trigger condition is met, but there has not
-recently been a trigger.  Now move the threshold below the amplitude
-for the waveform, and you should see the scope indicates the state
-``Trig'd'', or triggered, on this display.  A common mistake for
-students is to look at stale data, without realizing that the signal
-is lost.  Avoiding this pitfall is one benefit of the Auto trigger
-mode.
-
-At times you may wish to start and stop the data acquisition.  This
-can be accomplished using the ``Run/Stop'' button to pause and then
-resume waveform acquisition.  Try this feature out now.  You can also
-capture and display one single wave form by pressing the ``Single
-Seq'' button.  This can be handy when looking at things like detector
-pulses, which are different each time, and which may occur at a low
-rate.  Resume normal data acquisition with the ``Run/Stop'' button.
-
-Your scope trigger has the capability of triggering on either the
-rising edge or the falling edge of the input.  When triggering on the
-rising edge, the trigger fires at the instant the waveform first
-exceeds the trigger threshold.  When triggering on the falling edge,
-the trigger fires at the instant the waveform first falls below the
-trigger threshold.  Using the appropriate menu button, set your scope
-to trigger on the ``Falling'' edge.  You should observe that now the
-$t=0$ occurs at the nearly straight vertical line in our ramp
-function.  You'll also notice that adjusting the trigger threshold now
-has no discernible effect on the phase of the waveform.  Triggering on
-sharp edges eliminates the effect of time-slewing, a fact we will
-exploit to make accurate time measurements.
-
-
-\begin{plot} Save a scope trace when triggering on the falling edge.
+\begin{plot}
+Adjust the phase of Channel 2, under menu item StartPhase, until the
+pattern collapses into a Fish pattern (or greek letter $\alpha$) at
+135 degrees.  Save a scope trace.
 \end{plot}
 
-\noindent
+\begin{plot}
+Produce the parabola pattern according to the settings in
+Table~\ref{tbl:lissajous}, saving a scope trace.  Remember to align
+the phase each time you change the frequency.
+\end{plot}
+
+\begin{plot}
+Produce lace pattern and save a scope trace.
+\end{plot}
+
+\begin{plot}
+Produce the crown pattern, shown in Fig.~\ref{fig:tracelissajous}b.
+For the right proportions, adjust the amplitude of Channel 2 to $1~\rm
+V$ peak-to-peak, leaving Channel 1 at $3~\rm V$ peak-to-peak.  Notice
+that as you adjust the phase of Channel 1, the crown appears to
+rotate.  Adjust the frequency of Channel 2 to $4.0002~\rm kHz$.  The
+crown should now appear to rotate constantly at low speed.
+\end{plot}
+
 This is a \textbf{sign-off point} for this lab. 
 
-\section{Plotting}
+Please return all the components you took and cables to their
+place. Leave you workstation clean.
 
-Include your two scope traces in the python notebook. Make sure the date is clearly visible on each plot. Provide a full label for each plot which describes all the relevant information. 
-You can display your scope traces in python using the Image library like this:
+\section{Lissajous Figures Analysis}
+
+If you run out of time, you can finish the remaining portion of this
+lab, which is exclusively done in Jupyter notebook, at another time,
+such as during the Friday open lab period.  Just make sure you have
+saved all of your oscilloscope traces.
+
+Include your two scope traces in the python notebook. Make sure the
+date is clearly visible on each plot. Provide a full label for each
+plot which describes all the relevant information.  You can display
+your scope traces in python using the Image library like this:
+
 \begin{verbatim}
       from IPython.display import Image
 
@@ -405,6 +457,38 @@ You can display your scope traces in python using the Image library like this:
 \end{verbatim}
 This assumes that you copied your scope traces inside the jupyter notebook directory. 
 
+\begin{plot} Reproduce fish pattern using scientific
+python to draw the parameterized shape.  For
+example, see Fig.~\ref{fig:pythonlissajous}. \end{plot}
+\begin{plot} Reproduce  parabola pattern. \end{plot} 
+\begin{plot} Reproduce crown pattern. \end{plot}
 
-\noindent
-Please return all the components you took and cables to their place. Leave you workstation clean. 
+One way to approach this problem is to set the period to $1~\mu s$.
+The functions should be evaluated at 1000 discrete times within the
+interval from 0 to $1~\mu s$.
+\begin{verbatim}
+     t = np.linspace(0,1,num=1000)
+\end{verbatim}
+Define a fundamental angular frequency $\omega_0 = 2 \pi~\rm kHz$:
+\begin{verbatim}
+     w = 2*np.pi
+\end{verbatim}
+With these definitions, we would define:
+\begin{verbatim}
+     x = np.sin(4*w*t)
+\end{verbatim}
+to obtain $x$ points corresponding to $f=4~\rm kHz$ sine function.
+
+When plotting your curves, use:
+\begin{verbatim}
+       plt.axis('equal')
+\end{verbatim}
+to keep the unit aspect ratio used by your scope.
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=0.45\textwidth]{figs/labs/lissajous/pythonlissajous.pdf} 
+\caption{Lissajous curve constructed using Scientific Python corresponding to the scope trace in Fig.~\ref{fig:tracelissajous}a.}
+\label{fig:pythonlissajous}
+\end{center}
+\end{figure}
