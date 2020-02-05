@@ -1,6 +1,6 @@
 \documentclass[12pt,oneside]{book}
 
-\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.75in]{geometry}
+\usepackage[letterpaper,margin=0.75in,bottom=0.75in]{geometry}
 \usepackage{cite}
 \usepackage{slashed}
 \usepackage{graphicx}
@@ -693,13 +693,16 @@ For the specific case that $I(0) = 0$, we conclude that $A = -V/R$ and so:
 \begin{displaymath}
 I(t) = (V_0/R) \, (1 - \exp(-t / \tau)).
 \end{displaymath}
-Notice that at $t=0$, we have simply $I = V_0/R$, as there is no voltage across the capacitor while $Q=0$.
+
+% TODO:  show V(t)
 
 \section{Alternating Current}
- 
+
+% TODO:  needs a figure
+
  We've seen now that voltages can be a function of time $V(t)$.    If the steady-state voltage levels in a circuit are constant with time, it is referred to as a direct current (DC) circuit, because the currents that result tend to flow in the same direction.   A circuit with a time-dependence which averages to zero by oscillating back and forth is referred to as an alternating current (AC).   If the voltage is changing with time, but does not average to zero, the signal is a mixture of AC and DC.  The DC contribution is the average value, and the AC component is what remains when this DC component is removed.  We will use a convention that lower-case variables, such as $v$ and $i$ refer to AC quantities, and upper case variables, such as $V$ and $I$ refer to DC quantities.  Transients responses, which are often ignored in AC and DC circuit analysis, will remain as time-dependent upper case variables, such as $V(t)$ and $I(t)$.
    
- Of particular importance, is a sinusoidal voltage of the form:
+Of particular importance, is a sinusoidal voltage of the form:
  \begin{displaymath}
  v(t) = v_{\rm p} \cos(\omega t + \phi).
  \end{displaymath}
