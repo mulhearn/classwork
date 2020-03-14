@@ -9,8 +9,8 @@
 
 In this lab, you will produce a numerical demonstration of the central
 limit theorem.  You will also model the propagation of uncertainties
-and compare with the calculated uncertainties. For this lab there are only jupyter notebook entries. 
-
+and compare with the calculated uncertainties. For this lab there are
+only Jupyter notebook entries.
 
 \section{Sampling Distributions}
 
@@ -80,11 +80,10 @@ Produce three different histograms with 40 bins covering the range
 from -1.2 to 1.2 for three values {\tt NAVG}: 1,2, and 3.  Plot all
 three histogram in the same graph with appropriate legend. \end{plot}
 
-Your plot will show that already for three contributions to the average, the result looks quite Gaussian on a linear scale.  For more precise comparison, will use a log scale and compare to the PDF.
+Your plot will show that already for three contributions to the average, the result looks quite Gaussian on a linear scale.  For more precise comparison, we will use a log scale and compare to the PDF.
 
 \begin{plot} Calculate {\tt NEXP}$=1000000$ average values {\tt x} for {\tt NAVG}$=10$.  Calculate the mean value of the entries in {\tt x} using the {\tt np.mean} function.  Calculate $\sigma$ for the entries in $x$ by taking the square root of the output from the {\tt np.var} (variance) function.  Produce a histograms with 20 bins covering the range
 from -0.5 to 0.5 for the average values.  Compare with a Gaussian distribution, appropriately normalized, using your calculated values from the  mean and sigma.  Plot both the histogram and PDF on the same graph, including an appropriate legend.  Use a logarithmic $y$ axis. \end{plot}
-
 
 \section{Propagation of Uncertainties}
 
@@ -107,35 +106,36 @@ In this section, you'll develop a numerical simulation for the
 propagation of uncertainties under addition, subtraction,
 multiplication, and division.  An example, for $c = a + b$ is shown in Fig.~\ref{fig:addunc}.
 
-\begin{print} Pick values for $a$, $b$, $ \sigma_a$ and $ \sigma_b$ for simulating subtraction: $c=a-b$. Print them out in your notebook. Choose the values that are different from what is plotted in Fig.~\ref{fig:addunc}.  \end{print}
+Pick values for $a$, $b$, $ \sigma_a$ and $ \sigma_b$ for simulating
+subtraction: $c=a-b$. Record them out in your logbook. Choose values
+that are different from what is plotted in Fig.~\ref{fig:addunc}.
 
 \begin{plot} 
-Simulate the measurement $a$ by drawing 100,000 random variables
-sampled from the Gaussian distribution with mean $a$ and sigma
-$\sigma_a$, and likewise for $b$.  Calculate the values of $c = a -b $ from
-the $a$ and $b$ values.  Plot the result in histogram with 50 bins and an appropriate range. \end{plot} 
-
-\begin{print} 
-Calculate the mean and variance of the mean and variance of the simulated $c$ values and compare to your expectations for the mean, variance of the distribution and variance of the mean. Apply the standard propagation of uncertainties for calculating expectation value for the variances. 
- \end{print}
-
+Simulate the measurement $a$ by drawing 100,000 random samples from a
+Gaussian distribution with mean $a$ and sigma $\sigma_a$, and do
+likewise for $b$.  Calculate the values $c = a -b $ from the $a$ and
+$b$ values.  Plot the distribution of all three variables (as in
+Fig.~\ref{fig:addunc}) as histograms with 50 bins and an appropriate
+range.  Calculate the mean and variance of the simulated $c$ values
+and compare to your expectations from the standard propagation of
+uncertainties.
+\end{plot} 
 
 This is a \textbf{sign-off point} for this lab. 
 
-\begin{print} Pick values for $a$, $b$, $ \sigma_a$ and $ \sigma_b$ for simulating division: $c=a/b$. Print them out in your notebook.  Choose the values that are different from what is plotted in Fig.~\ref{fig:addunc}.  \end{print}
+Pick values for $a$, $b$, $\sigma_a$ and $\sigma_b$ for simulating
+division: $c=a/b$. Record them in your logbook.  Choose values that
+are will allow you to see the distributions of $a$, $b$, and $c$ all
+on the same plot.
 
-\begin{plot} 
-Simulate the measurement $a$ by drawing 100,000 random variables
-sampled from the Gaussian distribution with mean $a$ and sigma
-$\sigma_a$, and likewise for $b$.  Calculate the values of $c = a/b $ from
-the $a$ and $b$ values.  Plot the result in histogram with 50 bins and an appropriate range. \end{plot} 
-
-\begin{print} 
-Calculate the mean and variance of the mean and variance of the simulated $c$ values and compare to your expectations for the mean, variance of the distribution and variance of the mean. Apply the standard propagation of uncertainties for calculating expectation value for the variances. 
- \end{print}
-
- 
-%{\bf Plot 3-6:}  Produce four plots simulating addition, subtraction, multiplication, and division, as in Fig.~\ref{fig:addunc}.  In each case, compare the measured variance of the $c$ values with your expectation.
+\begin{plot}
+Simulate the measurements $a$ and $b$ using the same procedure as in the previous plots, but with your new values.  Calculate the values of $c = a/b $ from
+the $a$ and $b$ values.  Plot the distribution of all three variables (as in
+Fig.~\ref{fig:addunc}) as histograms with 50 bins and an appropriate
+range.  Calculate the mean and variance of the simulated $c$ values
+and compare to your expectations from the standard propagation of
+uncertainties.
+\end{plot}
 
 
 

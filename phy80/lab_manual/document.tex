@@ -11,13 +11,8 @@
 
 \usepackage[american,fulldiode]{circuitikz}
 \tikzset{component/.style={draw,thick,circle,fill=white,minimum size =0.75cm,inner sep=0pt}}
-%\newtheorem{env-name}[other_env]{label-text}
-\newtheorem{measurement}{Measurement}[chapter]
-\newtheorem{plot}{Plot}[chapter]
-\newtheorem{example}{Example}[chapter]
-\newtheorem{print}{Print}[chapter]
-\newtheorem{calculation}{Calculation}[chapter]
-
+\newtheorem{measurement}{Logbook Entry}[chapter]
+\newtheorem{plot}{Jupyter Notebook}[chapter]
 
 \begin{document}
 \ctikzset{bipoles/thickness=1}
@@ -32,15 +27,14 @@
 \input{lab_time_varying.tex}
 \input{lab_transients.tex}
 \input{lab_filters.tex}
-\input{lab_resonance.tex}
 \input{lab_distributions.tex}
-%\input{lab_geiger.tex}
-%\input{lab_uncertainties.tex}
-%\input{lab_diode.tex}
-%\input{lab_fitting.tex}
-%\input{lab_planck.tex}
-%\input{lab_c_air.tex}
-%\input{lab_muon.tex}
+\input{lab_geiger.tex}
+\input{lab_uncertainties.tex}
+\input{lab_diode.tex}
+\input{lab_fitting.tex}
+\input{lab_planck.tex}
+\input{lab_c_air.tex}
+\input{lab_muon.tex}
 \end{document}
 
 % OTHER IDEAS:

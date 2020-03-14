@@ -10,7 +10,7 @@
 In this lab, you will create your own numerical simulation of a binomial
 process, and compare the results of your simulation with the PDFs for
 the binomial, Poisson, and Gaussian processes in the appropriate
-limits.  For this lab there are only jupyter notebook entries. 
+limits.  For this lab there are only Jupyter notebook entries. 
 
 
 This lab includes a number of code snippets to illustrate the ideas
@@ -108,11 +108,13 @@ comparison with $n_{\rm exp}=1000$, $n_{\rm try}=10$, and
 $\epsilon=0.5$ should result in something like:\\
 \includegraphics[width=0.8\textwidth]{figs/labs/distributions/validate.png}\\ 
 
-\begin{print} Produce a large number of pseudo-experiments by setting $n_{\rm exp} =
+\begin{plot}
+Produce a large number of pseudo-experiments by setting $n_{\rm exp} =
 1000$ and comment out any debugging print statements which will get
 very long.  Pick two  well chosen test cases with different values of
 $n_{\rm try}$ and $\epsilon$ and compare the expected and simulated
 mean and variances. 
+\end{plot}
 
 %Not really visual since it fluctuates and one would need to study the average behaviour for this
 %Print also the values for the percent error for mean and variance
@@ -120,12 +122,16 @@ mean and variances.
 %\mbox{percent error}= \frac{|\mbox{expected}-\mbox{simulated}|*100\%}{\mbox{expected}}
 %\end{equation}
 
- The simulated values will fluctuate by a
+The simulated values will fluctuate by a
 fractional amount $1/\sqrt{n_{\rm exp}}$.  So for $n_{\rm exp} =
 1000$, we expect the expected and simulated values to agree within
-about $3\%$.  If you increase to $n_{\rm exp} = 100000$, the agreement
-should improve to better than $1\%$.  Be certain to print your test
-cases and the results in a clear way in your notebook. \end{print}
+about $3\%$.
+
+\begin{plot}
+Increase the number of pseudo-experiments to $n_{\rm exp} = 100000$.
+The agreement should improve to better than $1\%$.  Be certain to
+print your test cases and the results in a clear way in your notebook.
+\end{plot}
 
 \section{Histogram for the Binomial Process}
 
