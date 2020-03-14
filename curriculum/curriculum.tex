@@ -10,6 +10,11 @@
 \usepackage{pdfpages}
 \usepackage{xcolor}
 
+%
+% Make ECS 32/36 options explicit
+% Think about relaxing 104B requirement for A part.  112?
+% Figure with prerequisite structure
+%
 
 \usepackage[american,fulldiode]{circuitikz}
 \tikzset{component/.style={draw,thick,circle,fill=white,minimum size =0.75cm,inner sep=0pt}}
@@ -18,17 +23,286 @@
 \ctikzset{bipoles/thickness=1}
 \ctikzset{bipoles/length=.6cm}
 
-\title{Overview of the Undergraduate Physics Curriculum}
+\title{Straw Man Proposal for the \\ Undergraduate Physics Curriculum}
 \author{Michael Mulhearn}
 
 \maketitle
 
 \section{Objectives}
 
-\section{Review of Preparatory Subject Matter}
+\begin{table}
+\caption{Typical schedule for undergraduate physics majors, taking the 9H series, in the fall quarter, omitting lab courses.}
+\label{tbl:current-honors}
+\begin{center}
+\begin{tabular}{|l|l|l|l|}
+\hline
+year      & fall    & winter & spring  \\
+\hline
+Freshman  & 9HA  & 9HB  & 9HC \\
+\hline
+Sophomore & 9HD  & 9HE   & 40     \\
+          &      &        &        \\
+\hline
+Junior    & 104A & 105B & 110B\\
+          & 105A & 110A & 115A\\
+\hline
+Senior    & 115B &        & \\
+          & 110C &        & \\
+          & 112  &        & \\
 
+\hline 
+\end{tabular}
+\end{center}
+\end{table}
 
-A summary of the content in the core required courses:
+\begin{table}
+\caption{Typical schedule for undergraduate physics majors that transfer to UC Davis in their Junior year, omitting lab courses.}
+\label{tbl:current-transfers}
+\begin{center}
+\begin{tabular}{|l|l|l|l|}
+\hline
+year      & fall    & winter & spring  \\
+\hline
+Junior    & 9D  &    & 40     \\
+          & 104A & 105B & 110B\\
+          & 105A & 110A & 115A\\
+          & 102 &       & \\
+\hline
+Senior    & 115B &        & \\
+          & 112  &        & \\
+\hline 
+\end{tabular}
+\end{center}
+\end{table}
+
+The current typical schedule of student coursework is shown in Table~\ref{tbl:current-honors} for honors students.  The schedule for transfer students that arrive at UC Davis for their Junior year is shown in Table~\ref{tbl:current-transfers}.  There are of course many students taking different trajectories through our program, but most are some variation on these two.  This proposal aims to improve upon this course of study, to achieve the following aims:
+\begin{itemize}
+
+\item Physics majors that complete 9HD or 9D in the fall of their sophomore year have little to do for the rest of the year.  The honors students have 9HE, but this is effectively an elective and does little to further prepare them for upper division course work.  The recent addition of 40 and 80 helps somewhat, but not enough.  The result of this stalling is that the junior and senior year are a race to complete the degree requirements, leaving very little flexibility or time for advanced electives.
+
+\item Transfer students that arrive at UC Davis for their Junior year face a wall of coursework that they have to handle in the first quarter: math methods, mechanics, and modern physics.  Many also take Physics 102, which is nominally a one credit course, but generally nearly as much work as a four credit course.  For many of the transfer students these courses are the first physics courses that require solving challenging homework problems, and they face effectively 16 credits.  We have two trains of students running through our program (transfers and honors students) and the fall of their junior year is the train wreck where they collide.
+
+\item The current curriculum does not include sufficient computing practice for our students.  It's useful to consider what a physics degree would like if we taught calculus the same way we teach computing.  Students would arrive their Freshman year and take an introductory calculus course.  Then, they would take their physics courses, which would never mention calculus.  At some point in their Junior or Senior year, they would take a one quarter course called "Calculus in Physics" that would attempt to show all the ways we use calculus in physics.  Our students are experts at calculus because they learn how to use the tool, and then apply it, again and again, throughout their coursework.  To remain relevant in the modern world (or even the world from 20 years ago, to be honest) our majors need more practice in the use of computing as a tool for solving physics problems.
+
+\item We are allowed to require a maximum of 110 credits from the college of Letters and Science, which is one half the maximum number of credits students are allowed to take.  Fitting the canon of undergraduate physics into such a tight space is extremely challenging.  Students complain that we waste time teaching some topics again and again (e.g. Special Relativity from scratch) while completely dropping other topics (e.g. Classical Hamiltonians).  The problem is particularly acute for Applied Physics majors, where core material must be dropped to make space for coursework outside of Physics.
+
+\item The prerequisite structure of the upper division courses creates many tiers.  
+As an extreme example, 122 requires 112, which requires 115A, which requires 104A and 105A, both of which require the 9 series.  This, combined with the rapid paces, leaves very little flexibility for students once they start their Junior year.  For example, missing a single quarter of the courses in the Junior year of Table~\ref{tbl:current-honors} requires an exception to prerequisites or an extra year to graduate.
+
+\label{tbl:current-honors}
+
+\end{itemize}
+
+A proposal to improve on all of these issues is detailed in the next section followed by a discussion of non-lab coursework, computational lab work, and experimental lab work in turn, and pre-requisite structure.
+\newpage
+
+\section{B.S. Requirements (Minimal)}
+
+The proposed B.S. Requirements are presented in Tables~\ref{tbl:prep} and \ref{tbl:core}.  Example schedules are presented in Tables~\ref{tbl:proposed-honors} and \ref{tbl:proposed-transfers}.
+
+\begin{table}
+\caption{\label{tbl:prep}Preparatory Subject Matter}
+\noindent
+\vskip 0.25cm
+Credits:  49-50. *: recommended, C: concurrently.\\
+\begin{tabular}{|llllll|}
+\hline
+Course & & Credits & Offered & Pre-reqs & Name \\
+\hline
+PHY & 9A & 5 & F,S & & Classical Physics {\it (Class. Mech.)}\\ 
+    & 9B & 5 & F,W & & Classical Physics {\it (Waves, Thermo., Optics.)}\\ 
+    & 9C & 5 & W,S & & Classical Physics {\it (Elec. and Magn.)}\\ 
+    & 9D & 4 & F,S & & Modern Physics {\it (Rel. and Quant. Mech.)}\\ 
+\hline
+&or&&\\
+\hline
+PHY & 9HA & 5 & F & & Honors Physics {\it (Class. Mech.)}\\ 
+    & 9HB & 5 & W & & Honors Physics {\it (Rel. and Stat. Mech.)}\\ 
+    & 9HC & 5 & S & & Honors Physics {\it (Waves and Quant. Mech.)}\\ 
+    & 9HD & 5 & F & & Honors Physics {\it (Elec. and Magn.)}\\ 
+\hline
+\hline
+MAT & 21A & 4 & & &\\ 
+    & 21B & 4 & & &\\ 
+    & 21C & 4 & & &\\ 
+    & 21D & 4 & & &\\ 
+    & 22A & 3 & & &\\ 
+    & 22B & 3 & & &\\ 
+PHY & 40  & 4 & S & & Introduction to Physics Computation \\ 
+    & 80  & 4 & (F),W,S & 40,9D & Experimental Techniques \\ 
+PHY & 185* & 1 & S & & \\ 
+    & 190* & 1 & F & & \\ 
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}
+\caption{\label{tbl:core}Core Subject Matter}
+\noindent
+\vskip 0.25cm
+Credits:  46-50. *: recommended, C: concurrently.\\
+\begin{tabular}{|llllll|}
+\hline
+Course & & Credits & Offered & Pre-reqs & Name \\
+\hline
+PHY & 102  & 4 & W & 40, 9D     & Computational Physics\\
+    & 104A & 4 & F & C:9D       & Mathematical Physics \\ 
+    & 105A & 4 & W & 104A, 9D   & Classical Mechanics I\\
+    & 105B & 4 & S & 105A, 102  & Classical Mechanics II\\ 
+    & 110A & 4 & W & 104A, 9D   & Electricity and Magnetism I\\
+    & 110B & 4 & S & 110A, 102  & Electricity and Magnetism II\\
+    & 115A & 4 & F & 104A, 9D   & Quantum Mechanics I \\
+    & 115B & 4 & W & 115A, 102  & Quantum Mechanics II \\
+    & 115C & 4 & S & 115B       & Applications of Quantum Mechanics\\ 
+    & 112  & 4 & F & 104A, 9D   & Thermodynamics and Statistical Mechanics\\    
+\hline
+PHY & 116A & 4 &  W & 80   & Instrumentation with Discrete Electronics  \\
+    & 116B & 4 &  S & 116B & Instrumentation with Integrated Electronics\\ 
+\hline
+    & or & & & & \\
+\hline
+PHY & 122A or B & 4 & (F),W,S & & Advanced Physics Laboratory \\  
+\hline
+ & Any two of & & & & (all three recommended): \\
+\hline 
+PHY & 105L & 1 & S & 102,C:105B & Computational Lab in Mechanics \\
+    & 112L & 1 & F & 102,C:112  & Computational Lab in Statistical Mechanics \\ 
+    & 115L & 1 & W & 102,C:115B & Computational Lab in Quantum Mechanics \\ 
+\hline
+\end{tabular}\\ \vskip 0.25cm
+\noindent
+{\bf Electives:} an additional 15 credits of electives is required, 12 credits from advanced (capstone) topics.\\
+\noindent
+{\bf Total Units:} 110-115
+\end{table}
+
+\begin{table}
+\caption{Example schedule for undergraduate physics majors taking the 9H series and opting for the 116 lab sequence.  E is an elective course.  Rate is 5-9 credits per quarter.}
+\label{tbl:proposed-honors}
+\begin{center}
+\begin{tabular}{|l|l|l|l|}
+\hline
+year      & fall    & winter & spring \\
+\hline
+Freshman  & 9HA(5)  & 9HB(5)  & 9HC(5) \\
+          &         &         & 40(4)  \\
+\hline
+Sophomore & 9HD(5)  & 105A(4) &  105B(4) \\
+          & 104A(4) & 102(4)  &  105L(1) \\
+          &         &         &  80(4)\\
+\hline
+Junior    & 115A(4) & 115B(4)  & 115C(4)\\
+          & 112(4)  & 110A(4)  & 110B(4)\\
+		  & 112L(1) & 115L(1)  & \\
+\hline
+Senior    & E(4)    & 116A(4)  & 116B(4) \\
+          & E(4)    & E(4)     & E(4) \\
+
+\hline  
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}
+
+\caption{Example schedule for for an undergraduate physics majors that transfered to UC Davis in their Junior year without Physics D or 40 equivalents.  Rate is 12-13 credits per quarter.}
+\label{tbl:proposed-transfers}
+\begin{center}
+\begin{tabular}{|l|l|l|l|}
+\hline
+year      & fall    & winter & spring \\
+\hline
+Junior   & 9D(4)     & 105A(4)       & 105B(4) \\
+         & 40(4)     & 110A(4)       & 105L(1) \\         
+         & 104A(4)   & 102(4)        & 110B(4) \\
+         &           &               & 80(4) \\
+\hline
+Senior   & 115A(4)   & 115B(4)       & 115C(4) \\
+         & 112(4)    & 122A(4)       & E(4) \\
+         & 112L(1)   & E(4)          & E(4)  \\
+		 & E(4)      & 115L(1)       & \\
+\hline 
+\end{tabular}
+\end{center}
+\end{table}
+
+\newpage
+\section{Discussion of Regular Coursework}
+
+The typical schedule of courses for the proposed new curriculum is shown in Table~\ref{tbl:proposed-honors} for honors physics and Table~\ref{tbl:proposed-transfers} for Junior transfer students.
+The primary feature is that incoming transfer students now overlap mostly with sophomore honors physics students.  This eliminates the stalling of our honors students while relieving some of the intense academic pressure on incoming transfer students.  Our experience has been that the best of the transfer students perform as well as our four-year students once they have sufficient time to adjust, and this proposal gives them that time.  Accelerating the honors students also provides tremendous additional flexibility to their schedule.  Transfer students that wish to complete their degree in two-years are still highly constrained, but instead of facing a 13 credit brick wall, they start with only eight credits of required coursework in their first fall quarter at UCD.
+
+Several new classes have been added and others require changes to their content or will no longer be required:
+\begin{itemize}
+\item 9A-D and 9HA-D  These courses are largely unchanged, however, some fine adjustments may be needed to ensure that the 9 series plus 104A are sufficient preparation for 115A and 112.
+\item 9HE is no longer offered:  This course is effectively an elective, with content that varies from instructor to instructor.  By removing it, we allow the Honors students to start toward the core material sooner, leaving more time for advanced electives. With more relaxed schedule in their senior year, it seems highly plausible that physics majors will take more electives.
+\item The 115 sequence will be substantially revised.  The addition of 115C as a third quarter is intended to achieve a number of effects to the entire sequence.  115A will be an introduction to QM that relies only on 9 series and 104B, and it should function well as a standalone course for applied physics majors who will not be required to take 115B and 115C.  The next two quarters, 115B and 115C, have 102 as prerequisites and can therefore integrate significant computational work into the curriculum.  The extra time should also allow coverage of new topics (e.g. QIT).
+\item 102:  This course will be renamed ``Computational Physics'' and will be closer in content to the 104B as taught by some instructors.  This course will play a more integral role in this revised curriculum and so the content and tools will need to be more consistently covered than in 104B.  The decision to use 102 as the course number is for clarity, as 104A will not be a prerequisite.
+\item 110C is no longer offered:  A third quarter of E+M is too much to allocate to this topic, given the other needs of the curriculum and limited number of required credits. 110A and B will need some adjustment to make certain that the vector potential and special relativity are covered.
+\end{itemize}
+
+\section{Discussion of Computational Physics}
+One of the major objectives of this curriculum overhaul is to better integrate computational physics throughout the curriculum, and this is accomplished in a number of ways:
+\begin{itemize}
+\item The one credit PHY 102 course is eliminated.  Now every major takes PHY 40 and a new 4 credit PHY 102 for a total of eight credits of introductory programming and computational physics. 
+\item Physics 80 is required for all majors and includes extensive use of scientific python for data analysis and presentation.
+\item There are three new one-credit computational lab courses (105L, 112L, and 115L) designed to be taken concurrently with 105B, 112, and 115B. They are computational problem solving labs related to mechanics, E+M, and quantum mechanics.  The instructor will present a technique and problem during a single one hour lecture, and the students will have the rest of the week to complete their assignment.  It is expected that one instructor will teach all three in a single year, which will count as one course.
+These are each offered in a different quarters, so students get three credits of computational problem-solving spread across an entire year.  Due to credit limits, we only require two of these courses, but all three are recommended.
+\item PHY 105B, 110B, and 115B now have 102 (computational physics) as a pre-requisite.  Computational problems can therefore be fully integrated into these courses.
+\end{itemize}
+
+\section{Discussion of Labs}
+
+Physics 80 was introduced in 2018, and is currently a pre-req for 122A and 122B.  It is anticipated that this will relieve some of the time pressure in this one quarter course.
+
+In this proposal, Physics 80 is a pre-requisite for the 116 (Instrumentation) sequence.  Physics 80 covers some of the content in 116A (passive analog electronics) and some of the content in 116C (computation with scientific python and statistical analysis).  Therefore, the three quarter 116 sequence (A,B, and C) can become a two quarter sequence, 116A covers discrete electronics (analog and digital), and 116B can cover integrated electronics (microprocessors and FPGAs).
+
+\section{Discussion of Prerequisites}
+
+\begin{figure}
+\begin{center}
+\begin{tikzpicture}
+\draw (0,0) -- ++(0,1) -- ++(10,0) -- ++(0,-1) -- ++(-10,0);
+\node[above right] at (0,0) {9A-D, 40};
+\draw (0,-2) -- ++(0,1) -- ++(10,0) -- ++(0,-1) -- ++(-10,0);
+\node[above right] at (0,-2) {80, 102, 104A, 105A, 110AB, 112, 115A};
+\draw (0,-4) -- ++(0,1) -- ++(10,0) -- ++(0,-1) -- ++(-10,0);
+\node[above right] at (0,-4) {105BL, 112L, 115L, 116AB, 122AB};
+\draw[->] (5,0) --(5,-1);
+\draw[->] (5,-2) --(5,-3);
+\end{tikzpicture}
+\caption{\label{fig:prereqs} The prerequisite structure of required courses.  At each tier, course prerequisites can only be earlier courses in the same sequence or courses from a previous tier.  Courses from the lowest tier should not be prerequisites for any other courses outside their own sequence, including capstone courses.}
+\end{center}
+\end{figure}
+
+An overview of the prerequisite structure is shown in Fig.~\ref{fig:prereqs}.  Classes within a tier can require only earlier classes from within the sequence (e.g. B requires A) or classes from an earlier tier.  One exception is that 104A requires 9D (which may be taken concurrently).  Reducing the number of tiers in our program to three affords significantly more flexibility for students to work through each tier in whatever order works best for their schedule.  Because 102 requires 40 and the 9 series, but is needed for 115B and 105B, it remains a potential bottleneck, along with 104B.  The limited number of offerings for most courses will also limit flexibility in practice.
+
+The most notable changes are that:
+\begin{itemize}
+\item 115A does not require 105A anymore, 9A-D must suffice instead
+\item 112 does not require 115A anymore, 104A and 9A-D must suffice instead
+\item The new four-credit 102 course (which replaces both 104B and the current version of 102) does not require 104A, and instead requires 40.
+\item 105B and 115B require 102, which allows for computing to be integrated with the course. 
+\end{itemize}
+Some classes can be globally substituted as prerequisites, which we note here:
+\begin{itemize}
+\item 9HD can replace 9D or 9C.  Note that 9HC does not replace 9C due to different ordering of the Honors sequence.
+\item Any ECS introductory programming course can replace 40.
+\end{itemize}
+
+\section{Other Goals}
+There are some other goals not included in this proposal that I would like to keep track of:
+\begin{itemize}
+\item It would be nice if e.g. 105A, 110A-B, 115A worked as complete set of core courses for e.g. Astro and Applied physics majors. 
+\item I would like to offer some sort of lower division 3 credit elective for the transfer students (PHY 19?) to take in Fall of their Junior year, that focuses on solving problems from material in 9A-C.  We could also recommend this to students that didn't did so well in 9 and can use a bit of brushing up before the upper division course work.  Currently, 105A is filling this role.
+\end{itemize}
+
+\end{document}
+
+\section{Detailed course listings - Preparatory Material}
+
+For reference, the content in core required courses in the present catalog is included here:
+
 \begin{itemize}
 
 \item {\bf PHY 9A - Classical Physics (5)}
@@ -67,70 +341,8 @@ Recent Syllabi and More Complete Descriptions}
 
 \end{itemize}
 
-\section{Review of Core Subject Matter}
+\section{Detailed course listings - Core Subject Matter}
 
-The present core required courses are:\\
-\begin{tabular}{lllll}
-& PHY 104A & 4 & Introductory Methods of Mathematical Physics \\
-& PHY 105A & 4 & Analytical Mechanics\\
-& (PHY 105B) & 4 & Analytical Mechanics\\
-& PHY 110A & 4 & Electricity and Magnetism \\
-& PHY 110B & 4 & Electricity and Magnetism  \\
-& (PHY 110C) & 4 & Electricity and Magnetism  \\
-& PHY 112   & 4 & Thermodynamics and Statistical Mechanics & 115A\\
-& PHY 115A & 4 & Quantum Mechanics & 104A,105A\\
-& PHY 115B & 4 & Quantum Mechanics & \\
-\end{tabular}
-
-Typical schedule for preparatory and core subject matter of 4 yr BS majors, omitting 80 (considered a lab).
-
-\begin{table}
-\begin{center}
-\begin{tabular}{|l|l|l|l|}
-\hline
-year      & fall    & winter & spring  \\
-\hline
-Freshman  & 9A/9HA  & 9B/9HB  & 9C/9HC \\
-\hline
-Sophomore & 9D/9HD  & (9HE)   & 40     \\
-          &         &         &        \\
-\hline
-Junior    & 104A & 105B & 110B\\
-          & 105A & 110A & 115A\\
-\hline
-Senior    & 115B &        & \\
-          & 110C &        & \\
-          & 112  &        & \\
-
-\hline 
-\end{tabular}
-\end{center}
-\end{table}
-For Junior transfers the typical schedule is:
-\begin{table}
-\begin{center}
-\begin{tabular}{|l|l|l|l|}
-\hline
-year      & fall    & winter & spring  \\
-\hline
-Junior    & 9D/9HD  &    & 40     \\
-          & 104A & 105B & 110B\\
-          & 105A & 110A & 115A\\
-          & 102 &       & \\
-
-\hline
-Senior    & 115B &        & \\
-          & 112  &        & \\
-
-\hline 
-\end{tabular}
-\end{center}
-\end{table}
- 
-
-
-
-A summary of the content in the core required courses:
 \begin{itemize}
 \item {\bf PHY 104A - Introductory Methods of Mathematical Physics}
 {\it Lecture - 3 hours; extensive problem solving. Prerequisite: courses 9B, 9C, 9D [or 9HB, 9HC, 9HD] and Mathematics 21D, 22A, and 22B with grade C- or better or consent of instructor. Introduction to the mathematics used in upper-division physics courses, including applications of vector spaces, Fourier analysis, partial differential equations. - I. (I.)}
@@ -181,452 +393,4 @@ Recently taught by Curro.  Townsend 6,7, skip 8 (path integrals), then 9-10.
 Leaves off perturbation theory, identical particles, scattering.
 
 \end{itemize}
-
-
-\section{Objectives}
-
-\section{Open Questions}
-\begin{itemize}
-\item What is the role of advanced classes not part of any major or specialization:  104C,123,...  Is 105C ever offered?  It seems required for physical oceanography.
-\item What actually is the maximum number of required credits allowed in a major?
-Looks empirically like 90 for some reason...
-\end{itemize}
-
-\section{Answered Questions}
-\begin{itemize}
-\item Can we require a class if e.g. less than A in certain prerequisites? No.  C- is threshold for pre-req.
-\item Do specializations have to stay within any credit limits?  Could we have "Physics BS with specialization in Computational Physics" that exceeds credit limits?  No.
-\item Astrophysics specializations comes at high extra course load:  180,150-156, and lab course 157.  Is this "fair" to the non-astro faculty?  Can this foot print be reduced?  For elective courses, students vote with their feet, and Astronomy electives are popular.  Labs have been discontinued and many of these courses are offered only every other year. 
-\end{itemize}
-
-\section{Proposed  Changes}
-
-\begin{itemize}
-\item Classes we should no longer offer:  110C, 102, 9HE.  This does not reduce required credits, since 9H sequence is already optional, and removing one credit 102 leaves only the four credit 104B, cancelling the loss of three credits in 110C.
-
-\item Regain the lost sophomore year for 9H (and 9A fall) students.  These students will now take 40 in the winter of their second year, followed by a new honors mechanics course (105H) for five credits.  These also take 104B concurrently with 105H for computational physics with scientific python, focused on classical mechanics (or 9-level EM and QM).
-
-\item Provide a more consistent tempo for Junior-year transfers.  Current system throws them into a brick wall (9D, 104A, 105A).  Instead they take
-take the sequence 104A (F), 105A (W), and 105B (S).  They put off 115A until their senior year.
-
-\item Quantum mechanics is extended to three quarters.  However, 112 is now taken concurrently with 115A.
-
-\item Make 105B (or 105H) a pre-req for 115A.  This has maximum unit consequences to applied physics majors that will need to be addressed.
-
-\item Make 80 a pre-req for 116 sequence, make 116C elective. 116A becomes discrete electronics, and 116B becomes integrated electronics.  Move 80 to fall and winter offering.
-
-\item Tighten up the content in core courses.  Particular features:
-\begin{itemize}
-\item Damped harmonic oscillator needs to be taught somewhere.
-\item Hamiltonian formalism needs to be included.
-\end{itemize}
-\end{itemize}
-\newpage
-
-\section{B.S. Requirements (Minimal)}
-\noindent
-{\bf Preparatory Subject Matter: 49-50} (*: recommended)\\ \vskip -0.25cm
-
-\noindent
-\begin{tabular}{|llllll|}
-\hline
-PHY & 9A & 5 & F,S & & Classical Physics {\it (Class. Mech.)}\\ 
-    & 9B & 5 & F,W & & Classical Physics {\it (Waves, Thermo., Optics.)}\\ 
-    & 9C & 5 & W,S & & Classical Physics {\it (Elec. and Magn.)}\\ 
-    & 9D & 4 & F,S & & Modern Physics {\it (Rel. and Quant. Mech.)}\\ 
-\hline
-&or&&\\
-\hline
-PHY & 9HA & 5 & F & & Honors Physics {\it (Class. Mech.)}\\ 
-    & 9HB & 5 & W & & Honors Physics {\it (Rel. and Stat. Mech.)}\\ 
-    & 9HC & 5 & S & & Honors Physics {\it (Waves and Quant. Mech.)}\\ 
-    & 9HD & 5 & F & & Honors Physics {\it (Elec. and Magn.)}\\ 
-\hline
-\hline
-MAT & 21A & 4 & F & &\\ 
-    & 21B & 4 & W & &\\ 
-    & 21C & 4 & S & &\\ 
-    & 21D & 4 & F & &\\ 
-    & 22A & 3 & F & &\\ 
-    & 22B & 3 & F & &\\ 
-PHY & 40  & 4 & S & ? & Introduction to Physics Computation \\ 
-    & 80  & 4 & W,S & 9D or 9HD & Experimental Techniques \\ 
-    & 185* & 1 & S & & \\ 
-    & 190* & 1 & F & & \\ 
-\hline
-\end{tabular}
-
-\vskip 0.5cm
-\noindent
-{\bf Core Subject Matter: 40-45} (*: recommended)\\ \vskip -0.25cm
-
-\noindent
-\begin{tabular}{|lllll|}
-\hline
-PHY & 105A & 4 &  104A & Classical Mechanics I\\
-    & 105B & 4 &  105A & Classical Mechanics II\\ 
-    & 115C*& 4 &  115B,112 & Applications of Quantum Mechanics\\ 
-
-\hline
-    & or & & & \\
-\hline
-PHY & 105H & 5 &  104A, 9HA-D & Honors Classical Mechanics\\  
-    & 115C & 4 &  115B,112 & Applications of Quantum Mechanics\\ 
-\hline
-\hline
-PHY & 104A & 4 & C:9D or C:9HD & Mathematical Physics \\ 
-    & 104B & 4 & 40, C:105B or C:105H& Computational Physics\\
-    & 110A & 4 & 104A & Electricity and Magnetism I\\
-    & 110B & 4 & 110A&  Electricity and Magnetism II\\
-    & 115A & 4 & 105B or 105H, 104B & Quantum Mechanics I \\
-    & 115B & 4 & 115A & Quantum Mechanics II \\
-    & 112  & 4 & C:115A & Thermodynamics and Statistical Mechanics\\    
-\hline
-\hline
-PHY & 116A & 4 &  F\\
-    & 116B & 4 &  W \\ 
-\hline
-    & or & & \\
-\hline
-PHY & 122A or B & 4 & W\\  
-\hline
-\end{tabular}\\ \vskip 0.25cm
-
-
-\noindent
-Advanced Electives: 12
-\\
-\noindent
-Two Additional Electives: 7-8 
-\\
-\noindent
-Total Units: 108-115 
-\newpage
-\onecolumn
-
-\section{Example Schedule}
-
-Note that 116A-B in this sequence can be replaced with 122A or B in the winter.
-
-\begin{table}
-\begin{center}
-\begin{tabular}{|l|l|l|l|}
-\hline
-year      & fall    & winter & spring \\
-\hline
-Freshman  & 9HA(5)  & 9HB(5)  & 9HC(5) \\
-\hline
-Sophomore & 9HD(5)  & 40(4)    &  105H(5) \\
-          & 104A    & {\it 80} &  104B(4) \\
-\hline
-Junior    & 115A(4) & 115B(4)  & 115C(4)\\
-          & 112(4)  & {\it 110A(4)}  & {\it 110B(4)}\\
-          &         &      &  \\
-\hline
-Senior    &     & {\it 116A(4)}     & {\it 116B(4)} \\
-\hline 
-\end{tabular}
-\end{center}
-\end{table}
-
-\begin{table}
-\begin{center}
-\begin{tabular}{|l|l|l|l|}
-\hline
-year      & fall    & winter & spring \\
-\hline
-Junior   & 9D(4)     & 105A(4)     & 105B(4) \\
-         & 104A(4)   & {\it 110A(4)}     & {\it 110B(4)} \\
-         &           & 40(4)       & 104B(4) \\
-\hline
-Senior   & 115A(4)  & 115B(4)      & 115C(4) \\
-         & 112(4)   &              &  \\
-         & 80(4)    & 116A(4)      & 116B(4)  \\       
-\hline 
-\end{tabular}
-\end{center}
-\end{table}
-
-
-\section{Problems and Ideas}
-\begin{itemize}
-\item Relevant stuff for QM (Angular Momentum, Central Forces) is in 105B, but only 105A is a preq.  In general, 105B is major absence from applied physics requirements.  Not all 105A+B instructors even cover Hamiltonian formalism.
-\item 104A is taught by Luty as a sort of boot camp for problem solving in upper division courses... but only a pre-req for 115A.
-\item Damped driven oscillator is missing from mechanics.
-\item We don't always cover Hamiltonian formalism before reaching QM.
-\item Drop 110C.  Need to cover vector potential in B.  Need to cover special relativity elsewhere.
-\item Curro thinks we need to add QIT somewhere, at least as elective, or risk being left behind.
-\end{itemize}
-
-\section{Big Ideas}
-\begin{itemize}
-\item We have three tracks, essentially:  9H, 9, and transfers.  Current policy amounts to asking 9H students to wait for everyone else.  Maybe we can make 9H students overlap other tracks in Sophomore (vs Junior) year.
-\item More computing!!!
-\end{itemize}
-
-\newpage
-
-\includepdf[pages=1,pagecommand={\begin{tikzpicture}[remember picture, overlay]
-    \end{tikzpicture}}]{tocs/morin_toc.pdf}
-
-\includepdf[pages=3,pagecommand={\begin{tikzpicture}[remember picture, overlay]
-      \node[left] at (0.25, -7.5) {\color{red} 105A};
-      \node[left] at (0.25, -10.3) {\color{red} 105A};
-      \node[left] at (0.25, -15) {\color{red} 105A};
-      \node[left] at (0.25, -20.2) {\color{red} 105A};
-    \end{tikzpicture}}]{tocs/morin_toc.pdf}
-
-\includepdf[pages=4,pagecommand={\begin{tikzpicture}[remember picture, overlay]
-      \node[left] at (0.25, -9.5) {\color{red} 105A/B};
-      \node[left] at (0.25, -17) {\color{red} 105B};
-    \end{tikzpicture}}]{tocs/morin_toc.pdf}
-
-\includepdf[pages=5,pagecommand={\begin{tikzpicture}[remember picture, overlay]
-      \node[left] at (0.25, -2.3) {\color{red} 105B};
-      \node[left] at (0.25, -11.3) {\color{red} 105B};
-    \end{tikzpicture}}]{tocs/morin_toc.pdf}
-
-\includepdf[pages=6,pagecommand={\begin{tikzpicture}[remember picture, overlay]
-      \node[left] at (0.25, -2.3) {\color{red} 105B};
-      \node[left] at (0.25, -7.7) {\color{red} 105B};
-      \node[left] at (0.25, -17.8) {\color{red} 105B};
-    \end{tikzpicture}}]{tocs/morin_toc.pdf}
-
-\includepdf[pages=7,pagecommand={\begin{tikzpicture}[remember picture, overlay]
-    \end{tikzpicture}}]{tocs/morin_toc.pdf}
-
-\includepdf[pages=8,pagecommand={\begin{tikzpicture}[remember picture, overlay]
-    \end{tikzpicture}}]{tocs/morin_toc.pdf}
-
-
-\includepdf[pages=1,pagecommand={\begin{tikzpicture}[remember picture, overlay]
-    \end{tikzpicture}}]{tocs/griffiths_toc.pdf}
-
-\includepdf[pages=6,pagecommand={\begin{tikzpicture}[remember picture, overlay]
-      \node[left] at (0.25, -7.4) {\color{red} 110A};
-    \end{tikzpicture}}]{tocs/griffiths_toc.pdf}
-
-\includepdf[pages=7,pagecommand={\begin{tikzpicture}[remember picture, overlay]
-      \node[left] at (0.25, -2.8) {\color{red} 110A};
-      \node[left] at (0.25, -17.8) {\color{red} 110A};
-    \end{tikzpicture}}]{tocs/griffiths_toc.pdf}
-
-\includepdf[pages=8,pagecommand={\begin{tikzpicture}[remember picture, overlay]
-      \node[left] at (0.25, -7.8) {\color{red} 110A};
-      \node[left] at (0.25, -18.4) {\color{red} 110B};
-    \end{tikzpicture}}]{tocs/griffiths_toc.pdf}
-
-\includepdf[pages=9,pagecommand={\begin{tikzpicture}[remember picture, overlay]
-      \node[left] at (0.25, -5.7) {\color{red} 110B};
-      \node[left] at (0.25, -15.2) {\color{red} 110B};
-    \end{tikzpicture}}]{tocs/griffiths_toc.pdf}
-
-\includepdf[pages=10,pagecommand={\begin{tikzpicture}[remember picture, overlay]
-      \node[left] at (0.25, -2.5) {\color{red} 110B};
-      \node[left] at (0.25, -8.5) {\color{red} 110B};
-      \node[left] at (0.25, -20.6) {\color{red} 110C};
-    \end{tikzpicture}}]{tocs/griffiths_toc.pdf}
-
-\includepdf[pages=11,pagecommand={\begin{tikzpicture}[remember picture, overlay]
-      \node[left] at (0.25, -5.2) {\color{red} 110C};
-      \node[left] at (0.25, -11.6) {\color{red} 110C};
-    \end{tikzpicture}}]{tocs/griffiths_toc.pdf}
-
-\includepdf[pages=12,pagecommand={\begin{tikzpicture}[remember picture, overlay]
-    \end{tikzpicture}}]{tocs/griffiths_toc.pdf}
-
-\includepdf[pages=1,pagecommand={\begin{tikzpicture}[remember picture, overlay]
-    \end{tikzpicture}}]{tocs/townsend_toc.pdf}
-
-\includepdf[pages=3,pagecommand={\begin{tikzpicture}[remember picture, overlay]
-      \node[left] at (0.25, -6.2) {\color{red} 115A};
-      \node[left] at (0.25, -11.2) {\color{red} 115A};
-      \node[left] at (0.25, -17.5) {\color{red} 115A};
-    \end{tikzpicture}}]{tocs/townsend_toc.pdf}
-
-\includepdf[pages=4,pagecommand={\begin{tikzpicture}[remember picture, overlay]
-      \node[left] at (0.25, -0.3) {\color{red} 115A};
-      \node[left] at (0.25, -6) {\color{red} 115A};
-      \node[left] at (0.25, -12) {\color{red} 115A/B};
-      \node[left] at (0.25, -20.2) {\color{red} 115B};
-    \end{tikzpicture}}]{tocs/townsend_toc.pdf}
-
-\includepdf[pages=5,pagecommand={\begin{tikzpicture}[remember picture, overlay]
-      \node[left] at (0.25, -13.5) {\color{red} 115B};
-    \end{tikzpicture}}]{tocs/townsend_toc.pdf}
-
-\includepdf[pages=6,pagecommand={\begin{tikzpicture}[remember picture, overlay]
-      \node[left] at (0.25, -0.5) {\color{red} 115B};
-    \end{tikzpicture}}]{tocs/townsend_toc.pdf}
-
-\includepdf[pages=7,pagecommand={\begin{tikzpicture}[remember picture, overlay]
-    \end{tikzpicture}}]{tocs/townsend_toc.pdf}
-
-\begin{center}
-   \includegraphics[scale=2.2]{tocs/schroeder_cover.jpg}
-\end{center}
-
-\includepdf[pages=1,pagecommand={\begin{tikzpicture}[remember picture, overlay]
-    \node[left] at (0.25, -9.7) {\color{red} 112};
-    \node[left] at (0.25, -16.7) {\color{red} 112};
-    \end{tikzpicture}}]{tocs/schroeder_toc.pdf}
-
-\includepdf[pages=2,pagecommand={\begin{tikzpicture}[remember picture, overlay]
-    \node[left] at (0.25, 0.1) {\color{red} 112};
-    \node[left] at (0.25, -13.2) {\color{red} 112};
-    \node[left] at (2.2, -13.8) {\color{red} (Free Energy Only)};
-    \end{tikzpicture}}]{tocs/schroeder_toc.pdf}
-
-\includepdf[pages=3,pagecommand={\begin{tikzpicture}[remember picture, overlay]
-    \node[left] at (0.25, -1.5) {\color{red} 112};
-    \node[left] at (0.25, -7.7) {\color{red} 112};
-    \end{tikzpicture}}]{tocs/schroeder_toc.pdf}
-
-\includepdf[pages=4,pagecommand={\begin{tikzpicture}[remember picture, overlay]
-    \end{tikzpicture}}]{tocs/schroeder_toc.pdf}
-
-
-\end{document}
-
-
-
-
-
-
-Upper Division Courses
-102. Computational Laboratory in Physics (1)
-Laboratory - 3 hours. Prerequisite: Mathematics 21D, 22A, 22B, Computer Science Engineering 30, course 9D or 9HD, course 104A concurrently. Introduction to computational physics and to the computational resources in the physics department. Preparation for brief programming assignments required in other upper division physics classes. Not open for credit to students who have completed course 104B or 105AL. - I. (I.) Fong
-Recent Syllabus and More Complete Descriptions
-
-
-
-104B. Computational Methods of Mathematical Physics (4)
-Lecture - 3 hours; extensive problem solving. Prerequisite: course 104A with grade C- or better and course 105AL or consent of instructor. Introduction to the use of computational techniques to solve the mathematical problems that arise in advanced physics courses, complementing the analytical approaches emphasized in course 104A. - II. (II.)
-Recent Syllabi and More Complete Descriptions
-
-
-
-
-
-
-
-
-
-
-
-
-NON-CORE:
-Advanced and Specialty Classes:
-
-104C. Intermediate Methods of Mathematical Physics (4)
-Lecture - 3 hours; extensive problem solving. Prerequisite: course 104A with grade C- or better or consent of instructor. Applications of complex analysis, conditional probability, integral transformations and other advanced topics. Not offered every year.
-Recent Syllabi and More Complete Descriptions
-
-105C. Continuum Mechanics (4)
-Lecture - 3 hours; extensive problem solving. Prerequisite: courses 104B and 105A passed with a grade of C– or better, or consent of department. The continuum hypothesis and limitations. Tensor methods develop stress-strain relations for linear isotropic solids/fluids and field equations to study wave propagation in solids/fluids, heat flow, potential flow and ocean waves. - III. (III.)
-
-108. Optics (3)
-Lecture - 3 hours. Prerequisite: course 9 [or 9H] or 7 sequence and Mathematics 21 sequence or consent of instructor. The phenomena of diffraction, interference, and polarization of light, with applications to current problems in astrophysics, material science, and atmospheric science. Study of modern optical instrumentation. Open to non-majors. - III. (III.) Recent Syllabi and More Complete Descriptions
-
-108L. Optics Laboratory (1)
-Laboratory - 3 hours. Prerequisite: course 108 concurrently. The laboratory will consist of one major project pursued throughout the quarter, based on modern applications of optical techniques. - III. (III.)
-
-
-
-116A. Electronic Instrumentation (4)
-Lecture - 3 hours; laboratory - 3 hours. Prerequisite: course 9C [or 9HD], Mathematics 22B. An experimental and theoretical study of important electronic circuits commonly used in physics. - I. (I.)
-Recent Syllabi and More Complete Descriptions
-
-116B. Electronic Instrumentation (4)
-Lecture - 3 hours; laboratory - 3 hours. Prerequisite: courses 9D [or 9HD], 116A. Continuation of course 116A. Introduction to the use of digital electronics and microcomputers in experimental physics. - II. (II.)
-Recent Syllabi and More Complete Descriptions
-
-116C. Introduction to Computer-Based Experiments in Physics (4)
-Lecture - 3 hours; laboratory - 3 hours. Prerequisite: course 9D or 9HD, 116B, Mathematics 22B or consent of instructor. Introduction to techniques for making physical measurements using computer-based instrumentation. - III. (III.) Pellett
-Recent Syllabi and More Complete Descriptions
-
-122A. Advanced Physics Laboratory in Condensed Matter Physics (4) (Formerly Physics 122) 
-Laboratory - 8 hours. Prerequisite: course 104A, 105A, 110B, and 112 (may be taken concurrently) or consent of the department, course 115A with grade of C- or better or consent of department. Experimental techniques and measurements in solid-state physics. Student performs three to six experiments depending on difficulty. Individual work is stressed. Thorough write-ups of the experiments are required. - II. (II.)
-Recent Syllabus and More Complete Descriptions
-
-122B. Advanced Physics Laboratory in Particle Physics (4) (Formerly Physics 122) 
-Laboratory - 8 hours. Prerequisite: course 104A, 105A, 110B, and 112 (may be taken concurrently) or consent of the department, course 115A with grade of C- or better or consent of department. Experimental techniques and measurements in nuclear and particle physics. Student performs three to six experiments depending on difficulty. Individual work is stressed. Thorough write-ups of the experiments are required. - II. (II.)
-Recent Syllabus and More Complete Descriptions
-
-123. Signals and Noise in Physics (4) 
-Lecture - 3 hours; extensive problem solving. Prerequisite(s): Physics 9ABCD [or 9HA-9HD] and 104A, or consent of instructor. Techniques of measurement and analysis designed to avoid systematic error and maximize signal/noise ratio. Illustrative examples of optimal filters ranging from condensed matter to cosmology. - II. (II.)
-Recent Syllabus
-Recent Flyer
-
-129A. Introduction to Nuclear Physics (4) 
-Lecture - 3 hours; extensive problem solving. Prerequisite: course 115A passed with a grade of C- or better or consent of instructor. Survey of basic nuclear properties and concepts requiring introductory knowledge of quantum mechanics: nuclear models and forces, radioactive decay and detecting nuclear radiation and nuclear reaction products, alpha, beta and gamma decay. - III. (III.)
-Recent Syllabus and More Complete Descriptions
-
-130A-130B. Elementary Particle Physics (4-4)
-Lecture - 3 hours; extensive problem solving. Prerequisite: course 115A passed with a grade of C- or better or consent of instructor. Properties and classification of elementary particles and their interactions. Experimental techniques. Conservation laws and symmetries. Strong, electromagnetic, and weak interactions. Introduction to Feynman calculus. - II-III. (II-III.)
-Recent Syllabi and More Complete Descriptions
-
-140A-140B. Introduction to Solid State Physics (4-4)
-Lecture - 3 hours; extensive problem solving. Prerequisite: course 115A or the equivalent passed with a grade of C- or better or consent of instructor. Survey of fundamental ideas in the physics of solids, with selected device applications. Crystal structure, x-ray and neutron diffraction, phonons, simple metals, energy bands and Fermi surfaces, semiconductors, optical properties, magnetism, superconductivity. - II-III. (II-III.)
-Recent Syllabus 140A, Recent Syllabus 140B
-
-150. Special Topics in Physics (4)
-Lecture - 3 hours; extensive problem solving. Prerequisite(s): Physics 9ABCD or 9HA, HB, HC, HD, HE or consent of instructor. Topics vary, covering areas of contemporary research in physics. - I-II-III. (I-II-III.) Offered irregularly/on demand.
-
-151. Stellar Structure and Evolution (4)
-Lecture - 3 hours; extensive problem solving. Prerequisite(s): Physics 9ABCD [or 9HA-9HE] or consent of instructor. The chemical composition, structure, energy sources and evolutionary history of stars, with equal emphasis on both the observational data and theoretical models, including black holes, neutron stars and white dwarfs and the formation of substellar masses. - I. (I.) Not offered every year.
-Recent Syllabus
-
-152. Galactic Structure and the Interstellar Medium (4)
-Lecture - 3 hours; extensive problem solving. Prerequisite(s): Physics 9ABCD [or 9HA-9HE] and Physics 105A concurrently or consent of instructor. The structure, contents, and formation of our Milky Way galaxy, viz. its shape and size, the nature of the interstellar medium, stellar populations, rotation curves, mass determination and evidence of dark matter. - I. (I.) Not offered every year.
-Recent Syllabus
-
-153. Extragalactic Astrophysics (4)
-Lecture - 3 hours; extensive problem solving. Prerequisite(s): Physics 9ABCD [or 9HA-9HE] and Physics 104A and 105A or consent of the instructor.Not open to students who have taken Physics 127. Structure and evolution of galaxies and clusters of galaxies, including distance and mass determination, galaxy types and environments, active galactic nuclei and quasars, gravitational lensing and dark matter, global cosmological properties. - II. (II.) Not offered every year.
-Recent Syllabus
-
-154. Astrophysical Applications of Physics (4)
-Lecture - 3 hours; extensive problem solving. Prerequisite(s): Physics 105AB, 110A; 110B, and 115A concurrently; 112 or consent of instructor. Not open to students who have taken this course previously as Physics 198. Applications of classical and quantum mechanics, thermodynamics, statistical mechanics, and electricity and magnetism to astrophysical settings such as the Big Bang, degenerate white dwarf and neutron stars, and solar neutrinos. - III. (III.) Not offered every year.
-
-155. General Relativity (4)
-Lecture - 3 hours; extensive problem solving. Prerequisite(s): Physics 104A and 105A; 105B and 110A or consent of instructor. Definition of the mathematical frame work for the description of the gravitational field, introduction of the dynamical equations of Einstein governing its evolution and review of the key solutions, including black holes and expanding universes. - II. (II.) Not offered every year.
-Recent Syllabus
-
-156. Introduction to Cosmology
-Lecture - 3 hours; extensive problem solving. Prerequisite(s): Physics 9ABCD [or 9HA-9HE] and Physics 105A or consent of instructor. Not open to students who have taken Physics 126. Contemporary knowledge regarding the origin of the universe, including the Big Bang and nucleosynthesis, microwave background radiation, formation of cosmic structure, cosmic inflation, cosmic acceleration and dark energy. - II. (II.) Not offered every year.
-
-157. Astronomy Instrumentation and Data Analysis Laboratory
-Lecture - 2 hours; laboratory - 6 hours; extensive problem solving. Prerequisite(s): Physics 9ABCD [or 9HA-9HE]. Experimental techniques, data acquisition and analysis involving stellar, nebular and galaxy digital imaging, photometry and spectroscopy. Analyzing time resolved changes in the solar atmosphere in the light of hydrogen alpha. - III. (III.) Not offered every year.
-Recent Syllabus
-
-160. Environmental Physics and Society (3)
-Lecture - 3 hours. Prerequisite: course 9D [or 9HD] or 7C; or course 10 or 1B and Mathematics 16B or the equivalent. Impact of humankind on the environment will be discussed from the point of view of the physical sciences. Calculations based on physical principles will be made, and the resulting policy implications will be considered. (Same course as Engineering 160.) GE credit: SciEng or SocSci. - III. (III.)
-
-185. Careers in Physics (1)
-Seminar - 1 hour. Designed to give Physics graduate students an in-depth appreciation of career opportunities with a graduate degree in physics. Professional physicists, mainly from outside academia, will give seminars describing both research and career insights. - II. (II.)
-Recent Syllabi and More Complete Descriptions
-
-190. Careers in Physics (1)
-Seminar - 2 hours. Overview of important research areas in physics, discussions of research opportunities and internships, strategies for graduate school and industrial careers, the fellowship and assistantship selection process, preparation of resumes, personal statements, and letters of recommendation. - I. (I.)
-Recent Syllabus
-
-194HA-194HB. Special Study for Honors Students (4-4)
-Independent study - 12 hours. Prerequisite: consent of instructor required. Open only to Physics and Applied Physics majors who satisfy the College of Letters and Science requirements for entrance into the Honors Program. Independent research project at a level significantly beyond that defined by the normal physics curriculum. (Deferred grading only, pending completion of sequence).
-
-195. Senior Thesis (5)
-Independent study - 15 hours. Prerequisite: consent of instructor required. Open only to Physics and Applied Physics majors with senior standing. Preparation of a senior thesis on a topic selected by the student with approval of the department. May be repeated for a total of 15 units. - I-II- III. (I-II-III.)
-
-197T. Tutoring in Physics and Astronomy (1-5)
-Tutoring of students in lower division courses. Leading of small voluntary discussion groups affiliated with one of the department’s regular courses. Weekly meeting with instructor. (P/NP grading only.) - I-II-III. (I-II-III.)
-
-198. Directed Group Study (1-5)
-Prerequisite: consent of instructor. (P/NP grading only.)
-Recent Syllabi and More Complete Descriptions
-
-199. Special Study for Advanced Undergraduates (1-5)
-(P/NP grading only.)
-
-
-
-
 \end{document}
