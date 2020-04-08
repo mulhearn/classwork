@@ -1,0 +1,81 @@
+The Central Processing Unit and Assembly
+
+One goal of this course is to connect the digital electronics you
+learned about last year to the computer processors that have become
+indispensable to modern society.
+
+A truly excellent introduction to the Algorithm and Logic Unit (ALU)
+and the Central Processing Unit is provided by PBS's crash course:
+
+ALU:     https://www.youtube.com/watch?v=1I5ZMmrOfnA (required)
+Memory:  https://www.youtube.com/watch?v=fpnE6UAfbtU (optional)
+CPU:     https://www.youtube.com/watch?v=FZGugFqdr60 (required)
+
+A more detailed look at Fetch Decode Execute Cycle from a different source:
+https://www.youtube.com/watch?v=jFDMZpkUWCw (optional)
+
+These videos should be sufficient background for you to read and
+understand the Little Man Computer (LMC) model we will be using as a
+representative assembly language.  See:
+https://en.wikipedia.org/wiki/Little_man_computer
+
+You can run LMC programs on this online and nicely visual simulator:
+https://www.101computing.net/LMC/
+
+The simulator has no capacity to save your programs, so do so by
+copying and pasting to and from a local text file.  If you accidently
+get into an infinite loop of input requests, you can recover by
+selecting the "Prevent this page from creating additional dialogs",
+then use the pause button to stop program execution.  After saving
+your program, you'll have to reload the web-page to recover the user
+input dialogs.  (If you find this all too annoying, you are welcome to
+run locally using a less user friendly LMC compiler like this one:
+https://gist.github.com/shutebt01/f840186c62e0c8ce2ff9)
+
+Exercises:
+
+1) Run the "Adding 2 inputs" program and step through it with the
+compliler line by line (the >| button).
+
+2) Run the remaining examples and understand the code.
+
+3) Write a program that calculate A/B from user input A and B.  Use integer divide, i.e. 5/2 = 2.
+
+HINTS: while debugging your code, you can use DAT command to enter
+data initially, instead of prompting the user.  Once your code is
+working, you can replace these with INP and STA code.  A good place to
+start for this code is the multiplication example, and think about
+complementary operations!
+
+4) Update your program in 3 to output the remainder instead of the quotient. This makes your program into a mod operation 5%2=1
+
+5) Consider this program:
+
+LOOP    INP
+        STA A
+        INP
+        STA B
+        INP
+        STA OPP
+        LDA A
+OPP     DAT 110
+        OUT
+        BRA LOOP
+A       DAT 000
+B       DAT 000
+
+which prompts the user to enter two numbers, followed by an operation
+code, such as 111 to add, or 211 to subtract.  To exit the program,
+you can give (e.g.) the operation 699.
+
+Pretend that you are a malicious user of this program and would like
+to force it to print our course number (116) endlessly to screen.  You
+cannot modify the source code, you can only enter numbers at the user
+input prompts!  Determine a sequence of user inputs that allows a user to accomplish this task.  The fastest I can do it is with 9 inputs (2 are unused)... perhaps you can use fewer?
+
+Exploiting secruity flaws in a running program to exectute arbitrary code is a fundamental technique in computer hacking!
+
+Submission Instructions:
+
+Please submit a text file that includes your program listing for problems 3 and 4, and the list of user inputs for problem 5.
+
