@@ -17,6 +17,12 @@
 
 \chapter{Statistical Distributions}
 
+\section{Notes on Section Ordering}
+
+To reach Section~\ref{sec:comphist} as rapidly as possible, delay
+Sections~\ref{sec:poisson} and \ref{sec:poissonmeanvar} and delay or
+even skip \ref{sec:gaussfrompoisson}.
+
 \section{Statistics of Experiments}
 
 A primary purpose of science is to predict the results of experiments.
@@ -37,18 +43,20 @@ the results like this:
 Scientist almost never display experimental data this way (as a bar
 graph) because it is nearly impossible to answer the crucial question
 {\em is this data consistent with this prediction?}  Even if every
-outcome has an equal probability, the results of individual
-experiments experience statistical fluctuations.  So even if the
-theory is correct, we well seldom reproduce exactly the theory
+outcome has an equal probability, the measured results of individual
+experiments will result from random statistical fluctuations.  So even
+if the theory is correct, we well seldom reproduce exactly the theory
 prediction.
 
 To interpret scientific experiments, it isn't enough to have a single
 prediction for the outcome of an experiment, instead, you need a
-prediction for the statistical distribution of outcomes: a probability
-distribution function.  We'll start this discussion, therefore, by
-deriving three of the most frequently encountered probability
-distributions: the Binomial Distribution, the Poisson Distribution,
-and the Gaussian Distribution.
+prediction for the statistical distribution of outcomes.  The
+mathematical framework for providing this prediction is called a
+probability distribution, which reports the probability of each
+possible outcome for a random variable.  We'll start this discussion,
+therefore, by deriving three of the most frequently encountered
+probability distributions: the Binomial Distribution, the Poisson
+Distribution, and the Gaussian Distribution.
 
 
 \section{The  Binomial Distribution}
@@ -104,42 +112,51 @@ P(m; \, n ,\epsilon) = \binom{n}{m} \, \epsilon^m \, (1 - \epsilon)^{n-m}
 \end{equation}
 which is called the Binomial Distribution.
 
-\section{Mean and Variance}
+\section{Mean and Variance of a Probability Distribution}
 
-Given a probability distribution, the most urgent questions are generally ``what is the mean value we can expect from this distribution?" and ``how close to the mean value are most of the outcomes?"  The first answer localizes the distribution while the second answer describes its width.
+Given a probability distribution describing the outcomes of an experiment, our
+most urgent questions are generally ``what is a typical outcome?'' and ``how widely will outcomes typically vary from one another?''.
 
-To calculate the mean value in answer to the first question, we simply calculate a weighted average:
+There are a number of ways to quantitfy the answer to first question,
+but generally the most useful answer is the mean value, $\mu$, also called
+the expected value, of the distribution, which is defined as the
+weighted average across all possible outcomes.  For the Binomial distribution, which describes probabilities for outcomes which are natural numbers up to $n$, we calculate the sum:
 \begin{equation}
-\braket{m} \equiv \bar{m} \equiv \sum_m m \, P(m) 
+\mu \equiv \braket{m} \equiv \sum_{m=0}^{n} m \, P(m)
 \end{equation}
-For a continuous probability distribution, we would integrate instead:
+For a continuous probability distribution, where outcomes can be any
+real value, we would integrate instead:
 \begin{equation}
-\braket{x} \equiv \bar{x} \equiv \int x \, P(x) \, dx 
+\mu \equiv \braket{x} \equiv \int_{-\infty}^{+\infty} x \, P(x) \, dx 
 \end{equation}
+across a range appropriate to the situation, typically $[-\infty,\infty]$.
+
+A mode of a distribution is an outcome for which the probability is
+maximal.  A median of a distribution is a value at which $50\%$ of
+probability is at or below it and $50\%$ of probability is at or above
+it.  Both of these quantities provide information about typical values
+for a distribution, but they suffer the signficant defect that they
+are not necessarily unique for a given distribution.
+
 We usually answer the second question in terms of the variance, $\sigma^2$, of the distribution:
 \begin{displaymath}
-\sigma^2 \equiv \braket{(x-\bar{x})^2}
+\sigma^2 \equiv \braket{(x-\mu)^2}
 \end{displaymath}
-Other answers have problems, e.g. $\braket{x-\bar{x}}$ can be zero or nearly so, even for wide distributions, as long as it is symmetric.  You could fix this by calculating $\braket{|x-\bar{x}|}$ but this is generally much harder to calculate, and less useful, than the variance.  For instance, it is left as an exercise to show that:
+Other answers have problems, e.g. $\braket{x-\mu}$ can be zero or nearly so, even for wide distributions, as long as it is symmetric.  You could fix this by calculating $\braket{|x-\mu|}$ but this is generally much harder to calculate, and less useful, than the variance.  For instance, it is left as an exercise to show that:
 \begin{equation}
 \label{eqn:varhw}
-\braket{(x-\bar{x})^2} = \braket{x^2} -\bar{x}^2
+\braket{(x-\mu)^2} = \braket{x^2} -\braket{x}^2
 \end{equation}
-using the fact that $\bar{x}$ is simply a number, and so $\braket{\bar{x}} = \bar{x}$.  We often write this result equivalently as:
-\begin{equation}
-\label{eqn:variance}
-\sigma^2 \equiv \braket{(x-\braket{x})^2} = \braket{x^2} - \braket{x}^2
-\end{equation}
-Which shows explicitly that we need only calculate $\braket{x}$ and $\braket{x^2}$ in order to determine the variance of a distribution.
+using the fact that $\mu$ is simply a number, and so $\braket{\mu} = \mu$.  We need only calculate $\braket{x}$ and $\braket{x^2}$ in order to determine the variance of a distribution.
 
 \section{Mean and Variance of the Binomial Distribution}
 
 The mean value of Binomial Distribution is given by:
 \begin{eqnarray*}
-\bar{m} &=& \sum_{m=0}^n \; m \, P(m) \\
+\braket{m} &=& \sum_{m=0}^n \; m \, P(m) \\
 &=& \sum_{m=0}^n \; m \, \binom{n}{m} \epsilon^m (1-\epsilon)^{n-m} \\
 \end{eqnarray*}
-which looks rather daunting!  The trick is to use the Binomial Theorem (\ref{eqn:binomt}) and define a function of two independent variables p and q given by:
+which looks rather daunting!  The trick is to use the Binomial Theorem (\ref{eqn:binomt}) and define a function of two independent variables $p$ and $q$ given by:
 \begin{displaymath}
 f(p,q) = (p+q)^n = \sum_{m=0}^n \binom{n}{m} p^m q^{n-m}
 \end{displaymath}
@@ -153,11 +170,11 @@ np(p+q)^{n+1} = \sum_{m=0}^n m \binom{n}{m} p^m q^{n-m}
 \end{displaymath}
 which is true for any $p$ and $q$.  We now substitute the particular values $p=\epsilon$ and $q=1-\epsilon$ and find that:
 \begin{displaymath}
-n \epsilon = \sum_{m=0}^n m \binom{n}{m} \epsilon^m (1-\epsilon)^{n-m} \equiv \sum_{m=0}^n m P(m) = \bar{m}
+n \epsilon = \sum_{m=0}^n m \binom{n}{m} \epsilon^m (1-\epsilon)^{n-m} \equiv \sum_{m=0}^n m P(m) = \mu
 \end{displaymath}
 So the mean value is given by:
 \begin{equation}
-\bar{m} = n \epsilon
+\mu = n \epsilon
 \end{equation}
 or the total number of trials times the probability of success for each trial, a wholly plausible answer.
 
@@ -185,6 +202,90 @@ or simply:
 \end{equation}
 Note that if $\epsilon=0$ or $\epsilon=1$, there is only one outcome (all failures or all success) and so the variation is zero.
 
+\section{The Poisson Distribution}
+\label{sec:poisson}
+
+\begin{figure}[htbp]
+\begin{center}
+{\includegraphics[width=0.45\textwidth]{figs/poisson.pdf}}
+\end{center}
+\caption{\label{fig:poisson}  The Poisson distribution for several values of parameter $\lambda$.}
+\end{figure}
+
+Suppose we have some time interval over which we expect to observe a
+mean number of events $\lambda$.  The events must be independent of
+one another: an event occurring at a particular time cannot affect the
+time at which the next event occurs.  We divide the time interval over
+which the $\lambda$ events are expected to occur into into $n$
+sub-intervals, each with an equal probability to contain an event.
+These intervals will be all the same size if the events are uniformly
+distributed in time, but if the events are not uniformly distributed,
+the sub-intervals are simply chosen to ensure the probability is the
+same in each interval.  The probability of an event occuring in each
+subinterval is $\epsilon = \lambda / n$.  If we make $n$ large enough,
+the probability of observing two events in an interval is vanishing
+small: $\epsilon^2 = \lambda^2 / n^2 \ll \epsilon$.  Once cast this way, we can
+interpret the outcome of the counting experiment as drawn from a
+Binomial distribution of $n$ trials each with $\epsilon = \lambda / n$:
+\begin{eqnarray*}
+P(m) &=& \binom{n}{m} \epsilon^m (1-\epsilon)^{n-m} \\[5pt]
+  &=& \frac{n!}{m! \, (n-m)!} \; \left( \frac{\lambda}{n} \right)^m \left( 1 - \frac{\lambda}{n}\right)^{n-m} \\[5pt]
+  &=& \left( \frac{\lambda^m}{m!} \right) \left(1-\frac{\lambda}{n} \right)^n \left[ \frac{n!}{(n-m)!} \cdot \frac{1}{n^m}\right]_1 \left[ \left( 1 - \frac{\lambda}{n}\right)^{-m}\right]_2
+\end{eqnarray*}
+We obtain the Poisson distribution by considering the limit that  $n \to \infty$.   It is left as an exercise to show that both $[\dots]_1 \to 1$ and $[\dots]_2 \to 1$ as $n \to \infty$.  Recalling that
+\begin{displaymath}
+\lim_{n \to \infty} \left(1 - \frac{\lambda}{n} \right)^n = e^{-\lambda}
+\end{displaymath}
+we obtain the Poisson distribution, the probability for observing $m$ events for a mean of $\lambda$:
+\begin{equation}
+\label{eqn:poisson}
+P(m\; ; \; \lambda) = \frac{\lambda^m}{m!} \, e^{-\lambda}
+\end{equation}
+Notice that there is no longer a parameter $n$, since we took $n \to
+\infty$, and so $m$ now ranges from 0 to $\infty$.  Note also that
+$\lambda$ is a real number, not necessarily an integer, even though it
+is the mean of integer values.  For example, the mean of the integers
+1 and 2 is the real value 1.5.
+
+\section{Mean and Variance of The Poisson Distribution}
+\label{sec:poissonmeanvar}
+
+The mean of the Poisson distribution is given by:
+\begin{eqnarray*}
+\mu &=& \sum_{m \geq 0} \; m \, P(m) \\
+&=& \sum_{m \geq 0} \; m \, \frac{\lambda^m}{m!} \, e^{-\lambda}\\
+\end{eqnarray*}
+Since the first term ($m=0$) is zero, we have:
+\begin{eqnarray}
+\mu &=& e^{-\lambda} \sum_{m \geq 1} \; \frac{\lambda^m}{(m-1)!} \notag \\
+             &=& \lambda e^{-\lambda} \sum_{m \geq 1} \; \frac{\lambda^{m-1}}{(m-1)!} \notag \\
+             &=& \lambda e^{-\lambda} \sum_{n \geq 0} \; \frac{\lambda^{n}}{n!} \notag \\
+             &=& \lambda e^{-\lambda} e^\lambda \notag \\
+\mu  &=& \lambda
+\end{eqnarray}
+which should come as no surprise, as the assumption in the derivation was the that mean number of events was $\lambda$. 
+
+For the variance, we use a similar manipulation to calculate:
+\begin{eqnarray*}
+\braket{m^2} &=& \sum_{m \geq 0} \; m^2 \, P(m) \\
+&=& \sum_{m \geq 0} \; m^2 \, \frac{\lambda^m}{m!} \, e^{-\lambda}\\
+&=& \lambda \sum_{m \geq 1} \; m \, \frac{\lambda^{m-1}}{(m-1)!} \, e^{-\lambda}\\
+&=& \lambda \sum_{n \geq 0} \; (n+1) \, \frac{\lambda^{n}}{(n)!} \, e^{-\lambda}\\
+&=& \lambda \braket{m+1} = \lambda \, (\lambda+1)
+\end{eqnarray*}
+And so:
+\begin{eqnarray}
+\sigma^2 &=& \braket{m^2} - \braket{m}^2 \notag \\
+&=& \lambda \, (\lambda+1) - \lambda^2 \notag \\
+\sigma^2 &=& \lambda. 
+\end{eqnarray}
+That is, the variance of a Poisson distribution is simply the mean.
+This is probably the single most practical result from statistics.
+Whenever a measurement amounts to a counting experiment, simply from
+knowing the outcome of the experiment, the count $N$, we can estimate
+that mean value $\mu \sim N$ and also the variance $\sigma^2 = N$.
+Typical flutuations in a count $N$ are characterized by $\sigma =
+\sqrt{N}$.
 
 \section{The Gaussian Distribution}
 
@@ -198,25 +299,26 @@ Note that if $\epsilon=0$ or $\epsilon=1$, there is only one outcome (all failur
 The next distribution we will consider is the Gaussian distribution:
 \begin{equation}
 \label{eqn:gaussian}
-P(x) = \frac{1}{\sqrt{2\pi} \sigma} \cdot \exp\left( - \frac{(x - \lambda)^2}{2 \sigma^2}\right)
+P(x) = \frac{1}{\sqrt{2\pi} \sigma} \cdot \exp\left( - \frac{(x - \mu)^2}{2 \sigma^2}\right)
 \end{equation}
 which is plotted in Fig.~\ref{fig:gaussian}.  The Gaussian
-distribution (also sometimes called the normal distribution) appears
-frequently as a consequence of the central limit theorem, which states
-that the sum of independent random variables, when appropriately
-average (such as by taking the mean value) approaches a Gaussian
-distribution.  As one example of the CLT, we'll show later that the
-Gaussian distribution emerges from the Poisson distribution in the
-limit that $\lambda \to \infty$.
+distribution (often called the normal distribution) is the most
+important and useful distribution as a consequence of the central
+limit theorem (CLT).  The CLT states that when independent random
+variables drawn from any distribution of finite variance are added
+together and appropriately normalized (such as by taking their
+average) the distribution of the resulting random variable approaches
+the Gaussian distribution as the number of entries in the sum
+increases to infinity.  A proof of the CLT is in the Appendix.
 
-The Binomial distribution is a discrete functions: it describes the
-probability of outcomes which are integer quantities.  The Binomial
-probability for having 2.31 successes is either undefined or taken to be
-zero.  The value of the Binomial distribution function at
-a particular integer value is simply the probability of that
-particular outcome.  To determine the probability that an outcome is
-within a range of integers, say $m_1$ to $m_2$ the probability
-distribution function is simply added:
+The Binomial and Poisson distribution are discrete functions: they
+describes the probability of outcomes which are integer quantities.
+For example, the Binomial probability for having 2.31 successes is
+either undefined or taken to be zero.  The value of the
+Binomial distribution function at a particular integer value is simply
+the probability of that particular outcome.  To determine the
+probability that an outcome is within a range of integers, say $m_1$
+to $m_2$ the probability distribution function is simply added:
 \begin{displaymath}
 P = \sum_{m=m_1}^{m_2} P(m).
 \end{displaymath}
@@ -252,161 +354,12 @@ and:
 \braket{x^2}  \equiv \int_{-\infty}^{+\infty} x^2 P(x) \, dx 
 \end{displaymath}
 We have defined the Gaussian distribution with the suggestive
-parameters $\lambda$ and $\sigma$.  It is left as an exercise to show
-that indeed, the mean is $\lambda$ and the variance is $\sigma^2$.
-
-
-\section{Histograms in Scientific Python}
-
-\begin{figure}[htbp]
-\begin{center}
-\begin{tabular}{cc}
-{\includegraphics[width=0.45\textwidth]{figs/raw.pdf}} &
-{\includegraphics[width=0.45\textwidth]{figs/histeg.pdf}} \\
-(a) & (b) \\
-\end{tabular}
-\end{center}
-\caption{\label{fig:histeg} The 1000 measurements of variable $x$ in (a) are used to produce the histogram in (b).  The red data point in (b) is the count of the number of entries in range indicated by the red dashed lines in (a).}
-\end{figure}
-
-Suppose a particular variable $x$ is measured 1000 times.  One way to visualize the collected data is shown in Fig.~\ref{fig:histeg}a, which simply plots each measurement value above the measurement number (from 0 to 1000).  In this example, the number of measurements that occur within the range from $x=100$ to $x=105$ is 181.  This count is plotted as the red data point in Fig.~\ref{fig:histeg}b, 181 entries located above $x=102.5$, the center of the range.  If we repeat this exercise across a number or ranges, the resulting plot in Fig.~\ref{fig:histeg}b is called a histogram.  A histogram reports the number of entries that occur within each of a sequence of consecutive ranges of $x$-values.  Each range considered is called a histogram  bin, and the choice of which bins to use is at the discretion of the analyzer.
-
-The content of each bin is a single number, a count, and is therefore subject to the Poisson distribution.
-We can estimate the mean of the Poisson distribution by the measured value, so that $\lambda = N$.
-For the Poisson distribution, the variance $\sigma^2 = \lambda$, and so $\sigma = \sqrt{N}$.  It is customary to draw a line of size $\sqrt{N}$ when plotting a histogram value $N$. This is an example of an error bar, which indicates how well our measurement has determined a particular value.
-
-\begin{figure}[htbp]
-\begin{center}
-{\includegraphics[width=0.85\textwidth]{figs/makehisteg.png}} 
-\end{center}
-\caption{\label{fig:makehisteg} Example producing a histogram in Scientific Python.}
-\end{figure}
-
-An example producing a histogram in Scientific Python is shown in Fig.~\ref{fig:makehisteg}.
-The data to plot is simply a sequence of 1000 values randomly and uniformly chosen in the range $[0,20]$:
-\begin{verbatim}
-x = np.random.uniform(high=20.0,size=1000)
-\end{verbatim}
-To create a histogram from these 1000 values, we use the {\tt np.histogram} function:
-\begin{verbatim}
-counts,edges = np.histogram(x,bins=10,range=(0,20))
-\end{verbatim}
-where we have specified 10 bins, uniformly covering the range from 0 to 20.  The 
-function returns to arrays, which we save as {\tt counts} and {\tt edges}.  The {\tt counts} array contains the bin contents, the count of the number of values in each bin: 
-\begin{verbatim}
-counts:   [ 92  82 123  96  85 106 105  99  99 113]
-\end{verbatim}
-The edges array contains the edges of the bins:
-\begin{verbatim}
-edges:    [ 0.  2.  4.  6.  8. 10. 12. 14. 16. 18. 20.]
-\end{verbatim}
-You'll notice that 10 consecutive bins have 11 edges.  For plotting continuous data, one choice is to plot the contents at the center of each bin:
-\begin{verbatim}
-cbins = (edges[:-1] + edges[1:])/2.0
-\end{verbatim}
-the two slices {\tt edges[:-1]} and {\tt edges[1:]} are all but the last and all but the first.  The average of the two is the center of each bin:
-\begin{verbatim}
-cbins:    [ 1.  3.  5.  7.  9. 11. 13. 15. 17. 19.]
-\end{verbatim}
-The error bar values are chosen as the square root of the bin values:
-\begin{verbatim}
-err   = counts**0.5
-\end{verbatim}
-
-
-
-
-The histogram is plotted using the {\tt plt.errorbar} function:
-\begin{verbatim}
-plt.errorbar(cbins,counts,yerr=err,fmt="ko")
-\end{verbatim}
-which plots the bin contents {\tt counts} at the bin center values {\tt cbins} using the square root error bars in the array {\tt err}, using the format {\tt "ko"} for black circles.
-
-\section{Comparing a Histogram to a Probability Distribution Function}
-
-Our theoretical models often predict a PDF for some observable variable $x$.  As experimentalists, we are often therefore concerned with the question as to whether our collected data for an observable $x$ is consistent with the theoretical PDF.  A visual approach to answering this question is to plot the data in a histogram, and to draw the PDF as a curve normalized to the histogram.
-
-To predict the number of events in a bin with edges $x_{\rm lower}$ and $x_{\rm upper}$, in principle we need to integrate the PDF and normalize to the number of experiments:
-\begin{displaymath}
-N_{\rm pred} = N_{\rm meas} \int^{x_{\rm upper}}_{x_{\rm lower}} p(x) \, dx
-\end{displaymath}
-In practice, we generally choose the bin sizes small enough that the PDF is approximately constant during the entire bin, and in this case, the prediction can be taken as:
-\begin{displaymath}
-N_{\rm pred} = N_{\rm meas} \; \Delta x \; p(x)
-\end{displaymath}
-where $\Delta x$ is the width of each bin.  This scale factor $N_{\rm meas} \; \Delta x$ allows us to compare a continuous function to data collected in discrete bins, as shown in Fig.~\ref{fig:histpdf}.
-
-\begin{figure}[htbp]
-\begin{center}
-{\includegraphics[width=0.65\textwidth]{figs/compare.pdf}}
-\end{center}
-\caption{\label{fig:histpdf} The Gaussian PDF scaled to compare to data from a Gaussian distribution.
-In this case, there are 1000 total entries in the histogram and the bin size is 0.5, for a scale factor of 500.
-}
-\end{figure}
-
-\section{The Poisson Distribution}
-
-\begin{figure}[htbp]
-\begin{center}
-{\includegraphics[width=0.45\textwidth]{figs/poisson.pdf}}
-\end{center}
-\caption{\label{fig:poisson}  The Poisson distribution for several values of parameter $\lambda$.}
-\end{figure}
-
-
-Suppose we have some time interval over which we expect to observe a mean number of events $\lambda$.  The events must be independent of one another:  an event occurring at a particular time cannot affect the time at which the next event occurs.  We divide the time interval over which the $\lambda$ events are expected to occur into into $n$ sub-intervals, each with an equal probability to contain an event.  These intervals will be all the same size if the events are uniformly distributed in time, but if the events are not uniformly distributed, the sub-intervals are simply chosen to ensure the probability is the same in each interval.  Once cast this way, we can interpret this as a binomial distribution, with probability to contain an event, by construction, given by $\epsilon = \lambda / n$:
-\begin{eqnarray*}
-P(m) &=& \binom{n}{m} \epsilon^m (1-\epsilon)^{n-m} \\[5pt]
-  &=& \frac{n!}{m! \, (n-m)!} \; \left( \frac{\lambda}{n} \right)^m \left( 1 - \frac{\lambda}{n}\right)^{n-m} \\[5pt]
-  &=& \left( \frac{\lambda^m}{m!} \right) \left(1-\frac{\lambda}{n} \right)^n \left[ \frac{n!}{(n-m)!} \cdot \frac{1}{n^m}\right]_1 \left[ \left( 1 - \frac{\lambda}{n}\right)^{-m}\right]_2
-\end{eqnarray*}
-We obtain the Poisson distribution by considering the limit that  $n \to \infty$.   It is left as an exercise to show that both $[\dots]_1 \to 1$ and $[\dots]_2 \to 1$ as $n \to \infty$.  Recalling that
-\begin{displaymath}
-\lim_{n \to \infty} \left(1 - \frac{\lambda}{n} \right)^n = e^{-\lambda}
-\end{displaymath}
-we obtain the Poisson distribution, the probability for observing $m$ events for a mean of $\lambda$:
-\begin{equation}
-\label{eqn:poisson}
-P(m\; ; \; \lambda) = \frac{\lambda^m}{m!} \, e^{-\lambda}
-\end{equation}
-Notice that there is no longer a parameter $n$, since we took $n \to \infty$, and so $m$ now ranges from 0 to $\infty$.  Note also that $\lambda$ is a real number, not necessarily an integer, even though it is the mean of integer values.  For example, the mean of the integers 1 and 2 is the real value 1.5.
-
-\section{Mean and Variance of The Poisson Distribution}
-
-The mean of the Poisson distribution is given by:
-\begin{eqnarray*}
-\bar{m} &=& \sum_{m \geq 0} \; m \, P(m) \\
-&=& \sum_{m \geq 0} \; m \, \frac{\lambda^m}{m!} \, e^{-\lambda}\\
-\end{eqnarray*}
-Since the first term ($m=0$) is zero, we have:
-\begin{eqnarray}
-\bar{m} &=& e^{-\lambda} \sum_{m \geq 1} \; \frac{\lambda^m}{(m-1)!} \notag \\
-             &=& \lambda e^{-\lambda} \sum_{m \geq 1} \; \frac{\lambda^{m-1}}{(m-1)!} \notag \\
-             &=& \lambda e^{-\lambda} \sum_{n \geq 0} \; \frac{\lambda^{n}}{n!} \notag \\
-             &=& \lambda e^{-\lambda} e^\lambda \notag \\
-\bar{m}  &=& \lambda
-\end{eqnarray}
-which should come as no surprise, as the assumption in the derivation was the that mean number of events was $\lambda$. 
-
-For the variance, we use a similar manipulation to calculate:
-\begin{eqnarray*}
-\braket{m^2} &=& \sum_{m \geq 0} \; m^2 \, P(m) \\
-&=& \sum_{m \geq 0} \; m^2 \, \frac{\lambda^m}{m!} \, e^{-\lambda}\\
-&=& \lambda \sum_{m \geq 1} \; m \, \frac{\lambda^{m-1}}{(m-1)!} \, e^{-\lambda}\\
-&=& \lambda \sum_{n \geq 0} \; (n+1) \, \frac{\lambda^{n}}{(n)!} \, e^{-\lambda}\\
-&=& \lambda \braket{m+1} = \lambda \, (\lambda+1)
-\end{eqnarray*}
-And so:
-\begin{eqnarray}
-\sigma^2 &=& \braket{m^2} - \braket{m}^2 \notag \\
-&=& \lambda \, (\lambda+1) - \lambda^2 \notag \\
-\sigma^2 &=& \lambda. 
-\end{eqnarray}
-That is, the variance of a Poisson distribution is simply the mean.
+parameters $\mu$ and $\sigma$.  It is left as an exercise to show
+that indeed, the mean is $\mu$ and the variance is $\sigma^2$.
 
 
 \section{The Gaussian Distribution as a Limiting Case}
+\label{sec:gaussfrompoisson}
 
 As expected from the Central Limit Theorem, the Poisson Distribution in the limit $\lambda \to \infty$
 approaches the Gaussian distribution.  In this case, we can apply the Stirling Approximation:
@@ -475,13 +428,109 @@ Recalling that:
 P(x) = \frac{1}{\sqrt{2\pi \lambda}} \cdot \exp\left( - \frac{(m - \lambda)^2}{2 \lambda}\right)
 \end{equation}
 Which we can identify as a special case of the Gaussian distribution of Equation~\ref{eqn:gaussian} with 
-$\sigma^2 = \lambda$ and $x = m$:
-
+$\sigma^2 = \mu = \lambda$ and $x = m$:
 \begin{equation*}
-P(x) = \frac{1}{\sqrt{2\pi} \sigma} \cdot \exp\left( - \frac{(x - \lambda)^2}{2 \sigma^2}\right)
+P(x) = \frac{1}{\sqrt{2\pi} \sigma} \cdot \exp\left( - \frac{(x - \mu)^2}{2 \sigma^2}\right)
 \end{equation*}
 It may trouble you that $x$ is continuous while $m$ here was an integer.  But note that in the limit 
 $\lambda \to \infty$, the difference between $m/\lambda$ and $(m+1)/\lambda$ is infinitesimal, and so this is effectively a continuous function, consistent with the Gaussian distribution.
+
+\section{Histograms in Scientific Python}
+
+\begin{figure}[htbp]
+\begin{center}
+\begin{tabular}{cc}
+{\includegraphics[width=0.45\textwidth]{figs/raw.pdf}} &
+{\includegraphics[width=0.45\textwidth]{figs/histeg.pdf}} \\
+(a) & (b) \\
+\end{tabular}
+\end{center}
+\caption{\label{fig:histeg} The 1000 measurements of variable $x$ in (a) are used to produce the histogram in (b).  The red data point in (b) is the count of the number of entries in range indicated by the red dashed lines in (a).}
+\end{figure}
+
+Suppose a particular variable $x$ is measured 1000 times.  One way to visualize the collected data is shown in Fig.~\ref{fig:histeg}a, which simply plots each measurement value above the measurement number (from 0 to 1000).  In this example, the number of measurements that occur within the range from $x=100$ to $x=105$ is 181.  This count is plotted as the red data point in Fig.~\ref{fig:histeg}b, 181 entries located above $x=102.5$, the center of the range.  If we repeat this exercise across a number or ranges, the resulting plot in Fig.~\ref{fig:histeg}b is called a histogram.  A histogram reports the number of entries that occur within each of a sequence of consecutive ranges of $x$-values.  Each range considered is called a histogram  bin, and the choice of which bins to use is at the discretion of the analyzer.
+
+The content of each bin is a single number, a count. In
+Section~\ref{sec:poissonmeanvar}, an appropriate estimate for typical
+fluctuation of a count $N$ is shown to be $\sqrt{N}$.  It is customary
+to indicate the size of these typical fluctuations with an ``error
+bar'', a line through the data point at $N$ with length $\sqrt{N}$.
+The error bars provide a visual cue to how much we expect that a
+repeated identical measurement would vary with respect to the
+presented data.
+
+\begin{figure}[htbp]
+\begin{center}
+{\includegraphics[width=0.85\textwidth]{figs/makehisteg.png}} 
+\end{center}
+\caption{\label{fig:makehisteg} Example producing a histogram in Scientific Python.}
+\end{figure}
+
+An example producing a histogram in Scientific Python is shown in Fig.~\ref{fig:makehisteg}.
+The data to plot is simply a sequence of 1000 values randomly and uniformly chosen in the range $[0,20]$:
+\begin{verbatim}
+x = np.random.uniform(high=20.0,size=1000)
+\end{verbatim}
+To create a histogram from these 1000 values, we use the {\tt np.histogram} function:
+\begin{verbatim}
+counts,edges = np.histogram(x,bins=10,range=(0,20))
+\end{verbatim}
+where we have specified 10 bins, uniformly covering the range from 0 to 20.  The 
+function returns to arrays, which we save as {\tt counts} and {\tt edges}.  The {\tt counts} array contains the bin contents, the count of the number of values in each bin: 
+\begin{verbatim}
+counts:   [ 92  82 123  96  85 106 105  99  99 113]
+\end{verbatim}
+The edges array contains the edges of the bins:
+\begin{verbatim}
+edges:    [ 0.  2.  4.  6.  8. 10. 12. 14. 16. 18. 20.]
+\end{verbatim}
+You'll notice that 10 consecutive bins have 11 edges.  For plotting continuous data, one choice is to plot the contents at the center of each bin:
+\begin{verbatim}
+cbins = (edges[:-1] + edges[1:])/2.0
+\end{verbatim}
+the two slices {\tt edges[:-1]} and {\tt edges[1:]} are all but the last and all but the first.  The average of the two is the center of each bin:
+\begin{verbatim}
+cbins:    [ 1.  3.  5.  7.  9. 11. 13. 15. 17. 19.]
+\end{verbatim}
+The error bar values are chosen as the square root of the bin values:
+\begin{verbatim}
+err   = counts**0.5
+\end{verbatim}
+
+
+
+
+The histogram is plotted using the {\tt plt.errorbar} function:
+\begin{verbatim}
+plt.errorbar(cbins,counts,yerr=err,fmt="ko")
+\end{verbatim}
+which plots the bin contents {\tt counts} at the bin center values {\tt cbins} using the square root error bars in the array {\tt err}, using the format {\tt "ko"} for black circles.
+
+\section{Comparing a Histogram to a Probability Distribution Function}
+\label{sec:comphist}
+
+
+Our theoretical models often predict a PDF for some observable variable $x$.  As experimentalists, we are often therefore concerned with the question as to whether our collected data for an observable $x$ is consistent with the theoretical PDF.  A visual approach to answering this question is to plot the data in a histogram, and to draw the PDF as a curve normalized to the histogram.
+
+To predict the number of events in a bin with edges $x_{\rm lower}$ and $x_{\rm upper}$, in principle we need to integrate the PDF and normalize to the number of experiments:
+\begin{displaymath}
+N_{\rm pred} = N_{\rm meas} \int^{x_{\rm upper}}_{x_{\rm lower}} p(x) \, dx
+\end{displaymath}
+In practice, we generally choose the bin sizes small enough that the PDF is approximately constant during the entire bin, and in this case, the prediction can be taken as:
+\begin{displaymath}
+N_{\rm pred} = N_{\rm meas} \; \Delta x \; p(x)
+\end{displaymath}
+where $\Delta x$ is the width of each bin.  This scale factor $N_{\rm meas} \; \Delta x$ allows us to compare a continuous function to data collected in discrete bins, as shown in Fig.~\ref{fig:histpdf}.
+
+\begin{figure}[htbp]
+\begin{center}
+{\includegraphics[width=0.65\textwidth]{figs/compare.pdf}}
+\end{center}
+\caption{\label{fig:histpdf} The Gaussian PDF scaled to compare to data from a Gaussian distribution.
+In this case, there are 1000 total entries in the histogram and the bin size is 0.5, for a scale factor of 500.
+}
+\end{figure}
+
 
 
 \newpage
@@ -517,7 +566,7 @@ Hint: recall the Taylor series expansion for $e^\lambda$.
 \noindent
 {\bf Problem 5:} Show that the mean of the Gaussian distribution has been correctly identified in Equation~\ref{eqn:gaussian}.  That is, show explicitly that:
 \begin{displaymath}
-\int_{-\infty}^{\infty} x P(x) dx = \lambda 
+\int_{-\infty}^{\infty} x P(x) dx = \mu 
 \end{displaymath}
 
 \vskip 1cm
@@ -527,8 +576,22 @@ Hint: recall the Taylor series expansion for $e^\lambda$.
 \int_{-\infty}^{\infty} x^2 P(x) dx = \sigma^2 
 \end{displaymath}
 when we take $\lambda=0$ (which is equivalent to simply changing variables $y=x-\lambda$.)
-   
+
+\vskip 1cm
+\noindent
+{\bf Problem 7:} Consider a special probability function with the following properties: (A) it is defined for outcomes 0,1,2,3, and 4, (B) it has two modes at outcomes 0 and 4, (C) it has three medians at outcomes 1,2, and 3.  Sketch the probability distribution and determine its mean. 
+
+\noindent
+{\bf Problem 9:} Suppose that two counting experiments $a$ and $b$ have outcomes that are well described by the Poisson distribution with mean values $\lambda_a$ and $\lambda_b$ respectively.  Now consider the counting
+experiment $a+b$ that results from simply adding the counts from both experiments $a$ and $b$.  Show that that the variance of this sum is given by:
+\begin{displaymath}
+\sigma^2(a+b) = \sigma^2_a + \sigma^2_b
+\end{displaymath}
+We'll show in the next chapter that, quite generally, uncertainties $\sigma$ add in quadrature.
+
 \newpage
+
+\end{document}
 
 \chapter{Experimental Uncertainties}
 
@@ -557,7 +620,13 @@ If the first nonzero digit in the uncertainty is a zero or one, we keep two digi
 \begin{displaymath}
 x = 1.245 \pm 0.113~{\rm m} \to x = 1.25 \pm 0.11~{\rm m}.
 \end{displaymath}
-We'll define this uncertainty quite precisely, but let's start with a conceptual definition.  Each particular measurement of a quantity $x$ makes a claim about where the true value of $x$ is most likely to lie.  If we assume that measurements improve with time and better reproduce the true value, we expect a series of measurements to proceed like in Fig.~\ref{fig:measuretime}, with future measurements shown to be consistent with the uncertainties reported by previous experiments.
+We'll define this uncertainty quite precisely, but let's start with a
+conceptual definition.  Each particular measurement of a quantity $x$
+makes a claim about where the true value of $x$ is most likely to lie.
+If we assume that measurements improve with time and better reproduce
+the true value, we expect a series of measurements to proceed like in
+Fig.~\ref{fig:measuretime}, with future measurements shown to be
+consistent with the uncertainties reported by previous experiments.
 
 \begin{figure}[htbp]
 \begin{center}
@@ -566,7 +635,15 @@ We'll define this uncertainty quite precisely, but let's start with a conceptual
 \caption{\label{fig:stdunc}  The interpretation of experimental uncertainties as the parameters of a Gaussian distribution for the true value.}
 \end{figure}
 
-We can therefore think of a measurement and it's uncertainty as describing a PDF for the outcome of  experiments in the distant future with uncertainties so small as to effectively measure the true value of the quantity.  Because most measured quantities have many independent sources of uncertainties, the Central Limit Theorem implies that the true value of the measured quantity is best described by a Gaussian  Distribution.  We define the measured value $x$ as the mean of this distribution, and the uncertainty as the $\sigma$ of the Gaussian.
+We can therefore think of a measurement and it's uncertainty as
+describing a PDF for the outcome of experiments in the distant future
+with uncertainties so small as to effectively measure the true value
+of the quantity.  Because most measured quantities have many
+independent sources of uncertainties, the Central Limit Theorem
+implies that the true value of the measured quantity is best described
+by a Gaussian Distribution.  We define the measured value $x$ as the
+mean of this distribution, and the uncertainty as the $\sigma$ of the
+Gaussian.
 
 \section{The Error Function}
 
@@ -586,7 +663,7 @@ but we can also ask, what is the probability enclosed in $1.5 \sigma$.  To  answ
 \begin{displaymath}
 {\rm erf}(x) = \frac{1}{\sqrt{\pi}} \int^x_{-x} \exp\left(-t^2 \right) dt
 \end{displaymath}
-which is simply the integral from $-x$ to $x$ of a Gaussian with $\sigma = 1/sqrt{2}$.  So if we want to calculate the probability contained in $n~\rm sigma$ we would calculate:
+which is simply the integral from $-x$ to $x$ of a Gaussian with $\sigma = 1/\sqrt{2}$.  So if we want to calculate the probability contained in $n~\rm sigma$ we would calculate:
 \begin{displaymath}
  {\rm erf}(n \cdot \frac{1}{\sqrt{2}})
 \end{displaymath}
@@ -606,6 +683,19 @@ $\pm5 \sigma$ & ${\rm erf}\left( \frac{5}{\sqrt{2}} \right)$ & 99.99994\% \\
 \caption{\label{tbl:erf} The integrated probability for a Gaussian distribution within the stated bounds.} 
 \end{center}
 \end{table}
+
+In practice, scientist often speak in units of $\sigma$.  Measure
+values that differs from a prediction by one or even two $\sigma$ are
+generally considered to be consistent, because nearly $5\%$ of our
+measurements will be off by two $\sigma$ or more.  At three sigma,
+which occurs with a probabilty of $0.3\%$ things are starting to get
+interesting: either someone has likely made a mistake (the theorist or
+the experimentalist) or something new and exciting is happening, or
+both.  In my field of particle physics, we consider three $\sigma$ to
+constitute initial evidence, but hold off on claiming discovery of a
+new particle until five $\sigma$.  This is because if you collect lots
+of data and do lots of different analyses, it starts to become likely that
+you will encounter occassional three $\sigma$ statistical fluctuations.
 
 \section{Mean and Variance of a Sum}
 
@@ -656,14 +746,13 @@ from which it follows that:
 &=& \braket{x^2} + \braket{y^2} \\
 &=& \sigma^2_x + \sigma^2_y\\
 \end{eqnarray*}
-
 In the exercises you will show that even if $\braket{x}$ and $\braket{y}$ are non-zero, we still obtain:
 \begin{displaymath}
 \sigma^2(x+y) = \sigma^2_x + \sigma^2_y
 \end{displaymath}
 that is, the uncertainties in a sum add in quadrature.
 
-\section{Uncertainties Add in Quadrature}
+\section{Independent Uncertainties Add in Quadrature}
 
 In the previous section, we discussed that the variance of the sum of two random variables drawn from any distribution is just the sum of their variances:
 \begin{displaymath}
@@ -751,34 +840,72 @@ and conclude that:
 \sigma_y = k \sigma_x
 \end{equation*}
 
+\section{Repeated Experiments}
+
+Suppose that we have an apparatus which can measure a quantity $x$
+with uncertainty $\sigma_x$, and that we repeat a series of $N$
+measurements $x_1$, $x_2$, $x_3$, \ldots, $x_N$. Each $x_i$ is a
+random variable drawn from a distribution with variance $\sigma_x$ and
+mean $\mu$.
+
+A useful quantity to calculate from our $N$ measurements is the sample mean:
+\begin{displaymath}
+  \bar{x} \equiv \frac{1}{N} \, \sum_{i=1}^{N} x_i = \frac{x_1 + x_2 + x_3 + \ldots + x_N}{N}
+\end{displaymath}
+Just as each of our individual measurements have mean value:
+\begin{displaymath}
+\braket{x_i} = \mu  
+\end{displaymath}
+the sample mean also has mean value:
+\begin{displaymath}
+  \braket{\bar{x}} = \frac{1}{N} \, \sum_{i=1}^{N} \braket{x_i}
+= \frac{1}{N} \, \sum_{i=1}^{N} \mu = \mu
+\end{displaymath}
+The uncertainty on the sample mean can be calculated using the results of the previous sections which covered sums and constant scale factors:
+\begin{eqnarray*}
+  \sigma^2(\bar{x}) &=& \sigma^2\left( \frac{1}{N} \, \sum_{i=1}^{N} x_i \right) \\
+  &=& \sum_{i=1}^{N} \left( \sigma \left( \frac{x_i}{N} \right) \right)^2 \\
+  &=& \sum_{i=1}^{N} \left( \frac{\sigma_x}{N} \right)^2 \\ 
+  &=& \frac{\sigma_x^2}{N} \\
+ \sigma_{\bar{x}} &=& \frac{\sigma_x}{\sqrt{N}} \\
+\end{eqnarray*}
+This shows that the sample mean measures the same mean value $\mu$ but
+with an uncertainty that is reduced by a factor $1/\sqrt{N}$.  More
+generally, taking additional data reduces the uncertainty of a
+measurement.  If you take gfour times as much data, you can expect the
+uncertainties to be cut in half.
+
+Statistics textbooks will often refer to $\mu$ as the {\em poplulation
+  mean} and $\bar{x}$ as the {\em sample mean}, terminology that makes
+good sense in the context of estimating properties of an entire
+population using a smaller sample.  I've mostly avoided this
+terminology because it doesn't make as much sense in the context of
+measurement of most physics experiments where this is no finite
+population to consider.  We are generally attempting to measuring
+fundamental properties of the universe, not hair length in a
+population of goats!  But you'll likely encounter this terminology in
+the statostics literature.
+
 \section{General Propagation of Uncertainties}
-We are now ready to handle propagation of uncertainties for a general function.  Suppose we measure $x = x_0 \pm \sigma_x$ and $y = y_0 \pm \sigma_y$ and we wish to know the resulting uncertainty on the calculated quantity $f(x,y)$.
+
+We are now ready to handle propagation of uncertainties for a general
+function.  Suppose we measure $x = x_0 \pm \sigma_x$ and $y = y_0 \pm
+\sigma_y$ and we wish to know the resulting uncertainty on the
+calculated quantity $f(x,y)$.
 
 Now we Taylor expand the function about the measured values $x_0$ and $y_0$:
 \begin{equation*}
-f(x,y) = f(x_0+\Delta x,y_0 + \Delta y) \sim f(x_0,y_0) + \left.\frac{df}{dx}\right|_{x_0,y_0} \Delta x + \left.\frac{df}{dy}\right|_{x_0,y_0} \Delta y 
+f(x,y) \sim f(x_0,y_0) + \left.\frac{\partial f}{\partial x}\right|_{x_0,y_0} (x-x_0) + \left.\frac{\partial f}{dy}\right|_{x_0,y_0} (y-y_0) 
 \end{equation*}
-We note that 
-\begin{eqnarray*}
-\Delta x \equiv x - x_0 \\
-\Delta y \equiv y - y_0 \\
-\end{eqnarray*}
-where we can consider $x_0$ and $y_0$ to be precisely known constants that happen to coincide with our best measured value of $x$ and $y$.  In this case, our measurement amounts to:
-\begin{eqnarray*}
-\Delta x &=& 0 \pm \sigma_x\\
-\Delta y &=& 0 \pm \sigma_y\\
-\end{eqnarray*}
-and our uncertainties are associated with $\Delta x$ and $\Delta y$, not the ``constants" $x_0$ and $y_0$.
-
-Turning back to the Taylor expansion, we see now that:
+which we can write as:
 \begin{equation*}
-f(x,y) \sim A + B \Delta x + C \Delta y 
+f(x,y) \sim A + B x + C y 
 \end{equation*}
 where the constants are:
 \begin{eqnarray*}
-A  &=& f(x_0,y_0)\\
-B  &=& \left.\frac{df}{dx}\right|_{x_0,y_0}\\
-C  &=& \left.\frac{df}{dy}\right|_{x_0,y_0}\\
+  A  &=& f(x_0,y_0) - B x_0 - C y_0\\
+  B  &=& \left.\frac{\partial f}{\partial x}\right|_{x_0,y_0}\\
+  C  &=& \left.\frac{\partial f}{dy}\right|_{x_0,y_0}\\
 \end{eqnarray*}
 We know how to propagate uncertainties in this case, which involves scaling, adding in quadrature, and adding a constant:
 \begin{equation*}
@@ -786,32 +913,52 @@ We know how to propagate uncertainties in this case, which involves scaling, add
 \end{equation*}
 And plugging in the constants:
 \begin{equation*}
-\sigma^2_f = \left(\left.\frac{df}{dx}\right|_{x_0 y_0} \right)^2 \sigma^2_x  + \left( \left.\frac{df}{dy} \right|_{x_0 y_0} \right)^2 \sigma^2_y
+\sigma^2_f = \left(\left.\frac{\partial f}{\partial x}\right|_{x_0 y_0} \right)^2 \sigma^2_x  + \left( \left.\frac{\partial f}{dy} \right|_{x_0 y_0} \right)^2 \sigma^2_y
 \end{equation*}   
+This is a plausible result.  As $x$ moves by a typical amount $\sigma_x$ from the value $x_0$, we expect $f$ to change by approximately:
+\begin{equation*}
+  \Delta f = \left.\frac{\partial f}{\partial x}\right|_{x_0 y_0} \sigma_x
+\end{equation*}   
+The result we obtain is this amount of variation added in quadrature with a similar variation due to variable $y$.
 
-\section{Variance of the Mean}
-
-Suppose we have an apparatus that can measure a quantity $x$ with uncertainty $\sigma$, and we make a series of $N$ measurements $x_1$, $x_2$, $x_3$, \ldots, $x_N$.
-
-We can calculate the mean value:
-\begin{displaymath}
-X = \frac{x_1 + x_2 + x_3 + \ldots + x_N}{N}
-\end{displaymath}
-
-The uncertainty on the mean value can be calculated by propagating the uncertainties in the usual way:
-\begin{eqnarray*}
-\sigma_X &=& \sqrt{\left(\frac{dX}{dx_1} \sigma \right)^2 
-+ \left(\frac{dX}{dx_2} \sigma \right)^2 +  \ldots + \left(\frac{dX}{dx_N} \sigma \right)^2 } \\
-&=& \sqrt{N \left(\frac{\sigma}{N} \right)^2}\\ 
-&=& \frac{\sigma}{\sqrt{N}} \\
-\end{eqnarray*}
-If we assume that the mean value is approaching the true value of the quantity $x$, then repeating the measurement $N$ times reduces the statistical uncertainty by a factor $\sqrt{N}$.
+This result was obtained by the Taylor series approximation, and is
+therefore only appropriate when the uncertainties are small enough
+that the function $f$ is not changing dramatically as $x$ and $y$ vary
+by $\sigma_x$ and $\sigma_y$.  This is usually the case for a well
+designed experiment.  A poorly designed experiment that determines a
+quantity $f$ which is varying dramatically, from poorly measured
+quantities, would likley benefit from a redesign, for instance by
+measuring the dramatically varying quantity $f$ more directly!  A
+typical case where this approximation is problematic is when
+calculating recipocals of quantities which are within a few sigma of
+zero.
 
 \section{Systematic Uncertainties}
 
-If by repeating an experiment $N$ times we can reduce the statistical uncertainty by a factor of $\sqrt{N}$, it might seem that we can reach any desired level of experimental uncertainty simply by repeating an experiment many times.  Unfortunately, statistical uncertainty is just one component of experimental uncertainty, there is also systematic uncertainty.
+If by repeating an experiment $N$ times we can reduce the statistical
+uncertainty by a factor of $\sqrt{N}$, it might seem that we can reach
+any desired level of experimental uncertainty simply by repeating an
+experiment many times.  Unfortunately, statistical uncertainty is just
+one component of experimental uncertainty.  There is also systematic
+uncertainty.
 
-Our derivation of the Binomial, Poisson, and Gaussian distributions all shared a common assumption:  that each outcome is independent of previous outcomes.  But real measurements are also biased from the correct value by a  {\bf constant} but unknown amount.  We describe the expected size of this bias as an additional uncertainty called the systematic uncertainty.  Since the bias away from the true value is constant, and not subject to statistical fluctuations, repeating an experiment does nothing to reduce systematic uncertainties.  The only way to reduce systematic uncertainties is to design a better experiment.vvGenerally in the early stages, experiments are statistics limited, and taking more data helps reduce the overall uncertainty.  But at a later stage, the experiment becomes systematics limited.  More data does not help unless the apparatus is improved.  Often, in complicated experiments, increased statistics also gives the experimenter a better handle on the systematic uncertainties, allowing for improvements to both the statistical and systematic uncertainties.
+Our derivation of the Binomial, Poisson, and Gaussian distributions
+all shared a common assumption: that each outcome is independent of
+previous outcomes.  But real measurements are also biased from the
+correct value by a {\bf constant} and unknown amount.  We describe the
+expected size of this bias as an additional uncertainty called the
+systematic uncertainty.  Since the bias away from the true value is
+constant, and not subject to statistical fluctuations, repeating an
+experiment does nothing to reduce systematic uncertainties.  The only
+way to reduce systematic uncertainties is to design a better
+experiment.  Generally in the early stages, experiments are
+statistically limited, and taking more data helps reduce the overall
+uncertainty.  But at a later stage, the experiment becomes
+systematically limited.  More data does not help unless the apparatus
+is improved.  Often, in complicated experiments, increased statistics
+also gives the experimenter a better handle on the systematic
+uncertainties, allowing for improvements to both the statistical and
+systematic uncertainties.
 
 The treatment of systematic uncertainties is one of the greatest challenges that an experimenter faces.  
 Often scientific results report a measurement with both the statistical and a systematic uncertainty, e.g.:
@@ -834,6 +981,7 @@ Another common source of systematic uncertainties is when a measured value depen
 Apart from building a better experiment, the most common way to improve systematics is by calibration.  You could eliminate the systematic due to the velocity $v$ in the first example by measuring the relationship between $x$ and $t$ yourself.  In the light leakage example, you could record the time each measurement was made, and correct for the effect of light leakage.  
 
 \section{Exercises for Uncertainties}
+
 
 \noindent
 {\bf Problem 1:}  Suppose you measure an RMS voltage as $V = 43.2145~\rm mV$ and you calculate the uncertainty on this measurement to be $0.471~\rm mV$.  How should you report this measurement?  How about if the uncertainty were $1.07~\rm mV$? \\ \vskip 0.25cm
@@ -881,7 +1029,10 @@ There's another way to solve this problem, and that is to realize that $m$ and $
 \epsilon = \frac{p}{p+f}
 \end{displaymath}
 using standard propagation of uncertainties and the fact that $\sigma_p = \sqrt{p}$ and $\sigma_f = \sqrt{f}$.  You should be able to reproduce the same answer as above. \\ \vskip 0.25cm
-   
+
+
+
+
 %\chapter{Challenges (Not Assigned)}
 %
 %\noindent
@@ -935,7 +1086,7 @@ of the same quantity, and we would like to find out which single value $X$ is mo
 \end{displaymath}
 We can find the particular value of $X$ that maximizes the likelihood by finding the value that minimizes the $\chi^2$, because $\chi^2 \sim - 2 \log \mathcal{L}$.  We find the minimum from the condition:
 \begin{displaymath}
-\frac{d\chi^2}{dX} = 0,
+\frac{d\chi^2}{\partial x} = 0,
 \end{displaymath}
 which amounts to:
 \begin{eqnarray}
