@@ -579,19 +579,38 @@ when we take $\lambda=0$ (which is equivalent to simply changing variables $y=x-
 
 \vskip 1cm
 \noindent
-{\bf Problem 7:} Consider a special probability function with the following properties: (A) it is defined for outcomes 0,1,2,3, and 4, (B) it has two modes at outcomes 0 and 4, (C) it has three medians at outcomes 1,2, and 3.  Sketch the probability distribution and determine its mean. 
+{\bf Problem 7:}
+Suppose that 300 students are taking introductory physics from a particularly boring professor.  Each student has a 50\% chance of falling asleep at some point during lecture and staying asleep until the end of class.  What is the mean and variance of the number of students asleep at the end of class?
 
+\vskip 1cm
 \noindent
-{\bf Problem 9:} Suppose that two counting experiments $a$ and $b$ have outcomes that are well described by the Poisson distribution with mean values $\lambda_a$ and $\lambda_b$ respectively.  Now consider the counting
+{\bf Problem 8:}
+Suppose that in your spare time, you build a muon detector to impress your undergraduate research advisor.  On your own, you find that you detect, on average, one cosmic ray muon per minute.  What's is the probability of observing zero muon candidates when your advisor finally gives you three minutes of their attention?  What is the probability of dazzling your advisor by observing six muons during three minutes?
+
+\vskip 1cm
+\noindent
+{\bf Problem 9:} Consider a special probability distribution with the
+following properties: (A) it is only defined for outcomes 0,1,2,3, and
+4 (B) it has two modes at outcomes 0 and 4, (C) it has three medians
+at outcomes 1,2, and 3.  Sketch the probability distribution and
+determine its mean.
+
+\vskip 1cm
+\noindent
+{\bf Problem 10:} Suppose that two counting experiments $a$ and $b$ have outcomes that are well described by the Poisson distribution with mean values $\lambda_a$ and $\lambda_b$ respectively.  Now consider the counting
 experiment $a+b$ that results from simply adding the counts from both experiments $a$ and $b$.  Show that that the variance of this sum is given by:
 \begin{displaymath}
 \sigma^2(a+b) = \sigma^2_a + \sigma^2_b
 \end{displaymath}
-We'll show in the next chapter that, quite generally, uncertainties $\sigma$ add in quadrature.
+or equivalently:
+\begin{displaymath}
+\sigma(a+b) = \sqrt{\sigma^2_a + \sigma^2_b}
+\end{displaymath}
+We'll show in the next chapter that, quite generally, uncertainties ($\sigma$) add in quadrature in this way.
 
 \newpage
 
-\end{document}
+%\end{document}
 
 \chapter{Experimental Uncertainties}
 
@@ -1007,7 +1026,7 @@ What does this imply about the uncertainty on the sum of two variables, assuming
 \begin{displaymath}
 m = \sqrt{2  p_1 p_2 (1 - \cos\theta)}
 \end{displaymath}
-Suppose you were sitting in the control and saw a nice looking two photon event with 
+Suppose you were sitting in the control room and saw a nice looking two photon event with 
 $p_1=53 \pm 2~\rm GeV$, $p_2=75 \pm 3~\rm GeV$ and $\theta = 2.8 \pm 0.1$.   Calculate the invariant mass of these two photons (answer in GeV) and the uncertainty. \\ \vskip 0.25cm
 
 \noindent
@@ -1024,20 +1043,16 @@ One way out of this embarrassment is to realize that this problem is more approp
 $\sigma_m = \sqrt{n \epsilon (1 - \epsilon))}$.  Calculate the resulting uncertainty on the efficiency 
 $\epsilon$ and check that there is no longer a problem for $n=100$ and $m=95$.
 
-There's another way to solve this problem, and that is to realize that $m$ and $n$ are not independent variables, because $m > n$ is impossible.  If we instead think of this in terms of the number of events $p$ that pass, and the number of events $f$ that fail, these variable are independent.  Calculate the uncertainty on the efficiency: 
+{\bf Problem 9: (Challenging)} There's another way to solve the
+previous problem, and that is to realize that $m$ and $n$ are not
+independent variables, because $m > n$ is impossible.  If we instead
+think of this in terms of the number of events $p$ that pass, and the
+number of events $f$ that fail, these variable are independent.
+Calculate the uncertainty on the efficiency:
 \begin{displaymath}
 \epsilon = \frac{p}{p+f}
 \end{displaymath}
-using standard propagation of uncertainties and the fact that $\sigma_p = \sqrt{p}$ and $\sigma_f = \sqrt{f}$.  You should be able to reproduce the same answer as above. \\ \vskip 0.25cm
-
-
-
-
-%\chapter{Challenges (Not Assigned)}
-%
-%\noindent
-%{\bf Problem 1:} Prove by induction the formula for the binomial coefficients in (Equation~\ref{eqn:binomc}).
-
+using standard propagation of uncertainties and the fact that $\sigma_p = \sqrt{p}$ and $\sigma_f = \sqrt{f}$.  With some work, you should be able to reproduce the same answer as above. \\ \vskip 0.25cm
 
 \chapter{Statistical Analysis}
 
