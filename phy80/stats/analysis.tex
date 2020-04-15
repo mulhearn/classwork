@@ -585,20 +585,19 @@ Suppose that 300 students are taking introductory physics from a particularly bo
 \vskip 1cm
 \noindent
 {\bf Problem 8:}
-Suppose that in your spare time, you build a muon detector to impress your undergraduate research advisor.  On your own, you find that you detect, on average, one cosmic ray muon per minute.  What's is the probability of observing zero muon candidates when your advisor finally gives you three minutes of their attention?  What is the probability of dazzling your advisor by observing six muons during three minutes?
+Suppose that in your spare time, you build a muon detector to impress your undergraduate research advisor.  On your own, you find that you detect, on average, one cosmic ray muon per minute.  What is the probability of observing zero muons when your advisor finally gives you three minutes of their attention?  What is the probability of dazzling your advisor by observing six muons during three minutes?
 
 \vskip 1cm
 \noindent
 {\bf Problem 9:} Consider a special probability distribution with the
-following properties: (A) it is only defined for outcomes 0,1,2,3, and
+following properties: (A) it is only defined for outcomes 0,1,2,3 and
 4 (B) it has two modes at outcomes 0 and 4, (C) it has three medians
 at outcomes 1,2, and 3.  Sketch the probability distribution and
 determine its mean.
 
 \vskip 1cm
 \noindent
-{\bf Problem 10:} Suppose that two counting experiments $a$ and $b$ have outcomes that are well described by the Poisson distribution with mean values $\lambda_a$ and $\lambda_b$ respectively.  Now consider the counting
-experiment $a+b$ that results from simply adding the counts from both experiments $a$ and $b$.  Show that that the variance of this sum is given by:
+{\bf Problem 10:} Suppose that two independent experiments provide counts $a$ and $b$, which we can assume our drawn from a Poisson distribution.  Now consider the counting experiment that results from simply adding these counts to obtain $a+b$.  Show that that the variance of this sum is given by:
 \begin{displaymath}
 \sigma^2(a+b) = \sigma^2_a + \sigma^2_b
 \end{displaymath}
@@ -606,11 +605,11 @@ or equivalently:
 \begin{displaymath}
 \sigma(a+b) = \sqrt{\sigma^2_a + \sigma^2_b}
 \end{displaymath}
-We'll show in the next chapter that, quite generally, uncertainties ($\sigma$) add in quadrature in this way.
+Hint: use the property of the Poisson distribution that $\sigma^2 =
+\lambda = \mu$.  We'll show in the next chapter that, quite generally,
+uncertainties ($\sigma$) add in quadrature in this way.
 
 \newpage
-
-%\end{document}
 
 \chapter{Experimental Uncertainties}
 
@@ -1019,7 +1018,17 @@ What does this imply about the uncertainty on the sum of two variables, assuming
 {\bf Problem 4:}  For a measurement $x_0 \pm \sigma$ we define the fractional uncertainty as $\sigma/x_0$.  Use the general formula for propagating uncertainties to show that for products and ratios, the {\em fractional} uncertainties add in quadrature.  \\ \vskip 0.25cm
 
 \noindent
-{\bf Problem 5:}  Suppose you measure the system gain (i.e. the increase in output voltage for each electron) for your new ionization chamber to be $12~\rm mV$ per collected electron.  Suppose you measure a pulse with a height of $6.2~\rm V$.  First estimate the uncertainty on this measured value due to statistical fluctuations from the number of electrons.   You can neglect any uncertainties on the system gain measurement and the voltage reading itself as these are very small compared to the uncertainty due to electron statistics.  Next, suppose your pre-amplifier adds about $300~\rm mV$ of noise to this measurement.  What is the total uncertainty for this measurement? \\ \vskip 0.25cm
+{\bf Problem 5:}Suppose you measure the system gain (i.e. the increase
+in output voltage for each electron) for your new ionization chamber
+to be $12~\rm mV$ per collected electron.  Suppose you measure a pulse
+with a height of $6.2~\rm V$.  First estimate the uncertainty on this
+measured value due to statistical fluctuations from the number of
+electrons.  You can neglect any uncertainties on the system gain
+measurement and the voltage reading itself as these are very small
+compared to the uncertainty due to electron statistics.  Next, suppose
+your pre-amplifier adds about $300~\rm mV$ of noise to this
+measurement.  What is the total uncertainty for this measurement?
+\\ \vskip 0.25cm
 
 \noindent
 {\bf Problem 6:}  The rare decay of the Higgs boson ($m \sim125~\rm GeV$ in units where $c=1$) into pairs of photons played a crucial role in its discovery at the Large Hadron Collider.  The invariant mass of a particle that decays into two massless particles $p_1$ and $p_2$ can be calculated from:
@@ -1030,19 +1039,56 @@ Suppose you were sitting in the control room and saw a nice looking two photon e
 $p_1=53 \pm 2~\rm GeV$, $p_2=75 \pm 3~\rm GeV$ and $\theta = 2.8 \pm 0.1$.   Calculate the invariant mass of these two photons (answer in GeV) and the uncertainty. \\ \vskip 0.25cm
 
 \noindent
-{\bf Problem 7:}  A perennial problem with drawing data in histograms is what to do about bins that have zero events in them.  Those crazy people that insist that data has no statistical uncertainty (only predictions have statistical uncertainty!) laugh maniacally when we struggle with what to do in these bins.  This is where our highly useful fiction that data has an associated uncertainty manifestly falls apart! 
+{\bf Problem 7:} A perennial problem with drawing data in histograms
+is what to do about bins that have zero events in them.  Those crazy
+people that insist that data has no statistical uncertainty (only
+predictions have statistical uncertainty!) laugh maniacally when we
+struggle with what to do in these bins.  This is where our highly
+useful fiction that data has an associated uncertainty manifestly
+falls apart!
 
-The crazy people argue like this: the Poisson distribution has one parameter $\lambda$ which is both the mean and the variance.  We expect to see $\lambda$ events on average with fluctuations of about $\sigma = \sqrt{\lambda}$, leading to some observed value $n$.  When we plot uncertainties of $\sqrt{n}$ we are plotting the wrong uncertainty, which should be $\sqrt{\lambda}$.  Calculate how much these two estimates vary for a typical one sigma fluctuation, up and down, for $\lambda=10$ and $\lambda=100$.  Do the crazy people have a point? \\ \vskip 0.25cm
+The crazy people argue like this: the Poisson distribution has one
+parameter $\lambda$ which is both the mean and the variance.  We
+expect to see $\lambda$ events on average with fluctuations of about
+$\sigma = \sqrt{\lambda}$, leading to some observed value $n$.  When
+we plot uncertainties of $\sqrt{n}$ we are plotting the wrong
+uncertainty and associating it to the wrong quantity!  What we should
+be doing is comparing our measured value $n$ to a prediction $\lambda$
+with  $\sigma = \sqrt{\lambda}$.
+
+Let's see how much these two different estimates of the uncertainty
+typically vary.  For $\lambda=10$ and $\lambda=100$, caculate the
+uncertainty you would estimate (as $\sqrt{n}$) for typical one-sigma
+variations, i.e. for $n = \lambda \pm \sqrt{\lambda}$.
+
+Our estimate of the uncertainty from $\sqrt{n}$ is biased... however,
+this approach to determining the uncertainty of our data avoids a much
+more important bias, because it can determined directy from the
+collected data, independently of any theoretical prediction!
 
 \noindent
-{\bf Problem 8:}  In particle physics, we always need to understand the efficiency of our detectors.  For instance, if $n$ muons are produced by collisions, we'd like to know how many are actually recorded successfully by our muon detectors.  If we measure $m$ muons that are actually detected, we know that our efficiency is $\epsilon = m/n$.  No problem here!
+{\bf Problem 8:}  In particle physics, we always need to understand the efficiency ($E$) of our detectors.  For instance, if $n$ muons are produced by collisions, we'd like to know how many are actually recorded successfully by our muon detectors.  If we measure $m$ muons that are actually detected, we know that our efficiency is $E = m/n$.  No problem here!
 
-You will often see young particle physicists (and occasionally old!) run into problems estimating the uncertainty of this estimate.  They reason like this:  $n$ is just a constant, with no uncertainty.  I could pick to study exactly 1000 events, for instance.  The only number which I actually measure is $m$, and that should fluctuate by $\sigma_m = \sqrt{m}$.  So my uncertainty on the efficiency is just $\sigma_\epsilon = \sigma_m/n = \sqrt{m}/n$.  Problems arise because we often build good detectors with high efficiency.  So consider, for instance $n=100$ and $m=95$.  This leads to a measurement of the efficiency as $0.95 \pm 0.10$ which seems to include the impossible value $\epsilon = 1.05$.
+You will often see young particle physicists (and occasionally old!)
+run into problems estimating the uncertainty of this estimate.  They
+reason like this: $n$ is just a constant, with no uncertainty.  I
+could pick to study exactly 1000 events, for instance.  The only
+number which I actually measure is $m$, and that should fluctuate by
+$\sigma_m = \sqrt{m}$.  So my uncertainty on the efficiency is just
+$\sigma_E= \sigma_m/n = \sqrt{m}/n$.  Problems arise because we often
+build good detectors with high efficiency.  So consider, for instance
+$n=100$ and $m=95$.  This leads to a measurement of the efficiency as
+$0.95 \pm 0.10$ which seems to include the physically impossible value
+$E = 1.05 > 1$ within a one-sigma variation!
 
-One way out of this embarrassment is to realize that this problem is more appropriate for the binomial distribution which has two parameters, the number of trials $n$ and the success rate $\epsilon$ which is precisely the efficiency we are attempting to measure, and for which we all agree our best estimate is $\epsilon = m/n$.  Unlike our incorrect assumption that $\sigma_m = \sqrt{m}$, for the Binomial distribution
-$\sigma_m = \sqrt{n \epsilon (1 - \epsilon))}$.  Calculate the resulting uncertainty on the efficiency 
-$\epsilon$ and check that there is no longer a problem for $n=100$ and $m=95$.
+One way out of this embarrassment is to realize that this problem is
+more appropriate for the binomial distribution which has two
+parameters, the number of trials $n$ and the binomial success rate
+$\epsilon = E = m/n$.  For $n=100$ and $m=95$, calculate the uncertainty $\sigma$ on the value $E$ directly from the variance of the Binomial distribution.
+Check that the efficiency $E$ plus one sigma is now safely below one.
+\\ \vskip 0.25cm
 
+\noindent
 {\bf Problem 9: (Challenging)} There's another way to solve the
 previous problem, and that is to realize that $m$ and $n$ are not
 independent variables, because $m > n$ is impossible.  If we instead
@@ -1056,7 +1102,7 @@ using standard propagation of uncertainties and the fact that $\sigma_p = \sqrt{
 
 \chapter{Statistical Analysis}
 
-\section{Likelihood and $\chi^2$}
+\section{Likelihood and $\chi^2$ }
 
 Suppose we make a series of measurements:
 \begin{displaymath}
@@ -1064,65 +1110,91 @@ Suppose we make a series of measurements:
 \end{displaymath}
 and we would like to quantify how likely this outcome is to have occurred as the result of a corresponding theoretical prediction for each measurement:
 \begin{displaymath}
-\{X_1, X_2, \ldots, X_n \} \equiv X_i
+\{a_1, a_2, \ldots, a_n \} \equiv a_i
 \end{displaymath}
-Assuming the uncertainties on each $x$ are Gaussian, the probability of one measurement is:
+Assuming the uncertainties on each $x_i$ are Gaussian, the probability of one measurement is:
 \begin{displaymath}
-P_i = \frac{1}{\sqrt{2 \pi} \sigma_i}  \exp\left( - \frac{(X_i-x_i)^2}{2\sigma_i^2}\right)
+P_i = \frac{1}{\sqrt{2 \pi} \sigma_i}  \exp\left( - \frac{(a_i-x_i)^2}{2\sigma_i^2}\right)
 \end{displaymath}
 And the probability for the complete set of measurements, called the Likelihood, is the product of these probabilities for each measurement:
 \begin{displaymath}
-{\cal L} = \prod_i P_i = \prod_i \frac{1}{\sqrt{2 \pi} \sigma_i}  \exp\left( - \frac{(X_i-x_i)^2}{2\sigma_i^2}\right)
+{\cal L} = \prod_i P_i = \prod_i \frac{1}{\sqrt{2 \pi} \sigma_i}  \exp\left( - \frac{(a_i-x_i)^2}{2\sigma_i^2}\right)
 \end{displaymath}
 Now being physicists, we hate products and prefer sums, so we apply a logarithm , and there is an annoying factor of $\frac{1}{2}$ in the exponential, so we multiple by 2.  We'd also like to construct a quantity that tells us about how far apart a prediction is from our measurement, and so we multiply by $-1$, to obtain:
 \begin{equation}
--2 \log {\cal L} = \sum_i \frac{(X_i-x_i)^2}{\sigma_i^2} + 2 \log(\sqrt{2\pi}\sigma_i)
+-2 \log {\cal L} = \sum_i \frac{(a_i-x_i)^2}{\sigma_i^2} + 2 \log(\sqrt{2\pi}\sigma_i)
 \end{equation}
-Assuming the experimental uncertainties, $\sigma_i$, are known, the second term is simply a constant of the experiment setup.  The first term is what we call the $\chi^2$ metric:
+Assuming the experimental uncertainties, $\sigma_i$, are known, the second term is simply a constant of the experiment setup.  The first term is referred to as the $\chi^2$ test: 
 \begin{equation}
-\chi^2 \equiv \sum_i \frac{(X_i-x_i)^2}{\sigma_i^2} 
+\chi^2 \equiv \sum_i \frac{(a_i-x_i)^2}{\sigma_i^2} 
 \end{equation}
-A small value of $\chi^2$ means that the result is close to the theoretical prediction and a large value means that the result is unlikely to have occurred as a result of the prediction.  If the uncertainties and prediction are all correct, we would expect each $x_i$ to differ from the prediction $X_i$ by about $\sigma_i$.  So in this case we would expect:
+A small value of $\chi^2$ means that the result is close to the
+theoretical prediction and a large value means that the result is
+unlikely to have occurred as a result of the prediction.  If the
+uncertainties and prediction are all correct, we would expect each
+$x_i$ to differ from the prediction $a_i$ by about $\sigma_i$.  So in
+this case we would expect:
 \begin{equation}
-\chi^2 = \sum_i \frac{(X_i-x_i)^2}{\sigma_i^2} \sim \sum_i 1 = N
+\chi^2 = \sum_i \frac{(a_i-x_i)^2}{\sigma_i^2} \sim \sum_i 1 = N
 \end{equation}
-This assumes that the prediction $X_i$ is simply given to us.  We'll revisit this assumption when we discuss degrees of freedom.
+This assumes that the prediction $a_i$ is simply given to us.  We'll
+revisit this assumption when we discuss degrees of freedom.
 
 \section{Maximal Likelihood Method}
-
 Often, we are interested to know which particular parameters of a model maximize the likelihood
 of the data we have collected.  For instance, suppose we made $N$ measurements:
 \begin{displaymath}
-\left\{ x_1 \pm \sigma, x_2 \pm \sigma, ..., x_N \pm \sigma \right\}
+\left\{ x_1 \pm \sigma_x, x_2 \pm \sigma_x, ..., x_N \pm \sigma_x \right\}
 \end{displaymath}
-of the same quantity, and we would like to find out which single value $X$ is most consistent with these $n$ measurements.  Our $\chi^2$ for this simple model is then:
+of the same quantity $x$, each with the same uncertainty $\sigma_x$, and we
+would like to find out which value is most consistent with
+these $N$ measurements.  Our $\chi^2$ test for this simple model is
+then:
 \begin{displaymath}
-\chi^2 = \sum_i \frac{(X - x_i)^2}{\sigma^2}.
+\chi^2 = \sum_i \frac{(a - x_i)^2}{\sigma_x^2}.
 \end{displaymath}
-We can find the particular value of $X$ that maximizes the likelihood by finding the value that minimizes the $\chi^2$, because $\chi^2 \sim - 2 \log \mathcal{L}$.  We find the minimum from the condition:
+We can find the particular value of $a$, called $a_0$, that maximizes
+the likelihood by finding the minimum of the $\chi^2$, because $\chi^2
+\sim - 2 \log \mathcal{L}$.  We find the minimum from the condition:
 \begin{displaymath}
-\frac{d\chi^2}{\partial x} = 0,
+\left.\frac{\partial\chi^2}{\partial a}\right|_{a_0} = 0,
 \end{displaymath}
 which amounts to:
 \begin{eqnarray}
-0 &=& 2 \sum_i \frac{(X - x_i)}{\sigma^2} \nonumber \\
-0 &=& \left( X \sum_i \right)- \left( \sum_i x_i \right) \nonumber \\
-X &=& \frac{1}{N} \sum_i x_i \label{eqn:mean}
+0 &=& 2 \sum_i \frac{(a_0 - x_i)}{\sigma_x^2} \nonumber \\
+0 &=& \left( a_0 \sum_i \right)- \left( \sum_i x_i \right) \nonumber \\
+a_0 &=& \frac{1}{N} \sum_i x_i \label{eqn:mean} = \bar{x}
 \end{eqnarray}
-which of course is just the mean of the measurements, as expected.
+which is the sample mean $\bar{x}$ for our $N$ measurements.  This
+exercise shows that the sample mean is in fact our best estimate for
+the mean of the distribution which the measurements $x_i$ are drawn from.
 
-The $\chi^2$ formalism is quite general.  Suppose at each position $x_i$ we make a measurement $y_i$ which has a corresponding theoretical prediction $f(x_i; a, b)$ where $a$ and $b$ are parameters of the theory.  In this case, the $\chi^2$ is given:
+The $\chi^2$ test is quite general.  Suppose at each position
+$x_i$ we make a measurement $y_i$ which has a corresponding
+theoretical prediction $f(x_i; a, b)$ where $a$ and $b$ are parameters
+of the theory.  In this case, the $\chi^2$ is given:
 \begin{displaymath}
 \chi^2 = \sum_i \frac{(f(x_i;a,b) - y_i)^2}{\sigma_i^2}
 \end{displaymath}
-and to determine the best fit values for $a$ and $b$ we would require:
+and to determine the best fit values $a_0$ and $b_0$ we would require:
 \begin{eqnarray*}
-\frac{\partial \chi^2}{\partial a} &=& 0 \\
-\frac{\partial \chi^2}{\partial b} &=& 0 
+  \left.\frac{\partial\chi^2}{\partial a}\right|_{a_0,b_0} &=& 0 \\
+  \left.\frac{\partial\chi^2}{\partial b}\right|_{a_0,b_0} &=& 0 \\
 \end{eqnarray*}
-We can accommodate any number of theory parameters in this fashion.  And the interpretations of $x$ and $y$ are endless.  We can imagine taking measurements of the voltage at particular times, measuring the electric field strength at particular radii, the number of cars produced in a factory each month, and so on.
+We can accommodate any number of theory parameters in this fashion.
+And the interpretations of $x$ and $y$ are endless.  We can imagine
+taking measurements of the voltage at particular times, measuring the
+electric field strength at particular radii, the number of cars
+produced in a factory each month, and so on.
 
 \section{Interpretation of $\Delta \chi^2$}
+
+Suppose that at particular points $\{x_i\}$ we have made measurements
+$\{y_i \pm \sigma_i\}$ with corresponding theoretical predictions
+$f(x_i, a)$.  Using the $\chi^2$ formalism we can determine the best
+fit value $a_0$ for the parameter $a$.  But this is of very little use
+unless we can also determine the corresponding uncertainty $\sigma_a$
+associated with the best fit value $a_0$.
 
 \begin{figure}[htbp]
 \begin{center}
@@ -1139,9 +1211,14 @@ We can accommodate any number of theory parameters in this fashion.  And the int
 %plt.savefig("chisq.png")
 \end{figure}
 
-Suppose at particular points $\{x_i\}$ we have made measurements $\{y_i \pm \sigma_i\}$ with corresponding theoretical predictions $f(x_i, a)$.  Using the $\chi^2$ formalism we can determine the best fit value $a_0$ for the parameter $a$.  But this is of very little use unless we can also determine the corresponding uncertainty $\sigma_a$ associated with the best fit value $a_0$.  
-
-One approach is to simply apply propagation of uncertainties to the formula determined by minimizing the $\chi^2$, for instance, Equation~\ref{eqn:mean}.  But this approach can be tedious or even unusable in cases where the $\chi^2$ is minimized numerically and no closed form solution is available.   It is well worthwhile, therefore, to consider an alternative approach, that determines these uncertainties directly from the Likelihood and its corresponding $\chi^2$ distribution.
+One approach is to simply apply propagation of uncertainties to the
+formula determined by minimizing the $\chi^2$, for instance,
+Equation~\ref{eqn:mean}.  But this approach can be tedious or even
+unusable in cases where the $\chi^2$ is minimized numerically and no
+closed form solution is available.  It is well worthwhile, therefore,
+to consider an alternative approach, that determines these
+uncertainties directly from the Likelihood and its corresponding
+$\chi^2$ distribution.
 
 Consider the Likelihood associated with this series of measurements:
 \begin{displaymath}
@@ -1163,56 +1240,57 @@ when $a=a_0$ exactly as expected.  We also see that:
 \begin{displaymath}
 \frac{d^2\chi^2}{da^2} = \frac{2}{\sigma_a^2}
 \end{displaymath}
-
 As shown in Fig.~\ref{fig:chisq} the $\chi^2$ for a Guassian likelihood is a parabola, and so the second derivative {\em evaluated anywhere} yields a term containing the uncertainty $\sigma_a$.  However, the region near the minimum of any $\chi^2$ can distribution can be approximated as a parabola about the minimum, and so for a general $\chi^2$ distribution, we have:
 \begin{equation} \label{eqn:chisqunc}
 \sigma_a^2  = \frac{2}{\left. \frac{d^2\chi^2}{da^2} \right|_{a_0}}
 \end{equation}
 The uncertainty on any parameter can be estimated from the curvature of the $\chi^2$ at the minimum.
-Another approach, sometimes used in numerical calculations, is to note that $\chi^2$ changes by a factor of one when you move a distance $\sigma_a$ from the minimum.
 
-\section{Uncertainty on the Mean}
-
-Earlier we used the $\chi^2$ formalism to show that the best fit constant value describing a set of repeated measurements of the same quantity:
+\section{Uncertainty on the Sample Mean}
+Let's consider again a set of repeated measurements of the same quantity
+each with the same uncertainty $\sigma_x$:
 \begin{displaymath}
-\left\{ x_1 \pm \sigma, x_2 \pm \sigma, ..., x_N \pm \sigma \right\} \equiv x_i \pm \sigma_i
+\left\{ x_1 \pm \sigma_x, x_2 \pm \sigma_x, ..., x_N \pm \sigma_x \right\} \equiv x_i \pm \sigma_x
 \end{displaymath}
-is, not surprisingly, the mean value of the data:
+Earlier we used the $\chi^2$ test to determine the best fit constant
+value $a_0$ for these measurements is the sample mean:
 \begin{displaymath}
-X_0 = \frac{1}{N} \sum_i x_i \label{eqn:mean}.
+a_0 = \bar{x} = \frac{1}{N} \sum_i x_i \label{eqn:mean}.
 \end{displaymath}
-We are now in a position to determine the uncertainty on this mean value, by first taking the second derivative of the $\chi^2$ function:
+We are now in a position to determine the uncertainty on this mean
+value, by first taking the second derivative of the $\chi^2$ function:
 \begin{eqnarray*}
-\chi^2 &=& \sum_i \frac{(X-x_i)^2}{\sigma^2} \\
-\frac{d\chi^2}{dX} &=& \sum_i \frac{2\,(X-x_i)}{\sigma^2}\\
-\frac{d^2\chi^2}{dX^2} &=& \sum_i \frac{2}{\sigma^2}\\
-&=& \frac{2 N}{\sigma^2}\\
+\chi^2 &=& \sum_i \frac{(a-x_i)^2}{\sigma_x^2} \\
+\frac{d^2\chi^2}{da^2} &=& \sum_i \frac{2}{\sigma_x^2}\\
+&=& \frac{2 N}{\sigma_x^2}\\
 \end{eqnarray*}
-From which we conclude that the uncertainty on the mean is given by:
+From which we conclude that the uncertainty on the sample mean is given by:
 \begin{displaymath}
-\sigma^2_X = \frac{2}{\left. \frac{d^2\chi^2}{dX^2} \right|_{X_0}} = \sigma^2 / N
+\sigma^2_{\bar{x}} = \sigma^2_a = \frac{2}{\left. \frac{d^2\chi^2}{dX^2} \right|_{a_0}} = \sigma_x^2 / N
 \end{displaymath}
-a result we obtained before by simply propagating uncertainties.
+a result we obtained earlier by propagating uncertainties.
 
 \section{Weighted Mean}
 
-Suppose we make a series of measurements of the same quantity as before, but now each measurement has a different uncertainty:
+Now suppose we make a series of measurements of the same quantity as
+before, but now each measurement has a different uncertainty:
+
 \begin{displaymath}
 \left\{ x_1 \pm \sigma_1, x_2 \pm \sigma_2, ..., x_N \pm \sigma_N \right\} \equiv x_i \pm \sigma_i
 \end{displaymath}
-Our $\chi^2$ formalism allows us to determine the single value $X$ that best matches this data.  The $\chi^2$ is simply:
+Our $\chi^2$ formalism allows us to determine the single value $a$ that best matches this data.  The $\chi^2$ is:
 \begin{displaymath}
-\chi^2 = \sum_i \frac{(X-x_i)^2}{\sigma_i^2}
+\chi^2 = \sum_i \frac{(a-x_i)^2}{\sigma_i^2}
 \end{displaymath}
 And the minimum value of $\chi^2$ occurs at:
 \begin{displaymath}
-\frac{d\chi^2}{dX} = 0
+\left.\frac{d\chi^2}{da}\right|_{a_0} = 0
 \end{displaymath}
 and so
 \begin{eqnarray*}
-\frac{d\chi^2}{dX} &=& \sum_i \frac{2\,(X - x_i)}{\sigma_i^2} = 0\\
-0 &=& \sum_i \frac{x_i}{\sigma^2_i} - X \sum_i \frac{1}{\sigma^2_i}\\
-X &=& \sum_i w_i \; x_i
+0 &=& \sum_i \frac{2\,(a_0 - x_i)}{\sigma_i^2} = 0\\
+0 &=& \sum_i \frac{x_i}{\sigma^2_i} - a_0 \sum_i \frac{1}{\sigma^2_i}\\
+a_0 &=& \sum_i w_i \; x_i
 \end{eqnarray*}
 where
 \begin{equation}
@@ -1221,47 +1299,60 @@ w_i = \frac{1/\sigma^2_i}{\sum_j 1/\sigma_j^2}.
 
 The uncertainty is determined from the second derivative of the $\chi^2$ function:
 \begin{eqnarray*}
-\frac{d^2\chi^2}{dX^2} &=& \sum_i \frac{2}{\sigma_i^2}\\
+\left.\frac{d^2\chi^2}{da^2}\right|_{a_0} &=& \sum_i \frac{2}{\sigma_i^2}\\
 \end{eqnarray*}
 From which we determine that the uncertainty on the mean is:
 \begin{displaymath}
-\sigma^2_X = \frac{2}{\left. \frac{d^2\chi^2}{dX^2} \right|_{X_0}} = \left( \sum_i \frac{1}{\sigma_i^2} \right)^{-1}
+\sigma^2_a = \frac{2}{\left. \frac{d^2\chi^2}{da^2} \right|_{a_0}} = \left( \sum_i \frac{1}{\sigma_i^2} \right)^{-1}
 \end{displaymath}
-
-% EXERCISE IDEA:  show what happens when you add a poor measurement...
 
 \section{Degrees of Freedom}
 
-We noted before that we expect the $\chi^2$ function for a series of $N$ measurements to have a value of approximately $N$, because each term in the $\chi^2$ sum is approximately one.  We need to revisit this estimate when we have we are comparing our data to a best fit function.
+We noted before that we expect the $\chi^2$ function for a series of
+$N$ measurements to have a value of approximately $N$, because each
+term in the $\chi^2$ sum is approximately one.  We need to revisit
+this estimate when we have we are comparing our data to a best fit
+function.
 
-It's instructive to consider some extreme cases.  Consider the case that we make a single measurement $x_1 \pm \sigma_i$.  In this case, the mean value is simply $X = x_1$ and the $\chi^2$ is zero.
-Suppose we make two measurements.  In this case, the best fit line $y = a\,x + b$ will pass through the two points, and again we will have $\chi^2=0$.  Quite in general, we can always fit $N$ data points exactly with $N$ parameters.  When we discuss the typical size of $chi^2$, the important quanity is the number of degrees of freedom (NDF), which is the number of measurements minus the number of fit parameters.  The $\chi^2$ for a function that has been {\em fitted} to $N$ data points should have:
+It's instructive to consider some extreme cases.  Consider the case
+that we make a single measurement $x_1 \pm \sigma_i$.  In this case,
+the best fit is simply $a_0 = x_1$ and the $\chi^2$ is zero.  Suppose
+we make two measurements.  In this case, the best fit line $y = a\,x +
+b$ will pass through the two points, and again we will have
+$\chi^2=0$.  Quite in general, we can always fit $N$ data points
+exactly with $N$ parameters.  When we discuss the typical size of
+$chi^2$, the important quanity is the number of degrees of freedom
+(NDF), which is the number of measurements minus the number of fit
+parameters.  The $\chi^2$ for a function that has been {\em fitted} to
+$N$ data points should have:
+
 \begin{displaymath}
 \chi^2 / {\rm NDF}  \sim 1
 \end{displaymath}
 
 \section{The Best Estimate for $\sigma$}
 
-So far we have presumed that we know the uncertainty associated with each measurement, but suppose we don't know this.
+So far we have presumed that we know the uncertainty associated with
+each measurement, but suppose instead that we do not know this.
 
 Minimizing $\chi^2$ is no help here, because we can make $\sigma$ as large as we want to minimize $\chi^2$.  This is because we treated the uncertainties as constants!  Return to:
 \begin{equation}
--2 \log {\cal L} = \sum_i \left( \frac{(X_i-x_i)^2}{\sigma^2} + 2 \log(\sqrt{2\pi}\sigma)\right)
+-2 \log {\cal L} = \sum_i \left( \frac{(a_i-x_i)^2}{\sigma^2} + 2 \log(\sqrt{2\pi}\sigma)\right)
 \end{equation}
 
 Differenentiating wrt $\sigma$ and setting to zero:
 
 \begin{equation}
-0 = \left( - 2 \sum_i \frac{(X_i-x_i)^2}{\sigma^3} \right)+\frac{2\sqrt{2\pi}}{\sqrt{2\pi}\sigma}\sum_i 
+0 = \left( - 2 \sum_i \frac{(a_i-x_i)^2}{\sigma^3} \right)+\frac{2\sqrt{2\pi}}{\sqrt{2\pi}\sigma}\sum_i 
 \end{equation}
 
 \begin{equation}
-\sigma^2 = \frac{\sum_i (X_i-x_i)^2}{N} 
+\sigma^2 = \frac{\sum_i (a_i-x_i)^2}{N} 
 \end{equation}
 
-This analysis assumes we have not found the best fit values for the predictions $X_i$.  In this case, we simply replace $N$ with the degrees of freedom:
+This analysis assumes we have not found the best fit values for the predictions $a_i$.  To adapt this result to the case of fitted parameters, we simply replace $N$ with the degrees of freedom:
 \begin{displaymath}
-\sigma^2 = \frac{\sum_i (X_i^{\rm fit}-x_i)^2}{\rm NDF}
+\sigma^2 = \frac{\sum_i (a_i^{\rm fit}-x_i)^2}{\rm NDF}
 \end{displaymath}
 but this quantity is simply the $\chi^2$ per degree of freedom for $\sigma_i = 1$:
 \begin{displaymath}
