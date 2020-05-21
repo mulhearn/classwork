@@ -10,12 +10,6 @@
 \usepackage{pdfpages}
 \usepackage{xcolor}
 
-%
-% Make ECS 32/36 options explicit
-% Think about relaxing 104B requirement for A part.  112?
-% Figure with prerequisite structure
-%
-
 \usepackage[american,fulldiode]{circuitikz}
 \tikzset{component/.style={draw,thick,circle,fill=white,minimum size =0.75cm,inner sep=0pt}}
 
@@ -23,15 +17,15 @@
 \ctikzset{bipoles/thickness=1}
 \ctikzset{bipoles/length=.6cm}
 
-\title{Straw Man Proposal for the \\ Undergraduate Physics Curriculum}
-\author{Michael Mulhearn}
+\title{Proposal for the \\ Undergraduate Physics Curriculum \\ Version 1.0}
+\author{Undergraduate Curriculum Committee}
 
 \maketitle
 
 \section{Objectives}
 
 \begin{table}
-\caption{Typical schedule for undergraduate physics majors, taking the 9H series, in the fall quarter, omitting lab courses.}
+\caption{Typical schedule for undergraduate physics majors, taking the 9H series, in the fall quarter, omitting lab courses.  Typical math courses shown also, but note that a delay of one quarter is also common with instructor permission.}
 \label{tbl:current-honors}
 \begin{center}
 \begin{tabular}{|l|l|l|l|}
@@ -82,12 +76,12 @@ The current typical schedule of student coursework is shown in Table~\ref{tbl:cu
 
 \item Transfer students that arrive at UC Davis for their Junior year face a wall of coursework that they have to handle in the first quarter: math methods, mechanics, and modern physics.  Many also take Physics 102, which is nominally a one credit course, but generally nearly as much work as a four credit course.  For many of the transfer students these courses are the first physics courses that require solving challenging homework problems, and they face effectively 16 credits.  We have two trains of students running through our program (transfers and honors students) and the fall of their junior year is the train wreck where they collide.
 
-\item The current curriculum does not include sufficient computing practice for our students.  It's useful to consider what a physics degree would like if we taught calculus the same way we teach computing.  Students would arrive their Freshman year and take an introductory calculus course.  Then, they would take their physics courses, which would never mention calculus.  At some point in their Junior or Senior year, they would take a one quarter course called "Calculus in Physics" that would attempt to show all the ways we use calculus in physics.  Our students are experts at calculus because they learn how to use the tool, and then apply it, again and again, throughout their coursework.  To remain relevant in the modern world (or even the world from 20 years ago, to be honest) our majors need more practice in the use of computing as a tool for solving physics problems.
+\item The current curriculum does not include sufficient computing practice for our students.  It's useful to consider what a physics degree would like if we taught calculus the same way we teach computing.  Students would arrive their Freshman year and take an introductory calculus course.  Then, they would take their physics courses, which would never mention calculus.  At some point in their Junior or Senior year, they would take a one quarter course called ``Calculus in Physics'' that would attempt to show all the ways we use calculus in physics.  Our students are experts at calculus because they learn how to use the tool, and then apply it, again and again, throughout their coursework.  To remain relevant in the modern world (or even the world from 20 years ago, to be honest) our majors need more practice in the use of computing as a tool for solving physics problems.
 
 \item We are allowed to require a maximum of 110 credits from the college of Letters and Science, which is one half the maximum number of credits students are allowed to take.  Fitting the canon of undergraduate physics into such a tight space is extremely challenging.  Students complain that we waste time teaching some topics again and again (e.g. Special Relativity from scratch) while completely dropping other topics (e.g. Classical Hamiltonians).  The problem is particularly acute for Applied Physics majors, where core material must be dropped to make space for coursework outside of Physics.
 
 \item The prerequisite structure of the upper division courses creates many tiers.  
-As an extreme example, 122 requires 112, which requires 115A, which requires 104A and 105A, both of which require the 9 series.  This, combined with the rapid paces, leaves very little flexibility for students once they start their Junior year.  For example, missing a single quarter of the courses in the Junior year of Table~\ref{tbl:current-honors} requires an exception to prerequisites or an extra year to graduate.
+As an extreme example, 122 requires 112, which requires 115A, which requires 104A and 105A, both of which require the 9 series.  This, combined with the rapid pace, leaves very little flexibility for students once they start their Junior year.  For example, missing a single quarter of the courses in the Junior year of Table~\ref{tbl:current-honors} requires an exception to prerequisites or an extra year to graduate.
 
 \label{tbl:current-honors}
 
@@ -109,10 +103,10 @@ Credits:  49-50. *: recommended, C: concurrently.\\
 \hline
 Course & & Credits & Offered & Pre-reqs & Name \\
 \hline
-PHY & 9A & 5 & F,S & & Classical Physics {\it (Class. Mech.)}\\ 
-    & 9B & 5 & F,W & & Classical Physics {\it (Waves, Thermo., Optics.)}\\ 
-    & 9C & 5 & W,S & & Classical Physics {\it (Elec. and Magn.)}\\ 
-    & 9D & 4 & F,S & & Modern Physics {\it (Rel. and Quant. Mech.)}\\ 
+PHY & 9A & 5 & FS & & Classical Physics {\it (Class. Mech.)}\\ 
+    & 9B & 5 & FW & & Classical Physics {\it (Waves, Thermo., Optics.)}\\ 
+    & 9C & 5 & WS & & Classical Physics {\it (Elec. and Magn.)}\\ 
+    & 9D & 4 & FS & & Modern Physics {\it (Rel. and Quant. Mech.)}\\ 
 \hline
 &or&&\\
 \hline
@@ -128,8 +122,8 @@ MAT & 21A & 4 & & &\\
     & 21D & 4 & & &\\ 
     & 22A & 3 & & &\\ 
     & 22B & 3 & & &\\ 
-PHY & 40  & 4 & S & & Introduction to Physics Computation \\ 
-    & 80  & 4 & (F),W,S & 40,9D & Experimental Techniques \\ 
+PHY & 40  & 4 & FW(S) & & Introduction to Physics Computation \\ 
+    & 80  & 4 & (FW)S & 40,9D & Experimental Techniques \\ 
 PHY & 185* & 1 & S & & \\ 
     & 190* & 1 & F & & \\ 
 \hline
@@ -145,23 +139,23 @@ Credits:  46-50. *: recommended, C: concurrently.\\
 \hline
 Course & & Credits & Offered & Pre-reqs & Name \\
 \hline
-PHY & 102  & 4 & W & 40, 9D     & Computational Physics\\
-    & 104A & 4 & F & C:9D       & Mathematical Physics \\ 
-    & 105A & 4 & W & 104A, 9D   & Classical Mechanics I\\
-    & 105B & 4 & S & 105A, 102  & Classical Mechanics II\\ 
-    & 110A & 4 & W & 104A, 9D   & Electricity and Magnetism I\\
-    & 110B & 4 & S & 110A, 102  & Electricity and Magnetism II\\
-    & 115A & 4 & F & 104A, 9D   & Quantum Mechanics I \\
-    & 115B & 4 & W & 115A, 102  & Quantum Mechanics II \\
-    & 115C & 4 & S & 115B       & Applications of Quantum Mechanics\\ 
-    & 112  & 4 & F & 104A, 9D   & Thermodynamics and Statistical Mechanics\\    
+PHY & 102  & 4 & W & 40, 9D/9HD     & Computational Physics\\
+    & 104A & 4 & F & C:9D/9HD C:MTH 22A & Mathematical Physics \\ 
+    & 105A & 4 & W & 104A, 9D/9HD   & Classical Mechanics I\\
+    & 105B & 4 & S & 105A, 102      & Classical Mechanics II\\ 
+    & 110A & 4 & W & 104A, 9D/9HD   & Electricity and Magnetism I\\
+    & 110B & 4 & S & 110A, 102      & Electricity and Magnetism II\\
+    & 115A & 4 & F & 104A, 9D/9HD   & Quantum Mechanics I \\
+    & 115B & 4 & W & 115A, 102      & Quantum Mechanics II \\
+    & 115C & 4 & S & 115B           & Applications of Quantum Mechanics\\ 
+    & 112  & 4 & F & 104A, 9D/9HD   & Thermodynamics and Statistical Mechanics\\    
 \hline
 PHY & 116A & 4 &  W & 80   & Instrumentation with Discrete Electronics  \\
     & 116B & 4 &  S & 116B & Instrumentation with Integrated Electronics\\ 
 \hline
     & or & & & & \\
 \hline
-PHY & 122A or B & 4 & (F),W,S & & Advanced Physics Laboratory \\  
+PHY & 122A or B & 4 & (F)WS & 80 & Advanced Physics Laboratory \\  
 \hline
  & Any two of & & & & (all three recommended): \\
 \hline 
@@ -177,19 +171,20 @@ PHY & 105L & 1 & S & 102,C:105B & Computational Lab in Mechanics \\
 \end{table}
 
 \begin{table}
-\caption{Example schedule for undergraduate physics majors taking the 9H series and opting for the 116 lab sequence.  E is an elective course.  Rate is 5-9 credits per quarter.}
+\caption{Example schedule for undergraduate physics majors taking the 9H series and opting for the 116 lab sequence.  E is an elective course.  Rate is 5-9 physics credits per quarter.}
 \label{tbl:proposed-honors}
 \begin{center}
 \begin{tabular}{|l|l|l|l|}
 \hline
 year      & fall    & winter & spring \\
 \hline
-Freshman  & 9HA(5)  & 9HB(5)  & 9HC(5) \\
-          &         &         & 40(4)  \\
+Freshman  & 9HA(5)    & 9HB(5)    & 9HC(5) \\
+          & {\it 21B(4)} & 40(4)     & {\it 21D(4)} \\
+          &           & {\it 21C(4)}     & {\it 22A(3)}\\
 \hline
-Sophomore & 9HD(5)  & 105A(4) &  105B(4) \\
-          & 104A(4) & 102(4)  &  105L(1) \\
-          &         &         &  80(4)\\
+Sophomore & 9HD(5)       & 105A(4)   &  105B(4) \\
+          & 104A(4)      & 102(4)    &  105L(1) \\
+          & {\it 22B(3)} &           &  80(4)\\
 \hline
 Junior    & 115A(4) & 115B(4)  & 115C(4)\\
           & 112(4)  & 110A(4)  & 110B(4)\\
@@ -263,30 +258,44 @@ In this proposal, Physics 80 is a pre-requisite for the 116 (Instrumentation) se
 \begin{center}
 \begin{tikzpicture}
 \draw (0,0) -- ++(0,1) -- ++(10,0) -- ++(0,-1) -- ++(-10,0);
-\node[above right] at (0,0) {9A-D, 40};
-\draw (0,-2) -- ++(0,1) -- ++(10,0) -- ++(0,-1) -- ++(-10,0);
-\node[above right] at (0,-2) {80, 102, 104A, 105A, 110AB, 112, 115A};
-\draw (0,-4) -- ++(0,1) -- ++(10,0) -- ++(0,-1) -- ++(-10,0);
-\node[above right] at (0,-4) {105BL, 112L, 115L, 116AB, 122AB};
-\draw[->] (5,0) --(5,-1);
-\draw[->] (5,-2) --(5,-3);
+\node[above right] at (0,0) {9A-D, 9HA-HD, 40, 104A (MTH 21A-D, 22AB)};
+\draw (0,2) -- ++(0,1) -- ++(10,0) -- ++(0,-1) -- ++(-10,0);
+\node[above right] at (0,2) {80, 102, 105A, 110AB, 112, 115A};
+\draw (0,4) -- ++(0,1) -- ++(10,0) -- ++(0,-1) -- ++(-10,0);
+\node[above right] at (0,4) {105BL, 112L, 115BL, 116AB, 122AB};
+\draw[->] (5,1) --(5,2);
+\draw[->] (5,3) --(5,4);
 \end{tikzpicture}
-\caption{\label{fig:prereqs} The prerequisite structure of required courses.  At each tier, course prerequisites can only be earlier courses in the same sequence or courses from a previous tier.  Courses from the lowest tier should not be prerequisites for any other courses outside their own sequence, including capstone courses.}
+\caption{\label{fig:prereqs} The prerequisite structure of required
+  courses.  At each tier, course prerequisites can only be earlier
+  courses in the same sequence or courses from a lower tier.  104A is
+  an exception, it is taken C:9D.  Courses from the lowest tier should
+  not be prerequisites for any other courses outside their own
+  sequence, including capstone courses.}
 \end{center}
 \end{figure}
 
-An overview of the prerequisite structure is shown in Fig.~\ref{fig:prereqs}.  Classes within a tier can require only earlier classes from within the sequence (e.g. B requires A) or classes from an earlier tier.  One exception is that 104A requires 9D (which may be taken concurrently).  Reducing the number of tiers in our program to three affords significantly more flexibility for students to work through each tier in whatever order works best for their schedule.  Because 102 requires 40 and the 9 series, but is needed for 115B and 105B, it remains a potential bottleneck, along with 104B.  The limited number of offerings for most courses will also limit flexibility in practice.
+An overview of the prerequisite structure is shown in
+Fig.~\ref{fig:prereqs}.  Classes within a tier can require only
+earlier classes from within the sequence (e.g. B requires A) or
+classes from an earlier tier.  Reducing the number of tiers in our
+program to three affords significantly more flexibility for students
+to work through each tier in whatever order works best for their
+schedule.  Because 102 requires 40 and the 9 series, but is needed for
+115B and 105B, it remains a potential bottleneck, along with 104B.
+The limited number of offerings for most courses will also limit
+flexibility in practice.
 
 The most notable changes are that:
 \begin{itemize}
 \item 115A does not require 105A anymore, 9A-D must suffice instead
 \item 112 does not require 115A anymore, 104A and 9A-D must suffice instead
+\item 104A is now taken concurrently with 9D/9HD and can also be taken concurrently with MTH 22A.
 \item The new four-credit 102 course (which replaces both 104B and the current version of 102) does not require 104A, and instead requires 40.
-\item 105B and 115B require 102, which allows for computing to be integrated with the course. 
+\item 105B and 115B require 102, which allows for computing to be integrated with these course. 
 \end{itemize}
 Some classes can be globally substituted as prerequisites, which we note here:
 \begin{itemize}
-\item 9HD can replace 9D or 9C.  Note that 9HC does not replace 9C due to different ordering of the Honors sequence.
 \item Any ECS introductory programming course can replace 40.
 \end{itemize}
 
@@ -295,6 +304,7 @@ There are some other goals not included in this proposal that I would like to ke
 \begin{itemize}
 \item It would be nice if e.g. 105A, 110A-B, 115A worked as complete set of core courses for e.g. Astro and Applied physics majors. 
 \item I would like to offer some sort of lower division 3 credit elective for the transfer students (PHY 19?) to take in Fall of their Junior year, that focuses on solving problems from material in 9A-C.  We could also recommend this to students that didn't did so well in 9 and can use a bit of brushing up before the upper division course work.  Currently, 105A is filling this role.
+\item It would be nice to make 102 less of a bottle neck, by offering it more than once per quarter, and relaxing the physics prequisite requirements.
 \end{itemize}
 
 \end{document}
