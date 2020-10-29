@@ -189,6 +189,8 @@ def main(args):
     #print(contents)
 
     for m in re.finditer(r'@article.*?\n\s*}', contents, re.S):
+        if ((args.max) and (success >= int(args.max))):
+            break
         articles = articles+1
         #print("INFO:  parsing article ", articles) 
         # require year field is present:
@@ -270,6 +272,7 @@ if __name__ == "__main__":
     parser.add_argument("bib", help="the bibtex file to convert")
     parser.add_argument("xml", help="the xml file to write")    
     parser.add_argument('--year', help='only output records from YEAR')
+    parser.add_argument('--max', help='stop after MAX records are parsed')
     parser.add_argument('--author', help='explicitly add AUTHOR when absent due to "and others", e.g. "M. Mulhearn"')
     args = parser.parse_args()
     main(args)
