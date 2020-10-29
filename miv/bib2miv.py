@@ -167,8 +167,8 @@ def main(args):
         print("INFO:  will attempt to remove latex from title.")
     if (args.year):
         print("INFO:  restricting output to year ", args.year)
-    if (args.rejected):
-        print("INFO:  writing rejected articles to rejected_REASON.bib")
+    #if (args.rejected):
+    #    print("INFO:  writing rejected articles to rejected_REASON.bib")
     if (args.author):
         print('INFO:  target author is', args.author)
 
@@ -262,12 +262,12 @@ def main(args):
 
 if __name__ == "__main__":
     example_text = '''examples:
-   ./bib2mv.py INSPIRE-CiteAll.bib update_2020.xml --year 2020 --author "M. Mulhearn"  --rejected
+   ./bib2miv.py INSPIRE-CiteAll.bib update_2020.xml --year 2020 --author "M. Mulhearn"  --no_latex
 '''
     parser = argparse.ArgumentParser(description='Convert bibtex file to XML format used by UCD MIV.', epilog=example_text,
                                      formatter_class=argparse.RawDescriptionHelpFormatter)    
     parser.add_argument('--dry',action="store_true", help="don't actually write any files.")
-    parser.add_argument('--rejected',action="store_true", help="write rejected bibtex records to rejected_REASON.bib.")
+    #parser.add_argument('--rejected',action="store_true", help="write rejected bibtex records to rejected_REASON.bib.")
     parser.add_argument('--no_latex',action="store_true", help="remove LaTex from title")
     parser.add_argument("bib", help="the bibtex file to convert")
     parser.add_argument("xml", help="the xml file to write")    
