@@ -10,13 +10,14 @@ XML_START = r'<?xml version="1.0" encoding="UTF-8" ?><xml><records>'
 XML_END   = r'</records></xml>'
 XML_RECORD = '''
 <record><ref-type name="Journal Article">17</ref-type>
-<contributors><authors><author>MYAUTHORS</author></authors></contributors>
-<titles><title>MYTITLE</title>
-<secondary-title>MYJOURNAL</secondary-title></titles>
-<pages>MYPAGES</pages>
-<volume>MYVOLUME</volume>
-<dates><year>MYYEAR</year></dates>
-<urls><related-urls><url>MYURL</url></related-urls></urls>
+<contributors><authors><author>%%MYAUTHORS%%</author></authors></contributors>
+<titles><title>%%MYTITLE%%</title>
+<secondary-title>%%MYJOURNAL%%</secondary-title></titles>
+<pages>%%MYPAGES%%%%INDEX%%</pages>
+<volume>%%MYVOLUME%%</volume>
+<number>%%TAG%%</number>
+<dates><year>%%MYYEAR%%</year></dates>
+<urls><related-urls><url>%%MYURL%%</url></related-urls></urls>
 </record>
 '''
 
@@ -160,6 +161,7 @@ def clean_authors(authors, args):
     return authors
 
 def main(args):
+    
     print("INFO:  starting bibtex conversion of", args.bib, "to", args.xml)
     if (args.dry):
         print("INFO:  dry run:  will not write files.")
@@ -171,10 +173,6 @@ def main(args):
     #    print("INFO:  writing rejected articles to rejected_REASON.bib")
     if (args.author):
         print('INFO:  target author is', args.author)
-
-    if (not args.dry): 
-        output = open(args.xml,"w")
-        output.write(XML_START + "\n")
     
     articles = 0
     timely  = 0
@@ -188,11 +186,12 @@ def main(args):
 
     #print(contents)
 
+    records = []
     for m in re.finditer(r'@article.*?\n\s*}', contents, re.S):
         if ((args.max) and (success >= int(args.max))):
             break
         articles = articles+1
-        #print("INFO:  parsing article ", articles) 
+        print("INFO:  parsing article ", articles) 
         # require year field is present:
         year    = extract_quoted_field('year',  m.group(0), True)
         # quietly ignore non-target years if specified:
@@ -239,17 +238,42 @@ def main(args):
         print("       url:       ", url)
 
         record = XML_RECORD
-        record =record.replace('MYAUTHORS', authors)
-        record =record.replace('MYTITLE', title)            
-        record =record.replace('MYYEAR', year)
-        record =record.replace('MYVOLUME', volume)
-        record =record.replace('MYPAGES', pages)
-        record =record.replace('MYJOURNAL', journal)
-        record =record.replace('MYURL', url)
-        if (not args.dry):
-            output.write(record + "\n")            
+        record =record.replace('%%MYAUTHORS%%', authors)
+        record =record.replace('%%MYTITLE%%', title)            
+        record =record.replace('%%MYYEAR%%', year)
+        record =record.replace('%%MYVOLUME%%', volume)
+        record =record.replace('%%MYPAGES%%', pages)
+        record =record.replace('%%MYJOURNAL%%', journal)
+        record =record.replace('%%MYURL%%', url)
+        records.append(record)
         success = success+1
+    # reverse the order since INSPIRES is most recent first:
 
+    if (args.last):
+        records[0] = records[0].replace('%%TAG%%', "*LAST*")
+    records.reverse()
+
+    # write the XML file header:
+    if (not args.dry): 
+        output = open(args.xml,"w")
+        output.write(XML_START + "\n")
+
+    index = 0;
+    for record in records:
+        index = index + 1
+        if (args.new):
+            record = record.replace('%%TAG%%', "*NEW*")
+        else:
+            record = record.replace('%%TAG%%', "")
+        if (args.index):
+            record = record.replace('%%INDEX%%', " ["+str(index)+"]")
+        else:
+            record = record.replace('%%INDEX%%', "")
+        # write the record to XML file:
+        if (not args.dry): 
+            output.write(record + "\n")            
+
+    # write the XML file tail:
     if (not args.dry): 
         output.write(XML_END + "\n")
         output.close()
@@ -261,9 +285,44 @@ def main(args):
     
 
 if __name__ == "__main__":
-    example_text = '''examples:
-   ./bib2miv.py INSPIRE-CiteAll.bib update_2020.xml --year 2020 --author "M. Mulhearn"  --no_latex
+    example_text = '''Complete Usage Example:
+
+While it's not required, it's a good idea to use the --year option and
+go year by year, checking the results.  It is alot easy to delete one
+year worth of entries from MIV than three.
+
+Suppose I had my last action in 2017 for a promotion in 2018.  My MIV
+has journals in 2017, but is empty for 2018, 2019,and 2020.  Suppose I
+have all my journals not already in MIV in the file
+INSPIRE-CiteAll.bib by using SLAC Inspire.  It's important that this
+not include any duplicates, because MIV does a mediocre job of finding
+duplicates during upload.
+
+For the year 2017, I'll have to append, so I use "--new" option:
+
+   ./bib2miv.py INSPIRE-CiteAll.bib update_2017.xml --year 2017 --author "M. Mulhearn" --no_latex --new 
+
+After uploading to MIV, I'll have to manually move the reference
+marked *NEW* to the bottom of the list, and delete the tag
+*NEW*.  This is because MIV import from XML shuffles the references,
+presumably because the people that wrote MIV are idiots.
+
+For the year 2018, and 2019, I don't have to use the "--new" option:
+
+   ./bib2miv.py INSPIRE-CiteAll.bib update_2018.xml --year 2018 --author "M. Mulhearn"  --no_latex 
+   ./bib2miv.py INSPIRE-CiteAll.bib update_2019.xml --year 2019 --author "M. Mulhearn"  --no_latex 
+
+These can be uploaded to MIV with no manual adjustments needed.
+
+For the year 2020, I use the "--last" option:
+
+   ./bib2miv.py INSPIRE-CiteAll.bib update_2020.xml --year 2020 --author "M. Mulhearn"  --no_latex --last
+
+After uploading to MIV, I move the reference tagged *LAST* to the end
+of the list.  This will be a convenient reference when appending to this
+year for a future action.
 '''
+
     parser = argparse.ArgumentParser(description='Convert bibtex file to XML format used by UCD MIV.', epilog=example_text,
                                      formatter_class=argparse.RawDescriptionHelpFormatter)    
     parser.add_argument('--dry',action="store_true", help="don't actually write any files.")
@@ -271,8 +330,11 @@ if __name__ == "__main__":
     parser.add_argument('--no_latex',action="store_true", help="remove LaTex from title")
     parser.add_argument("bib", help="the bibtex file to convert")
     parser.add_argument("xml", help="the xml file to write")    
-    parser.add_argument('--year', help='only output records from YEAR')
+    parser.add_argument('--year', help='only write files from YEAR')
     parser.add_argument('--max', help='stop after MAX records are parsed')
     parser.add_argument('--author', help='explicitly add AUTHOR when absent due to "and others", e.g. "M. Mulhearn"')
+    parser.add_argument('--index',action="store_true", help="add index to page field")
+    parser.add_argument('--new',action="store_true", help="add *NEW* to issue field, use when appending additional references to MIV in a year that already has references.")
+    parser.add_argument('--last',action="store_true", help="add *LAST* to issue field for last record.  Use to move the last entry to the bottom of your MIV file, for easy reference when appening later.")
     args = parser.parse_args()
     main(args)
