@@ -1,0 +1,4 @@
+xpdf -remote latex <PDF>
+
+pdflatex curriculum.tex  ; xpdf -remote latex -reload
+
