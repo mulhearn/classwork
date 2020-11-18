@@ -131,12 +131,15 @@ real value, we would integrate instead:
 \end{equation}
 across a range appropriate to the situation, typically $[-\infty,\infty]$.
 
-A mode of a distribution is an outcome for which the probability is
-maximal.  A median of a distribution is a value at which $50\%$ of
-probability is at or below it and $50\%$ of probability is at or above
-it.  Both of these quantities provide information about typical values
-for a distribution, but they suffer the signficant defect that they
-are not necessarily unique for a given distribution.
+A mode of a distribution is an outcome for which the distribution
+function takes on a maximal value (in the case of continuous
+distributions, the requirement is often relaxed to require only a
+local maximum).  A median of a distribution is an outcome at which at
+most $50\%$ of the probablity is contained above the value and at most
+$50\%$ of the probablity is contained below the value.  Both of these
+quantities provide information about typical values for a
+distribution, but they suffer the significant defect that they are not
+necessarily unique for a given distribution.
 
 We usually answer the second question in terms of the variance, $\sigma^2$, of the distribution:
 \begin{displaymath}
@@ -591,13 +594,12 @@ Suppose that in your spare time, you build a muon detector to impress your under
 \noindent
 {\bf Problem 9:} Consider a special probability distribution with the
 following properties: (A) it is only defined for outcomes 0,1,2,3 and
-4 (B) it has two modes at outcomes 0 and 4, (C) it has three medians
-at outcomes 1,2, and 3.  Sketch the probability distribution and
-determine its mean.
+4 (B) it has two modes at outcomes 0 and 4, (C) all five outcomes are
+medians.  Sketch the probability distribution and determine its mean.
 
 \vskip 1cm
 \noindent
-{\bf Problem 10:} Suppose that two independent experiments provide counts $a$ and $b$, which we can assume our drawn from a Poisson distribution.  Now consider the counting experiment that results from simply adding these counts to obtain $a+b$.  Show that that the variance of this sum is given by:
+{\bf Problem 10:} Suppose that two independent experiments provide counts $a$ and $b$, which we can assume are drawn from a Poisson distribution.  Now consider the counting experiment that results from simply adding these counts to obtain $a+b$.  Show that that the variance of this sum is given by:
 \begin{displaymath}
 \sigma^2(a+b) = \sigma^2_a + \sigma^2_b
 \end{displaymath}
@@ -634,10 +636,14 @@ When reporting a number with an associated uncertainty, we round both the value 
 \begin{displaymath}
 x = 1.245 \pm 0.313~{\rm m} \to x = 1.2 \pm 0.3~{\rm m} 
 \end{displaymath}
-If the first nonzero digit in the uncertainty is a zero or one, we keep two digits instead:
+If the first nonzero digit in the uncertainty is a one, we keep two digits instead:
 \begin{displaymath}
 x = 1.245 \pm 0.113~{\rm m} \to x = 1.25 \pm 0.11~{\rm m}.
 \end{displaymath}
+This is because the effect of rounding to one digit can be a $50\%$
+effect in this case.  Sometimes this rule is extended to the case when
+the first nonzero digit ias a two.
+
 We'll define this uncertainty quite precisely, but let's start with a
 conceptual definition.  Each particular measurement of a quantity $x$
 makes a claim about where the true value of $x$ is most likely to lie.
@@ -715,7 +721,7 @@ new particle until five $\sigma$.  This is because if you collect lots
 of data and do lots of different analyses, it starts to become likely that
 you will encounter occassional three $\sigma$ statistical fluctuations.
 
-\section{Mean and Variance of a Sum}
+\section{Independent Random Variables}
 
 So far we've been calculating expectation values of functions of one random variable: 
 \begin{displaymath}
@@ -725,35 +731,54 @@ but this easily generalizes to two or more random variables:
 \begin{displaymath}
 \braket{f(x,y)} = \int \int f(x,y) \; P(x,y) dx \, dy 
 \end{displaymath}
-If the random variables are independent, then we have $P(x,y) = P(x) \, P(y)$ and so
+If the random variables are independent, then we have $P(x,y) = P(x) \, Q(y)$ and so
 \begin{displaymath}
-\braket{f(x,y)} = \int f(x,y) \; P(x) \, P(y) \; dx \, dy
+\braket{f(x,y)} = \int f(x,y) \; P(x) \, Q(y) \; dx \, dy
 \end{displaymath}
 And also we have
 \begin{eqnarray*}
-\braket{f(x)+g(y)} &=& \int \int dx \, dy \; P(x) \, P(y) \;\; (f(x) + g(y)) \\
-&=& \left(\int P(y) \; dy \right) \cdot \left( \int P(x) \; f(x) \; dx  \right) 
-+ \left(\int P(x) \; dx \right) \cdot \left( \int P(y) \; f(y) \; dy  \right)\\
-&=& 1 \cdot \int P(x) \; f(x) \; dx  + 1 \; \cdot \int P(y) \; f(y) \; dy \\
+\braket{f(x)+g(y)} &=& \int \int dx \, dy \; P(x) \, Q(y) \;\; (f(x) + g(y)) \\
+&=& \left(\int Q(y) \; dy \right) \cdot \left( \int P(x) \; f(x) \; dx  \right) 
++ \left(\int P(x) \; dx \right) \cdot \left( \int Q(y) \; f(y) \; dy  \right)\\
+&=& 1 \cdot \int P(x) \; f(x) \; dx  + 1 \; \cdot \int Q(y) \; f(y) \; dy \\
 \end{eqnarray*}
 which we can write much more simply as:
 \begin{displaymath}
 \braket{f(x)+g(y)} = \braket{f(x)}+\braket{g(y)}
 \end{displaymath}
-revealing the power of the expectation value notation for tackling independent random variables.  In the homework you will show that similarly:
+revealing the power of the expectation value notation for tackling independent random variables.
+
+In the homework you will show that similarly:
 \begin{equation}
 \braket{f(x) \cdot g(y)} = \braket{f(x)} \cdot \braket{g(y)} \label{eqn:expprod}
 \end{equation}
+
+Even in two-dimensions, it is easy to see that expectation value of a
+constant is simply the constant:
+\begin{eqnarray*}
+\braket{C} &=& \int \int dx \, dy \; C \, P(x) \, Q(y) \\
+&=& C \, \int \int dx \, dy \; P(x) \, Q(y) \\
+&=& C \\
+\end{eqnarray*}
+Combined with the previous results, we can see that constants move through expectation values intuitively:
+\begin{equation}
+  \braket{f(x,y) + C } = \braket{f(x,y)} + C  
+\end{equation}
+and:
+\begin{equation}
+  \braket{C f(x,y) } = C \braket{f(x,y)}  
+\end{equation}
+
+\section{Mean and Variance of a Sum}
+
 We can therefore conclude that the mean of a sum of two random variables:
 \begin{displaymath}
 \braket{x + y} = \braket{x} + \braket{y} 
 \end{displaymath}
-is just the sum of the mean.  
-
-For simplicity let's assume that $\braket{x} = \braket{y} = 0$, and so:
+is just the sum of the mean.  For simplicity let's assume that
+$\braket{x} = \braket{y} = 0$, and so:
 \begin{eqnarray*}
 \braket{(x + y)^2} &=& \braket{x^2 + 2xy + y^2} \\
-&=& \braket{x^2} + 2\braket{xy} + \braket{y^2} \\
 &=& \braket{x^2} + 2\braket{x}\braket{y} + \braket{y^2} \\
 &=& \braket{x^2} + \braket{y^2} \\
 \end{eqnarray*}
@@ -764,11 +789,12 @@ from which it follows that:
 &=& \braket{x^2} + \braket{y^2} \\
 &=& \sigma^2_x + \sigma^2_y\\
 \end{eqnarray*}
-In the exercises you will show that even if $\braket{x}$ and $\braket{y}$ are non-zero, we still obtain:
+In the exercises you will show that even if $\braket{x}$ and
+$\braket{y}$ are non-zero, and for constants $A$ and $B$ and $C$, this
+result generalizes to:
 \begin{displaymath}
-\sigma^2(x+y) = \sigma^2_x + \sigma^2_y
+\sigma^2(Ax+By+C) = A^2\sigma^2_x + B^2\sigma^2_y
 \end{displaymath}
-that is, the uncertainties in a sum add in quadrature.
 
 \section{Independent Uncertainties Add in Quadrature}
 
@@ -834,30 +860,6 @@ which is a Gaussian distribution with variance:
 \end{eqnarray*}
 that is, uncertainties add in quadrature.
 
-\section{Handling Constants}
-
-When adding a known constant to a measured quantity:
-\begin{equation*}
-y = x + C
-\end{equation*}
-we can consider the constant to have uncertainty $\sigma=0$.  And therefore, from the addition in quadrature rule:
-\begin{equation*}
-\sigma_y = \sigma_x
-\end{equation*}
-
-If we multiply a measured quantity by a known constant 
-\begin{equation*}
-y = k x 
-\end{equation*}
-we consider that:
-\begin{displaymath}
-dx \frac{1}{\sqrt{2\pi} \sigma} \exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right) = d(kx) \frac{1}{\sqrt{2\pi} k\sigma} \exp\left(-\frac{(kx-k\mu)^2}{2(k\sigma)^2}\right)
-\end{displaymath}
-and conclude that:
-\begin{equation*}
-\sigma_y = k \sigma_x
-\end{equation*}
-
 \section{Repeated Experiments}
 
 Suppose that we have an apparatus which can measure a quantity $x$
@@ -917,17 +919,17 @@ f(x,y) \sim f(x_0,y_0) + \left.\frac{\partial f}{\partial x}\right|_{x_0,y_0} (x
 \end{equation*}
 which we can write as:
 \begin{equation*}
-f(x,y) \sim A + B x + C y 
+f(x,y) \sim A x + B y + C  
 \end{equation*}
 where the constants are:
 \begin{eqnarray*}
-  A  &=& f(x_0,y_0) - B x_0 - C y_0\\
-  B  &=& \left.\frac{\partial f}{\partial x}\right|_{x_0,y_0}\\
-  C  &=& \left.\frac{\partial f}{dy}\right|_{x_0,y_0}\\
+  A  &=& \left.\frac{\partial f}{\partial x}\right|_{x_0,y_0}\\
+  B  &=& \left.\frac{\partial f}{dy}\right|_{x_0,y_0}\\
+  C  &=& f(x_0,y_0) - A x_0 - B y_0\\
 \end{eqnarray*}
 We know how to propagate uncertainties in this case, which involves scaling, adding in quadrature, and adding a constant:
 \begin{equation*}
-\sigma_f^2 =   B^2 \sigma_x^2 + C^2 \sigma_y^2 
+\sigma_f^2 =   A^2 \sigma_x^2 + B^2 \sigma_y^2 
 \end{equation*}
 And plugging in the constants:
 \begin{equation*}
