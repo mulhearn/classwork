@@ -1,8 +1,10 @@
 \documentclass[12pt]{article}
 
+\usepackage[T1]{fontenc}
 \usepackage[dvips,letterpaper,margin=0.75in,bottom=0.75in]{geometry}
 \usepackage{cite}
-\usepackage{slashed}
+%\usepackage{slashed}
+\usepackage{cancel}
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{braket}
@@ -18,21 +20,47 @@
 \ctikzset{bipoles/thickness=1}
 \ctikzset{bipoles/length=.6cm}
 
-\title{Proposal for Revising the \\ Undergraduate Physics Curriculum \\ Version 1.11}
+\title{Proposal for Revising the \\ Undergraduate Physics Curriculum \\ Version 1.12}
 \author{Undergraduate Curriculum Committee}
 
 \maketitle
 
-\section{Changes Since the Faculty Meeting}
-A number of changes have been made to the proposal, based on
-discussion and feedback following the presentation of this proposal to
-the faculty on June 3, 2020.  Those changes include:
+\section{Changes Since the November Faculty Meeting}
+This proposal has been updated since the faculty meeting on November
+18, 2020.  The additions and changes include:
 \begin{itemize}
-\item The new course PHY 115C is no longer a required course.
-\item Symbolic Computation has been added to PHY 40.
-\item Example syllabi for required courses impacted by this proposal are now included.
-\item Proposed revisions to the Astrophysics and Applied Physics majors are now included.  
-\item Some prerequisites were changed to accommodate the additional majors.
+  
+ \item An explicit description of the theoretical physics content of
+   the program is added as Section~\ref{sec:theory}, which includes a
+   digest of the related ongoing discussion.
+ \item The contents of the example course syllabi of
+   Section~\ref{sec:syllabi} have been revised based on feedback from
+   the faculty discussions. 
+ \item The AB Physics degree has been added as Section~\ref{sec:ab}
+ \item An explicit description of the approval procedure, including
+   the faculty vote, has been added as Section~\ref{sec:approval}.
+ \item A plan for implementing the proposal, over two years, has been
+   added as Section~\ref{sec:implementation}.
+ \item This proposal includes a procedure for maintaining example
+   syllabi, as discussed in the Section~\ref{sec:approval}.  The
+   example syllabi as currently presented in this proposal are not
+   final, and are not part of the faculty vote on this proposal.  They
+   are included as a proof of principle that the proposed course
+   requirements are workable.  The faculty will have a chance to
+   discuss and vote on the example syllabi every spring quarter,
+   starting this year.  We hope that the ongoing useful discussions
+   about course content will continue.   
+ \item Explicit discussion of the need to keep the 110L, 112L, 115L to
+   a workload consistent with a one unit course is included.
+ \item We are asking specific faculty to carefully review specific
+   portions of this proposal.  We are expecting at least one small
+   update to this proposal, based on the feedback from these readers,
+   prior to the faculty vote.   
+ \item PHY 45 has been added as a prerequisite for 116B, because 116B requires C++.
+ \item Mistakes in the Physical Oceanography major have been
+   addressed, as well as minor edits to the layout and content of the
+   Applied Physics major tables.   
+ \item Unnecessary commentary about ECS has been removed.
 \end{itemize}
 
 \section{Objectives of the Proposal}
@@ -206,7 +234,7 @@ course work in any quarter.
 \captionof{table}{\label{tbl:prep}Preparatory Subject Matter}
 \noindent
 \vskip 0.25cm
-Units:  53-54. *: recommended, $\parallel$ concurrently.\\
+Units:  53-54. *: recommended, $\parallel$ concurrently\\
 \begin{tabular}{|llllll|}
 \hline
 Course & & Units & Offered & Prereqs & Name \\
@@ -227,7 +255,7 @@ PHY & 9A & 5 & FS & 21B & Classical Physics {\it (Class. Mech.)}\\
 \hline
 &or&&\\
 \hline
-PHY & 9HA & 5 & F & $\parallel$21B/21M & Honors Physics {\it (Class. Mech.)}\\ 
+PHY & 9HA & 5 & F & $\parallel$21B/$\parallel$21M & Honors Physics {\it (Class. Mech.)}\\ 
     & 9HB & 5 & W & 21B/21M & Honors Physics {\it (Rel. and Stat. Mech.)}\\ 
     & 9HC & 5 & S & 21C & Honors Physics {\it (Waves and Quant. Mech.)}\\ 
     & 9HD & 5 & F & 21D & Honors Physics {\it (Elec. and Magn.)}\\ 
@@ -235,11 +263,13 @@ PHY & 9HA & 5 & F & $\parallel$21B/21M & Honors Physics {\it (Class. Mech.)}\\
 \hline
 PHY & 40  & 4 & F & & Introduction to Physics Computation \\ 
     & 45  & 4 & W & 40,9C/9HD,$\parallel$22B & Computational Physics\\ 
-    & 80  & 4 & WS & 40,9C/9HD     & Experimental Techniques \\
+    & 80  & 4 & WS & 40$\dagger$,9C/9HD     & Experimental Techniques \\
 PHY & 185* & 1 & S & & Careers in Physics \\ 
     & 190* & 1 & F & & Careers in Physics \\ 
 \hline
 \end{tabular}
+$\dagger$:  Instructor permission may be obtained to take PHY 80 without the PHY 40 prerequisite.
+
 
 \newpage
 \captionof{table}{\label{tbl:depth}Depth Subject Matter}
@@ -258,11 +288,11 @@ PHY & 104A & 4 & FS & 9C/9HD,MAT 22B   & Mathematical Physics \\
     & 112  & 4 & F & 104A,9D/9HD      & Thermodynamics and Stat. Mech.\\    
     & 115A & 4 & F & 104A,105A,9D/9HD & Quantum Mechanics I \\
     & 115B & 4 & W & 115A             & Quantum Mechanics II \\
-    & 115C* & 4 & S & 115B,45         & Applications of Quantum Mechanics\\ 
+    & 115C* & 4 & S & 115B,45/ECS 36B& Applications of Quantum Mechanics\\ 
 \hline
 \hline
 PHY & 116A & 4 &  F & 80              & Phys. Instr. with A\&D Electronics.  \\
-    & 116B & 4 &  W & 80              & Phys. Instr. for Data Acquisition. \\ 
+    & 116B & 4 &  W & 80,45/ECS 36B   & Phys. Instr. for Data Acquisition. \\ 
 \hline
     & or & & & & \\
 \hline
@@ -430,11 +460,9 @@ others require changes to their content:
   This proposal eliminates 110C and increases the pace of 110AB.
   Students must reliably enter 110 having adequate preparation in
   vector calculus, curvilinear coordinates, Lorentz transformation,
-  relativisitic mechanics, and introductory electricity and magnetism.
-  This material must be covered adquately in the 9 series and 104A.
-  The sequence will drop guided waves and radiation of moving charges,
-  as well as simplify or skip less critical material.  Note that wave
-  guides are an example topic for 110L.
+  relativistic mechanics, and introductory electricity and magnetism.
+  This material must be covered adequately in the 9 series and 104A.
+
 
 \item 112: The 115A prerequisite for 112 has been removed, and the
   treatment must rely on quantum from the 9 series instead.
@@ -448,15 +476,16 @@ others require changes to their content:
 
 \item New computational physics courses 45, 110L, 112L, and 115L
   replace the present requirement for 102 or 104B.  PHY 45 is a
-  required four-unit course students are required to take at least two
-  of the three one-unit computing lab courses. This is discussed in
-  detail in Section~\ref{sec:comp}.
+  required four-unit course.  Students are also required to take at
+  least two of the three one-unit computing lab courses. These courses
+  are discussed in detail in Section~\ref{sec:comp}.
 
-\item The 116ABC sequence adds PHY 80 as a prerequisite and is
-  reduced to a two quarter sequence 116AB.  Due to the significant
-  overlap between 116A+116C and 80, no material is lost.  This is
+\item The 116ABC sequence adds PHY 80 as a prerequisite and is reduced
+  to a two quarter sequence 116AB.  In the current program, there is
+  significant duplication of PHY 80 content in PHY 116A and PHY 116C,
+  so no content is lost in this reorganization.  The lab courses are
   discussed in detail in Section~\ref{sec:labs}.
-  \end{itemize}
+\end{itemize}
 Example syllabi for the new required courses and existing courses
 affected by this proposal are presented in Section~\ref{sec:syllabi}.
 
@@ -467,10 +496,50 @@ instruction if we assume that the cost of electives is held constant
 computing labs add a total of three new instructors.  But dropping
 courses 9HE, 102, 104B, 110C and 116C frees 4.3 instructors, for a net
 decrease of 1.3 instructors.  If the need for more sections of 80
-increases requires an additional instructor (currently typically two,
-although three were initially planned for 2020-2021) there would be a
-decrease of 0.3 instructors.  Additional fall offerings for 122A/B
-could be added as well, if needed to meet demand.
+requires an additional instructor (currently typically two, although
+three were initially planned for 2020-2021) there would be a decrease
+of 0.3 instructors.  Additional fall offerings for 122A/B could be
+added as well, if needed to meet demand.
+
+\section{Theoretical Physics}
+\label{sec:theory}
+
+At the core of any undergraduate physics degree are the following
+topics in theoretical physics:
+\begin{itemize}
+\item Classical Mechanics (105AB): the fundamental principles of physical laws
+  (e.g. least action and symmetries) are taught in a familiar and
+  intuitive context. 
+\item Electromagnetism (110AB): a remarkable special case of classical
+  phenomenon that anticipates non-Newtonian physics (e.g. special
+  relativity, gauge theories).  No other force in nature can be understood so
+  completely in such a straight forward fashion.  
+\item Quantum Mechanics (115AB): the rules governing the microscopic world are
+  different from those governing our familiar macroscopic world.  The
+  rules are not intuitive but they can be codified and used to make
+  quantitative predictions which can be experimentally verified.
+\item Statistical Mechanics (112): provides the crucial statistical explanation for how
+  microscopic laws ultimately produce the macroscopic world which we inhabit.
+\end{itemize}
+This proposal includes a procedure for maintaining example syllabi for
+the core courses to ensure these topics are being consistently and
+effectively covered.  While this proposal need not resolve all of the
+issues, a digest of the current discussion is provided here:
+\begin{itemize}
+ \item It is generally agreed that 105A needs to cover Hamiltonian mechanics, but this has not been managed reliably.
+ \item We need to find a consistent location to cover the calculus of variations.
+ \item There is strong support for covering waveguides in 110AB.
+   Waveguides are a possible topic for 110L (not taken by every
+   student) They could also be added to 80 with an experimental focus
+   (which will be taken by every student).
+ \item The treatment of radiation in 110AB is limited.
+ \item PHY 104A plays a central role in providing students with the
+   analytic techniques needed for upper division course work.  This
+   course has been far too topical for the central role it plays in
+   our program.   
+ \item While this proposal doesn't include any changes to PHY 115AB, but we should develop and discuss example syllabi for this course along with the other core courses.
+\end{itemize}
+Example syllabi are presented in Section~\ref{sec:syllabi}.  
 
 \section{Computational Physics}
 \label{sec:comp}
@@ -506,8 +575,6 @@ could be added as well, if needed to meet demand.
 \end{center}
 \end{figure}
 
-
-
 One of the major objectives of this proposal is to better integrate
 computational physics throughout the curriculum.  To do so, students
 must have a consistent set of tools that can be relied upon in later
@@ -521,30 +588,24 @@ tools are:
 \item C/C++
 \item Computer Algebra:  Mathematica or SymPy
 \end{itemize}
-The entire Scientific Python  ecosystem is easily accessible to students for any
-major OS for free through Anaconda.  No graphical features of C/C++
-will be explored.  If necessary, C++ programs will pass data by text
-file to SciPy for plotting.  SymPy is not as mature as Mathematica,
-but comes with the significant advantages of being freely available
-within Anaconda and interoperable with SciPy.
+The entire Scientific Python ecosystem is easily accessible to
+students for any major OS for free through Anaconda.  No graphical
+features of C/C++ will be explored.  If necessary, C++ programs will
+pass data by text file to SciPy for plotting.  SymPy is not as mature
+as Mathematica, but comes with the significant advantages of being
+freely available within Anaconda and interoperable with SciPy.
 
-In response to the ECS department's decision to no longer offer ECS
-30, a one quarter introduction to C without any prerequisites, we
-replaced this required course with own version, PHY 40, in 2018. This
-course currently introduces programming with both C++ and python.
-This leaves no time for symbolic computation and little time for
-exploring additional features of Scientific Python beyond the Python
-language.  The proposal keeps 40 as a physics-centric introduction to
-programing and adds a second, more advanced computational course, PHY
-45, with both 40 and the 9 series as prerequisites.  The proposal
-adds upper division computing labs as well.  The computational courses
-added or impacted by this proposal are:
-
+In 2018, we added a new required course, PHY 40, which introduces
+programming with both C++ and python.  This format leaves no time for
+symbolic computation and little time for exploring additional features
+of Scientific Python beyond the basic Python language.  This proposal
+modifies the computational content of existing courses and adds
+several new required courses:
 \begin{itemize}
-\item 40: This four-unit course has no prerequisites and assumes no
-  prior knowledge of programing.  It is primarily an introduction to
-  programming but using examples from computational physics.  It will
-  also include a short introduction to symbolic manipulations using a
+\item 40: This four-unit course, which has no prerequisites and
+  assumes no prior knowledge of programing, provides an introduction
+  to programming using examples from computational physics.  It
+  includes a short introduction to symbolic manipulations using a
   computer algebra system.  The specific tools covered (which will not
   be included in the course description) are Scientific Python and
   either SymPy or Mathematica.
@@ -559,22 +620,23 @@ added or impacted by this proposal are:
 \item 80: is a new four-unit lab course introduced in 2018 which
   includes extensive use of scientific python for data analysis and
   presentation, including curve fitting and plotting scientific data.
-  In this proposal, 80 is required for all majors and adds 40 as a
-  prerequisite.
+  In this proposal, 80 is required for all majors.  It adds 40 as a
+  prerequisite, but with an exception intended for AB majors as described
+  in Section ~\ref{sec:ab}.
 
 \item 110L, 112L, and 115L: These three new one-unit computational lab
   courses are designed to be taken concurrently with 110B, 112, and
-  115B. They are computational problem solving labs related to E+M,
-  statistical mechanics, and quantum mechanics.  The emphasis will be on
-  solving problems from upper division physics using computing at the
-  level of PHY 45.  The instructor will present a technique and
-  problem during a single one hour lecture, and the students will have
-  the rest of the week to complete the assignment.  One instructor
-  could teach all three of these courses in a single year, which will
-  count as one course.  Each course is offered in a different quarter,
-  so students get three units of computational problem-solving spread
-  across an entire year.  Due to unit limits, we only require two of
-  these courses, but all three are recommended.
+  115B. They are computational problem solving labs related to E\&M,
+  statistical mechanics, and quantum mechanics.  The emphasis will be
+  on solving problems from upper division physics using computing at
+  the level of PHY 45.  One unit courses should involve three hours of
+  academic work per week as described below.  One instructor could
+  teach all three of these courses in a single year, which would count
+  toward instructor workload as a single three unit course.  Each course
+  is offered in a different quarter, so students get three units of
+  computational problem-solving spread across an entire year.  Due to
+  unit limits, we only require two of these courses, but all three are
+  recommended.
 
 \item 105B: this course now has PHY 40 as a prerequisite and can
   therefore include computational problems in mechanics using
@@ -590,7 +652,17 @@ of course work that involves extensive computing exercises.
 Furthermore, once student computing abilities are on more solid
 ground, capstone and advanced elective courses could further evolve to
 include additional computing exercises and add 45 (or at least 40) as
-a prerequisite.
+a prerequisite.  All applied majors include 45 or an equivalent, so,
+for example, even 140A could include a computational component.
+
+{\bf One-unit workload: }It is important that 110L, 112L, and 115L are
+taught as one-unit courses.  A one unit course should involve three
+hours of total academic work per week.  One way to teach the course
+would be to have five assignments due every two weeks.  The first one
+hour lecture would introduce the assignment, and the second lecture
+would focus on helping students with their solutions.  That would
+leave the students four hours of independent work to complete each
+assignment.
 
 \section{Lab Course Work}
 \label{sec:labs}
@@ -613,7 +685,9 @@ as sufficient analog electronics is covered in 80.
 Physics 80 and 116 share the same dedicated lab space.  The primary
 time for taking 80 will be in spring quarter, but it will also be
 offered in fall, and possibly winter, while 116A and 116B will be
-offered in fall and winter respectively.
+offered in fall and winter respectively.  The department plans to
+expand the lab space available for 80 and 116 to meet the needs of
+increase enrollment.
 
 \section{Prerequisites}
 
@@ -671,7 +745,7 @@ offered in fall and winter respectively.
 
 \node[right] at (3,4.5) {115A};
 
-\node[right] at (4.5,4.5) {116AB};
+\node[right] at (4.5,4.5) {116A};
 
 \node[right] at (7,4.5) {\it \underline{110L} \underline{112L} \underline{115L}};
 \draw (7,4) coordinate(X) -- ++(0,1) -- ++(4.3,0) |- (X);
@@ -682,8 +756,8 @@ offered in fall and winter respectively.
 
 
 % top tier:
-\node[right] at (0,6.5) {122AB 115B {\underline{115C}}, Capstone Courses};
-\draw (0,6) coordinate(X) -- ++(0,1) -- ++(7.4,0) |- (X);
+\node[right] at (0,6.5) {122AB 115B {\underline{116C}},{\underline{115C}}, Capstone Courses};
+\draw (0,6) coordinate(X) -- ++(0,1) -- ++(9.0,0) |- (X);
 
 
 \end{tikzpicture}
@@ -714,14 +788,15 @@ in fall to complete the remaining upper division courses in two years,
 but sophomores finishing 9HD in the fall are not generally ready to
 take 104A until the spring.
 
-It appears from the graph that 45 is a bottleneck as well, but it is
-less severe.  It does not require MAT 22A so can be taken sooner than
-104A, and it is only needed for top tier courses such as 115C and the
-computational lab courses, which can be postponed until senior year.
+It appears from the graph that 45 is a potential bottleneck as well,
+but it is less severe.  It does not require MAT 22A so can be taken
+sooner than 104A, and it is only needed for top tier courses such as
+115C and the computational lab courses, which can be postponed until
+senior year.
 
 The most notable changes to the prerequisite structure are:
 \begin{itemize}
-\item 80 adds 40 as a prerequisite.
+\item 80 adds 40 as a prerequisite, with an exception for AB majors as described in Section~\ref{sec:ab}.
 \item 112 does not require 115A anymore, 104A and 9A-D must suffice instead.
 \item 110A does not require 105A anymore. 
 \item 105B requires 40, so computational examples can be used in this course.
@@ -908,8 +983,7 @@ Senior   & 115A     & 115B & 108+L\\
 \vskip 0.5cm
 \end{center}
 
-\newpage
-\section{Applied Physics}
+\section{Proposed Applied Physics majors}
 
 The Applied Physics majors require the preparatory courses in
 Table~\ref{tbl:prep-astro-applied} and the depth courses listed in
@@ -935,12 +1009,27 @@ modifications to all of the Applied Physics majors:
   Physics electives has been extended.  See
   Table~\ref{tbl:atmospheric}.
 
-\item The Physical and Chemical Oceanography course (GEL 150A) is not offered every year and now has extensive prerequisites.  Therefore, the Physical Oceanography major might not be achievable in two years for students that have not already satisfied these prerequisites.  The prerequisites for reaching GEL 150A are now included in the concentration courses, and GEL 150B has been added.  See Table~\ref{tbl:oceanography}.
-
+\item The Physical and Chemical Oceanography course (GEL 150A) is not
+  offered every year and now has extensive prerequisites.  Therefore,
+  the Physical Oceanography major might not be achievable in two years
+  for students that have not already satisfied these prerequisites.
+  The prerequisites for reaching GEL 150A are now included in the
+  concentration courses.  See Table~\ref{tbl:oceanography}.
+  Additional example schedules are provided in
+  Tables~\ref{tbl:oceanography-two-year} and
+  \ref{tbl:oceanography-four-year}.
+  
 \item The Chemical Physics major requires 15 credits of lower division General Chemistry course work which severely limits the number of upper division course that can be required in this major.  The course requires 115B and 140A as concentration courses.  See Table~\ref{tbl:chemical}.
 
+\item The Materials Science major is renamed Materials Physics.
+  
 \end{itemize}
-
+These proposed updates to the Applied Physics majors are narrowly
+focused on the new required courses and prerequisite structure, with
+some essential updates for changes to courses outside the department.
+Some of the majors, particularly Chemical Physics, might benefit from
+more extensive and targeted revisions, which will be considered after
+the new program is implemented.
 
 
 \captionof{table}{\label{tbl:depth-applied}Depth Subject Matter:  All Applied Physics Majors}
@@ -967,10 +1056,10 @@ PHY & 104A   & 4 \\
 
 \newpage
 \captionof{table}{\label{tbl:computational}Computational Physics}
-\noindent
 \vskip 0.25cm
-{\bf Concentration Courses:  }\\
-Units:  29 units. *: recommended, $^\#$: not offered every year, $\parallel$: concurrently.\\
+\noindent
+{\bf Additional Preparatory Courses:  }\\
+Units:  12 units. *: recommended, $^\#$: not offered every year, $\parallel$: concurrently.\\
 \begin{tabular}{|llllll|}
 \hline
 Course & & Units & Offered & Prereqs & Name \\
@@ -978,7 +1067,17 @@ Course & & Units & Offered & Prereqs & Name \\
 ECS & 36A  & 4 & FWS & & Programming and Problem Solving\\
     & 36B  & 4 & FWS & & Software Dev. and OOP in C++\\
     & 36C  & 4 & FWS & & Data Structures, Algorithms, and Programming\\
-    & 122A & 4 & FWS & & Algorithm Design \& Analysis\\
+\hline
+\end{tabular}\\
+\vskip 0.25cm
+\noindent
+{\bf Concentration Courses:  }\\
+Units:  17 units. *: recommended, $^\#$: not offered every year, $\parallel$: concurrently.\\
+\begin{tabular}{|llllll|}
+\hline
+Course & & Units & Offered & Prereqs & Name \\
+\hline
+& 122A & 4 & FWS & & Algorithm Design \& Analysis\\
 \hline
 \hline
     & Choose one of & & & & \\
@@ -1002,11 +1101,14 @@ PHY & 122A/B & 4 & & & \\
     & 116A   & 4 & & & \\
     & 116B   & 4 & & & \\
 \hline
-\end{tabular}\\ \vskip 0.25cm
+\end{tabular}\\
+\vskip 0.25cm
 \noindent
 {\bf Additional Electives: (8 units)} Two courses for a total of at least 8 units of additional upper division course work from ECS, MAT, or PHY.\\
 {\bf Total Units:} 110-111\\
-{\bf Example schedules:} In most cases, the 9D requirement is
+\vskip 0.25cm
+\noindent
+{\bf Example schedule:} In most cases, the 9D requirement is
 satisfied before junior year, but an example including 9D is included.
 Physics course numbers are shown unless otherwise indicated.  Courses
 in italics are electives.\\
@@ -1029,17 +1131,27 @@ Senior   & ECS 122A    & {\it ECS 122B/120/132} & 122A \\
 
 \newpage
 \captionof{table}{\label{tbl:electronics}Physical Electronics }
-\noindent
 \vskip 0.25cm
-{\bf Concentration Courses:  }\\
-Units:  37 units. *: recommended, $^\#$: not offered every year, $\parallel$: concurrently.\\
+\noindent
+{\bf Additional Preparatory Courses:  }\\
+Units:  8 units. *: recommended, $^\#$: not offered every year, $\parallel$: concurrently.\\
 \begin{tabular}{|llllll|}
 \hline
 Course & & Units & Offered & Prereqs & Name \\
 \hline
 ENG & 17     & 4 & FWS & & Circuits I\\
-EEC & 100    & 4 & FW & & Circuits II\\
 PHY & 45     & 4 & & & \\
+\hline
+\end{tabular}\\
+\vskip 0.25cm
+\noindent
+{\bf Concentration Courses:  }\\
+Units:  29 units. *: recommended, $^\#$: not offered every year, $\parallel$: concurrently.\\
+\begin{tabular}{|llllll|}
+\hline
+Course & & Units & Offered & Prereqs & Name \\
+\hline
+EEC & 100    & 4 & FW & & Circuits II\\
     & 115B*  & 4 & & & \\
     & 140A   & 4 & & & \\
     & 140B*  & 4 & & & \\
@@ -1062,17 +1174,21 @@ EEC & 110A  & 4 & WS & & Electronic Circuits I \\
     & 150A  & 4 & WS & & Intro. to Signals \& Systems I\\
     & 150B  & 4 & F & & Intro. to Signals \& Systems II\\
 \hline
-\end{tabular}\\ \vskip 0.25cm
+\end{tabular}\\
+\vskip 0.25cm
+\noindent
 {\bf Total Units:} 110-111\\
 
-{\bf Example schedules:} for the junior and senior year.  In most
-cases, the PHY 9D and ENG 17 requirement is satisfied before the
+\newpage
+\captionof{table}{\label{tbl:electronics-two-year}Example two-year
+  schedule for Physical Electronics major:  In most
+cases, the PHY 9D and ENG 17 requirements are satisfied before the
 junior year, but the first example shows how those courses can be
 accommodated.  The second example considers a student that completed
 PHY 9HD,40,45,80, 105A and ENG 45 prior to their junior year.  A particular
 feature of this major is the ability to take graduate courses in the
 senior year.  Physics course numbers are shown unless otherwise
-indicated.  Courses in italics are electives.\\
+indicated.  Courses in italics are electives.}
 \begin{center}
 \begin{tabular}{|l|l|l|l|}
 \hline
@@ -1100,20 +1216,30 @@ Senior   & 112                & 140A               & 140B  \\
 \end{center}
 
 \newpage
-\captionof{table}{\label{tbl:materials}Materials Science}
-\noindent
+\captionof{table}{\label{tbl:materials}Materials Physics}
 \vskip 0.25cm
-{\bf Concentration Courses:  }\\
-Units:  37-38 units. *: recommended, $^\#$: not offered every year, $\parallel$: concurrently.\\
+\noindent
+{\bf Additional Preparatory Courses:  }\\
+Units:  8 units. *: recommended, $^\#$: not offered every year, $\parallel$: concurrently.\\
 \begin{tabular}{|llllll|}
 \hline
 Course & & Units & Offered & Prereqs & Name \\
 \hline
 PHY & 45     & 4 & & & \\
+ENG & 45     & 4 & FWS & & Properties of Materials \\
+\hline
+\end{tabular}\\
+\vskip 0.25cm
+\noindent
+{\bf Concentration Courses:  }\\
+Units:  29-33 units. *: recommended, $^\#$: not offered every year, $\parallel$: concurrently.\\
+\begin{tabular}{|llllll|}
+\hline
+Course & & Units & Offered & Prereqs & Name \\
+\hline
     & 115B   & 4 & & & \\
     & 140A   & 4 & & & \\
     & 140B   & 4 & & & \\
-ENG & 45     & 4 & FWS & & Properties of Materials \\
 \hline
 \hline
     & Choose two of & & & & \\
@@ -1144,8 +1270,11 @@ EMS & 162L   & 3 & W & & Structure \& Characterization Lab\\
     & 172L   & 3 & F & & Smart Materials Lab \\
     & 174L   & 3 & S & & Mech. Behavior of Materials Lab \\
 \hline
-\end{tabular}\\ \vskip 0.25cm
-{\bf Total Units:} 110-112 \\
+\end{tabular}\\
+\noindent
+{\bf Total Units:} 110-115 \\
+
+\noindent
 {\bf Example schedule:} In most cases, the PHY 9D and ENG 45 requirement is
 satisfied before the junior year, but an example including these courses is
 shown.  Physics course numbers are shown unless otherwise indicated.
@@ -1169,10 +1298,10 @@ Senior   & 112+L          & 140A   & 140B \\
 
 \newpage
 \captionof{table}{\label{tbl:atmospheric}Atmospheric Physics}
-\noindent
 \vskip 0.25cm
-{\bf Concentration Courses:  }\\
-Units:  37-40 units. *: recommended, $^\#$: not offered every year, $\parallel$: concurrently.\\
+\noindent
+{\bf Additional Preparatory Courses:  }\\
+Units:  8 units. *: recommended, $^\#$: not offered every year, $\parallel$: concurrently.\\
 \begin{tabular}{|llllll|}
 \hline
 Course & & Units & Offered & Prereqs & Name \\
@@ -1180,7 +1309,17 @@ Course & & Units & Offered & Prereqs & Name \\
 PHY & 45     & 4 &     & & \\
 GEL & 50*    & 3 & FWS & & Physical Geology \\
 ATM & 60     & 4 & F   & & Intro. to Atmospheric Sci. \\
-    & 120    & 4 & F   & & Atmos. Thermo. and Cloud Physics \\
+\hline
+\end{tabular}\\
+\vskip 0.25cm
+\noindent
+{\bf Concentration Courses:  }\\
+Units:  28-30 units. *: recommended, $^\#$: not offered every year, $\parallel$: concurrently.\\
+\begin{tabular}{|llllll|}
+\hline
+Course & & Units & Offered & Prereqs & Name \\
+\hline
+ATM & 120    & 4 & F   & & Atmos. Thermo. and Cloud Physics \\
     & 121A   & 4 & W   & & Atmospheric Dynamics \\
     & 121B   & 4 & S   & & Atmospheric Dynamics \\
 \hline
@@ -1209,10 +1348,14 @@ ATM  & 124    & 3 & F  & ATM 60      & Meteorological Instruments \& Observation
      & 128    & 4 & W  &             & Radiation and Satellite Meteorology \\
      & 158    & 4 &    &             & Boundary-Layer Meteorology \\
 \hline
-\end{tabular}\\ \vskip 0.25cm
-{\bf Total Units:} 110-113 \\
-{\bf Example schedule:} In most cases, the PHY 9D and ENG 45 requirement is
-satisfied before the junior year, but an example including these courses is
+\end{tabular}\\
+\vskip 0.25cm
+\noindent
+{\bf Total Units:} 109-112 \\
+
+\noindent
+{\bf Example schedule:} In most cases, the PHY 9D and GEL 50 are taken
+before the junior year, but an example including these courses is
 shown.  Physics course numbers are shown unless otherwise indicated.
 Courses in italics are electives.
 \begin{center}
@@ -1223,6 +1366,7 @@ Year      & Fall    & Winter & Spring \\
 Junior    & 40         & 45           & 80 \\
           & 104A       & 105A         & {\it 105B} \\
           & ATM 60     & 110A         & 110B+L \\
+          & (9D)       & (GEL 50)     & \\
 \hline
 Senior   & ATM 120       & ATM 121A   & ATM 121B \\
          & 112+L         & 140A       & 140B \\
@@ -1234,10 +1378,10 @@ Senior   & ATM 120       & ATM 121A   & ATM 121B \\
 
 \newpage
 \captionof{table}{\label{tbl:oceanography}Physical Oceanography}
-\noindent
 \vskip 0.25cm
-{\bf Concentration Courses:  }\\
-Units:  37-40 units. *: recommended, $^\#$: not offered every year, $\parallel$: concurrently.\\
+\noindent
+{\bf Additional Preparatory Courses:  }\\
+Units:  15 units. *: recommended, $^\#$: not offered every year, $\parallel$: concurrently.\\
 \begin{tabular}{|llllll|}
 \hline
 Course & & Units & Offered & Prereqs & Name \\
@@ -1246,9 +1390,18 @@ CHE  & 2A     & 5 & FW  & & \\
 PHY  & 45     & 4 &     & & \\
 GEL  & 50     & 3 & FWS & & Physical Geology \\
      & 55     & 3 & F      & CHE 2A & Intro. to Geochemistry\\
-     & 116N   & 3 & S      & GEL 50          & Oceanography\\
+\hline
+\end{tabular}\\
+\vskip 0.25cm
+\noindent
+{\bf Concentration Courses:  }\\
+Units:  20-21 units. *: recommended, $^\#$: not offered every year, $\parallel$: concurrently.\\
+\begin{tabular}{|llllll|}
+\hline
+Course & & Units & Offered & Prereqs & Name \\
+\hline
+GEL  & 116N   & 3 & S      & GEL 50          & Oceanography\\
      & 150A   & 4 & S$^\#$ & GEL 116N,55 & Physical and Chemical Oceanography\\
-     & 150B   & 3 & W      & GEL 50          & Geological Oceanography\\
 \hline
     & Choose two of & & & & \\
 \hline
@@ -1270,40 +1423,95 @@ PHY & 105B & 4 & & & \\
     & 105C & 4 & $^\#$ & & \\
 GEL & 150B & 3 & W & GEL 50 & Geological Oceanography\\
 \hline
-\end{tabular}\\ \vskip 0.25cm
+\end{tabular}\\
+\vskip 0.25cm
 \noindent
-{\bf Total Units:} 108-109
-{\bf Note: } This degree may not be possible to complete in two years.
-Students should seek instructor permission to take GEL 150A alongside
-prerequisites if it is offered in their junior year.\\
-{\bf Example schedule:} In most cases, the PHY 9D and ENG 45 requirement is
-satisfied before the junior year, but an example including these courses is
-shown.  Physics course numbers are shown unless otherwise indicated.
-Courses in italics are electives.
+{\bf Total Units:} 108-110\\
+{\bf Note: } For transfer students arriving in their junior year, this
+degree may not be possible to complete in two years.  Students should
+seek instructor permission to take GEL 150A alongside 116N prerequisite if
+it is offered in their junior year.\\
+
+\noindent
+{\bf Example schedule:} In most cases, the PHY 9D, CHE 2A, and GEL 50
+requirements will be satisfied before the junior year, but an example
+including these courses is shown.  Physics course numbers are shown
+unless otherwise indicated.  Courses in italics are electives.\\
+\vskip 0.25cm
 \begin{center}
 \begin{tabular}{|l|l|l|l|}
 \hline
 Year      & Fall    & Winter & Spring \\
 \hline
 Junior    & 40         & 45           & 80 \\
-          & 104A       & 105A         & {\it 105B} \\
-          & CHE 2A     & 110A         & 110B+L \\
-          & (9D)       & GEL 50       & GEL 159N \\
+          & 104A       & 105A         & 110B+L \\
+          & (CHE 2A)   & 110A         & GEL 116N \\
+          & (9D)       & (GEL 50)     &  \\
 \hline
-Senior   & GEL 55      & GEL 150B         & GEL 150A \\
-         & 112+L         & 140A       & 140B \\
-         & 115A          & 115B       & 122A \\
-         &               & 116B       &  \\
+Senior   & GEL 55      & {\it GEL 150B}     & GEL 150A \\
+         & 112+L       & {\it 116B}         & {\it 122A}  \\
+         & 115A        &              & \\
 \hline
 \end{tabular}
+\newpage
+
+\captionof{table}{\label{tbl:oceanography-two-year}Example two-year
+  schedule for Physical Oceanography major: This schedule assumes
+  student took CHE 2A, GEL 50, and PHY 9D before the Junior year, and student
+  receives instructor permission to take GEL 150 concurrently with GEL
+  116N.  Physics course numbers are shown unless otherwise indicated.
+  Courses in italics are electives.}
+
+\vskip 0.25cm
+\begin{center}
+\begin{tabular}{|l|l|l|l|}
+\hline
+Year      & Fall    & Winter & Spring \\
+\hline
+Junior    & 40         & 45           & 110B+L \\ 
+          & 104A       & 105A         & GEL 116N \\ 
+          & GEL 55     & 110A         & GEL 150A \\
+\hline
+Senior   & 80          & {\it GEL 150B} & \\
+         & 112+L       & {\it 116B}     & {\it 122A}  \\
+         & 115A        &                & \\
+\hline
+\end{tabular}
+\end{center}
+\captionof{table}{\label{tbl:oceanography-four-year}Example four-year
+  schedule for Physical Oceanography major.  Physics course numbers are
+  shown unless otherwise indicated.  Courses in italics are electives.
+  If GEL 150A is not offered in junior year, it can be taken in senior
+  year.}
+\vskip 0.25cm
+\begin{tabular}{|l|l|l|l|}
+\hline
+Year      & Fall    & Winter & Spring \\
+\hline
+Freshman  & MAT 21A  & MAT 21B  & MAT 21C \\
+          & CHE 2A   & GEL 50   & 9A \\
+\hline
+Sophomore & MAT 21D  & MAT 22A  & MAT 22B \\ 
+          & 9B       & 9C       & 9D \\
+          & GEL 55   &          & GEL 116N \\
+\hline
+Junior    & 40       & 45       & 80\\
+          & 104A     & 110A     & 110B+L\\
+          &          & 105A     & GEL 150A \\         
+\hline
+Senior   & 115A      & GEL 150B & \\
+         & 112+L     &          & \\
+\hline 
+\end{tabular}
+
 \end{center}
 
 \newpage
 \captionof{table}{\label{tbl:chemical}Chemical Physics}
-\noindent
 \vskip 0.25cm
-{\bf Concentration Courses:  }\\
-Units:  36 units. *: recommended, $^\#$: not offered every year, $\parallel$: concurrently.\\
+\noindent
+{\bf Additional Preparatory Courses:  }\\
+Units:  19 units. *: recommended, $^\#$: not offered every year, $\parallel$: concurrently.\\
 \begin{tabular}{|llllll|}
 \hline
 Course & & Units & Offered & Prereqs & Name \\
@@ -1311,13 +1519,23 @@ Course & & Units & Offered & Prereqs & Name \\
 CHE  & 2A      & 5 & FW  & & General Chemistry \\
      & 2B      & 5 & WS  & & General Chemistry \\
      & 2C      & 5 & FS  & & General Chemistry \\
-     & 124A    & 3 & F   & & Inorganic Chemistry\\
+PHY  & 45     & 4 & & & \\
+\hline
+\end{tabular}\\
+\vskip 0.25cm
+\noindent
+{\bf Concentration Courses:  }\\
+Units:  17 units. *: recommended, $^\#$: not offered every year, $\parallel$: concurrently.\\
+\begin{tabular}{|llllll|}
+\hline
+Course & & Units & Offered & Prereqs & Name \\
+\hline
+CHE  & 124A    & 3 & F   & & Inorganic Chemistry\\
      & 110BC*  &  & & & Physical Chemistry\\
      & 128ABC* &  & & & Organic Chemistry\\
      & 129A*   &  & & & Organic Chemistry Lab\\
      & 210B*   &  & & & Quantum Chemistry\\
 EMS  & 147*    &  & & & Principles of Polymer Materials Science\\
-PHY  & 45     & 4 & & & \\
      & 115B   & 4 & & & \\
      & 140A   & 4 & & & \\
      & 140B*  & 4 & & & \\
@@ -1335,10 +1553,13 @@ PHY & 122A/B & 4 & & & \\
     & 116A   & 4 & & & \\
     & 116B   & 4 & & & \\
 \hline
-\end{tabular}\\ \vskip 0.25cm
+\end{tabular}\\
+\vskip 0.25cm
 \noindent
 {\bf Total Units:} 109-110 \\
-{\bf Example schedule:} In most cases, the PHY 9D and ENG 45 requirement is
+
+\noindent
+{\bf Example schedule:} In most cases, the PHY 9D and CHE 2 requirements are
 satisfied before the junior year, but an example including these courses is
 shown.  Physics course numbers are shown unless otherwise indicated.
 Courses in italics are electives.
@@ -1347,7 +1568,7 @@ Courses in italics are electives.
 \hline
 Year      & Fall    & Winter & Spring \\
 \hline
-Junior    & CHE 2A     & CHE 2B       & CHE 2C \\
+Junior    & (CHE 2A)   & (CHE 2B)     & (CHE 2C) \\
           & 40         & 45           & 80 \\
           & 104A       & 110A         & 110B+L \\
           & (9D)       & 105A         & \\
@@ -1360,8 +1581,119 @@ Senior   & 112+L         & 140A       & 122A\\
 \end{tabular}
 \end{center}
 
+\section{Proposed AB Physics Major}
+\label{sec:ab}
+
+
+
+The proposed requirements for the AB Physics major are listed in
+Tables~\ref{tbl:ab-prep} and \ref{tbl:ab-depth}.  To avoid version
+conflicts, some information in Tables \ref{tbl:prep} and
+\ref{tbl:depth} is not duplicated in these tables.
+
+The AB degree has a cap of 80 units of which at least 36 must be upper
+division.  This imposes an effective limit of 44 units of lower
+division course work, which includes all prerequisites.  The current
+degree requirements include 46 units of lower-division course work and
+therefore exceed the cap by two units.  This proposal adds PHY 40 as a
+prerequisite for PHY 80, which would add four more units of required
+lower division course work to this major.  For this reason, PHY 80 may
+be taken without PHY 40 with instructor permission.  AB majors should
+still be encouraged to take 40, but to accommodate those who do not,
+PHY 80 students who have not taken PHY 40 will be paired with a lab
+partner who has.  This proposal requires 81 units for the AB, which
+still exceeds the cap, but is one less than the current requirements.
+
+If the campus does not approve this major because of this one unit
+excess, our fallback will be to allow students to choose either the
+optics lab (108+108L) or 122A/B (recommended) for a lab experience.
+This provides a path that does not require 80 and 40 and therefore
+remains below the 80 unit cap.  However, this solution would
+significantly weaken the effectiveness of this major, as there would
+be no way to ensure that students take 80 and 122A/B, which
+provide essential lab experience.
+
+
+\vskip 2cm
+\captionof{table}{\label{tbl:ab-prep}Preparatory Subject Matter}
+\noindent
+\vskip 0.25cm
+Units:  45-51. *: recommended, $\parallel$ concurrently\\
+\begin{tabular}{|llllll|}
+\hline
+Course & & Units & Offered & Prereqs & Name \\
+\hline
+MAT & 21A & 4 & &&\\
+    & 21B & 4 & &&\\
+    & 21C & 4 & &&\\
+    & 21D & 4 & &&\\
+    & 22A & 3 & &&\\
+    & 22B & 3 & &&\\
+\hline
+\hline
+
+PHY & 9A & 5 & &&\\
+    & 9B & 5 & &&\\
+    & 9C & 5 & &&\\
+    & 9D & 4 & &&\\
+\hline
+&or&&\\
+\hline
+PHY & 9HA & 5 & &&\\
+    & 9HB & 5 & &&\\
+    & 9HC & 5 & &&\\
+    & 9HD & 5 & &&\\
+\hline
+\hline
+PHY & 40*  & 4 & F & & Introduction to Physics Computation \\ 
+    & 80  & 4 & WS & 40$\dagger$,9C/9HD     & Experimental Techniques \\
+PHY & 185* & 1 & &&\\
+    & 190* & 1 & &&\\
+\hline
+\end{tabular}\\
+$\dagger$:  Instructor permission may be obtained to take PHY 80 without the PHY 40 prerequisite.
 
 \newpage
+\captionof{table}{\label{tbl:ab-depth}Depth Subject Matter}
+\noindent
+\vskip 0.25cm
+Units:  32-35. *: recommended, $\parallel$: concurrently.\\
+\begin{tabular}{|lll|}
+\hline
+Course & & Units \\
+\hline
+PHY & 104A & 4 \\
+    & 105A & 4 \\
+    & 110A & 4 \\
+    & 110B & 4 \\
+    & 112  & 4 \\
+    & 115A & 4 \\
+\hline
+PHY & 122A/B & 4 \\
+
+\hline
+PHY & 110L* & 1 \\
+    & 112L* & 1 \\
+    & 115L* & 1 \\
+\hline
+    & At least one of & \\ 
+\hline
+PHY & 129A & 4 \\
+    & 130A & 4 \\
+    & 140A & 4 \\
+    & 151 & 4 \\
+    & 152 & 4 \\
+    & 153 & 4 \\
+    & 156 & 4 \\
+    & 158 & 4 \\
+\hline
+\end{tabular}\\ \vskip 0.25cm
+\noindent
+    {\bf Electives:} Additional electives to bring the total number of 3-4 unit upper division courses (excluding PHY 160) to at least 36 units. \\
+    {\bf Foreign Language:} The AB degree requires proficiency in a language other than English (15 units)\\
+\noindent
+{\bf Total Units:} 81-90 units, excluding language requirement.
+
 \section{Example Course Syllabi}
 \label{sec:syllabi}
 
@@ -1369,21 +1701,21 @@ This section contains example syllabi for new courses and existing
 courses impacted by this proposal.  The first paragraph for each
 course is a brief description suitable for the course catalog, and is
 generally much less specific than the details that follow.  This is to
-allow some flexibility to adjust the course content purely within the
+allow some flexibility to maintain the course content within the
 department without contradicting the course catalog.
 
-Instructors are expected to satisfy the brief course description as listed
-in the course catalog, but are not obligated to follow the detailed
-example syllabi shown here.  However, many of these courses are
-prerequisite courses, so instructors are expected to consider the
-impact on downstream courses to their decisions.
+Instructors are expected to satisfy the brief course description as
+listed in the course catalog, but are not obliged to follow the
+detailed example syllabi shown here.  However, many of these courses
+are prerequisite courses, so instructors are expected to consider how
+their course content decisions will impact downstream courses.
 
 The specific computational tools (e.g. Scientific Python, C++) will
 not be included in the course catalog description.  This is to allow
 the department some flexibility to evolve independently over time.
 However, the choice of tool set needs to be coordinated throughout the
 department.  It would be extremely disruptive if the instructor for
-Phy 40 or 45 made changes to the tool set without coordinating with
+PHY 40 or 45 made changes to the tool set without coordinating with
 the rest of the department.  Specific details about the current
 computational tool set will be publicly available on the department
 website, including guidance for installation.
@@ -1410,7 +1742,8 @@ approach minimizes formal pedagogy, so that the students can learn by
 coding themselves.  This course has no prerequisites, but most of the
 elementary techniques are intuitively graphical.  For example,
 Simpson's method of integration can be easily explained as estimating
-the area under the curve.
+the area under the curve.  Whenever possible, special cases with
+analytic solutions are used to validate the numerical approach.
 
 There are a surprising large number of excellent textbooks, some dated
 and many quite recent, in computational physics.  These syllabi use
@@ -1429,6 +1762,8 @@ The core course content is:
 \item Monte Carlo: Quadrature, scipy tools (2 hours) [Gezerlis 7.7.2]
 \item Ordinary Differential Equations:  Euler and Verlet/Leap frog methods, Mass on spring with damping, Euler-Cromer Kepler problem (5 hours) [Gezerlis 8.2, Giordano 4.1]
 \item Computer Algebra (5 hours):  Mathematica or SymPy
+\item Analytic solutions to special cases are calculated and used throughout the
+  course to validate the numerical approach.
 \end{itemize}
 The time allocated for core material is generous, which should leave room for topical material.  Example topical approachable material:
 \begin{itemize}
@@ -1483,11 +1818,13 @@ This leaves plenty of time for topical problems, such as:
 \item Relaxation Method for solving Laplaces's Equation [Giordano 5.1] (EM / PDEs)
 \item Manhattan Project, critical mass [Garcia 6.3] (Diffusion / PDEs)
 \item Direct simulation of an Ideal Gas [Giordano 9] (SM / Molecular Dynamics)
+\item Analytic solutions to special cases are calculated and used throughout the
+  course to validate the numerical approach.
 \end{itemize}  
 
 \vskip 1cm
 \noindent
-{\bf PHY 80 —-- Experimental Techniques (4):}
+{\bf PHY 80 --- Experimental Techniques (4):}
 Experimental techniques. Design of circuits. Data analysis, sources of
 noise, statistical and systematic uncertainties. Light sources,
 detection, and measurement in basic optical systems.
@@ -1517,24 +1854,63 @@ adjusted in the fall and spring offerings to best suit the class
 composition, which will be predominantly students from the PHY 9
 series, including transfer students, in the fall, versus 9H students
 in the spring.  Textbook: Mathematical Methods in the Physical
-Sciences, 3rd Edition by Mary L. Boas.
+Sciences, 3rd Edition by Mary L. Boas.  It might be beneficial to
+leave vector analysis until the end of course, as many students will
+start 110A in the following quarter.  Note that treatment of Fourier
+Transforms is restricted to the limit of the Fourier Series as the period becomes
+infinite.
 
 \begin{samepage}
 Example coverage:
 \begin{itemize}
-\item Quick Review of Complex Numbers (Ch. 2)
-\item Quick Review of Sequences and Series, including Taylor (1.1-1.15)
-\item Quick Review of Linear Transformations (3.6-3.12)
-\item Review of Vector Calculus (Ch. 6) (as needed)
-\item Fourier Series (7.1-7.11)
-\item Fourier Transform (7.12, 13.9)
-\item Dirac Delta Function ( 8.11)
-\item Legendre Series (12.1-12.10)
-\item Partial Differential Equations (13.2)
-\item Series Solutions to PDEs (13.3-13.8)
-\item Calculus of Variations (Chap 9) (if time permits)
+\item Quick Review of Complex Numbers (Ch. 2) (as needed - 1.5 hour)
+\item Quick Review of Sequences and Series, including Taylor (1.1-1.15) (as needed - 1.5 hour)
+\item Linear Algebra (3.6-3.12,3.14,12.6) (6 hours)
+\item Fourier Series and Transforms (7.1-7.12) (6 hours)
+\item Dirac Delta Function ( 8.11) (1.5 hours)
+\item Legendre Series (12.1-12.10) (3 hours)
+\item Partial Differential Equations (Intro+13.2) (3 hours)
+\item Series Solutions to PDEs (13.3-13.8) (3 hours)
+\item Review of Vector Calculus (Ch. 6) (important for 110A - 3 hours)
 \end{itemize}
 \end{samepage}
+
+\vskip 1cm
+\noindent {\bf PHY 104B --- Intermediate Methods of Mathematical Physics (4):}  
+Continuation of 104A.  Contour Integration, Fourier Transforms, and other topics in Mathematical Physics.
+
+This is more topical than PHY 104A, but some topics should be routinely covered:
+\begin{itemize}
+ \item Contour Integration (Ch. 14)
+ \item Fourier Transforms
+\end{itemize}
+while others are at the discretion of the instructor:
+\begin{itemize}
+ \item Tensors (Ch. 10)
+ \item Group Theory
+ \item Green Functions
+ \item Probability and Statistics (Ch. 15)
+\end{itemize}
+
+
+%\vskip 1cm
+%\noindent {\bf PHY 105A ---  (4):}  
+%Applied Physics and Astrophysics majors are only required to take 105A, so we need to make sure essential content  is covered here.
+%(Reach out to Bob and Richard for syllabi.)
+
+%We are waiting on feedback from this years 105A based on Marion (in
+%place of Morin) before providing a detailed syllabus.  We need to cover consistently:
+%\begin{itemize}
+% \item Hamiltonian Mechanics
+%\end{itemize}
+
+%\vskip 1cm
+%\noindent {\bf PHY 105B ---  (4):}  
+%\begin{itemize}
+% \item Calculus of Variations 
+%\end{itemize}
+
+\newpage
 
 \vskip 1cm
 \noindent {\bf PHY 110A --- Electricity \& Magnetism (4):}  
@@ -1554,7 +1930,6 @@ The first quarter of 110 focuses on electrostatics and magnetostatics
 \item Week 9: magnetization, bound current, H field (6.1, 6.2, 6.3)
 \end{itemize}
 
-\vskip 1cm
 \noindent {\bf PHY 110B --- Electricity \& Magnetism (4):}  
 Theory of electrostatics, magnetostatics, electrodynamics and radiation.
 
@@ -1571,17 +1946,23 @@ An example schedule:
 \item Week 8: review of Lorentz transformation and relativistic mechanics (12.1, 12.2)
 \item Week 9: relativistic electrodynamics (12.3)
 \end{itemize}
-
-
+This version omits wave guides (9.5) and radiation from point charges
+(11.2).  These topics could be included by spending less time on other
+topics.
+\newpage
 
 \vskip 1cm
 \noindent
-{\bf PHY 110L --— Computing Lab for Electricity and Magnetism (1):}
+{\bf PHY 110L --- Computing Lab for Electricity and Magnetism (1):}
 Applications of computational physics to problems from Electricity and
 Magnetism.
 
-This course, which has one hour of lecture per week, includes extensive problems from numerical physics related to PHY 110AB, using the techniques introduced in PHY 40 and 45.
+This course, which has one hour of lecture per week, includes
+extensive problems from numerical physics related to PHY 110AB, using
+the techniques introduced in PHY 40 and 45.
 
+See comments in Section~\ref{sec:computing} regarding workload for one
+unit courses.  Example topics for assignments include:
 \begin{itemize}
 \item Variations of related problems from PHY 45.
 \item Visualizing Electric and Magnetic fields (Gezerlis 1.7)
@@ -1590,12 +1971,14 @@ This course, which has one hour of lecture per week, includes extensive problems
 \item Waves on a String: Spectral methods (Giordano 6.4)
 \item Relaxation Method Solution to Laplace's Equation (Giordano 5.1-2, Garcia 8)
 \item Fourier Analysis:  Spectral method (Garcia 8.2)
-\item Waveguides (Recommended Topic... not covered in 110AB)
+\item Waveguides
+\item Analytic solutions to special cases are calculated and used throughout the
+  course to validate the numerical approach.
 \end{itemize}
 
 \vskip 1cm
 \noindent
-{\bf PHY 112L —-- Computing Lab for Statistical Mechanics (1):}
+{\bf PHY 112L --- Computing Lab for Statistical Mechanics (1):}
 Applications of computational physics to problems from Statistical Mechanics.
 
 This course, which has one hour of lecture per week, includes
@@ -1603,6 +1986,8 @@ extensive problems from numerical physics related to PHY 105A and 112,
 using the techniques introduced in PHY 40 and 45.
 % see also Garcia 11 when arrives
 
+See comments in Section~\ref{sec:computing} regarding workload for one
+unit courses.  Example topics for assignments include:
 \begin{itemize}
 \item Variations of related problems from PHY 45.
 \item Testing the Stefan-Boltzmann Law (Gezerlis 6.6)
@@ -1612,6 +1997,8 @@ using the techniques introduced in PHY 40 and 45.
 \item Monte Carlo Simulation of Dilute Gas (Giordano 9.1) 
 \item Melting (Giordano 9.2)
 \item Protein Folding (Giordano 12.1)
+\item Analytic solutions to special cases are calculated and used throughout the
+  course to validate the numerical approach.
 \end{itemize}
 
 
@@ -1624,6 +2011,8 @@ This course, which has one hour of lecture per week, includes
 extensive problems from numerical physics related to PHY 115A and 115B,
 using the techniques introduced in PHY 40 and 45.
 
+See comments in Section~\ref{sec:computing} regarding workload for one
+unit courses.  Example topics for assignments include:
 \begin{itemize}
 \item Variations of related problems from PHY 45.
 \item Symplectic Algorithms
@@ -1634,11 +2023,13 @@ using the techniques introduced in PHY 40 and 45.
 \item Time-dependent Schrodinger equation:  reflection of wave packets (Giordano 10.5)
 \item Spectral method solutions to Schrodinger equation.  (Giordano 10.7)
 \item Matrix Representation of Interacting spin-half particles (Gezerlis 4.5)
+\item Analytic solutions to special cases are calculated and used throughout the
+  course to validate the numerical approach.
 \end{itemize}
 
 \vskip 1cm
 \noindent
-{\bf PHY 116A --- Physics Instrumentation with Analog and Digital Electronics:}  
+{\bf PHY 116A --- Physics Instrumentation with Analog and Digital Electronics (4):}  
 Experimental and theoretical study of important electronic circuits
 involving analog and digital components.  Feedback, amplifiers,
 oscillators, noise, integrated circuits, digital logic, timers,
@@ -1646,53 +2037,140 @@ analog-to-digital and digital-to-analog converters.
 
 \vskip 1cm
 \noindent 
-{\bf PHY 116B --- Physics Instrumentation for Data Acquisition:}  
+{\bf PHY 116B --- Physics Instrumentation for Data Acquisition (4):}  
 Experimental application of modern high density integrated circuits.
 Automated data acquisition,  microprocessors, field programmable gate arrays.
 
+\section{Approval Process}
+\label{sec:approval}
 
-\end{document}
+This section outlines procedures and other details necessary for
+approving the proposal.  The faculty approval process will consist of
+an online vote based on a specific proposal version once all feedback
+has been assimilated.  This proposal includes additional material to
+inform the decision that is not included in the vote.  The faculty
+vote will be either ``yes'' or ``no'', with optional comment, on a
+complete slate of specific changes:
+\begin{itemize}
+ \item The new courses: PHY 45, 105L, 110L, and 115L
+ \item The eliminated courses:  PHY 9HE, 102, 104B, 110C, 116C
+ \item Substantially revised courses: 40, 110AB, 116AB
+ \item The new BS physics requirements: Tables \ref{tbl:prep} and \ref{tbl:depth}.
+ \item The new Astro requirements: Tables \ref{tbl:prep-astro-applied} and \ref{tbl:depth-astro}   
+ \item The new Applied Physics requirements: Tables \ref{tbl:prep-astro-applied},\ref{tbl:depth-applied},
+\ref{tbl:computational}, \ref{tbl:electronics}, \ref{tbl:materials}, \ref{tbl:atmospheric}, \ref{tbl:oceanography}, and \ref{tbl:chemical}.   
+ \item The new AB requirements.
+ \item The new procedure for maintaining example syllabi within the department, described below.
+\end{itemize}
+This list leaves some details within the purview of the undergraduate
+curriculum committee (UGCC), notably:
+\begin{itemize}
+ \item Purely cosmetic changes, such as renaming 104C as 104B, once 104B is eliminated.
+ \item Class scheduling, such as when to offer each class and how many sections.
+ \item Details about prerequisites that may have been missed in this proposal.
+ \item Pursuing approval within the College of Letters and Science, which may require
+   generating additional material.  This material will likely include
+   the example syllabi as presented here, as examples, with the
+   understanding that the new procedure will provide long-term faculty
+   control over this content.
+ \item Implementing the proposal in a timely manner.
+\end{itemize}
+This leaves several follow-up items, which will be considered by the UGCC in the near future:
+\begin{itemize}
+ \item The new non-required PHY 115C course.
+ \item An update of the PHY 9H series (A-D).
+ \item More extensive updates to the Applied Physics majors.
+\end{itemize}
+This proposal includes a new mechanism for maintaining official
+``Example Syllabi'' for core courses.  Near the end of spring quarter,
+a faculty meeting will be devoted to discussing details of the
+undergraduate program, including:
+\begin{itemize} 
+ \item Short reports from faculty on how required core courses were taught.
+ \item The syllabi as taught, and how this differed from the example syllabi.
+ \item Areas where student preparation was insufficient.
+\end{itemize}
+Following the faculty discussion, the UGCC will update the example
+syllabi as needed, and present these for an online faculty vote.  If
+majority of the faculty accepts the new syllabi, the department
+website will be updated with the new version.  If the faculty votes
+no, additional faculty meetings will be dedicated to resolving the
+controversy, with the old version (or no version) will be left in
+place until the matter is resolved.  Example syllabi will be
+publically presented as examples only, with a clear disclaimer that
+instructors will decide the specific content of their own courses.
 
+\section{Implementation}
+\label{sec:implementation}
 
-
-
-
-
-
-
-
-
-\vskip 1cm
-\noindent {{\bf PHY 110B}—Electricity \& Magnetism (4):}  
-Theory of electrostatics, electromagnetism, Maxwell's equations, electromagnetic waves.
-
-\vskip 1cm
-\noindent {{\bf PHY 110C}—Electricity \& Magnetism (4):}  
-Theory of electrostatics, electromagnetism, Maxwell's equations, electromagnetic waves.
-
-\vskip 1cm
-\noindent {{\bf PHY 112}—Thermodynamics \& Statistical Mechanics (4):}  
-Theory of electrostatics, electromagnetism, Maxwell's equations, electromagnetic waves.
-Introduction to classical and quantum statistical mechanics and their connections with thermodynamics. Theory is developed for the ideal gas model and simple magnetic models and then extended to studies of solids, quantum fluids, and chemical equilibria. GE credit: SE. Effective: 2000 Winter Quarter.
-
-
-
-\vskip 1cm
+If the faculty approves the new program, we will begin to implement
+changes in the first year, even before the major requirements have
+been approved by the college, by rescheduling our regular course
+offerings to the new schedule.  The first year implements the changes
+for juniors and earlier, while allowing seniors to finish under the
+current schedule.  In the tables below, only the courses sequences
+directly impacted by this proposal are shown.
+\captionof{table}{\label{tbl:impone} Implementation
+  Year One Offerings}
 \noindent
-{\bf PHY 116A --- Physics Instrumentation with Analog and Digital Electronics:}  
-Experimental and theoretical study of important electronic circuits
-involving analog and digital components.  Feedback, amplifiers,
-oscillators, noise, integrated circuits, digital logic, timers,
-analog-to-digital and digital-to-analog converters.
-
-\vskip 1cm
-\noindent 
-{\bf PHY 116B --- Physics Instrumentation for Data Acquisition:}  
-Experimental application of modern high density integrated circuits.
-Automated data acquisition,  microprocessors, field programmable gate arrays.
+Italics: only if college approves in time, Bold:  courses offered for seniors. Slashed:  No longer offered.\\
+\noindent
+\vskip 0.25cm
+\begin{center}
+\begin{tabular}{|lll|}
+\hline
+Fall    & Winter   & Spring  \\
+\hline
+9HA     & 9HB      & 9HC     \\
+9HD     & \cancel{9HE}         &         \\
+40      &          &         \\
+        & {\it 45}  &         \\
+\hline
+\cancel{102} & \cancel{104B} &         \\
+104A    &          & 104A    \\
+        & 105A     & 105B    \\
+        & 110A     & 110B    \\
+116A    & 116B     & 116C  \\
+\hline
+{\bf 110C} &       &       \\
+{\bf 112}  &       &       \\
+{\bf 115B} &       &       \\
+\hline
+\end{tabular}
+\end{center}
+If the new PHY 45 course is not approved in time, we can teach it as
+PHY 104B instead.  By the second year, the new courses and
+requirements must be approved, and the new program is fully
+implemented: \captionof{table}{\label{tbl:impone} Implementation Year
+  Two Offerings}
+\noindent
+Slashed: No longer offered.\\
+\noindent
+\vskip 0.25cm
+\begin{center}
+\begin{tabular}{|lll|}
+\hline
+Fall    & Winter   & Spring  \\
+\hline
+9HA     & 9HB      & 9HC   \\
+9HD     &          &       \\
+40      &          &       \\
+        & 45       &       \\
+\hline
+104A    &          & 104A  \\
+              & 105A     & 105B  \\
+\cancel{110C} & 110A     & 110B  \\
+112     &          &       \\
+115A    & 115B     &       \\
+112L    & 115L     & 110L  \\
+116A    & 116B     & \cancel{116C}\\
+\hline
+\end{tabular}
+\end{center}
 
 
 \end{document}
+
 
 \section{Additional Figures}
 \newpage
