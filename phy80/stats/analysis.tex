@@ -40,6 +40,12 @@ the results like this:
 \caption{\label{fig:intro} Comparison of experimental results with a prediction.}
 \end{figure}
 
+In general, the experiment can estimate any $\braket{f(x)}$ as:
+\begin{displaymath}
+\bar{f} = \frac{1}{N} \sum_i f(x_i)
+\end{displaymath}
+
+
 Scientist almost never display experimental data this way (as a bar
 graph) because it is nearly impossible to answer the crucial question
 {\em is this data consistent with this prediction?}  Even if every
@@ -57,7 +63,6 @@ possible outcome for a random variable.  We'll start this discussion,
 therefore, by deriving three of the most frequently encountered
 probability distributions: the Binomial Distribution, the Poisson
 Distribution, and the Gaussian Distribution.
-
 
 \section{The  Binomial Distribution}
 
@@ -112,22 +117,27 @@ P(m; \, n ,\epsilon) = \binom{n}{m} \, \epsilon^m \, (1 - \epsilon)^{n-m}
 \end{equation}
 which is called the Binomial Distribution.
 
-\section{Mean and Variance of a Probability Distribution}
+\section{The Mean and Variance of a Probability Distribution}
 
-Given a probability distribution describing the outcomes of an experiment, our
-most urgent questions are generally ``what is a typical outcome?'' and ``how widely will outcomes typically vary from one another?''.
+Given a probability distribution describing the outcomes of an
+experiment, our most urgent questions are generally ``what is a
+typical outcome?'' and ``how widely will outcomes typically vary from
+one another?''.
 
-There are a number of ways to quantitfy the answer to first question,
-but generally the most useful answer is the mean value, $\mu$, also called
-the expected value, of the distribution, which is defined as the
-weighted average across all possible outcomes.  For the Binomial distribution, which describes probabilities for outcomes which are natural numbers up to $n$, we calculate the sum:
+There are a number of ways to quantify the answer to first question,
+but generally the most useful answer is the mean value, $\mu$, of the
+distribution, which we calculate as a weighted average across all
+possible outcomes.  For the Binomial distribution, which describes
+probabilities for outcomes which are natural numbers up to $n$, we
+calculate the sum:
 \begin{equation}
-\mu \equiv \braket{m} \equiv \sum_{m=0}^{n} m \, P(m)
+\label{eqn:mudis}
+\mu = \sum_{m=0}^{n} m \, P(m)
 \end{equation}
 For a continuous probability distribution, where outcomes can be any
-real value, we would integrate instead:
+real value, we integrate instead:
 \begin{equation}
-\mu \equiv \braket{x} \equiv \int_{-\infty}^{+\infty} x \, P(x) \, dx 
+\mu = \int_{-\infty}^{+\infty} x \, P(x) \, dx 
 \end{equation}
 across a range appropriate to the situation, typically $[-\infty,\infty]$.
 
@@ -141,16 +151,44 @@ quantities provide information about typical values for a
 distribution, but they suffer the significant defect that they are not
 necessarily unique for a given distribution.
 
-We usually answer the second question in terms of the variance, $\sigma^2$, of the distribution:
+The mean is an example of an expectation value.  In general, the
+epectation value of a function $f(x)$ of a random variable $x$ drawn
+from a probability distribution function $P(x)$ is:
 \begin{displaymath}
-\sigma^2 \equiv \braket{(x-\mu)^2}
+\braket{f(x)} \equiv \int_{-\infty}^{+\infty} f(x) \, P(x) \,dx.
 \end{displaymath}
-Other answers have problems, e.g. $\braket{x-\mu}$ can be zero or nearly so, even for wide distributions, as long as it is symmetric.  You could fix this by calculating $\braket{|x-\mu|}$ but this is generally much harder to calculate, and less useful, than the variance.  For instance, it is left as an exercise to show that:
+For a discrete random variable, the integral becomes a sum as in
+Eqn.~\ref{eqn:mudis}.  Using this notation, we can define the mean as the
+expectation value of the random variable:
+\begin{displaymath}
+\mu \equiv \braket{x}
+\end{displaymath}
+
+To answer the second question, we define an expectation value
+which characterizes the variation of outcomes from the mean value,
+which we call the variance ($\sigma^2$) of the distribution:
+\begin{displaymath}
+\sigma^2 \equiv \braket{(x-\mu)^2}.
+\end{displaymath}
+The square root of the variance ($\sigma$) is referred to as the
+standard deviation.
+
+There are other ways to quantify the variation from outcome to
+outcome, but they are generally inferior to the variance in some way.
+For example $\braket{x-\mu}$ can be zero, even for wide distributions,
+as long as $P(x)$ is symmetric.  The quantity $\braket{|x-\mu|}$
+(called the average deviation) avoids this pitfall but is generally
+much harder to calculate, due to the absolute value.
+
+The variance, on the other hand, is quite convenient to calculate.
+For example, in the homework you will show that:
 \begin{equation}
 \label{eqn:varhw}
 \braket{(x-\mu)^2} = \braket{x^2} -\braket{x}^2
 \end{equation}
-using the fact that $\mu$ is simply a number, and so $\braket{\mu} = \mu$.  We need only calculate $\braket{x}$ and $\braket{x^2}$ in order to determine the variance of a distribution.
+using the fact that $\mu$ is simply a number, and so $\braket{\mu} =
+\mu$.  We therefore need only calculate $\braket{x}$ and $\braket{x^2}$ in order
+to determine the variance of a distribution.
 
 \section{Mean and Variance of the Binomial Distribution}
 
@@ -617,14 +655,14 @@ uncertainties ($\sigma$) add in quadrature in this way.
 
 \section{Reporting Experimental Uncertainties}
 
-\begin{figure}[htbp]
-\begin{center}
-{\includegraphics[width=0.45\textwidth]{figs/measuretime.pdf}}
-\end{center}
-\caption{\label{fig:measuretime}  The evolution of a measurement of a quantity $x$ over time.}
-\end{figure}
+A scientific measurement is meaningless without an associated
+uncertainty.  Without an associated uncertainty, we can't make any
+meaningful prediction about the results that someone reproducing our
+measurement would obtain.  We also cannot quantitatively compare our
+measurement to previous measurements or predictions.
 
-A scientific measurement is meaningless without an associated uncertainty.   For instance, we might report a measured distance as:
+We report experimental uncertainties along with measured values.  For
+instance, we might report a measured distance as:
 \begin{displaymath}
 x = 1.2 \pm 0.3~\rm m
 \end{displaymath}
@@ -632,7 +670,9 @@ and a time as:
 \begin{displaymath}
 t = 4.76 \pm 0.13~\rm \mu s.
 \end{displaymath}
-When reporting a number with an associated uncertainty, we round both the value and the uncertainty to one significant digit in the uncertainty, so:
+When reporting a number with an associated uncertainty, we round both
+the value and the uncertainty to one significant digit in the
+uncertainty, so:
 \begin{displaymath}
 x = 1.245 \pm 0.313~{\rm m} \to x = 1.2 \pm 0.3~{\rm m} 
 \end{displaymath}
@@ -642,15 +682,28 @@ x = 1.245 \pm 0.113~{\rm m} \to x = 1.25 \pm 0.11~{\rm m}.
 \end{displaymath}
 This is because the effect of rounding to one digit can be a $50\%$
 effect in this case.  Sometimes this rule is extended to the case when
-the first nonzero digit ias a two.
+the first nonzero digit is a two.  For this class, you may assume that
+we use only one significant digit of uncertainty unless that digit is
+one, in which case we use two significant digits.
 
-We'll define this uncertainty quite precisely, but let's start with a
-conceptual definition.  Each particular measurement of a quantity $x$
-makes a claim about where the true value of $x$ is most likely to lie.
-If we assume that measurements improve with time and better reproduce
-the true value, we expect a series of measurements to proceed like in
-Fig.~\ref{fig:measuretime}, with future measurements shown to be
-consistent with the uncertainties reported by previous experiments.
+
+\section{Interpreting Experimental Uncertainties}
+
+\begin{figure}[htbp]
+\begin{center}
+{\includegraphics[width=0.45\textwidth]{figs/measuretime.pdf}}
+\end{center}
+\caption{\label{fig:measuretime}  The evolution of a measurement of a quantity $x$ over time.}
+\end{figure}
+
+\noindent
+We will define experimental uncertainty precisely, but let's start
+with a conceptual definition.  A typical sequence of experimental
+measurements is shown in Fig.~\ref{fig:measuretime}.  Over time,
+technology improves, science advances, and the uncertainty on the
+measured value of $x$ improves.  The uncertainty on a measurement
+amounts to a claim about the likely outcome of future experiments with
+arbitrarily small uncertainty.
 
 \begin{figure}[htbp]
 \begin{center}
@@ -660,16 +713,21 @@ consistent with the uncertainties reported by previous experiments.
 \end{figure}
 
 We can therefore think of a measurement and it's uncertainty as
-describing a PDF for the outcome of experiments in the distant future
-with uncertainties so small as to effectively measure the true value
-of the quantity.  Because most measured quantities have many
-independent sources of uncertainties, the Central Limit Theorem
-implies that the true value of the measured quantity is best described
-by a Gaussian Distribution.  We define the measured value $x$ as the
-mean of this distribution, and the uncertainty as the $\sigma$ of the
-Gaussian.
+describing a probability distribution for the future outcome of an
+experiment in the future with uncertainties that are negligible on the
+scale of our present uncertainty.
 
-\section{The Error Function}
+But which distribution should we use?  The Central Limit Theorem
+informs us that any quantity that results from a suitable average of
+random uniform variables approaches the Gaussian Distribution.  Most
+measurements, even relatively simple ones, effectively average many
+different real world factors which randomly influence the result, and
+so the Central Limit Theorom implies that the Guassian Distribution is
+often the best distribution to describe an experimental outcome.  We
+define the measured value $x$ as the mean and the experimental
+uncertainty as the $\sigma$ of the Gaussian.
+
+\section{Probabilistic Interpretation of Uncertainty}
 
 Suppose we measure the speed of light in vacuum to be:
 \begin{displaymath}
@@ -683,7 +741,7 @@ where we have omitted the uncertainty here because it is much smaller than our u
 \begin{displaymath}
 \frac{3.3 - 3.0}{0.2} = 1.5 \; \sigma.
 \end{displaymath}
-but we can also ask, what is the probability enclosed in $1.5 \sigma$.  To  answer this question, we use the error function:
+We can also ask, what is the probability enclosed in $1.5 \sigma$?  To answer this question, we use the error function:
 \begin{displaymath}
 {\rm erf}(x) = \frac{1}{\sqrt{\pi}} \int^x_{-x} \exp\left(-t^2 \right) dt
 \end{displaymath}
@@ -708,18 +766,21 @@ $\pm5 \sigma$ & ${\rm erf}\left( \frac{5}{\sqrt{2}} \right)$ & 99.99994\% \\
 \end{center}
 \end{table}
 
-In practice, scientist often speak in units of $\sigma$.  Measure
-values that differs from a prediction by one or even two $\sigma$ are
-generally considered to be consistent, because nearly $5\%$ of our
-measurements will be off by two $\sigma$ or more.  At three sigma,
-which occurs with a probabilty of $0.3\%$ things are starting to get
-interesting: either someone has likely made a mistake (the theorist or
-the experimentalist) or something new and exciting is happening, or
-both.  In my field of particle physics, we consider three $\sigma$ to
-constitute initial evidence, but hold off on claiming discovery of a
-new particle until five $\sigma$.  This is because if you collect lots
-of data and do lots of different analyses, it starts to become likely that
-you will encounter occassional three $\sigma$ statistical fluctuations.
+In practice, scientist often compare measurement in terms of $\sigma$.
+Measured values that differs from a prediction by one or even two
+$\sigma$ are considered to be consistent, because nearly
+$5\%$ of our measurements will be off by two $\sigma$ or more.  A
+three sigma discrepancy, which occurs with a probabilty of $0.3\%$ is
+starting to get interesting: either someone has likely made a mistake
+(the theorist or the experimentalist) or something new and exciting is
+happening, or both.  In my field of particle physics, we call three
+$\sigma$ effects ``initial evidence'', but hold off on claiming
+discovery of a new particle until five $\sigma$.  This is because if
+you collect lots of data and do lots of different analyses, it starts
+to become likely that you will encounter an occassional three $\sigma$
+statistical fluctuation.  It would be quite an embarrasment to give
+away a Nobel prize for a ``discovery'' that turns out to be merely a
+statistical fluctuation!
 
 \section{Independent Random Variables}
 
@@ -789,27 +850,36 @@ from which it follows that:
 &=& \braket{x^2} + \braket{y^2} \\
 &=& \sigma^2_x + \sigma^2_y\\
 \end{eqnarray*}
-In the exercises you will show that even if $\braket{x}$ and
-$\braket{y}$ are non-zero, and for constants $A$ and $B$ and $C$, this
-result generalizes to:
-\begin{displaymath}
-\sigma^2(Ax+By+C) = A^2\sigma^2_x + B^2\sigma^2_y
-\end{displaymath}
+In the exercises you will show that this result persists even when $\braket{x}$ and
+$\braket{y}$ are non-zero.
 
 \section{Independent Uncertainties Add in Quadrature}
 
-In the previous section, we discussed that the variance of the sum of two random variables drawn from any distribution is just the sum of their variances:
+In the previous section, we discussed that the variance of the sum of
+two random variables drawn from any distribution is just the sum of
+their variances:
 \begin{displaymath}
 \sigma^2(x+y) = \sigma^2_x + \sigma^2_y
 \end{displaymath}
-This is a quite general result.  In the context of experimental uncertainties, we consider experimental measurements to be drawn from a Gaussian distribution and the square-root of the variance ($\sigma$) is called the uncertainty.
+This is a quite general result.  In the context of experimental
+uncertainties, we consider experimental measurements to be drawn from
+a Gaussian distribution and the square-root of the variance ($\sigma$)
+is called the uncertainty.
 
-If we calculate the sum $s$ of two independent measurements $x$ and $y$ with uncertainties $\sigma_x$ and $\sigma_y$, it's clear that the variance of the sum will be simply $\sigma^2_x + \sigma^2_y$.  If the resulting distribution of $x+y$ is a Gaussian distribution, as seems probable due to the Central Limit Theorem, then the uncertainties simply add in quadrature:
+If we calculate the sum $s$ of two independent measurements $x$ and
+$y$ with uncertainties $\sigma_x$ and $\sigma_y$, it's clear that the
+variance of the sum will be simply $\sigma^2_x + \sigma^2_y$.  If the
+resulting distribution of $x+y$ is a Gaussian distribution, as seems
+probable due to the Central Limit Theorem, then the uncertainties
+simply add in quadrature:
 \begin{displaymath}
 \sigma_{x+y} = \sqrt{\sigma^2_x + \sigma^2_y}.
 \end{displaymath}
 
-Let's show explicitly that this is the case.  If we wish to know the probability that two random variables $x$ and $y$ add to some particular value $u = x + y$, we simply integrate the total probability of $x$ and $y$ subject to the requirement $u = x + y$:
+Let's show explicitly that this is the case.  If we wish to know the
+probability that two random variables $x$ and $y$ add to some
+particular value $u = x + y$, we simply integrate the total
+probability of $x$ and $y$ subject to the requirement $u = x + y$:
 \begin{eqnarray*}
 P(u) &=& \int dx \int dy \; P_x(x) \, P_y(y) \, \delta\left(u-(x+y)\right) \\
         &=& \int dx \; P_x(x) \, P_y(u-x)
@@ -895,17 +965,6 @@ generally, taking additional data reduces the uncertainty of a
 measurement.  If you take gfour times as much data, you can expect the
 uncertainties to be cut in half.
 
-Statistics textbooks will often refer to $\mu$ as the {\em poplulation
-  mean} and $\bar{x}$ as the {\em sample mean}, terminology that makes
-good sense in the context of estimating properties of an entire
-population using a smaller sample.  I've mostly avoided this
-terminology because it doesn't make as much sense in the context of
-measurement of most physics experiments where this is no finite
-population to consider.  We are generally attempting to measuring
-fundamental properties of the universe, not hair length in a
-population of goats!  But you'll likely encounter this terminology in
-the statostics literature.
-
 \section{General Propagation of Uncertainties}
 
 We are now ready to handle propagation of uncertainties for a general
@@ -932,9 +991,10 @@ We know how to propagate uncertainties in this case, which involves scaling, add
 \sigma_f^2 =   A^2 \sigma_x^2 + B^2 \sigma_y^2 
 \end{equation*}
 And plugging in the constants:
-\begin{equation*}
+\begin{equation}
+\label{eqn:prop}
 \sigma^2_f = \left(\left.\frac{\partial f}{\partial x}\right|_{x_0 y_0} \right)^2 \sigma^2_x  + \left( \left.\frac{\partial f}{dy} \right|_{x_0 y_0} \right)^2 \sigma^2_y
-\end{equation*}   
+\end{equation}   
 This is a plausible result.  As $x$ moves by a typical amount $\sigma_x$ from the value $x_0$, we expect $f$ to change by approximately:
 \begin{equation*}
   \Delta f = \left.\frac{\partial f}{\partial x}\right|_{x_0 y_0} \sigma_x
@@ -1104,6 +1164,59 @@ using standard propagation of uncertainties and the fact that $\sigma_p = \sqrt{
 
 \chapter{Statistical Analysis}
 
+% Move to Chapter 1 in the Future
+\section{Sample Mean and Sample Variance}
+
+Let's return to the case of $N$ repeated measurements of the same
+quantity $x$.  We can interpret our experiment as drawing random
+variables from a distribution with mean $\mu$ and variance $\sigma^2$,
+with our experimental uncertainty identified as $\sigma$, the square
+root of the variance.
+
+The quantities $\mu$ and $\sigma^2$ are often referred to as the
+{\em population mean} and {\em population variance}, because they are associated
+with the entire (possiblily infinite) population, from which our
+finite and relatively small data sample is drawn.  Throughout these
+lecture notes, I have mostly used the alternative terms mean of the
+distribution and variance of the distribution.
+
+One goal of the experimenter is to determine the best estimate for the
+value $\mu$ using our limited sample of $N$ values of $x$.  We've seen that we can estimate $\mu$ using the sample mean:
+\begin{displaymath}
+\bar{x} = \frac{1}{N} \sum_i x_i
+\end{displaymath}
+which we can think of as an alternative approach to the computing integral:
+\begin{displaymath}
+\mu = \braket{x} = \int x_i P(x) dx
+\end{displaymath}
+The experimental outcomes are drawn from P(x), so the average of these outcomes approximates the integral.  In general, the experiment can estimate any $\braket{f(x)}$ as:
+\begin{displaymath}
+\bar{f} = \frac{1}{N} \sum_i f(x_i)
+\end{displaymath}
+
+An essential experimental technique is the ability to estimate
+uncertainty from repeated measurements.  Even if you know the
+uncertainty of a measurement, this technique is valuable as a means of
+validating your experiment.  We can estimate the variance of the distribution
+\begin{displaymath}
+ \sigma^2 = \braket{(x-\mu)^2} \sim \braket{(x - \bar{x})^2}
+\end{displaymath}
+from our limited sample of $N$ values of $x$ as:
+\begin{displaymath}
+s_n^2  = \frac{1}{N} \sum_i (x_i-\bar{x})^2.
+\end{displaymath}
+The quantity $s_n^2$ is called the sample variance.  You will show in
+the exercises that a better estimate is provided by the {\em unbiased}
+sample variance:
+\begin{displaymath}
+\label{eqn:sampvar}
+s^2  = \frac{1}{N-1} \sum_i (x_i-\bar{x})^2.
+\end{displaymath}
+This form corrects for the bias introduced by using the estimate $\bar{x}$ in place of $\mu$.  The quantity $s_n$ is called the uncorrected sample standard deviation
+and the quantity $s$ is called the corrected sample standard
+deviation.
+
+
 \section{Likelihood and $\chi^2$ }
 
 Suppose we make a series of measurements:
@@ -1122,25 +1235,27 @@ And the probability for the complete set of measurements, called the Likelihood,
 \begin{displaymath}
 {\cal L} = \prod_i P_i = \prod_i \frac{1}{\sqrt{2 \pi} \sigma_i}  \exp\left( - \frac{(a_i-x_i)^2}{2\sigma_i^2}\right)
 \end{displaymath}
-Now being physicists, we hate products and prefer sums, so we apply a logarithm , and there is an annoying factor of $\frac{1}{2}$ in the exponential, so we multiple by 2.  We'd also like to construct a quantity that tells us about how far apart a prediction is from our measurement, and so we multiply by $-1$, to obtain:
+Now being physicists, we hate products and prefer sums, so we apply a logarithm , and there is an annoying factor of $-\frac{1}{2}$ in the exponential, so we multiple by $-2$ to get rid of it.  We obtain:
 \begin{equation}
--2 \log {\cal L} = \sum_i \frac{(a_i-x_i)^2}{\sigma_i^2} + 2 \log(\sqrt{2\pi}\sigma_i)
+-2 \ln {\cal L} = \sum_i \frac{(a_i-x_i)^2}{\sigma_i^2} + 2 \ln(\sqrt{2\pi}\sigma_i)
 \end{equation}
-Assuming the experimental uncertainties, $\sigma_i$, are known, the second term is simply a constant of the experiment setup.  The first term is referred to as the $\chi^2$ test: 
+Assuming the experimental uncertainties, $\sigma_i$, are known, the
+second term is simply a constant of the experiment setup.  The first
+term is referred to as the $\chi^2$ test, or even just $\chi^2$ (``chi-squared''):
 \begin{equation}
 \chi^2 \equiv \sum_i \frac{(a_i-x_i)^2}{\sigma_i^2} 
 \end{equation}
 A small value of $\chi^2$ means that the result is close to the
 theoretical prediction and a large value means that the result is
 unlikely to have occurred as a result of the prediction.  If the
-uncertainties and prediction are all correct, we would expect each
-$x_i$ to differ from the prediction $a_i$ by about $\sigma_i$.  So in
-this case we would expect:
+uncertainties and prediction are all correct, then we expect each outcome $x_i$ is a random variable drawn from a distribution with mean value $a_i$ and variance $\sigma_i^2$.  So the expectation value $\braket{(x_i - a_i)^2}$ is, by definition, just the variance $\sigma_i^2$.  Each term in the $\chi^2$ is a quantity with an expectation value of 1:
 \begin{equation}
 \chi^2 = \sum_i \frac{(a_i-x_i)^2}{\sigma_i^2} \sim \sum_i 1 = N
 \end{equation}
-This assumes that the prediction $a_i$ is simply given to us.  We'll
-revisit this assumption when we discuss degrees of freedom.
+This interpretation assumes that the prediction $a_i$ is independent
+of our experimental results.  That is, we have not modified the
+prediction in any way to fit our results.  We will revisit this
+assumption later.
 
 \section{Maximal Likelihood Method}
 Often, we are interested to know which particular parameters of a model maximize the likelihood
@@ -1157,7 +1272,7 @@ then:
 \end{displaymath}
 We can find the particular value of $a$, called $a_0$, that maximizes
 the likelihood by finding the minimum of the $\chi^2$, because $\chi^2
-\sim - 2 \log \mathcal{L}$.  We find the minimum from the condition:
+\sim - 2 \ln \mathcal{L}$.  We find the minimum from the condition:
 \begin{displaymath}
 \left.\frac{\partial\chi^2}{\partial a}\right|_{a_0} = 0,
 \end{displaymath}
@@ -1200,17 +1315,9 @@ associated with the best fit value $a_0$.
 
 \begin{figure}[htbp]
 \begin{center}
-{\includegraphics[width=0.75\textwidth]{figs/chisq.png}}
+{\includegraphics[width=0.75\textwidth]{figs/delchisq.pdf}}
 \end{center}
-\caption{\label{fig:chisq} Approximation of $\chi^2$ near minimum.}
-%x = np.arange(0,10,0.1)
-%y = (x - 5)**2/3**2
-%z = y + 0.05*(x - 5)**3/3**2 
-%plt.plot(x,y,"--",label="gaussian")
-%plt.plot(x,z,"-",label="$\chi^2$")
-%plt.legend(loc=2,frameon=False)
-%plt.xticks([2,5,8],["$a_0 - \sigma_a$", "$a_0$", "$a_0 + \sigma_a$"])
-%plt.savefig("chisq.png")
+\caption{\label{fig:delchisq} Approximation of a $\chi^2$ by a parabola near the minimum.}
 \end{figure}
 
 One approach is to simply apply propagation of uncertainties to the
@@ -1242,7 +1349,14 @@ when $a=a_0$ exactly as expected.  We also see that:
 \begin{displaymath}
 \frac{d^2\chi^2}{da^2} = \frac{2}{\sigma_a^2}
 \end{displaymath}
-As shown in Fig.~\ref{fig:chisq} the $\chi^2$ for a Guassian likelihood is a parabola, and so the second derivative {\em evaluated anywhere} yields a term containing the uncertainty $\sigma_a$.  However, the region near the minimum of any $\chi^2$ can distribution can be approximated as a parabola about the minimum, and so for a general $\chi^2$ distribution, we have:
+
+The $\chi^2$ for a simple Guassian likelihood is a parabola, and so
+the second derivative {\em evaluated anywhere} yields a term
+containing the uncertainty $\sigma_a$.  However, as illustrated in
+Fig.~\ref{fig:delchisq}, the region near the minimum of an any
+$\chi^2$ distribution can be approximated as a parabola about the
+minimum, with a second derivative set equal to that of the $\chi^2$.
+And so for any $\chi^2$ distribution, we have:
 \begin{equation} \label{eqn:chisqunc}
 \sigma_a^2  = \frac{2}{\left. \frac{d^2\chi^2}{da^2} \right|_{a_0}}
 \end{equation}
@@ -1333,26 +1447,35 @@ $N$ data points should have:
 \end{displaymath}
 
 \section{The Best Estimate for $\sigma$}
+\label{sec:estsig}
 
 So far we have presumed that we know the uncertainty associated with
-each measurement, but suppose instead that we do not know this.
+our experimental measurements.  Suppose we do not know out
+experimental uncertainty, and wish to estimate it from the data, just
+as we do for parameters.  Minimizing $\chi^2$ appears to be of no help
+here, because we can make $\sigma$ as large as we want to minimize
+$\chi^2$.
 
-Minimizing $\chi^2$ is no help here, because we can make $\sigma$ as large as we want to minimize $\chi^2$.  This is because we treated the uncertainties as constants!  Return to:
-\begin{equation}
--2 \log {\cal L} = \sum_i \left( \frac{(a_i-x_i)^2}{\sigma^2} + 2 \log(\sqrt{2\pi}\sigma)\right)
-\end{equation}
+This is because the $\chi^2$ term is just one term in the log likelihood:
+\begin{equation*}
+-2 \ln {\cal L} = \sum_i \left( \frac{(a_i-x_i)^2}{\sigma^2} + 2 \ln(\sqrt{2\pi}\sigma)\right)
+\end{equation*}
+We've been able to ignore the second term so far under the assumption
+that the experimental uncertainties are constant terms in the
+likelihood, not parameters to minimize!
 
-Differenentiating wrt $\sigma$ and setting to zero:
-
-\begin{equation}
+To find the values of $\sigma$ which maximizes the likelihood, we need differenentiate the entire expression with respect to $\sigma$, and set it to zero:
+\begin{equation*}
 0 = \left( - 2 \sum_i \frac{(a_i-x_i)^2}{\sigma^3} \right)+\frac{2\sqrt{2\pi}}{\sqrt{2\pi}\sigma}\sum_i 
-\end{equation}
-
+\end{equation*}
+and solving for $\sigma$:
 \begin{equation}
 \sigma^2 = \frac{\sum_i (a_i-x_i)^2}{N} 
 \end{equation}
 
-This analysis assumes we have not found the best fit values for the predictions $a_i$.  To adapt this result to the case of fitted parameters, we simply replace $N$ with the degrees of freedom:
+This analysis assumes we have not found the best fit values for the
+predictions $a_i$.  To adapt this result to the case of fitted
+parameters, we simply replace $N$ with the degrees of freedom:
 \begin{displaymath}
 \sigma^2 = \frac{\sum_i (a_i^{\rm fit}-x_i)^2}{\rm NDF}
 \end{displaymath}
@@ -1360,7 +1483,43 @@ but this quantity is simply the $\chi^2$ per degree of freedom for $\sigma_i = 1
 \begin{displaymath}
 \sigma^2 = \frac{\chi^2(\sigma_i = 1)}{NDF}.
 \end{displaymath}
-So if we do not know the uncertainties, we can set $\sigma_i = 1$, and then simply scale the squares of the uncertainties by the $\chi^2$ per degree of freedom at the best fit values for the parameter.  
+If we do not know the uncertainties, we simply set $\sigma_i = 1$, and
+then scale the squares of the uncertainties by the $\chi^2$ per
+degree of freedom at the best fit values for the parameter.
+
+\newpage
+
+\section{Homework Exercises for Statistical Analysis}
+
+\noindent
+{\bf Problem 1:} Suppose that you measure the same quantity $x$ a
+total $N$ times, with the same statistical experimental uncertainty
+$\sigma$ for each measurement.  Suppose you do not know the value of
+the experimental uncertainty $\sigma$.  First show that the best
+estimate for the mean value of $x$ is the sample mean $\bar{x}$,
+independent of the value of $\sigma$.  Next, use the procedure of
+Section~\ref{sec:estsig} to show that the best estimate for $\sigma^2$
+is given by Eqn.~\ref{eqn:sampvar}.  Last, calculate the statistical
+uncertainty of the quanitity $\bar{x}$.
+
+\vskip 1cm
+\noindent
+{\bf Problem 2:} Estimate the $\chi^2$ for the following data with respect to the predition:\\
+{\includegraphics[width=0.65\textwidth]{figs/chisq.pdf}}
+
+\vskip 1cm
+\noindent
+{\bf Problem 3:} Sketch your own prediction for a relationship between
+two variables $x$ and $y$.  Make it somewhat complicated.  Draw
+typical experimental data which might result from an
+experiment which is consistent with the prediction.  (No calculation
+needed!)
+
+\vskip 1cm
+\noindent
+{\bf Problem 4:} Repeat Problem 4 for, but for an experiment that has
+a large discrepancy with the prediction.
+
 
 \appendix
 
