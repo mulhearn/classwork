@@ -17,11 +17,10 @@
 
 \chapter{Statistical Distributions}
 
-\section{Notes on Section Ordering}
-
-To reach Section~\ref{sec:comphist} as rapidly as possible, delay
-Sections~\ref{sec:poisson} and \ref{sec:poissonmeanvar} and delay or
-even skip \ref{sec:gaussfrompoisson}.
+%\section{Notes on Section Ordering}
+%To reach Section~\ref{sec:comphist} as rapidly as possible, delay
+%Sections~\ref{sec:poisson} and \ref{sec:poissonmeanvar} and delay or
+%even skip \ref{sec:gaussfrompoisson}.
 
 \section{Statistics of Experiments}
 
@@ -31,27 +30,19 @@ repeat ten times.  If our theoretical prediction is that each of these
 five outcomes is equally probable, than our prediction for a typical
 series of ten experiments would be for each outcome to occur two
 times.  Now suppose we perform the experiment ten times and present
-the results like this:
-
+the results as in Fig.~\ref{fig:intro}.
 \begin{figure}[htbp]
 \begin{center}
 {\includegraphics[width=0.45\textwidth]{figs/intro.pdf}}
 \end{center}
 \caption{\label{fig:intro} Comparison of experimental results with a prediction.}
 \end{figure}
-
-In general, the experiment can estimate any $\braket{f(x)}$ as:
-\begin{displaymath}
-\bar{f} = \frac{1}{N} \sum_i f(x_i)
-\end{displaymath}
-
-
-Scientist almost never display experimental data this way (as a bar
+Scientist almost never display experimental data in this format (as a bar
 graph) because it is nearly impossible to answer the crucial question
 {\em is this data consistent with this prediction?}  Even if every
 outcome has an equal probability, the measured results of individual
-experiments will result from random statistical fluctuations.  So even
-if the theory is correct, we well seldom reproduce exactly the theory
+experiments will vary from statistical fluctuations.  So even if the
+theory is correct, we well seldom reproduce exactly the theory
 prediction.
 
 To interpret scientific experiments, it isn't enough to have a single
@@ -108,9 +99,13 @@ where the binomial coefficients are defined by
 \label{eqn:binomc}
 \binom{n}{m} = \frac{n!}{m! \, (n-m)!}
 \end{equation}
-and are also often referred to in other contexts as $n$-choose-$m$.  The binomial coefficient simply tells us how many times we can choose $m$ instances of $p$ instead of $q$, from $n$ factors, and so it is precisely the combinatoric factor that we need.
+where the symbol on the left is read as ``$n$ choose $m$''.  The
+binomial coefficient tells us how many times we can choose $m$
+instances of $p$ instead of $q$, from $n$ factors, and so it is
+precisely the combinatoric factor that we need.
 
-The probability of obtaining $m$ successes after $n$ trials with probability $\epsilon$ is therefore given by:
+The probability of obtaining $m$ successes after $n$ trials with
+probability $\epsilon$ is therefore given by:
 \begin{equation}
 \label{eqn:binom}
 P(m; \, n ,\epsilon) = \binom{n}{m} \, \epsilon^m \, (1 - \epsilon)^{n-m}
@@ -125,9 +120,9 @@ typical outcome?'' and ``how widely will outcomes typically vary from
 one another?''.
 
 There are a number of ways to quantify the answer to first question,
-but generally the most useful answer is the mean value, $\mu$, of the
-distribution, which we calculate as a weighted average across all
-possible outcomes.  For the Binomial distribution, which describes
+but generally the most useful answer is the mean value of the
+distribution, $\mu$, which we calculate as a weighted average across
+all possible outcomes.  For the Binomial distribution, which describes
 probabilities for outcomes which are natural numbers up to $n$, we
 calculate the sum:
 \begin{equation}
@@ -170,8 +165,8 @@ which we call the variance ($\sigma^2$) of the distribution:
 \begin{displaymath}
 \sigma^2 \equiv \braket{(x-\mu)^2}.
 \end{displaymath}
-The square root of the variance ($\sigma$) is referred to as the
-standard deviation.
+The square root of the variance is referred to as the
+standard deviation ($\sigma$).
 
 There are other ways to quantify the variation from outcome to
 outcome, but they are generally inferior to the variance in some way.
@@ -184,11 +179,10 @@ The variance, on the other hand, is quite convenient to calculate.
 For example, in the homework you will show that:
 \begin{equation}
 \label{eqn:varhw}
-\braket{(x-\mu)^2} = \braket{x^2} -\braket{x}^2
+\braket{(x-\mu)^2} = \braket{x^2} -\braket{x}^2.
 \end{equation}
-using the fact that $\mu$ is simply a number, and so $\braket{\mu} =
-\mu$.  We therefore need only calculate $\braket{x}$ and $\braket{x^2}$ in order
-to determine the variance of a distribution.
+We need only calculate $\braket{x}$ and $\braket{x^2}$ in order
+to determine both the mean and variance of a distribution.
 
 \section{Mean and Variance of the Binomial Distribution}
 
@@ -829,14 +823,20 @@ and:
 \begin{equation}
   \braket{C f(x,y) } = C \braket{f(x,y)}  
 \end{equation}
+In the homework, you will show that for a constant $C$:
+\begin{equation}
+ \sigma^2(Cx) = C^2 \, \sigma^2(x)  \label{eqn:scalevar}
+\end{equation}
+or equivalently:
+\begin{equation*}
+ \sigma(Cx) = C\, \sigma(x).
+\end{equation*}
 
-\section{Mean and Variance of a Sum}
-
-We can therefore conclude that the mean of a sum of two random variables:
+We can also conclude that the mean of a sum of two random variables:
 \begin{displaymath}
 \braket{x + y} = \braket{x} + \braket{y} 
 \end{displaymath}
-is just the sum of the mean.  For simplicity let's assume that
+is just the sum of the means.  For simplicity let's assume that
 $\braket{x} = \braket{y} = 0$, and so:
 \begin{eqnarray*}
 \braket{(x + y)^2} &=& \braket{x^2 + 2xy + y^2} \\
@@ -844,91 +844,19 @@ $\braket{x} = \braket{y} = 0$, and so:
 &=& \braket{x^2} + \braket{y^2} \\
 \end{eqnarray*}
 from which it follows that:
-\begin{eqnarray*}
-\sigma^2(x+y) &=& \braket{(x+y)^2} - \left( \braket{x+y} \right) ^2\\
-&=& \braket{(x+y)^2}\\
-&=& \braket{x^2} + \braket{y^2} \\
-&=& \sigma^2_x + \sigma^2_y\\
-\end{eqnarray*}
+\begin{eqnarray}
+\sigma^2(x+y) &=& \braket{(x+y)^2} - \left( \braket{x+y} \right) ^2 \nonumber \\
+&=& \braket{(x+y)^2} \nonumber \\
+&=& \braket{x^2} + \braket{y^2 } \nonumber \\
+\sigma^2(x+y) &=& \sigma^2_x + \sigma^2_y \label{eqn:varsum} \\
+\nonumber
+\end{eqnarray}
 In the exercises you will show that this result persists even when $\braket{x}$ and
-$\braket{y}$ are non-zero.
+$\braket{y}$ are non-zero.  We say that independent uncertainties add in quadrature, that is:
+\begin{eqnarray*}
+\sigma(x+y) &=& \sqrt{\sigma^2_x + \sigma^2_y} \\
+\end{eqnarray*}
 
-\section{Independent Uncertainties Add in Quadrature}
-
-In the previous section, we discussed that the variance of the sum of
-two random variables drawn from any distribution is just the sum of
-their variances:
-\begin{displaymath}
-\sigma^2(x+y) = \sigma^2_x + \sigma^2_y
-\end{displaymath}
-This is a quite general result.  In the context of experimental
-uncertainties, we consider experimental measurements to be drawn from
-a Gaussian distribution and the square-root of the variance ($\sigma$)
-is called the uncertainty.
-
-If we calculate the sum $s$ of two independent measurements $x$ and
-$y$ with uncertainties $\sigma_x$ and $\sigma_y$, it's clear that the
-variance of the sum will be simply $\sigma^2_x + \sigma^2_y$.  If the
-resulting distribution of $x+y$ is a Gaussian distribution, as seems
-probable due to the Central Limit Theorem, then the uncertainties
-simply add in quadrature:
-\begin{displaymath}
-\sigma_{x+y} = \sqrt{\sigma^2_x + \sigma^2_y}.
-\end{displaymath}
-
-Let's show explicitly that this is the case.  If we wish to know the
-probability that two random variables $x$ and $y$ add to some
-particular value $u = x + y$, we simply integrate the total
-probability of $x$ and $y$ subject to the requirement $u = x + y$:
-\begin{eqnarray*}
-P(u) &=& \int dx \int dy \; P_x(x) \, P_y(y) \, \delta\left(u-(x+y)\right) \\
-        &=& \int dx \; P_x(x) \, P_y(u-x)
-\end{eqnarray*}
-If we make the (very often valid) assumption that $x$ and $y$ are Gaussian distributed, and, for simplicity, assume that the mean values are zero (or simply change coordinates), so that we have:
-\begin{eqnarray*}
-P_x(x) &=& \frac{1}{\sqrt{2\pi} a} \exp\left( -\frac{x^2}{2a^2} \right) \\
-P_y(y) &=& \frac{1}{\sqrt{2\pi} a} \exp\left( -\frac{y^2}{2b^2} \right) 
-\end{eqnarray*}
-And so the mean value probability distribution function for $u$ is now:
-\begin{eqnarray*}
-P(u) &=& \frac{1}{2\pi a b} \int dx \; \exp\left( -\frac{x^2}{2a^2}\right) \exp\left( -\frac{(u-x)^2}{2b^2}\right) \\
-&=& \frac{1}{2\pi a b} \int dx \; \exp \left( -\frac{a^2+b^2}{2a^2b^2} \, \left\{ x^2 - \frac{2a^2}{a^2+b^2}ux + \frac{a^2}{a^2+b^2}u^2\right\}_1 \right) 
-\end{eqnarray*}
-We deal with the term in brackets ($\{\}_1$) by completing the square.  Simply note that
-\begin{equation}
-\left(x-\frac{a^2}{a^2+b^2}u\right)^2 = x^2-\frac{2a^2}{a^2+b^2}ux + \frac{a^4}{(a^2+b^2)^2}u^2
-\end{equation}
-reproduces the first and second terms, so we can replace:
-\begin{equation}
-x^2-\frac{2a^2}{a^2+b^2}ux  = \left(x-\frac{a^2}{a^2+b^2}u\right)^2 -  \frac{a^4}{(a^2+b^2)^2}u^2
-\end{equation}
-to obtain:
-\begin{eqnarray*}
-\{\}_1 &=& \left(x-\frac{a^2}{a^2+b^2}u\right)^2 -  \frac{a^4}{(a^2+b^2)^2}u^2 + \frac{a^2}{a^2+b^2}u^2\\
-&=& \left(x-\frac{a^2}{a^2+b^2}u\right)^2 + \frac{a^2b^2}{(a^2+b^2)^2}u^2\\
-\end{eqnarray*}
-and substituting back into the original expression we obtain:
-\begin{eqnarray*}
-P(u) &=& \frac{1}{2\pi a b} \left\{ \int_{-\infty}^{+\infty} dx \;  \exp \left( -\frac{a^2+b^2}{2a^2b^2} \, \left(x-\frac{a^2}{a^2+b^2}u\right)^2 \right) \right\}_2
-\exp \left( -\frac{1}{2} \frac{u^2}{a^2+b^2} \right)
-\end{eqnarray*}
-making a substitution of variables ($u$ is constant during the integration):
-\begin{equation*}
-y = x-\frac{a^2}{a^2+b^2}u
-\end{equation*}
-the definite integral in brackets yields:
-\begin{equation}
-\{\}_2 = \sqrt(2 \pi) \frac{a b}{\sqrt{a^2+b^2}}
-\end{equation}
-and we have at last:
-\begin{eqnarray*}
-P(u) &=& \frac{1}{\sqrt{2\pi} \sqrt{a^2+b^2}}  \exp \left( -\frac{1}{2} \frac{u^2}{a^2+b^2} \right)
-\end{eqnarray*}
-which is a Gaussian distribution with variance:
-\begin{eqnarray*}
-\sigma^2 = a^2 + b^2,
-\end{eqnarray*}
-that is, uncertainties add in quadrature.
 
 \section{Repeated Experiments}
 
@@ -951,19 +879,23 @@ the sample mean also has mean value:
   \braket{\bar{x}} = \frac{1}{N} \, \sum_{i=1}^{N} \braket{x_i}
 = \frac{1}{N} \, \sum_{i=1}^{N} \mu = \mu
 \end{displaymath}
-The uncertainty on the sample mean can be calculated using the results of the previous sections which covered sums and constant scale factors:
+The uncertainty on the sample mean can be calculated using the results of the previous sections.  Using Equations \ref{eqn:varsum} and \ref{eqn:scalevar} we see that:
 \begin{eqnarray*}
   \sigma^2(\bar{x}) &=& \sigma^2\left( \frac{1}{N} \, \sum_{i=1}^{N} x_i \right) \\
-  &=& \sum_{i=1}^{N} \left( \sigma \left( \frac{x_i}{N} \right) \right)^2 \\
-  &=& \sum_{i=1}^{N} \left( \frac{\sigma_x}{N} \right)^2 \\ 
+  &=& \sum_{i=1}^{N} \sigma^2 \left( \frac{x_i}{N} \right) \\
+  &=& \frac{1}{N^2}\sum_{i=1}^{N} \sigma^2 \left( x_i \right) \\
+\end{eqnarray*}
+Now we need only note that $\sigma^2(x_i) = \sigma^2_x$ by definition, and complete the sum:
+
+ext, we move the constant $1/N$ outside the sum:
+\begin{eqnarray*}
+\sigma^2(\bar{x}) &=& \frac{1}{N^2}\sum_{i=1}^{N} \sigma^2_x \\
   &=& \frac{\sigma_x^2}{N} \\
- \sigma_{\bar{x}} &=& \frac{\sigma_x}{\sqrt{N}} \\
+ \sigma(\bar{x}) &=& \frac{\sigma_x}{\sqrt{N}} \\
 \end{eqnarray*}
 This shows that the sample mean measures the same mean value $\mu$ but
-with an uncertainty that is reduced by a factor $1/\sqrt{N}$.  More
-generally, taking additional data reduces the uncertainty of a
-measurement.  If you take gfour times as much data, you can expect the
-uncertainties to be cut in half.
+with an uncertainty that is reduced by a factor $1/\sqrt{N}$.  Taking
+additional data reduces the uncertainty of a measurement.
 
 \section{General Propagation of Uncertainties}
 
@@ -1024,13 +956,15 @@ uncertainty.
 
 Our derivation of the Binomial, Poisson, and Gaussian distributions
 all shared a common assumption: that each outcome is independent of
-previous outcomes.  But real measurements are also biased from the
-correct value by a {\bf constant} and unknown amount.  We describe the
-expected size of this bias as an additional uncertainty called the
-systematic uncertainty.  Since the bias away from the true value is
-constant, and not subject to statistical fluctuations, repeating an
-experiment does nothing to reduce systematic uncertainties.  The only
-way to reduce systematic uncertainties is to design a better
+previous outcomes.  But real measurements inevitably contain flaws
+which introduce a {\bf constant} unknown bias relative to future
+measurements.  We describe the expected size of this bias as an
+additional uncertainty called the systematic uncertainty.  Since this
+bias is constant, and so not subject to statistical fluctuations,
+repeating an experiment does nothing to reduce systematic
+uncertainties.
+
+The only way to reduce systematic uncertainties is to design a better
 experiment.  Generally in the early stages, experiments are
 statistically limited, and taking more data helps reduce the overall
 uncertainty.  But at a later stage, the experiment becomes
@@ -1038,27 +972,52 @@ systematically limited.  More data does not help unless the apparatus
 is improved.  Often, in complicated experiments, increased statistics
 also gives the experimenter a better handle on the systematic
 uncertainties, allowing for improvements to both the statistical and
-systematic uncertainties.
+systematic uncertainties.  Determining and minimizing systematic
+uncertainties is one of the greatest challenges that an experimenter
+faces.
 
-The treatment of systematic uncertainties is one of the greatest challenges that an experimenter faces.  
-Often scientific results report a measurement with both the statistical and a systematic uncertainty, e.g.:
+Often scientific results report a measurement with both the
+statistical and a systematic uncertainty, e.g.:
 \begin{displaymath}
  x = 1.21 \pm 0.03 ({\rm stat}) \pm 0.05 ({\rm syst})
 \end{displaymath}
-Systematic uncertainties and statistical uncertainties are considered to be independent, so the total experimental uncertainty is their sum in quadrature:
+Systematic uncertainties and statistical uncertainties are considered
+to be independent, so the total experimental uncertainty is their sum
+in quadrature:
 \begin{displaymath}
 \sigma_{\rm total} = \sqrt{\sigma^2_{\rm syst} + \sigma^2_{\rm stat}}.
 \end{displaymath}
 
-Often, systematic uncertainties are the result of something outside the experimenters direct control.  One common example is when a measurement depends on a measured value determined by another experiment.  For example, suppose you determine a position $x$ from your measurement of a time $t$ by the relation $x = v t$.  But you do not measure the velocity $v$ yourself and instead rely on a previous measurement of $v$ with total uncertainty $\sigma_v$.  In this case, by standard propagation of uncertainties, we find that:
+Often, systematic uncertainties are the result of something outside
+the experimenters direct control.  One common example is when a
+measurement depends on a measured value determined by another
+experiment.  For example, suppose you determine a position $x$ from
+your measurement of a time $t$ by the relation $x = v t$.  But you do
+not measure the velocity $v$ yourself and instead rely on a previous
+measurement of $v$ with total uncertainty $\sigma_v$.  In this case,
+by standard propagation of uncertainties, we find that:
 \begin{displaymath}
 \frac{\sigma_x}{x} = \frac{\sigma_v}{v}.
 \end{displaymath}
 So a $10\%$ uncertainty on the value $v$ would lead to a $10\%$ systematic uncertainty on our measured value $x$.
 
-Another common source of systematic uncertainties is when a measured value depends on something outside the experimenters direct control.   These types of uncertainties are usually estimated by determining how much the uncontrolled quantity is likely to vary, and the effect this variation has on the measured value.  For example, suppose a measurement was sensitive to the amount of light that leaks into the apparatus, which is different depending on the weather and time of day.  In this case, you might estimate the systematic by comparing results of measurements made at noon to similar measurements made at midnight.
+Another common source of systematic uncertainties is when a measured
+value depends on something outside the experimenters direct control.
+These types of uncertainties are usually estimated by determining how
+much the uncontrolled quantity is likely to vary, and the effect this
+variation has on the measured value.  For example, suppose a
+measurement was sensitive to the amount of light that leaks into the
+apparatus, which is different depending on the weather and time of
+day.  In this case, you might estimate the systematic by comparing
+results of measurements made at noon to similar measurements made at
+midnight.
 
-Apart from building a better experiment, the most common way to improve systematics is by calibration.  You could eliminate the systematic due to the velocity $v$ in the first example by measuring the relationship between $x$ and $t$ yourself.  In the light leakage example, you could record the time each measurement was made, and correct for the effect of light leakage.  
+Apart from building a better experiment, the most common way to
+improve systematics is by calibration.  You could eliminate the
+systematic due to the velocity $v$ in the first example by measuring
+the relationship between $x$ and $t$ yourself.  In the light leakage
+example, you could record the time each measurement was made, and
+correct for the effect of light leakage.
 
 \section{Exercises for Uncertainties}
 
@@ -1069,18 +1028,22 @@ Apart from building a better experiment, the most common way to improve systemat
 \noindent
 {\bf Problem 2:}  Show that Equation~\ref{eqn:expprod} is valid. \\ \vskip 0.25cm
 
+
 \noindent
-{\bf Problem 3:}  Show that for independent random variables $x$ and $y$:
+{\bf Problem 3:}  Show that Equation~\ref{eqn:scalevar} is valid. \\ \vskip 0.25cm
+
+\noindent
+{\bf Problem 4:}  Show that Equation~\ref{eqn:varsum} is generally valid by showing:
 \begin{displaymath}
 \braket{(x+y)^2} - \braket{x+y}^2 = \braket{x^2} - \braket{x}^2 + \braket{y^2} - \braket{y}^2.
 \end{displaymath}
-What does this imply about the uncertainty on the sum of two variables, assuming all of the PDFs are Gaussian? \\ \vskip 0.25cm
+\vskip 0.25cm
 
 \noindent
-{\bf Problem 4:}  For a measurement $x_0 \pm \sigma$ we define the fractional uncertainty as $\sigma/x_0$.  Use the general formula for propagating uncertainties to show that for products and ratios, the {\em fractional} uncertainties add in quadrature.  \\ \vskip 0.25cm
+{\bf Problem 5:}  For a measurement $x_0 \pm \sigma$ we define the fractional uncertainty as $\sigma/x_0$.  Use the general formula for propagating uncertainties to show that for products and ratios, the {\em fractional} uncertainties add in quadrature.  \\ \vskip 0.25cm
 
 \noindent
-{\bf Problem 5:}Suppose you measure the system gain (i.e. the increase
+{\bf Problem 6:}  Suppose you measure the system gain (i.e. the increase
 in output voltage for each electron) for your new ionization chamber
 to be $12~\rm mV$ per collected electron.  Suppose you measure a pulse
 with a height of $6.2~\rm V$.  First estimate the uncertainty on this
@@ -1093,7 +1056,7 @@ measurement.  What is the total uncertainty for this measurement?
 \\ \vskip 0.25cm
 
 \noindent
-{\bf Problem 6:}  The rare decay of the Higgs boson ($m \sim125~\rm GeV$ in units where $c=1$) into pairs of photons played a crucial role in its discovery at the Large Hadron Collider.  The invariant mass of a particle that decays into two massless particles $p_1$ and $p_2$ can be calculated from:
+{\bf Problem 7:}  The rare decay of the Higgs boson ($m \sim125~\rm GeV$ in units where $c=1$) into pairs of photons played a crucial role in its discovery at the Large Hadron Collider.  The invariant mass of a particle that decays into two massless particles $p_1$ and $p_2$ can be calculated from:
 \begin{displaymath}
 m = \sqrt{2  p_1 p_2 (1 - \cos\theta)}
 \end{displaymath}
@@ -1101,7 +1064,7 @@ Suppose you were sitting in the control room and saw a nice looking two photon e
 $p_1=53 \pm 2~\rm GeV$, $p_2=75 \pm 3~\rm GeV$ and $\theta = 2.8 \pm 0.1$.   Calculate the invariant mass of these two photons (answer in GeV) and the uncertainty. \\ \vskip 0.25cm
 
 \noindent
-{\bf Problem 7:} A perennial problem with drawing data in histograms
+{\bf Problem 8:} A perennial problem with drawing data in histograms
 is what to do about bins that have zero events in them.  Those crazy
 people that insist that data has no statistical uncertainty (only
 predictions have statistical uncertainty!) laugh maniacally when we
@@ -1119,17 +1082,23 @@ be doing is comparing our measured value $n$ to a prediction $\lambda$
 with  $\sigma = \sqrt{\lambda}$.
 
 Let's see how much these two different estimates of the uncertainty
-typically vary.  For $\lambda=10$ and $\lambda=100$, caculate the
-uncertainty you would estimate (as $\sqrt{n}$) for typical one-sigma
-variations, i.e. for $n = \lambda \pm \sqrt{\lambda}$.
+typically vary.  For $\lambda=10$, calculate typical values for one
+sigma variation, that is, calculate $n_1 = \lambda + \sqrt{\lambda}$
+and $n_2 = \lambda - \sqrt{\lambda}$.  It's OK that these will be
+non-integer values, but you can round them off to the nearest integer
+if this bothers you.  Next calculate the uncertainty you would
+estimate from the measured values $n_1$ and $n_2$, that is
+$\sqrt{n_1}$ and $\sqrt{n_2}$ and compare to $\sqrt{\lambda}$.  Then
+repeat for $\lambda = 100$.
 
-Our estimate of the uncertainty from $\sqrt{n}$ is biased... however,
-this approach to determining the uncertainty of our data avoids a much
-more important bias, because it can determined directy from the
-collected data, independently of any theoretical prediction!
+Our estimate of the uncertainty as $\sqrt{n}$ is indeed biased with
+respect $\sqrt{\lambda}$.  However, this approach to determining the
+uncertainty of our data avoids a much more important bias, because it
+can be determined directy from the collected data, independently of
+any theoretical prediction. \\ \\ \vskip 0.25cm
 
 \noindent
-{\bf Problem 8:}  In particle physics, we always need to understand the efficiency ($E$) of our detectors.  For instance, if $n$ muons are produced by collisions, we'd like to know how many are actually recorded successfully by our muon detectors.  If we measure $m$ muons that are actually detected, we know that our efficiency is $E = m/n$.  No problem here!
+{\bf Problem 9:}  In particle physics, we always need to understand the efficiency ($E$) of our detectors.  For instance, if $n$ muons are produced by collisions, we'd like to know how many are actually recorded successfully by our muon detectors.  If we measure $m$ muons that are actually detected, we know that our efficiency is $E = m/n$.  No problem here.
 
 You will often see young particle physicists (and occasionally old!)
 run into problems estimating the uncertainty of this estimate.  They
@@ -1140,18 +1109,22 @@ $\sigma_m = \sqrt{m}$.  So my uncertainty on the efficiency is just
 $\sigma_E= \sigma_m/n = \sqrt{m}/n$.  Problems arise because we often
 build good detectors with high efficiency.  So consider, for instance
 $n=100$ and $m=95$.  This leads to a measurement of the efficiency as
-$0.95 \pm 0.10$ which seems to include the physically impossible value
-$E = 1.05 > 1$ within a one-sigma variation!
+$0.95 \pm 0.10$ which we can interpret as a claim that there is 16\%
+chance of a future measurement being above 1.05, which is clearly impossible!
 
 One way out of this embarrassment is to realize that this problem is
 more appropriate for the binomial distribution which has two
 parameters, the number of trials $n$ and the binomial success rate
-$\epsilon = E = m/n$.  For $n=100$ and $m=95$, calculate the uncertainty $\sigma$ on the value $E$ directly from the variance of the Binomial distribution.
-Check that the efficiency $E$ plus one sigma is now safely below one.
-\\ \vskip 0.25cm
+$\epsilon = E = m/n$.  For $n=100$ and $m=95$, calculate the
+uncertainty $\sigma$ on the value $E$ from the variance of the
+Binomial distribution.  Check that the efficiency $E$ plus one sigma
+is now safely below one.  This gives a nice intuitive explanation for
+the factors $\epsilon$ and $1-\epsilon$ in the variance of the
+binomial distribution: they cause the variance to varnish as $\epsilon$
+aproaches either zero or one.\\ \vskip 0.25cm
 
 \noindent
-{\bf Problem 9: (Challenging)} There's another way to solve the
+{\bf Problem 10: (Optional and Challenging)} There's another way to solve the
 previous problem, and that is to realize that $m$ and $n$ are not
 independent variables, because $m > n$ is impossible.  If we instead
 think of this in terms of the number of events $p$ that pass, and the
@@ -1160,11 +1133,10 @@ Calculate the uncertainty on the efficiency:
 \begin{displaymath}
 \epsilon = \frac{p}{p+f}
 \end{displaymath}
-using standard propagation of uncertainties and the fact that $\sigma_p = \sqrt{p}$ and $\sigma_f = \sqrt{f}$.  With some work, you should be able to reproduce the same answer as above. \\ \vskip 0.25cm
+using standard propagation of uncertainties and the fact that $\sigma_p = \sqrt{p}$ and $\sigma_f = \sqrt{f}$.  With some work, you should be able to reproduce the same result for the uncertainty as that obtained by assuming a binomial distribution. \\ \vskip 0.25cm
 
 \chapter{Statistical Analysis}
 
-% Move to Chapter 1 in the Future
 \section{Sample Mean and Sample Variance}
 
 Let's return to the case of $N$ repeated measurements of the same
@@ -1175,7 +1147,7 @@ root of the variance.
 
 The quantities $\mu$ and $\sigma^2$ are often referred to as the
 {\em population mean} and {\em population variance}, because they are associated
-with the entire (possiblily infinite) population, from which our
+with the entire (possibly infinite) population, from which our
 finite and relatively small data sample is drawn.  Throughout these
 lecture notes, I have mostly used the alternative terms mean of the
 distribution and variance of the distribution.
@@ -1187,11 +1159,17 @@ value $\mu$ using our limited sample of $N$ values of $x$.  We've seen that we c
 \end{displaymath}
 which we can think of as an alternative approach to the computing integral:
 \begin{displaymath}
-\mu = \braket{x} = \int x_i P(x) dx
+\mu = \braket{x} = \int_{-\infty}^{+\infty} x P(x) dx
 \end{displaymath}
-The experimental outcomes are drawn from P(x), so the average of these outcomes approximates the integral.  In general, the experiment can estimate any $\braket{f(x)}$ as:
+The experimental outcomes are drawn from P(x), so the average of these outcomes approximates the integral.
+
+In general, the experiment can estimate any
 \begin{displaymath}
-\bar{f} = \frac{1}{N} \sum_i f(x_i)
+\braket{f(x)} = \int_{-\infty}^{+\infty} f(x) \, P(x) \, dx
+\end{displaymath}
+as
+\begin{displaymath}
+\bar{f} = \frac{1}{N} \sum_i f(x_i). 
 \end{displaymath}
 
 An essential experimental technique is the ability to estimate
@@ -1203,19 +1181,21 @@ validating your experiment.  We can estimate the variance of the distribution
 \end{displaymath}
 from our limited sample of $N$ values of $x$ as:
 \begin{displaymath}
-s_n^2  = \frac{1}{N} \sum_i (x_i-\bar{x})^2.
+s_N^2  = \frac{1}{N} \sum_i (x_i-\bar{x})^2.
 \end{displaymath}
 The quantity $s_n^2$ is called the sample variance.  You will show in
-the exercises that a better estimate is provided by the {\em unbiased}
+the exercises that a better estimate for $\sigma^2$ is provided by the {\em unbiased}
 sample variance:
 \begin{displaymath}
 \label{eqn:sampvar}
 s^2  = \frac{1}{N-1} \sum_i (x_i-\bar{x})^2.
 \end{displaymath}
-This form corrects for the bias introduced by using the estimate $\bar{x}$ in place of $\mu$.  The quantity $s_n$ is called the uncorrected sample standard deviation
-and the quantity $s$ is called the corrected sample standard
-deviation.
-
+This form corrects for the bias introduced by using the estimate
+$\bar{x}$ in place of $\mu$.  The quantity $s_n$ is called the
+uncorrected sample standard deviation and the quantity $s$ is called
+the corrected sample standard deviation.  Note that while $s^2$ is an
+unbiased estimate for $\sigma^2$, the value $s$ remains a biased
+estimate for $\sigma$, despite the correction.
 
 \section{Likelihood and $\chi^2$ }
 
@@ -1248,14 +1228,19 @@ term is referred to as the $\chi^2$ test, or even just $\chi^2$ (``chi-squared''
 A small value of $\chi^2$ means that the result is close to the
 theoretical prediction and a large value means that the result is
 unlikely to have occurred as a result of the prediction.  If the
-uncertainties and prediction are all correct, then we expect each outcome $x_i$ is a random variable drawn from a distribution with mean value $a_i$ and variance $\sigma_i^2$.  So the expectation value $\braket{(x_i - a_i)^2}$ is, by definition, just the variance $\sigma_i^2$.  Each term in the $\chi^2$ is a quantity with an expectation value of 1:
-\begin{equation}
-\chi^2 = \sum_i \frac{(a_i-x_i)^2}{\sigma_i^2} \sim \sum_i 1 = N
-\end{equation}
-This interpretation assumes that the prediction $a_i$ is independent
-of our experimental results.  That is, we have not modified the
-prediction in any way to fit our results.  We will revisit this
-assumption later.
+uncertainties and prediction are all correct,
+then we expect each outcome $x_i$ to be a random variable drawn from a distribution with mean value $a_i$ and variance $\sigma_i^2$.  We can calculate the expected value for the $\chi^2$ as:
+\begin{eqnarray*}
+  \braket{\chi^2} &=& \braket{\sum_i \frac{(a_i-x_i)^2}{\sigma_i^2}} \\
+&=& \sum_i \frac{\braket{(a_i-x_i)^2}}{\sigma_i^2} \\
+&=& \sum_i \frac{\sigma_i^2}{\sigma_i^2} \\
+&=& \sum_i 1 \\
+&=& N \\
+\end{eqnarray*}
+This interpretation assumes that the prediction $a_i$ is exactly the
+mean of the distribution, and is not biased by our experimental
+results.  That is, we have not modified the prediction in any way to
+fit our results.  We will revisit this assumption later.
 
 \section{Maximal Likelihood Method}
 Often, we are interested to know which particular parameters of a model maximize the likelihood
@@ -1491,20 +1476,17 @@ degree of freedom at the best fit values for the parameter.
 
 \section{Homework Exercises for Statistical Analysis}
 
+\vskip 1cm
 \noindent
-{\bf Problem 1:} Suppose that you measure the same quantity $x$ a
-total $N$ times, with the same statistical experimental uncertainty
-$\sigma$ for each measurement.  Suppose you do not know the value of
-the experimental uncertainty $\sigma$.  First show that the best
-estimate for the mean value of $x$ is the sample mean $\bar{x}$,
-independent of the value of $\sigma$.  Next, use the procedure of
-Section~\ref{sec:estsig} to show that the best estimate for $\sigma^2$
-is given by Eqn.~\ref{eqn:sampvar}.  Last, calculate the statistical
-uncertainty of the quanitity $\bar{x}$.
+{\bf Problem 1:}  Suppose you collect $N$ measurements of $y_i \pm \sigma$ each at angle $\theta_i$.  You would like to fit your data to the model:
+\begin{displaymath}
+y = A \sin \theta
+\end{displaymath}
+where $A$ is an unknown parameter.  Use the $\chi^2$ technique to derive a formula for the best fit value of $A$ and its uncertainty.
 
 \vskip 1cm
 \noindent
-{\bf Problem 2:} Estimate the $\chi^2$ for the following data with respect to the predition:\\
+{\bf Problem 2:} Estimate the $\chi^2$ for the following data with respect to the prediction:\\
 {\includegraphics[width=0.65\textwidth]{figs/chisq.pdf}}
 
 \vskip 1cm
@@ -1517,9 +1499,83 @@ needed!)
 
 \vskip 1cm
 \noindent
-{\bf Problem 4:} Repeat Problem 4 for, but for an experiment that has
+{\bf Problem 4:} Repeat Problem 3, but for an experiment that has
 a large discrepancy with the prediction.
 
+\vskip 1cm
+\noindent
+{\bf Problem 5:} Suppose that you measure the same quantity $x$ a
+total $N$ times, with the same statistical experimental uncertainty
+$\sigma$ for each measurement.  Suppose you do not know the value of
+the experimental uncertainty $\sigma$.  First show that the best
+estimate for the mean value of $x$ is the sample mean $\bar{x}$,
+independent of the value of $\sigma$.  Next, use the procedure of
+Section~\ref{sec:estsig} to show that the best estimate for $\sigma^2$
+is given by Eqn.~\ref{eqn:sampvar}.  Last, calculate the statistical
+uncertainty of the quanitity $\bar{x}$.
+
+\vskip 1cm
+\noindent
+{\bf Problem 6:} (Optional and Challenging)  The sample variance $S_N^2$ provides a biased estimate for the variance $\sigma^2$ of the distribution.  Show explicitly that:
+\begin{displaymath}
+  \braket{S_N^2} = \frac{N-1}{N}\,\sigma^2.
+\end{displaymath}
+One way to approach this problem is to show that
+\begin{displaymath}
+  \braket{S_N^2} = \braket{x^2} - \braket{\bar{x}^2}
+\end{displaymath}
+in contrast to what you might have been tempted to assume:
+\begin{displaymath}
+  \braket{S_N^2} = \braket{x^2} - \braket{\bar{x}}^2 \;\;\rm (incorrect)
+\end{displaymath} 
+From there, it follows pretty easily from
+\begin{displaymath}
+  \braket{\bar{x}^2} = \sigma^2/N + \mu^2
+\end{displaymath}
+which itself follows from our result for repeated measurements:
+\begin{displaymath}
+  \sigma(\bar{x}^2) = \sigma^2/N.
+\end{displaymath}
+I wish it were true that this exceptionally clever correction was also
+extremely useful... but the reality is that we usually just make sure
+$N$ is large enough that it hardly matters! 
+
+%\vskip 1cm
+%{\bf Problem 7:} (Optional and Challenging) If we define an
+%experimental estimate of a quantity $f(x)$ from $N$ measured values
+%$\{x_i\}$ as:
+%\begin{displaymath}
+%\bar{f} = \frac{1}{N}\sum_i f(x_i)
+%\end{displaymath}
+%(a) Show that:
+%\begin{displaymath}
+%  \braket{\bar{f}} = \braket{f(x)}
+%\end{displaymath}
+%using the fact that each $x_i$ is presumed to be drawn from $P(x)$ and so 
+%\begin{displaymath}
+%  \braket{f(x_i)} = \braket{f(x)}.
+%\end{displaymath}
+%(b) Next, assume that:
+%\begin{displaymath}
+%  \braket{f(x)} = 0
+%\end{displaymath}
+%just to keep the math easier, and show that:
+%\begin{displaymath}
+%  \braket{\bar{f}^2} = \braket{f^2(x)} / N. 
+%\end{displaymath}
+%Start by writing:
+%\begin{displaymath}
+%  \bar{f}^2 = \left( \frac{1}{N} \sum_i f(x_i)\right) \, \left( \frac{1}{N} \sum_j f(x_j)\right) 
+%\end{displaymath}
+%and take the expectation value of both sides.  Note that for
+%$i \neq j$ then $x_i$ and $x_j$ are independent random variables and so
+%\begin{displaymath}
+%  \braket{f(x_i) f(x_j)} =  
+%  \begin{cases}
+%    0, & i \neq j \\   
+%    \braket{f^2(x)}, & i = j \\
+%  \end{cases}
+%\end{displaymath}
 
 \appendix
 
@@ -1646,6 +1702,189 @@ where in the last step we have used the fact that the $x_i$ are identical indepe
 \end{eqnarray*}
 which is the characteristic function from the Gaussian distribution.
 
+
+
+\chapter{Independent Uncertainties Add in Quadrature}
+
+In the previous section, we discussed that the variance of the sum of
+two random variables drawn from any distribution is just the sum of
+their variances:
+\begin{displaymath}
+\sigma^2(x+y) = \sigma^2_x + \sigma^2_y
+\end{displaymath}
+This is a quite general result.  In the context of experimental
+uncertainties, we consider experimental measurements to be drawn from
+a Gaussian distribution and the square-root of the variance ($\sigma$)
+is called the uncertainty.
+
+If we calculate the sum $s$ of two independent measurements $x$ and
+$y$ with uncertainties $\sigma_x$ and $\sigma_y$, it's clear that the
+variance of the sum will be simply $\sigma^2_x + \sigma^2_y$.  If the
+resulting distribution of $x+y$ is a Gaussian distribution, as seems
+probable due to the Central Limit Theorem, then the uncertainties
+simply add in quadrature:
+\begin{displaymath}
+\sigma_{x+y} = \sqrt{\sigma^2_x + \sigma^2_y}.
+\end{displaymath}
+
+Let's show explicitly that this is the case.  If we wish to know the
+probability that two random variables $x$ and $y$ add to some
+particular value $u = x + y$, we simply integrate the total
+probability of $x$ and $y$ subject to the requirement $u = x + y$:
+\begin{eqnarray*}
+P(u) &=& \int dx \int dy \; P_x(x) \, P_y(y) \, \delta\left(u-(x+y)\right) \\
+        &=& \int dx \; P_x(x) \, P_y(u-x)
+\end{eqnarray*}
+If we make the (very often valid) assumption that $x$ and $y$ are Gaussian distributed, and, for simplicity, assume that the mean values are zero (or simply change coordinates), so that we have:
+\begin{eqnarray*}
+P_x(x) &=& \frac{1}{\sqrt{2\pi} a} \exp\left( -\frac{x^2}{2a^2} \right) \\
+P_y(y) &=& \frac{1}{\sqrt{2\pi} b} \exp\left( -\frac{y^2}{2b^2} \right) 
+\end{eqnarray*}
+And so the mean value probability distribution function for $u$ is now:
+\begin{eqnarray*}
+P(u) &=& \frac{1}{2\pi a b} \int dx \; \exp\left( -\frac{x^2}{2a^2}\right) \exp\left( -\frac{(u-x)^2}{2b^2}\right) \\
+&=& \frac{1}{2\pi a b} \int dx \; \exp \left( -\frac{a^2+b^2}{2a^2b^2} \, \left\{ x^2 - \frac{2a^2}{a^2+b^2}ux + \frac{a^2}{a^2+b^2}u^2\right\}_1 \right) 
+\end{eqnarray*}
+We deal with the term in brackets ($\{\}_1$) by completing the square.  Simply note that
+\begin{equation}
+\left(x-\frac{a^2}{a^2+b^2}u\right)^2 = x^2-\frac{2a^2}{a^2+b^2}ux + \frac{a^4}{(a^2+b^2)^2}u^2
+\end{equation}
+reproduces the first and second terms, so we can replace:
+\begin{equation}
+x^2-\frac{2a^2}{a^2+b^2}ux  = \left(x-\frac{a^2}{a^2+b^2}u\right)^2 -  \frac{a^4}{(a^2+b^2)^2}u^2
+\end{equation}
+to obtain:
+\begin{eqnarray*}
+\{\}_1 &=& \left(x-\frac{a^2}{a^2+b^2}u\right)^2 -  \frac{a^4}{(a^2+b^2)^2}u^2 + \frac{a^2}{a^2+b^2}u^2\\
+&=& \left(x-\frac{a^2}{a^2+b^2}u\right)^2 + \frac{a^2b^2}{(a^2+b^2)^2}u^2\\
+\end{eqnarray*}
+and substituting back into the original expression we obtain:
+\begin{eqnarray*}
+P(u) &=& \frac{1}{2\pi a b} \left\{ \int_{-\infty}^{+\infty} dx \;  \exp \left( -\frac{a^2+b^2}{2a^2b^2} \, \left(x-\frac{a^2}{a^2+b^2}u\right)^2 \right) \right\}_2
+\exp \left( -\frac{1}{2} \frac{u^2}{a^2+b^2} \right)
+\end{eqnarray*}
+making a substitution of variables ($u$ is constant during the integration):
+\begin{equation*}
+y = x-\frac{a^2}{a^2+b^2}u
+\end{equation*}
+the definite integral in brackets yields:
+\begin{equation}
+\{\}_2 = \sqrt(2 \pi) \frac{a b}{\sqrt{a^2+b^2}}
+\end{equation}
+and we have at last:
+\begin{eqnarray*}
+P(u) &=& \frac{1}{\sqrt{2\pi} \sqrt{a^2+b^2}}  \exp \left( -\frac{1}{2} \frac{u^2}{a^2+b^2} \right)
+\end{eqnarray*}
+which is a Gaussian distribution with variance:
+\begin{eqnarray*}
+\sigma^2 = a^2 + b^2,
+\end{eqnarray*}
+that is, uncertainties add in quadrature.
+
+
+\chapter{Notation}
+
+We write a sum as:
+\begin{displaymath}
+\sum_{i=1}^{N} x_i = x_1 + x_2 + ... + x_N 
+\end{displaymath}
+when they are clear from context, we leave off the limits and write:
+\begin{displaymath}
+\sum_i x_i = x_1 + x_2 + ... + x_N .
+\end{displaymath}
+Similarly, we write a product as:
+\begin{displaymath}
+\prod_{i=1}^{N} x_i = x_1 \cdot x_2 \cdot ... \cdot x_N 
+\end{displaymath}
+Although we avoid doing so in these lecture notes, if you encounter an integral
+\begin{displaymath}
+\int f(x) \, dx
+\end{displaymath}
+it most likely refers to a definite integral over the whole range, e.g. 
+e.g. from $-\infty$ to $+\infty$, and not an indefinite integral. 
+
+We write the binomial coefficients
+\begin{displaymath}
+\binom{n}{m} = \frac{n!}{m! \, (n-m)!}
+\end{displaymath}
+which is pronounced ``n choose m''.
+
+For a function of multiple variables $f(x,y)$ we write the partial derivative:
+\begin{displaymath}
+\frac{\partial f}{\partial y}
+\end{displaymath}
+which is the derivative of $f$ with respect to $y$ while holding $x$
+constant.  To indicate a particular value for the derivative at
+the location ${x_0, y_0}$ we write:
+\begin{displaymath}
+\left. \frac{\partial f}{\partial y} \right|_{x_0, y_0}
+\end{displaymath}
+which we pronounce as the partial derivative of $f$ with respect to $y$ evaluated at $(x_0, y_0)$.
+
+We write a probability distribution $P$ of a random variable $x$ with parameters $a$ and $b$ as:
+\begin{displaymath}
+P(x; a, b)
+\end{displaymath}
+We can ommit the parameters and write $P(x)$ if we do not wish to make
+them explicit.  Although these notes attempt to avoid this, sometimes
+$P(x)$ and $P(y)$ are considered to be two different functions, one
+for variable $x$ and one for variable $y$.
+
+We define the expectation value of a quantity $f(x)$ for a random
+variable $x$ by the integral:
+\begin{displaymath}
+\braket{f(x)} \equiv \int_{-\infty}^{+\infty} f(x) P(x) dx
+\end{displaymath}  
+We write the mean of a distribution as:
+\begin{displaymath}
+\mu \equiv \braket{x}
+\end{displaymath}  
+We write the variance ($\sigma^2$) of a random variable $x$ as:
+\begin{displaymath}
+\sigma^2 \equiv \braket{(x - \braket{x})^2}
+\end{displaymath}
+The square root of the variance is called the standard deviation
+$\sigma$.
+When it is not clear from context, we can explicitly indicate the random variable in the variation, for example $\sigma^2_y$ or $sigma^2(y)$.  For example:
+\begin{displaymath}
+\sigma^2(f(x)) \equiv \braket{(f(x) - \braket{f(x)})^2}
+\end{displaymath}
+
+
+An experimental measurement of a quanity $x$ with value $x_0$ and
+uncertainty $\sigma$ is written as:
+\begin{displaymath}
+x_0 \pm \sigma
+\end{displaymath}
+Often, we refer to the measured value $x_0$ as simply $x$.
+
+We indicate a set of $N$ experimental measurements of a quantity $x$ by:
+\begin{displaymath}
+\{x_i\} =   \{x_1, x_2, \dots , x_N \}
+\end{displaymath}
+We include their uncertainties as:
+\begin{displaymath}
+\{x_i \pm \sigma_i\} =   \{x_1 \pm \sigma_1, x_2 \pm \sigma_2, \dots , x_N \pm \sigma_N \}
+\end{displaymath}
+Experimental estimates of a quantity $f(x)$ from $N$ experimental measurements of a quantity $x$ are denoted with the bar notation:
+\begin{displaymath}
+  \bar{f} = \frac{1}{N} \sum_{i=0}^N f(x_i)
+\end{displaymath}
+The sample mean is:
+\begin{displaymath}
+  \bar{x} = \frac{1}{N} \sum_{i=0}^N x_i
+\end{displaymath}
+The sample variance is defined as:
+\begin{displaymath}
+s_N^2  = \frac{1}{N} \sum_i (x_i-\bar{x})^2.
+\end{displaymath}
+The unbiased sample variance is defined as:
+\begin{displaymath}
+\label{eqn:sampvar}
+s^2  = \frac{1}{N-1} \sum_i (x_i-\bar{x})^2.
+\end{displaymath}
+The quantity $s_n$ is called the sample standard deviation or the
+uncorrected sample standard deviation and the quantity $s$ is called
+the corrected sample standard deviation.  
+
 \end{document}
-
-

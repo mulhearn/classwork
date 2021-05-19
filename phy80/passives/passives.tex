@@ -8,12 +8,12 @@
 \usepackage{latexsym,amssymb,amsmath}
 \usepackage{multicol}
 
-\usepackage[american,fulldiode,oldvoltagedirection]{circuitikz}
+\usepackage[american,fulldiode,oldvoltagedirection, betterproportions]{circuitikz}
 \tikzset{component/.style={draw,thick,circle,fill=white,minimum size =0.75cm,inner sep=0pt}}
 
 \begin{document}
 \ctikzset{bipoles/thickness=1}
-\ctikzset{bipoles/length=.6cm}
+\ctikzset{bipoles/length=1cm}
 
 \title{Lecture Notes:  Passive Electronics}
 \author{Michael Mulhearn}
@@ -64,17 +64,17 @@ The unit of electrical potential difference is the Volt (V), where $1~\rm{V} = 1
 \begin{center}
 \begin{tabular}{ccc}
 \begin{circuitikz}[line width=1pt]
-\draw (0,0) to[battery1,bipoles/length=1.5cm] ++(0,+2.0);
+\draw (0,2) to[battery1] ++(0,-2.0);
 \draw (0,0.7) node[left]{$-$};
 \draw (0,1.4) node[left]{$+$};
 \end{circuitikz} &  
 \begin{circuitikz}[line width=1pt]
-\draw (0,0) to[battery,bipoles/length=1.5cm] ++(0,+2.0);
+\draw (0,2) to[battery] ++(0,-2.0);
 \draw (0,0.5) node[left]{$-$};
 \draw (0,1.6) node[left]{$+$};
 \end{circuitikz} & 
 \begin{circuitikz}[line width=1pt]
-\draw (0,0) to[voltage source,bipoles/length=1.5cm] ++(0,+2.0);
+\draw (0,0) to[voltage source, bipoles/length=1.5cm] ++(0,+2.0);
 \end{circuitikz} \\
 (a) & (b) & (c) \\
 \end{tabular}
@@ -88,7 +88,7 @@ The unit of electrical potential difference is the Volt (V), where $1~\rm{V} = 1
 \begin{center}
 \begin{tabular}{cc}
 \begin{circuitikz}[line width=1pt]
-\draw (0,0) node[ground,yscale=2.0]{};
+\draw (0,0) node[ground, yscale=2.0]{};
 \end{circuitikz}  & 
 \begin{circuitikz}[line width=1pt]
 \draw (0,0) coordinate(A) to[voltage source,bipoles/length=1.5cm,l_=3~\rm V] ++(0,+2.0)
@@ -96,7 +96,7 @@ coordinate(B) to[voltage source,bipoles/length=1.5cm,l_=2~\rm V] ++(0,+2.0) coor
 \draw (A) to[short,-o] ++(1.0,0) node[right]{A};
 \draw (B) to[short,-o] ++(1.0,0) node[right]{B};
 \draw (C) to[short,-o] ++(1.0,0) node[right]{C};
-\draw (A) node[ground,yscale=2.0]{};
+\draw (A) node[ground, yscale=2.0]{};
 \end{circuitikz} \\
 (a) & (b) \\
 \end{tabular}
@@ -109,7 +109,6 @@ The battery is a frequently encountered electrical component that imposes a cons
 
 Because these devices supply a fixed voltage which is approximately constant with time, they produce circuits with currents in one direction only.   As a result, these are called direct current (DC) sources.
 The electrical symbols for various DC voltage sources are shown in Fig.~\ref{fig:dcsymbols}
-
 
 By definition, a conservative force has a single value for the relative potential $U_{ab}$ which is independent of the path taken from point $a$ to point $b$.   The same holds for $V_{ab}$.
 This implies that $V_{ab} = -V_{ba}$ which is why terminals of any voltage source have a polarity.  If we specify a reference point, we can define the electrical potential as the electrical potential difference of the point of interest and the reference point.   Most often, the reference point chosen is the earth ground, which has it's own symbol, shown in Fig.~\ref{fig:poteg}a.  In the circuit diagram of Fig.~\ref{fig:poteg}b, examples of electrical potential differences are $V_{\rm AB} = 3~{\rm V}$, $V_{\rm BC} = 2~{\rm V}$,  and $V_{\rm BA}= -3~{\rm V}$, while examples of electrical potentials are $V_A = 0$, $V_B = 3~\rm V$ $V_C = 5~\rm V$.
@@ -127,18 +126,18 @@ Materials which do not readily conduct charge are called electrical insulators, 
 \begin{figure}[htbp]
 \begin{center}
 \begin{circuitikz}[line width=1pt]
-\draw (0,0) to[battery,bipoles/length=1.5cm,l=$V$] ++(0,+3.0) to[short,i>=$I$] ++(3.0,0) coordinate(A)
+\draw (0,0) to[voltage source,bipoles/length=1.5cm,l=$V$] ++(0,+3.0) to[short,i>=$I$] ++(3.0,0) coordinate(A)
 to[resistor,l_=$R$] ++(0,-3.0) coordinate(B) to[short] ++(-3.0,0);
 \draw (A) to[short,*-o] ++(1.0,0) node[right]{A};
 \draw (B) to[short,*-o] ++(1.0,0) node[right]{B};
 \end{circuitikz} 
 \end{center}
-\caption{A resistor connected to a battery.}
+\caption{A resistor connected to a voltage source.}
 \label{fig:ohms}
 \end{figure}
 
-If we construct a composite material from a mixture of graphite (a conductor) and ceramic dust (an insulator) held together by a resin, we obtain a resistor: a device which has mobile charges that do not flow as readily as in a conductor.  When we connect a resistor to a battery,  as shown in Fig.~\ref{fig:ohms}, 
-the battery imposes a non-zero electric potential across the resistor.  This implies that a non-zero electric field is present in the resistor.  This electric field exerts a force on the mobile electrons in the resistor, resulting in a net flow of electrons through the resistor.  Resistors have a characteristic resistance $R$ which relates the current $I$ that flows through the resistor to the voltage $V$ across it: 
+If we construct a composite material from a mixture of graphite (a conductor) and ceramic dust (an insulator) held together by a resin, we obtain a resistor: a device which has mobile charges that do not flow as readily as in a conductor.  When we connect a resistor to a voltage source,  as shown in Fig.~\ref{fig:ohms}, 
+the voltage source imposes a non-zero electric potential across the resistor.  This implies that a non-zero electric field is present in the resistor.  This electric field exerts a force on the mobile electrons in the resistor, resulting in a net flow of electrons through the resistor.  Resistors have a characteristic resistance $R$ which relates the current $I$ that flows through the resistor to the voltage $V$ across it: 
 \begin{displaymath}
 V = I R
 \end{displaymath}
@@ -177,7 +176,7 @@ This is referred to as Kirchhoff's Voltage Law (KVL).  When determining the drop
 \begin{figure}[htbp]
 \begin{center}
 \begin{circuitikz}[line width=1pt]
-\draw (0,0) to[battery,bipoles/length=1.5cm,l=$V$] ++(0,+3.0) to[resistor,l=$R_1$,i>=$I_1$] ++(3.0,0) coordinate(A) to[resistor,l=$R_2$,i>=$I_2$] ++(0,-3.0) coordinate(B) to[short] ++(-3.0,0);
+\draw (0,0) to[voltage source,bipoles/length=1.5cm,l=$V$] ++(0,+3.0) to[resistor,l=$R_1$,i>=$I_1$] ++(3.0,0) coordinate(A) to[resistor,l=$R_2$,i>=$I_2$] ++(0,-3.0) coordinate(B) to[short] ++(-3.0,0);
 \draw (A) to[R,*-,l=$R_3$,i>=$I_3$] ++(3.0,0) |- (B);
 \draw (1.5,1.5) coordinate(L) node[scale=4]{$\circlearrowright$};
 \draw (L) node[]{$1$};
@@ -211,11 +210,11 @@ Pay close attention to the signs of the voltage drops across the resistors and m
 \begin{center}
 \begin{tabular}{c@{\hskip 2cm}c}
 \begin{circuitikz}[line width=1pt]
-\draw (0,0) to[battery,bipoles/length=1.5cm,l=$V$] ++(0,+4.0) to[short, i>=$I$] ++(2.0,0) coordinate(A);
+\draw (0,0) to[voltage source,bipoles/length=1.5cm,l=$V$] ++(0,+4.0) to[short, i>=$I$] ++(2.0,0) coordinate(A);
 \draw (A) to[resistor,l_=$R_1$] ++(0,-2.0) to[resistor,l_=$R_2$] ++(0,-2.0) to[short] ++(-2.0,0);
 \end{circuitikz} &
 \begin{circuitikz}[line width=1pt]
-\draw (0,0) to[battery,bipoles/length=1.5cm,l=$V$] ++(0,+4.0) to[short, i>=$I$] ++(2.0,0) coordinate(A);
+\draw (0,0) to[voltage source,bipoles/length=1.5cm,l=$V$] ++(0,+4.0) to[short, i>=$I$] ++(2.0,0) coordinate(A);
 \draw (A) to[resistor,l=$R_{\rm eq}$] ++(0,-4.0) to[short] ++(-2,0);
 \end{circuitikz} \\
 (a) & (b) \\
@@ -235,7 +234,7 @@ which can be solved to obtain:
 \begin{displaymath}
 R_{\rm eq} = R_1 + R_2.
 \end{displaymath}
-It is left as an exercise to show that for any number of resistors wired in parallel, the equivalent resistance
+It is left as an exercise to show that for any number of resistors wired in series, the equivalent resistance
 is given by:
 \begin{equation} \label{eqn:rseries}
 R_{\rm eq} = \sum_i R_i. 
@@ -245,12 +244,12 @@ R_{\rm eq} = \sum_i R_i.
 \begin{center}
 \begin{tabular}{c@{\hskip 2cm}c}
 \begin{circuitikz}[line width=1pt]
-\draw (0,0) to[battery,bipoles/length=1.5cm,l=$V$] ++(0,+4.0) to[short,i>=$I$] ++(2.0,0) coordinate(A);
+\draw (0,0) to[voltage source,bipoles/length=1.5cm,l=$V$] ++(0,+4.0) to[short,i>=$I$] ++(2.0,0) coordinate(A);
 \draw (A) to[resistor,l_=$R_1$,i>=$I_1$] ++(0,-4.0) to[short] ++(-2,0);
 \draw (A) to[short,*-] ++(2.0,0.0) to[resistor,l_=$R_2$,i>=$I_2$] ++(0.0,-4.0) to[short,-*] ++(-2.0,0);
 \end{circuitikz} &
 \begin{circuitikz}[line width=1pt]
-\draw (0,0) to[battery,bipoles/length=1.5cm,l=$V$] ++(0,+4.0) to[short,i>=$I$] ++(2.0,0) coordinate(A);
+\draw (0,0) to[voltage source,bipoles/length=1.5cm,l=$V$] ++(0,+4.0) to[short,i>=$I$] ++(2.0,0) coordinate(A);
 \draw (A) to[resistor,l=$R_{\rm eq}$] ++(0,-4.0) to[short] ++(-2,0);
 \end{circuitikz} \\
 (a) & (b) \\
@@ -271,7 +270,7 @@ which can be solved to determine:
 \begin{displaymath}
 R_{\rm eq} = \frac{R_1 R_2}{R_1 + R_2}
 \end{displaymath}
-It is left as an exercise to show that for any number of resistors wired in series, the equivalent resistance
+It is left as an exercise to show that for any number of resistors wired in parallel, the equivalent resistance
 is given by:
 \begin{equation} \label{eqn:rparallel}
 \frac{1}{R_{\rm eq} }= \sum_i \frac{1}{R_i}. 
@@ -281,12 +280,12 @@ is given by:
 \begin{center}
 \begin{tabular}{c@{\hskip 2cm}c}
 \begin{circuitikz}[line width=1pt]
-\draw (0,0) node[ground,yscale=2.0]{} to[battery,bipoles/length=1.5cm,l=$V$] ++(0,+4.0) to[short,i>=$I$] ++(2.0,0) coordinate(A);
+\draw (0,0) node[ground,yscale=2.0]{} to[voltage source,bipoles/length=1.5cm,l=$V$] ++(0,+4.0) to[short,i>=$I$] ++(2.0,0) coordinate(A);
 \draw (A) to[resistor,l_=$R_1$] ++(0,-2.0) coordinate(B) to[resistor,l_=$R_2$] ++(0,-2.0) to[short] ++(-2.0,0);
 \draw (B) to[short,*-o] ++(1.0,0) node[right]{$V_{\rm out}$};
 \end{circuitikz} &
 \begin{circuitikz}[line width=1pt]
-\draw (0,0) node[ground,yscale=2.0]{} to[battery,bipoles/length=1.5cm,l=$V$] ++(0,+4.0) to[short,i=$I$] ++(2.0,0) coordinate(A);
+\draw (0,0) node[ground,yscale=2.0]{} to[voltage source,bipoles/length=1.5cm,l=$V$] ++(0,+4.0) to[short,i=$I$] ++(2.0,0) coordinate(A);
 \draw (A) to[resistor,l_=$R_1$,i>=$I_1$] ++(0,-4.0) to[short] ++(-2,0);
 \draw (A) to[short,*-] ++(2.0,0.0) to[resistor,l_=$R_2$, i>=$I_2$] ++(0.0,-4.0) to[short,-*] ++(-2.0,0);
 \end{circuitikz} \\
@@ -318,13 +317,13 @@ In circuit analysis, the laws of electrostatics govern our circuits as well.  Wh
 
 \section{Sources, Loads, $I$-$V$ Curves, and Power}
 
-Analyzing complicated circuits inevitably involves breaking them down into smaller parts that are more easily understood.   A particularly useful way to divide circuits is in terms of sources and loads.  Consider first the simple circuit consisting of a battery connected to a resistor.  As illustrated in Fig.~\ref{fig:source_load}, both the voltage source and the resistor can be considered as two separate two terminal networks.  If we wish to connect these two networks together, we must agree on a definition for the direction of the current $I$.  One of the networks will have positive current $I$ leaving the positive terminal (A), and we call this network the ``source".  The other network will have positive current entering the positive terminal, and we call this network the ``load".  
+Analyzing complicated circuits inevitably involves breaking them down into smaller parts that are more easily understood.   A particularly useful way to divide circuits is in terms of sources and loads.  Consider first the simple circuit consisting of a voltage source connected to a resistor.  As illustrated in Fig.~\ref{fig:source_load}, both the voltage source and the resistor can be considered as two separate two terminal networks.  If we wish to connect these two networks together, we must agree on a definition for the direction of the current $I$.  One of the networks will have positive current $I$ leaving the positive terminal (A), and we call this network the ``source".  The other network will have positive current entering the positive terminal, and we call this network the ``load".  
 
 \begin{figure}[htbp]
 \begin{center}
 \begin{tabular}{cc}
 \begin{circuitikz}[line width=1pt]
-\draw (0,0) node[right]{A} to[short,o-] ++(-1.0,0) to[battery,bipoles/length=1.5cm,l=$V_1$] ++(0,+4.0) to[short, i>=$I$,-o] ++(1.0,0) node[right]{B};
+\draw (0,0) node[right]{A} to[short,o-] ++(-1.0,0) to[voltage source,bipoles/length=1.5cm,l=$V_1$] ++(0,+4.0) to[short, i>=$I$,-o] ++(1.0,0) node[right]{B};
 \draw (1, 0.0) to [open,v_>=$V$] (1,4.0);
 \end{circuitikz} &
 \begin{circuitikz}[line width=1pt]
@@ -344,7 +343,7 @@ The intersection of the source $I$-$V$ curve with the load $I$-$V$ curve is the 
 \begin{displaymath}
 P \equiv \frac{dU}{dt} = \frac{VdQ}{dt} = V \frac{dQ}{dT} = V I
 \end{displaymath}
-Meanwhile, the load is consuming power $P = VI$.  It is instructive to consider what would happen if you called the battery the load and the resistor the source.  In this case, the current simply changes sign, and you would find that at the operating point the so-called supply is providing negative power.  In other contexts you might find that both the current $I$ and the voltage $V$ are negative, so that the power provided by the source is positive.  In this case, you have likely correctly identified the roles of source and load while making a poor choice for the polarity.
+Meanwhile, the load is consuming power $P = VI$.  It is instructive to consider what would happen if you called the voltage source the load and the resistor the source.  In this case, the current simply changes sign, and you would find that at the operating point the so-called supply is providing negative power.  In other contexts you might find that both the current $I$ and the voltage $V$ are negative, so that the power provided by the source is positive.  In this case, you have likely correctly identified the roles of source and load while making a poor choice for the polarity.
 
 \begin{figure}[htbp]
 \begin{center}
@@ -358,7 +357,7 @@ Meanwhile, the load is consuming power $P = VI$.  It is instructive to consider 
 \begin{center}
 \begin{tabular}{cc}
 \begin{circuitikz}[line width=1pt]
-\draw (0,0) node[right]{A} to[short,o-] ++(-1.0,0) to[battery,bipoles/length=1.5cm,l=$V_1$] ++(0,+2.0) 
+\draw (0,0) node[right]{A} to[short,o-] ++(-1.0,0) to[voltage source,bipoles/length=1.5cm,l=$V_1$] ++(0,+2.0) 
 to[R, l=$R_{\rm src}$] ++(0,+2.0) to[short, i>=$I$,-o] ++(1.0,0) node[right]{B};
 \draw (1, 0.0) to [open,v_>=$V$] (1,4.0);
 \end{circuitikz} &

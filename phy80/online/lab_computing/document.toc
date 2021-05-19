@@ -1,0 +1,42 @@
+\contentsline {chapter}{\numberline {1}Introduction to Scientific Python}{3}
+\contentsline {section}{\numberline {1.1}Introduction}{3}
+\contentsline {section}{\numberline {1.2}Starting a Jupyter notebook}{3}
+\contentsline {section}{\numberline {1.3}Scientific Python lecture notes}{5}
+\contentsline {section}{\numberline {1.4}Submitting your assignment}{7}
+\contentsline {chapter}{\numberline {2}Introduction to Plotting}{8}
+\contentsline {section}{\numberline {2.1}Introduction}{8}
+\contentsline {section}{\numberline {2.2}Plotting discrete data and continuous functions}{8}
+\contentsline {section}{\numberline {2.3}Multivariate analysis using boolean masks}{10}
+\contentsline {section}{\numberline {2.4}The Logistics Map}{12}
+\contentsline {chapter}{\numberline {3}The Monte Carlo Method}{15}
+\contentsline {section}{\numberline {3.1}Introduction}{15}
+\contentsline {section}{\numberline {3.2}Generating random numbers}{15}
+\contentsline {section}{\numberline {3.3}Visualizing distributions}{16}
+\contentsline {section}{\numberline {3.4}Calculating the value of $\pi $}{18}
+\contentsline {section}{\numberline {3.5}Monte Carlo integration}{20}
+\contentsline {section}{\numberline {3.6}The Rejection method}{22}
+\contentsline {section}{\numberline {3.7}The transformation method}{24}
+\contentsline {section}{\numberline {3.8}Particle diffusion}{26}
+\contentsline {chapter}{\numberline {4}Limits of Distributions}{29}
+\contentsline {section}{\numberline {4.1}Introduction}{29}
+\contentsline {section}{\numberline {4.2}Poisson Limit of the Binomial Distribtion}{29}
+\contentsline {section}{\numberline {4.3}Gaussian Limit of the Poisson Distribtion}{30}
+\contentsline {section}{\numberline {4.4}The Central Limit Theorem}{32}
+\contentsline {chapter}{\numberline {5}Experimental Uncertainties}{34}
+\contentsline {section}{\numberline {5.1}Introduction}{34}
+\contentsline {section}{\numberline {5.2}Sample Mean and Sample Variance}{34}
+\contentsline {section}{\numberline {5.3}Propagation of Uncertainties}{39}
+\contentsline {chapter}{\numberline {6}Curve Fitting}{41}
+\contentsline {section}{\numberline {6.1}Introduction}{41}
+\contentsline {section}{\numberline {6.2}Fitting a Straight Line}{41}
+\contentsline {section}{\numberline {6.3}Parameter Uncertainties}{44}
+\contentsline {section}{\numberline {6.4}Fitting a Sine Curve}{46}
+\contentsline {chapter}{\numberline {7}Simulation of an Ideal Gas}{47}
+\contentsline {section}{\numberline {7.1}Introduction}{47}
+\contentsline {section}{\numberline {7.2}System of Units}{48}
+\contentsline {section}{\numberline {7.3}Collision Model}{50}
+\contentsline {section}{\numberline {7.4}Implementing the Collision Model}{51}
+\contentsline {section}{\numberline {7.5}Initializing the Simulated Ideal Gas}{53}
+\contentsline {section}{\numberline {7.6}Collisions of an Ideal Gas}{53}
+\contentsline {section}{\numberline {7.7}Temperature of an Ideal Gas}{54}
+\contentsline {section}{\numberline {7.8}The Maxwell-Boltzmann Distribution}{54}

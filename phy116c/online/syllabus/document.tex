@@ -14,7 +14,7 @@
 \begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} r}
   & \multirow{3}{*}{\includegraphics[height=1.0in]{logo.jpg}} \\
   \large Computers in Physics Exps. & \\
-  \large Spring Quarter 2020 & \\
+  \large Spring Quarter 2021 & \\
   \large Physics 116C & \\
 \end{tabular*}
 \vspace{10mm}
@@ -33,53 +33,83 @@
 \noindent
 \begin{tabbing}
 \hspace*{9em}\= \hspace*{10em} \= \hspace*{6em} \= \kill % set the tabbings
-\textbf {Lectures:} \> MWF  1:10-2:00 PM \> 140 Physics (Cancelled!)\\
+\textbf {Lectures:} \> W  1:10-2:00 PM \> Remote Instruction\\
 %\> \> 152 Roessler \> (F) \\
 \hspace*{9em}\= \hspace*{5em} \= \hspace*{8em} \= \kill % set the tabbings
 \\
-\textbf {Lab:}    \> Section 1: \>  M 4:10-7:00 PM \>152 Roessler (Cancelled!)\\
-                        \> Section 2: \> W 3:10-6:00 PM \> 152 Roessler (Cancelled!)\\
+\textbf {Labs:}    
+\> Section 1: \> M 3:10-6:00 PM \> Remote Instruction \\
+\> Section 2: \> W 4:10-7:00 PM \> Remote Instruction \\
 \\
 \hspace*{9em}\= \kill % set the tabbings
 \textbf {References:}  \>  {\tt https://www.scipy-lectures.org} \\
-\> Online lecture notes on data analysis. \\
-\\
-\textbf{Office Hours:} \> TBD \\
-\textbf{Lab Instructor:} \> Rahim Ullah \\
+\> Online lecture notes on data analysis and fourier analysis. \\
+\textbf{Lab Instructor:} \> TBD \\
 \textbf{Final Exam:} \> No Final Exam \\
 \end{tabbing}
 
 \noindent
-\textbf {COVID-19 Response:}
-To facilitate shelter-in-place during the COVID-19 pandemic, and to
-accommodate the diverse challenges that students are likely facing,
-this course will be taught in an asynchronous fashion.  As much as
-possible, there will be no pre-arranged times for activitates.  On an
-approximately weekly timescale, new material will provided including
-activities and assignments.  You should strive to finish the
-assignments within two weeks, but deadlines will be flexible.  Try not
-to get too far behind, however, or you will struggle to finish.
-
-\noindent
-\textbf {On-line Help Sessions:}
-The instructor and TA will be available at specified times to offer
-help.  More details will be provided soon.
-
-\noindent
 \textbf {Course Description:}
 Modern experiments rely heavily on microprocessors to acquire and
-analyze experimental data.  This course uses the Arduino
-microprocessor as a platform for creating data acquisition systems in
-different experimental contexts.  We will use Scientific Python for
-analysis of experimental data.  Topics include statistical
-distributions, experimental uncertainties, statistical analysis,
-Fourier analysis, and noise.\\
+analyze experimental data.  We will use Scientific Python for analysis
+of experimental data.  Topics include statistical distributions,
+experimental uncertainties, statistical analysis, and Fourier
+analysis.  We will also study computer architecture and assembly language.\\
 
 \noindent
-\textbf {Lab Safety:}
-Even though you will not be attending lab, you should complete the
-online course for Electrical Safety at \\ {\tt
-  http://safetyservices.ucdavis.edu/training/electrical-safety}.\\
+\textbf {Lectures:}
+Lectures will be asynchronous with recorded optional synchronous
+recaps and problem-solving sessions.
+
+The optional synchronous lectures will be offered during the Wednesday
+lecture slot over zoom.  The lectures will be recorded, but will
+include a short unrecorded session for additional questions at the
+end.  The recorded lectures will be posted on the course website.
+
+The remaining lecture material will consist of pre-recorded videos
+which can be viewed whenever it is convenient.  My experience has been
+that pre-recorded videos cover material much faster than traditional
+lectures, so generally there will be less than two hours of
+pre-recorded content per week.\\
+
+\noindent
+\textbf {Labs:}
+The lab activities will be asynchronous, but the lab TAs will be
+available over zoom to provide help.  Students may attend any lab
+section they choose, it does not matter which section you are formally
+assigned to.  We may have to revisit this if attendance becomes too
+lopsided, but it has worked fine in previous courses.
+
+The due date for each lab will be included with the assignment.  There
+is also an automatic one week grace period.  If you are having
+difficulty keeping up beyond the grace period, contact the instructor
+to devise a schedule.  I am extremely accommodating during remote
+learning, but I do not want to encourage procrastination which could
+lead to an extremely hectic end of the quarter.\\
+
+\noindent
+\textbf {Office Hours:}
+The Monday lecture time slot will be repurposed for office hours.
+Office hours will not be recorded.  Use the lecture zoom link from the course web site.\\
+
+
+%\noindent
+%\textbf {Lab Safety:}
+%Even though you will not be attending lab, you should complete the
+%online course for Electrical Safety at \\ {\tt
+%  http://safetyservices.ucdavis.edu/training/electrical-safety}\\
+%before attempting the Arduino labs.
+
+\noindent
+\textbf {Homework:}
+There will be five homework assignments, three on statistics, one on
+Fourier analysis, and one on assembly.  Using online solution services
+is not permitted.  To minimize the effectiveness of online solution
+services, homeworks will be graded based on effort only.\\
+
+\noindent
+\textbf {Exams:}
+There will not be a final exam.  There will be a midterm exam, with format to be determined.\\
 
 \begin{samepage}
 \vskip 0.5cm
@@ -87,32 +117,31 @@ online course for Electrical Safety at \\ {\tt
 \textbf {Course Outline}:
 
 \begin{table}[h!]
-\begin{tabular}{ lll }
+\begin{tabular}{ llll }
 \hline
-\textbf{Week} & \textbf{Dates} & \textbf{Topics} \\
+\textbf{Week} & \textbf{Wed Lecture} & \textbf{Lecture} & \textbf{Lab}  \\
 \hline
-1 & 30 Mar,1,3 Apr & Cancelled \\
+1 & 31 Mar & (No Lecture) & Scipy and Plotting \\
 \hline
-2 & 6,8,10 Apr & CPUs and Assembly  \\
+2 & 7 Apr & Recap S1 & The Monte Carlo Method \\
 \hline
-3 & 13,15,17 Apr & Distributions \\
+3 & 14 Apr & Recap S2 & Limits of Distributions \\
 \hline
-4 & 20,22,24 Apr &  \\
-% F:  Fourier Analysis
+4 & 21 Apr & Problems &  Uncertainties\\
 \hline
-5 & 27,29 Apr 1 May & \\
+5 & 28 Apr & Problems &  Ideal Gas\\
 \hline
-6 & 4,6,8 May & \\
-\hline
-7 & 11,13,15 May & \\
+6 & 5 May & Recap S3  & Curve Fitting \\
+\hline 
+7 & 12 May & Recap S3  & (catchup) \\
 % F: 
 \hline
-8 & 18,20,22 May & \\
+8 & 19 May & Fourier & TBD \\
 \hline
-9 & (25),27,29 May &  \\
+9 & 26 May & Problems & TBD \\
 % F: 
 \hline
-10 & 1,3 Jun &  \\
+10 & 2 Jun & Problems  & No Lab \\
 % F: 
 \hline
 \end{tabular} 
