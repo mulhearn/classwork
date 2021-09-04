@@ -1,0 +1,40 @@
+\documentclass[12pt,oneside]{book}
+
+\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.75in]{geometry}
+\usepackage{cite}
+\usepackage{slashed}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage{amsthm}
+\usepackage{braket}
+\usepackage{listings}
+\theoremstyle{definition}
+
+\usepackage[american,fulldiode]{circuitikz}
+\tikzset{component/.style={draw,thick,circle,fill=white,minimum size =0.75cm,inner sep=0pt}}
+\newtheorem{measurement}{Logbook Entry}[chapter]
+\newtheorem{plot}{Jupyter Notebook}[chapter]
+
+\begin{document}
+\ctikzset{bipoles/thickness=1}
+\ctikzset{bipoles/length=.6cm}
+
+\title{Physics 40 Lab Manual}
+\author{Michael Mulhearn}
+\maketitle
+
+\tableofcontents
+
+\input{lab_install.tex}
+%\input{lab_plotting.tex}
+%\input{lab_monte_carlo.tex}
+%\input{lab_ideal_gas.tex}
+
+\appendix
+
+\input{debugging.tex}
+
+\end{document}
+
+
