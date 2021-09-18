@@ -1,0 +1,196 @@
+\chapter{Differentiation and Projectile Motion}
+
+\section{Introduction}
+
+\section{Preparation}
+
+
+Our codes are getting complicated enough that we will need to pay some
+attention to variable scope, as illustrated here:
+\begin{python}
+i=1
+j=2
+k=3
+def f(i,j):
+    print(i,j,k)
+f(i,j)
+f(j,i)
+\end{python}
+Try to predict the output of this snippet before running it.  The
+first three lines define integers $i$,$j$, and $k$. These have global
+scope, which means they can be accessed from anywhere.  The function
+\pyth{f(i,j)} has parameters $i$ and $j$ which have a scope limited to
+the function $f$.  Even though they have the same name as the global
+variables $i$ and $j$, they are independent quantities.  Within the
+function $f$ the variable $i$ is the first parameter, and $j$ is the
+second parameter.  Because they have the same name, the global
+variables $i$ and $j$ are {\em shadowed} by the local parameters $i$
+and $j$.  The global variable $k$ is not shadowed.
+
+When \pyth{f(j,i)} the paramter $i$ is set to the global variable $j$,
+and the parameter $k$ is set to the global variable $i$.  There is no
+parameter $k$ only global variable $k$.  This is why the output from
+the call is ``2 1 3''.\\
+
+In this lab, we will be passing a function as an argument to another
+function, as in this simple example:
+\begin{python}
+def show(f):
+    print(f(2))
+    print(f(3))    
+    
+def f(i):
+    return i**2
+
+def g(i):
+    return i**3
+
+show(f)
+show(g)    
+\end{python}
+Here the \pyth{show} function takes another function \pyth{f} as an
+argument.  Within the show function, the function \pyth{f} is called
+using paranthesis just like any other function, as in \pyth{f(2)} We
+define two additional functions, \pyth{f} which returns the square of
+its argument, and \pyth{g} which returns the cube.  When
+\pyth{show(f)} the output 4 and 9.  When \pyth{show(g)} the output 8
+and 27.  Run the code as is, and also check what happens if you define
+\pyth{g(i)} to require a second argument as in \pyth{g(i,j)}.
+
+\section{Numerical Differentiation}
+
+In lecture we derived the right derivative (aka foward derivative) formula
+\begin{displaymath}
+  f'(x) = \frac{f(x+h) - f(x)}{h} + \mathcal{O}(h)
+\end{displaymath}
+for numerically determining the derivative of the function $f$.  Remember we do not calculate the 
+$\mathcal{O}(h)$ term, that indicates that the truncation error is of order $h$.
+We also derived centered derivative formula:
+\begin{displaymath}
+f'(x) = \frac{f(x+h) - f(x-h)}{2h} + \mathcal{O}(h^2)
+\end{displaymath}
+
+To evaluate a derivative using any of these formulas, we need to
+choose an appropriate value of $h$.  If $h$ is too large, the
+truncation error (the amount the estimated value differs from the
+actual value) will dominate.  If $h$ is too small, floating point
+precision will likely be the limit.
+
+\plot Implement the right derivative formula as \pyth{right(f, x, h)}
+where $f$ is the function to be evaluated, $x$ is the location to
+evaluate the derivative, and $h$ is the step size for the numerical
+integration.  Check you code on several functions with known
+derivatives, like this:
+\begin{python}
+def f(x):  # derivative 0
+    return 2
+def g(x):  # derivative 3
+    return 3*x
+def h(x):  # derivative 4x
+    return 2*x**2
+
+print(right(f,1,0.01))
+print(right(g,1,0.01))
+print(right(h,1,0.01))
+\end{python}
+
+
+\plot Implement the center derivative function as \pyth{center} and test it in the same manner as in the previous exercise for \pyth{right}.
+
+
+\plot Compare the performance of \pyth{right} and \pyth{center} like this:
+\begin{python}
+def f(x):  # derivative 6x**2
+    return 2*x**3
+
+print("right:", right(f,1,0.1),   "center:", center(f,1,0.1))
+print("right:", right(f,1,0.01),  "center:", center(f,1,0.01)) 
+print("right:", right(f,1,0.001), "center:", center(f,1,0.001)) 
+\end{python}
+Recall that the truncation error goes as $h$ for the right derivative and as $h^2$ for the center derivative.  Are these results consistent with that expecation?
+
+
+From now on, we will use the center derivative function only due to
+its better performance.  We can plot the derivative a function like
+this:
+\begin{python}
+def f(x):
+    return 0.5*x**2
+
+x = np.linspace(0,1,100)
+y = center(f, x, 0.1)
+plt.plot(x,ya,"-b")
+plt.xlabel("x")
+plt.ylabel("y")
+plt.show()
+\end{python}
+Notice how the argument $x$ passed to the function \pyth{right(f,x,h)}
+and then to \pyth{f(x)} is now a numpy array of 100 values from 0 to
+1.  The derivative is now evalued at 100 places with a single call.
+
+\plot Define $f(x) = x^3$.  Use your \pyth{center} function to evaluate it's derivative $f'(x)$ in the x range $[-2,2]$.  Plot both $f(x)$ and $f'(x)$ in that range (in the same plot) using different colors for each.  Add a legend and axis labels.
+
+
+\plot Define $f(x) = sin(x)$.  Use your \pyth{center} function to evaluate it's derivative $f'(x)$ in the x range $[0,2\pi]$.  Plot $f(x)$, $f'(x)$, and $cos(x)$ in that range (all in the same plot) using different colors for each.  Add a legend and axis labels.
+
+\section{Projectile Motion}
+
+\plot Check you implementation against the following test values:
+\begin{python}
+print(np.around(euler(0.134, 0.659, 0.282, 0.662, 0.643, 0.900, 0.451),2))
+print(np.around(euler(0.924, 0.959, 0.575, 0.299, 0.710, 0.699, 0.471),2))
+\end{python}
+and ensure you get the corret output:
+\begin{verbatim}
+[0.75 0.37 0.78 0.7 ]
+[1.24 1.23 0.94 1.15]
+\end{verbatim}
+
+\begin{python}
+tau = 2*np.pi
+vi    = 20   # [m/s]
+g     = 9.8  # [m/s^2]
+theta = tau/8
+dt = 0.01 # [s] 
+x  = 0    # [m]
+y  = 0    # [m]
+vx = vi*np.cos(theta)
+vy = vi*np.sin(theta)
+\end{python}
+
+\begin{python}
+tjx = np.array([x])
+tjy = np.array([y])
+while(y>=0):
+    x,y,vx,vy = euler(dt,x,y,vx,vy,0,-g)
+    tjx = np.append(tjx,  x)
+    tjy = np.append(tjy,  y)
+    
+plt.plot(tjx, tjy)
+plt.xlabel("x [m]")
+plt.xlabel("y [m]")
+plt.show()
+\end{python}
+
+\plot Simulate projectile motion using your function \pyth{euler} as described above.
+
+\plot Extend your simulation to record vx and vy at each step along with the x and y positions.  Take the mass of the projectile to be $m=0.145~\rm kg$ and plot the kinetic energy, potential energy, and total energy as a function of time.  To build an array containing the time of each step 
+for plotting quanties against time, you can do:
+\begin{verbatim}
+t = np.arange(tjx.size)*dt
+\end{verbatim}
+Include a legend. The $x$ and $y$ axes have changed to time and energy, so make certain to change the axes labels.
+
+
+\section{Projectile Motion with Drag}
+
+We can model drag as a deceleration:
+\begin{displaymath}
+\vec{a} = -k |\vec{v}| \vec{v}
+\end{displaymath}
+where $k=0.00622~\rm m^-1$ for typical baseballs .
+
+\plot Extend your simulation to include the effect of drag.  Plot the trajectory without drag and the trajectory with drag in the same plot.  Include a legend and (as always) label all axes.
+
+\plot Plot the kinetic energy, potential energy, and total energy as a function	of time, just as before.  Is total energy conserved?
+

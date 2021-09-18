@@ -1,0 +1,21 @@
+
+
+Installation
+
+Sequences and Series
+ Quad Eq, Arithmetic Series, Geometric Series, compare to prediction
+Quadratic Equation and Prime Numbers:
+ Identifying prime numbers, Adding fractions exactly
+
+Vectors, Matrices and Symmetry
+Projectile Motion
+
+Integration:
+Right/Left, Trapezoid, Simpson's Rule.  Illustrative Plots
+
+Differentiation:
+Differentiation, Harmonic Oscillator
+
+Numerical Uncertainty
+ 
+

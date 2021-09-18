@@ -1,0 +1,5 @@
+
+xpdf -remote latex document.pdf &
+
+pdflatex document.tex  ; xpdf -remote latex -reload
+
