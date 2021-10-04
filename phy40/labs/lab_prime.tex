@@ -73,26 +73,24 @@ b^2-4ac
 \end{displaymath}
 If this is positive there are two real solutions, it it is one there
 is one real solution, and if it is negative there are no real
-solutions.
+solutions.  For now, let's assume that a, b, and c are all integers.
 
-The solution to the quadratic equation can be calculate as follows:
+In this case, the solution to the quadratic equation can be calculated
+as follows:
 \vskip -0.25cm
 \noindent
 \begin{algorithm}
-  D := b^2 - 4ac
+  D := $b^2 - 4ac$
+  if (D=0):
+     calculate the single solution from quadratic 
+     print single solution
   if (D<0): 
      print no solutions
   if (D>0):
      calculate both solutions from quadratic formula
      print both solution
-  if (D=0):
-     calculate the single solution from quadratic 
-     print single solution
 \end{algorithm}
 \vskip 0.25cm
-Since $D$ is calculated from parameters $a$, $b$, and $c$ which might
-be floating point, we need to take some care to evaluate the condition
-that \pyth{D==0} within the precision of the floating point operation.
 
 A test case with one real solution is:
 \begin{displaymath}
@@ -110,16 +108,22 @@ A test case with zero real solutions is:
 \vskip 0.25cm
 \plot Implement a function \pyth{quad(a,b,c)} which reports the solutions to the quadratic equation and verify it with the test cases shown.\\
 
+\vskip 0.25cm
 \plot Calculate three more test cases with integer solutions and use them to test your function more thoroughly. \\
 
-\plot A particular tricky test case is a=.1 b=.3 c =0.225 which should
-have only one real solution.  Test you function against this test case. \\
+\vskip 0.25cm
+\plot (Optional) The condition that the discriminant is exactly zero
+(\pyth{D==0}) is problematic when applied to floating point
+numbers. (Why?) In example is for a=.1 b=.3 c =0.225 which should have
+only one real solution.  Test you function with this test case.
+Modify the conditionals in your function to account for floating point
+precision and test it.\\
 
 \section{Prime Numbers}
 
-A prime number is a number that has two and only two factors: itself and one.
-One is not prime, but two is.
-We can determine if a number $a$ is prime as follows:
+A prime number is a number that has two and only two factors: itself
+and one.  One is not prime, but two is.  We can determine if a number
+$a$ is prime as follows:
 \vskip 0.25cm
 \begin{algorithm}
   if (a<2):
@@ -190,5 +194,9 @@ k^2 + ak + b
 \end{displaymath}
 For each integer value of $a$ and $b$, there is a maximum number $n$ such that the quadratic formula produces prime numbers for $0 \leq k < n$\\
 
-\plot Find the the values of $a$ and $b$ which produce the largest number of prime numbers.  Restrict yourself to $|a| \leq 1000$ and $|b| \leq 1000$.
+\plot (Optional) Find the the values of $a$ and $b$ which produce the largest number of prime numbers.  Restrict yourself to $|a| \leq 1000$ and $|b| \leq 1000$.\\ \vskip 1cm
+
+\noindent
+If you do complete this optional problem, then nice work, hot shot,
+but remember that Euler found his without using a computer!
 

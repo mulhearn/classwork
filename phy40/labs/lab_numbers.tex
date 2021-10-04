@@ -64,6 +64,14 @@ the same integer value, do $a$ and $b$ refer to the same object, or to
 two different objects with the same value?  Write a snippet of code
 (three lines) to find out.\\
 
+In this lab, it will be convenient to know how to calculate the absolute value of a number, which you can do with the python \pyth{abs} function:
+\begin{python}
+a = -1.5
+b = abs(a)
+print(b)
+\end{python}
+
+
 \section{Binary Representation of Integers}
 
 Computer hardware is based on digital logic: the electrical voltage of
@@ -158,10 +166,14 @@ seven working bits!  What is the maximum sized unsigned integer which
 you could write on this degraded seven-bit bus?  What range of signed
 integers could you write? \\
 
-\plot Let's consider a four-bit signed integer, so zero is 0000 and one is 0001.
-Suppose the upper bit is reserved for sign, so 1XXX is a negative
-number.  An obvious choice for representing -1 would be 1001, but there is a better
-choice.  Consider that:
+% FIXME:  in future years, use the paper and pencil macro here:
+\plot This is a paper and pencil exercise.  You can do it on paper and
+pencil and submit a scanned PDF, or you can just record you steps as
+comments in a jupyter notebook cell.  Let's consider a four-bit signed
+integer, so zero is 0000 and one is 0001.  Suppose the upper bit is
+reserved for sign, so 1XXX is a negative number.  An obvious choice
+for representing -1 would be 1001, but there is a better choice.
+Consider that:
 \begin{displaymath}
 (-1) + 1 = 0  
 \end{displaymath}
@@ -220,6 +232,7 @@ eps = 1.0
 while eps + 1 > 1:
     eps = eps / 2
 eps = eps * 2
+print(eps)
 \end{python}
 Here the while loop continues running the indented code until the
 condition $\epsilon+1=\epsilon$ is met.
@@ -247,10 +260,22 @@ x = np.sin(np.pi)
 print(x)
 print(x==0)
 \end{python}
-Devise an alternative condition to \pyth{x==0} that properly accounts for
-floating point precision.\\
+The strict equality condition $x==0$ is not met because of limited
+floating point precision.  Instead of strict equality, check that $x$
+is near zero with a condition like:
+\begin{displaymath}
+|x| < 10 \epsilon
+\end{displaymath}
+where $\epsilon$ is the machine precision and the factor of 10 is a
+conservative factor to allow for round-off errors that might be a bit
+larger than the best possible precision $\epsilon$.  Add such a
+condition to the code above and show that this looser definition of
+equality now holds.  In general, when using approximations (like
+floating point numbers) you can only check things to within the
+accuracy of the approximation!\\
 
-\plot Here is another case where floating point precision joins the chat uninvited:
+\plot Here is another case where floating point precision joins the
+chat uninvited:
 \begin{python}
 x = 0.1
 y = x+x+x
@@ -333,9 +358,9 @@ that \pyth{z.conjugate()} is much like a function that already has $z$
 as a parameter, and \pyth{z.imag} and \pyth{r.real} are just ways to
 access the data contained in $z$.\\
 
-\plot Define a complex number $1+i$ and multiply it by it's complex
-number.  Show that the resulting complex number has zero for it's
-imaginary part.\\
+\plot Define a complex number with value of $1+i$ and multiply it by
+it's complex conjugate.  Show that the resulting complex number has
+zero for it's imaginary part.\\
 
 Python provides Lists as a native container of python objects.  We'll
 make much more use of numpy arrays, which are better suited to
@@ -363,7 +388,7 @@ for i in [1,5,10,50,100]:
 \begin{python}
   a = [1,2,3,4,5]
   b = a
-  b[0] = 1
+  b[0] = 3
   print(a[0])
   print(a is b)
 \end{python}
@@ -378,6 +403,8 @@ object is mutable. \\
 figure things out for yourself too!  Without looking up the
 documentation, write a snippet of code to determine for yourself if
 complex numbers are mutable (like lists) or immutable (like integers).
+We are able to change just a part of a list (like \pyth{a[0]=3}).  But can we change part of a complex number (like \pyth{z.real}).  Try it and find out!
+
 (It's OK if your code throws an error here, but you can also comment
 it out if you are the sort of person that can't possibly leave it
 alone)\\
