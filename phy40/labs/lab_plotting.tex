@@ -1,11 +1,18 @@
-\chapter{Arrays and Plotting}
+\chapter{Arrays, Plotting and Chaos}
 
 \section{Introduction}
 
-This lab will introduce a fundamental element of scientific python the
-numpy array, and show how they are used to produce plots.
+This lab will introduce a fundamental element of scientific python,
+the numpy array, and use them to produce plots.  We will also consider
+the non-linear logistics map and examine bifurcation in the approach
+to chaos.
+
+If you can complete all of the plots in Section~\ref{sec:logmap}
+including the optional plot and {\em without any instructor help} then
+you may omit the plots from the preceding sections.
 
 \section{Preparation}
+\label{sec:arraysprep}
 
 This lab will rely on the material from Sections 1.4.1 to 1.4.2 and
 1.5.1 to 1.5.2 of the Scientific Python Lecture notes.  This is the
@@ -78,9 +85,24 @@ print(a)
 a = np.append(a, 4)
 print(a)
 \end{python}
-This example creates an empty numpy array and then adds one element at a time.
+This example creates an empty numpy array and then adds one element at a time.\\
 
+\plot Run the snippet above and observe the output.\\
 
+\plot Implement a function \pyth{def recur(n,x)} which returns an
+array containining the first $n$ values of the recurrance relationship
+$x_{i+1}=2 \, x_{i}+1$ starting from $x_0=x$.  Use the following algorithm:
+\begin{algorithm}
+  Parameter $x$ # starting value
+  Parameter $n$ # number of iterations
+  Create empty array $a$ 
+  Repeat $n$ times:
+     append $x$ to array $a$
+     $x$ := $2\,x + 1$
+  print $a$
+\end{algorithm}
+Test your code for $x=1$ and $n=5$ and ensure that it produces the
+correct output: \pyth{[ 1.  3.  7. 15. 31.]}.\\
 
 \section{Plotting with Scentific Python}
 
@@ -148,22 +170,66 @@ but ultimately, the fact that python handles so much of this
 bookkeeping for us is what makes it a very fun language to work with.\\
 
 \plot Plot the $sinc(x)$ function as a smooth line in the $x$ range from -5
-to 5.  Add appropriate axes labels.  Include a legend identifying the
+to 5.  Add appropriate labels to each axes.  Include a legend identifying the
 sinc function.  For the line color, use any color other than red or
 blue.
 
 \section{The Logistics Map}
+\label{sec:logmap}
+
 The logistics map is the recurrence relation
 \begin{displaymath}
-x_{n+1} = r \, x_n \, (1 - x_n)
+p_{i+1} = r \; p_i \; (1 - p_i)
 \end{displaymath}
-with the variable $x$ between $0$ and $1$.  The variable $x$ can be
-thought to represent the ratio of a population to its maximum possible
-value.  The population increases due to birth and decreases due to
-starvation as the population approaches it's maximum value ($x$ near
-1).  This leads to the non-linear relationship that defines the
-logistic map.  The mapping keeps the variable x between $0$ and $1$ as
-long as the parameter r is in the range $[0,4]$.
+which calculates the value of $p$ for step $i+1$ from step $i$.  The
+variable $p$ can represent the ratio of a population to its maximum
+possible value, and each iteration ($n$) is a step in time (such as
+one year).  Each year, the population increases due to birth and
+decreases due to starvation as the population approaches it's maximum
+value ($p$ near 1).  The growth (or decline) of the population is
+controlled by the growth rate parameter $r$.  We will only consider
+$r$ in the range from $[0,4]$ which keeps $p$ in the range $[0,1]$.
+This is a simple non-linear model which illustrates chaotic behavior.\\
+
+\plot Implement a function \pyth{def logmap(p, r)} which returns the
+next iteration ($p_{i+1}$) of the logistic map for parameter $r$ and
+$p_i = p$.  Test your code by showing that for $r=3.0$ and $p_0=0.1$
+the next five iterations are: 0.27, 0.5913, 0.725, 0.5981 and 0.7211.\\
+
+\plot Use your \pyth{logmap} function to build an array containing the
+first $n$ entries in the logistics map starting from $p_0=0.1$.  Check
+that the output is correct by comparing with the results from the
+previous exercise for $n=6$.\\
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=0.65\textwidth]{figs/plotting/converge.pdf} 
+\caption{Convergence of the logistic map for $r=2.8$}
+\label{fig:logmapconv}
+\end{center}
+\end{figure}
+
+\plot Plot the time evolution of the logistics map for $r=2.8$ for 40
+iterations, starting from $p_0=0.1$ as in Fig.~\ref{fig:logmapconv}.
+To create a plot, you'll need an array containing the $p$ values
+(these correspond to the $y$ axis in the plot) which you can construct
+as in the previous exercise.  But what about the $x$ axis values?
+Since your array of $p$ values contains $[p_0, p_1, p_2 \ldots p_n]$
+the corresponding array of indices is simply $[0,1,2 \ldots 3]$ which
+you can construct using \pyth{np.arrange}.\\
+
+Your results from the previous exercise should reproduce
+Fig.~\ref{fig:logmapconv}.  This shows that for $r=2.8$ the logistics
+map converges to a value of about 0.64.  But this non-linear recursion
+relationship does not always converge to a single value.\\
+
+\plot Plot the time evolution of the logistics map for $r=3.2$ for 40
+iterations, starting from $p_0=0.1$.\\
+
+Notice that now the system oscillates between two values (near 0.5 and 0.8).\\
+
+\plot Plot the time evolution of the logistics map for $r=3.5$ for 40
+iterations, starting from $p_0=0.1$.\\
 
 \begin{figure}[htbp]
 \begin{center}
@@ -173,95 +239,49 @@ long as the parameter r is in the range $[0,4]$.
 \end{center}
 \end{figure}
 
-The logistics map is frequently encountered as a simple example of a
-chaotic system emerging from a simple non-linear system.  The long
-term behavior of the logistic map is showin in Fig.~\ref{fig:logmap}.
-For each value of $r$, the $x$ values encountered during 100
-iterations after thowring out the first 1000 iterations are shown
-(i.e. we see $x_i$ for $i$ from 1000 to 1100.)
+Notice that now the system oscillates between four values.  This is an
+example of bifurcation in the approach to chaos.  To show this more
+clearly, we'd like to produce a plot as in Fig.~\ref{fig:logmap}.  For
+each $r$ value, this shows the $p$ values from 100 iterations {\em
+  after} the first 1000 iterations.  This shows the {\em long term
+  behavior} of the logistics map.  We can clearly see that for $r=2.8$
+the $p$ values converge to one single value and for $r=3.2$ there are
+two values just as in the previous exercises.  These bifurcations
+continue until the system becomes chaotic (oscillating between many
+different values) with occassional windows of stability.
 
+To produce this plot for yourself, start by considering this snippet:
+\begin{python}
+Nr = 5
+r = np.linspace(2.6,4,Nr)
+p = logmap(0.1,r)
+print(p)
+p = logmap(p,r)
+print(p)
+\end{python}
+Here we create a numpy array of $r$ values, and pass that to our
+\pyth{logmap} function instead of a single value.  The operations
+within the function are applied elementwise to the array, and the
+result is that instead of a single $p$ value, the call to to
+\pyth{logmap(0.1,r)} returns an array of $p$ values, one for each $r$
+value.  This is just what we need to make the plot in Fig.~\ref{fig:logmap}.\\
 
-If we
-consider the long term behavior of the population $x$ as a function of
-the parameter $r$, as shown in , we see that for
-values of $r$ less than $3$ the population approaches a single fixed
-value.  At the value $r=3$ the non-linear system exhibits bifurcation
-with the population oscillating between two values.  As $r$ increase,
-further bifurcations occur at an ever increasing rate until the
-systems exhibits chaotic behavior alternating with occasional returns
-to stable oscillations.
+\plot Run (and understand!) the snippet and make a plot of $p$ versus
+$r$.  Understand that you are plotting $p_2$ as a function $r$!  Use
+the \pyth{\"k,\"} format option (black pixels) when plotting.  Comment
+out the print statements and increase $Nr$ to 100.\\
 
-\plot Implement a function \pyth{def logmap(x, r)} which returns the
-next iteration ($x_{n+1}$) of the logistic map for parameter $r$ and
-$x_n = x$.  Test your code by showing that for $r=3.0$ and $x_0=0.1$
-the next five iterations are: 0.27, 0.5913, 0.725, 0.5981 and 0.7211.
+\plot Make a plot that is {\em almost} like that of
+Fig.~\ref{fig:logmap} by plotting $p_{1001}$ versus $r$.  Hint:
+in the code above, instead of one call to \pyth{p = logmap(p, r)} use a for loop which
+calls this 1000 times.\\
 
-\plot 
+You should start to see features of the Fig.~\ref{fig:logmap} but you are only plotting one $p$ value for each $r$.  To see the bifurcations and chaos, you'll need to plot about 100 $p$ values at each $r$ value.\\
 
+\plot Reproduce the plot in Fig.~\ref{fig:logmap}.  Hint: instead of plotting just $p_{1001}$ as in the previous exercise, plot the next 100 values as well.  Increase the number of $r$ values plotted to 1000.  Add appropriate labels to each axis.\\
 
-
-Implement a function \pyth{def logmap(x, r)} which returns the
-next iteration ($x_{n+1}$) of the logistic map for parameter $r$ and
-$x_n = x$.  Test your code by showing that for $r=3.0$ and $x_0=0.1$
-the next five iterations are: 0.27, 0.5913, 0.725, 0.5981 and 0.7211.
-
-
-
-
-
-
-
-
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=0.65\textwidth]{figs/plotting/converge.pdf} 
-\caption{Convergence of the logistic map for $r=2.8$}
-\label{fig:logmap}
-\end{center}
-\end{figure}
-
-
-
-
-
-
-
-
-\plot For 
-
-
-
-
-
-
-
-
-
-
-The long term behavior of the logistics map can be easily modeled in
-Scientific Python.  
-\begin{itemize}
-\item An array of $r$ values is defined.
-\item An array of $x$ values of the same size as $r$ is defined and initialized to an arbitrary non-zero value (0.01).
-\item Two example iterations of the logistic map are applied.
-\item The next two iterations of the values of $x$ are plotted as function of $r$ on the same plot.
-\end{itemize}
-
-\noindent
-%{\bf Plot 3:} 
-\begin{plot} \end{plot} Reproduce the figure in Fig.~\ref{fig:logmap} by doing the following:
-\begin{itemize}
-\item Define two global variables {\tt ITER = 10} and {\tt PLOT = 5}.
-\item Apply the logistics map {\tt ITER} times by using a for loop.
-\item Apply the logistics map an additional {\tt PLOT} times, plotting the values of $x$ as a function of $r$, as in the example, each time.
-\end{itemize}
-You'll observe the long term behavior by increasing the value of {\tt
-  ITER} to a large value, such as 10,000.  You'll see the full
-dependence on $r$ by decreasing the step size in the initialization of
-the numpy array $r$ to something like $0.001$.  You'll observe the
-chaotic behavior by increasing the value of {\tt PLOT} to 100 or even
-1000 iterations.  To make a prettier plot using finer points (once you
-have a large number of points) you can reduce the size by adjusting
-the {\tt s=10} parameter in the call to {\tt plt.scatter} to something
-like {\tt s=0.0001}.
-
+\plot (Optional) The bifurcation diagram which you have constructed
+exhibits self-similarity.  If you zoom into an appropriate region of
+the diagram, you will find a diagram which looks quite similar to the
+original diagram.  Produce a plot that demonstrates this
+self-similiarity by zooming into a particular region.
