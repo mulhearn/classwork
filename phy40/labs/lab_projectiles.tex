@@ -2,6 +2,13 @@
 
 \section{Introduction}
 
+In this lab we will apply numerical differentiation to elementary
+functions.  We'll apply the Euler method to compute the trajectory of
+a projectile, and compare our results with the analytic solution.
+We'll also show that our numerical technique easily accommodates air
+resistance, a problem that has no analytic solution using elementary
+functions.
+
 \section{Preparation}
 
 Our code is going to get complicated enough that we will need to pay
@@ -205,16 +212,19 @@ Include a legend. The $x$ and $y$ axes have changed to time and energy, so make 
 
 \section{Projectile Motion with Drag}
 
-In this section we will consider the effect of air restistance on a baseball thrown a $20~\rm m/s$.
-We can model drag as a deceleration:
+In this section we will consider the effect of air restistance on a
+baseball thrown a $20~\rm m/s$.  We can model drag as a deceleration:
 \begin{displaymath}
 \vec{a} = -k |\vec{v}| \vec{v}
 \end{displaymath}
 where $k=0.00622~\rm m^-1$ for typical baseballs.\\
 
-\plot Extend your simulation to include the effect of drag.  Plot the trajectory without drag and the trajectory with drag in the same plot.  Include a legend and (as always) label all axes.\\
+\plot Extend your simulation to include the effect of drag.  Plot the
+trajectory without drag and the trajectory with drag in the same plot.
+Include a legend and (as always) label all axes.\\
 
 \plot Including the effect of air restistance, plot the kinetic
-energy, potential energy, and total energy as a function of time.  Is
-total energy conserved?\\
+energy, potential energy, and total energy (kinetic plus potential) of
+the projectile as a function of time.  Is the total energy of the
+projectile conserved?\\
 
