@@ -31,6 +31,12 @@ each section.  At this point, every section of the proposal has been
 scrutinized by at least one faculty member that was not involved in
 producing the draft.  The changes since the last version are:
 \begin{itemize}
+ \item Fixed a mistake in the unit accounting for upper division
+   coursework in the BS Physics majors.  Under the proposed
+   requirements, BS physics majors will take four to five upper
+   division electives (including three capstone electives).  This was
+   incorrectly tallied as three to four in the previous version.
+   Total number of units is still 110-112.
  \item The contents of the example course syllabi of
    Section~\ref{sec:syllabi} have been updated based on the
    presentations at the (first) annual faculty curriculum review.
@@ -38,17 +44,14 @@ producing the draft.  The changes since the last version are:
    simplified.  Several reviewers found the previous version
    misleading and devoid of a clear purpose.   
  \item The prerequisites for Physics 9 and 9H have been updated.  For
-   better readability, the math prerequisites for lower division coursework is
+   better readability, the math prerequisites for lower division coursework are
    now broken out into a separate table.
- \item The requirements for the chemical physics major have been
-   updated.   
- \item In the previous version, 116ABC was replaced by 80,116A, and
-   116B.  The course numbering has been changed in this version to
-   80,116,and 117. This change is intended to clearly indicate that
-   116 and 117 are now independent courses.
+ \item PHY 40 has been reduced from four to three units, based on recent experience with the course.  BS majors are now required to take all of the 1 unit computational lab courses.  The AB major is also now safely within the unit cap. 
+ \item The course numbering for PHY 80 and 116ABC has been changed as described in Sec.~\ref{sec:labs}.
+    \item The requirements for the chemical physics major have been
+   updated.      
  \item Various small changes to the text were made to improve clarity
    and accuracy, and to fix grammar mistakes and typos.
- \item The alternative AB physics requirements (in case the proposed 81 unit version is not accepted) have been updated.
 \end{itemize}
 
 \newpage
@@ -243,7 +246,7 @@ alleviate pressure.
 \captionof{table}{\label{tbl:prep}Preparatory Subject Matter}
 \vskip 0.25cm
 \noindent
-Units:  53-54. *: recommended, $\parallel$ concurrently, when indicated grades are minimum accepted.\\
+Units:  52-54. *: recommended, $\parallel$ concurrently, when indicated grades are minimum accepted.\\
 See Table~\ref{tbl:math-prereqs} for math prerequisites.\\
 \begin{tabular}{|llllll|}
 \hline
@@ -275,7 +278,7 @@ PHY & 9HA & 5 & F &  & Honors Physics {\it (Class. Mech.)}\\
     & 9HD & 5 & F & 9HC,   & Honors Physics {\it (Elec. and Magn.)}\\ 
 \hline
 \hline
-PHY & 40  & 4 & F & & Introduction to Physics Computation \\ 
+PHY & 40  & 3 & F & & Introduction to Physics Computation \\ 
     & 45  & 4 & W & 40,9C/9HD & Computational Physics\\ 
     & 80  & 4 & WS & 40$\dagger$,9C/9HD     & Experimental Techniques \\
 PHY & 185* & 1 & S & & Careers in Physics \\ 
@@ -286,9 +289,9 @@ $\dagger$:  Instructor permission may be obtained to take PHY 80 without the PHY
 
 \newpage
 \captionof{table}{\label{tbl:depth}Depth Subject Matter}
+\vskip 0.5cm
 \noindent
-\vskip 0.25cm
-Units:  42-46. *: recommended, $\parallel$: concurrently.\\
+Units:  39-43. *: recommended, $\parallel$: concurrently.\\
 \begin{tabular}{|llllll|}
 \hline
 Course & & Units & Offered & Prereqs & Name \\
@@ -299,9 +302,13 @@ PHY & 104A & 4 & FS & 9C/9HD,MAT 22B   & Mathematical Physics \\
     & 105B & 4 & S & 105A,40$\dagger$          & Classical Mechanics II\\ 
     & 110A & 4 & W & 104A             & Electricity and Magnetism I\\
     & 110B & 4 & S & 110A,9HD/$\parallel$9D    & Electricity and Magnetism II\\
+    & 110L & 1 & S & 45/ECS 36B, $\parallel$110B & Comp. Lab in Electricity and Magn. \\
     & 112  & 4 & F & 104A,9D/9HD      & Thermo. and Stat. Mech.\\    
+    & 112L & 1 & F & 45/ECS 36B, $\parallel$112  & Comp. Lab in Statistical Mechanics \\ 
     & 115A & 4 & F & 104A,105A,9D/9HD & Quantum Mechanics I \\
     & 115B & 4 & W & 115A             & Quantum Mechanics II \\
+    & 115L & 1 & W & 115A,$\parallel$115B*  & Comp. Lab in Quantum Mechanics \\
+           & & & & 45/ECS 36B & \\
     & 115C* & 4 & S & 115B,45/ECS 36B& Appl. of Quantum Mechanics\\ 
 \hline
 \hline
@@ -315,20 +322,14 @@ PHY & 122A/B & 4 & WS & 80,104A,105A,110B & Advanced Physics Laboratory \\
 
 \hline
 \hline
- & Any two & & & & (all three recommended): \\
-\hline 
-PHY & 110L & 1 & S & 45/ECS 36B, $\parallel$110B & Comp. Lab in Electricity and Magn. \\
-    & 112L & 1 & F & 45/ECS 36B, $\parallel$112  & Comp. Lab in Statistical Mechanics \\ 
-& 115L & 1 & W & 115A,$\parallel$115B*  & Comp. Lab in Quantum Mechanics \\
-& & & & 45/ECS 36B & \\
-\hline
 \end{tabular}\\ 
 \noindent
 $\dagger$:  Instructor permission may be obtained to take PHY 105B without the PHY 40 prerequisite.
 \noindent
-{\bf Electives:} Additional electives to bring the total number of 3-4 unit upper division courses to 14, including at least three from capstone courses.  
-(3-4 courses, totaling 12-16 units with current offerings)
-\\
+{\bf Electives:} Additional electives to bring the total number of 3 or more
+unit upper division courses to 14, including at least three from
+capstone courses.  (4-5 courses, totaling 15-20 units with current
+offerings) \\
 \noindent
 {\bf Total Units:} 110-112
 
@@ -527,9 +528,12 @@ others require changes to their content:
   need to implement it immediately, and it can be developed first as a
   PHY 150 course.
 
+\item 40: PHY 40 is reduced from four to three units, as discussed
+  further in Sec.~\ref{sec:computing}.
+    
 \item 45, 110L, 112L, and 115L: PHY 45 is a new required four-unit
   course in computational physics.  Students are also required to take
-  at least two of three new one-unit computing lab courses 110L, 112L,
+  three new one-unit computing lab courses 110L, 112L,
   and 115L.  These courses are discussed in more detail in
   Section~\ref{sec:computing}.
 
@@ -666,17 +670,25 @@ freely available within Anaconda and interoperable with SciPy.
 In 2018, we added a new required course, PHY 40, which introduces
 programming with both C++ and python.  This format leaves no time for
 symbolic computation and little time for exploring additional features
-of Scientific Python beyond the basic Python language.  This proposal
-modifies the computational content of existing courses and adds
-several new required courses:
+of Scientific Python beyond the basic Python language.  In 2020, the
+course was instead taught exclusively with Scientific Python, which
+was found to be much more workable.  However, even at this slower
+pace, most students taking the course are not yet ready to do
+extensive unsupervised computational work, and only manage to make
+siginficant progress during lab sections with TA support.  For this
+reason, recent instructors agree that a three unit course, with
+essentially no homework, is a more appropriate format for PHY 40.
+
+This proposal modifies the computational content of existing courses
+and adds several new required courses:
 \begin{itemize}
-\item 40: This four-unit course, which has no prerequisites and
-  assumes no prior knowledge of programing, provides an introduction
-  to programming using examples from computational physics.  It
-  includes a short introduction to symbolic manipulations using a
-  computer algebra system.  The specific tools covered (which will not
-  be included in the course description) are Scientific Python and
-  either SymPy or Mathematica.
+\item 40: This three-unit course (reduced from four units), which has
+  no prerequisites and assumes no prior knowledge of programing,
+  provides an introduction to programming using examples from
+  computational physics.  It includes a short introduction to symbolic
+  manipulations using a computer algebra system.  The specific tools
+  covered (which will not be included in the course description) are
+  Scientific Python and either SymPy or Mathematica.
 
 \item 45: This new four-unit course, Computational Physics, will have
   the PHY 9 series through E\&M as a prerequisite (9C/9HD) as well as
