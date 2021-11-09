@@ -6,6 +6,11 @@ In this lab we will apply the Euler and Verlet methods to the pendulum
 problem.  We will compare the results of the Verlet problem to the
 small angle approximation.
 
+If you prefer, you can complete the shorter, but more challenging
+sequence of problems: 7.8, 7.10, and at least two of the optional
+challenge problems.  You will only receive minimal instructor help
+while you are taking this approach.
+
 \section{Preparation}
 
 Suppose you want to produce a plot of $f(t) = A \exp(-t/\lambda)$
@@ -40,8 +45,6 @@ plt.xlabel("t (s)")
 plt.ylabel("y")
 \end{python}
 If you look closely, you'll see kinks in the plot for $N=11$.  Increase to $N=100$ for a visually smooth plot.
-
-\newpage
 
 You are expected to do all of this on your own, from a prompt like this:\\
 
@@ -142,9 +145,7 @@ wL = 2*np.pi/TL # small-angle angular frequency of pendulum
 A  = 0.2        # theta at t=0 (amplitude)
 \end{python}
 You must complete this problem {\bf without using an explicit for
-  loop} and only {\bf six or less additional lines of code.}  (Debugging
-print statements do not count toward this limit, use as many of those
-as you like!)  To set the $y$ axis label to the fancy $\theta$ do:
+  loop}.  To set the $y$ axis label to the fancy $\theta$ do:
 \begin{python}
 plt.ylabel("$\\theta$")
 \end{python}.
@@ -197,7 +198,7 @@ Then implement the Euler method as follows:
   Create an empty array tjth which will contain $\theta$ positions of the trajectory
   Append $\theta$ to the array tjth.
   Repeat $N$ times:
-     Calculate $\alpha = \omega_L^2 \theta$
+     Calculate $\alpha = -\omega_L^2 \theta$
      Update $\theta$ and $\omega$ for acceleration $\alpha$ and time step $\tau$ by calling euler().
      Append $\theta$ to the array tjth.
   Create an array t containting $N+1$ appropriately spaced time values.
@@ -257,6 +258,7 @@ You'll use this now thoroughly tested function more below.  Don't change it!\\
 With this method, you should produce many oscillations with no sign of instability.\\
 
 \plot So far, we have been using the small angle approximation.  Modify your code to use the exact formula for the angular acceleration $\alpha = \omega_L^2 \, \sin \theta$ and set the initial position to $A=2$.  This is a trivial change to your numerical simulation, but it  makes an analytic solution impossible!\\
+
 
 \plot (Optional Challenge) Run you Verlet analysis for $N=1000$ steps
 for $A=3$ and set $\tau$ appropriately so that you see a bit more than
