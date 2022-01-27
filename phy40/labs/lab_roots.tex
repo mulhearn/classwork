@@ -114,7 +114,7 @@ $x_{n+1}$ from the previous two estimates $x_n$ and $x_n-1$ which are used to
 estimate the derivative and then apply Newton's method:
 
 \begin{displaymath}
-x_{n_1} = x_n - f(x_n) \frac{x_n-x_{n-1}}{f(x_n) - f(x_{n-1}}
+x_{n+1} = x_n - f(x_n) \frac{x_n-x_{n-1}}{f(x_n) - f(x_{n-1}}
 \end{displaymath}\\
 
 \plot Implement the python function:
@@ -146,12 +146,12 @@ $g(x)$.  Calculate the derivative $g'(x)$ analytically, and define
 \pyth{gp(x)} which returns $g'(x)$.  Plot $g(x)$ and $g'(x)$ for
 $0<x<5$.  Be sure to include axis labels and a legend. \\
 
-\plot Apply five iterations of your function \pyth{bisection(f,a,b)} to the range (0,2.5).  Do you approach the correct root?   \\
+\plot Apply five iterations of your function \pyth{bisection} to the range (0,2.5).  Do you approach the correct root?   \\
 
-\plot  Starting from estimates a=0 and b=2.5, apply five iterations of your function \pyth{secant(f,a,b)}.  Do you approach the correct root? \\
+\plot  Starting from estimates a=0 and b=2.5, apply five iterations of your function \pyth{secant}.  Do you approach the correct root? \\
 
 
-\plot Starting from the value x=2.5, apply five iterations of your function \pyth{newton(f,fp,x)}.  Do you approach a root? \\
+\plot Starting from the value x=2.5, apply five iterations of your function \pyth{newton}.  Do you approach a root? \\
 
 \section{Particle in a Finite Potential Well}
 \label{sec:pbox}
@@ -284,7 +284,7 @@ h = \frac{b-a}{n-1}
 \end{displaymath}
 and
 \begin{displaymath}
-x_i = a + h \, (i - 1).
+x_i = a + h \, i 
 \end{displaymath}
 The truncation error is:
 \begin{displaymath}
@@ -307,11 +307,12 @@ print(np.around(trapz(np.sin,0,np.pi/2,2),2))
 print(np.around(trapz(np.sin,0,np.pi/2,3),2))
 print(np.around(trapz(np.sin,0,np.pi/2,4),2))
 \end{python}
-which should output the values 0.79, 0.95, and 0.98.
+which should output the values 2.36, 1.73, and 1.5.
 
 \section{Iterative Trapezoid Method}
 
-In the iterative trapezoid method, we halve the spaces between points during each interation, so that:
+In the iterative trapezoid method, we halve the spaces between points
+during each interation, so that:
 \begin{displaymath}
 h_1 = (b-a), \; h_2 = \frac{b-a}{2}, \; \ldots \; , \; h_m = \frac{b-a}{2^{m-1}}
 \end{displaymath}
@@ -319,10 +320,12 @@ Because the interval size $h_{m+1}$ is one half the previous interval
 $h_m$, we can avoid evaluating previously evaluated $x$ values by
 resusing the previous iteration:
 \begin{displaymath}
-I_{m+1} = \frac{1}{2} \, I_{m} + h_{m+1}\sum_{i=1}^{2^{(m-1)}} f(a+(2i-1)h).
+I_{m+1} = \frac{1}{2} \, I_{m} + h_{m+1}\sum_{i=1}^{2^{(m-1)}} f(a+(2i-1)h_{m+1}).
 \end{displaymath}
-A major benefit of this approach is that the difference between
-$I_{m+1}$ and $I_m$ can be used to estimate the truncation error.\\
+Take care when reading that the upper limit on the sum is $2^{(m-1)}$
+not $2\,(m-1)$.  A major benefit of this approach is that the
+difference between $I_{m+1}$ and $I_m$ can be used to estimate the
+truncation error.\\
 
 \plot Implement the python function:
 \begin{python}
@@ -449,19 +452,21 @@ def romberg(f,a,b,R):
 \end{python}
 which given the $m$th row as array R:
 \begin{displaymath}
+R = 
 \begin{pmatrix}
-R = R_{m,1} & R_{m,2} & \cdots & R_{m,m}\\
+R_{m,1} & R_{m,2} & \cdots & R_{m,m}\\
 \end{pmatrix}
 \end{displaymath}
 returns the updated array:
 \begin{displaymath}
+R = 
 \begin{pmatrix}
-R = R_{m+1,1} & R_{m+1,2} & \cdots & R_{m+1,m+1}\\
+R_{m+1,1} & R_{m+1,2} & \cdots & R_{m+1,m+1}\\
 \end{pmatrix}
 \end{displaymath}
 Test your code by calculating the definite integral:
 \begin{displaymath}
-I = \int_0^\pi sin(x) \, dx
+I = \int_0^\pi \sin(x) \, dx
 \end{displaymath}
 by constructing four rows of the Romberg matrix.\\
 
