@@ -1260,8 +1260,9 @@ EEC & 110A  & 4 & WS & & Electronic Circuits I \\
     & 110B  & 4 & S  & & Electronic Circuits II\\
     & 140A  & 4 & FW & & Principles of Device Physics I\\
     & 140B  & 4 & S & & Principles of Device Physics II\\
-    & 150A  & 4 & WS & & Intro. to Signals \& Systems I\\
-    & 150B  & 4 & F & & Intro. to Signals \& Systems II\\
+    & 150   & 4 & WS & & Intro. to Signals \& Systems \\
+    & 160   & 4 & & & Signal Analysis And Communications \\
+    & 180   & 4 & & & Digital Systems II \\
 \hline
 \end{tabular}\\
 \vskip 0.25cm
@@ -1680,6 +1681,92 @@ Senior   & 112+L         & 140A       & 140B\\
 \end{tabular}
 \end{center}
 
+
+\newpage
+\captionof{table}{\label{tbl:geophysics} Geological Physics}
+\vskip 0.25cm
+\noindent
+{\bf Additional Preparatory Courses:  }\\
+Units: 13 units. *: recommended, $^\#$: not offered every year, $\parallel$: concurrently.\\
+\begin{tabular}{|llllll|}
+\hline
+Course & & Units & Offered & Prereqs & Name \\
+\hline
+PHY & 45     & 4 &     & & \\
+GEL & 50     & 3 & FWS & & Physical Geology \\
+    & 50L    & 2 &     & & Physical Geology Laboratory\\
+ATM & 60     & 4 & F   & & Intro. to Atmospheric Sci. \\
+\hline
+\end{tabular}\\
+\vskip 0.25cm
+\noindent
+{\bf Concentration Courses:  }\\
+Units:  25-30 units. *: recommended, $^\#$: not offered every year, $\parallel$: concurrently.\\
+\begin{tabular}{|llllll|}
+\hline
+Course & & Units & Offered & Prereqs & Name \\
+\hline
+    & Choose two of & & & & \\
+\hline
+PHY & 110L   & 1 & & & \\
+    & 115L   & 1 & & & \\
+    & 112L   & 1 & & & \\
+\hline
+\hline
+    & Choose two of & & & & \\
+\hline
+PHY & 122A/B & 4 & & & \\
+    & 117   & 4 & & & \\
+    & 118   & 4 & & & \\
+\hline
+\hline
+    & Choose five of & & & & \\
+\hline
+PHY  & 105B   & 4 & &  & \\
+     & 105C   & 4 & &  & Continuum Mechanics\\
+ATM  & 120    & 4 & F  & ATM 60    & Atmospheric Thermodynamics \& Cloud Physics \\
+     & 121A   & 4 & F  & ATM 120   & Atmospheric Dynamics \\
+     & 121B   & 4 & W  & ATM 121A  & Atmospheric Dynamics \\
+GEL  & 116N   & 3 &    & & Oceanography\\
+     & 146    & 3 &    & & Radiogenic Isotope Geochemistry \& Cosmochemistry \\
+     & 150A   & 4 & S$^\#$ & GEL 116N,55 & Physical and Chemical Oceanography\\
+     & 150B   & 3 & W  & GEL 50      & Geological Oceanography\\
+\hline
+     & incl at least two:  & & & & \\
+\hline
+     & 161    & 3 & S$^\#$ & GEL 50 & Geophysical Field Methods \\
+     & 162    & 3 & W$^\#$ & GEL 50 & Geophysics of the Solid Earth \\
+     & 163    & 3 & F$^\#$ & GEL 50 & Planetary Geology \\
+\hline
+\end{tabular}\\
+\vskip 0.25cm
+\noindent
+{\bf Total Units:} 110-117 \\
+
+\noindent
+{\bf Example schedule:} In most cases, the PHY 9D and GEL 50 are taken
+before the junior year, but an example including these courses is
+shown.  Physics course numbers are shown unless otherwise indicated.
+Courses in italics are electives.
+\begin{center}
+\begin{tabular}{|l|l|l|l|}
+\hline
+Year      & Fall    & Winter & Spring \\
+\hline
+Junior    & 40         & 45           & 80 \\
+          & 104A       & 105A         & 105B\\
+          & ATM 60     & 110A         & 110B \\
+          & (9D)       & (GEL 50+L)   & GEL 161\\
+\hline
+Senior   & 112+L       & ATM 121A     & 122A \\
+         & 115A        & 118          & \\
+         & ATM 120     & GEL 162      & \\
+\hline
+\end{tabular}
+\end{center}
+
+
+
 \newpage
 \section{Proposed AB Physics Major}
 \label{sec:ab}
@@ -1831,17 +1918,16 @@ The time allocated for core material is generous, which should leave room for to
 \vskip 1cm
 \noindent
 {\bf PHY 45 --- Computational Physics (4):}
-Algorithms and programming techniques used in computational physics
-with examples from introductory physics.
+Algorithms and programming techniques of computational physics
+with applications from introductory physics.
 
-This course will continue to use Python/Anaconda, but will also
-introduce the C/C++ language.  The supported operating systems will be
-Windows, MacOS, and Linux.  The algorithms and problems considered
-will be more sophisticated than in PHY 40 taking advantage of the fact
-that students have completed at least PHY 9C/9HD, MAT 21D, and MAT 22A
-sequences.  As some students will be taking MAT 22B concurrently, the
-more challenging differential equation related material should be left
-until the second half of the course.
+This course builds on the programming, numerical analysis, and basic
+computational physics techniques from PHY 40.  The algorithms and
+problems considered in this course are more sophisticated, using
+theoretical physics and mathematical concepts from PHY 9ABC, and MAT
+21ABCD, and MAT 22A.  Students may take MAT 22B concurrently, so the
+more challenging differential equation related material is left for
+the second half of the course.
 
 The core material is:
 \begin{itemize}
@@ -1894,9 +1980,9 @@ a prerequisite, this component can be more ambitious:
 \newpage
 
 \vskip 1cm
-\noindent {\bf PHY 104A --- Introductory Methods of Mathematical Physics (4):}
+\noindent {\bf PHY 104A --- Introduction to Mathematical Methods in Physics (4):}
 Introduction to the mathematics used in upper division physics
-courses. Vector spaces, Fourier analysis, partial differential
+courses. Vector spaces, Fourier analysis, and partial differential
 equations.
 
 This course includes review of some material from MAT 21D and MAT
@@ -2030,7 +2116,7 @@ topics.
 
 \vskip 1cm
 \noindent
-{\bf PHY 110L --- Computing Lab for Electricity and Magnetism (1):}
+{\bf PHY 110L --- Computational Physics Lab for Electricity and Magnetism (1):}
 Applications of computational physics to problems from Electricity and
 Magnetism.
 
@@ -2069,7 +2155,7 @@ The reference text is ``Thermal Physics'' by Schroeder.  The core topics are:
 
 \vskip 1cm
 \noindent
-{\bf PHY 112L --- Computing Lab for Statistical Mechanics (1):}
+{\bf PHY 112L --- Computational Physics Lab for Statistical Mechanics (1):}
 Applications of computational physics to problems from statistical mechanics.
 
 This course, which has one hour of lecture per week, includes
@@ -2177,7 +2263,7 @@ courses within the same year.
 
 \vskip 1cm
 \noindent
-{\bf PHY 115L --- Computing Lab for Quantum Mechanics (1):}
+{\bf PHY 115L --- Computational Physics Lab for Quantum Mechanics (1):}
 Applications of computational physics to problems from Classical and Quantum Mechanics.
 
 This course, which has one hour of lecture per week, includes
@@ -2211,11 +2297,93 @@ involving analog and digital components.  Feedback, amplifiers,
 oscillators, noise, integrated circuits, digital logic, timers,
 analog-to-digital and digital-to-analog converters.
 
+
+{\bf Summary of Course Content:}
+This course provides a theoretical understanding and practical
+experience with the use of analog and digital electronics within the
+context of instrumentation for physics experiments.
+
+The lecture content is primarily in support of the lab activities.
+The lab activities survey the essential devices used for physics
+instrumentation, excluding passive compenents (resistors, capacitors,
+and diodes) covered in PHY 80.  It excludes modern high-density
+integrated circuits, such as FPGAs and CPUs, which are covered in PHY
+118.  The lab topics include: transistors, operational amplifiers,
+power amplifiers, schmitt triggers, oscillators, gates, flip-flops,
+combinatorics, synchronous logic, and analog-to-digital and
+digital-to-analog conversion.  There is also room for topical
+interests of each instructor.  The lectures develop physics models for
+each device which are used to calculate their theoretical behavior,
+and discuss the ways in which each device contributes to physical
+instrumentation.
+
+{\bf Illustrative Reading:}
+The Art of Electronics by Horowitz and Hill
+Practical Electronics for Inventors by Scherz
+Experiments in Modern Physics by Melissinos and Napolitano
+
+{\bf Potential Course Overlap:} This course has substantial overlap
+with many courses in electrical and computer engineering, most notably
+EEC 110A, 110B, 140A, and 18.  However, this course is substantially
+different from any of these courses.  Most importantly, this course
+does not attempt to reach the level of mastery in electronic design
+that an electrical engineer reaches through years of study and
+practice.  Instead, this is a one quarter survey of the essential
+analog and digital devices which a scientist is likely to encounter in
+the context of instrumenting an experiment.  This course prepares
+future scientists with a basic understanding of the operational
+behavior of these devices which is needed for productive collaboration
+with engineers to design experiments.  We do have an applied physics
+major in electronic devices which attempts to reach the same level of
+mastery as engineers in some of these topics.  Those students are
+required to take coursework in EEC instead of taking PHY 117 or 118.
+
+
+
 \vskip 1cm
 \noindent 
 {\bf PHY 118 --- Physics Instrumentation for Data Acquisition (4):}  
 Experimental application of modern high density integrated circuits.
 Automated data acquisition,  microprocessors, field programmable gate arrays.
+
+{\bf Summary of Course Content:}
+This course provides practical experience with using modern
+high-density integrated circuits to develop custom data acquisition
+circuits for physics experiments.
+
+The lecture content is primarily in support of the lab activities,
+which deploy FPGAs and microprocessors to create a scalar, function
+generator, digital oscilloscope, and spectrum analyzier.  In order to
+do so, students learn to write microprocessor code and high level
+description code for FPGAs.  Students use their custom data
+acquisition system to conduct experiments exploring physical
+phenomemon such as radioactivity, muon decay, and johnson noise.  The
+lectures further explore the role that data acquisition systems play
+in modern physics experiments.
+
+{\bf Illustrative Reading:}
+A Verilog HDL Primer by Bhasker
+FPGA Prototyping by VHDL Examples by Chu
+Getting Started with Arudino by Banzi and Shiloh
+Experiments in Modern Physics by Melissinos and Napolitano
+
+
+{\bf Potential Course Overlap:} This course has substantial overlap
+with many courses in electrical and computer engineering, most notably
+EEC 170, 172, 180, and 181A/B.  However, this course is substantially
+different from any of these courses.  Most importantly, this course
+does not attempt to reach the level of mastery in electronic design
+that an electrical engineer reaches through years of study and
+practice.  Instead, this course covers the basics of programming
+microprocessors and configuring FPGAs at a level sufficient to
+instrument basic physics experiments.  This course prepares future
+scientists with a basic understanding of the operational behavior of
+these essential devices which is needed for productive collaboration
+with engineers to design experiments.  We do have an applied physics
+major in electronic devices which attempts to reach the same level of
+mastery as engineers in some topics.  Those students are required to
+take their electronics courses in EEC instead of taking PHY 117 or
+118.
 
 \newpage
 
