@@ -1,0 +1,76 @@
+\documentclass[12pt,oneside]{book}
+
+\usepackage[letterpaper,margin=0.75in,bottom=0.75in]{geometry}
+\usepackage{cite}
+\usepackage{slashed}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{latexsym,amssymb,amsmath}
+\usepackage{multicol}
+
+\usepackage[american,fulldiode,oldvoltagedirection, betterproportions]{circuitikz}
+\tikzset{component/.style={draw,thick,circle,fill=white,minimum size =0.75cm,inner sep=0pt}}
+
+\begin{document}
+\ctikzset{bipoles/thickness=1}
+\ctikzset{bipoles/length=1cm}
+
+\title{Electronics for Scientists}
+\author{Andy Haas and Michael Mulhearn}
+\maketitle
+
+\input{equivalent_circuits}
+
+\input{phase}
+
+\input{semiconductors}
+
+\input{feedback}
+
+\appendix
+
+\input{problems}
+
+\chapter{Plan}
+
+\begin{verbatim}
+Chapter 1: Equivalent Circuits
+Big Idea: Maxwell's equations provide a complete description of any electrical
+device, but they are impractical to apply to real world problems. We develop
+approximate laws that are better suited for understanding electrical devices.
+
+Fundamental Physics: Drude Law, Electric fields and drift velocity, Charge and Fields of DC circuits
+Core Topics: Ohm's Law, KVL+KCL, Voltage Divider, Resistors in Parallel and Series, Source and Load Resistance, VI diagrams, Thevenin Equivalent Circuits
+Practical Topics: Schematics, Bread Boards, Power Supplies, DMM, Simulation, Safety
+
+Chapter 2: Phase
+Big Idea: We use the phase of complex numbers in place of differential equations
+to understand time-dependent circuits. This enables us to build circuits which filter or resonate based on frequency.
+
+Fundamental Physics: Capacitance and Inductance, Fourier transform
+Core Topics:  Time-Dependent Circuits, Transient Response of RLC devices, AC, Impedance, Filters, Resonance, Transformers
+Practical Topics: Function Generator, Oscilloscope, Decibels, Decoupling, Bode Plots 
+
+Chapter 3: Semiconductors
+Big Idea: Semiconductors provide a new form of charge carrier (positive holes) essential for modern electronics.
+
+Fundamental Physics: Band Theory (no conduction in full bands), PN-junction behavior
+Core Topics: Diode, LEDs, Transistor (BJT and FET), Amplification, Input and Output Impedance, Transconductance, Integrated Circuits
+Practical Topics: Transformer, Unregulated and Regulated DC power, Negative voltage sources, Emitter Follower, Common-Emitter Amplifier, Switch, Diode and Transistor Curves, Datasheets
+
+Chapter 4: Feedback
+Big Idea: Coupling the output of a device back to its input can make an imperfect device appear to be nearly ideal. A wonderful abstraction using this idea is the operational amplifier, which can be used for countless applications.
+
+Fundamental Physics: Feedback phase - exponential damping vs. resonance
+Core Topics: Op-Amps, Op-Amp Rules, Positive and Negative Feedback, Gain-Bandwidth Product, Limitations of Real Devices
+Practical Topics: Follower, Amplifier, Adder, Active Filter
+\end{verbatim}
+
+
+
+
+\end{document}
+
+
+
+

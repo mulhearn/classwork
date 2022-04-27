@@ -1,0 +1,428 @@
+
+\chapter{Practice Problems}
+
+\section{DC Circuits}
+
+\begin{enumerate}
+
+\item In the circuit below, which includes a current source providing a constant $5~\rm mA$ current, find the indicated current $I$: \\
+\begin{center}
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) to[current source,bipoles/length=1.5cm] ++(0,+3.0) 
+to[short] ++(1.5,0) coordinate(X) to[R,l=$2~\rm k\Omega$] ++(0,-3) to[short] ++(-1.5,0);
+\draw (X) to[short,*-] ++(1.5,0) coordinate(X) to[R,l=$3~\rm k\Omega$,i=$I$] ++(0,-3) to[short,-*] ++(-1.5,0);
+\draw (-0.25,2.0) node[left]{$5~\rm mA$};
+\end{circuitikz} 
+\end{center}
+
+\item In the circuit below, find the voltage $V_{\rm out}$:
+\begin{center}
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) node[ground,yscale=2.0]{} to[voltage source,bipoles/length=1.5cm,l=$5~\rm V$] ++(0,+3.0) 
+to[R,l=$2~\rm k\Omega$] ++(3.0,0) coordinate(X) to[R,l=$3~\rm k\Omega$] ++(0,-3) to[short] ++(-3.0,0);
+\draw (X) to[short,*-o] ++(1.5,0) node[right]{$V_{\rm out}$};
+\end{circuitikz} 
+\end{center}
+
+
+\item In the circuit below, find the indicated current $I$ in terms $V_{\rm out}$ and $R$:
+\begin{center}
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) to[voltage source,bipoles/length=1.5cm,l=$V_0$] ++(0,+3.0) 
+to[R,l=$R$] ++(3.0,0) coordinate(X) to[R,l=$R$] ++(0,-3) to[short] ++(-3.0,0);
+\draw (X) to[short] ++(1.5,0) to[R,l=$R$,i=$I$] ++(0,-3) to[short] ++(-3.0,0);
+\end{circuitikz} 
+\end{center}
+
+
+\item In the circuit below, find the indicated current $I$ in terms of the DC voltage $V_{\rm out}$, and the component values $R$, and $C$:
+\begin{center}
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) to[voltage source,bipoles/length=1.5cm,l=$V_0$] ++(0,+3.0) 
+to[short,i=I] ++(3.0,0) coordinate(X) to[C,l=$C$] ++(0,-3) to[short] ++(-3.0,0);
+\draw (X) to[short] ++(1.5,0) to[R,l=$R$] ++(0,-3) to[short] ++(-3.0,0);
+\end{circuitikz} 
+\end{center}
+
+\item In the circuit below, find the indicated current $I$ in terms of the DC voltage $V_{\rm out}$, and the component values $R$, and $C$:
+\begin{center}
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) to[voltage source,bipoles/length=1.5cm,l=$V_0$] ++(0,+3.0) 
+to[C,l=$C$] ++(3.0,0) to[R,l=$R$,i=$I$] ++(0,-3) to[short] ++(-3.0,0);
+\end{circuitikz} 
+\end{center}
+
+\item In the circuit below, which includes an inductor with inductance $L$, find the indicated current $I$ in terms of the DC voltage $V_{\rm out}$, and the component values $L$, and $R$:
+\begin{center}
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) to[voltage source,bipoles/length=1.5cm,l=$V_0$] ++(0,+3.0) 
+to[L,l=$L$] ++(3.0,0) to[R,l=$R$,i=$I$] ++(0,-3) to[short] ++(-3.0,0);
+\end{circuitikz} 
+\end{center}
+
+\item Find the Thevenin equivalent circuit for the following two node network, expressing $V_{\rm th}$ and $R_{\rm th}$ in terms of the quantities $V_0$ and $R$:
+
+\begin{center}
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) coordinate(X) to[voltage source,bipoles/length=1.5cm,l=$V_0$] ++(0,+3.0) 
+to[R,l=$R$,-o] ++(3.0,0) node[right]{B};
+\draw (X) to[R,l=$R$,-o] ++(3.0,0) node[right]{A};
+\end{circuitikz} 
+\end{center}
+
+\newpage
+
+\item Find the Thevenin equivalent circuit for the following two node network, expressing $V_{\rm th}$ and $R_{\rm th}$ in terms of the quantities $V_0$ and $R$:
+
+\begin{center}
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) to[voltage source,bipoles/length=1.5cm,l=$V_0$] ++(0,+3.0) 
+to[R,l=$R$] ++(3.0,0) coordinate(X) to[short,*-o] ++(1.0,0) node[right]{B};
+\draw (X) to[R,l=$R$,-o] ++(0.0,-3.0) coordinate(X) to[short,*-o] ++(1.0,0) node[right]{A};
+\draw(X) to[short,*-] ++(-3.0,0);
+\end{circuitikz} 
+\end{center}
+
+\item Find the Thevenin equivalent circuit for the following two node network, expressing $V_{\rm th}$ and $R_{\rm th}$ in terms of the quantities $V_0$ and $R$:
+
+\begin{center}
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) to[voltage source,bipoles/length=1.5cm,l=$V_0$] ++(0,+3.0) 
+to[short] ++(1.5,0) coordinate(X) to[short,*-o] ++(1.0,0) node[right]{B};
+\draw (X) to[R,l=$R$,-o] ++(0.0,-3.0) coordinate(X) to[short,*-o] ++(1.0,0) node[right]{A};
+\draw(X) to[short,*-] ++(-1.5,0);
+\end{circuitikz} 
+\end{center}
+
+\item Find the Thevenin equivalent circuit for the following two node network,
+expressing $V_{\rm th}$ and $R_{\rm th}$ in terms of the constant current $I_0$ and the resistance $R$:
+
+\begin{center}
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) to[current source,bipoles/length=1.5cm,l=$I_0$] ++(0,+3.0) 
+to[short] ++(1.5,0) coordinate(X) to[short,*-o] ++(1.0,0) node[right]{B};
+\draw (X) to[R,l=$R$,-o] ++(0.0,-3.0) coordinate(X) to[short,*-o] ++(1.0,0) node[right]{A};
+\draw(X) to[short,*-] ++(-1.5,0);
+\end{circuitikz} 
+\end{center}
+
+\item Find the Thevenin equivalent circuit for the following two node network,
+expressing $V_{\rm th}$ and $R_{\rm th}$ in terms of the resistance $R$:
+
+\begin{center}
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) node[right]{A} to[short,o-] ++(-2.5,0) to[R,l=$R$,-*] ++(0.0,1.5) coordinate(X);
+\draw (X) to[short] ++(-0.75,0) to[R,l=$R$] ++(0.0,1.5) to[short,-o] ++(3.25,0) node[right]{B};
+\draw (X) to[short] ++(0.75,0) to[R,l=$R$,-*] ++(0.0,1.5);
+\end{circuitikz} 
+\end{center}
+
+
+
+\item Find the Thevenin equivalent circuit for the following two node network, expressing $V_{\rm th}$ and $R_{\rm th}$ in terms of the quantities $V_0$ and $R$:
+
+\begin{center}
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) coordinate(X) to[R,l=$R$] ++(0,1.5) coordinate(Y) to[short] ++(0,1.5) to[R,l=$R$] ++(0,1.5);
+\draw (Y) to[short,*-] ++(1.5,0) to[voltage source,bipoles/length=1.5cm,l=$V_0$] ++(0,1.5) to[short,-*] ++(1.5,0);
+\draw (X) to[short] ++(3.0,0) coordinate(X);
+\draw (X) to[R,l=$R$] ++(0,1.5) to[short] ++(0,1.5) to[R,l=$R$] ++(0,1.5) coordinate(Y);
+\draw (Y) to[short] ++(-3.0,0);
+\draw (X) to[short,-o] ++(1.0,0) node[right]{A};
+\draw (Y) to[short,-o] ++(1.0,0) node[right]{B};
+\end{circuitikz} 
+\end{center}
+
+
+\item Find the Thevenin equivalent circuit for the following two node network, expressing $V_{\rm th}$ and $R_{\rm th}$ in terms of the constant current $I_0$ and the resistance $R$:
+
+\begin{center}
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) to[R,l=$R$] ++(0,1.5) to[R,l=$R$] ++(0,1.5) to[short] ++(2.5,0) coordinate(X);
+\draw (X) to[short,-o] ++(1.0,0) node[right]{B};
+\draw (X) to[R,l_=$R$,*-] ++(0,-1.5) coordinate(X) to[current source,bipoles/length=1.5cm,l=$I_0$,-*] ++(-2.5,0);
+\draw (X) to[R,l_=$R$,*-] ++(0,-1.5) coordinate(X) to[short] ++ (-2.5,0);
+\draw (X) to[short,-o] ++(1.0,0) node[right]{A};
+\end{circuitikz} 
+\end{center}
+
+
+\item Circuits like the one below, which contains the bridge resistor $R_3$, cannot be reduced in terms of series and parallel resistors.  For this particular circuit, we'll show that $I_1 = I_5$ and $I_2 = I_4$, which seems plausible based on symmetry.
+\begin{center}
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) to[R,l=$R_2$,i<^=$I_4$] ++(0,3.0) to[R,l=$R_1$,i<=$I_1$] ++(0,3.0) to[short] ++(3.0,0) coordinate(X);
+\draw (X) to[R,l_=$R_2$,i>_=$I_2$] ++(0,-3.0) coordinate(X) to[R,l=$R_3$,i<^=$I_3$,-*] ++(-3.0,0);
+\draw (X) to[R,l_=$R_1$,i_>=$I_5$,*-] ++(0,-3.0) coordinate(X) to[short] ++ (-3.0,0) coordinate(X);
+\draw(X) to[short,*-] ++(-3.0,0) to[voltage source,bipoles/length=1.5cm,l=$V_0$] ++(0,6.0) 
+to[short,i=$I$,*-] ++(3.0,0);
+\end{circuitikz} 
+\end{center}
+First show why:
+\begin{eqnarray*} 
+I_1 + I_2 &=& I_4 + I_5 \\
+I_1 R_1 + I_4 R_2 &=& I_2 R_2 + R_1 I_5 \\
+\end{eqnarray*}
+then use these equations to show that we must have:
+\begin{eqnarray*} 
+I_1 &=& I_5 \\
+I_2 &=& I_4 \\
+\end{eqnarray*}
+
+\item Consider the bridge circuit below, which has been simplified according to the results of the previous exercise to include only four currents $I$, $I_1$, $I_2$, and $I_3$.
+\begin{center}
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) to[R,l=$R_2$,i<^=$I_2$] ++(0,3.0) to[R,l=$R_1$,i<=$I_1$] ++(0,3.0) to[short] ++(3.0,0) coordinate(X);
+\draw (X) to[R,l_=$R_2$,i>_=$I_2$] ++(0,-3.0) coordinate(X) to[R,l=$R_3$,i<^=$I_3$,-*] ++(-3.0,0);
+\draw (X) to[R,l_=$R_1$,i_>=$I_1$,*-] ++(0,-3.0) coordinate(X) to[short] ++ (-3.0,0) coordinate(X);
+\draw(X) to[short,*-] ++(-3.0,0) to[voltage source,bipoles/length=1.5cm,l=$V_0$] ++(0,6.0) 
+to[short,i=$I$,*-] ++(3.0,0);
+\end{circuitikz} 
+\end{center}
+(a) Suppose we want to solve for the current $I$ in terms of the known quantities $V_0$, $R_1$,$R_2$, and $R_3$.  There are four unknown quantities $I$, $I_1$, $I_2$, $I_3$, so we will need to find four independent equations.  Find two equations from KCL and two equations from KVL to yield a total of four independent equations.  You {\bf do not} need to solve these equations!
+(b) The solution to this system of equations zx b  hn nhyresults in:
+\begin{displaymath}
+\frac{V_0}{I} = \frac{(R_1 + R_2)\,R_3 + 2 R_1 R_2}{2 R_3 + R_1 + R_2}
+\end{displaymath}
+which is the equivalent resistance for the bridge network.  Draw equivalent circuits for the two cases $R_3 = 0$ and $R_3 \to \infty$, and show that this expression reduces to correct resistance in these two cases.
+\end{enumerate}
+
+\section{AC Circuits}
+\begin{enumerate}
+\item An AC voltage has peak-to-peak voltage of $4~\rm V$.  What is the RMS voltage?
+
+\item An AC current has an RMS value of $10~\rm mA$.  What is the peak current and peak-to-peak current?
+\item Write the phasor for the following AC voltage with angular frequency $\omega$ in terms of $v_{\rm p}$:
+\begin{displaymath}
+v(t) = v_{\rm p} \, \cos \left(\omega t + \frac{\pi}{3} \right)
+\end{displaymath}
+
+\item Write the phasor for the following AC current with angular frequency $\omega$ in terms of $i_{\rm p}$:
+\begin{displaymath}
+i(t) = i_{\rm p} \, \sin \left(\omega t \right)
+\end{displaymath}
+
+\item Write the phasor for the following AC current with angular frequency $\omega$ in terms of $i_{\rm p}$:
+\begin{displaymath}
+i(t) = i_{\rm p} \, \sin \left(\omega t + \frac{\pi}{5}\right)
+\end{displaymath}
+ 
+\item Write the phasor for the following AC voltage with angular frequency $\omega$ in terms of $A$:
+\begin{displaymath}
+v(t) = A \, (\sin(\omega t) + \cos (\omega t))
+\end{displaymath}
+
+\item Write the AC voltage $v(t)$ with angular frequency $\omega$ corresponding to the phasor
+\begin{displaymath}
+\tilde{v} = v_{\rm p}
+\end{displaymath}
+in terms of $v_{\rm p}$ and $\omega$.
+
+ \item Write the AC voltage $v(t)$ with angular frequency $\omega$ corresponding to the phasor
+\begin{displaymath}
+\tilde{v} = - j v_{\rm p}
+\end{displaymath}
+in terms of $v_{\rm p}$ and $\omega$.
+
+ \item Write the AC current $i(t)$ with angular frequency $\omega$ corresponding to the phasor
+\begin{displaymath}
+\tilde{i} = i_{\rm p} \exp\left( j \frac{\pi}{7} \right)
+\end{displaymath}
+in terms of $i_{\rm p}$ and $\omega$.
+ 
+\item Write the AC current $i(t)$ with angular frequency $\omega$ corresponding to the phasor
+\begin{displaymath}
+\tilde{i} = i_{\rm p} \, \frac{1+j}{\sqrt{2}}
+\end{displaymath}
+in terms of $i_{\rm p}$ and $\omega$.
+
+\item Write the complex impedance of the following two-node network:
+\begin{center}
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) node[left]{A} to[short,o-] ++(1.5,0) coordinate(X) to[R,l=$R$] ++(0,3.0)
+to[short,-o] ++(-1.5,0) node[left]{B};
+\draw (X) to[short,*-] ++(1.5,0) coordinate(X) to[C,l_=$C$] ++(0,3.0) to[short,-*] ++(-1.5,0);
+\end{circuitikz} 
+\end{center}
+in terms of the angular frequency $\omega$, and component values $R$ and $C$.
+
+\newpage
+
+\item Write the complex impedance of the following two-node network:
+\begin{center}
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) node[left]{A} to[short,o-] ++(1.5,0) coordinate(X) to[L,l=$L$] ++(0,3.0)
+to[short,-o] ++(-1.5,0) node[left]{B};
+\draw (X) to[short,*-] ++(1.5,0) coordinate(X) to[C,l_=$C$] ++(0,3.0) to[short,-*] ++(-1.5,0);
+\end{circuitikz} 
+\end{center}
+in terms of the angular frequency $\omega$, the inductance $L$, and capacitance $C$.
+
+
+\item Write the complex impedance of the following two-node network:
+\begin{center}
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) node[left]{A} to[short,o-] ++(1.5,0) coordinate(X) to[L,l=$L$] ++(0,1.5)
+to[C,l=$C$] ++(0,1.5) to[short,-o] ++(-1.5,0) node[left]{B};
+\end{circuitikz} 
+\end{center}
+in terms of the angular frequency $\omega$, the inductance $L$, and capacitance $C$.
+
+\item For an AC voltage $v(t) = v_{\rm p} \sin(\omega t)$, find the current $i(t)$ through the following circuit:
+\begin{center}
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) node[ground,yscale=2.0]{} coordinate(X) to[sinusoidal voltage source,bipoles/length=1.5cm] ++(0,3.0);
+\draw (X) to[short] ++(3.0,0) coordinate(X) to[R,l=$R$] ++(0,3.0)
+to[short] ++(-3.0,0);
+\draw (-0.25,2.0) node[left]{$v(t)$};
+\end{circuitikz} 
+\end{center}
+in terms of $v_{\rm p}$, $\omega$, and $R$.
+
+\item For an AC voltage $v(t) = v_{\rm p} \sin(\omega t)$, find the current $i(t)$ through the following circuit:
+\begin{center}
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) node[ground,yscale=2.0]{} coordinate(X) to[sinusoidal voltage source,bipoles/length=1.5cm] ++(0,3.0);
+\draw (X) to[short] ++(3.0,0) coordinate(X) to[C,l=$C$] ++(0,3.0)
+to[short] ++(-3.0,0);
+\draw (-0.25,2.0) node[left]{$v(t)$};
+\end{circuitikz} 
+\end{center}
+in terms of $v_{\rm p}$, $\omega$, and $C$.
+
+\item For an AC voltage $v(t) = v_{\rm p} \cos(\omega t)$, find the current $i(t)$ through the following circuit:
+\begin{center}
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) node[ground,yscale=2.0]{} coordinate(X) to[sinusoidal voltage source,bipoles/length=1.5cm] ++(0,3.0);
+\draw (X) to[short] ++(3.0,0) coordinate(X) to[L,l=$L$] ++(0,1.5) to[R,l=$R$] ++(0,1.5)
+to[short] ++(-3.0,0);
+\draw (-0.25,2.0) node[left]{$v(t)$};
+\end{circuitikz} 
+\end{center}
+in terms of $v_{\rm p}$, $\omega$, and $R$, at the particular frequency $\omega = R/L$.
+
+\item For an AC voltage $v(t) = v_{\rm p} \cos(\omega t)$, find the indicated current $i(t)$ in the following circuit:
+\begin{center}
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) node[ground,yscale=2.0]{} coordinate(X) to[sinusoidal voltage source,bipoles/length=1.5cm] ++(0,3.0);
+\draw (X) to[short] ++(1.5,0) coordinate(X) to[L,l_=$L$] ++(0,3.0)
+to[short,,i_<=$i(t)$] ++(-1.5,0);
+\draw (X) to[short,*-] ++(1.5,0) coordinate(X) to[C,l_=$C$] ++(0,3.0) to[short,-*] ++(-1.5,0);
+\draw (-0.25,2.0) node[left]{$v(t)$};
+\end{circuitikz} 
+\end{center}
+in terms of $v_{\rm p}$, $\omega$, $L$ and $C$.
+
+\item Find the complex transfer function $H(\omega) = \tilde{v}_{\rm out}/\tilde{v}_{\rm in}$ for the following circuit:
+\begin{center}
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) node[ground,yscale=2.0]{} coordinate(X) to[sinusoidal voltage source,bipoles/length=1.5cm] ++(0,4.0);
+\draw (X) to[short] ++(3.0,0) coordinate(X) to[R,l=$2R$] ++(0,2.0) coordinate(X) to[R,l=$R$] ++(0,2.0)
+to[short] ++(-3.0,0);
+\draw (X) to[short,*-o] ++(1.0,0) node[right]{$\tilde{v}_{\rm out}$};
+\draw (-0.25,2.5) node[left]{$\tilde{v}_{\rm in}$};
+\end{circuitikz} 
+\end{center}
+in terms of the resistance $R$.
+
+\newpage
+
+\item Find the complex transfer function $H(\omega) = \tilde{v}_{\rm out}/\tilde{v}_{\rm in}$ for the following circuit:
+\begin{center}
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) node[ground,yscale=2.0]{} coordinate(X) to[sinusoidal voltage source,bipoles/length=1.5cm] ++(0,4.0);
+\draw (X) to[short] ++(3.0,0) coordinate(X) to[C,l=$C$] ++(0,2.0) coordinate(X) to[R,l=$R$] ++(0,2.0)
+to[short] ++(-3.0,0);
+\draw (X) to[short,*-o] ++(1.0,0) node[right]{$\tilde{v}_{\rm out}$};
+\draw (-0.25,2.5) node[left]{$\tilde{v}_{\rm in}$};
+\end{circuitikz} 
+\end{center}
+in terms of the component values $R$ and $C$.
+
+\item Find the complex transfer function $H(\omega) = \tilde{v}_{\rm out}/\tilde{v}_{\rm in}$ for the following circuit:
+\begin{center}
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) node[ground,yscale=2.0]{} coordinate(X) to[sinusoidal voltage source,bipoles/length=1.5cm] ++(0,4.0);
+\draw (X) to[short] ++(3.0,0) coordinate(X) to[C,l=$C$] ++(0,2.0) coordinate(X) to[L,l=$L$] ++(0,2.0)
+to[short] ++(-3.0,0);
+\draw (X) to[short,*-o] ++(1.0,0) node[right]{$\tilde{v}_{\rm out}$};
+\draw (-0.25,2.5) node[left]{$\tilde{v}_{\rm in}$};
+\end{circuitikz} 
+\end{center}
+in terms of the component values $R$ and $C$.
+
+\item Find the complex transfer function $H(\omega) = \tilde{v}_{\rm out}/\tilde{v}_{\rm in}$ for the following circuit:
+\begin{center}
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) node[ground,yscale=2.0]{} coordinate(X) to[sinusoidal voltage source,bipoles/length=1.5cm] ++(0,4.0);
+\draw (X) to[short] ++(3.5,0) coordinate(X) to[C,l=$C$] ++(0,2.0) coordinate(X) to[R,l=$R$] ++(0,2.0)
+to[short] ++(-3.5,0);
+\draw (X) to[short,*-o] ++(1.0,0) node[right]{$\tilde{v}_{\rm out}$};
+\draw (X) to[short] ++(-1.5,0) to[R,l_=$R$,-*] ++(0,-2.0);
+\draw (-0.25,2.5) node[left]{$\tilde{v}_{\rm in}$};
+\end{circuitikz} 
+\end{center}
+in terms of the component values $R$ and $C$.
+\end{enumerate}
+
+\newpage
+\section{Answers}
+
+\begin{multicols}{2}
+DC circuits:
+\begin{enumerate}
+\item $I = 2~\rm mA$
+\item $V_{\rm out} = 3~\rm V$
+\item $$ \hspace*{-5cm} I = \frac{V_0} {3R} $$
+
+\item $$ \hspace*{-5cm} I = \frac{V_0} {R} $$
+\item $I=0$
+\item $$ \hspace*{-5cm} I = \frac{V_0} {R} $$
+\item $V_{\rm th} = V_0, R_{\rm th} = 2R$
+
+\item $V_{\rm th} = V_0/2, R_{\rm th} = R/2$
+\item $V_{\rm th} = V_0, R_{\rm th} = 0$
+\item $V_{\rm th} = I_0 R, R_{\rm th} = R$
+\item $V_{\rm th} = 0, R_{\rm th} = 3R/2$
+
+\item $V_{\rm th} = 0, R_{\rm th} = R$
+\item $V_{\rm th} = 0, R_{\rm th} = R$
+\item (answer given)
+\item (answer given)
+\end{enumerate}
+AC circuits:
+\begin{enumerate}
+\item $v_{\rm rms} = \sqrt{2}~\rm V$
+\item $v_{\rm p} = 10 \sqrt{2} ~\rm mA, v_{\rm pp} = 20 \sqrt{2} ~\rm mA, $
+\item $\tilde{v} = v_{\rm p} e^{j\pi/3}$
+
+\item $\tilde{i} = -j \, i_p$
+\item $\tilde{i} = -j \, i_p \, e^{j\pi/5} = i_p \, e^{-j 4 \pi /5}$
+\item $\tilde{v} = A(1-j)$
+\item $v(t) = v_p \cos(\omega t)$
+\item $v(t) = v_p \sin(\omega t)$
+\item $i(t) = i_p \cos(\omega t + \pi/7)$
+\item $i(t) = (i_p/\sqrt{2}) \, (\cos(\omega t) - \sin(\omega t))$
+\item $$ \hspace*{-5cm} Z = \frac{R}{1 + j \omega RC} $$
+
+\item $$ \hspace*{-5cm} Z = \frac{j \omega L }{1 - \omega^2 LC} $$
+\item $$ \hspace*{-5cm} Z = j \left( \omega L - \frac{1}{\omega C} \right)$$
+\item $i(t) = v_{\rm p} \, \sin(\omega t) / R$
+\item $i(t) = v_{\rm p} \, \omega \, C \, \cos(\omega t)$
+
+\item $$ \hspace*{-3cm} i(t) = \frac{v_{\rm p}}{2 R} \left( \cos(\omega t) + \sin(\omega t) \right)$$
+\item $$ \hspace*{-3cm} i(t) = \frac{1 - \omega^2 LC}{\omega L} \, v_p \, \sin(\omega t)$$
+\item $H(\omega) = 2/3$
+
+\item $$ \hspace*{-3cm} H(\omega) = \frac{1}{1 + j \omega R C} $$
+\item $$ \hspace*{-3cm} H(\omega) = \frac{1}{1 - \omega^2 L C} $$
+\item $$ \hspace*{-3cm} H(\omega) = \frac{1}{2 + j \omega R C} $$
+
+
+\end{enumerate}
+\end{multicols}
+
+
+
+
+
+
