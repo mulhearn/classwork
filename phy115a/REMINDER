@@ -1,0 +1,4 @@
+xpdf -remote latex <PDF> &
+
+pdflatex <TEX>  ; xpdf -remote latex -reload
+
