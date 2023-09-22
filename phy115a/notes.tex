@@ -23,7 +23,6 @@
 
 \section{The Experimental Foundation of Quantum Mechanics}
 
-
 By the start of the 1900's classical physics had achieved a series of remarkable experimental and theoretical breakthroughs.
 \begin{itemize}
 
@@ -47,17 +46,26 @@ Despite these impressive achievements, a series of experiments revealed the shor
 where $1/R_H = 91~\rm nm$ and $n_1 < n_2$ are both quantum numbers.
 \end{itemize}
 These results made it clear that classical physics needed to be replaced or overhauled.
-The conversation between experimentalists and theorists during this time was quite intense.  There were both breakthroughs and missteps, but ultimately, the theory of Quantum Mechanics emerged as an even greater accomplishment than the Classical Physics it superseded.
+The conversation between experimentalists and theorists during this time was quite intense and productive:
+\begin{itemize}
+\item Black body radiation:
+\item Photoelectric effect:
+\item Atomic spectroscopy: 
+\item Stern-Gerlach:
+\end{itemize}
 
-This is a fascinating period to read about, and there is much to be learned by looking closely at past breakthroughs and missteps.  However, our approach will be to jump directly to our present understanding of Quantum Theory, learn how to apply it, develop intuitions about it, and then see how the canonical historical experiments are all described handily by the theory.
+This collection of phenomenology and ad-hoc quantum explanation is now referred to as the "Old Quantum Theory"
+
+The quantization of photons inspired deBroglie to make a remarkable hypothesis, which was the beginning of the formulation of quantum mechanics as we know it today.
+
+Instead of developing the theory piece by piece, we take the Schr\:odinger as our starting assumption, and work through the consequences.
+
 
 \section{An Experimental Perspective}
 
 \begin{itemize}
 
-\item Never forget that physics is an {\bf experimental discipline}: the
-most compelling mathematical argument you can imagine could be rendered
-invalid by a single well-executed experiment.
+\item Never forget that physics is an {\bf experimental discipline}: the most compelling mathematical argument you can imagine could be rendered invalid by a single well-executed experiment.  
 
 \item {\bf You cannot derive Quantum Mechanics.}  Quantum Mechanics is a set
 of assumptions that are mathematically consistent with experimental results.
@@ -71,27 +79,176 @@ game, the more confidence we have in the theory.
 \item By this metric, {\bf Quantum Mechanics is an exceptionally successful theory!}
 
 \item {\bf The starting assumptions are not unique.} You can learn
-alot by seeing how different assumptions lead to the same physical
+a lot by seeing how different assumptions lead to the same physical
 theory.  We'll do some of this.
-
-\item You can appreciate the beauty of an elegant derivation or the
-power of a well-designed notation while still keeping the experimental
-perspective!
 
 \end{itemize}
 
-\section{The Schrodinger Equation}
+\section{The Schr\"odinger Equation}
+
+Here's a summary of Griffiths sections 1.1-1.2.
 
 \begin{itemize}
 
-\item A particle is described by a wave function $\Psi(x,t)$.
+\item A state of a particle is described by its wave function $\Psi(x,t)$.
 
-\item The time evolution of $\Psi(x,t)$ according to the Schroginger Equation (SE):
+\item The wave function $\Psi(x,t)$ is a solution to the Schr\"odinger Equation (SE):
 \begin{equation}
 \label{eqn:se}
 \ihbar \dPsidt = - \frac{\hbar^2}{2 m}\ddPsidx + V \Psi
 \end{equation}
+where $m$ is the mass of the particle, $V$ the potential energy function or just ``potential'', and:  
+
+\item The reduced plank's constant $\ihbar = \frac{h}{2 \pi} = 1.054573 \times 10^-34~\rm Js$.
+
+\item The physical interpretation of the wave function is statistical.  The probability $P_{ab}(t)$ that the particle will be found between points $a$ and $b$ at time $t$ is:
+\begin{equation}
+\label{eqn:prob}
+P_{ab}(t) = \int_a^b |\Psi(x,t)|^2 dx
+\end{equation}
 \end{itemize}
+
+Suppose we divide the $x$-axis into six regions $A,B,C,D,E,F$ and the particle is in a state where it has equal probability to be found in any region at $t=0$.  At $t-0$ we observe the particle in region $C$.  Where was the particle before this measurement?  There are several schools of thought:
+\begin{itemize}
+\item realist:  The particle was already in region $C$ and we just didn't know that yet.
+\item orthodox:  The particle wasn't in any one region, it was the measurement itself that caused one of several possible outcomes.
+\item agnostic:  I don't know.  It doesn't matter where the particle was before a measurement, because physics is about predicting the outcome of measurements.
+\end{itemize}
+As we'll see later, John Bell showed that this seemingly philosophical question could be explored experimentally.  Of these three possibilities, the orthodox interpretation is the most supported by the experimental evidence.
+
+\section{Review of Statistics and Probability}
+
+Given that the physical interpretation of Quantum Mechanics is statistical, we'll review the relevant concepts from statistics. This is also covered in Griffiths sections 1.3.  In the language of statistics, at the time $t$ that we make a measurement of the particles position, the measured value $x$ is a random variable of the probability distribution function $P(x) = |\Psi(x,t)|$. 
+
+More generally, probability distribution functions can describe a discrete random variable $m$ 
+that takes on a countable number of distinct values like $m=0,1.2,3,\ldots$.   Or they can describe a continuous random variable $x$.  We will encounter both cases in this course.
+
+The value of the probability distribution function for a discrete random variable is simply a probability.  To determine the probability that an outcome is within a range of integers, say $m_1$
+to $m_2$ the probability distribution function is simply added:
+\begin{displaymath}
+P = \sum_{m=m_1}^{m_2} P(m).
+\end{displaymath}
+Because the probability that the outcome $m$ is some value must be 1, the normalization is:
+\begin{displaymath}
+\sum_{m=0}^{\infty} P(m) = 1
+\end{displaymath}
+A probability distribution function can also describe a continuous random variable $x$.  In this case, the probability of any particular outcome, say $x=1.24323$, is vanishing small.  But the
+probability that the value lies within a range of values is non-zero,
+and is determined by integrating:
+\begin{displaymath}
+P = \int_{x_{\rm min}}^{x_{\rm max}} P(x) \, dx
+\end{displaymath}
+As the outcome must be some value of $x$ between $-\infty$ and $+\infty$ the normalization is:
+\begin{displaymath}
+\int_{-\infty}^{+\infty} P(x) \, dx = 1
+\end{displaymath}
+The probability distribution function of a continuous random variable is called a probability density function (PDF).  A discrete probability distribution is sometimes referred to
+as probability mass function (PMF), to draw upon an analogy with
+physical mass and density: a PDF is probability per unit volume while
+a PMF is simply a probability.
+
+Given a probability distribution describing the outcomes of an
+experiment, our most urgent questions are generally ``what is a
+typical outcome?'' and ``how widely will outcomes typically vary from
+one another?''.
+
+There are a number of ways to quantify the answer to first question,
+but generally the most useful answer is the mean value of the
+distribution, $\mu$, which we calculate as a weighted average across
+all possible outcomes.  For the Binomial distribution, which describes
+probabilities for outcomes which are natural numbers up to $n$, we
+calculate the sum:
+\begin{equation}
+\label{eqn:mudis}
+\mu = \sum_{m=0}^{n} m \, P(m)
+\end{equation}
+For a continuous probability distribution, where outcomes can be any
+real value, we integrate instead:
+\begin{equation}
+\mu = \int_{-\infty}^{+\infty} x \, P(x) \, dx 
+\end{equation}
+across a range appropriate to the situation, typically $[-\infty,\infty]$.
+
+The mean is an example of an expectation value.  In general, the
+expectation value of a function $f(x)$ of a random variable $x$ drawn
+from a probability distribution function $P(x)$ is:
+\begin{displaymath}
+\braket{f(x)} \equiv \int_{-\infty}^{+\infty} f(x) \, P(x) \,dx.
+\end{displaymath}
+For a discrete random variable, the integral becomes a sum:
+\begin{displaymath}
+\braket{f(m)} \equiv \sum_m f(m) \, P(m) 
+\end{displaymath}
+Using this notation, we can define the mean as the
+expectation value of the random variable:
+\begin{displaymath}
+\mu \equiv \braket{x}
+\end{displaymath}
+
+To answer the second question, we define an expectation value
+which characterizes the variation of outcomes from the mean value,
+which we call the variance ($\sigma^2$) of the distribution:
+\begin{displaymath}
+\sigma^2 \equiv \braket{(x-\mu)^2}.
+\end{displaymath}
+The square root of the variance is referred to as the
+standard deviation ($\sigma$).
+
+There are other ways to quantify the variation from outcome to
+outcome, but they are generally inferior to the variance in some way.
+For example $\braket{x-\mu}$ can be zero, even for wide distributions,
+as long as $P(x)$ is symmetric.  The quantity $\braket{|x-\mu|}$
+(called the average deviation) avoids this pitfall but is generally
+much harder to calculate, due to the absolute value.
+
+The variance, on the other hand, is quite convenient to calculate.
+For example, you can show that:
+\begin{equation}
+\label{eqn:varhw}
+\braket{(x-\mu)^2} = \braket{x^2} -\braket{x}^2.
+\end{equation}
+We need only calculate $\braket{x}$ and $\braket{x^2}$ in order
+to determine both the mean and variance of a distribution.
+
+\section{Normalization of the Wave Function}
+
+This material is covered in Griffiths section 1.4.  
+\begin{itemize}
+ \item If $\Psi(x,t)$ is a solution to the SE, then so is $k \cdot \Psi(x,t)$ for any value $k$ (check!)  So it would seem we could make the probability density $|\Psi(x,t)|^2$ any value that we like and still satisfy the SE!  
+ \item In fact, we are constrained in our choice by the realization that the probability of finding the particle {\em somewhere} must be 1, and so we must choose the value $k$ such that:
+\begin{equation}
+\label{eqn:norm}
+\int_{-\infty}^{+\infty} |\Psi(x,t)|^2 dx = 1
+\end{equation}
+
+\item If $\Psi(x,t)=0$ for all $x$ then we cannot find such a $k$.
+ \item If the integral:
+$$\int_{-\infty}^{+\infty} |\Psi(x,t)|^2 dx$$
+diverges then we cannot find such a $k$
+\item Being good physicists, we simply throw away useless unphysical solutions that cannot be normalized, and we are never troubled by them again! 
+\end{itemize}
+
+But now here's a troubling throught.  Suppose at $t=0$, we have normalized $\Psi(x,t)$ such that
+$$\int_{-\infty}^{+\infty} |\Psi(x,0)|^2 dx = 1$$.  
+From this point on, the time dependence of $\Psi(x,t)$ is given by the SE, outside of our control.  What if changes in such a way that:
+$$\int_{-\infty}^{+\infty} |\Psi(x,t)|^2 dx \neq 1$$ 
+at later times?  Might we have to renormalize $\Psi(x,t)$ again at each $t$?
+
+
+(Insert Derivation)
+ 
+
+\section{Momentum}
+
+(Insert Derivation)
+
+\chapter{Time-Independent Schr\"odinger Equation}
+
+
+\chapter{Formalism}
+
+
+
 
 
 \appendix
