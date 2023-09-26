@@ -1,0 +1,72 @@
+\documentclass[12pt]{article}
+
+
+\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.5in]{geometry}
+\usepackage{cite}
+\usepackage{slashed}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage[american,fulldiode]{circuitikz}
+
+\begin{document}
+\ctikzset{bipoles/thickness=1}
+\ctikzset{bipoles/length=.6cm}
+
+\date{\vspace{-5ex}}
+
+\title{Homework Assignment 1 \\ Review}
+
+\maketitle
+
+\section*{Practice Problems}
+
+These problems are graded on effort only.
+
+Griffiths: P1.4, P1.14a
+
+\section*{Additional Problems}
+
+\vskip 1cm
+\noindent
+{\bf Problem 1:} Suppose the wave function for a particle is:
+\begin{displaymath}
+  \Psi(x,t) =
+  \begin{cases}    
+    {\displaystyle \sqrt{\frac{\pi}{2L}}\, e^{it/t_0} \, \sqrt{\sin\left(\frac{\pi x}{L}\right)}} & {\displaystyle 0 \leq x \leq L} \\[10pt]
+    {\displaystyle 0} & {\displaystyle {\rm otherwise}} \\
+  \end{cases}
+\end{displaymath}
+
+\noindent
+(a) Plot $|\Psi(x,t)|^2$ as a function of $x$.  Does the time $t$ matter? \\[5pt]
+
+\noindent
+(b) Is $\Psi$ properly normalized?  Show how you determined this.\\[5pt]
+
+\noindent
+(c) For any position $b$ what is the probability that you observe the particle with $x \leq b$?  (Hint: consider three cases $b<0$, $0 \leq b \leq L$, and $b > L$.)
+
+\vskip 1cm
+\noindent
+{\bf Problem 2:} Suppose the wave function for a particle is:
+\begin{displaymath}
+  \Psi(x,t) =
+  \begin{cases}    
+    {\displaystyle A \, x \, e^{-\kappa x - i \omega t}} & {\displaystyle x > 0} \\
+    {\displaystyle 0} & {\displaystyle {\rm otherwise}} \\
+  \end{cases}
+\end{displaymath}
+
+\noindent
+(a) Determine $A$ so that $\Psi$ is properly normalized. \\[5pt]
+
+\noindent
+(b) Suppose that $\Psi$ satisfies the Schrodinger equation from some potential V.  What is the potential for V(x) for $x > 0$?
+
+(c) Find $\kappa$ such that V(x) is portional to 1/x. (working on this...)
+
+\end{document}
+
+
+
+
