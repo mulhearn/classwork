@@ -8,20 +8,30 @@
 \usepackage{braket}
 \begin{document}
 
-\newcommand{\ihbar}{\ensuremath{ i \hbar} }
+\newcommand{\ihbar}{\ensuremath{i \hbar}}
+\newcommand{\Pss}{\ensuremath{\Psi^*}}
 \newcommand{\dPsidt}{\ensuremath{ \frac{\partial \Psi}{\partial t} }}
 \newcommand{\dPsidx}{\ensuremath{ \frac{\partial \Psi}{\partial x} }}
 \newcommand{\ddPsidx}{\ensuremath{ \frac{\partial^2 \Psi}{\partial x^2} }}
+\newcommand{\dPssdt}{\ensuremath{ \frac{\partial \Psi^*}{\partial t} }}
+\newcommand{\dPssdx}{\ensuremath{ \frac{\partial \Psi^*}{\partial x} }}
+\newcommand{\ddPssdx}{\ensuremath{ \frac{\partial^2 \Psi^*}{\partial x^2} }}
 
 \title{PHY 115A \\ Lecture Notes}
 \author{Michael Mulhearn}
 
 \maketitle
 
-
 \chapter{The Wave Function}
 
 \section{The Experimental Foundation of Quantum Mechanics}
+
+\begin{figure}[thb]
+\begin{center}
+{\includegraphics[width=0.40\textwidth]{figs/black_body.png}}
+\end{center}
+\caption{\label{fig:blackbody} The utraviolet catastrophe.}
+\end{figure}
 
 By the start of the 1900's classical physics had achieved a series of remarkable experimental and theoretical breakthroughs.
 \begin{itemize}
@@ -30,36 +40,42 @@ By the start of the 1900's classical physics had achieved a series of remarkable
 \begin{displaymath}
 I(\theta) = I_0 \, \cos^2\left(\frac{\pi d}{\lambda} \sin \theta \right)
 \end{displaymath}
-where $\lambda$ is the wavelength of the light, $d$ the distance between the slit, $\theta$ the angle relative to the center of the slits, and $I_0$ the intensity at $\theta=0$.  You will derive this result in the homework. 
-\item The Maxwell Equations (1861) unified the magnetic and electrical forces within a theory that accurately describes an array of phenomenon that is breathtaking in scope.  It predicted radio waves and how to produce and detect them.  It alluded to special relativity.  The theory showed that light was a propagating disturbance in the electromagnetic field: an EM wave.
-\item JJ Thomson discovered the electron (1897) using cathode ray tubes and determined it's charge to mass ratio, Michelson oil dop.  More recently, bubble chambers 
+where $\lambda$ is the wavelength of the light, $d$ the distance between the slit, $\theta$ the angle relative to the center of the slits, and $I_0$ the intensity at $\theta=0$.  
 
+\item The Maxwell Equations (1861) unified the magnetic and electrical forces within a theory that accurately describes an array of phenomenon that is breathtaking in scope.  It predicted radio waves and how to produce and detect them.  It alluded to special relativity.  The theory showed that light was a propagating disturbance in the electromagnetic field: an EM wave.
+\item JJ Thomson discovered the electron (1897) using cathode ray tubes and determined its charge to mass ratio.  The Millikan oil drop experiment (1909) determined the electron charge $e$.
 \end{itemize}
-Despite these impressive achievements, a series of experiments revealed the shortcomings of classical physics:
+Despite these impressive achievements, their were also shortcomings in the classical theory:
 \begin{itemize}
-\item Black body radiation
-\item Photoelectric effect
+\item The prediction of the classical theory for the spectral radiance of black body radiation failed spectacularly at low wavelength.
+\item In the photoelectric effect, light shining on a material causes the emission of electrons.  The classical theory predicts that the kinetic energy of the photoelectrons emitted depends on the intensity of the light, but experiments showed it depended on the wavelength.  Below a certain wavelength for each material, there was no emission at all.
 \item Atomic spectroscopy: hydrogen (and other atoms) were shown to emit electromagnetic radiation at specific wavelengths.  For the hydrogen atom, the quantized wavelengths are described by the empirically-determined Rydberg formula:
 \begin{displaymath}
 \frac{1}{\lambda} = R_H \left( \frac{1}{n_1^2} - \frac{1}{n_2^2} \right)
 \end{displaymath}
 where $1/R_H = 91~\rm nm$ and $n_1 < n_2$ are both quantum numbers.
 \end{itemize}
-These results made it clear that classical physics needed to be replaced or overhauled.
-The conversation between experimentalists and theorists during this time was quite intense and productive:
+The explanation for these phenomenon relied upon quantization: 
 \begin{itemize}
-\item Black body radiation:
-\item Photoelectric effect:
-\item Atomic spectroscopy: 
-\item Stern-Gerlach:
+\item Planck's Law: the observed spectral radiance from black body radiation can be accurately predicted if light consists of discrete quanta, called photons, with energy 
+$$E = h \nu.$$  
+The ultra-violet catastrophe is avoided because it requires a great deal of energy to produce each ultra-violet photon.   
+\item The surprising features of the photoelectric effect can also be understood as do to photons.  Individual photons below a certain wavelength do not have enough energy to liberate an electron, and the kinetic energy of the electrons depends on the energy of the photon, which depends on the wavelength of light, not the intensity. 
+\item The Bohr model of the atom constrained electrons to orbits at discrete energy levels with angular momentum that is an integer ratio of Planck's constant.  This model perfectly predicted the Rydberg formula.
 \end{itemize}
 
-This collection of phenomenology and ad-hoc quantum explanation is now referred to as the "Old Quantum Theory"
+The quantization of photons inspired Louis de Broglie to the hypothesis that matter behaves like a wave with wavelength
+$$ \lambda = \frac{h}{p}.$$
+This hypothesis was the beginning of our modern formulation of quantum mechanics.  Modern demonstrations of electron interefernce, as shown in Fig.~\ref{fig:elecint}, clearly reveal the wave nature of matter.
 
-The quantization of photons inspired deBroglie to make a remarkable hypothesis, which was the beginning of the formulation of quantum mechanics as we know it today.
+\begin{figure}[thb]
+\begin{center}
+{\includegraphics[width=0.40\textwidth]{figs/electron_interference.jpg}}
+\end{center}
+\caption{\label{fig:elecint} After passing through a double slit apparatus, the location of individual electrons are observed as dots of light.  When enough electrons are observed an interference pattern emerges.}
+\end{figure}
 
-Instead of developing the theory piece by piece, we take the Schr\:odinger as our starting assumption, and work through the consequences.
-
+The fascinating conversation between theory and experiment that led to the formulation of quantum mechanics is worthy of studying.  However, it isn't the easiest ways to come to terms with the shocking theory.  Instead of developing the theory piece by piece, we'll jump right to the Schr\"odinger Equation as our starting assumption, and work through the consequences.
 
 \section{An Experimental Perspective}
 
@@ -234,13 +250,195 @@ From this point on, the time dependence of $\Psi(x,t)$ is given by the SE, outsi
 $$\int_{-\infty}^{+\infty} |\Psi(x,t)|^2 dx \neq 1$$ 
 at later times?  Might we have to renormalize $\Psi(x,t)$ again at each $t$?
 
+Fortunately, solutions to the SE preserve their normalization.  We can show this using the SE and integration by parts (reviewed above).  We note that:
+$$\frac{d}{dt}\int_{-\infty}^{+\infty} |\Psi(x,t)|^2 \, dx  = 
+\int_{-\infty}^{+\infty} \frac{\partial}{\partial t} |\Psi(x,t)|^2\, dx.$$ 
+Working on the integral:
+\begin{eqnarray*}
+\frac{\partial}{\partial t} |\Psi(x,t)|^2 &=&  \frac{\partial}{\partial t} (\Psi^* \Psi) \\[7pt]
+  &=&  \frac{\partial \Psi^*}{\partial t} \Psi + \Psi^* \frac{\partial \Psi}{\partial t} \\
+\end{eqnarray*}
+Reworking SE:
+\begin{eqnarray*}
+\label{eqn:se}
+\ihbar \dPsidt &=& -  \frac{\hbar^2}{2 m}\,\ddPsidx + V \Psi \\[7pt] 
+       \dPsidt &=& \;\; \frac{\ihbar}{2 m}\,\ddPsidx - \frac{i V}{\hbar} \Psi \\[7pt]
+       \dPssdt &=& - \frac{\ihbar}{2 m}\,\ddPssdx + \frac{i V}{\hbar} \Psi^* \\[7pt]
+\end{eqnarray*}
+where in the last step we've taken the complex conjugate of the preceding equation.  Substituting these results we have:
+\begin{eqnarray}
+\frac{\partial}{\partial t} |\Psi(x,t)|^2 &=&  \frac{\ihbar}{2 m} 
+\left( \Psi^* \ddPsidx - \ddPssdx \Psi\right) \notag \\[7pt]
+\label{eqn:dtpp}
+  &=& \frac{\ihbar}{2 m} \;
+\frac{\partial}{\partial x} \, \left( \Psi^* \dPsidx - \dPssdx \Psi\right)
+\end{eqnarray}
+So now:
+\begin{eqnarray*}
+\frac{d}{dt}\int_{-\infty}^{+\infty} |\Psi(x,t)|^2 \, dx  &=& 
+\frac{\ihbar}{2 m} \, \int_{-\infty}^{+\infty}  \frac{\partial}{\partial x} \, \left( \Psi^* \dPsidx - \dPssdx \Psi\right) dx\\[7pt]
+&=&  \frac{\ihbar}{2 m} \, \left. \left( \Psi^* \dPsidx - \dPssdx \Psi\right) 
+\right\rvert_{-\infty}^{+\infty}\\[7pt]
+&=& 0
+\end{eqnarray*}
+where in the last step we've used the fact that the wave function and it's derivative must go to zero at infinity to be physical.
 
-(Insert Derivation)
- 
+\section{Review of Integration by Parts}
 
-\section{Momentum}
+We'll make use of integration by parts in the following sections, so let's review the idea.  We apply the chain rule to the functions $u(x)$ and $v(x)$:
+$$\frac{d(uv)}{dx} = u\frac{dv}{dx} + v\frac{du}{dx}$$
+and then integrate both sides:
+$$\int_a^b\frac{d(uv)}{dx} \, dx = \int_a^b u \frac{dv}{dx} \, dx + \int_a^bv\frac{du}{dx} \, dx$$
+By the fundamental theorem of calculus:
+$$\int_a^b\frac{d(uv)}{dx} = \left. uv \right\rvert_{a}^{b}$$
+If the product $u(x)\,v(x)$ vanishes at $x = a$ and $x = b$ then
+$$\left.uv \right\rvert_{a}^{b} = 0$$
+and so:
+\begin{equation}
+\label{eqn:intparts}
+\int_{a}^{b} u \frac{dv}{dx} \, dx =  - \int_{a}^{b} v \frac{du}{dx} \, dx
+\end{equation}
+Suppose a definite integral consists of two parts, one of which ($dv/dx$ here) is a derivative with respect to the integration variable ($x$ here).  Further suppose that the integrand with the derivative removed ($uv$ here) vanishes at the limits of the integration.  In this case, we can move the differentiation between parts of the integrand (from $v$ to $u$ here) by adding a negative sign.
 
-(Insert Derivation)
+\section{Position and Momentum Operators}
+\begin{itemize}
+\item  From the probability interpretation of the wavefunction $P(x) = | \Psi | ^2$, we define the expectation value of the $x$ position as:
+$$\braket{x} \equiv \int_{-\infty}^{+\infty} x \, P(x) \,dx = \int_{-\infty}^{+\infty} x \, |\Psi|^2 \,dx$$
+\item There is some subtlety here: the expectation value for the observable $x$ is the mean value of the results of many repeated measurements of the $x$ position of a particle {\em always starting} in the same state $\Psi$.  
+\item Due to the collapse of the wave function, repeated measurements of the $x$ position of the same particle {\em after} it was already observed at some position $x=a$ would reproduce the same result (to within the experiments ability to do so before the particles state changes).
+\end{itemize}
+
+In classical physics, the state of a particle is completely determined from it's position and momentum.  So it is natural to consider the expectation value for the momentum: 
+\begin{eqnarray*}
+\braket{p} &=& m \frac{d}{dt} \braket{x} \\[7pt] 
+&=& m \int_{-\infty}^{+\infty} x \, \frac{\partial}{\partial t} |\Psi|^2 \,dx \\[7pt]
+\end{eqnarray*}
+We already worked out the time derivative in the integrand before (Equation~\ref{eqn:dtpp}) so we have:
+\begin{eqnarray*}
+\braket{p} &=&  \frac{\ihbar}{2} \int_{-\infty}^{+\infty} x \, \frac{\partial}{\partial x} \, \left( \Psi^* \dPsidx - \dPssdx \Psi\right) \,dx \\[7pt]
+\end{eqnarray*}
+We can use integration by parts to move the outer partial derivative onto the $x$:
+\begin{eqnarray*}
+\braket{p} &=&  -\frac{\ihbar}{2} \int_{-\infty}^{+\infty} \frac{\partial x}{\partial x} \, \left( \Psi^* \dPsidx - \dPssdx \Psi\right) \,dx \\[7pt]
+&=&  -\frac{\ihbar}{2} \int_{-\infty}^{+\infty} \, \left( \Psi^* \dPsidx - \dPssdx \Psi\right) \,dx \\[7pt]
+\end{eqnarray*}
+And one more application of integration by parts to second term in the parenthesis:
+\begin{eqnarray}
+\braket{p} &=&  -\ihbar \, \int_{-\infty}^{+\infty} \, \left( \Psi^* \dPsidx \right) \,dx \notag \\[7pt]
+ &=& \int_{-\infty}^{+\infty} \, \Psi^* \left[ -\ihbar \frac{\partial}{\partial x}\right] \Psi \,dx 
+\label{eqn:derivpop} \end{eqnarray}
+Compare to the expectation value for the position:
+\begin{eqnarray}
+\braket{x} 
+ &=& \int_{-\infty}^{+\infty} \, \Psi^* \left[ x \right] \Psi \,dx 
+\end{eqnarray}
+
+\begin{itemize}
+\item In general, we calculate expectation values using the {\em operator}:
+\begin{eqnarray}
+\braket{o}  &=& \int_{-\infty}^{+\infty} \, \Psi^* \left[ \hat{o} \right] \Psi \,dx 
+\end{eqnarray}
+\item For the position observable with have the position operator 
+\begin{equation}
+\hat{x} = x.
+\end{equation}
+\item For the momentum observable with have the momentum operator 
+\begin{equation}
+\hat{p} = - \ihbar \frac{\partial}{\partial x}.
+\end{equation}
+\item We can construct the operator $\hat{f}$ for any classical function of position and momentum $f(x,p)$ by substituting $\hat{p}$ and $\hat{x}$ for $p$ and $x$.
+\item Have a close look at Equation~\ref{eqn:derivpop}.  Had we applied integration by parts to the first term instead of the section, we would have instead concluded:
+\begin{eqnarray*}
+\braket{p} &=&  
+\int_{-\infty}^{+\infty} \, \left(\left[ \ihbar \frac{\partial}{\partial x}\right] \Psi^* \right) \Psi\,dx 
+\end{eqnarray*}
+evidently, there is also a momentum operator that operates on the $\Psi^*$.  We'll return to this later.
+\end{itemize}
+
+\section{Ehrenfest's Theorem}
+\begin{eqnarray*}
+\frac{d \braket{p}}{dt} &=& \frac{d}{dt} \int_{-\infty}^{+\infty} \, \Psi^* \, \hat{p} \, \Psi \,dx \\[7pt]
+&=& -\ihbar \int_{-\infty}^{+\infty} \, \frac{\partial}{\partial t} \left(\Psi^* \dPsidx\right) \,dx \\[7pt]
+&=& -\ihbar \int_{-\infty}^{+\infty} \, \left( \dPssdt \dPsidx + 
+\Psi^* \frac{\partial}{\partial x} \dPsidt \right) \,dx \\[7pt]
+\end{eqnarray*}
+where in the last part we have used:
+$$\frac{\partial}{\partial t} \dPsidx = \frac{\partial}{\partial x} \dPsidt$$
+now using integration by parts on the second term:
+\begin{eqnarray*}
+\frac{d \braket{p}}{dt} &=& -\ihbar \int_{-\infty}^{+\infty} \, 
+\left( \dPssdt \dPsidx - \dPssdx \dPsidt \right) \,dx \\[7pt]
+&=& -\ihbar \int_{-\infty}^{+\infty} \, 
+\left( \left[ -\frac{\ihbar}{2 m}\,\ddPssdx + \frac{i V}{\hbar} \Pss \right] \dPsidx 
+- \dPssdx \left[ \frac{\ihbar}{2 m}\,\ddPsidx - \frac{i V}{\hbar} \Psi \right] \right) \,dx \\[7pt]
+&=& -\frac{\hbar^2}{2 m} \int_{-\infty}^{+\infty} \, \left(\ddPssdx \dPsidx + \dPssdx \ddPsidx\right)
++ \int_{-\infty}^{+\infty} V \left( \Pss \dPsidx + \dPssdx \Psi \right) \, dx \\[7pt]
+&=& -\frac{\hbar^2}{2 m} \int_{-\infty}^{+\infty} \, \frac{\partial}{\partial x} \left(\dPssdx \dPsidx + \dPssdx \dPsidx\right) dx
++ \int_{-\infty}^{+\infty} V \frac{\partial}{\partial x} \left( \Pss \Psi \right) \, dx \\[7pt]
+\end{eqnarray*}
+The first integral vanishes\footnote{If you want to go for the hat trick (three scores in one game) on using integration by parts, you can do it here, noting that $d1/dx = 0$.} and using integration by parts on the second integrand:
+\begin{eqnarray*}
+\frac{d \braket{p}}{dt} &=& -\int_{-\infty}^{+\infty} \frac{\partial V}{\partial x} \Pss \Psi \, dx \\[7pt]
+\end{eqnarray*}
+so now:
+\begin{eqnarray}
+\label{eqn:ehrenfest}
+\frac{d \braket{p}}{dt} &=& - \braket{\frac{\partial V}{\partial x}}
+\end{eqnarray}
+which is known as Ehrenfest's Theorem.
+
+Newton's Law in one dimension in classical physics can be written as:
+\begin{eqnarray}
+\label{eqn:ehrenfest}
+\frac{dp}{dt} &=& -\frac{dV}{dx}
+\end{eqnarray}
+
+which remains true in Quantum Mechanics in an average sense.
+
+\section{Chapter Review}
+
+We are considering a particle of mass $m$, in one dimension $x$, in a potential $V$.
+
+\begin{itemize}
+\item The state of a particle is described by its wave function $\Psi(x,t)$.
+\item The wave function $\Psi(x,t)$ is a solution to the Schr\"odinger Equation (SE):
+\begin{equation}
+\label{eqn:se}
+\ihbar \dPsidt = - \frac{\hbar^2}{2 m}\ddPsidx + V \Psi
+\end{equation}
+\item The physical interpretation of the wave function is statistical.  The probability $P_{ab}(t)$ that the particle will be found between points $a$ and $b$ at time $t$ is:
+\begin{equation}
+\label{eqn:prob}
+P_{ab}(t) = \int_a^b |\Psi(x,t)|^2 dx
+\end{equation}
+\item The wave functions are normalized such that
+\begin{equation}
+\int_{-\infty}^{+\infty} |\Psi(x,t)|^2 dx = 1
+\end{equation}
+\item Once a wave function is normalized, it will remain normalized for all time as a consequence of the Schr\"odinger equation.
+\item Measurements of observable quantities are associated with operators.  Given an operator $\hat{o}$ we can calculate the expectation value for the observable $o$ as:
+\begin{eqnarray}
+\braket{o}  &=& \int_{-\infty}^{+\infty} \, \Psi^* \left[ \hat{o} \right] \Psi \,dx 
+\end{eqnarray}
+The operator acts toward its right.
+\item For the position observable with have the position operator 
+\begin{equation}
+\hat{x} = x.
+\end{equation}
+\item For the momentum observable with have the momentum operator 
+\begin{equation}
+\hat{p} = - \ihbar \frac{\partial}{\partial x}.
+\end{equation}
+\item Newtons law is still true, but only in an average sense, by Ehrenfest's Theorem:
+\begin{eqnarray}
+\frac{d \braket{p}}{dt} &=& - \braket{\frac{\partial V}{\partial x}}
+\end{eqnarray}
+
+\end{itemize}
+
+
+
+\end{document}
 
 \chapter{Time-Independent Schr\"odinger Equation}
 
