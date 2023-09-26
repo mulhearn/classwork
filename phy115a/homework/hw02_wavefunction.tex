@@ -6,6 +6,7 @@
 \usepackage{slashed}
 \usepackage{graphicx}
 \usepackage{amsmath}
+\usepackage{braket}
 \usepackage[american,fulldiode]{circuitikz}
 
 \begin{document}
@@ -14,7 +15,7 @@
 
 \date{\vspace{-5ex}}
 
-\title{Homework Assignment 1 \\ Review}
+\title{Homework Assignment 2 \\ Review}
 
 \maketitle
 
@@ -26,9 +27,21 @@ Griffiths: P1.4, P1.14a
 
 \section*{Additional Problems}
 
+\noindent
+    {\bf Problem 1:} Consider the discrete probability distribution function $P(n)$ with:
+\begin{eqnarray*}
+  P(0) &=& \frac{1}{4}\\[8pt]
+  P(1) &=& \frac{1}{4}\\[8pt]
+  P(4) &=& \frac{1}{2}\\
+\end{eqnarray*}
+and $P(n) = 0$ for all other $n$.\\[5pt]
+(a) Is $P(n)$ properly normalized?  Show your work.\\[5pt]
+(b) Find the expectation value $\braket{n}$ of the random variable $n$.\\[5pt]
+(b) Find the variance of the random variable $n$.\\ 
+
 \vskip 1cm
 \noindent
-{\bf Problem 1:} Suppose the wave function for a particle is:
+{\bf Problem 2:} Suppose the wave function for a particle is:
 \begin{displaymath}
   \Psi(x,t) =
   \begin{cases}    
@@ -39,31 +52,41 @@ Griffiths: P1.4, P1.14a
 
 \noindent
 (a) Plot $|\Psi(x,t)|^2$ as a function of $x$.  Does the time $t$ matter? \\[5pt]
-
-\noindent
 (b) Is $\Psi$ properly normalized?  Show how you determined this.\\[5pt]
-
-\noindent
 (c) For any position $b$ what is the probability that you observe the particle with $x \leq b$?  (Hint: consider three cases $b<0$, $0 \leq b \leq L$, and $b > L$.)
 
+
 \vskip 1cm
+\begin{center}
+Next problem on next page...
+\end{center}
+
+
+\newpage
 \noindent
-{\bf Problem 2:} Suppose the wave function for a particle is:
+{\bf Problem 3:} Suppose the wave function for a particle is:
 \begin{displaymath}
-  \Psi(x,t) =
-  \begin{cases}    
-    {\displaystyle A \, x \, e^{-\kappa x - i \omega t}} & {\displaystyle x > 0} \\
-    {\displaystyle 0} & {\displaystyle {\rm otherwise}} \\
-  \end{cases}
+  \Psi(x,t) = A \, \sin(\kappa x) \, \exp(-i\omega t-\kappa|x|)
 \end{displaymath}
 
 \noindent
-(a) Determine $A$ so that $\Psi$ is properly normalized. \\[5pt]
+(a) Is $d\Psi/dx$ continues at $x=0$?  (Hint: evaluate derivative for both cases of $|x|$ and evaluate at $x=0$.)\\
 
 \noindent
 (b) Suppose that $\Psi$ satisfies the Schrodinger equation from some potential V.  What is the potential for V(x) for $x > 0$?
 
-(c) Find $\kappa$ such that V(x) is portional to 1/x. (working on this...)
+\vskip 1cm
+\noindent
+    {\bf Problem 4:} Define $P_{ab}(t)$ as the probability of measuring a particle in the range $a< x < b$, at time t.  Show that:
+\begin{displaymath}
+  \frac{dP_{ab}}{dt} = J(a, t) - J(b, t),
+\end{displaymath}
+where:
+\begin{displaymath}
+  J(x, t) \equiv \frac{i \hbar}{2m}
+  \left( \Psi \frac{\partial \Psi^*}{\partial x} - \Psi^* \frac{\partial \Psi}{\partial x}\right)
+\end{displaymath}
+Hint: look closely at the section on Normalization in Chapter 1 of the {\em lecture notes}.
 
 \end{document}
 
