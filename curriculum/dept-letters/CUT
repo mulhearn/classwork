@@ -1,0 +1,7 @@
+pdftk all.pdf cat 1-4 output math.pdf
+pdftk all.pdf cat 5-9 output eps.pdf
+pdftk all.pdf cat 10-14 output atm.pdf
+pdftk all.pdf cat 15-18 output che.pdf
+pdftk all.pdf cat 19-21 output ecs.pdf
+pdftk all.pdf cat 22-24 output eec.pdf
+pdftk all.pdf cat 25-27 output ems.pdf
