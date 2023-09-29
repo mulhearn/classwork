@@ -134,69 +134,62 @@ As we'll see later, John Bell showed that this seemingly philosophical question 
 
 \section{Review of Statistics and Probability}
 
-Given that the physical interpretation of Quantum Mechanics is statistical, we'll review the relevant concepts from statistics. This is also covered in Griffiths sections 1.3.  In the language of statistics, at the time $t$ that we make a measurement of the particles position, the measured value $x$ is a random variable of the probability distribution function $P(x) = |\Psi(x,t)|$. 
+Given that the physical interpretation of Quantum Mechanics is statistical, we'll review the relevant concepts from statistics. This is also covered in Griffiths sections 1.3.  
 
-More generally, probability distribution functions can describe a discrete random variable $m$ 
-that takes on a countable number of distinct values like $m=0,1.2,3,\ldots$.   Or they can describe a continuous random variable $x$.  We will encounter both cases in this course.
+We refer to the outcome of a random process as a random variable.  Random variables can be discrete (countable): heads or tails from a coin flip, the number of children the next person you meet has had, the number of nuclear decays of a radioactive sample within a specified time interval.  Or random variables can be continuous:  the mass of fish that you have caught, the amount of time you must wait for the next bus to arrive, or the speed of the next bike that passes you.  Here we'll use variable $m$ for a discrete random variables that take on a countable number of distinct values $m=0,1.2,3,\ldots$.  We'll use $x$ to describe a continuous random variable $x$ on the interval $[-\infty, \infty]$. 
 
-The value of the probability distribution function for a discrete random variable is simply a probability.  To determine the probability that an outcome is within a range of integers, say $m_1$
-to $m_2$ the probability distribution function is simply added:
+\subsection{Discrete and Continuous Random Variables}
+
+In the discrete case, the probability of each outcome $m$ defines the probability distribution function $P(m)$.  To calculate the probability $P_{AB}$ that an outcome $m$ is any integer from $A$ to $B$ we need only sum the probability distribution function for those integers:
 \begin{displaymath}
-P = \sum_{m=m_1}^{m_2} P(m).
+P_{AB} = \sum_{m=A}^{B} P(m).
 \end{displaymath}
-Because the probability that the outcome $m$ is some value must be 1, the normalization is:
+Because the probability of the outcome being any possible value is 1, we have the normalization condition:
 \begin{displaymath}
 \sum_{m=0}^{\infty} P(m) = 1
 \end{displaymath}
-A probability distribution function can also describe a continuous random variable $x$.  In this case, the probability of any particular outcome, say $x=1.24323$, is vanishing small.  But the
-probability that the value lies within a range of values is non-zero,
-and is determined by integrating:
+
+In the case of a continuous random variable $x$, it is nonsensical to speak of the probability of any particular value of $x$.  Instead the probability of $x$ occurring within an interval $a < x < b$:
 \begin{displaymath}
-P = \int_{x_{\rm min}}^{x_{\rm max}} P(x) \, dx
+P_{ab} = \int_{a}^{b} \rho(x) \, dx
 \end{displaymath}
-As the outcome must be some value of $x$ between $-\infty$ and $+\infty$ the normalization is:
+The value of the probability distribution function $\rho(x)$ is not a probability, but instead a probability density, which we integrate to find the probability.  As the outcome must be some value of $x$ between $-\infty$ and $+\infty$ the normalization is:
 \begin{displaymath}
-\int_{-\infty}^{+\infty} P(x) \, dx = 1
+\int_{-\infty}^{+\infty} \rho(x) \, dx = 1
 \end{displaymath}
 The probability distribution function of a continuous random variable is called a probability density function (PDF).  A discrete probability distribution is sometimes referred to
-as probability mass function (PMF), to draw upon an analogy with
-physical mass and density: a PDF is probability per unit volume while
+as probability mass function (PMF), to draw upon an analogy with physical mass and density: a PDF is probability per unit volume (1-D volume in this case) while
 a PMF is simply a probability.
 
-Given a probability distribution describing the outcomes of an
-experiment, our most urgent questions are generally ``what is a
-typical outcome?'' and ``how widely will outcomes typically vary from
-one another?''.
+\subsection{Mean and Variance}
 
-There are a number of ways to quantify the answer to first question,
+Given a probability distribution our most urgent questions are generally ``what is a
+typical outcome?'' and ``how widely will outcomes typically vary from
+one another?''.  There are a number of ways to give a quantitative answer to the first question,
 but generally the most useful answer is the mean value of the
 distribution, $\mu$, which we calculate as a weighted average across
-all possible outcomes.  For the Binomial distribution, which describes
-probabilities for outcomes which are natural numbers up to $n$, we
-calculate the sum:
+all possible outcomes.  For a discrete random variable we calculate a sum:
 \begin{equation}
 \label{eqn:mudis}
-\mu = \sum_{m=0}^{n} m \, P(m)
+\mu = \sum_{m=0}^{\infty} m \, P(m)
 \end{equation}
-For a continuous probability distribution, where outcomes can be any
-real value, we integrate instead:
+For a continuous probability distribution we integrate instead:
 \begin{equation}
-\mu = \int_{-\infty}^{+\infty} x \, P(x) \, dx 
+\mu = \int_{-\infty}^{+\infty} x \, \rho(x) \, dx 
 \end{equation}
 across a range appropriate to the situation, typically $[-\infty,\infty]$.
 
-The mean is an example of an expectation value.  In general, the
+The mean value is an example of an expectation value.  In general, the
 expectation value of a function $f(x)$ of a random variable $x$ drawn
 from a probability distribution function $P(x)$ is:
 \begin{displaymath}
-\braket{f(x)} \equiv \int_{-\infty}^{+\infty} f(x) \, P(x) \,dx.
+\braket{f(x)} \equiv \int_{-\infty}^{+\infty} f(x) \, \rho(x) \,dx.
 \end{displaymath}
 For a discrete random variable, the integral becomes a sum:
 \begin{displaymath}
 \braket{f(m)} \equiv \sum_m f(m) \, P(m) 
 \end{displaymath}
-Using this notation, we can define the mean as the
-expectation value of the random variable:
+Using this notation, we can define the mean as the expectation value of the random variable:
 \begin{displaymath}
 \mu \equiv \braket{x}
 \end{displaymath}
@@ -231,16 +224,16 @@ to determine both the mean and variance of a distribution.
 This material is covered in Griffiths section 1.4.  
 \begin{itemize}
  \item If $\Psi(x,t)$ is a solution to the SE, then so is $k \cdot \Psi(x,t)$ for any value $k$ (check!)  So it would seem we could make the probability density $|\Psi(x,t)|^2$ any value that we like and still satisfy the SE!  
- \item In fact, we are constrained in our choice by the realization that the probability of finding the particle {\em somewhere} must be 1, and so we must choose the value $k$ such that:
+ \item In fact, we are constrained in our choice by the realization that the probability of finding the particle {\em somewhere} must be 1, and so we must choose the normalization of $\Psi$ such that:
 \begin{equation}
 \label{eqn:norm}
 \int_{-\infty}^{+\infty} |\Psi(x,t)|^2 dx = 1
 \end{equation}
 
-\item If $\Psi(x,t)=0$ for all $x$ then we cannot find such a $k$.
+\item If $\Psi(x,t)=0$ for all $x$ we cannot normalize $\Psi$.
  \item If the integral:
 $$\int_{-\infty}^{+\infty} |\Psi(x,t)|^2 dx$$
-diverges then we cannot find such a $k$
+diverges then we cannot normalize $\Psi$.
 \item Being good physicists, we simply throw away useless unphysical solutions that cannot be normalized, and we are never troubled by them again! 
 \end{itemize}
 
@@ -248,7 +241,7 @@ But now here's a troubling throught.  Suppose at $t=0$, we have normalized $\Psi
 $$\int_{-\infty}^{+\infty} |\Psi(x,0)|^2 dx = 1$$.  
 From this point on, the time dependence of $\Psi(x,t)$ is given by the SE, outside of our control.  What if changes in such a way that:
 $$\int_{-\infty}^{+\infty} |\Psi(x,t)|^2 dx \neq 1$$ 
-at later times?  Might we have to renormalize $\Psi(x,t)$ again at each $t$?
+at later times?  Might we have to renormalize $\Psi(x,t)$ again at each $t$?  What would we make of $d\Psi/dt$ in this case?
 
 Fortunately, solutions to the SE preserve their normalization.  We can show this using the SE and integration by parts (reviewed above).  We note that:
 $$\frac{d}{dt}\int_{-\infty}^{+\infty} |\Psi(x,t)|^2 \, dx  = 
@@ -302,10 +295,10 @@ Suppose a definite integral consists of two parts, one of which ($dv/dx$ here) i
 
 \section{Position and Momentum Operators}
 \begin{itemize}
-\item  From the probability interpretation of the wavefunction $P(x) = | \Psi | ^2$, we define the expectation value of the $x$ position as:
-$$\braket{x} \equiv \int_{-\infty}^{+\infty} x \, P(x) \,dx = \int_{-\infty}^{+\infty} x \, |\Psi|^2 \,dx$$
+\item  From the probability interpretation of the wave function $\rho(x) = | \Psi | ^2$, we define the expectation value of the $x$ position as:
+$$\braket{x} \equiv \int_{-\infty}^{+\infty} x \, \rho(x) \,dx = \int_{-\infty}^{+\infty} x \, |\Psi|^2 \,dx$$
 \item There is some subtlety here: the expectation value for the observable $x$ is the mean value of the results of many repeated measurements of the $x$ position of a particle {\em always starting} in the same state $\Psi$.  
-\item Due to the collapse of the wave function, repeated measurements of the $x$ position of the same particle {\em after} it was already observed at some position $x=a$ would reproduce the same result (to within the experiments ability to do so before the particles state changes).
+\item Due to the collapse of the wave function, repeated measurements of the $x$ position of the same particle {\em after} it was already observed at some position $x=a$ would reproduce the same result (to within the experiments ability to do so before the particle's state changes).
 \end{itemize}
 
 In classical physics, the state of a particle is completely determined from it's position and momentum.  So it is natural to consider the expectation value for the momentum: 
@@ -333,27 +326,31 @@ Compare to the expectation value for the position:
  &=& \int_{-\infty}^{+\infty} \, \Psi^* \left[ x \right] \Psi \,dx 
 \end{eqnarray}
 
-\begin{itemize}
-\item In general, we calculate expectation values using the {\em operator}:
+In general, we calculate expectation value of an observable $o$
+using the corresponding {\em operator} $\hat{o}$:
 \begin{eqnarray}
 \braket{o}  &=& \int_{-\infty}^{+\infty} \, \Psi^* \left[ \hat{o} \right] \Psi \,dx 
 \end{eqnarray}
-\item For the position observable with have the position operator 
+For the position observable we have the position operator 
 \begin{equation}
 \hat{x} = x.
 \end{equation}
-\item For the momentum observable with have the momentum operator 
+For the momentum observable with have the momentum operator 
 \begin{equation}
 \hat{p} = - \ihbar \frac{\partial}{\partial x}.
 \end{equation}
-\item We can construct the operator $\hat{f}$ for any classical function of position and momentum $f(x,p)$ by substituting $\hat{p}$ and $\hat{x}$ for $p$ and $x$.
-\item Have a close look at Equation~\ref{eqn:derivpop}.  Had we applied integration by parts to the first term instead of the section, we would have instead concluded:
+We can construct the operator $\hat{f}$ for any classical function of position and momentum $f(x,p)$ by substituting $\hat{p}$ and $\hat{x}$ for $p$ and $x$.
+\begin{eqnarray}
+\braket{f(x,p)}  &=& \int_{-\infty}^{+\infty} \, \Psi^* \left[ f(\hat{x},\hat{p}) \right] \Psi \,dx 
+\end{eqnarray}
+Since the position and momentum completely define the state of a classical particle, any dynamical variable can be calculated from x and p.  Therefore, this is a prescription for calculating the expectation value of any classical dynamical variable.
+
+Have a close look at Equation~\ref{eqn:derivpop}.  Had we applied integration by parts to the first term instead of the section, we would have instead concluded:
 \begin{eqnarray*}
 \braket{p} &=&  
 \int_{-\infty}^{+\infty} \, \left(\left[ \ihbar \frac{\partial}{\partial x}\right] \Psi^* \right) \Psi\,dx 
 \end{eqnarray*}
 evidently, there is also a momentum operator that operates on the $\Psi^*$.  We'll return to this later.
-\end{itemize}
 
 \section{Ehrenfest's Theorem}
 \begin{eqnarray*}
@@ -395,6 +392,63 @@ Newton's Law in one dimension in classical physics can be written as:
 
 which remains true in Quantum Mechanics in an average sense.
 
+\section{The Uncertainty Principle}
+
+From our review of statistics we know that the variance of $x$ can be calculated as:
+\begin{displaymath}
+\sigma_x^2 \equiv \braket{\,(x-\braket{x})^2\,} = \braket{x^2}-\braket{x}^2
+\end{displaymath}
+where:
+\begin{eqnarray}
+\braket{x} 
+ &=& \int_{-\infty}^{+\infty} \, \Psi^* \left[ \hat{x} \right] \Psi \,dx \\
+ &=& \int_{-\infty}^{+\infty} \, x|\Psi|^2 \,dx 
+\end{eqnarray}
+and
+\begin{eqnarray}
+\braket{x^2} 
+ &=& \int_{-\infty}^{+\infty} \, \Psi^* \left[ \hat{x}^2 \right] \Psi \,dx \\
+ &=& \int_{-\infty}^{+\infty} \, x^2|\Psi|^2 \,dx 
+\end{eqnarray}
+
+The variance of $p$ is:
+
+\begin{displaymath}
+\sigma_p^2 \equiv \braket{\,(p-\braket{p})^2\,} = \braket{p^2}-\braket{p}^2
+\end{displaymath}
+where:
+\begin{eqnarray}
+\braket{x} 
+ &=& \int_{-\infty}^{+\infty} \, \Psi^* \left[ \hat{p} \right] \Psi \,dx \\[8pt]
+ &=& -\ihbar \int_{-\infty}^{+\infty} \, \Psi^* \; \dPsidx \; dx \\
+\end{eqnarray}
+and
+\begin{eqnarray}
+\braket{x^2} 
+ &=& \int_{-\infty}^{+\infty} \, \Psi^* \left[ \hat{p}^2 \right] \Psi \,dx \\[8pt]
+ &=& -\hbar^2 \int_{-\infty}^{+\infty} \, \Psi^* \; \ddPsidx \; dx \\
+\end{eqnarray}
+
+The Heisenberg uncertainty principle states that:
+\begin{equation}
+\sigma_x \sigma_p \, \geq \, \frac{\hbar}{2}
+\end{equation}
+
+This is easily the most famous result of quantum mechanics.  But we aren't ready to prove it yet. We will come back to that once we are better equipped to do so.
+
+Griffiths section 1.6 gives a good intuitive explanation that goes like this:
+\begin{itemize}
+\item The de Broglie hypothesis relates a particles momentum to it's wavelength:
+\begin{equation}
+p = \frac{h}{\lambda}
+\end{equation}
+(we aren't equipped yet to proof this yet either)
+\item Waves that have a well defined wavelength (e.g. an entire sine wave) do not have a well defined position.
+\item Waves that have a well defined position (e.g. a localized splash) do not have a well defined wavelength.
+\end{itemize}
+
+Don't worry if this doesn't seem clear yet.  We'll but this on very firm ground later!
+
 \section{Chapter Review}
 
 We are considering a particle of mass $m$, in one dimension $x$, in a potential $V$.
@@ -429,10 +483,19 @@ The operator acts toward its right.
 \begin{equation}
 \hat{p} = - \ihbar \frac{\partial}{\partial x}.
 \end{equation}
+\item Any classical dynamical variable can be calculated from the position and momentum, and we can calculate its expectation value as:
+\begin{eqnarray}
+\braket{f(x,p)}  &=& \int_{-\infty}^{+\infty} \, \Psi^* \left[ f(\hat{x},\hat{p}) \right] \Psi \,dx 
+\end{eqnarray}
+
 \item Newtons law is still true, but only in an average sense, by Ehrenfest's Theorem:
 \begin{eqnarray}
 \frac{d \braket{p}}{dt} &=& - \braket{\frac{\partial V}{\partial x}}
 \end{eqnarray}
+\item The Heisenberg uncertainty relation states that:
+\begin{equation}
+\sigma_x \sigma_p \, \geq \, \frac{\hbar}{2}
+\end{equation}
 
 \end{itemize}
 
