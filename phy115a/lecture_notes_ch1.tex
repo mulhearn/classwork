@@ -18,7 +18,7 @@
 \newcommand{\ddPssdx}{\ensuremath{ \frac{\partial^2 \Psi^*}{\partial x^2} }}
 
 \title{PHY 115A \\ Lecture Notes:\\
-The Wave Function \\ (Griffith's Chapter 2) \\}
+The Wave Function \\ (Griffith's Chapter 1) \\}
 \author{Michael Mulhearn}
 
 \maketitle
@@ -26,13 +26,6 @@ The Wave Function \\ (Griffith's Chapter 2) \\}
 \chapter{The Wave Function}
 
 \section{The Experimental Foundation of Quantum Mechanics}
-
-\begin{figure}[thb]
-\begin{center}
-{\includegraphics[width=0.40\textwidth]{figs/black_body.png}}
-\end{center}
-\caption{\label{fig:blackbody} The utraviolet catastrophe.}
-\end{figure}
 
 By the start of the 1900's classical physics had achieved a series of remarkable experimental and theoretical breakthroughs.
 \begin{itemize}
@@ -46,9 +39,20 @@ where $\lambda$ is the wavelength of the light, $d$ the distance between the sli
 \item The Maxwell Equations (1861) unified the magnetic and electrical forces within a theory that accurately describes an array of phenomenon that is breathtaking in scope.  It predicted radio waves and how to produce and detect them.  It alluded to special relativity.  The theory showed that light was a propagating disturbance in the electromagnetic field: an EM wave.
 \item JJ Thomson discovered the electron (1897) using cathode ray tubes and determined its charge to mass ratio.  The Millikan oil drop experiment (1909) determined the electron charge $e$.
 \end{itemize}
+
+
+\begin{figure}[thb]
+\begin{center}
+{\includegraphics[width=0.40\textwidth]{figs/black_body.png}}
+\end{center}
+\caption{\label{fig:blackbody} The utraviolet catastrophe.}
+\end{figure}
+
+
+\noindent
 Despite these impressive achievements, their were also shortcomings in the classical theory:
 \begin{itemize}
-\item The prediction of the classical theory for the spectral radiance of black body radiation failed spectacularly at low wavelength.
+\item The prediction of the classical theory for the spectral radiance of black body radiation failed spectacularly at low wavelength.  (See Fig.~\ref{fig:blackbody})
 \item In the photoelectric effect, light shining on a material causes the emission of electrons.  The classical theory predicts that the kinetic energy of the photoelectrons emitted depends on the intensity of the light, but experiments showed it depended on the wavelength.  Below a certain wavelength for each material, there was no emission at all.
 \item Atomic spectroscopy: hydrogen (and other atoms) were shown to emit electromagnetic radiation at specific wavelengths.  For the hydrogen atom, the quantized wavelengths are described by the empirically-determined Rydberg formula:
 \begin{displaymath}
@@ -60,14 +64,20 @@ The explanation for these phenomenon relied upon quantization:
 \begin{itemize}
 \item Planck's Law: the observed spectral radiance from black body radiation can be accurately predicted if light consists of discrete quanta, called photons, with energy 
 $$E = h \nu.$$  
-The ultra-violet catastrophe is avoided because it requires a great deal of energy to produce each ultra-violet photon.   
-\item The surprising features of the photoelectric effect can also be understood as do to photons.  Individual photons below a certain wavelength do not have enough energy to liberate an electron, and the kinetic energy of the electrons depends on the energy of the photon, which depends on the wavelength of light, not the intensity. 
+The ultra-violet catastrophe is avoided because it requires a relatively large amount of energy to produce each ultra-violet photon.   
+\item The surprising features of the photoelectric effect can also be understood as due to photons.  Individual photons below a certain wavelength do not have enough energy to liberate an electron, and the kinetic energy of the electrons depends on the energy of the photon, which depends on the wavelength of light, not the intensity. 
 \item The Bohr model of the atom constrained electrons to orbits at discrete energy levels with angular momentum that is an integer ratio of Planck's constant.  This model perfectly predicted the Rydberg formula.
 \end{itemize}
 
-The quantization of photons inspired Louis de Broglie to the hypothesis that matter behaves like a wave with wavelength
+\noindent
+As photons are massless, they have energy $E = pc$ where $p$ is there momentum, and so combining this with the Planck's Law:
+\begin{eqnarray*}
+E &=& p\,c = h \nu \\
+\frac{c}{\nu} &=& \lambda = \frac{h}{p}\\
+\end{eqnarray*}
+where $\lambda$ is the wavelength of the light.  The quantization of photons inspired Louis de Broglie to make the brash and utterly correct hypothesis that matter behaves like a wave with wavelength
 $$ \lambda = \frac{h}{p}.$$
-This hypothesis was the beginning of our modern formulation of quantum mechanics.  Modern demonstrations of electron interefernce, as shown in Fig.~\ref{fig:elecint}, clearly reveal the wave nature of matter.
+This hypothesis was the beginning of our modern formulation of quantum mechanics.  Modern demonstrations of electron interference, as shown in Fig.~\ref{fig:elecint}, clearly reveal the wave nature of matter.
 
 \begin{figure}[thb]
 \begin{center}
@@ -85,8 +95,8 @@ The fascinating conversation between theory and experiment that led to the formu
 \item Never forget that physics is an {\bf experimental discipline}: the most compelling mathematical argument you can imagine could be rendered invalid by a single well-executed experiment.  
 
 \item {\bf You cannot derive Quantum Mechanics.}  Quantum Mechanics is a set
-of assumptions that are mathematically consistent with experimental results.
-It offers no explanation for those assumptions.
+of starting assumptions the consequences of which are consistent with experimental results.
+It offers no explanation for the starting assumptions.
 
 \item {\bf Derivations are useful for predicting the outcomes of future
 experiments} based on the results from our previous experiments, within
@@ -116,7 +126,7 @@ Here's a summary of Griffiths sections 1.1-1.2.
 \end{equation}
 where $m$ is the mass of the particle, $V$ the potential energy function or just ``potential'', and:  
 
-\item The reduced plank's constant $\ihbar = \frac{h}{2 \pi} = 1.054573 \times 10^-34~\rm Js$.
+\item The reduced plank's constant $\hbar = \frac{h}{2 \pi} = 1.054573 \times 10^-34~\rm Js$.
 
 \item The physical interpretation of the wave function is statistical.  The probability $P_{ab}(t)$ that the particle will be found between points $a$ and $b$ at time $t$ is:
 \begin{equation}
@@ -125,7 +135,7 @@ P_{ab}(t) = \int_a^b |\Psi(x,t)|^2 dx
 \end{equation}
 \end{itemize}
 
-Suppose we divide the $x$-axis into six regions $A,B,C,D,E,F$ and the particle is in a state where it has equal probability to be found in any region at $t=0$.  At $t-0$ we observe the particle in region $C$.  Where was the particle before this measurement?  There are several schools of thought:
+Suppose we divide the $x$-axis into six regions $A,B,C,D,E,F$ and the particle is in a state where it has equal probability to be found in any region at $t=0$.  At $t=0$ we observe the particle in region $C$.  Where was the particle before this measurement?  There are several schools of thought:
 \begin{itemize}
 \item realist:  The particle was already in region $C$ and we just didn't know that yet.
 \item orthodox:  The particle wasn't in any one region, it was the measurement itself that caused one of several possible outcomes.
@@ -244,7 +254,7 @@ From this point on, the time dependence of $\Psi(x,t)$ is given by the SE, outsi
 $$\int_{-\infty}^{+\infty} |\Psi(x,t)|^2 dx \neq 1$$ 
 at later times?  Might we have to renormalize $\Psi(x,t)$ again at each $t$?  What would we make of $d\Psi/dt$ in this case?
 
-Fortunately, solutions to the SE preserve their normalization.  We can show this using the SE and integration by parts (reviewed above).  We note that:
+Fortunately, solutions to the SE preserve their normalization.  We can show this using the SE.  We note that:
 $$\frac{d}{dt}\int_{-\infty}^{+\infty} |\Psi(x,t)|^2 \, dx  = 
 \int_{-\infty}^{+\infty} \frac{\partial}{\partial t} |\Psi(x,t)|^2\, dx.$$ 
 Working on the integral:
@@ -501,563 +511,6 @@ The operator acts toward its right.
 \end{equation}
 
 \end{itemize}
-
-
-
-\end{document}
-
-\chapter{Time-Independent Schr\"odinger Equation}
-
-
-\chapter{Formalism}
-
-
-
-
-
-\appendix
-
-\chapter{Fourier Transforms}
-
-\section{The Vector Analogy}
-
-A vector in ordinary space is completely specified by its displacement in each spatial direction.  Lets look at this familiar picture a bit formally, to prepare us to apply it in a less intuitive (but mathematically equivalent) setting.  The first thing we will need to know how to do is to calculate the dot product between any two vectors:  
-\begin{displaymath}
-\vec{v} \cdot \vec{w} = v_x w_x + v_y w_y + v_z w_z 
-\end{displaymath}
-You already know how to do this for ordinary vectors.  In other settings, we use the more general term {\em inner product}.  To describe any vector we need a set of {\em basis vectors}, in this case $\hat{x}$, $\hat{y}$, and $\hat{z}$.  These basis vectors are orthogonal:
-\begin{displaymath}
-\hat{x} \cdot \hat{y} = \hat{y} \cdot \hat{z} = \hat{z} \cdot \hat{x} = 0
-\end{displaymath}
-and normalized:
-\begin{displaymath}
-\hat{x} \cdot \hat{x} = \hat{y} \cdot \hat{y} = \hat{z} \cdot \hat{z} = 1.
-\end{displaymath}
-When the basis vectors have both of these properties, we call them {\em orthonormal}.
-
-For any possible vector $\vec{v}$, we can calculate its component in the direction of each basis vector by calculating the inner product:
-\begin{eqnarray*}
-v_x = \vec{v} \cdot \hat{x} \\
-v_y = \vec{v} \cdot \hat{y} \\
-v_z = \vec{v} \cdot \hat{z} \\
-\end{eqnarray*}
-We say that the basis vectors $\hat{x}$, $\hat{y}$, and $\hat{z}$ are "complete", because specifying the values of $v_x$, $v_y$, and $v_z$ completely describes the vector $v$.  The set of basis vectors $\hat{x}$ and $\hat{z}$ are orthonormal, but they are not complete in three dimensional space, because there are vectors which we cannot write using only these two directions.  For instance, there are no possible values for $v_x$ and $v_z$
-which make
-\begin{eqnarray*}
- \vec{v_1} = v_x \hat{x} + v_z \hat{z}
-\end{eqnarray*}
-equal to the vector
-\begin{eqnarray*}
- \vec{v_2} = 3 \hat{x} + 2 \hat{y} + 7 \hat{z}.
-\end{eqnarray*}
-
- 
-\section{The Fourier Series}
-
-Using the language of vectors, the Fourier Theorem states that the sines and cosines form a complete orthonormal basis for describing any periodic function.  
-
-To make sense of this, we need to define the inner product. If we restrict ourselves to real functions of $x$ with period $L$, the inner product between any two functions $f(x)$ and $g(x)$ is defined to be the integral:
-\begin{equation}
-\braket{f, g} \equiv \int_{-\frac{L}{2}}^{\frac{L}{2}} f(x) g(x) \, dx
-\end{equation}
-The orthonormal basis vectors are the specific sine and cosine functions
-\begin{eqnarray}
-s_n(x) \equiv \sqrt{\frac{2}{L}}\sin\left(\frac{2\pi n}{L} \, x \right)\\
-c_n(x) \equiv \sqrt{\frac{2}{L}}\cos\left(\frac{2\pi n}{L} \, x \right)
-\end{eqnarray}
-which are defined for
-\begin{eqnarray}
-n = 0,1,2,3,...
-\end{eqnarray}
-These are normalized because by our definition for the inner product we can see that:
-\begin{eqnarray*}
-\braket{s_n, s_n} &=& \frac{2}{L} \int_{-\frac{L}{2}}^{\frac{L}{2}} \sin^2\left(\frac{2\pi n}{L} \, x \right) \, dx = 1 \\
-\braket{c_n, c_n} &=& \frac{2}{L} \int_{-\frac{L}{2}}^{\frac{L}{2}} \sin^2\left(\frac{2\pi n}{L} \, x \right) \, dx = 1
-\end{eqnarray*}
-The demonstration that they are orthogonal is left as an exercise (See HW Problem 1):
-\begin{eqnarray*}
-\braket{s_n, s_m} &=& \frac{2}{L} \int_{-\frac{L}{2}}^{\frac{L}{2}} 
-\sin\left(\frac{2\pi n}{L} \, x \right) \sin\left(\frac{2\pi m}{L} \, x \right) \, dx = 0 ~~(n \neq m) \\
-\braket{c_n, c_m} &=& \frac{2}{L} \int_{-\frac{L}{2}}^{\frac{L}{2}} 
-\cos\left(\frac{2\pi n}{L} \, x \right) \cos\left(\frac{2\pi m}{L} \, x \right) \, dx = 0~~(n \neq m) \\
-\braket{s_n, c_m} &=& \frac{2}{L} \int_{-\frac{L}{2}}^{\frac{L}{2}} 
-\sin\left(\frac{2\pi n}{L} \, x \right) \cos\left(\frac{2\pi m}{L} \, x \right) \, dx = 0 
-\end{eqnarray*}
-We can combine the normalization and orthogonality conditions using the Kronecker delta symbol:
-\begin{displaymath}
-\delta_{nm} =  
-\left\{
-	\begin{array}{ll}
-		1  & \mbox{if } n=m \\
-		0 & \mbox{otherwise}
-	\end{array}
-\right.
-\end{displaymath}
-and write the above five equations as:
-\begin{eqnarray}
-\braket{s_n, s_m} &=& \frac{2}{L} \int_{-\frac{L}{2}}^{\frac{L}{2}} 
-\sin\left(\frac{2\pi n}{L} \, x \right) \sin\left(\frac{2\pi m}{L} \, x \right) \, dx = \delta_{nm} \label{eqn:oss}\\
-\braket{c_n, c_m} &=& \frac{2}{L} \int_{-\frac{L}{2}}^{\frac{L}{2}} 
-\cos\left(\frac{2\pi n}{L} \, x \right) \cos\left(\frac{2\pi m}{L} \, x \right) \, dx = \delta_{nm} \label{eqn:occ}\\
-\braket{s_n, c_m} &=& \frac{2}{L} \int_{-\frac{L}{2}}^{\frac{L}{2}} 
-\sin\left(\frac{2\pi n}{L} \, x \right) \cos\left(\frac{2\pi m}{L} \, x \right) \, dx = 0 \label{eqn:osc}
-\end{eqnarray}
-
-
-
-
-
-
-
-Last of all, they are {\em complete} because {any periodic function} with period $L$ can be written as a sum of these sines and cosines:
-\begin{eqnarray}
-f(x) = \sqrt{\frac{2}{L}} \sum_{n=0}^{\infty}  A_n \, \cos\left(\frac{2\pi n}{L} \, x \right) + \sqrt{\frac{2}{L}} \sum_{n=1}^{\infty} B_n \, \sin\left(\frac{2\pi n}{L} \, x \right) \label{eqn:lfs}
-\end{eqnarray}
-The values $A_n$ and $B_n$ are called {\em Fourier coefficients}.  Technically the $N$th term in the Fourier Series refers to the approximation for $f(x)$ from the first $N$ terms in the infinite sum above, and we say that the Fourier Series converges to the function $f(x)$.  Note that $s_0(x) = 0$, which is why the second sum begins at $n=1$.  The demonstration of completeness is optional reading, available in the Appendix.
-
-For a visual example of the Fourier Series, the first terms of the Fourier Series for a step function are shown in Fig.~\ref{fig:fall}.  
-
-\section{Determining the Fourier Coefficients}
-\label{sect:coeff}
-
-\begin{figure}[thb]
-\begin{center}
-{\includegraphics[width=0.40\textwidth]{figs/fsall.pdf}}
-\end{center}
-\caption{\label{fig:fall} The Fourier Series for a step function including one term, three terms, five terms, and nineteen terms.  The Fourier Theorem states that the series will converge, reproducing the original function, as the number of terms approaches infinity.}
-\end{figure}
-
-Just as in the vector analogy, we can determine the Fourier coefficients of a function $f$ by computing the inner products:
-\begin{eqnarray*}
-A_n = \braket{c_n, f} \\
-B_n = \braket{s_n, f}
-\end{eqnarray*}
-or, in terms of the inner product integrals:
-\begin{eqnarray}
-A_n &=& \sqrt{\frac{2}{L}} \int_{-\frac{L}{2}}^{\frac{L}{2}} 
-f(x) \cos\left(\frac{2\pi n}{L} \, x \right) \, dx \label{eqn:fca} \\
-B_n &=& \sqrt{\frac{2}{L}} \int_{-\frac{L}{2}}^{\frac{L}{2}} 
-f(x) \sin\left(\frac{2\pi n}{L} \, x \right) \, dx
-\end{eqnarray}
-
-Just as in the vector analogy, the inner product determines the correct coefficients only because the basis functions are complete and orthonormal.  We will illustrate this with a function that has all of the $B_n$ equal to zero.  Start with the completeness equation, but change the index from $n$ to $m$ in order to make the next step clearer.  
-\begin{displaymath}
-f(x) = \sqrt{\frac{2}{L}} \sum_{m=0}^{\infty}  A_m \, \cos\left(\frac{2\pi m}{L} \, x \right)
-\end{displaymath}
-Now we apply the prescription in Equation~\ref{eqn:fca} to both sides of this equation:
-\begin{eqnarray*}
-\sqrt{\frac{2}{L}} \int_{-\frac{L}{2}}^{\frac{L}{2}} 
-f(x) \cos\left(\frac{2\pi n}{L} \, x \right) \, dx  
-&=& \sqrt{\frac{2}{L}} \int_{-\frac{L}{2}}^{\frac{L}{2}} 
-\left\{
-\sqrt{\frac{2}{L}} \sum_{m=0}^{\infty}  A_m \, \cos\left(\frac{2\pi m}{L} \, x \right) \right\}
-\cos\left(\frac{2\pi n}{L} \, x \right) \, dx \\
-&=& \sum_{m=0}^{\infty}  A_m \, \left\{ \frac{2}{L} 
-\int_{-\frac{L}{2}}^{\frac{L}{2}} 
- \, \cos\left(\frac{2\pi m}{L} \, x \right) \cos\left(\frac{2\pi n}{L} \, x \right) \, dx \right\}\\
-&=& \sum_{m=0}^{\infty}  A_m \, \delta_{nm} \\
-&=& A_n
-\end{eqnarray*}
-Note that the last step follows from the fact that, because of the $\delta_{nm}$ in the product, the only non-zero value in the sum across $m$ is the term for $m=n$.
-
-\section{Compact Form of the Fourier Series}
-
-The Fourier Series developed above has the considerable advantage that it makes explicit the role of the sine and cosine functions as an orthonormal basis.  But it is a bit unwieldy as written.  Consider Equation~\ref{eqn:lfs} again:
-\begin{eqnarray*}
-f(x) = \sqrt{\frac{2}{L}} \sum_{n=0}^{\infty}  A_n \, \cos\left(\frac{2\pi n}{L} \, x \right) + \sqrt{\frac{2}{L}} \sum_{n=1}^{\infty} B_n \, \sin\left(\frac{2\pi n}{L} \, x \right) 
-\end{eqnarray*}
-Since $\cos(0) = 1$, the first term in the left sum is just a constant $A_0$.  It is also convenient to absorb the normalization factor $\sqrt{2/L}$ into the coefficients.  The series is therefore most often written in the much more compact form:
-\begin{eqnarray}
-f(x) = a_0 + \sum_{n=1}^{\infty}  \left\{ a_n \, \cos(k_n x ) + b_n \, \sin( k_n x ) \right\}\label{eqn:fs}
-\end{eqnarray}
-where we have introduced the wave numbers:
-\begin{equation}
-k_n \equiv \frac{2 \pi n}{L} \label{eqn:kn}
-\end{equation}
-and the new Fourier Coefficients:
-\begin{eqnarray}
-a_n &\equiv& \sqrt{\frac{2}{L}}  A_n = \frac{2}{L} \int_{-\frac{L}{2}}^{\frac{L}{2}} 
-f(x) \cos( k_n x) \, dx \label{eqn:fca} \\
-b_n &\equiv& \sqrt{\frac{2}{L}}  B_n = \frac{2}{L} \int_{-\frac{L}{2}}^{\frac{L}{2}} 
-f(x) \sin( k_n x) \, dx \label{eqn:fcb}
-\end{eqnarray}
-
-\section{Fourier Series for Complex Functions}
-
-The Fourier Series can be expressed in terms of the complex exponential by noting that:
-\begin{eqnarray*}
-\cos(k_n x) &=& \frac{\exp(i k_n x) + \exp(-i k_n x)}{2} \\
-\sin(k_n x) &=& \frac{\exp.(i k_n x) - \exp(-i k_n x)}{2i}
-\end{eqnarray*}
-So that Equation~\ref{eqn:fs} can be rewritten as:
-\begin{eqnarray}
-f(x) &=& a_0 + \sum_{n=1}^{\infty}  \left\{ a_n \, \cos(k_n x ) + b_n \, \sin( k_n x ) \right\} \nonumber \\
-&=& a_0 + \sum_{n=1}^{\infty}  \left\{ a_n \,  \frac{\exp(i k_n x) + \exp(-i k_n x)}{2} 
-+ b_n \, \frac{\exp(i k_n x) - \exp(-i k_n x)}{2i} \right\} \nonumber \\
-&=& a_0 + \sum_{n=1}^{\infty}  \left\{ \frac{a_n - i b_n}{2} \exp(i k_n x) + 
-\frac{a_n + i b_n}{2} \exp(-i k_n x) \right\} \nonumber \\
-&=& a_0 + \sum_{n=1}^{\infty}  \left\{ c_n \exp(i k_n x) + 
-c_n^* \exp(-i k_n x) \right\} \label{eqn:cfsr} \label{eqn:cfsr} 
-\end{eqnarray}
-Where in the last step we have introduced the complex Fourier coefficient:
-\begin{displaymath}
-c_n \equiv \frac{a_n - i b_n}{2}.
-\end{displaymath}
-Note that each term of the sum in Equation~\ref{eqn:cfsr} contains two terms, with the second being the complex conjugate of the first.  Since $z+z^*$ is always a real number, the function $f(x)$ is real valued, as was our initial assumption.
-
-If we replace our initial real function $f(x) $ with a complex valued function $\Psi(x)$ (such as a wave function in Quantum Mechanics!), the constraint that these coefficients are complex conjugates vanishes, and we can replace $c_n^*$ with new independent\footnote{If you prefer, you can construct the complex function from two real functions:  $\Psi(x) = f(x) + i g(x)$.  Either way, you have twice as many independent Fourier coefficients when the function is complex valued.} complex Fourier coefficients $d_n$.   Furthermore, the real constant $a_0$ can be replaced by a complex constant $c_0$.  
-\begin{eqnarray*}
-\Psi(x)  &=& c_0 + \sum_{n=1}^{\infty}  \left\{ c_n \exp(i k_n x) + 
-d_n \exp(-i k_n x) \right\} \label{eqn:cfsr} \label{eqn:cfsr} 
-\end{eqnarray*}
-And finally, we note that we can simplify this equation even further by being quite clever, noting that 
-$k_{(-n)} = -k_n$ and defining $c_{(-n)} \equiv d_n$:
-\begin{eqnarray}
-\Psi(x)  &=& c_0 + \sum_{n=1}^{\infty}  c_n \exp(i k_n x) + \sum_{n=1}^{\infty}  d_n \exp(-i k_n x) \nonumber \\
- &=& c_0 + \sum_{n=1}^{\infty}  c_n \exp(i k_n x) + \sum_{n=-\infty}^{-1}  c_n \exp(i k_n x) \nonumber \\
-\Psi(x) &=& \sum_{n=-\infty}^{\infty} c_n \exp(i k_n x). \label{eqn:cfs}
-\end{eqnarray}
-Its amusing to compare the size of Equation~\ref{eqn:lfs} with Equation~\ref{eqn:cfs}, and note that the latter form is considerably more powerful.  To determine the complex Fourier coefficients we calculate:
-\begin{eqnarray}
-c_n &\equiv& \frac{a_n - i b_n}{2}. \nonumber \\
-&=& \frac{1}{2} \left\{ 
-\frac{2}{L} \int_{-\frac{L}{2}}^{\frac{L}{2}}  \Psi(x) \cos( k_n x) \, dx
--i \frac{2}{L} \int_{-\frac{L}{2}}^{\frac{L}{2}}  \Psi(x) \sin( k_n x) \, dx
-\right\} \nonumber \\
-&=& \frac{1}{L} \int_{-\frac{L}{2}}^{\frac{L}{2}}  \Psi(x) \left\{\cos( k_n x) - i \sin( k_n x) \right\} \, dx \nonumber \\
-c_n &=& \frac{1}{L} \int_{-\frac{L}{2}}^{\frac{L}{2}}  \Psi(x) \exp(-i k_n x) \, dx \label{eqn:cfc}
-\end{eqnarray}
-
-Now look closely at Equation~\ref{eqn:cfs} and Equation~\ref{eqn:cfc} and spot the negative sign in the exponential function of the latter.  It seems something strange has happened.  Instead of the sines and cosines, we would like to think of our new orthonormal basis as the complex exponential functions 
-\begin{equation}
-e_n(x) \equiv \frac{1}{\sqrt{L}}\exp(i k_n x).  
-\end{equation}
-But to calculate the coefficient of $\exp(i k_n x)$, we integrate with respect to a {\em different} function $\exp(-i k_n x)$.  Can our vector analogy survive this?  It seems as though we are calculating the component along $\hat{x}$ by taking the dot product with $-\hat{x}$.   
-
-It turns out that for complex valued functions, we need to modify our inner product to include complex conjugation of one of the functions:
-\begin{equation}
-\braket{\Psi, \phi} \equiv \int_{-\frac{L}{2}}^{\frac{L}{2}} \Psi^*(x) \phi(x) \, dx
-\end{equation}
-With this simple tune up, the vector analogy for complex valued functions is saved!   We still have orthonormal basis functions:
-\begin{eqnarray}
-\braket{e_n, e_m} &=& \frac{1}{L} \int_{-\frac{L}{2}}^{\frac{L}{2}}  \exp(-i k_n x) \exp(k_m x) \, dx \nonumber \\
-&=& \delta_{nm} \label{eqn:eno}
-\end{eqnarray}
-(you will show this in HW Problem 2) and we still calculate the coefficient of $e_n(x)$ from the inner product:
-\begin{equation}
-c_n = \frac{1}{L} \braket{e_n, \Psi} = \frac{1}{L} \int_{-\frac{L}{2}}^{\frac{L}{2}}  \Psi(x) \exp(-i k_n x) \, dx
-\end{equation}
-
-\section{The Fourier Transform}
-
-The Fourier Series is sufficient for periodic functions.  Unfortunately, this is of rather limited use in physics.  To realize the full potential of the Fourier Theorem, we need to extend the concept to apply to any function, with the only caveat that the function must approach zero as $x$ approaches both negative and positive infinity.
-
-The trick is to consider such a function as periodic with period $L$ in the limit $L \to \infty$.  Recall Equation~\ref{eqn:kn}:
-\begin{equation*}
-k_n \equiv \frac{2 \pi n}{L}.
-\end{equation*}
-When $L$ is very large, we will obtain a non-zero value for $k_n$ only for comparably large values of $n$.  But since $n$ is very large, the difference between $k_n$ and $k_{n+1}$ is infinitesimal.  We have moved from the discreet case, where we only have certain wave numbers $k_n$ for each integer $n=0,1,2,...$, to the continuous case, where $k$ can take any real value.  Fortunately, our vector analogy survives intact.
-
-Our inner product now extends between positive and negative infinity:
-\begin{equation}
-\braket{\Psi, \phi} \equiv \int_{-\infty}^{\infty} \Psi^*(x) \phi(x) \, dx
-\end{equation}
-Our basis functions, which are now defined for any value of $k$,
-\begin{equation}
-e_k = \frac{1}{\sqrt{2\pi}} \exp(i k x)
-\end{equation}
-are still orthonormal, but the condition looks a bit different in the continuum case:
-\begin{eqnarray*}
-\braket{e_k, e_{k'}} &=& \delta(k-k')
-\end{eqnarray*}
-See the appendix for more details on the Dirac delta function $\delta(x)$, which is zero everywhere but at $x=0$, where it is infinite.  It is the continuous version of $\delta_{nm}$.
-
-Our basis functions are also still complete.  In the discrete case we have a complex Fourier coefficient for every integer $n$.   Now we have a complex Fourier coefficient for any real value of $k$.  In place of Fourier coefficients, we have instead a function of $k$ which we call the Fourier transform: $\widetilde{\Psi}(k)$.
-Instead of a sum over discrete terms, we now have to integrate over all values of $k$:
-\begin{equation} \label{eqn:ift}
-\Psi(x) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} \widetilde{\Psi}(k) \exp(ikx) \, dk.
-\end{equation}
-Just as in the discrete case, we determine the Fourier transform from the inner product:
-\begin{equation} \label{eqn:ft}
-\widetilde{\Psi}(k) = \braket{e_k, \Psi} = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} {\Psi}(x) \exp(-ikx) \, dx
-\end{equation}
-Equation~\ref{eqn:ft} is generally referred to as the {\em Fourier Transform}, while Equation~\ref{eqn:ift} is referred to as the {\em Inverse Fourier Transform}.
-
-\section{The Fourier Transform in Quantum Mechanics}
-
-So far we have been considering the Fourier transform with respect to position $x$ and wave-number $k$.  A much more useful pair of variables for Quantum Mechanics turns out to be momentum $p$ and position $x$.  To relate $p$ to $k$ we need only apply the DeBroglie relation to the wavelength in the definition of the wavenumber:
-\begin{displaymath}
-k \equiv \frac{2 \pi}{\lambda} = \frac{2 \pi p}{h} = \frac{p}{\hbar}
-\end{displaymath}
-We could therefore make the substitution $k \to p/\hbar$ (and $dk \to dp / \hbar)$) in Equations~\ref{eqn:ift} and ~\ref{eqn:ft}.  It turns out that a marginally more useful equation results if we make the normalization factors symmetric, by splitting the normalization factor of $1/\hbar$ across both equations with $1/\sqrt{\hbar}$ applied to each:
-\begin{eqnarray} 
-\Psi(x) &=& \frac{1}{\sqrt{2\pi\hbar}} \int_{-\infty}^{\infty} \widetilde{\Psi}(p) \exp(ipx/\hbar) \, dp \\
-\widetilde{\Psi}(p) &=&  \frac{1}{\sqrt{2\pi\hbar}} \int_{-\infty}^{\infty} {\Psi}(x) \exp(-ipx/\hbar) \, dx
-\end{eqnarray}
-The major benefit of this symmetric form is that the normalization of $\Psi(x)$ and $\widetilde{\Psi}(p)$ in this case turns out to be the same:
-\begin{displaymath}
-\int_{-\infty}^{\infty} |\Psi(x)|^2 dx = \int_{-\infty}^{\infty} |\widetilde{\Psi}(p)|^2 dp = 1 
-\end{displaymath}
-Because we can always calculate $\Psi(x)$ from $\widetilde{\Psi}(p)$ either one completely describes the quantum mechanical state.  We call $\widetilde{\Psi}(p)$ the momentum wave function.   Whereas $|\Psi(x)|^2$ gives us the probability density for the quanton to be at position $x$, $|\Psi(p)|^2$ gives us the probability density for the quanton to have momentum $p$.
-
-\section{The Uncertainty Principle}
-
-Imagine that a particle is near $x=0$ with some uncertainty $\sigma_x$.  One way we might describe such a state is that the probability distribution is a Gaussian (bell-curve) distribution:
-\begin{displaymath}
-|\Psi(x)|^2 = N_x^2 \exp\left(-\frac{x^2}{2\sigma_x^2}\right)
-\end{displaymath}
-where $N_x$ is a normalization factor chosen such that 
-\begin{displaymath}
-\int_{-\infty}^{\infty} |\Psi(x)|^2 = 1.
-\end{displaymath}
-One wave function that would lead to such a probability distribution is 
-\begin{displaymath}
-\Psi(x) = N_x \exp\left(-\frac{x^2}{4\sigma_x^2}\right).
-\end{displaymath}
-Let's look at the momentum wave function for this particle:
-\begin{eqnarray} 
-\widetilde{\Psi}(p) &=&  \frac{1}{\sqrt{2\pi\hbar}} \int_{-\infty}^{\infty} {\Psi}(x) \exp(-ipx/\hbar) \, dx \\
-&=&  \frac{N}{\sqrt{2\pi\hbar}} \int_{-\infty}^{\infty}  \exp \left(-\frac{x^2}{4\sigma_x^2} - \frac{ipx}{\hbar}\right) \, dx
-\end{eqnarray}
-The trick to solving this integral is called {\em completing the square}, we add and subtract the missing term needed to write this as $(x+a)^2 + b$:
-\begin{eqnarray*} 
-X &=&  -\frac{x^2}{4\sigma_x^2} - \frac{ipx}{\hbar} \\
-&=&  -\frac{1}{4\sigma_x^2}(x^2 - 4ipx\sigma_x^2/\hbar) \\
-&=&  -\frac{1}{4\sigma_x^2}(x^2 - 4ipx\sigma_x^2/\hbar  + 4i^2p^2\sigma_x^4/\hbar^2 - 4i^2p^2\sigma_x^2/\hbar^2) \\
-&=&  -\frac{(x - 2 i p\sigma_x^2/\hbar)^2}{4\sigma_x^2} - p^2\sigma_x^2/\hbar^2
-\end{eqnarray*}
-The whole point of this is that because $x$ runs from $-\infty$ to $\infty$ we can now make a change of variables $x - 2 i p\sigma_x^2/\hbar \to x$ to clean things up dramatically:
-\begin{eqnarray*} 
-X &=&  -\frac{x^2}{4\sigma_x^2} - p^2\sigma_x^2/\hbar^2
-\end{eqnarray*}
-Our integral now becomes:
-\begin{eqnarray} 
-\widetilde{\Psi}(p) &=&  \frac{N}{\sqrt{2\pi\hbar}} \int_{-\infty}^{\infty}  \exp \left( -\frac{x^2}{4\sigma_x^2} - p^2\sigma_x^2/\hbar^2 \right) \, dx \nonumber \\
-&=& \left\{ \frac{N}{\sqrt{2\pi\hbar}} \int_{-\infty}^{\infty}  \exp \left( -\frac{x^2}{4\sigma_x^2} \right) \right\} \exp\left( - p^2\sigma_x^2/\hbar^2 \right) \nonumber \\
-&=& N_p \exp(-p^2 \sigma_x^2/\hbar^2) \label{eqn:psip}
-\end{eqnarray}
-Where in the last step we have noted that the term in brackets is just a constant and set $N_p=\{...\}$.
-
-Fortunately the term in brackets ${}$ does not depend on $p$ at all... there's no need to calculate it, it will just give us a normalized momentum wave function.  We might it as well just set it to $N_p$:
-Recall that we started with a wave function which had a Gaussian (bell-shaped) probability distribution with uncertainty $\sigma_x$:
-\begin{displaymath}
-|\Psi(x)|^2 = N_x^2 \exp\left(-\frac{x^2}{2\sigma_x^2}\right).
-\end{displaymath}
-We found that the momentum wave function also has a Gaussian probability distribution, if we call the uncertainty on the momentum $\sigma_p$, the probability distribution should have form the same form:
-\begin{eqnarray*}
-|\widetilde{\Psi}(p) |^2 &=& N_p^2 \exp\left(-\frac{p^2}{2 \sigma_p^2} \right)
-\end{eqnarray*}
-Comparing this to Equation~\ref{eqn:psip} we conclude:
-\begin{displaymath}
-\sigma_p = \frac{\hbar}{2 \sigma_x}
-\end{displaymath}
-or:
-\begin{displaymath}
-\sigma_x \sigma_p = \frac{\hbar}{2}
-\end{displaymath}
-Since uncertainties can always be worse than the best case, we have more generally:
-\begin{displaymath}
-\sigma_x \sigma_p \geq \frac{\hbar}{2}
-\end{displaymath}
-This is the Heisenberg uncertainty principle of quantum mechanics.  The more precisely the position is determined, the less precisely the momentum is determined, and vice versa.  It is a direct consequence of the wave like nature of matter.
-
-\section{Homework Problems}
-
-These problems are worth extra credit if turned in to Prof. Mulhearn before the Final Exam.  Any extra credit will be applied directly to your final exam score.\\
-
-
-\noindent
-{\em Problem 1:} Show that the sines and cosines are orthogonal functions as claimed in Equations~\ref{eqn:oss}, \ref{eqn:occ} and \ref{eqn:osc}.  You can compute the integrals using the trigonometric identities:
-\begin{eqnarray*}
-\sin \alpha \sin \beta &=& \frac{1}{2} \{\cos(\alpha - \beta) - \cos(\alpha + \beta)\}\\
-\cos \alpha \cos \beta &=& \frac{1}{2} \{\cos(\alpha - \beta) + \cos(\alpha + \beta)\}\\
-\cos \alpha \sin \beta &=& \frac{1}{2} \{\sin(\alpha + \beta) - \sin(\alpha - \beta)\}\\
-\end{eqnarray*}
-
-\vskip 0.5cm
-
-\noindent
-{\em Problem 2:} Verify (Equation~\ref{eqn:eno}) in two different ways: (A) by explicitly calculating the integral, and (B) by using Euler's Equation and the orthogonality of the sines and cosines.
-
-\vskip 0.5cm
-
-
-\noindent
-{\em Problem 3:} Using the compact form of the Fourier Series (Equation~\ref{eqn:fs}) show that the prescription for determining the coefficients (Equations~\ref{eqn:fca} and \ref{eqn:fcb}) is valid.  Use the same method for demonstrating this that is used at the end of Section~\ref{sect:coeff}. 
-
-\vskip 0.5cm
-
-\noindent
-{\em Problem 4:}  Suppose that instead of being in an Eigenstate of Energy, a particle in a box has equal probability to be anywhere in the box, so the wave function is:
-\begin{displaymath}
-\Psi(x) = 
-\left\{
-	\begin{array}{ll}
-		1/d  & \mbox{if } -d/2 < x < d/2 \\
-		0 & \mbox{otherwise}
-	\end{array}
-\right.
-\end{displaymath}
-Compute the corresponding momentum wave function by taking the Fourier Transform.
-
-%{\em Problem 4:}  The result from Problem 3 be used to explain the diffraction of particles which pass %through a single slit of size $d$. 
-
-% Prove orthogonality of complex exponentials.
-
-
-\section{Appendix}
-
-%\newtheorem{theorem}{Theorem}[section]
-%\newtheorem{corollary}{Corollary}[theorem]
-%\newtheorem{lemma}[theorem]{Lemma}
-%\begin{theorem}
-%\end{theorem}
-%\begin{lemma}
-%\end{lemma}
-
-This is optional reading.  A proper mathematical proof of these concepts requires about a one year course.  Fortunately, physicist are generally satisfied with informal proofs of mathematical concepts, because for us the ultimate validation is experiment!
-
-\subsection{The Dirac Delta Function}
-
-These proofs make extensive use of the Dirac delta function, $\delta(x)$, which is zero everywhere but at $x=0$, where it is infinite.  Mathematically, the delta function only makes formal sense inside an integral, where it has the following defining properties:
-\begin{eqnarray}
-\int_{-\infty}^{\infty} f(x') \, \delta(x-x') \, dx' &=& f(x) \\
-\int_{-\infty}^{\infty} \delta(x) \, dx &=& 1 \label{eqn:norm}
- \end{eqnarray}
-The delta function simply picks out from the integral the one value of the integrand which makes the argument of the delta function zero.  This makes intuitive sense, because the delta function is zero everywhere else.  The second equation shows the normalization of the delta function, which follows from the first if you take $f(x)=1$.
-
-
-\subsection{The completeness of the sines and cosines}
-
-\begin{figure}[thb]
-\begin{center}
-{\includegraphics[width=0.40\textwidth]{figs/hk.png}}
-\end{center}
-\caption{\label{fig:hl} The function $h_\ell(x)$ for increasingly large values of $\ell$.}
-\end{figure}
-
-\noindent
-To demonstrate the completeness of sines and cosines\footnote{This proof taken from http://web.mit.edu/jorloff/www/18.03-esg/notes/fourier-complete.pdf} we construct a peculiar but useful set of functions defined for $\ell=1,2,3,...$:
-\begin{displaymath}
-h_\ell(x) = c_\ell \left(\frac{1 + \cos(x)}{2}\right)^\ell
-\end{displaymath}
-We chose each factor $c_\ell$ such that:
-\begin{displaymath}
-\int_{-\pi}^{\pi} h_\ell(x) = 1
-\end{displaymath}
-The shape of $h_\ell$ is shown in Fig.~\ref{fig:hl}.  As $\ell$ increases, $h_\ell$ becomes more and more narrow at $x=0$, while the normalization is as in Equation~\ref{eqn:norm}.  It looks more and more like the delta function:
-\begin{displaymath}
-\lim_{\ell \to \infty} h_\ell(x) = \delta(x)
-\end{displaymath}
-It has one other important feature:  $h_\ell(x)$ is simply a sum of cosines of $nx$ with coefficients that don't depend on $x$.  To see how this can be, note that we can always turn a product of cosines into a sum via the trigonometric identity:
-\begin{displaymath}
-\cos \alpha \cos \beta = \frac{1}{2} \{\cos(\alpha - \beta) + \cos(\alpha + \beta)\}.
-\end{displaymath}
-So, for instance, we can write:
-\begin{eqnarray*}
-h_2(x) &=& \frac{c_2}{4} + \frac{c_2\cos(x)}{2}+\frac{c_2\cos^2(x)}{4} \\
-           &=& \frac{c_2}{4} + \frac{c_2\cos(x)}{2}+\frac{c_2\cos(2x)}{8}
-\end{eqnarray*}
-This property implies that the function $h_\ell(x-a)$ for some constant $a$ is simply a sum of {\em both} sines and cosines of $nx$ with coefficients that don't depend on $x$, as:
-\begin{displaymath}
-\cos(nx-na) = \cos(nx)\cos(na) + \sin(nx)\sin(na).
-\end{displaymath}
-
-With this technology in hand we are ready to demonstrate the completeness of the sines and cosines.   
-For simplicity, it suffices to consider only functions with period $L=2\pi$ (i.e. $k_n=n$).  The general case can then be inferred by transformation of coordinates.  Consider a real function $f(x)$ which is periodic for $L=2\pi$.  For now just define the function $F(x)$ to be the infinite series:
-\begin{eqnarray}
-F(x) \equiv a_0 + \sum_{n=1}^{\infty}  \left\{ a_n \, \cos(n x ) + b_n \, \sin(n x ) \right\}.
-\end{eqnarray}
-This is the compact form of the Fourier Series for this special case $L=2\pi$, so $k_n = n$.
-We assume the coefficients are determined in the usual way:
-\begin{eqnarray*}
-a_n &=& \frac{2}{L} \int_{-\frac{L}{2}}^{\frac{L}{2}} 
-f(x) \cos(n x) \, dx  \\
-b_n &=& \frac{2}{L} \int_{-\frac{L}{2}}^{\frac{L}{2}} 
-f(x) \sin(n x) \, dx.
-\end{eqnarray*}
-We need to show that $F(x) = f(x)$, or 
-\begin{displaymath}
-g(x) = F(x) - f(x) = 0
-\end{displaymath}
-The proof hinges on the fact that $F(x)$ and $f(x)$ have the same Fourier coefficients, so that:
-\begin{eqnarray*}
-\int_{-\pi}^{\pi} g(x) \sin(nx) dx &=& \int_{-\pi}^{\pi} F(x) \sin(nx) dx -  \int_{-\pi}^{\pi} f(x) \sin(nx) dx \\
-&=& b_n - b_n \\
-&=& 0 \\
-\int_{-\pi}^{\pi} g(x) \cos(nx) dx &=& \int_{-\pi}^{\pi} F(x) \cos(nx) dx -  \int_{-\pi}^{\pi} f(x) \cos(nx) dx \\
-&=& a_n - a_n \\
-&=& 0 
-\end{eqnarray*}
-This shows that the integral of $g(x)$ times any sine or cosine is zero.  But our special function $h_\ell(x-a)$ function is just a sum of sines and cosines of $nx$ for any value of $a$.  This means that:
-\begin{eqnarray*}
-\int_{-\pi}^{\pi} h_\ell(x-a) g(x) dx &=& 0 \\
-\end{eqnarray*}
-If we take the limit as $\ell \to \infty$, we obtain:
-\begin{eqnarray*}
-\int_{-\pi}^{\pi} \delta(x-a) g(x) dx &=& 0 \\
-g(a) &=& 0 \\
-\end{eqnarray*}
-Since this is true for any value of $a$, we have $g(x) = 0$ and so $F(x) = f(x)$.
-
-\subsection{The orthogonality and completeness of the complex exponential function}
-
-The first thing we need to show is that:
-\begin{equation} \label{eqn:delta}
-\frac{1}{2\pi} \int_{-\infty}^{\infty} \exp(ikx) \, dk = \delta(x)
-\end{equation}
-To see this we first calculate:
-\begin{eqnarray*} \label{eqn:delta}
-\frac{1}{2\pi} \int_{-a}^{a} \exp(ikx) \, dk &=& \frac{1}{2\pi} \, \frac{\exp(iax)-\exp(-iax)}{ix}\\
-&=& \frac{1}{\pi} \, \frac{\sin(ax)}{x} \\
-&=& \frac{a}{\pi} \, {\rm sinc}(ax)
-\end{eqnarray*}
-An integration shows that:
-\begin{eqnarray}
-\int_{-\infty}^{\infty} \frac{a}{\pi} \, {\rm sinc}(ax) \, dx = 1
-\end{eqnarray}
-exactly as needed for Equation~\ref{eqn:norm}.
-
-Fig.~\ref{fig:sinc} shows that this function peaks at zero and becomes more and more narrow for progressively larger values of $a$.  Since it has the correct normalization, we conclude that:
-\begin{eqnarray*}
-\frac{1}{2\pi} \int_{-\infty}^{\infty} \exp(ikx) \, dk &=& \lim_{a\to\infty} \frac{1}{2\pi} \int_{-a}^{a} \exp(ikx) \, dk \\
-&=& \lim_{a\to\infty} \frac{a}{\pi} \, {\rm sinc}(ax) \\ 
-&=& \delta(x)
-\end{eqnarray*}
-
-\begin{figure}[thb]
-\begin{center}
-{\includegraphics[width=0.40\textwidth]{figs/sinc.png}}
-\end{center}
-\caption{\label{fig:sinc} The function $a \, {\rm sinc}(ax)/\pi$ for progressively larger values of $a$.  As $a \to \infty$, this function approaches the delta function $\delta(x)$.}
-\end{figure}
-
-We are now fully equip to show that the complex exponential functions:
-\begin{equation*}
-e_k = \frac{1}{\sqrt{2\pi}} \exp(i k x)
-\end{equation*}
-are orthonormal.  Calculating the inner product
-\begin{eqnarray*}
-\braket{e_k, e_{k'}} &=& \int_{-\infty}^{\infty} \frac{1}{\sqrt{2 \pi}}  \exp(-ikx) \frac{1}{\sqrt{2 \pi}}  \exp(ik'x) \, dx \\
-                               &=& \frac{1}{2 \pi} \int_{-\infty}^{\infty} \exp\{i(k'-k)x\} \, dx \\
-                               &=& \delta(k-k')
-\end{eqnarray*}
-where we have used Equation~\ref{eqn:delta} but with the roles of $x$ and $k$ exchanged.
-To prove completeness, we can now show that:
-\begin{eqnarray*}
-\Psi(x) &=& \int_{-\infty}^{\infty} \Psi(x') \, \delta(x-x') \, dx' \\
-&=& \int_{-\infty}^{\infty} f(x') \left\{ \frac{1}{2 \pi} \int_{-\infty}^{+\infty} \exp\{ik(x-x')\} \, dk \right\} \, dx' \\
-&=& \frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} \left\{ \frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{+\infty} f(x') \exp(-ikx') \, dx' \right\}  \exp(ikx) \, dk \\
-&=& \frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} \widetilde{\Psi}(k)  \exp(ikx) \, dk \\
-\end{eqnarray*}
-where:
-\begin{eqnarray*}
-\widetilde{\Psi}(k) &=& \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} \Psi(x) \, \exp(-ikx) \, dx \\
-\end{eqnarray*}
-
-
-
-
 
 \end{document}
 

@@ -21,9 +21,24 @@
 
 \section*{Practice Problems}
 
-These problems are graded on effort only.
+These problems are graded on effort only.\\
 
-Griffiths: P1.4, P1.14a
+\noindent
+{\bf Griffiths: P1.5, P1.8} \\
+
+\noindent
+{\bf Hint for P1.8:}  Let $f(x,t)$ be a solution to the S.E.:
+\begin{displaymath}
+i\hbar \, \frac{\partial f}{\partial t} \; = \; - \frac{\hbar^2}{2 m} \; \frac{\partial^2 f}{\partial x^2} \, + \, V \, f
+\end{displaymath}
+Define:
+\begin{displaymath}
+g(x,t) = f(x,t) \, \exp(-\frac{i V_0 t}{\hbar})
+\end{displaymath}
+Then calculate:
+\begin{displaymath}
+i\hbar \, \frac{\partial g}{\partial t} 
+\end{displaymath}
 
 \section*{Additional Problems}
 
@@ -45,7 +60,7 @@ and $P(n) = 0$ for all other $n$.\\[5pt]
 \begin{displaymath}
   \Psi(x,t) =
   \begin{cases}    
-    {\displaystyle \sqrt{\frac{\pi}{2L}}\, e^{it/t_0} \, \sqrt{\sin\left(\frac{\pi x}{L}\right)}} & {\displaystyle 0 \leq x \leq L} \\[10pt]
+    {\displaystyle \sqrt{\frac{\pi}{2a}}\, e^{it/t_0} \, \sqrt{\sin\left(\frac{\pi x}{a}\right)}} & {\displaystyle 0 \leq x \leq a} \\[10pt]
     {\displaystyle 0} & {\displaystyle {\rm otherwise}} \\
   \end{cases}
 \end{displaymath}
@@ -55,16 +70,9 @@ and $P(n) = 0$ for all other $n$.\\[5pt]
 (b) Is $\Psi$ properly normalized?  Show how you determined this.\\[5pt]
 (c) For any position $b$ what is the probability that you observe the particle with $x \leq b$?  (Hint: consider three cases $b<0$, $0 \leq b \leq L$, and $b > L$.)
 
-
 \vskip 1cm
-\begin{center}
-Next problem on next page...
-\end{center}
-
-
-\newpage
 \noindent
-    {\bf Problem 3:} Define $P_{ab}(t)$ as the probability of measuring a particle in the range $a< x < b$, at time t.  Show that:
+{\bf Problem 3:} Define $P_{ab}(t)$ as the probability of measuring a particle in the range $a< x < b$, at time t.  Show that:
 \begin{displaymath}
   \frac{dP_{ab}}{dt} = J(a, t) - J(b, t),
 \end{displaymath}
@@ -75,8 +83,41 @@ where:
 \end{displaymath}
 Hint: look closely at the section on Normalization in Chapter 1 of the {\em lecture notes}.
 
+\vskip 1cm
+\noindent
+{\bf Problem 4 (Worth Double Credit):} Suppose we have two wave functions:
 
-Need one more problem...
+\begin{displaymath}
+  \Psi_1(x,t) =
+  \begin{cases}    
+    {\displaystyle \sqrt{\frac{2}{a}} \, \sin\left(\frac{2 \pi x}{a}\right) \exp\left(-i \omega_1 t\right)} & {\displaystyle -\frac{a}{2} \leq x \leq \frac{a}{2}} \\[10pt]
+    {\displaystyle 0} & {\displaystyle {\rm otherwise}} \\
+  \end{cases}
+\end{displaymath}
+
+\begin{displaymath}
+  \Psi_2(x,t) =
+  \begin{cases}    
+    {\displaystyle \sqrt{\frac{2}{a}} \, \sin\left(\frac{4 \pi x}{a}\right) \exp\left(-i \omega_2 t\right)} & {\displaystyle -\frac{a}{2} \leq x \leq \frac{a}{2}} \\[10pt]
+    {\displaystyle 0} & {\displaystyle {\rm otherwise}} \\
+  \end{cases}
+\end{displaymath}
+
+\noindent
+(a) Calculate $|\Psi_1|^2$ for $-a/2 \leq x \leq a/2$.  Is it time dependent?\\[5pt]
+(b) Calculate $|\Psi_2|^2$ for $-a/2 \leq x \leq a/2$.  Is it time dependent?\\[5pt]
+Define the wave function $\Psi$ as:
+\begin{displaymath}
+\Psi = A \cdot \left( \Psi_1 + \Psi_2 \right)
+\end{displaymath}
+for some constant A.\\[5pt]
+(c) Calculate $|\Psi|^2$ for $-a/2 \leq x \leq a/2$.  Is it time dependent?\\[5pt]
+{\bf Hint:} Use HW1, Problem 2 to make short work of the remaining steps!\\[5pt]
+(d) Show that $\Psi_1$ and $\Psi_2$ are properly normalized.\\[5pt]
+(e) Find the positive real value A that properly normalizes $\Psi$.\\[5pt]
+(f) Show that $\braket{x}$ is zero for $\Psi_1$ and $\Psi_2$.\\[5pt]
+(g) Calculate $\braket{x}$ for $\Psi$.\\
+
 \end{document}
 
 
