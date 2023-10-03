@@ -310,27 +310,27 @@ Using the language of vector spaces, the Fourier Theorem states that the sines a
 
 The vectors in this vector space are periodic functions.  Vector addition of the vectors $f(x)$ and $g(x)$ is just $f(x) + g(x)$ which is another vector.  Scalar multiplication is just multiplying a function $f(x)$ by a scalar $a$ to get a new function $a f(x)$.  The other properties of vector addition and scalar multiplication easily follow from the corresponding rules of ordinary addition and multiplication.
 
-We need to define the inner product. If we restrict ourselves to real functions of $x$ with period $a$, the inner product between any two functions $f(x)$ and $g(x)$ is defined to be the integral:
+We need to define the inner product. If we restrict ourselves to {\bf real} functions of $x$ with period $a$, the inner product between any two functions $f(x)$ and $g(x)$ is defined to be the integral:
 \begin{equation}
-\braket{f|g} \equiv \int_{-\frac{a}{2}}^{\frac{a}{2}} f(x) g(x) \, dx
+\braket{f,g} \equiv \int_{-\frac{a}{2}}^{\frac{a}{2}} f(x) \, g(x) \, dx
 \end{equation}
 The basis vectors are the sine and cosine functions
 \begin{eqnarray}
-s_n(x) \equiv \sqrt{\frac{2}{L}}\sin\left(\frac{2\pi n}{L} \, x \right)\\
-c_n(x) \equiv \sqrt{\frac{2}{L}}\cos\left(\frac{2\pi n}{L} \, x \right)
+s_n(x) \equiv \sqrt{\frac{2}{a}}\,\sin\left(\frac{2\pi n}{a} \, x \right)\\
+c_n(x) \equiv \sqrt{\frac{2}{a}}\,\cos\left(\frac{2\pi n}{a} \, x \right)
 \end{eqnarray}
 which are defined for
 \begin{eqnarray}
 n = 0,1,2,3,...
 \end{eqnarray}
-We'll leave it as an exercise to show that:
+except that $s_0(0)=0$ is not normalizable.  We'll leave it as an exercise to show that:
 \begin{eqnarray}
-\braket{s_n|s_m} &=& \frac{2}{L} \int_{-\frac{L}{2}}^{\frac{L}{2}} 
-\sin\left(\frac{2\pi n}{L} \, x \right) \sin\left(\frac{2\pi m}{L} \, x \right) \, dx = \delta_{nm} \label{eqn:oss}\\
-\braket{c_n| c_m} &=& \frac{2}{L} \int_{-\frac{L}{2}}^{\frac{L}{2}} 
-\cos\left(\frac{2\pi n}{L} \, x \right) \cos\left(\frac{2\pi m}{L} \, x \right) \, dx = \delta_{nm} \label{eqn:occ}\\
-\braket{s_n| c_m} &=& \frac{2}{L} \int_{-\frac{L}{2}}^{\frac{L}{2}} 
-\sin\left(\frac{2\pi n}{L} \, x \right) \cos\left(\frac{2\pi m}{L} \, x \right) \, dx = 0 \label{eqn:osc}
+\braket{s_n,s_m} &=& \frac{2}{a} \int_{-\frac{a}{2}}^{\frac{a}{2}} 
+\sin\left(\frac{2\pi n}{a} \, x \right) \sin\left(\frac{2\pi m}{a} \, x \right) \, dx = \delta_{nm} \;\;\;\;\; (n \neq 0) \notag\\[8pt]
+\braket{c_n, c_m} &=& \frac{2}{a} \int_{-\frac{a}{2}}^{\frac{a}{2}} 
+\cos\left(\frac{2\pi n}{a} \, x \right) \cos\left(\frac{2\pi m}{a} \, x \right) \, dx = \delta_{nm}\notag\\[8pt]
+\braket{s_n, c_m} &=& \frac{2}{a} \int_{-\frac{a}{2}}^{\frac{a}{2}} 
+\sin\left(\frac{2\pi n}{a} \, x \right) \cos\left(\frac{2\pi m}{a} \, x \right) \, dx = 0 \notag\\
 \end{eqnarray}
 where for compact notation we will use the Kronecker delta symbol:
 \begin{displaymath}
@@ -343,21 +343,18 @@ where for compact notation we will use the Kronecker delta symbol:
 \right.
 \end{displaymath}
 
+Fourier's Theorem states that these orthonormal basis functions are complete for the vector space of periodic functions with period $a$.  That is, if $f(x)$ has the property that:
+$$f(x) = f(x+a)$$
+then $f(x)$ can be written as a sum of the orthonormal basis vectors:
+\begin{equation}
+f(x) \; = \; \sum_{n=0}^{\infty}  A_n \, c_n(x)  \; \; + \; \; \sum_{n=1}^{\infty} B_n \, s_n(x) \label{eqn:bfs}
+\end{equation}
+or explicitly in terms of sine and cosine functions:
+\begin{equation}
+f(x) = \sqrt{\frac{2}{a}} \, \sum_{n=0}^{\infty}  A_n \, \cos\left(\frac{2\pi n}{L} \, x \right) + \sqrt{\frac{2}{a}} \, \sum_{n=1}^{\infty} B_n \, \sin\left(\frac{2\pi n}{L} \, x \right)  s_n(x) \label{eqn:lfs}
+\end{equation}
 
-
-
-
-
-Last of all, they are {\em complete} because {any periodic function} with period $L$ can be written as a sum of these sines and cosines:
-\begin{eqnarray}
-f(x) = \sqrt{\frac{2}{L}} \sum_{n=0}^{\infty}  A_n \, \cos\left(\frac{2\pi n}{L} \, x \right) + \sqrt{\frac{2}{L}} \sum_{n=1}^{\infty} B_n \, \sin\left(\frac{2\pi n}{L} \, x \right) \label{eqn:lfs}
-\end{eqnarray}
-The values $A_n$ and $B_n$ are called {\em Fourier coefficients}.  Technically the $N$th term in the Fourier Series refers to the approximation for $f(x)$ from the first $N$ terms in the infinite sum above, and we say that the Fourier Series converges to the function $f(x)$.  Note that $s_0(x) = 0$, which is why the second sum begins at $n=1$.  The demonstration of completeness is optional reading, available in the Appendix.
-
-For a visual example of the Fourier Series, the first terms of the Fourier Series for a step function are shown in Fig.~\ref{fig:fall}.  
-
-\section{Determining the Fourier Coefficients}
-\label{sect:coeff}
+The values $A_n$ and $B_n$ are called {\em Fourier coefficients}.  Technically the $N$th term in the Fourier Series refers to the approximation for $f(x)$ from the first $N$ terms in the infinite sum above, and we say that the Fourier Series converges to the function $f(x)$.  The demonstration of completeness is optional reading, available in the Appendix.
 
 \begin{figure}[thb]
 \begin{center}
@@ -366,41 +363,225 @@ For a visual example of the Fourier Series, the first terms of the Fourier Serie
 \caption{\label{fig:fall} The Fourier Series for a step function including one term, three terms, five terms, and nineteen terms.  The Fourier Theorem states that the series will converge, reproducing the original function, as the number of terms approaches infinity.}
 \end{figure}
 
+For a visual example of the Fourier Series, the first terms of the Fourier Series for a step function are shown in Fig.~\ref{fig:fall}.  
+
+\section{Determining the Fourier Coefficients}
+\label{sect:coeff}
+
 Just as in the vector analogy, we can determine the Fourier coefficients of a function $f$ by computing the inner products:
 \begin{eqnarray*}
 A_n = \braket{c_n, f} \\
 B_n = \braket{s_n, f}
 \end{eqnarray*}
-or, in terms of the inner product integrals:
+or, in terms of the inner product integrals and sine and cosine functions:
 \begin{eqnarray}
-A_n &=& \sqrt{\frac{2}{L}} \int_{-\frac{L}{2}}^{\frac{L}{2}} 
-f(x) \cos\left(\frac{2\pi n}{L} \, x \right) \, dx \label{eqn:fca} \\
-B_n &=& \sqrt{\frac{2}{L}} \int_{-\frac{L}{2}}^{\frac{L}{2}} 
-f(x) \sin\left(\frac{2\pi n}{L} \, x \right) \, dx
+A_n &=& \sqrt{\frac{2}{a}} \int_{-\frac{a}{2}}^{\frac{a}{2}} 
+f(x) \cos\left(\frac{2\pi n}{a} \, x \right) \, dx \label{eqn:fca} \\
+B_n &=& \sqrt{\frac{2}{a}} \int_{-\frac{a}{2}}^{\frac{a}{2}} 
+f(x) \sin\left(\frac{2\pi n}{a} \, x \right) \, dx
 \end{eqnarray}
 
-Just as in the vector analogy, the inner product determines the correct coefficients only because the basis functions are complete and orthonormal.  We will illustrate this with a function that has all of the $B_n$ equal to zero.  Start with the completeness equation, but change the index from $n$ to $m$ in order to make the next step clearer.  
-\begin{displaymath}
-f(x) = \sqrt{\frac{2}{L}} \sum_{m=0}^{\infty}  A_m \, \cos\left(\frac{2\pi m}{L} \, x \right)
-\end{displaymath}
-Now we apply the prescription in Equation~\ref{eqn:fca} to both sides of this equation:
+The inner product determines the correct coefficients only because the basis functions are complete and orthonormal.  To see how this works, start with the completeness equation but replace $n$ with $m$ for clarity later:
+\begin{equation*}
+f(x) \; = \; \sum_{m=0}^{\infty}  A_m \, c_m(x)  \; \; + \; \; \sum_{m=1}^{\infty} B_m \, s_m(x) 
+\end{equation*}
+Then calculate:
 \begin{eqnarray*}
-\sqrt{\frac{2}{L}} \int_{-\frac{L}{2}}^{\frac{L}{2}} 
-f(x) \cos\left(\frac{2\pi n}{L} \, x \right) \, dx  
-&=& \sqrt{\frac{2}{L}} \int_{-\frac{L}{2}}^{\frac{L}{2}} 
-\left\{
-\sqrt{\frac{2}{L}} \sum_{m=0}^{\infty}  A_m \, \cos\left(\frac{2\pi m}{L} \, x \right) \right\}
-\cos\left(\frac{2\pi n}{L} \, x \right) \, dx \\
-&=& \sum_{m=0}^{\infty}  A_m \, \left\{ \frac{2}{L} 
-\int_{-\frac{L}{2}}^{\frac{L}{2}} 
- \, \cos\left(\frac{2\pi m}{L} \, x \right) \cos\left(\frac{2\pi n}{L} \, x \right) \, dx \right\}\\
-&=& \sum_{m=0}^{\infty}  A_m \, \delta_{nm} \\
-&=& A_n
+\braket{c_n, f} \; &=& \; \sum_{m=0}^{\infty}  A_m \, \braket{c_n, c_m}  \; \; + \; \; \sum_{m=1}^{\infty} B_m \, \braket{c_m, s_m} \\[8pt]
+ &=& \; \sum_{m=0}^{\infty}  A_m \; \delta_{nm}  \; \; + \; \; \sum_{m=1}^{\infty} B_m \; 0 \\[8pt]
+\braket{c_n, f} \; &=& A_n \\
 \end{eqnarray*}
-Note that the last step follows from the fact that, because of the $\delta_{nm}$ in the product, the only non-zero value in the sum across $m$ is the term for $m=n$.
+Note that the last step follows from the fact that, because of the $\delta_{nm}$ in the product, the only non-zero value in the sum across $m$ is the term for $m=n$.  It is left as an exercise to work this out for $\braket{s_n, f}$.
+
+\section{The Half-Period Fourier Series}
+
+Suppose a function f(x) is even, i.e.:
+$$f(-x) = f(x)$$
+a function g(x) is odd, i.e.:
+$$g(-x) = -g(x)$$.
+Then the following integral vanishes:
+\begin{alignat*}{2}
+\int_{-a}^{a} 
+f(x) g(x) dx &=  &\int_{-a}^{0} f(x) g(x) dx + \int_{0}^{a} f(x) g(x) dx\\[14pt]
+ &=&\int_{0}^{a} f(-x) g(-x) dx + \int_{0}^{a} f(x) g(x) dx\\
+ &=&\int_{0}^{a} f(-x) g(-x) dx + \int_{0}^{a} f(x) g(x) dx\\
+ &=& 0 \\
+\end{alignat*}
+
+  
+
+
+
+Suppose f(x) is even, then:
+\begin{eqnarray*}
+A_n &=& \braket{s_n,f} \\
+    &=& \sqrt{\frac{2}{a}} \int_{-\frac{a}{2}}^{\frac{a}{2}} 
+f(x) \cos\left(\frac{2\pi n}{a} \, x \right) \, dx \label{eqn:fca} \\
+\sqrt{\frac{2}{a}} \int_{0}^{\frac{a}{2}} 
+f(x) \cos\left(\frac{2\pi n}{a} \, x \right) \, dx \label{eqn:fca} \\
+\end{eqnarray*}
+
+A function $f(x)$ is odd, i.e.:
+$$f(-x) = -f(x)$$
+with 
+
+
+\appendix
+
+\chapter{Proofs of Completeness of Trigonometric Functions}
+
+
+\subsection{The Dirac Delta Function}
+
+These proofs make extensive use of the Dirac delta function, $\delta(x)$, which is zero everywhere but at $x=0$, where it is infinite.  Mathematically, the delta function only makes formal sense inside an integral, where it has the following defining properties:
+\begin{eqnarray}
+\int_{-\infty}^{\infty} f(x') \, \delta(x-x') \, dx' &=& f(x) \\
+\int_{-\infty}^{\infty} \delta(x) \, dx &=& 1 \label{eqn:norm}
+ \end{eqnarray}
+The delta function simply picks out from the integral the one value of the integrand which makes the argument of the delta function zero.  This makes intuitive sense, because the delta function is zero everywhere else.  The second equation shows the normalization of the delta function, which follows from the first if you take $f(x)=1$.
+
+
+
+
+
+\subsection{The completeness of the sines and cosines}
+
+\begin{figure}[thb]
+\begin{center}
+{\includegraphics[width=0.40\textwidth]{figs/hk.png}}
+\end{center}
+\caption{\label{fig:hl} The function $h_\ell(x)$ for increasingly large values of $\ell$.}
+\end{figure}
+
+\noindent
+To demonstrate the completeness of sines and cosines\footnote{This proof taken from http://web.mit.edu/jorloff/www/18.03-esg/notes/fourier-complete.pdf} we construct a peculiar but useful set of functions defined for $\ell=1,2,3,...$:
+\begin{displaymath}
+h_\ell(x) = c_\ell \left(\frac{1 + \cos(x)}{2}\right)^\ell
+\end{displaymath}
+We chose each factor $c_\ell$ such that:
+\begin{displaymath}
+\int_{-\pi}^{\pi} h_\ell(x) = 1
+\end{displaymath}
+The shape of $h_\ell$ is shown in Fig.~\ref{fig:hl}.  As $\ell$ increases, $h_\ell$ becomes more and more narrow at $x=0$, while the normalization is as in Equation~\ref{eqn:norm}.  It looks more and more like the delta function:
+\begin{displaymath}
+\lim_{\ell \to \infty} h_\ell(x) = \delta(x)
+\end{displaymath}
+It has one other important feature:  $h_\ell(x)$ is simply a sum of cosines of $nx$ with coefficients that don't depend on $x$.  To see how this can be, note that we can always turn a product of cosines into a sum via the trigonometric identity:
+\begin{displaymath}
+\cos \alpha \cos \beta = \frac{1}{2} \{\cos(\alpha - \beta) + \cos(\alpha + \beta)\}.
+\end{displaymath}
+So, for instance, we can write:
+\begin{eqnarray*}
+h_2(x) &=& \frac{c_2}{4} + \frac{c_2\cos(x)}{2}+\frac{c_2\cos^2(x)}{4} \\
+           &=& \frac{c_2}{4} + \frac{c_2\cos(x)}{2}+\frac{c_2\cos(2x)}{8}
+\end{eqnarray*}
+This property implies that the function $h_\ell(x-a)$ for some constant $a$ is simply a sum of {\em both} sines and cosines of $nx$ with coefficients that don't depend on $x$, as:
+\begin{displaymath}
+\cos(nx-na) = \cos(nx)\cos(na) + \sin(nx)\sin(na).
+\end{displaymath}
+
+With this technology in hand we are ready to demonstrate the completeness of the sines and cosines.   
+For simplicity, it suffices to consider only functions with period $L=2\pi$ (i.e. $k_n=n$).  The general case can then be inferred by transformation of coordinates.  Consider a real function $f(x)$ which is periodic for $L=2\pi$.  For now just define the function $F(x)$ to be the infinite series:
+\begin{eqnarray}
+F(x) \equiv a_0 + \sum_{n=1}^{\infty}  \left\{ a_n \, \cos(n x ) + b_n \, \sin(n x ) \right\}.
+\end{eqnarray}
+This is the compact form of the Fourier Series for this special case $L=2\pi$, so $k_n = n$.
+We assume the coefficients are determined in the usual way:
+\begin{eqnarray*}
+a_n &=& \frac{2}{L} \int_{-\frac{L}{2}}^{\frac{L}{2}} 
+f(x) \cos(n x) \, dx  \\
+b_n &=& \frac{2}{L} \int_{-\frac{L}{2}}^{\frac{L}{2}} 
+f(x) \sin(n x) \, dx.
+\end{eqnarray*}
+We need to show that $F(x) = f(x)$, or 
+\begin{displaymath}
+g(x) = F(x) - f(x) = 0
+\end{displaymath}
+The proof hinges on the fact that $F(x)$ and $f(x)$ have the same Fourier coefficients, so that:
+\begin{eqnarray*}
+\int_{-\pi}^{\pi} g(x) \sin(nx) dx &=& \int_{-\pi}^{\pi} F(x) \sin(nx) dx -  \int_{-\pi}^{\pi} f(x) \sin(nx) dx \\
+&=& b_n - b_n \\
+&=& 0 \\
+\int_{-\pi}^{\pi} g(x) \cos(nx) dx &=& \int_{-\pi}^{\pi} F(x) \cos(nx) dx -  \int_{-\pi}^{\pi} f(x) \cos(nx) dx \\
+&=& a_n - a_n \\
+&=& 0 
+\end{eqnarray*}
+This shows that the integral of $g(x)$ times any sine or cosine is zero.  But our special function $h_\ell(x-a)$ function is just a sum of sines and cosines of $nx$ for any value of $a$.  This means that:
+\begin{eqnarray*}
+\int_{-\pi}^{\pi} h_\ell(x-a) g(x) dx &=& 0 \\
+\end{eqnarray*}
+If we take the limit as $\ell \to \infty$, we obtain:
+\begin{eqnarray*}
+\int_{-\pi}^{\pi} \delta(x-a) g(x) dx &=& 0 \\
+g(a) &=& 0 \\
+\end{eqnarray*}
+Since this is true for any value of $a$, we have $g(x) = 0$ and so $F(x) = f(x)$.
+
+\subsection{The orthogonality and completeness of the complex exponential function}
+
+The first thing we need to show is that:
+\begin{equation} \label{eqn:delta}
+\frac{1}{2\pi} \int_{-\infty}^{\infty} \exp(ikx) \, dk = \delta(x)
+\end{equation}
+To see this we first calculate:
+\begin{eqnarray*} \label{eqn:delta}
+\frac{1}{2\pi} \int_{-a}^{a} \exp(ikx) \, dk &=& \frac{1}{2\pi} \, \frac{\exp(iax)-\exp(-iax)}{ix}\\
+&=& \frac{1}{\pi} \, \frac{\sin(ax)}{x} \\
+&=& \frac{a}{\pi} \, {\rm sinc}(ax)
+\end{eqnarray*}
+An integration shows that:
+\begin{eqnarray}
+\int_{-\infty}^{\infty} \frac{a}{\pi} \, {\rm sinc}(ax) \, dx = 1
+\end{eqnarray}
+exactly as needed for Equation~\ref{eqn:norm}.
+
+Fig.~\ref{fig:sinc} shows that this function peaks at zero and becomes more and more narrow for progressively larger values of $a$.  Since it has the correct normalization, we conclude that:
+\begin{eqnarray*}
+\frac{1}{2\pi} \int_{-\infty}^{\infty} \exp(ikx) \, dk &=& \lim_{a\to\infty} \frac{1}{2\pi} \int_{-a}^{a} \exp(ikx) \, dk \\
+&=& \lim_{a\to\infty} \frac{a}{\pi} \, {\rm sinc}(ax) \\ 
+&=& \delta(x)
+\end{eqnarray*}
+
+\begin{figure}[thb]
+\begin{center}
+{\includegraphics[width=0.40\textwidth]{figs/sinc.png}}
+\end{center}
+\caption{\label{fig:sinc} The function $a \, {\rm sinc}(ax)/\pi$ for progressively larger values of $a$.  As $a \to \infty$, this function approaches the delta function $\delta(x)$.}
+\end{figure}
+
+We are now fully equip to show that the complex exponential functions:
+\begin{equation*}
+e_k = \frac{1}{\sqrt{2\pi}} \exp(i k x)
+\end{equation*}
+are orthonormal.  Calculating the inner product
+\begin{eqnarray*}
+\braket{e_k, e_{k'}} &=& \int_{-\infty}^{\infty} \frac{1}{\sqrt{2 \pi}}  \exp(-ikx) \frac{1}{\sqrt{2 \pi}}  \exp(ik'x) \, dx \\
+                               &=& \frac{1}{2 \pi} \int_{-\infty}^{\infty} \exp\{i(k'-k)x\} \, dx \\
+                               &=& \delta(k-k')
+\end{eqnarray*}
+where we have used Equation~\ref{eqn:delta} but with the roles of $x$ and $k$ exchanged.
+To prove completeness, we can now show that:
+\begin{eqnarray*}
+\Psi(x) &=& \int_{-\infty}^{\infty} \Psi(x') \, \delta(x-x') \, dx' \\
+&=& \int_{-\infty}^{\infty} f(x') \left\{ \frac{1}{2 \pi} \int_{-\infty}^{+\infty} \exp\{ik(x-x')\} \, dk \right\} \, dx' \\
+&=& \frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} \left\{ \frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{+\infty} f(x') \exp(-ikx') \, dx' \right\}  \exp(ikx) \, dk \\
+&=& \frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} \widetilde{\Psi}(k)  \exp(ikx) \, dk \\
+\end{eqnarray*}
+where:
+\begin{eqnarray*}
+\widetilde{\Psi}(k) &=& \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} \Psi(x) \, \exp(-ikx) \, dx \\
+\end{eqnarray*}
+
+
+
+
+
+
 
 
 \end{document}
+
+
 
 \section{Compact Form of the Fourier Series}
 
@@ -851,146 +1032,6 @@ Since uncertainties can always be worse than the best case, we have more general
 This is the Heisenberg uncertainty principle of quantum mechanics.  The more precisely the position is determined, the less precisely the momentum is determined, and vice versa.  It is a direct consequence of the wave like nature of matter.
 
 This is optional reading.  A proper mathematical proof of these concepts requires about a one year course.  Fortunately, physicist are generally satisfied with informal proofs of mathematical concepts, because for us the ultimate validation is experiment!
-
-\subsection{The Dirac Delta Function}
-
-These proofs make extensive use of the Dirac delta function, $\delta(x)$, which is zero everywhere but at $x=0$, where it is infinite.  Mathematically, the delta function only makes formal sense inside an integral, where it has the following defining properties:
-\begin{eqnarray}
-\int_{-\infty}^{\infty} f(x') \, \delta(x-x') \, dx' &=& f(x) \\
-\int_{-\infty}^{\infty} \delta(x) \, dx &=& 1 \label{eqn:norm}
- \end{eqnarray}
-The delta function simply picks out from the integral the one value of the integrand which makes the argument of the delta function zero.  This makes intuitive sense, because the delta function is zero everywhere else.  The second equation shows the normalization of the delta function, which follows from the first if you take $f(x)=1$.
-
-
-\subsection{The completeness of the sines and cosines}
-
-\begin{figure}[thb]
-\begin{center}
-{\includegraphics[width=0.40\textwidth]{figs/hk.png}}
-\end{center}
-\caption{\label{fig:hl} The function $h_\ell(x)$ for increasingly large values of $\ell$.}
-\end{figure}
-
-\noindent
-To demonstrate the completeness of sines and cosines\footnote{This proof taken from http://web.mit.edu/jorloff/www/18.03-esg/notes/fourier-complete.pdf} we construct a peculiar but useful set of functions defined for $\ell=1,2,3,...$:
-\begin{displaymath}
-h_\ell(x) = c_\ell \left(\frac{1 + \cos(x)}{2}\right)^\ell
-\end{displaymath}
-We chose each factor $c_\ell$ such that:
-\begin{displaymath}
-\int_{-\pi}^{\pi} h_\ell(x) = 1
-\end{displaymath}
-The shape of $h_\ell$ is shown in Fig.~\ref{fig:hl}.  As $\ell$ increases, $h_\ell$ becomes more and more narrow at $x=0$, while the normalization is as in Equation~\ref{eqn:norm}.  It looks more and more like the delta function:
-\begin{displaymath}
-\lim_{\ell \to \infty} h_\ell(x) = \delta(x)
-\end{displaymath}
-It has one other important feature:  $h_\ell(x)$ is simply a sum of cosines of $nx$ with coefficients that don't depend on $x$.  To see how this can be, note that we can always turn a product of cosines into a sum via the trigonometric identity:
-\begin{displaymath}
-\cos \alpha \cos \beta = \frac{1}{2} \{\cos(\alpha - \beta) + \cos(\alpha + \beta)\}.
-\end{displaymath}
-So, for instance, we can write:
-\begin{eqnarray*}
-h_2(x) &=& \frac{c_2}{4} + \frac{c_2\cos(x)}{2}+\frac{c_2\cos^2(x)}{4} \\
-           &=& \frac{c_2}{4} + \frac{c_2\cos(x)}{2}+\frac{c_2\cos(2x)}{8}
-\end{eqnarray*}
-This property implies that the function $h_\ell(x-a)$ for some constant $a$ is simply a sum of {\em both} sines and cosines of $nx$ with coefficients that don't depend on $x$, as:
-\begin{displaymath}
-\cos(nx-na) = \cos(nx)\cos(na) + \sin(nx)\sin(na).
-\end{displaymath}
-
-With this technology in hand we are ready to demonstrate the completeness of the sines and cosines.   
-For simplicity, it suffices to consider only functions with period $L=2\pi$ (i.e. $k_n=n$).  The general case can then be inferred by transformation of coordinates.  Consider a real function $f(x)$ which is periodic for $L=2\pi$.  For now just define the function $F(x)$ to be the infinite series:
-\begin{eqnarray}
-F(x) \equiv a_0 + \sum_{n=1}^{\infty}  \left\{ a_n \, \cos(n x ) + b_n \, \sin(n x ) \right\}.
-\end{eqnarray}
-This is the compact form of the Fourier Series for this special case $L=2\pi$, so $k_n = n$.
-We assume the coefficients are determined in the usual way:
-\begin{eqnarray*}
-a_n &=& \frac{2}{L} \int_{-\frac{L}{2}}^{\frac{L}{2}} 
-f(x) \cos(n x) \, dx  \\
-b_n &=& \frac{2}{L} \int_{-\frac{L}{2}}^{\frac{L}{2}} 
-f(x) \sin(n x) \, dx.
-\end{eqnarray*}
-We need to show that $F(x) = f(x)$, or 
-\begin{displaymath}
-g(x) = F(x) - f(x) = 0
-\end{displaymath}
-The proof hinges on the fact that $F(x)$ and $f(x)$ have the same Fourier coefficients, so that:
-\begin{eqnarray*}
-\int_{-\pi}^{\pi} g(x) \sin(nx) dx &=& \int_{-\pi}^{\pi} F(x) \sin(nx) dx -  \int_{-\pi}^{\pi} f(x) \sin(nx) dx \\
-&=& b_n - b_n \\
-&=& 0 \\
-\int_{-\pi}^{\pi} g(x) \cos(nx) dx &=& \int_{-\pi}^{\pi} F(x) \cos(nx) dx -  \int_{-\pi}^{\pi} f(x) \cos(nx) dx \\
-&=& a_n - a_n \\
-&=& 0 
-\end{eqnarray*}
-This shows that the integral of $g(x)$ times any sine or cosine is zero.  But our special function $h_\ell(x-a)$ function is just a sum of sines and cosines of $nx$ for any value of $a$.  This means that:
-\begin{eqnarray*}
-\int_{-\pi}^{\pi} h_\ell(x-a) g(x) dx &=& 0 \\
-\end{eqnarray*}
-If we take the limit as $\ell \to \infty$, we obtain:
-\begin{eqnarray*}
-\int_{-\pi}^{\pi} \delta(x-a) g(x) dx &=& 0 \\
-g(a) &=& 0 \\
-\end{eqnarray*}
-Since this is true for any value of $a$, we have $g(x) = 0$ and so $F(x) = f(x)$.
-
-\subsection{The orthogonality and completeness of the complex exponential function}
-
-The first thing we need to show is that:
-\begin{equation} \label{eqn:delta}
-\frac{1}{2\pi} \int_{-\infty}^{\infty} \exp(ikx) \, dk = \delta(x)
-\end{equation}
-To see this we first calculate:
-\begin{eqnarray*} \label{eqn:delta}
-\frac{1}{2\pi} \int_{-a}^{a} \exp(ikx) \, dk &=& \frac{1}{2\pi} \, \frac{\exp(iax)-\exp(-iax)}{ix}\\
-&=& \frac{1}{\pi} \, \frac{\sin(ax)}{x} \\
-&=& \frac{a}{\pi} \, {\rm sinc}(ax)
-\end{eqnarray*}
-An integration shows that:
-\begin{eqnarray}
-\int_{-\infty}^{\infty} \frac{a}{\pi} \, {\rm sinc}(ax) \, dx = 1
-\end{eqnarray}
-exactly as needed for Equation~\ref{eqn:norm}.
-
-Fig.~\ref{fig:sinc} shows that this function peaks at zero and becomes more and more narrow for progressively larger values of $a$.  Since it has the correct normalization, we conclude that:
-\begin{eqnarray*}
-\frac{1}{2\pi} \int_{-\infty}^{\infty} \exp(ikx) \, dk &=& \lim_{a\to\infty} \frac{1}{2\pi} \int_{-a}^{a} \exp(ikx) \, dk \\
-&=& \lim_{a\to\infty} \frac{a}{\pi} \, {\rm sinc}(ax) \\ 
-&=& \delta(x)
-\end{eqnarray*}
-
-\begin{figure}[thb]
-\begin{center}
-{\includegraphics[width=0.40\textwidth]{figs/sinc.png}}
-\end{center}
-\caption{\label{fig:sinc} The function $a \, {\rm sinc}(ax)/\pi$ for progressively larger values of $a$.  As $a \to \infty$, this function approaches the delta function $\delta(x)$.}
-\end{figure}
-
-We are now fully equip to show that the complex exponential functions:
-\begin{equation*}
-e_k = \frac{1}{\sqrt{2\pi}} \exp(i k x)
-\end{equation*}
-are orthonormal.  Calculating the inner product
-\begin{eqnarray*}
-\braket{e_k, e_{k'}} &=& \int_{-\infty}^{\infty} \frac{1}{\sqrt{2 \pi}}  \exp(-ikx) \frac{1}{\sqrt{2 \pi}}  \exp(ik'x) \, dx \\
-                               &=& \frac{1}{2 \pi} \int_{-\infty}^{\infty} \exp\{i(k'-k)x\} \, dx \\
-                               &=& \delta(k-k')
-\end{eqnarray*}
-where we have used Equation~\ref{eqn:delta} but with the roles of $x$ and $k$ exchanged.
-To prove completeness, we can now show that:
-\begin{eqnarray*}
-\Psi(x) &=& \int_{-\infty}^{\infty} \Psi(x') \, \delta(x-x') \, dx' \\
-&=& \int_{-\infty}^{\infty} f(x') \left\{ \frac{1}{2 \pi} \int_{-\infty}^{+\infty} \exp\{ik(x-x')\} \, dk \right\} \, dx' \\
-&=& \frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} \left\{ \frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{+\infty} f(x') \exp(-ikx') \, dx' \right\}  \exp(ikx) \, dk \\
-&=& \frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} \widetilde{\Psi}(k)  \exp(ikx) \, dk \\
-\end{eqnarray*}
-where:
-\begin{eqnarray*}
-\widetilde{\Psi}(k) &=& \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} \Psi(x) \, \exp(-ikx) \, dx \\
-\end{eqnarray*}
-
-
 
 
 
