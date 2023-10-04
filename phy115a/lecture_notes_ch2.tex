@@ -235,11 +235,10 @@ E_n &=& \frac{\hbar^2k_n^2}{2m}= \frac{n^2 \pi^2 \hbar^2}{2ma^2}\\
 
 You may recognize the $\psi_n(x)$ as ... 
 
-\section{The Fourier Series as a Vector Space}
+\section{The Fourier Series}
 
-In this section, we'll see how the Fourier Series defines a Vector Space.
-
-We'll start by definining the properties of a vector space in the familiar setting of the 3-D Euclidean Vectors.
+In this section, we'll see how the Fourier Series can be interpreted in the context of a vector space.
+We'll start by defining the properties of a vector space in the familiar setting of 3-D Euclidean vectors.
 
 \subsection{Euclidean Vector Space}
 
@@ -304,7 +303,7 @@ equal to the vector
 \end{eqnarray*}
 Orthogonality and completeness are intimately related.  In Euclidean vector space, any three orthogonal vectors must be complete.
  
-\section{The Fourier Series}
+\subsection{The Fourier Series}
 
 Using the language of vector spaces, the Fourier Theorem states that the sines and cosines form a complete orthonormal basis for any periodic function.  
 
@@ -316,23 +315,27 @@ We need to define the inner product. If we restrict ourselves to {\bf real} func
 \end{equation}
 The basis vectors are the sine and cosine functions
 \begin{eqnarray}
-s_n(x) \equiv \sqrt{\frac{2}{a}}\,\sin\left(\frac{2\pi n}{a} \, x \right)\\
-c_n(x) \equiv \sqrt{\frac{2}{a}}\,\cos\left(\frac{2\pi n}{a} \, x \right)
+s_n(x) &\equiv& \sqrt{\frac{2}{a}}\,\sin\left(\frac{2\pi n}{a} \, x \right)\\
+c_n(x) &\equiv& \sqrt{\frac{2}{a}}\,\cos\left(\frac{2\pi n}{a} \, x \right)
 \end{eqnarray}
 which are defined for
+\begin{eqnarray*}
+n = 1,2,3,...
+\end{eqnarray*}
+plus the constant function:
 \begin{eqnarray}
-n = 0,1,2,3,...
+c_0(x) \equiv \sqrt{\frac{1}{a}}
 \end{eqnarray}
-except that $s_0(0)=0$ is not normalizable.  We'll leave it as an exercise to show that:
+Note that if it existed, $s_0(x) = 0$ would not be normalizable.
+
+We leave it as an exercise to show that:
 \begin{eqnarray}
-\braket{s_n,s_m} &=& \frac{2}{a} \int_{-\frac{a}{2}}^{\frac{a}{2}} 
-\sin\left(\frac{2\pi n}{a} \, x \right) \sin\left(\frac{2\pi m}{a} \, x \right) \, dx = \delta_{nm} \;\;\;\;\; (n \neq 0) \notag\\[8pt]
-\braket{c_n, c_m} &=& \frac{2}{a} \int_{-\frac{a}{2}}^{\frac{a}{2}} 
-\cos\left(\frac{2\pi n}{a} \, x \right) \cos\left(\frac{2\pi m}{a} \, x \right) \, dx = \delta_{nm}\notag\\[8pt]
-\braket{s_n, c_m} &=& \frac{2}{a} \int_{-\frac{a}{2}}^{\frac{a}{2}} 
-\sin\left(\frac{2\pi n}{a} \, x \right) \cos\left(\frac{2\pi m}{a} \, x \right) \, dx = 0 \notag\\
+\braket{s_n, s_m} &=& \delta_{nm}\notag\\[8pt]
+\braket{c_n, c_m} &=& \delta_{nm}\notag\\[8pt]
+\braket{s_n, c_m} &=& 0\notag\\[8pt]
 \end{eqnarray}
-where for compact notation we will use the Kronecker delta symbol:
+for all $n$ and $m$, but take care that $c_0$ exists while $s_0$ does not.  
+For compact notation we use the Kronecker delta symbol:
 \begin{displaymath}
 \delta_{nm} =  
 \left\{
@@ -342,7 +345,23 @@ where for compact notation we will use the Kronecker delta symbol:
 	\end{array}
 \right.
 \end{displaymath}
-
+We can write these out explicitly for $n>0$ and $m>0$ as:
+\begin{eqnarray}
+\braket{s_n,s_m} &=& \frac{2}{a} \int_{-\frac{a}{2}}^{\frac{a}{2}} 
+\sin\left(\frac{2\pi n}{a} \, x \right) \sin\left(\frac{2\pi m}{a} \, x \right) \, dx = \delta_{nm} \;\;\;\;\; \notag\\[8pt]
+\braket{c_n, c_m} &=& \frac{2}{a} \int_{-\frac{a}{2}}^{\frac{a}{2}} 
+\cos\left(\frac{2\pi n}{a} \, x \right) \cos\left(\frac{2\pi m}{a} \, x \right) \, dx = \delta_{nm}\notag\\[8pt]
+\braket{s_n, c_m} &=& \frac{2}{a} \int_{-\frac{a}{2}}^{\frac{a}{2}} 
+\sin\left(\frac{2\pi n}{a} \, x \right) \cos\left(\frac{2\pi m}{a} \, x \right) \, dx = 0 \notag\\
+\end{eqnarray}
+leaving the special case for $c_0$ (and still keeping $n>0$):
+\begin{eqnarray}
+\braket{c_n, c_0} &=& \frac{\sqrt{2}}{a} \int_{-\frac{a}{2}}^{\frac{a}{2}} 
+\cos\left(\frac{2\pi n}{a} \, x \right) \, dx = 0 \notag\\[8pt]
+\braket{s_n, c_0} &=& \frac{\sqrt{2}}{a} \int_{-\frac{a}{2}}^{\frac{a}{2}} 
+\sin\left(\frac{2\pi n}{a} \, x \right) \, dx = 0 \notag\\
+\braket{c_0, c_0} &=& \frac{1}{a} \int_{-\frac{a}{2}}^{\frac{a}{2}} dx = 0 \notag\\
+\end{eqnarray}
 Fourier's Theorem states that these orthonormal basis functions are complete for the vector space of periodic functions with period $a$.  That is, if $f(x)$ has the property that:
 $$f(x) = f(x+a)$$
 then $f(x)$ can be written as a sum of the orthonormal basis vectors:
@@ -351,10 +370,21 @@ f(x) \; = \; \sum_{n=0}^{\infty}  A_n \, c_n(x)  \; \; + \; \; \sum_{n=1}^{\inft
 \end{equation}
 or explicitly in terms of sine and cosine functions:
 \begin{equation}
-f(x) = \sqrt{\frac{2}{a}} \, \sum_{n=0}^{\infty}  A_n \, \cos\left(\frac{2\pi n}{L} \, x \right) + \sqrt{\frac{2}{a}} \, \sum_{n=1}^{\infty} B_n \, \sin\left(\frac{2\pi n}{L} \, x \right)  s_n(x) \label{eqn:lfs}
+f(x) = A_0 \sqrt{\frac{1}{a}} + \sqrt{\frac{2}{a}} \sum_{n=1}^{\infty}  \left[ A_n \, \cos\left(\frac{2\pi n}{a} \, x \right) + B_n \, \sin\left(\frac{2\pi n}{a} \, x \right)\right]\label{eqn :lfs}
 \end{equation}
-
 The values $A_n$ and $B_n$ are called {\em Fourier coefficients}.  Technically the $N$th term in the Fourier Series refers to the approximation for $f(x)$ from the first $N$ terms in the infinite sum above, and we say that the Fourier Series converges to the function $f(x)$.  The demonstration of completeness is optional reading, available in the Appendix.
+
+We can write things a bit more neatly:
+\begin{equation}
+f(x) = a_0 + \sum_{n=1}^{\infty}  \left[ a_n \, \cos\left(\frac{2\pi n}{a} \, x \right) + b_n \, \sin\left(\frac{2\pi n}{a} \, x \right) \right]\label{eqn :lfs}
+\end{equation}
+where:
+\begin{eqnarray*}
+a_0 &=& \sqrt{\frac{1}{a}} A_0\\
+a_n &=& \sqrt{\frac{2}{a}} A_n\\
+b_n &=& \sqrt{\frac{2}{a}} B_n\\
+\end{eqnarray*}
+but at the cost of obscuring the role of the orthonormal basis functions.
 
 \begin{figure}[thb]
 \begin{center}
@@ -365,7 +395,7 @@ The values $A_n$ and $B_n$ are called {\em Fourier coefficients}.  Technically t
 
 For a visual example of the Fourier Series, the first terms of the Fourier Series for a step function are shown in Fig.~\ref{fig:fall}.  
 
-\section{Determining the Fourier Coefficients}
+\subsection{Determining Fourier Coefficients}
 \label{sect:coeff}
 
 Just as in the vector analogy, we can determine the Fourier coefficients of a function $f$ by computing the inner products:
@@ -374,16 +404,18 @@ A_n = \braket{c_n, f} \\
 B_n = \braket{s_n, f}
 \end{eqnarray*}
 or, in terms of the inner product integrals and sine and cosine functions:
-\begin{eqnarray}
+\begin{eqnarray*}
+A_0 &=& \sqrt{\frac{1}{a}} \int_{-\frac{a}{2}}^{\frac{a}{2}} f(x) \, dx \\
 A_n &=& \sqrt{\frac{2}{a}} \int_{-\frac{a}{2}}^{\frac{a}{2}} 
-f(x) \cos\left(\frac{2\pi n}{a} \, x \right) \, dx \label{eqn:fca} \\
+\cos\left(\frac{2\pi n}{a} \, x \right) \, f(x) \, dx \\
 B_n &=& \sqrt{\frac{2}{a}} \int_{-\frac{a}{2}}^{\frac{a}{2}} 
-f(x) \sin\left(\frac{2\pi n}{a} \, x \right) \, dx
-\end{eqnarray}
+\sin\left(\frac{2\pi n}{a} \, x \right) \, f(x) \, dx \\
+\end{eqnarray*}
+
 
 The inner product determines the correct coefficients only because the basis functions are complete and orthonormal.  To see how this works, start with the completeness equation but replace $n$ with $m$ for clarity later:
 \begin{equation*}
-f(x) \; = \; \sum_{m=0}^{\infty}  A_m \, c_m(x)  \; \; + \; \; \sum_{m=1}^{\infty} B_m \, s_m(x) 
+f(x) \; = \; \sum_{m=0}^{\infty}  A_m \, c_m(x)  \; \; + \; \; \sum_{m=1}^{\infty} B_m \, s_m(x)
 \end{equation*}
 Then calculate:
 \begin{eqnarray*}
@@ -393,39 +425,60 @@ Then calculate:
 \end{eqnarray*}
 Note that the last step follows from the fact that, because of the $\delta_{nm}$ in the product, the only non-zero value in the sum across $m$ is the term for $m=n$.  It is left as an exercise to work this out for $\braket{s_n, f}$.
 
-\section{The Half-Period Fourier Series}
+\subsection{Application of Fourier Series to Infinite Well}
 
-Suppose a function f(x) is even, i.e.:
-$$f(-x) = f(x)$$
-a function g(x) is odd, i.e.:
-$$g(-x) = -g(x)$$.
-Then the following integral vanishes:
-\begin{alignat*}{2}
-\int_{-a}^{a} 
-f(x) g(x) dx &=  &\int_{-a}^{0} f(x) g(x) dx + \int_{0}^{a} f(x) g(x) dx\\[14pt]
- &=&\int_{0}^{a} f(-x) g(-x) dx + \int_{0}^{a} f(x) g(x) dx\\
- &=&\int_{0}^{a} f(-x) g(-x) dx + \int_{0}^{a} f(x) g(x) dx\\
- &=& 0 \\
-\end{alignat*}
+For the potential well, we have a wave function $\psi(x)$ which meets the boundary conditions $\psi(0) = \psi(a) = 0$.  We define a helper function:
+\begin{equation*}
+f(x) = 
+\begin{cases}    
+  \hspace{9.5pt}\psi(x)  & \hspace{9pt} 0 \leq x \leq a \\
+  -\psi(-x) & -a \leq x < 0 \\
+\end{cases}   
+\end{equation*}
+It is an odd function by construction:  $f(-x) = -f(x)$.  Since f(a) = f(-a) = 0, we can consider it to be a periodic function with period $2a$. To evaluate it's Fourier series, we'll only need to evaluate it in the region $[-a,a]$ where it is defined\footnote{If you prefer, you can imagine making it truly periodic by just stamping out a copy of $f(x)$ from $[-a,a]$ into $[a,3a]$, and so on.}.
 
-  
-
-
-
-Suppose f(x) is even, then:
+For $f(x)$ the Fourier coefficients of the cosines all vanish:
 \begin{eqnarray*}
-A_n &=& \braket{s_n,f} \\
-    &=& \sqrt{\frac{2}{a}} \int_{-\frac{a}{2}}^{\frac{a}{2}} 
-f(x) \cos\left(\frac{2\pi n}{a} \, x \right) \, dx \label{eqn:fca} \\
-\sqrt{\frac{2}{a}} \int_{0}^{\frac{a}{2}} 
-f(x) \cos\left(\frac{2\pi n}{a} \, x \right) \, dx \label{eqn:fca} \\
+A_0 &=& \sqrt{\frac{1}{2a}} \int_{-a}^{a} f(x) \, dx = 0\\
+A_n &=& \sqrt{\frac{1}{a}} \int_{-a}^{a} 
+\cos\left(\frac{\pi n}{a} \, x \right) \, f(x) \, dx = 0\\
 \end{eqnarray*}
-
-A function $f(x)$ is odd, i.e.:
-$$f(-x) = -f(x)$$
-with 
-
-
+where we have put $a \to 2a$ in the original formulas, since the period of our function is now $2a$.  So the Fourier Series for $f(x)$ contains only sines:
+\begin{eqnarray*}
+f(x) &=& \sqrt{\frac{1}{a}} \sum_{n=1}^{\infty}  B_n \, \sin\left(\frac{\pi n}{a} \, x \right) \\
+&=&  \sum_{n=1}^{\infty}  \left( \frac{B_n}{\sqrt{2}}\right) \, \left( \sqrt{\frac{2}{a}} \, \sin\left(\frac{\pi n}{a} \, x \right) \right)\\
+\end{eqnarray*}
+We determine the Fourier coefficients for the sines from:
+\begin{eqnarray*}
+B_n &=& \sqrt{\frac{1}{a}} \int_{-a}^{a} 
+\sin\left(\frac{\pi n}{a} \, x \right) \, f(x) \, dx = 0\\
+\end{eqnarray*}
+but since the integrand is now even, the integral does not vanish, and in fact, we need only integrate in $[0,a]$ and multiply by a factor of two:
+\begin{eqnarray*}
+B_n &=& 2 \times \sqrt{\frac{1}{a}} \int_{0}^{a} 
+\sin\left(\frac{\pi n}{a} \, x \right) \, f(x) \, dx = 0\\[14pt]
+\frac{B_n}{\sqrt{2}} &=& \int_{0}^{a} 
+\left( \sqrt{\frac{2}{a}} \sin\left(\frac{\pi n}{a} \, x \right) \right) f(x) dx \\
+\end{eqnarray*}
+And since we are now integrating only from $[0,a]$ then 
+$$f(x) = \psi(x)$$ 
+and we can rewrite these equations in terms of 
+\begin{equation}
+\psi_n(x) = \sqrt{\frac{2}{a}} \, \sin(k_n x)
+\end{equation}
+and
+\begin{eqnarray*}
+k_n&=&\frac{n\pi}{a}
+\end{eqnarray*}
+so:
+\begin{equation}
+\psi(x) = \sum_{n=1}^{\infty} \; \left(\frac{B_n}{\sqrt{2}}\right) \psi_n(x)
+\end{equation}
+when $0 \leq x \leq a$ and $\psi(x) = 0$ otherwise.  And
+\begin{eqnarray*}
+\frac{B_n}{\sqrt{2}} &=& \int_{0}^{a} \; \psi_n(x) \, \psi(x) \, dx \\
+\end{eqnarray*}
+Don't mind the factor of $\sqrt{2}$ thats just because these are normalized on one-half period instead of one whole.
 \appendix
 
 \chapter{Proofs of Completeness of Trigonometric Functions}
