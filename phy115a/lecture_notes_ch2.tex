@@ -5,6 +5,7 @@
 \usepackage{slashed}
 \usepackage{graphicx}
 \usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{braket}
 \begin{document}
 
@@ -235,6 +236,93 @@ E_n &=& \frac{\hbar^2k_n^2}{2m}= \frac{n^2 \pi^2 \hbar^2}{2ma^2}\\
 
 You may recognize the $\psi_n(x)$ as ... 
 
+
+\section{Properties of an Vector Space}
+
+A vector space $V$ is a set whose elements are called vectors and in wich two operations, called addition and scalar multiplication, are defined.
+
+
+\begin{table}
+\caption{ \label{tbl:ipspace} Here we define the properties of a vector space $V$ and an innter product space $H$, using a compact mathematical notation.}
+\begin{center}
+{\bf Useful Math Symbols:}\\
+\begin{tabular}{ll}
+  $\forall \, x \in V$ & for all $x$ in $V$ (for any vector $x$)\\
+  $\forall \, \alpha \in \mathbb{C}$ & for all $\alpha$ in set of complex numbers (for any complex number $\alpha$) \\
+%  $\exists y$ & there exists $y$ \\
+  $\exists ! \, y$ & there exists unique $y$ \\
+  s.t.          & such that \\
+\end{tabular}\\    
+\vskip 0.5cm
+{\bf Properties of Addition:}\\
+\begin{tabular}{llll}
+{\bf A1} & {\bf Closure} & $\forall x,y \in V$ & $(x+y) \in V $\\
+{\bf A2} & {\bf Commutative} & $\forall x,y \in V$ & $x+y=y+z$\\
+{\bf A3} & {\bf Associative} & $\forall x,y,z \in V$ & $(x+y)+z = x+(y+z)$\\
+{\bf A4} & {\bf Zero}        & $\exists !~0$~~s.t.~~ $\forall x \in V$ & $x+0 = x$ \\
+{\bf A5} & {\bf Inverse} & $\forall x \in V \exists !\;(-x) \in V$~~s.t.~~& $x+(-x)=0$\\
+\end{tabular} \\
+\vskip 0.5cm
+{\bf Properties of Scalar Multiplication:}\\
+\begin{tabular}{llll}
+  {\bf M1} & {\bf Closure} & $\forall x \in V$ and $\forall \alpha \in \mathbb{C}$ & $\alpha x \in V$\\
+  {\bf M2} & {\bf Identity} & $\forall x \in V$ & $1x=x$\\
+  {\bf M3} & {\bf Associative} & $\forall x \in V$
+and $\forall \alpha,\beta \in \mathbb{C}$ & $(x+y)+z = x+(y+z)$\\
+{\bf M4} & {\bf Distributive} & $\forall x,y \in V$and $\forall \alpha \in \mathbb{C}$ & $\alpha(x+y) = \alpha x + \alpha y$ \\
+  {\bf M5} & {\bf Distributive} & $\forall x \in V$and $\forall \alpha,\beta \in \mathbb{C}$ & $ (\alpha + \beta)x = \alpha x + \beta x $ \\
+\end{tabular}
+\vskip 0.5cm
+{\bf Derivable Properties:}\\
+\begin{tabular}{llll}
+R1  & & $\forall x \in V $  & $0x = 0$ \\
+R2  & & $\forall x \in V $  & $(-1)x = (-x)$ \\
+\end{tabular}
+\vskip 0.5cm
+{\bf Properties of Inner Products:}\\
+\begin{tabular}{llll}
+  {\bf I1} & {\bf Complex Conjugate} & $\forall x,y \in H$ & $\braket{x,y}^* = \braket{y,x}$\\
+{\bf I2} & & $\forall x,y,z \in H$and $\forall \alpha \in \mathbb{C}$ &
+$\braket{x,\alpha y} = \alpha \braket{x,y}$\\
+{\bf I3} & & $\forall x,y,z \in H$ & $\braket{x+y,z} = \braket{x,z}+\braket{y,z}$\\
+{\bf I4} & & $\forall x \in H$ & $\braket{x,x} \geq 0$ \\
+{\bf I5} & & $\forall x \in H$ & $\braket{x,x}=0$ if and only if $x=0$ \\
+\end{tabular}
+\vskip 0.5cm
+{\bf Derivable Properties:}\\
+\begin{tabular}{llll}
+{\bf R3} & & $\forall x,y \in H$and $\forall \alpha \in \mathbb{C}$ &
+$\braket{\alpha x,y} = \alpha^* \braket{x,y}$\\
+{\bf R4} & & $\forall x,y,z \in H$ &
+$\braket{x,y+z} = \braket{x,y}+\braket{x,z}$\\
+
+\end{tabular}
+
+%\end{table}
+%The addition operation has the properties that for $x,y \in V$ (i.e. $x$ and $y$ are vectors) and $\alpha \in \Complex$ ($\alpha$ is a scalar, i.e. a complex number):
+\end{center}
+\end{table}
+
+It is left as a fun exercise to show that:
+\begin{equation}
+\forall x \in V (-1)x = (-x)
+\end{equation}
+and that:
+\begin{equation}
+\forall x \in V 0x = 0
+\end{equation}
+
+\begin{itemize}
+\item {\bf Closure under addition}: $\forall x,y \in V \hspace{0.5cm} x+y \in V$.
+%\item \{\bf Commutative:}  $x+y = y+x$
+%\item \{\bf Associative:}  $(x+y)+z = x+(y+z)$
+%\item \{\bf Zero}: $\exists ! 0 \in V$ s.t. $\forall x \in V x+0 = x$5
+\end{itemize}
+
+
+
+
+
 \section{The Fourier Series}
 
 In this section, we'll see how the Fourier Series can be interpreted in the context of a vector space.
@@ -242,7 +330,12 @@ We'll start by defining the properties of a vector space in the familiar setting
 
 \subsection{Euclidean Vector Space}
 
-We are going to be introducing the concept of a vector space, so let's review this in the context of ordinary euclidean vectors in three dimensional space.  Such a vector is completely specified by its displacement in each spatial direction.  Let's look at this familiar picture a bit formally, to prepare us to apply it in a less intuitive (but mathematically equivalent) setting.  
+We are going to be introducing the concept of an abstract vector space
+and inner product space, so let's review this in the context of
+ordinary euclidean vectors in three dimensional space.  Such a vector
+is completely specified by its displacement in each spatial direction.
+Let's look at this familiar picture a bit formally, to prepare us to
+apply it in a less intuitive (but mathematically equivalent) setting.
 
 We have {\bf vector addition} with the following properties:
 \begin{itemize}
@@ -250,7 +343,7 @@ We have {\bf vector addition} with the following properties:
 $$\vec{u} + \vec{v} = \vec{w}$$
 \item {\bf Commutative}:  
 $$\vec{u} + \vec{v} = \vec{v} + \vec{u}$$
-\item {\bf Associated}:  
+\item {\bf Associative}:  
 $$\vec{u} + (\vec{v} + \vec{w}) = (\vec{u} + \vec{v}) + \vec{w} $$
 \item {\bf Zero}:  There is the vector 0 with:
 $$\vec{u} + 0 = \vec{u} $$
