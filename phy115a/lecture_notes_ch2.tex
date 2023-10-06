@@ -194,10 +194,14 @@ Where in the last step we have used $A \neq 0$ because $A=0$ implies $\psi(x)=0$
 ka &=& n \pi \\[12pt]
 k_n&=&\frac{n\pi}{a}
 \end{eqnarray*}
-where $n$ is any integer.  The normalization condition implies:
+where $n$ is any integer.  
 
+The normalization condition is:
 \begin{eqnarray*}
 \int_{-\infty}^{+\infty} \; |\psi(x)|^2 \, dx &=& 1 \\
+\end{eqnarray*}
+but keeping in mind that $\psi(x)=0$ outside of the square well ($[0,a]$) this condition becomes:
+\begin{eqnarray*}
 1 &=& \int_{0}^{a} \; |A \, \sin(k_n x)|^2 \, dx \\
 1 &=& |A|^2 \int_{0}^{a} \; \sin(k_n x)|^2 \, dx \\
 1 &=& |A|^2 \; \frac{a}{2} \\
@@ -211,7 +215,12 @@ A &=& \sqrt{\frac{2}{a}} \\
 So at last we have an infinite number of solutions to the TISE:
 
 \begin{equation}
-\psi_n(x) = \sqrt{\frac{2}{a}}\sin(k_n x)
+\label{eqn:psin-isw}
+\psi_n(x) = 
+\begin{cases}    
+   {\displaystyle \sqrt{\frac{2}{a}}\sin(k_n x)} & 0 {\displaystyle \leq x \leq a} \\[8pt]
+   0 & {\rm otherwise} \\
+\end{cases}   
 \end{equation}
 where
 \begin{eqnarray*}
@@ -229,26 +238,32 @@ n = 1,2,3,\ldots
 \end{equation*}
 
 Recalling our definition for $k$, the definite total energy $E_n$ of stationary state $\psi_n$ is given by:
-\begin{eqnarray*}
+\begin{eqnarray}
 k_n &=& \frac{n\pi}{a} = \frac{\sqrt{2mE_n}}{\hbar}\\[10pt]
-E_n &=& \frac{\hbar^2k_n^2}{2m}= \frac{n^2 \pi^2 \hbar^2}{2ma^2}\\
-\end{eqnarray*}
+E_n &=& \frac{\hbar^2k_n^2}{2m}= \frac{n^2 \pi^2 \hbar^2}{2ma^2}
+\end{eqnarray}
 
-You may recognize the $\psi_n(x)$ as ... 
+\section{The Fourier Series}
 
+In this section, we'll see how the Fourier Series can be interpreted in the context of a vector space with an inner product.  Then we will see how it applies to the infinite square-well problem.
 
-\section{Properties of an Vector Space}
+\subsection{Vector Spaces with Inner Product Spaces}
 
-A vector space $V$ is a set whose elements are called vectors and in wich two operations, called addition and scalar multiplication, are defined.
+A vector space $V$ is a set whose elements are called vectors, for which an associative and commutative operation of addition is defined, along with a scalar field $S$ with which an associative and distributive operation of scalar multiplication is defined.  The only scalar fields we will consider are real numbers ($\mathbb{R}$) and complex numbers ($\mathbb{C}$).  The complete set of properties which define a vector field are shown in Table~\ref{tbl:ipspace}.  
 
+An {\em inner product} is an operation which returns a scalar for any two vectors $x$ and $y$.
+We write the inner product as $\braket{x|y}$.  If a vector space $V$ has an inner product defined 
+which satisfies conditions I1-I5 in the table, it is an inner product space $H$ as well.  
+
+It is left as an exercise to show that the deducible properties D1-D4 listed in the table follow from the other properties.
 
 \begin{table}
-\caption{ \label{tbl:ipspace} Here we define the properties of a vector space $V$ and an innter product space $H$, using a compact mathematical notation.}
+\caption{ \label{tbl:ipspace} Here we define the properties of a vector space $V$ associated with scalar space $S$, and an inner product space $H$, using a compact mathematical notation.  In case $S$ is the real numbers, just ignore all complex conjugation, e.g. take $\alpha^* = \alpha$.}
 \begin{center}
 {\bf Useful Math Symbols:}\\
 \begin{tabular}{ll}
   $\forall \, x \in V$ & for all $x$ in $V$ (for any vector $x$)\\
-  $\forall \, \alpha \in \mathbb{C}$ & for all $\alpha$ in set of complex numbers (for any complex number $\alpha$) \\
+  $\forall \, \alpha \in S$ & for all $\alpha$ in $S$ (for any scalar $\alpha$) \\
 %  $\exists y$ & there exists $y$ \\
   $\exists ! \, y$ & there exists unique $y$ \\
   s.t.          & such that \\
@@ -265,111 +280,88 @@ A vector space $V$ is a set whose elements are called vectors and in wich two op
 \vskip 0.5cm
 {\bf Properties of Scalar Multiplication:}\\
 \begin{tabular}{llll}
-  {\bf M1} & {\bf Closure} & $\forall x \in V$ and $\forall \alpha \in \mathbb{C}$ & $\alpha x \in V$\\
+  {\bf M1} & {\bf Closure} & $\forall x \in V$ and $\forall \alpha \in S$ & $\alpha x \in V$\\
   {\bf M2} & {\bf Identity} & $\forall x \in V$ & $1x=x$\\
   {\bf M3} & {\bf Associative} & $\forall x \in V$
-and $\forall \alpha,\beta \in \mathbb{C}$ & $(x+y)+z = x+(y+z)$\\
-{\bf M4} & {\bf Distributive} & $\forall x,y \in V$and $\forall \alpha \in \mathbb{C}$ & $\alpha(x+y) = \alpha x + \alpha y$ \\
-  {\bf M5} & {\bf Distributive} & $\forall x \in V$and $\forall \alpha,\beta \in \mathbb{C}$ & $ (\alpha + \beta)x = \alpha x + \beta x $ \\
+and $\forall \alpha,\beta \in S$ & $\alpha(\beta x) = (\alpha \beta) x$\\
+{\bf M4} & {\bf Distributive} & $\forall x,y \in V$and $\forall \alpha \in S$ & $\alpha(x+y) = \alpha x + \alpha y$ \\
+  {\bf M5} & {\bf Distributive} & $\forall x \in V$and $\forall \alpha,\beta \in S$ & $ (\alpha + \beta)x = \alpha x + \beta x $ \\
 \end{tabular}
 \vskip 0.5cm
-{\bf Derivable Properties:}\\
-\begin{tabular}{llll}
-R1  & & $\forall x \in V $  & $0x = 0$ \\
-R2  & & $\forall x \in V $  & $(-1)x = (-x)$ \\
+{\bf Deducible Properties:}\\
+\begin{tabular}{lll}
+{\bf D1}  & $\forall x \in V $  & $0x = 0$ \\
+{\bf D2}  & $\forall x \in V $  & $(-1)x = (-x)$ \\
 \end{tabular}
 \vskip 0.5cm
 {\bf Properties of Inner Products:}\\
-\begin{tabular}{llll}
-  {\bf I1} & {\bf Complex Conjugate} & $\forall x,y \in H$ & $\braket{x,y}^* = \braket{y,x}$\\
-{\bf I2} & & $\forall x,y,z \in H$and $\forall \alpha \in \mathbb{C}$ &
-$\braket{x,\alpha y} = \alpha \braket{x,y}$\\
-{\bf I3} & & $\forall x,y,z \in H$ & $\braket{x+y,z} = \braket{x,z}+\braket{y,z}$\\
-{\bf I4} & & $\forall x \in H$ & $\braket{x,x} \geq 0$ \\
-{\bf I5} & & $\forall x \in H$ & $\braket{x,x}=0$ if and only if $x=0$ \\
+\begin{tabular}{lll}
+  {\bf I1} & $\forall x,y \in H$ & $\braket{x,y}^* = \braket{y|x}$\\
+{\bf I2} & $\forall x,y,z \in H$and $\forall \alpha \in S$ &
+$\braket{x|\alpha y} = \alpha \braket{x|y}$\\
+{\bf I3} & $\forall x,y,z \in H$ & $\braket{x+y|z} = \braket{x|z}+\braket{y|z}$\\
+{\bf I4} & $\forall x \in H$ & $\braket{x|x} \geq 0$ \\
+{\bf I5} & $\forall x \in H$ & $\braket{x|x}=0$ if and only if $x=0$ \\
 \end{tabular}
 \vskip 0.5cm
-{\bf Derivable Properties:}\\
+{\bf Deducible Properties:}\\
 \begin{tabular}{llll}
-{\bf R3} & & $\forall x,y \in H$and $\forall \alpha \in \mathbb{C}$ &
-$\braket{\alpha x,y} = \alpha^* \braket{x,y}$\\
-{\bf R4} & & $\forall x,y,z \in H$ &
-$\braket{x,y+z} = \braket{x,y}+\braket{x,z}$\\
-
+{\bf D3} & & $\forall x,y \in H$and $\forall \alpha \in S$ &
+$\braket{\alpha x|y} = \alpha^* \braket{x|y}$\\
+{\bf D4} & & $\forall x,y,z \in H$ &
+$\braket{x|y+z} = \braket{x|y}+\braket{x|z}$\\
 \end{tabular}
-
-%\end{table}
-%The addition operation has the properties that for $x,y \in V$ (i.e. $x$ and $y$ are vectors) and $\alpha \in \Complex$ ($\alpha$ is a scalar, i.e. a complex number):
 \end{center}
 \end{table}
 
-It is left as a fun exercise to show that:
-\begin{equation}
-\forall x \in V (-1)x = (-x)
-\end{equation}
-and that:
-\begin{equation}
-\forall x \in V 0x = 0
-\end{equation}
-
-\begin{itemize}
-\item {\bf Closure under addition}: $\forall x,y \in V \hspace{0.5cm} x+y \in V$.
-%\item \{\bf Commutative:}  $x+y = y+x$
-%\item \{\bf Associative:}  $(x+y)+z = x+(y+z)$
-%\item \{\bf Zero}: $\exists ! 0 \in V$ s.t. $\forall x \in V x+0 = x$5
-\end{itemize}
-
-
-
-
-
-\section{The Fourier Series}
-
-In this section, we'll see how the Fourier Series can be interpreted in the context of a vector space.
-We'll start by defining the properties of a vector space in the familiar setting of 3-D Euclidean vectors.
-
 \subsection{Euclidean Vector Space}
 
-We are going to be introducing the concept of an abstract vector space
-and inner product space, so let's review this in the context of
-ordinary euclidean vectors in three dimensional space.  Such a vector
-is completely specified by its displacement in each spatial direction.
-Let's look at this familiar picture a bit formally, to prepare us to
-apply it in a less intuitive (but mathematically equivalent) setting.
+Before turning to the Fourier Series, let's explore how the properties of an abstract vector space apply to the familiar Euclidean vectors.  Such a vector is completely specified by its displacement in each spatial direction.  Let's see how the properties of Table~\ref{tbl:ipspace}.  Note that the scalar field $S$ is the real numbers, so we'll just ignore complex conjugation in this example.
 
-We have {\bf vector addition} with the following properties:
+\begin{samepage}
+\noindent
+We have {\bf vector addition} which satisfies properties A1-A5 of Table~\ref{tbl:ipspace}:
 \begin{itemize}
-\item {\bf Closure under addition:} The addition of two vectors is another vector:
-$$\vec{u} + \vec{v} = \vec{w}$$
-\item {\bf Commutative}:  
-$$\vec{u} + \vec{v} = \vec{v} + \vec{u}$$
-\item {\bf Associative}:  
-$$\vec{u} + (\vec{v} + \vec{w}) = (\vec{u} + \vec{v}) + \vec{w} $$
-\item {\bf Zero}:  There is the vector 0 with:
-$$\vec{u} + 0 = \vec{u} $$
-\item {\bf Inverse vector}:  For every $\vec{u}$ there is $(-\vec{u})$ s.t.:
-$$\vec{u} + (-\vec{u}) = 0 $$
+\item {\bf A1}: $\vec{u} + \vec{v} = \vec{w}$ 
+\item {\bf A2}: $\vec{v} + \vec{w} = \vec{w} + \vec{v}$
+\item {\bf A3}: $\vec{u} + (\vec{v} + \vec{w}) = (\vec{u} + \vec{v}) + \vec{w} $
+\item {\bf A4}: There is the vector 0 with: $\vec{v} + 0 = \vec{v} $
+\item {\bf A5}: For every $\vec{v}$ there is $(-\vec{v})$ s.t $\vec{v} + (-\vec{v})$
 \end{itemize}
+\end{samepage}
 
-We have {\bf scalar multiplication} with the following properties:
+\begin{samepage}
+\noindent
+We also have {\bf scalar multiplication} which satisfies properties M1-M5 and D1,D2:
 \begin{itemize}
-\item {\bf Closure under scalar multiplication:} The product of a scalar and a vector is another vector:
-$$a \vec{u} = \vec{w}$$
-\item {\bf Distributive}:  
-$$a(\vec{u} + \vec{v}) = a\vec{u} + a\vec{v}$$
-\item {\bf Associative}:  
-$$a(b\vec{u}) = (ab)\vec{u})$$
-\item {\bf Multiplication by one}:
-$$1\vec{u}) = \vec{u}$$
-\item {\bf Multiplication by zero}:
-$$0\vec{u}) = 0$$
+\item {\bf M1:} $a \vec{v} = \vec{v}$
+\item {\bf M2:} $1 \vec{v} = \vec{v}$
+\item {\bf M3:} $a(b\vec{v}) = (ab)\vec{v})$
+\item {\bf M4:} $a(\vec{v} + \vec{w}) = a\vec{v} + a\vec{w}$
+\item {\bf M5:} $(a+b)\vec{v} = a\vec{v} + b\vec{v}$
+\item {\bf D1:} $(-1)\vec{v} = (-\vec{v})$
+\item {\bf D2:} $0\vec{v} = 0$
 \end{itemize}
+\end{samepage}
 
-We also have the dot product, but this is called an {\bf inner product} within an $n-dimensional$ vector space:
+\noindent
+In this vector space, the dot product:
 \begin{displaymath}
 \vec{v} \cdot \vec{w} = v_x w_x + v_y w_y + v_z w_z 
 \end{displaymath}
-You already know how to do this for ordinary vectors.  In other settings, we use the more general term {\em inner product}.  To describe any vector we need a set of {\em basis vectors}, in this case $\hat{x}$, $\hat{y}$, and $\hat{z}$.  These basis vectors are orthogonal:
+is the inner product which satisfies properties I1-I5:
+\begin{itemize}
+\item {\bf I1:} $\vec{v} \cdot \vec{w} = \vec{w} \cdot \vec{v}$
+\item {\bf I2:} $\vec{v} \cdot \left(a\vec{w}\right) = a \vec{v} \cdot \vec{w}$
+\item {\bf I3:} $\left(\vec{u} + \vec{v}\right) \cdot \vec{w} = \vec{u} \cdot \vec{w} + \vec{v} \cdot \vec{w} $
+\item {\bf I4:} $\vec{v} \cdot \vec{v} \geq 0$
+\item {\bf I5:} $\vec{v} \cdot \vec{v} = 0$ if and only if $\vec{v} = 0$
+\item {\bf D3:} $\left(a\vec{v}\right) \cdot \vec{w} = a \left( \vec{v} \cdot \vec{w}\right) $
+\item {\bf D4:} $\vec{w} \cdot \left(\vec{u} + \vec{v}\right)  = \vec{w} \cdot \vec{u} + \vec{w} \cdot \vec{v}$
+\end{itemize}
+
+\noindent
+We have a set of {\em basis vectors}: $\hat{x}$, $\hat{y}$, and $\hat{z}$.  These basis vectors are orthogonal:
 \begin{displaymath}
 \hat{x} \cdot \hat{y} = \hat{y} \cdot \hat{z} = \hat{z} \cdot \hat{x} = 0
 \end{displaymath}
@@ -385,7 +377,7 @@ v_x = \vec{v} \cdot \hat{x} \\
 v_y = \vec{v} \cdot \hat{y} \\
 v_z = \vec{v} \cdot \hat{z} \\
 \end{eqnarray*}
-We say that the basis vectors $\hat{x}$, $\hat{y}$, and $\hat{z}$ are "complete", because specifying the values of $v_x$, $v_y$, and $v_z$ completely describes the vector $v$.  The set of basis vectors $\hat{x}$ and $\hat{z}$ are orthonormal, but they are not complete in three dimensional space, because there are vectors which we cannot write using only these two directions.  For instance, there are no possible values for $v_x$ and $v_z$
+We say that the basis vectors $\hat{x}$, $\hat{y}$, and $\hat{z}$ are ``complete'', because specifying the values of $v_x$, $v_y$, and $v_z$ completely describes the vector $v$.  The set of basis vectors $\hat{x}$ and $\hat{z}$ are orthonormal, but they are not complete in three dimensional space, because there are vectors which we cannot write using only these two directions.  For instance, there are no possible values for $v_x$ and $v_z$
 which make
 \begin{eqnarray*}
  \vec{v_1} = v_x \hat{x} + v_z \hat{z}
@@ -398,13 +390,13 @@ Orthogonality and completeness are intimately related.  In Euclidean vector spac
  
 \subsection{The Fourier Series}
 
-Using the language of vector spaces, the Fourier Theorem states that the sines and cosines form a complete orthonormal basis for any periodic function.  
+Using the language of inner product spaces, the Fourier Theorem states that the sines and cosines form a complete orthonormal basis for any periodic function.  
 
 The vectors in this vector space are periodic functions.  Vector addition of the vectors $f(x)$ and $g(x)$ is just $f(x) + g(x)$ which is another vector.  Scalar multiplication is just multiplying a function $f(x)$ by a scalar $a$ to get a new function $a f(x)$.  The other properties of vector addition and scalar multiplication easily follow from the corresponding rules of ordinary addition and multiplication.
 
 We need to define the inner product. If we restrict ourselves to {\bf real} functions of $x$ with period $a$, the inner product between any two functions $f(x)$ and $g(x)$ is defined to be the integral:
 \begin{equation}
-\braket{f,g} \equiv \int_{-\frac{a}{2}}^{\frac{a}{2}} f(x) \, g(x) \, dx
+\braket{f|g} \equiv \int_{-\frac{a}{2}}^{\frac{a}{2}} f(x) \, g(x) \, dx
 \end{equation}
 The basis vectors are the sine and cosine functions
 \begin{eqnarray}
@@ -423,9 +415,9 @@ Note that if it existed, $s_0(x) = 0$ would not be normalizable.
 
 We leave it as an exercise to show that:
 \begin{eqnarray}
-\braket{s_n, s_m} &=& \delta_{nm}\notag\\[8pt]
-\braket{c_n, c_m} &=& \delta_{nm}\notag\\[8pt]
-\braket{s_n, c_m} &=& 0\notag\\[8pt]
+\braket{s_n | s_m} &=& \delta_{nm}\notag\\[8pt]
+\braket{c_n | c_m} &=& \delta_{nm}\notag\\[8pt]
+\braket{s_n | c_m} &=& 0\notag\\[8pt]
 \end{eqnarray}
 for all $n$ and $m$, but take care that $c_0$ exists while $s_0$ does not.  
 For compact notation we use the Kronecker delta symbol:
@@ -440,20 +432,20 @@ For compact notation we use the Kronecker delta symbol:
 \end{displaymath}
 We can write these out explicitly for $n>0$ and $m>0$ as:
 \begin{eqnarray}
-\braket{s_n,s_m} &=& \frac{2}{a} \int_{-\frac{a}{2}}^{\frac{a}{2}} 
+\braket{s_n|s_m} &=& \frac{2}{a} \int_{-\frac{a}{2}}^{\frac{a}{2}} 
 \sin\left(\frac{2\pi n}{a} \, x \right) \sin\left(\frac{2\pi m}{a} \, x \right) \, dx = \delta_{nm} \;\;\;\;\; \notag\\[8pt]
-\braket{c_n, c_m} &=& \frac{2}{a} \int_{-\frac{a}{2}}^{\frac{a}{2}} 
+\braket{c_n| c_m} &=& \frac{2}{a} \int_{-\frac{a}{2}}^{\frac{a}{2}} 
 \cos\left(\frac{2\pi n}{a} \, x \right) \cos\left(\frac{2\pi m}{a} \, x \right) \, dx = \delta_{nm}\notag\\[8pt]
-\braket{s_n, c_m} &=& \frac{2}{a} \int_{-\frac{a}{2}}^{\frac{a}{2}} 
+\braket{s_n| c_m} &=& \frac{2}{a} \int_{-\frac{a}{2}}^{\frac{a}{2}} 
 \sin\left(\frac{2\pi n}{a} \, x \right) \cos\left(\frac{2\pi m}{a} \, x \right) \, dx = 0 \notag\\
 \end{eqnarray}
 leaving the special case for $c_0$ (and still keeping $n>0$):
 \begin{eqnarray}
-\braket{c_n, c_0} &=& \frac{\sqrt{2}}{a} \int_{-\frac{a}{2}}^{\frac{a}{2}} 
+\braket{c_n| c_0} &=& \frac{\sqrt{2}}{a} \int_{-\frac{a}{2}}^{\frac{a}{2}} 
 \cos\left(\frac{2\pi n}{a} \, x \right) \, dx = 0 \notag\\[8pt]
-\braket{s_n, c_0} &=& \frac{\sqrt{2}}{a} \int_{-\frac{a}{2}}^{\frac{a}{2}} 
+\braket{s_n| c_0} &=& \frac{\sqrt{2}}{a} \int_{-\frac{a}{2}}^{\frac{a}{2}} 
 \sin\left(\frac{2\pi n}{a} \, x \right) \, dx = 0 \notag\\
-\braket{c_0, c_0} &=& \frac{1}{a} \int_{-\frac{a}{2}}^{\frac{a}{2}} dx = 0 \notag\\
+\braket{c_0| c_0} &=& \frac{1}{a} \int_{-\frac{a}{2}}^{\frac{a}{2}} dx = 0 \notag\\
 \end{eqnarray}
 Fourier's Theorem states that these orthonormal basis functions are complete for the vector space of periodic functions with period $a$.  That is, if $f(x)$ has the property that:
 $$f(x) = f(x+a)$$
@@ -491,10 +483,10 @@ For a visual example of the Fourier Series, the first terms of the Fourier Serie
 \subsection{Determining Fourier Coefficients}
 \label{sect:coeff}
 
-Just as in the vector analogy, we can determine the Fourier coefficients of a function $f$ by computing the inner products:
+Just as in the euclidean vector space, we can determine the Fourier coefficients of a function $f$ by computing the inner products:
 \begin{eqnarray*}
-A_n = \braket{c_n, f} \\
-B_n = \braket{s_n, f}
+A_n = \braket{c_n| f} \\
+B_n = \braket{s_n| f}
 \end{eqnarray*}
 or, in terms of the inner product integrals and sine and cosine functions:
 \begin{eqnarray*}
@@ -512,11 +504,11 @@ f(x) \; = \; \sum_{m=0}^{\infty}  A_m \, c_m(x)  \; \; + \; \; \sum_{m=1}^{\inft
 \end{equation*}
 Then calculate:
 \begin{eqnarray*}
-\braket{c_n, f} \; &=& \; \sum_{m=0}^{\infty}  A_m \, \braket{c_n, c_m}  \; \; + \; \; \sum_{m=1}^{\infty} B_m \, \braket{c_m, s_m} \\[8pt]
+\braket{c_n| f} \; &=& \; \sum_{m=0}^{\infty}  A_m \, \braket{c_n| c_m}  \; \; + \; \; \sum_{m=1}^{\infty} B_m \, \braket{c_m| s_m} \\[8pt]
  &=& \; \sum_{m=0}^{\infty}  A_m \; \delta_{nm}  \; \; + \; \; \sum_{m=1}^{\infty} B_m \; 0 \\[8pt]
-\braket{c_n, f} \; &=& A_n \\
+\braket{c_n| f} \; &=& A_n \\
 \end{eqnarray*}
-Note that the last step follows from the fact that, because of the $\delta_{nm}$ in the product, the only non-zero value in the sum across $m$ is the term for $m=n$.  It is left as an exercise to work this out for $\braket{s_n, f}$.
+Note that the last step follows from the fact that, because of the $\delta_{nm}$ in the product, the only non-zero value in the sum across $m$ is the term for $m=n$.  It is left as an exercise to work this out for $\braket{s_n | f}$.
 
 \subsection{Application of Fourier Series to Infinite Well}
 
@@ -550,28 +542,118 @@ but since the integrand is now even, the integral does not vanish, and in fact, 
 \begin{eqnarray*}
 B_n &=& 2 \times \sqrt{\frac{1}{a}} \int_{0}^{a} 
 \sin\left(\frac{\pi n}{a} \, x \right) \, f(x) \, dx = 0\\[14pt]
-\frac{B_n}{\sqrt{2}} &=& \int_{0}^{a} 
+c_n \equiv \frac{B_n}{\sqrt{2}} &=& \int_{0}^{a} 
 \left( \sqrt{\frac{2}{a}} \sin\left(\frac{\pi n}{a} \, x \right) \right) f(x) dx \\
 \end{eqnarray*}
 And since we are now integrating only from $[0,a]$ then 
 $$f(x) = \psi(x)$$ 
 and we can rewrite these equations in terms of 
 \begin{equation}
-\psi_n(x) = \sqrt{\frac{2}{a}} \, \sin(k_n x)
+\psi_n(x) = 
+\begin{cases}
+{\displaystyle \sqrt{\frac{2}{a}} \, \sin(k_n x)} & 0 \leq x \leq a\\[8pt]
+0 & \rm otherwise \\
+\end{cases}
 \end{equation}
-and
+where
 \begin{eqnarray*}
 k_n&=&\frac{n\pi}{a}
 \end{eqnarray*}
-so:
+Any wave function can be expressed as a linear combination of these basis functions:
 \begin{equation}
-\psi(x) = \sum_{n=1}^{\infty} \; \left(\frac{B_n}{\sqrt{2}}\right) \psi_n(x)
+\psi(x) = \sum_{n=1}^{\infty} \; c_n \psi_n(x)
 \end{equation}
 when $0 \leq x \leq a$ and $\psi(x) = 0$ otherwise.  And
 \begin{eqnarray*}
-\frac{B_n}{\sqrt{2}} &=& \int_{0}^{a} \; \psi_n(x) \, \psi(x) \, dx \\
+c_n &=& \braket{\psi_n| \psi} = \int_{0}^{a} \; \psi_n(x) \, \psi(x) \, dx \\
 \end{eqnarray*}
-Don't mind the factor of $\sqrt{2}$ thats just because these are normalized on one-half period instead of one whole.
+
+\section{Insights from the Infinite Square Well}
+
+Let's recap what we have learned so far.  By assuming that we could find solutions of the form
+\begin{eqnarray*}
+\Psi(x,t) = \psi(x) \, \phi(t)
+\end{eqnarray*}
+we have indeed found an infinite number of solutions to the TISE for the Infinite Square Well potential:
+\begin{equation*}
+\hat{H} \, \psi_n(x) = E_n \, \psi_n(x)
+\end{equation*}
+for $n=1,2,3,\dots$. Each of these solutions has an associated time dependent ``wiggle factor'':
+\begin{equation*}
+\phi_n(t) = \exp(-\frac{i E_n t}{\hbar})
+\end{equation*}
+so that the total wave equation is:
+\begin{equation*}
+\Psi_n(x,t) = \exp(-\frac{i E_n t}{\hbar}) \, \psi_n(x)
+\end{equation*}
+We saw that these are {\bf stationary states} (the expectation values are constant in time) and they are {\bf states of definite energy} (every measurement of their energy will yield the results $E_n$).
+
+By design, the $\Psi_n(x,t)$ are solutions to the (time dependent) SE.  It's instructive to see exactly how that works:
+\begin{eqnarray*}
+\hat{H} \, \Psi_n(x,t) &=& -\ihbar \frac{\partial\Psi}{\partial t}\\[8pt]
+\exp(-\frac{i E_n t}{\hbar}) \; \hat{H} \; \psi_n(x) &=& -\ihbar \psi_n(x) \, \frac{d}{dt}
+\exp(-\frac{i E_n t}{\hbar})\\[8pt]
+\exp(-\frac{i E_n t}{\hbar}) \; E_n \; \psi_n(x) &=& -\ihbar \psi_n(x) \, \frac{-iE_n}{\hbar}
+\exp(-\frac{i E_n t}{\hbar})\\[8pt]
+E_n \Psi(x,t) &=& E_n \Psi(x,t)\\[8pt]
+\end{eqnarray*}
+
+Our detour into the Fourier series has given us a crucial additional insight.  The $\psi_n(x)$ are also a complete orthonormal basis for the Fourier series of any function that meets the boundary conditions for this problem.  That means that we have in fact already found the {\em general solution} to this problem.
+
+Suppose the initial state of a particle is $\Psi(x,0) \equiv \psi_i(x)$.  This can be absolutely any function so long as it vanishes outside of $[0,a]$ and it is properly normalized.  Our job is to find $\Psi(x,t)$ that satisfies the SE for all future times.  We calculate the Fourier coefficients of $\psi_i(x)$ as:
+\begin{eqnarray*}
+c_n &=& \braket{\psi_n| \psi_i} = \int_{0}^{a} \; \psi_n(x) \, \psi_i(x) \, dx \\
+\end{eqnarray*}
+and by Fourier's theorem, we know that:
+\begin{eqnarray*}
+\Psi(x,0) &=& \sum_{n=0}^{\infty} c_n \psi_n(x)
+\end{eqnarray*}
+But what about $\Psi(x,t)$?  It really couldn't be any simpler:
+\begin{eqnarray*}
+\Psi(x,t) &=& \sum_{n=0}^{\infty} c_n \Psi_n(x,t)\\
+          &=& \sum_{n=0}^{\infty} c_n \exp(-\frac{i E_n t}{\hbar}) \, \psi_n(x)\\
+\end{eqnarray*}
+It is left as an exercise to show explicitly that $\Psi(x,t)$ as defined here does satisfy the time-dependent SE and is equal to $\psi_i(x)$ at $t=0$. 
+
+Almost unbelievably, there is still some insight to be gleamed from this simple example.  We specified that $\Psi(x,0)$ is normalized, and we showed that the SE preserves normalization, so we know that $\Psi(x,t)$ is normalized as well:
+\begin{equation*}
+\int_{-\infty}^{+\infty} |\Psi(x,t)|^2 \; dx = 1
+\end{equation*}
+And plugging in our Fourier Series solution for $\Psi(x,t)$:
+\begin{eqnarray*}
+1 &=& \int_{-\infty}^{+\infty} \Psi^*(x,t)\Psi(x,t) \; dx \\
+  &=& \int_{-\infty}^{+\infty} \left( \sum_{n=1}^{\infty} c_n^* \Psi_n^*(x,t) \right) \left( \sum_{m=1}^{\infty} c_m \Psi_m(x,t) \right) \; dx \\
+  &=& \sum_{n=1}^{\infty} \; \sum_{m=1}^{\infty} \; c_n^* c_m  \, \exp\left(\frac{i(E_n-E_m)t}{\hbar}\right) \int_{-\infty}^{+\infty} \psi_n^*(x) \psi_m(x) \; dx \\
+  &=& \sum_{n=1}^{\infty} \; \sum_{m=1}^{\infty} \; c_n^* c_m  \, \exp\left(\frac{i(E_n-E_m)t}{\hbar}\right) \delta_{nm} \\
+\end{eqnarray*}
+so that  
+\begin{equation}  
+\sum_{n=1}^{\infty} |c_n|^2 = 1
+\end{equation}
+We can also calculate:
+\begin{eqnarray*}
+\braket{H} &=& \int_{-\infty}^{+\infty} \Psi^*(x,t)\hat{H}\Psi(x,t) \; dx \\
+  &=& \int_{-\infty}^{+\infty} \left( \sum_{n=1}^{\infty} c_n^* \Psi_n^*(x,t) \right) \hat{H}\left( \sum_{m=1}^{\infty} c_m \Psi_m(x,t) \right) \; dx \\
+  &=& \sum_{n=1}^{\infty} \; \sum_{m=1}^{\infty} \; c_n^* c_m \, \exp\left(\frac{i(E_n-E_m)t}{\hbar}\right) \int_{-\infty}^{+\infty} \psi_n^*(x) \hat{H} \psi_m(x) \; dx \\
+  &=& \sum_{n=1}^{\infty} \; \sum_{m=1}^{\infty} \; c_n^* c_m \, \exp\left(\frac{i(E_n-E_m)t}{\hbar}\right) \int_{-\infty}^{+\infty} \psi_n^*(x) E_m \psi_m(x) \; dx \\
+  &=& \sum_{n=1}^{\infty} \; \sum_{m=1}^{\infty} \; c_n^* c_m \, \exp\left(\frac{i(E_n-E_m)t}{\hbar}\right) E_m \int_{-\infty}^{+\infty} \psi_n^*(x) \psi_m(x) \; dx \\
+  &=& \sum_{n=1}^{\infty} \; \sum_{m=1}^{\infty} \; c_n^* c_m  \, \exp\left(\frac{i(E_n-E_m)t}{\hbar}\right) E_m \delta_{nm} \\
+\end{eqnarray*}
+
+so that  
+\begin{equation}  
+\braket{H} = \sum_{n=1}^{\infty} |c_n|^2 E_n
+\end{equation}
+Recall from our review of statistics that:
+\begin{equation}  
+\braket{H} = \sum_{n=1}^{\infty} P(n) E_n
+\end{equation}
+where $P(n)$ is the probability of observing the particle in state $n$.
+
+This allows us to identify $|c_n|^2$ as the probability of observing the particle with energy $E_n$.
+This is always what happens \ldots.
+
+
 \appendix
 
 \chapter{Proofs of Completeness of Trigonometric Functions}
