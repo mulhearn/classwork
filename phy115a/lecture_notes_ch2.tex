@@ -39,7 +39,6 @@ Here's our summary of Griffiths section 2.1:
 
 We attempt to solve the Schr\"odinger Equation:
 \begin{equation}
-\label{eqn:se}
 \ihbar \, \dPsidt \; = \; - \frac{\hbar^2}{2 m} \; \ddPsidx \, + \, V \, \Psi
 \end{equation}
 in the case that the potential V(x) is not a function of $t$.  We will try to find a solution under the assumption that $\Psi(x,t)$ is separable:
@@ -203,13 +202,12 @@ The normalization condition is:
 but keeping in mind that $\psi(x)=0$ outside of the square well ($[0,a]$) this condition becomes:
 \begin{eqnarray*}
 1 &=& \int_{0}^{a} \; |A \, \sin(k_n x)|^2 \, dx \\
-1 &=& |A|^2 \int_{0}^{a} \; \sin(k_n x)|^2 \, dx \\
+1 &=& |A|^2 \int_{0}^{a} \; \sin^2(k_n x) \, dx \\
 1 &=& |A|^2 \; \frac{a}{2} \\
 |A|^2 &=& \frac{2}{a} \\
 \end{eqnarray*}
-As the phase of $A$ doesn't matter for the purposes of normalization, we choose it to be positive real
+As the phase of $A$ doesn't matter for the purposes of normalization, we choose it to be positive real:
 \begin{eqnarray*}
-\int_{-\infty}^{+\infty} \; |\psi(x)|^2 \, dx &=& 1 \\
 A &=& \sqrt{\frac{2}{a}} \\
 \end{eqnarray*}
 So at last we have an infinite number of solutions to the TISE:
@@ -230,13 +228,10 @@ In principle, $n$ can be any integer, but for $n=0$ we get the unnormalizable wa
 \begin{eqnarray*}
 \psi_{-n}(x) = \sqrt{\frac{2}{a}} \sin(k_{-n}x) = \sqrt{\frac{2}{a}} \sin(-k_{n}x) = -\sqrt{\frac{2}{a}} \sin(k_{n}x) = -\psi_{n}(x)
 \end{eqnarray*}
-
-
 So $\psi_{-n}$ differs from $\psi_{n}$ only by a phase factor $-1$ and therefore adds nothing (recall that we simply chose $A$ to be positive and real).  So we can omit negative values of $n$ as well.  That leaves us with:
 \begin{equation*}
 n = 1,2,3,\ldots
 \end{equation*}
-
 Recalling our definition for $k$, the definite total energy $E_n$ of stationary state $\psi_n$ is given by:
 \begin{eqnarray}
 k_n &=& \frac{n\pi}{a} = \frac{\sqrt{2mE_n}}{\hbar}\\[10pt]
@@ -245,11 +240,10 @@ E_n &=& \frac{\hbar^2k_n^2}{2m}= \frac{n^2 \pi^2 \hbar^2}{2ma^2}
 
 \section{The Fourier Series}
 
-In this section, we'll see how the Fourier Series can be interpreted in the context of a vector space with an inner product.  Then we will see how it applies to the infinite square-well problem.
+In this section, we'll see how the Fourier Series can be interpreted in the context of a vector space with an inner product.  Then we will see how it relates to stationary solutions of the infinite square-well potential which we just determined.
 
 \subsection{Vector Spaces with Inner Product Spaces}
-
-A vector space $V$ is a set whose elements are called vectors, for which an associative and commutative operation of addition is defined, along with a scalar field $S$ with which an associative and distributive operation of scalar multiplication is defined.  The only scalar fields we will consider are real numbers ($\mathbb{R}$) and complex numbers ($\mathbb{C}$).  The complete set of properties which define a vector field are shown in Table~\ref{tbl:ipspace}.  
+The real numbers ($\mathbb(R)$) and complex numbers ($\mathbb{C}$) are both examples of fields in mathematics:  they are each a set on which the operations addition, subtraction, multiplication, and division are defined and follow the familiar rules.  A vector space $V$ over a scalar field $S$ is a set whose elements are called vectors, for which an associative and commutative operation of addition is defined as well as an associative and distributive operation of scalar multiplication is defined.    The complete set of properties which define a vector field are shown in Table~\ref{tbl:ipspace}.  
 
 An {\em inner product} is an operation which returns a scalar for any two vectors $x$ and $y$.
 We write the inner product as $\braket{x|y}$.  If a vector space $V$ has an inner product defined 
@@ -258,7 +252,8 @@ which satisfies conditions I1-I5 in the table, it is an inner product space $H$ 
 It is left as an exercise to show that the deducible properties D1-D4 listed in the table follow from the other properties.
 
 \begin{table}
-\caption{ \label{tbl:ipspace} Here we define the properties of a vector space $V$ associated with scalar space $S$, and an inner product space $H$, using a compact mathematical notation.  In case $S$ is the real numbers, just ignore all complex conjugation, e.g. take $\alpha^* = \alpha$.}
+\caption{ \label{tbl:ipspace} Here we define the properties of a vector space $V$ over a scalar field $S$, and an inner product space $H$ as well, using a compact mathematical notation.  In this class the scalar field $S$ will only be the real numbers ($\mathbb{R}$) or the complex numbers ($\mathbb{R}$).
+When $S=\mathbb{R}$, just ignore all complex conjugation below, e.g. take $\alpha^* = \alpha$.}
 \begin{center}
 {\bf Useful Math Symbols:}\\
 \begin{tabular}{ll}
@@ -316,10 +311,9 @@ $\braket{x|y+z} = \braket{x|y}+\braket{x|z}$\\
 
 \subsection{Euclidean Vector Space}
 
-Before turning to the Fourier Series, let's explore how the properties of an abstract vector space apply to the familiar Euclidean vectors.  Such a vector is completely specified by its displacement in each spatial direction.  Let's see how the properties of Table~\ref{tbl:ipspace}.  Note that the scalar field $S$ is the real numbers, so we'll just ignore complex conjugation in this example.
+Before turning to the Fourier Series, let's explore how the properties of an abstract vector space apply to the familiar Euclidean vectors.  Such a vector is completely specified by its displacement in each spatial direction.  Let's see how the axiomatic properties of Table~\ref{tbl:ipspace} apply in this case. Note that the scalar field $S$ is the real numbers ($\mathbb{R}$), so we'll just ignore all complex conjugation in the table for now.
 
 \begin{samepage}
-\noindent
 We have {\bf vector addition} which satisfies properties A1-A5 of Table~\ref{tbl:ipspace}:
 \begin{itemize}
 \item {\bf A1}: $\vec{u} + \vec{v} = \vec{w}$ 
@@ -377,7 +371,7 @@ v_x = \vec{v} \cdot \hat{x} \\
 v_y = \vec{v} \cdot \hat{y} \\
 v_z = \vec{v} \cdot \hat{z} \\
 \end{eqnarray*}
-We say that the basis vectors $\hat{x}$, $\hat{y}$, and $\hat{z}$ are ``complete'', because specifying the values of $v_x$, $v_y$, and $v_z$ completely describes the vector $v$.  The set of basis vectors $\hat{x}$ and $\hat{z}$ are orthonormal, but they are not complete in three dimensional space, because there are vectors which we cannot write using only these two directions.  For instance, there are no possible values for $v_x$ and $v_z$
+We say that the basis vectors $\hat{x}$, $\hat{y}$, and $\hat{z}$ are ``complete'', because specifying the values of $v_x$, $v_y$, and $v_z$ completely describes the vector $v$.  (Alternatively, we can say that the basis vectors span the vector space $V$.)  The set of basis vectors $\hat{x}$ and $\hat{z}$ are orthonormal, but they are not complete in three dimensional space, because there are vectors which we cannot write using only these two directions.  For instance, there are no possible values for $v_x$ and $v_z$
 which make
 \begin{eqnarray*}
  \vec{v_1} = v_x \hat{x} + v_z \hat{z}
@@ -390,11 +384,9 @@ Orthogonality and completeness are intimately related.  In Euclidean vector spac
  
 \subsection{The Fourier Series}
 
-Using the language of inner product spaces, the Fourier Theorem states that the sines and cosines form a complete orthonormal basis for any periodic function.  
+Using the language of inner product spaces, the Fourier Theorem states that the sines and cosines form a complete orthonormal basis for any periodic function.  The vectors in this vector space are periodic functions.  Addition of periodic functions $f(x)$ and $g(x)$ is another periodic function $f(x) + g(x)$.  Scalar multiplication of a periodic function $f(x)$ by a real number $a$ is another periodic function new function $a f(x)$.  The other properties of vector addition and scalar multiplication follow from the corresponding rules of ordinary addition and multiplication.
 
-The vectors in this vector space are periodic functions.  Vector addition of the vectors $f(x)$ and $g(x)$ is just $f(x) + g(x)$ which is another vector.  Scalar multiplication is just multiplying a function $f(x)$ by a scalar $a$ to get a new function $a f(x)$.  The other properties of vector addition and scalar multiplication easily follow from the corresponding rules of ordinary addition and multiplication.
-
-We need to define the inner product. If we restrict ourselves to {\bf real} functions of $x$ with period $a$, the inner product between any two functions $f(x)$ and $g(x)$ is defined to be the integral:
+To obtain an inner product space, we need to define the inner product. If we restrict ourselves to {\bf real} functions of $x$ with period $a$, the inner product between any two functions $f(x)$ and $g(x)$ is defined to be the integral:
 \begin{equation}
 \braket{f|g} \equiv \int_{-\frac{a}{2}}^{\frac{a}{2}} f(x) \, g(x) \, dx
 \end{equation}
@@ -430,7 +422,7 @@ For compact notation we use the Kronecker delta symbol:
 	\end{array}
 \right.
 \end{displaymath}
-We can write these out explicitly for $n>0$ and $m>0$ as:
+We can write the orthonormality conditions out explicitly as integrals for $n>0$ and $m>0$ as:
 \begin{eqnarray}
 \braket{s_n|s_m} &=& \frac{2}{a} \int_{-\frac{a}{2}}^{\frac{a}{2}} 
 \sin\left(\frac{2\pi n}{a} \, x \right) \sin\left(\frac{2\pi m}{a} \, x \right) \, dx = \delta_{nm} \;\;\;\;\; \notag\\[8pt]
@@ -445,7 +437,7 @@ leaving the special case for $c_0$ (and still keeping $n>0$):
 \cos\left(\frac{2\pi n}{a} \, x \right) \, dx = 0 \notag\\[8pt]
 \braket{s_n| c_0} &=& \frac{\sqrt{2}}{a} \int_{-\frac{a}{2}}^{\frac{a}{2}} 
 \sin\left(\frac{2\pi n}{a} \, x \right) \, dx = 0 \notag\\
-\braket{c_0| c_0} &=& \frac{1}{a} \int_{-\frac{a}{2}}^{\frac{a}{2}} dx = 0 \notag\\
+\braket{c_0| c_0} &=& \frac{1}{a} \int_{-\frac{a}{2}}^{\frac{a}{2}} dx = 1 \notag\\
 \end{eqnarray}
 Fourier's Theorem states that these orthonormal basis functions are complete for the vector space of periodic functions with period $a$.  That is, if $f(x)$ has the property that:
 $$f(x) = f(x+a)$$
@@ -457,7 +449,7 @@ or explicitly in terms of sine and cosine functions:
 \begin{equation}
 f(x) = A_0 \sqrt{\frac{1}{a}} + \sqrt{\frac{2}{a}} \sum_{n=1}^{\infty}  \left[ A_n \, \cos\left(\frac{2\pi n}{a} \, x \right) + B_n \, \sin\left(\frac{2\pi n}{a} \, x \right)\right]\label{eqn :lfs}
 \end{equation}
-The values $A_n$ and $B_n$ are called {\em Fourier coefficients}.  Technically the $N$th term in the Fourier Series refers to the approximation for $f(x)$ from the first $N$ terms in the infinite sum above, and we say that the Fourier Series converges to the function $f(x)$.  The demonstration of completeness is optional reading, available in the Appendix.
+The values $A_n$ and $B_n$ are called {\em Fourier coefficients}.  The $N$th term in the Fourier Series refers to the approximation for $f(x)$ from the first $N$ terms in the infinite sum above, and we say that the Fourier Series converges to the function $f(x)$.  The demonstration of completeness is optional reading, available in the Appendix.
 
 We can write things a bit more neatly:
 \begin{equation}
@@ -483,7 +475,7 @@ For a visual example of the Fourier Series, the first terms of the Fourier Serie
 \subsection{Determining Fourier Coefficients}
 \label{sect:coeff}
 
-Just as in the euclidean vector space, we can determine the Fourier coefficients of a function $f$ by computing the inner products:
+Just as in the Euclidean vector space, we can determine the Fourier coefficients of a function $f$ by computing the inner products:
 \begin{eqnarray*}
 A_n = \braket{c_n| f} \\
 B_n = \braket{s_n| f}
@@ -508,11 +500,11 @@ Then calculate:
  &=& \; \sum_{m=0}^{\infty}  A_m \; \delta_{nm}  \; \; + \; \; \sum_{m=1}^{\infty} B_m \; 0 \\[8pt]
 \braket{c_n| f} \; &=& A_n \\
 \end{eqnarray*}
-Note that the last step follows from the fact that, because of the $\delta_{nm}$ in the product, the only non-zero value in the sum across $m$ is the term for $m=n$.  It is left as an exercise to work this out for $\braket{s_n | f}$.
+Note that the last step follows from the fact that, because of the $\delta_{nm}$ in the product, the only non-zero value in the sum across $m$ is the term for $m=n$.  It is left as an exercise to work this out for $\braket{s_n | f}$.  (It is also helpful to work through these same steps using the integral form of the orthogonality conditions.  It's much more cumbersome notation, but much more explicit about what is going on.  I highly recommend doing this if you are finding the abstract notation confusing at this point.)
 
 \subsection{Application of Fourier Series to Infinite Well}
 
-For the potential well, we have a wave function $\psi(x)$ which meets the boundary conditions $\psi(0) = \psi(a) = 0$.  We define a helper function:
+For the infinite potential well, we have a wave function $\psi(x)$ which meets the boundary conditions $\psi(0) = \psi(a) = 0$.  We define a helper function:
 \begin{equation*}
 f(x) = 
 \begin{cases}    
@@ -598,9 +590,9 @@ By design, the $\Psi_n(x,t)$ are solutions to the (time dependent) SE.  It's ins
 E_n \Psi(x,t) &=& E_n \Psi(x,t)\\[8pt]
 \end{eqnarray*}
 
-Our detour into the Fourier series has given us a crucial additional insight.  The $\psi_n(x)$ are also a complete orthonormal basis for the Fourier series of any function that meets the boundary conditions for this problem.  That means that we have in fact already found the {\em general solution} to this problem.
+Our detour into the Fourier series has given us a crucial additional insight.  The $\psi_n(x)$ are also a complete orthonormal basis (the Fourier series) for any function that meets the boundary conditions for this problem.  That means that we have in fact already found the {\em general solution} to this problem.
 
-Suppose the initial state of a particle is $\Psi(x,0) \equiv \psi_i(x)$.  This can be absolutely any function so long as it vanishes outside of $[0,a]$ and it is properly normalized.  Our job is to find $\Psi(x,t)$ that satisfies the SE for all future times.  We calculate the Fourier coefficients of $\psi_i(x)$ as:
+Let's see how this works.  Suppose the initial state of a particle is $\Psi(x,0) \equiv \psi_i(x)$.  This can be absolutely any function so long as it vanishes outside of $[0,a]$ and it is properly normalized.  Our job is to find $\Psi(x,t)$ that satisfies the SE for all future times.  We calculate the Fourier coefficients of $\psi_i(x)$ as:
 \begin{eqnarray*}
 c_n &=& \braket{\psi_n| \psi_i} = \int_{0}^{a} \; \psi_n(x) \, \psi_i(x) \, dx \\
 \end{eqnarray*}
@@ -615,7 +607,7 @@ But what about $\Psi(x,t)$?  It really couldn't be any simpler:
 \end{eqnarray*}
 It is left as an exercise to show explicitly that $\Psi(x,t)$ as defined here does satisfy the time-dependent SE and is equal to $\psi_i(x)$ at $t=0$. 
 
-Almost unbelievably, there is still some insight to be gleamed from this simple example.  We specified that $\Psi(x,0)$ is normalized, and we showed that the SE preserves normalization, so we know that $\Psi(x,t)$ is normalized as well:
+There is still some insight to be gleamed from this simple example.  We specified that $\Psi(x,0)$ is normalized, and we showed that the SE preserves normalization, so we know that $\Psi(x,t)$ is normalized as well:
 \begin{equation*}
 \int_{-\infty}^{+\infty} |\Psi(x,t)|^2 \; dx = 1
 \end{equation*}
@@ -648,12 +640,71 @@ Recall from our review of statistics that:
 \begin{equation}  
 \braket{H} = \sum_{n=1}^{\infty} P(n) E_n
 \end{equation}
-where $P(n)$ is the probability of observing the particle in state $n$.
+where $P(n)$ is the probability of observing the particle in state $n$.  This allows us to identify $|c_n|^2$ as the probability of observing the particle with energy $E_n$.
 
-This allows us to identify $|c_n|^2$ as the probability of observing the particle with energy $E_n$.
+At this point, it would be reasonable to assume that these results apply only to the infinite square well potential.  In fact, there is a generalization to the Fourier series called the Spectral Theorem which shows that these results apply more more widely.  The stationary solutions to the TISE will always be a complete orthonormal basis for the general solution, exactly as here. 
+
+
+\subsection{The Harmonic Oscillator}
+
+Summarizing Section 2.3 of Griffiths.
+
+The classical harmonic oscillator is a mass $m$ connected to a spring which follows Hooke's law:
+\begin{equation*}
+F = -k \, x = m \frac{d^2x}{dt^2} 
+\end{equation*}
+with oscillatory solutions
+\begin{equation*}
+x(t) = A \cos(\omega t) + B \sin(\omega t)
+\end{equation*}
+where:
+\begin{equation*}
+\omega = \sqrt{\frac{k}{m}}
+\end{equation*}
+The potential energy is
+\begin{equation*}
+V(x) = \frac{1}{2}k x^2 = \frac{1}{2} m \omega^2 x^2
+\end{equation*}
+The classical harmonic oscillator is {\em widely} applicable, at least as an approximation, because any potential is approximately a parabola near a local minimum in the potential:
+\begin{eqnarray*}
+V(x) &=& V(x_0) + V'(x_0) \, (x-x_0) + \frac{1}{2}\,V''(x_0) \, (x-x_0)^2 + \ldots \\[5pt]
+V(x) &=& V_0 + \frac{1}{2}\,V''(x_0) \, (x-x_0)^2 + \ldots \\[5pt]
+V(x) &\approx& -\frac{1}{2}\,V''(x_0)\\
+\end{eqnarray*}
+where we have used the fact that $V'(x_0)=0$ at the minimum and the constant offset $V_0$ can be taken as zero.
+
+In this section, we will turn our attention to the widely applicable quantum harmonic oscillator, and find the solutions to the TISE for:
+\begin{equation*}
+\hat{H} = -\frac{\hbar^2}{2m}\,\frac{\partial^2}{\partial x^2} + \frac{1}{2} m \omega^2 x^2
+\end{equation*}
+
+\subsubsection{Algebraic Method}
+
+We write:
+\begin{equation*}
+\hat{H} = -\frac{1}{2m}\,\left[ \hat{p}^2 + (m \omega x)^2 \right]
+\end{equation*}
+If the RHS was an ordinary polynomial function it would factorize:
+\begin{equation*}
+u^2 + w^2 = (iu + w)(-iu+w)
+\end{equation*}
+So we'll try:
+\begin{equation*}
+\hat{a}_{\pm} \; \equiv \; A \, (\mp i \hat{p} + m \omega \hat{x})
+\end{equation*}
+But as these expressions involve operators, we cannot assume $\hat{p}\hat{x} = \hat{x}\hat{p}$.  Calculating:
+\begin{eqnarray*}
+\hat{a}_-\hat{a}_+ &=& A^2 \, (\mp i \hat{p} + m \omega \hat{x})(\mp i \hat{p} + m \omega \hat{x}) \\
+&=& A^2 \, (\mp i \hat{p} + m \omega \hat{x})(\mp i \hat{p} + m \omega \hat{x}) \\
+\end{eqnarray*}
 
 
 \appendix
+
+
+
+
+
 
 \chapter{Proofs of Completeness of Trigonometric Functions}
 

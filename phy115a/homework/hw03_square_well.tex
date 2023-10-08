@@ -11,12 +11,22 @@
 \usepackage[american,fulldiode]{circuitikz}
 
 \begin{document}
-\ctikzset{bipoles/thickness=1}
-\ctikzset{bipoles/length=.6cm}
+\newcommand{\ihbar}{\ensuremath{i \hbar}}
+\newcommand{\dPsidt}{\ensuremath{ \frac{\partial \Psi}{\partial t} }}
+\newcommand{\dPsidx}{\ensuremath{ \frac{\partial \Psi}{\partial x} }}
+\newcommand{\ddPsidx}{\ensuremath{ \frac{\partial^2 \Psi}{\partial x^2} }}
+\newcommand{\dPssdt}{\ensuremath{ \frac{\partial \Psi^*}{\partial t} }}
+\newcommand{\dPssdx}{\ensuremath{ \frac{\partial \Psi^*}{\partial x} }}
+\newcommand{\ddPssdx}{\ensuremath{ \frac{\partial^2 \Psi^*}{\partial x^2} }}
+
+\newcommand{\dphidt}{\ensuremath{ \frac{d \phi}{dt} }}
+\newcommand{\dpsidx}{\ensuremath{ \frac{d \psi}{dx} }}
+\newcommand{\ddpsidx}{\ensuremath{ \frac{d^2 \psi}{dx^2} }}
+
 
 \date{\vspace{-5ex}}
 
-\title{Homework Assignment 3 \\ Infinite Square Well Potential and Fourier Series}
+\title{Homework Assignment 3 \\ Infinite Square Well Potential}
 
 \maketitle
 
@@ -25,27 +35,78 @@
 These problems are graded on effort only.\\
 
 \noindent
-{\bf Griffiths: P1.17, P2.1bc, P2.3, P2.4} \\
+{\bf Griffiths: P1.17, P2.1bc, P2.3} \\
 
 \section*{Additional Problems}
 
 \noindent
-{\bf Problem 1:} The axiomatic definition of a vector space $V$ over the real numbers $\mathbb{R}$ is detailed in Table~\ref{tbl:ipspace}.\\[5pt]
+{\bf Problem 1:} Suppose that $\psi_n(x)$ is a solution to the TISE:
+ $$- \frac{\hbar^2}{2 m} \; \frac{\partial^2 \psi_n}{\partial x^2} \, + \, V(x) \, \psi_n(x) = E_n \psi_n(x)\\$$
+for 
+$$n=1,2,3,\ldots$$  
+Show that:
+ $$ \Psi(x,t) \equiv \sum_{n=1}^{\infty} c_n \exp\left( -\frac{i \, E_n \, t}{\hbar}\right)\psi_n(x) $$
+is a solution to the SE:
+$$\ihbar \, \dPsidt \; = \; - \frac{\hbar^2}{2 m} \; \ddPsidx \, + \, V \, \Psi$$
+
+\vskip 0.5cm
+
+\noindent
+{\bf Problem 2:} We found the complete set of orthonormal solutions to the TISE for the infinite square well potential to be:
+\begin{equation}
+\label{eqn:psin-isw}
+\psi_n(x) = 
+\begin{cases}    
+   {\displaystyle \sqrt{\frac{2}{a}}\sin(\frac{n \pi x}{a})} & 0 {\displaystyle \leq x \leq a} \\[8pt]
+   0 & {\rm otherwise} \\
+\end{cases}   
+\hspace{2cm} n=1,2,3,\ldots
+\end{equation}
+Show that if the particle is in any stationary state $\psi_n(x)$ then the expectation value of the position is:
+$$\braket{x} = \frac{a}{2}$$
+You may use the definite integral:
+$$\int_0^{n\pi} \, x \, \sin^2 \, x \;dx = \frac{n^2 \, \pi^2}{4}$$.
+
+\newpage
+
+\noindent
+{\bf Problem 3:} Suppose at time t=0, a particle is in the state
+$$\Psi(x,0) = \frac{1}{\sqrt{2}} \psi_\alpha(x) + \frac{1}{\sqrt{2}} \psi_\beta(x)$$
+where $\psi_\alpha(x)$ and $\psi_\beta(x)$ are two specific $\psi_n(x)$ from Problem 2 with definite energies $E_\alpha$ and $E_\beta$ and $\alpha \neq \beta$. Remember that $\psi_\alpha(x)$ and $\psi_\beta(x)$ are real functions.\\[5pt]
+
+\noindent
+(A) Write down the time-dependent wave function $\Psi(x,t)$  (You verified in Problem 1 that this will be a solution to the SE.)\\[5pt]
+
+\noindent
+(B) Calculate $|\Psi|^2$. You should find:
+$$ |\Psi|^2 = \frac{|\Psi_\alpha|^2 + |\Psi_\beta|^2}{2} + \ldots $$
+where the remaining bit is due to interference.\\[5pt]
+
+\noindent
+(C) Calculate the expectation value of the position $\braket{x}$ at any time $t$.  Make sure you use the results from Problem 2 so you should just have one not-so-bad integral to compute.  You may use:
+$$\sin a \sin b = \frac{\cos(a-b) - \cos(a+b)}{2}$$
+to help compute the integral.
+
+\vskip 1cm
+\noindent
+{\bf Problem 4:} The axiomatic definition of a vector space $V$ and inner product space $H$ over the real numbers $\mathbb{R}$ is detailed in Table~\ref{tbl:ipspace} on the next page.\\[5pt]
     
 \noindent
-(A) Show that D1 follows from A1-5 and M1-5.  Hint:  we already know for the scalars that $0+0=0$\\[5pt]
+(A) Show that D1 follows from A1-5 and M1-5.\\  
+
+Hint:  we already know for the scalars that $0+0=0$\\[5pt]
 
 \noindent
-(B) Show that D2 follows from A1-5, M1-5, and D1.\\[5pt]
+(B) Show that D2 follows from A1-5, M1-5, and D1.\\
+
+Hint: you need to show $x + (-1)x = 0$.  And we already know that $1+(-1)=0$.\\[5pt]
 
 \noindent
-{\bf Problem 2:} The axiomatic definition of an inner product space $H$ over the real numbers $\mathbb{R}$ is detailed in Table~\ref{tbl:ipspace}.\\[5pt]
-    
-\noindent
-(A) Show that D3 follows from A1-5,M1-5,D1-2  Hint:  we already know for the scalars that $0+0=0$\\[5pt]
+(C) Show that D3 follows from I1 and I2.\\[5pt] 
 
 \noindent
-(B) Show that D4 follows from A1-5,M1-5,D1-3.
+(D) Show that D4 follows from I1 and I3.\\[5pt]
+
 
 \newpage
 
@@ -108,6 +169,8 @@ $\braket{x|y+z} = \braket{x|y}+\braket{x|z}$\\
 \end{table}
 
 \newpage
+
+
 
        
 
