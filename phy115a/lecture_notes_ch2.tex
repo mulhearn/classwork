@@ -453,7 +453,7 @@ The values $A_n$ and $B_n$ are called {\em Fourier coefficients}.  The $N$th ter
 
 We can write things a bit more neatly:
 \begin{equation}
-f(x) = a_0 + \sum_{n=1}^{\infty}  \left[ a_n \, \cos\left(\frac{2\pi n}{a} \, x \right) + b_n \, \sin\left(\frac{2\pi n}{a} \, x \right) \right]\label{eqn :lfs}
+f(x) = a_0 + \sum_{n=1}^{\infty}  \left[ a_n \, \cos\left(\frac{2\pi n}{a} \, x \right) + b_n \, \sin\left(\frac{2\pi n}{a} \, x \right) \right]\label{eqn:lfs}
 \end{equation}
 where:
 \begin{eqnarray*}
@@ -644,8 +644,34 @@ where $P(n)$ is the probability of observing the particle in state $n$.  This al
 
 At this point, it would be reasonable to assume that these results apply only to the infinite square well potential.  In fact, there is a generalization to the Fourier series called the Spectral Theorem which shows that these results apply more more widely.  The stationary solutions to the TISE will always be a complete orthonormal basis for the general solution, exactly as here. 
 
+\section{Commutators}
 
-\subsection{The Harmonic Oscillator}
+Let's review the situation.  The state of a quantum system is contained entirely in a wave function $\Psi(x,t)$ which is a function of the position $x$ but not momentum $p$.  To calculate quantities involving momentum, instead of a variable, we must use the momentum operator:
+$$\hat{p} = -i \hbar \frac{\partial}{\partial x}$$
+But note that while:
+$$ x \, \hat{p} \; \Psi(x, t) = -\ihbar \, x \frac{\partial \Psi}{\partial x}$$
+because of the chain rule, we have:
+$$ \hat{p} \, x \; \Psi(x, t) = -\ihbar \Psi(x,t) - \ihbar \, x \frac{\partial \Psi}{\partial x}$$
+and:
+$$ \left( x \, \hat{p} - \hat{p} \, x \right) \, \Psi(x, t) = \ihbar \, \Psi(x,t) $$
+This might seems like it is all a silly mistake... like maybe we should just be more careful with our parenthesis in our notation and apply operators only to the part we want without getting anything extra.  But no, this non-commutative behavior and its physical consequences are far reaching and impossible to avoid.
+
+When using operators we encounter terms like $x\hat{p} - \hat{p}x$ so often that we have a special notation for them.  The commutator of $A$ and $B$ is written and defined as:
+\begin{equation}
+\label{eqn:commutator}
+\left[\hat{A}, \hat{B}\right] = \hat{A} \hat{B} - \hat{B} \hat{A} 
+\end{equation}
+Using this notation, and noting $\hat{x}=x$, we can rewrite our result about as:
+$$ \left[ \hat{x} , \hat{p} \right] \, \Psi(x, t) = \ihbar \, \Psi(x,t) $$
+or more simply:
+\begin{equation}
+\label{eqn:pxcom}
+\left[\hat{x}, \hat{p}\right] = i \hbar 
+\end{equation}
+This small little equation is called the {\bf canonical commutation relation} and it as we will see, it is a central feature of quantum mechanics.
+
+
+\section{The Harmonic Oscillator}
 
 Summarizing Section 2.3 of Griffiths.
 
@@ -677,26 +703,282 @@ In this section, we will turn our attention to the widely applicable quantum har
 \begin{equation*}
 \hat{H} = -\frac{\hbar^2}{2m}\,\frac{\partial^2}{\partial x^2} + \frac{1}{2} m \omega^2 x^2
 \end{equation*}
+We are going to use an Algebraic Method, based on commutators, which we will define in the next section.
 
-\subsubsection{Algebraic Method}
+ 
+\subsection{Algebraic Method}
 
 We write:
 \begin{equation*}
-\hat{H} = -\frac{1}{2m}\,\left[ \hat{p}^2 + (m \omega x)^2 \right]
+\hat{H} = \frac{1}{2m}\,\left[ \hat{p}^2 + (m \omega x)^2 \right]
 \end{equation*}
-If the RHS was an ordinary polynomial function it would factorize:
+in this problem, the only parameter is $\omega$, the frequency of the classical harmonic oscillator, and so $\hbar \omega$ has units of energy. It's reasonable to consider the dimensionless quantity:
 \begin{equation*}
-u^2 + w^2 = (iu + w)(-iu+w)
+\frac{\hat{H}}{\hbar\omega} \; = \; \frac{\hat{p}^2 + (m \omega x)^2 }{2 \hbar m \omega }
 \end{equation*}
-So we'll try:
+We can try to write the dimensionless quantity on the right as a product of two factors, which we will call $a_+$ and $a_-$ for now, with:
 \begin{equation*}
-\hat{a}_{\pm} \; \equiv \; A \, (\mp i \hat{p} + m \omega \hat{x})
+a_{\pm} \equiv \frac{1}{\sqrt{2\hbar m \omega}}\left(\mp i \hat{p} + m \omega x \right)
 \end{equation*}
-But as these expressions involve operators, we cannot assume $\hat{p}\hat{x} = \hat{x}\hat{p}$.  Calculating:
+and calculate:
 \begin{eqnarray*}
-\hat{a}_-\hat{a}_+ &=& A^2 \, (\mp i \hat{p} + m \omega \hat{x})(\mp i \hat{p} + m \omega \hat{x}) \\
-&=& A^2 \, (\mp i \hat{p} + m \omega \hat{x})(\mp i \hat{p} + m \omega \hat{x}) \\
+a_{+}a_{-} \; &=& \; \frac{\hat{p}^2 + (m\omega x)^2 \; + \; i m \omega (x \hat{p} - \hat{p} x)}{2\hbar m \omega}\\[8pt]
+&=& \; \frac{\hat{H}}{\hbar\omega} \; + \; \frac{i \, [\hat{x}, \hat{p}]}{2 \hbar}\\
 \end{eqnarray*}
+Using the canonical commutation relation $[\hat{x}, \hat{p}] = i\hbar$:
+\begin{eqnarray*}
+a_{+}a_{-} &=& \; \frac{\hat{H}}{\hbar\omega} \; - \frac{1}{2}
+\end{eqnarray*}
+and a similar computation gives:
+\begin{eqnarray*}
+a_{-}a_{+} &=& \; \frac{\hat{H}}{\hbar\omega} \; + \frac{1}{2}
+\end{eqnarray*}
+so that:
+\begin{equation}
+\label{eqn:ladder-com}
+[a_-, a_+] = 1
+\end{equation}
+and
+\begin{equation}
+\label{eqn:ladder-ham}
+\hat{H} =  \hbar\omega \left( a_+ a_- + \frac{1}{2} \right)
+\end{equation}
+These two equations contain everything that we need.  Let's start by calculating:
+\begin{eqnarray*}
+[H,a_+] &=& \hbar \omega [a_+ a_-, a_+]  \\
+&=& \hbar \omega a_+ a_- a_+ - a_+ a_+ a_- \\
+&=& \hbar \omega a_+ (a_- a_+ - a_+ a_-)\\
+&=& \hbar \omega a_+ [a_-, a_+]\\
+&=& \hbar \omega a_+  \\
+\end{eqnarray*}
+Similarly
+\begin{equation*}
+[H,a_-] = -\hbar \omega 
+\end{equation*}
+So now suppose we have a solution to the TISE, so that:
+$$\hat{H} \Psi = E \Psi$$
+then we also have:
+\begin{eqnarray*}
+\hat{H} \left( a_+ \Psi \right) &=& \left( \hat{H} a_+ \right) \Psi\\
+                                &=& \left( \hat{H} a_+ - a_+ \hat{H} + a_+ \hat{H} \right) \Psi\\
+                                &=& \left( [\hat{H}, a_+] + a_+ \hat{H} \right) \Psi\\
+                                &=& \left( \hbar\omega a_+ + a_+ \hat{H} \right) \Psi\\
+                                &=& \left( \hbar\omega a_+ + a_+ E \right) \Psi\\
+                                &=& \left( E + \hbar\omega \right) (a_+ \Psi)\\
+\end{eqnarray*}
+which shows that $\hat{a}_+ \Psi$ is a new solution to the TISE with energy $E+\hbar\omega$.  A similar calculation shows that:
+$$\hat{H} \left(\hat{a}_-\Psi\right) = \left( E - \hbar \omega \right) \left(\hat{a}_-\Psi\right)$$
+that is $\hat{a}_- \Psi$ is a new solution to the TISE with energy $E+\hbar\omega$.
+
+So evidently, given even one solution to the TISE, we can find an infinite number of new states at higher energy by successive applications of $\hat{a}_+$.  But what of $\hat{a}_-$?  We know that the energy of a normalizable wave function must be greater than zero.  So there must be a ground state, let's call it $\Psi_0$ such that:
+\begin{equation}
+\hat{a}_- \Psi_0 = 0
+\end{equation}
+What is the energy of the ground state?  We can ``ask'' the Hamiltonian:
+\begin{eqnarray*}
+\hat{H} \psi_0 &=& \hbar\omega \left( a_+ a_- + \frac{1}{2} \right) \psi_0 \\
+&=& \frac{\hbar\omega}{2}\psi_0 + \hbar\omega a_+ \left( a_- \psi_0 \right)\\
+&=& \frac{\hbar\omega}{2}\psi_0\\
+\end{eqnarray*}
+So the ground state has energy $E_0 = \hbar\omega/2$ and we have:
+\begin{equation}
+E_n = \hbar \omega \left(n + \frac{1}{2} \right) \hspace{3cm} n = 0,1,2,\ldots
+\end{equation}
+Take a look back at what a different way of doing business this has been.  We have determined the entire energy spectrum from Equations \ref{eqn:ladder-com} and \ref{eqn:ladder-ham} using nothing but  algebra.
+
+Let's see how far we can take this.
+\begin{eqnarray*}
+\hat{H} \psi_n &=& E_n \psi_n \\
+\hbar\omega \left( a_+ a_- + \frac{1}{2} \right) \psi_n &=& \hbar \omega \left(n + \frac{1}{2} \right) \psi_n \\
+\hat{a}_+ \hat{a}_- \psi_n &=& n \psi_n \\
+\end{eqnarray*}
+Also:
+\begin{eqnarray*}
+\hat{a}_- \hat{a}_+ \psi_n &=& \left(\hat{a}_+\hat{a}_- + [\hat{a}_-,\hat{a}_+]\right) \psi_n \\
+&=& (n+1) \psi_n
+\end{eqnarray*}
+
+
+From their definition, we have:
+\begin{equation*}
+x = \sqrt{\frac{\hbar}{2m\omega}} \left( a_+ + a_-\right)
+\end{equation*}
+and 
+\begin{equation*}
+p = i\sqrt{\frac{\hbar m\omega}{2}} \left( a_+ - a_-\right)
+\end{equation*}
+So we can calculate:
+\begin{equation*}
+x^2 = \frac{\hbar}{2m\omega} \left( a_+^2 + a_+a_- + a_-a_+ + a_-^2 \right)
+\end{equation*}
+and so:
+\begin{equation*}
+V(x) = \frac{1}{2}m \omega^2 x^2= \frac{\hbar \omega}{4} \left( a_+^2 + a_+a_- + a_-a_+ + a_-^2 \right)
+\end{equation*}
+with
+\begin{eqnarray*}
+\braket{V} &=& \frac{\hbar \omega}{4} \int_{-\infty}^{+\infty} \psi_n^* \left( a_+^2 + a_+a_- + a_-a_+ + a_-^2 \right) \psi_n \, dx
+\end{eqnarray*}
+This integral vanishes:
+$$\int_{-\infty}^{+\infty} \psi_n^* a_+^2 \psi_n dx = k \int_{-\infty}^{+\infty} \psi_n^* \psi_{n-2} dx
+ = 0 $$
+as does the integral involving $a_-^2$ leaving only:
+\begin{equation*}
+\braket{V} = \frac{\hbar \omega}{4} (n + n + 1) = \frac{\hbar \omega}{2} \left(n + \frac{1}{2}\right) 
+= \frac{E_n}{2}
+\end{equation*}
+
+In principle we can calculate any classical dynamical variable in terms of the a's.
+
+\subsection{Power Series Solution}
+
+Next we consider the 
+
+
+\section{Fourier Series for Complex Functions}
+
+The Fourier Series can be expressed in terms of the complex exponential by noting that:
+\begin{eqnarray*}
+\cos(k_n x) &=& \frac{\exp(i k_n x) + \exp(-i k_n x)}{2} \\
+\sin(k_n x) &=& \frac{\exp.(i k_n x) - \exp(-i k_n x)}{2i}
+\end{eqnarray*}
+So that Equation~\ref{eqn:lfs} can be rewritten as:
+\begin{eqnarray}
+f(x) &=& a_0 + \sum_{n=1}^{\infty}  \left\{ a_n \, \cos(k_n x ) + b_n \, \sin( k_n x ) \right\} \nonumber \\
+&=& a_0 + \sum_{n=1}^{\infty}  \left\{ a_n \,  \frac{\exp(i k_n x) + \exp(-i k_n x)}{2} 
++ b_n \, \frac{\exp(i k_n x) - \exp(-i k_n x)}{2i} \right\} \nonumber \\
+&=& a_0 + \sum_{n=1}^{\infty}  \left\{ \frac{a_n - i b_n}{2} \exp(i k_n x) + 
+\frac{a_n + i b_n}{2} \exp(-i k_n x) \right\} \nonumber \\
+&=& a_0 + \sum_{n=1}^{\infty}  \left\{ c_n \exp(i k_n x) + 
+c_n^* \exp(-i k_n x) \right\} \label{eqn:cfsr} \label{eqn:cfsr} 
+\end{eqnarray}
+Where in the last step we have introduced the complex Fourier coefficient:
+\begin{displaymath}
+c_n \equiv \frac{a_n - i b_n}{2}.
+\end{displaymath}
+Note that each term of the sum in Equation~\ref{eqn:cfsr} contains two terms, with the second being the complex conjugate of the first, so that the $f(x)$ remains real valued.  If we replace our initial real valued function $f(x) $ with a complex valued function $\Psi(x)$, then the coefficients $c_n^*$ become independent complex Fourier coefficients $d_n$.  Furthermore, the real constant $a_0$ can be replaced by a complex constant $c_0$.  
+\begin{eqnarray*}
+\Psi(x)  &=& c_0 + \sum_{n=1}^{\infty}  \left\{ c_n \exp(i k_n x) + 
+d_n \exp(-i k_n x) \right\} \label{eqn:cfsr} \label{eqn:cfsr} 
+\end{eqnarray*}
+And finally, we note that we can simplify this equation even further by noting that 
+$k_{(-n)} = -k_n$ and defining $c_{(-n)} \equiv d_n$:
+\begin{eqnarray}
+\Psi(x) &=& \sum_{n=-\infty}^{\infty} c_n \exp(i k_n x). \label{eqn:cfs}
+\end{eqnarray}
+To determine the complex Fourier coefficients we calculate:
+\begin{eqnarray}
+c_n &\equiv& \frac{a_n - i b_n}{2}. \nonumber \\
+&=& \frac{1}{2} \left\{ 
+\frac{2}{a} \int_{-\frac{a}{2}}^{\frac{a}{2}}  \Psi(x) \cos( k_n x) \, dx
+-i \frac{2}{a} \int_{-\frac{a}{2}}^{\frac{a}{2}}  \Psi(x) \sin( k_n x) \, dx
+\right\} \nonumber \\
+&=& \frac{1}{a} \int_{-\frac{a}{2}}^{\frac{a}{2}}  \Psi(x) \left\{\cos( k_n x) - i \sin( k_n x) \right\} \, dx \nonumber \\
+c_n &=& \frac{1}{a} \int_{-\frac{a}{2}}^{\frac{a}{2}}  \Psi(x) \exp(-i k_n x) \, dx \label{eqn:cfc}
+\end{eqnarray}
+This now correctly handles $n=0$ exactly as the other terms, unlike in the formulation with sines and cosines.  Now look closely at Equation~\ref{eqn:cfs} and Equation~\ref{eqn:cfc} and spot the negative sign in the exponential function of the latter.  It seems something strange has happened.  Our new basis functions are the complex exponentials:
+\begin{equation}
+e_n(x) \equiv \frac{1}{\sqrt{a}}\exp(i k_n x).  
+\end{equation}
+But to calculate the Fourier coefficient, we integrate with respect to the complex conjugate:
+\begin{equation}
+e_n^*(x) \equiv \frac{1}{\sqrt{a}}\exp(-i k_n x).  
+\end{equation}
+This is handled tidily by the definition for the inner product of a complex valued periodic function with period $a$:
+\begin{equation}
+\braket{f|g} \equiv \int_{-\frac{a}{2}}^{\frac{a}{2}} f^*(x) \, g(x) \, dx
+\end{equation}
+It is left as an exercise to show that this definition meets the axiomatic properties I1 and I2 in Table~\ref{tbl:ipspace}.
+
+The orthonormality of the basis functions is:
+\begin{eqnarray}
+\braket{e_n, e_m} &=& \frac{1}{a} \int_{-\frac{a}{2}}^{\frac{a}{2}}  \exp(-i k_n x) \exp(k_m x) \, dx \nonumber \\
+&=& \delta_{nm} \label{eqn:eno}
+\end{eqnarray}
+and the Fourier coefficients are calculated as:
+\begin{equation}
+c_n = \frac{1}{a} \braket{e_n, \Psi} = \frac{1}{a} \int_{-\frac{a}{2}}^{\frac{a}{2}} \Psi(x) \exp(-i k_n x) \, dx
+\end{equation}
+
+\section{Hermetian Conjugates}
+The normalizable wave functions are a vector space over the complex numbers, with an inner product:
+\begin{equation}
+\braket{f|g} \equiv \int_{-\infty}^{\infty} f^*(x) \, g(x) \, dx
+\end{equation}
+We can now recognize the normalization condition as a requirement on the inner product of the wave function with itself:
+\begin{equation}
+\braket{\Psi|\Psi} \equiv \int_{-\infty}^{\infty} |\Psi(x,t)|^2 dx = 1
+\end{equation}
+Expectation values are inner products as well:
+\begin{equation}
+\braket{O} = \braket{\Psi|\hat{O}\Psi} \equiv \int_{-\infty}^{\infty} \Psi^*(x,t)\hat{O}\Psi(x,t) dx
+\end{equation}
+We define the Hermetian conjugate of an operator $\hat{O}^{\dagger}$ by the property that:
+\begin{equation}
+\braket{f|\hat{O^\dagger}g} = \braket{\hat{O} f| g}
+\end{equation}
+Explicitly in terms of the integral:
+\begin{equation}
+\int_{-\infty}^{\infty} f^*(x,t)\hat{O}^\dagger g(x,t) dx = 
+\int_{-\infty}^{\infty} \left( \hat{O} f(x,t)\right)^* g(x,t) dx
+\end{equation}
+The Hermetian conjugate $\hat{O}^\dagger$ of an operator $\hat{O}$ is the operator that, when operating on function g, acts equivalently as the original operator acting on f.
+
+For the operator $\hat{x}$:
+\begin{equation*}
+\int_{-\infty}^{\infty} f^*(x)\hat{x}^\dagger g(x) dx = 
+\int_{-\infty}^{\infty} \left(x f(x)\right)^* g(x) dx = 
+\int_{-\infty}^{\infty} x f^*(x) g(x) dx = 
+\int_{-\infty}^{\infty} f^*(x) x g(x) dx 
+\end{equation*}
+So:
+\begin{equation}
+\hat{x}^\dagger = \hat{x}
+\end{equation}
+For a complex number z:
+\begin{equation*}
+\int_{-\infty}^{\infty} f^*(x)z^\dagger g(x) dx = 
+\int_{-\infty}^{\infty} \left(z f(x)\right)^* g(x) dx = 
+\int_{-\infty}^{\infty} z^* f^*(x) g(x) dx = 
+\int_{-\infty}^{\infty} f^*(x) z^* g(x) dx 
+\end{equation*}
+So:
+\begin{equation}
+z^\dagger = z^*
+\end{equation}
+
+Single derivative:
+\begin{equation*}
+\int_{-\infty}^{\infty} f^*(x) \left( \frac{\partial}{\partial x} \right)^\dagger g(x) dx = 
+\int_{-\infty}^{\infty} \left(\frac{\partial f}{\partial x}\right)^* g(x) dx = 
+-\int_{-\infty}^{\infty} f^*(x) \frac{\partial g}{dx} dx  
+\end{equation*}
+where we used integration by parts in the last step (and assumed f and g vanish at the boundaries.
+\begin{equation}
+\left( \frac{\partial}{\partial x} \right)^{\dagger} = -\frac{\partial}{\partial x}
+\end{equation}
+It is left as an exercise to show that:
+\begin{equation}
+\hat{p}^\dagger = \hat{p}
+\end{equation}
+
+When an operator has the property $\hat{o}^\dagger = \hat{o}$ we say that it is hermetian.  
+
+\begin{equation}
+\braket{o} = \braket{\Psi|\hat{o}\Psi} = \braket{\Psi|\hat{o}^\dagger \Psi}
+= \braket{\hat{o} \Psi| \Psi} = \overline{\braket{\Psi| o \Psi}} = \braket{o}^*
+\end{equation}
+
+Expectations values of hermetian operators are real, and so we associate physical observables with hermetian operators. 
+
+
+
+
+
+
+
+\section{Ladder Operators Revisited}
+
 
 
 \appendix
