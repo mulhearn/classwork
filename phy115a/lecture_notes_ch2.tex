@@ -703,7 +703,157 @@ In this section, we will turn our attention to the widely applicable quantum har
 \begin{equation*}
 \hat{H} = -\frac{\hbar^2}{2m}\,\frac{\partial^2}{\partial x^2} + \frac{1}{2} m \omega^2 x^2
 \end{equation*}
-We are going to use an Algebraic Method, based on commutators, which we will define in the next section.
+We are first going to solve the differential the hard way, through the power series solution, and then solve it using an elegant algebraic method.
+
+\subsection{Power Series Solutions}
+
+We are solving this equation:
+\begin{equation*}
+-\frac{\hbar^2}{2m}\,\frac{d^2 \psi}{d x^2} + \frac{1}{2} m \omega^2 x^2 \psi(x) = E \psi(x)
+\end{equation*}
+but if we leave it in that form we will spend all our time dealing with constants and not make any progress.  Instead our idea is two multiply through by:
+$$\frac{2}{\hbar \omega}$$
+as this will make the coefficient of the RHS dimensionless, and get rid of the factors of $1/2$ on the LHS.  This gives us:
+\begin{equation*}
+-\frac{\hbar}{m\omega}\,\frac{d^2 \psi}{d x^2} + \frac{m \omega}{\hbar} x^2 \psi(x) = \frac{2E}{\hbar\omega} \psi(x)
+\end{equation*}
+and we can see the progress we've made if we put:
+$$a \equiv \sqrt{\frac{m \omega}{\hbar}}$$ 
+and 
+$$\epsilon \equiv \frac{2E}{\hbar\omega} $$
+Our equation becomes:
+\begin{equation*}
+-\frac{1}{a^2}\frac{d^2 \psi}{d x^2} + a^2 x^2 \psi(x) = \epsilon \psi(x)
+\end{equation*}
+which is already looking less tedious.  But note that we can define a dimensionless variable $u$ to replace $x$ as:
+$$u \equiv a x$$
+and noting that:
+$$\frac{d}{dx} = \frac{du}{dx}\frac{d}{du} = a \frac{d}{du}$$
+we have at last:
+\begin{equation*}
+-\frac{d^2 \psi}{d u^2} + u^2 \psi(u) = \epsilon \psi(x)
+\end{equation*}
+or:
+\begin{equation*}
+\frac{d^2 \psi}{d u^2} =  (u^2 - \epsilon) \psi(u) 
+\end{equation*}
+the same equation with the tedious constants hidden in our variable definitions.
+
+Next we consider the behavior of $\psi$ at large $u$ (which is also large $x$).  In this case, the differential equation becomes:
+\begin{equation*}
+\frac{d^2 \psi}{d u^2}  \approx u^2 \psi(u) 
+\end{equation*}
+Noticing that in this case, derivatives cause the power of $u$ to increase us leads us to try something like:
+\begin{equation*}
+\psi(u) = \exp\left(\frac{\alpha u^2}{2}\right)
+\end{equation*}
+for some $\alpha$, because each derivative will bring down a factor of $u$.  But as we'll see, even something like:
+\begin{equation*}
+\psi(u) = u^k \; \exp\left(\frac{\alpha u^2}{2}\right)
+\end{equation*}
+will do the trick.  Trying it out:
+$$\frac{d \psi}{d u}  = \left(\alpha u^{k+1} + k\,u^{k-1}\right) \, \exp\left(\frac{\alpha u^2}{2}\right) $$
+and
+$$\frac{d^2 \psi}{d u^2}  = \alpha^2 u^{k+2} \exp\left(\frac{\alpha u^2}{2}\right) \, \left(1 + \mathcal{O}(1/u^2)\right)$$
+where $\mathcal{O}(\epsilon)$ means terms of order $\epsilon$ and higher.  We can neglect these higher order terms relative to the leading 1, and get:
+$$\frac{d^2 \psi}{d u^2}  = \alpha^2 u^2 \psi$$
+which satisfies the differential equation if $\alpha^2 = 1$, i.e.:
+$$\psi(u) = A u^k \exp(-u^2/2) + B u^k \exp(+u^2/2)$$
+but we cannot hope to normalize the wave function unless the $B$ term is zero.  So we conclude that the limiting behavior of the wave function we want is:
+$$\psi(u) = A u^k \exp(-u^2/2)$$
+This leads us to try a solution of the form:
+$$\psi(u) = h(u) \exp(-u^2/2)$$
+where $h(u)$ is any function of $u$.  Note that we are no longer making any approximation.  We can express any wave function this way.  We are just hopeful the differential equation for $h(u)$ will be easier to solve than the differential equation for $\psi(u)$, because the asymptotic behavior has been factored out.  Trying it out:
+$$\frac{d\psi}{du} = \left( \frac{dh}{du} - u\, h(u)\right) \, e^{-u^2/2}$$
+and
+$$\frac{d^2\psi}{du^2} = \left( \frac{d^2h}{du^2} - 2 u \frac{dh}{du} + (u^2-1)h(u) \right) \, e^{-u^2/2}$$
+the TISE becomes:
+\begin{eqnarray*}
+\left( \frac{d^2h}{du^2} - 2 u \frac{dh}{du} + (u^2-1)h(u) \right) \, e^{-u^2/2} &=& (u^2-\epsilon)\\[7pt] 
+\left( \frac{d^2h}{du^2} - 2 u \frac{dh}{du} + (\epsilon-1)h(u) \right) \, e^{-u^2/2} &=& 0\\
+\end{eqnarray*}
+but $e^{-u^2/2}$ is nowhere zero, so we are left with the TISE for $h(u)$ as:
+\begin{equation}
+\label{eqn:htise}
+\frac{d^2h}{du^2} - 2 u \frac{dh}{du} + (\epsilon-1)h(u) = 0
+\end{equation}
+We will solve it with everyones least favorite method: power series.  We assume:
+$$h(u) = \sum_{m=0}^{\infty} a_m u^m$$
+then calculate:
+$$\frac{dh}{du} = \sum_{m=0}^{\infty} m a_m u^{m-1}$$
+and
+$$\frac{d^2h}{du^2} = \sum_{m=0}^{\infty} m (m-1) a_m u^{m-2}$$
+Then we start collecting terms from the LHS of the Equation~\ref{eqn:htise}:
+$$(\epsilon-1)\;h(u) = \sum_{m=0}^{\infty} (\epsilon-1)\;a_m u^m$$
+and:
+$$-2 u \, \frac{dh}{du} = \sum_{m=0}^{\infty} -2 \, m \, a_m \, u^{m}$$
+which to our good fortune have the same power of $u$ for each value of $m$.  But that is not the case for the second derivative, which we will reproduce here as:
+$$\frac{d^2h}{du^2} = \sum_{n=2}^{\infty} n (n-1) a_n u^{n-2}$$
+with the index in the sum changed to $n$ (for simplicity below) and where the first two terms have been omitted from the sum as they are both zero.  To line up nicely with the first two series, we need to have the term $m$ be a power $u^m$ so substituting $m = n - 2$ we get:
+$$\frac{d^2h}{du^2} = \sum_{m=0}^{\infty} (m+2) (m+1) a_{m+2} u^{m}$$
+and the TISE for $h(u)$ becomes:
+$$\sum_{m=0}^{\infty} \left[(\epsilon-1)\;a_m -2 \, m \, a_m + (m+2) (m+1) a_{m+2} \right] u^{m} = 0$$
+to be zero everywhere, the coefficients of every power of $u$ must vanish, leading to:
+$$(\epsilon-1)\;a_m -2 \, m \, a_m + (m+2) (m+1) a_{m+2} = 0$$
+which can be written as the recursion relationship:
+$$a_{m+2} = \frac{2m+1-\epsilon}{(m+2)(m+1)} \; a_m$$
+which appears on a first glance to solve the problem.  This recursion relation will give all the even $a_m$ starting from $a_0$ and all the odd $a_m$ starting from $a_1$. Noting that:
+$$h(0) = a_0$$
+and 
+$$h'(0) = a_1$$
+it seems that given two initial conditions, we obtain the corresponding solution $h(u)$ as a series.  
+We can break this solution into two solutions, an even solution and an odd solution:
+$$h(u) = h_{\rm even}(u) + h_{\rm odd}$$
+with:
+$$h_{\rm even}(u) = a_0 + a_2 \, u^2 + a_4 \, u^4 + \ldots$$
+and 
+$$h_{\rm odd}(u) = a_1 \, u + a_3 \, u^3 + a_5 \, u^5 + \ldots$$
+
+But on a closer look, it seems we are in deep trouble for two reason.  First, we expected (as in the infinite square well) to find that we had solutions only for certain values of the energy ($epsilon$ here) but these recursion relations give a solution for any value of $\epsilon$.  Secondly, for large $m$ the recursion relationship becomes:
+$$a_{m+2} \approx \frac{2}{j}\;a_{m}$$
+which looks like {\bf bad news}.  Let's start with $h_{\rm even}(u)$.  Picking some large even number $2n$ and defining (you see why shortly):
+$$C \equiv a_{2n} n!$$
+we have:
+$$a_{2(n+1)} \approx \frac{1}{n}\;a_{2n} \approx \frac{1}{n+1}\;a_{2n} = \frac{C}{(n+1)!}$$
+and it keeps going:
+$$a_{2(n+2)} \approx \frac{C}{(n+2)!}$$
+So the asymptotic behavior of $h_{\rm even}$ is:
+$$h_{\rm even}(u) \approx \sum_{n=0}^{\infty} \frac{C}{n!}u^{2n} = C\exp(u^2)$$
+and so:
+$$\psi(u) \approx h_{\rm even}(u) exp(-u^2/2) \approx C exp(u^2/2)$$
+which we cannot possibly normalize.  In fact, this is {\bf exactly} the unusable solution to the TISE at large $u$ that we threw away, coming back to us.
+You might hope that $h_{\rm odd}(u)$ can save the day, but we can pick a large odd number $2n+1$ and proceed in exact same manner to find that $h_{\rm odd}(u)$
+
+There is only one way out of this predicament.  The series must terminate at some coefficient $a_n$.
+Looking back at Equation~\ref{eqn:hermite-recursion} we see that if:
+$$2n+1-\epsilon = 0$$
+then $a_{n+2} = 0$.  Recalling our definition for $\epsilon$ we see that:
+\begin{equation}
+E = \hbar \omega \left( n + \frac{1}{2} \right)
+\end{equation}
+The highest power term in the series defining $h(u)$ will be $u^n$, with the asymptotic before of $\psi(u)$ now:
+$$\psi(u) \approx h(u) exp(-u^2/2) \approx C u^n exp(-u^2/2)$$
+this is precisely the nice behavior we choose at the very start.
+
+We can work out explicit solutions.  It's convenient to rewrite the recursion formula in terms of the quantum number $n$ instead of $\epsilon = 2n+1$:
+\begin{equation}
+a_{m+2} = \frac{-2(n-m)}{(m+2)(m+1)} \; a_m
+\end{equation}
+For $n=0$, the last term is $a_0$, so we have simply
+$h_0(u) = a_0$ and so
+$$\psi_0(u) = a_0 e^{-u^2/2}$$
+For $n=1$, the last term is $a_1$, and so $h_1=a_1 u$ and
+$$\psi_1(u) = a_1 u e^{-u^2/2} $$
+For $n=2$, the last term is $a_2$, with $a_2 = -2a_0$ and so
+and so $h_2=a_0 \, (1-2u^2)$ and
+$$\psi_2(u) =  a_0 \, (1-2u^2) \, e^{-u^2/2} $$
+
+The polynomials are know as the Hermite polynomials $H_n(u)$.  They can be most ``easily'' obtained from the Taylor expansion of the generating function:
+$$\exp(-z^2+2zu) = \sum_{n=0}^{\infty} \frac{z_n}{n!}H_n(u)$$
+with this convention, the normalized stationary states for the harmonic oscillator are:
+$$\psi_n(x) = \left( \frac{m \omega}{\pi \hbar} \right)^{1/4} \frac{1}{\sqrt{2^n n!}}H_n(u) e^{-u^2/2}$$
+where
+$$u \equiv \sqrt{\frac{m \omega}{\hbar}} x$$.
 
  
 \subsection{Algebraic Method}
@@ -829,10 +979,6 @@ as does the integral involving $a_-^2$ leaving only:
 \end{equation*}
 
 In principle we can calculate any classical dynamical variable in terms of the a's.
-
-\subsection{Power Series Solution}
-
-Next we consider the 
 
 
 \section{Fourier Series for Complex Functions}
