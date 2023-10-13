@@ -148,11 +148,11 @@ Next we will turn our attention to the infinite square well:
 \begin{equation}
 V(x) = 
 \begin{cases}    
-   0 & 0 \leq x \leq a \\
+   0 & 0 \leq x \leq b \\
    +\infty & {\rm otherwise} \\
 \end{cases}   
 \end{equation}
-By setting $V(x) = +\infty$ outside the well, we just mean $\Psi(x,t)=0$ in that region, and not anything more.  We also see that for normalizable solutions, we must have $E>0$.
+By setting $V(x) = +\infty$ outside the well, we just mean $\Psi(x,t)=0$ in that region, and not anything more.  We also see that for normalizable solutions, we must have $E>0$.  
 
 We are looking for the stationary states that solve the TISE:
 \begin{eqnarray*}
@@ -173,7 +173,7 @@ Taking $\psi(x)$ to be real, the solutions are:
 \end{equation*}
 And the continuity requirements on $\psi(x)$ imply:
 \begin{equation*}
-\psi(0) = \psi(a) = 0.
+\psi(0) = \psi(b) = 0.
 \end{equation*}
 Why is there no continuity condition on $d\psi/dx$?  Applying the conditions:
 \begin{equation*}
@@ -185,13 +185,13 @@ So now:
 \end{equation*}
 And applying the other condition:
 \begin{eqnarray*}
-\psi(a)  &=& A \sin(ka) = 0 \\
-\sin(ka) &=& 0 \\
+\psi(b)  &=& A \sin(kb) = 0 \\
+\sin(kb) &=& 0 \\
 \end{eqnarray*}
 Where in the last step we have used $A \neq 0$ because $A=0$ implies $\psi(x)=0$ a non-normalizable solution.  The sin function is zero for any integer value of pi, so:
 \begin{eqnarray*}
-ka &=& n \pi \\[12pt]
-k_n&=&\frac{n\pi}{a}
+kb &=& n \pi \\[12pt]
+k_n&=&\frac{n\pi}{b}
 \end{eqnarray*}
 where $n$ is any integer.  
 
@@ -199,16 +199,16 @@ The normalization condition is:
 \begin{eqnarray*}
 \int_{-\infty}^{+\infty} \; |\psi(x)|^2 \, dx &=& 1 \\
 \end{eqnarray*}
-but keeping in mind that $\psi(x)=0$ outside of the square well ($[0,a]$) this condition becomes:
+but keeping in mind that $\psi(x)=0$ outside of the square well ($[0,b]$) this condition becomes:
 \begin{eqnarray*}
 1 &=& \int_{0}^{a} \; |A \, \sin(k_n x)|^2 \, dx \\
-1 &=& |A|^2 \int_{0}^{a} \; \sin^2(k_n x) \, dx \\
-1 &=& |A|^2 \; \frac{a}{2} \\
-|A|^2 &=& \frac{2}{a} \\
+1 &=& |A|^2 \int_{0}^{b} \; \sin^2(k_n x) \, dx \\
+1 &=& |A|^2 \; \frac{b}{2} \\
+|A|^2 &=& \frac{2}{b} \\
 \end{eqnarray*}
 As the phase of $A$ doesn't matter for the purposes of normalization, we choose it to be positive real:
 \begin{eqnarray*}
-A &=& \sqrt{\frac{2}{a}} \\
+A &=& \sqrt{\frac{2}{b}} \\
 \end{eqnarray*}
 So at last we have an infinite number of solutions to the TISE:
 
@@ -216,40 +216,39 @@ So at last we have an infinite number of solutions to the TISE:
 \label{eqn:psin-isw}
 \psi_n(x) = 
 \begin{cases}    
-   {\displaystyle \sqrt{\frac{2}{a}}\sin(k_n x)} & 0 {\displaystyle \leq x \leq a} \\[8pt]
+   {\displaystyle \sqrt{\frac{2}{b}}\sin(k_n x)} & 0 {\displaystyle \leq x \leq b} \\[8pt]
    0 & {\rm otherwise} \\
 \end{cases}   
 \end{equation}
 where
 \begin{eqnarray*}
-k_n&=&\frac{n\pi}{a}
+k_n&=&\frac{n\pi}{b}
 \end{eqnarray*}
 In principle, $n$ can be any integer, but for $n=0$ we get the unnormalizable wave function $\psi(x)=0$ and so we omit $n=0$.  We note also that:
 \begin{eqnarray*}
-\psi_{-n}(x) = \sqrt{\frac{2}{a}} \sin(k_{-n}x) = \sqrt{\frac{2}{a}} \sin(-k_{n}x) = -\sqrt{\frac{2}{a}} \sin(k_{n}x) = -\psi_{n}(x)
+\psi_{-n}(x) = \sqrt{\frac{2}{b}} \sin(k_{-n}x) = \sqrt{\frac{2}{b}} \sin(-k_{n}x) = -\sqrt{\frac{2}{b}} \sin(k_{n}x) = -\psi_{n}(x)
 \end{eqnarray*}
-So $\psi_{-n}$ differs from $\psi_{n}$ only by a phase factor $-1$ and therefore adds nothing (recall that we simply chose $A$ to be positive and real).  So we can omit negative values of $n$ as well.  That leaves us with:
+So $\psi_{-n}$ differs from $\psi_{n}$ only by a phase factor $-1$ and therefore adds nothing (recall that we simply chose $A$ to be positive and real).  If we need $\psi_{-n}$ we can just use $-\psi_n$.
+So we can omit negative values of $n$ as well.  That leaves us with:
 \begin{equation*}
 n = 1,2,3,\ldots
 \end{equation*}
 Recalling our definition for $k$, the definite total energy $E_n$ of stationary state $\psi_n$ is given by:
 \begin{eqnarray}
-k_n &=& \frac{n\pi}{a} = \frac{\sqrt{2mE_n}}{\hbar}\\[10pt]
-E_n &=& \frac{\hbar^2k_n^2}{2m}= \frac{n^2 \pi^2 \hbar^2}{2ma^2}
+k_n &=& \frac{n\pi}{b} = \frac{\sqrt{2mE_n}}{\hbar}\\[10pt]
+E_n &=& \frac{\hbar^2k_n^2}{2m}= \frac{n^2 \pi^2 \hbar^2}{2mb^2}
 \end{eqnarray}
 
 \section{The Fourier Series}
 
-In this section, we'll see how the Fourier Series can be interpreted in the context of a vector space with an inner product.  Then we will see how it relates to stationary solutions of the infinite square-well potential which we just determined.
+In this section, we'll see how the Fourier Series can be interpreted in the context of a vector space with an inner product.  Then we will see how it relates to stationary solutions of the infinite square-well potential which we have just determined.
 
-\subsection{Vector Spaces with Inner Product Spaces}
-The real numbers ($\mathbb(R)$) and complex numbers ($\mathbb{C}$) are both examples of fields in mathematics:  they are each a set on which the operations addition, subtraction, multiplication, and division are defined and follow the familiar rules.  A vector space $V$ over a scalar field $S$ is a set whose elements are called vectors, for which an associative and commutative operation of addition is defined as well as an associative and distributive operation of scalar multiplication is defined.    The complete set of properties which define a vector field are shown in Table~\ref{tbl:ipspace}.  
+\subsection{Vector Spaces and Inner Product Spaces}
+The real numbers ($\mathbb(R)$) and complex numbers ($\mathbb{C}$) are both examples of fields in mathematics:  they are each a set on which the operations addition, subtraction, multiplication, and division are defined and follow their familiar rules.  A vector space $V$ over a scalar field $S$ is a set whose elements are called vectors, for which an associative and commutative operation of addition and an associative and distributive operation of scalar multiplication are both defined.    The complete set of properties which define a vector field are shown in Table~\ref{tbl:ipspace}.  
 
 An {\em inner product} is an operation which returns a scalar for any two vectors $x$ and $y$.
 We write the inner product as $\braket{x|y}$.  If a vector space $V$ has an inner product defined 
-which satisfies conditions I1-I5 in the table, it is an inner product space $H$ as well.  
-
-It is left as an exercise to show that the deducible properties D1-D4 listed in the table follow from the other properties.
+which satisfies conditions I1-I5 in the table, it is an inner product space $H$ as well.  It is left as an exercise to show that the deducible properties D1-D4 listed in the table follow from the other properties.
 
 \begin{table}
 \caption{ \label{tbl:ipspace} Here we define the properties of a vector space $V$ over a scalar field $S$, and an inner product space $H$ as well, using a compact mathematical notation.  In this class the scalar field $S$ will only be the real numbers ($\mathbb{R}$) or the complex numbers ($\mathbb{R}$).
@@ -320,7 +319,7 @@ We have {\bf vector addition} which satisfies properties A1-A5 of Table~\ref{tbl
 \item {\bf A2}: $\vec{v} + \vec{w} = \vec{w} + \vec{v}$
 \item {\bf A3}: $\vec{u} + (\vec{v} + \vec{w}) = (\vec{u} + \vec{v}) + \vec{w} $
 \item {\bf A4}: There is the vector 0 with: $\vec{v} + 0 = \vec{v} $
-\item {\bf A5}: For every $\vec{v}$ there is $(-\vec{v})$ s.t $\vec{v} + (-\vec{v})$
+\item {\bf A5}: For every $\vec{v}$ there is $(-\vec{v})$ s.t $\vec{v} + (-\vec{v}) = 0$
 \end{itemize}
 \end{samepage}
 
@@ -328,9 +327,9 @@ We have {\bf vector addition} which satisfies properties A1-A5 of Table~\ref{tbl
 \noindent
 We also have {\bf scalar multiplication} which satisfies properties M1-M5 and D1,D2:
 \begin{itemize}
-\item {\bf M1:} $a \vec{v} = \vec{v}$
+\item {\bf M1:} $a \vec{v} = \vec{w}$
 \item {\bf M2:} $1 \vec{v} = \vec{v}$
-\item {\bf M3:} $a(b\vec{v}) = (ab)\vec{v})$
+\item {\bf M3:} $a(b\vec{v}) = (ab)\vec{v}$
 \item {\bf M4:} $a(\vec{v} + \vec{w}) = a\vec{v} + a\vec{w}$
 \item {\bf M5:} $(a+b)\vec{v} = a\vec{v} + b\vec{v}$
 \item {\bf D1:} $(-1)\vec{v} = (-\vec{v})$
@@ -380,11 +379,11 @@ equal to the vector
 \begin{eqnarray*}
  \vec{v_2} = 3 \hat{x} + 2 \hat{y} + 7 \hat{z}.
 \end{eqnarray*}
-Orthogonality and completeness are intimately related.  In Euclidean vector space, any three orthogonal vectors must be complete.
+Orthogonality and completeness are intimately related.  In Euclidean vector space, any three orthogonal vectors are a complete basis.
  
 \subsection{The Fourier Series}
 
-Using the language of inner product spaces, the Fourier Theorem states that the sines and cosines form a complete orthonormal basis for any periodic function.  The vectors in this vector space are periodic functions.  Addition of periodic functions $f(x)$ and $g(x)$ is another periodic function $f(x) + g(x)$.  Scalar multiplication of a periodic function $f(x)$ by a real number $a$ is another periodic function new function $a f(x)$.  The other properties of vector addition and scalar multiplication follow from the corresponding rules of ordinary addition and multiplication.
+Using the language of inner product spaces, the Fourier Theorem states that the sines and cosines form a complete orthonormal basis for any periodic function.  The vectors in this vector space are periodic functions.  Addition of periodic functions $f(x)$ and $g(x)$ is another periodic function $f(x) + g(x)$.  Scalar multiplication of a periodic function $f(x)$ by a real number $a$ is another periodic function $a f(x)$.  The other properties of vector addition and scalar multiplication follow from the corresponding rules of ordinary addition and multiplication.
 
 To obtain an inner product space, we need to define the inner product. If we restrict ourselves to {\bf real} functions of $x$ with period $a$, the inner product between any two functions $f(x)$ and $g(x)$ is defined to be the integral:
 \begin{equation}
@@ -504,60 +503,68 @@ Note that the last step follows from the fact that, because of the $\delta_{nm}$
 
 \subsection{Application of Fourier Series to Infinite Well}
 
-For the infinite potential well, we have a wave function $\psi(x)$ which meets the boundary conditions $\psi(0) = \psi(a) = 0$.  We define a helper function:
+For the infinite potential well
+\begin{equation}
+V(x) = 
+\begin{cases}    
+   0 & 0 \leq x \leq b \\
+   +\infty & {\rm otherwise} \\
+\end{cases}   
+\end{equation}
+we have a wave function $\psi(x)$ which meets the boundary conditions $\psi(0) = \psi(b) = 0$.  We define a helper function:
 \begin{equation*}
 f(x) = 
 \begin{cases}    
-  \hspace{9.5pt}\psi(x)  & \hspace{9pt} 0 \leq x \leq a \\
-  -\psi(-x) & -a \leq x < 0 \\
+  \hspace{9.5pt}\psi(x)  & \hspace{9pt} 0 \leq x \leq b \\
+  -\psi(-x) & -b \leq x < 0 \\
 \end{cases}   
 \end{equation*}
-It is an odd function by construction:  $f(-x) = -f(x)$.  Since f(a) = f(-a) = 0, we can consider it to be a periodic function with period $2a$. To evaluate it's Fourier series, we'll only need to evaluate it in the region $[-a,a]$ where it is defined\footnote{If you prefer, you can imagine making it truly periodic by just stamping out a copy of $f(x)$ from $[-a,a]$ into $[a,3a]$, and so on.}.
+It is an odd function by construction:  $f(-x) = -f(x)$.  Since f(b) = f(-b) = 0, we can consider it to be a periodic function with period $2b$. To evaluate it's Fourier series, we'll only need to evaluate it in the region $[-b,b]$ where it is defined\footnote{If you prefer, you can imagine making the helper function truly periodic by just stamping out a copy of $f(x)$ from $[-a,a]$ into $[a,3a]$, and so on.  It will have no effect in what follows.}.  When applying the formulas for the Fourier series, we will need to make the substitute $a \to 2b$ into the original formulas, because the period of $f(x)$ is $2b$.
 
 For $f(x)$ the Fourier coefficients of the cosines all vanish:
 \begin{eqnarray*}
-A_0 &=& \sqrt{\frac{1}{2a}} \int_{-a}^{a} f(x) \, dx = 0\\
-A_n &=& \sqrt{\frac{1}{a}} \int_{-a}^{a} 
-\cos\left(\frac{\pi n}{a} \, x \right) \, f(x) \, dx = 0\\
+A_0 &=& \sqrt{\frac{1}{2b}} \int_{-b}^{b} f(x) \, dx = 0\\
+A_n &=& \sqrt{\frac{1}{b}} \int_{-b}^{b} 
+\cos\left(\frac{\pi n}{b} \, x \right) \, f(x) \, dx = 0\\
 \end{eqnarray*}
-where we have put $a \to 2a$ in the original formulas, since the period of our function is now $2a$.  So the Fourier Series for $f(x)$ contains only sines:
+and so the Fourier Series for $f(x)$ contains only sines:
 \begin{eqnarray*}
-f(x) &=& \sqrt{\frac{1}{a}} \sum_{n=1}^{\infty}  B_n \, \sin\left(\frac{\pi n}{a} \, x \right) \\
-&=&  \sum_{n=1}^{\infty}  \left( \frac{B_n}{\sqrt{2}}\right) \, \left( \sqrt{\frac{2}{a}} \, \sin\left(\frac{\pi n}{a} \, x \right) \right)\\
+f(x) &=& \sqrt{\frac{1}{b}} \sum_{n=1}^{\infty}  B_n \, \sin\left(\frac{\pi n}{b} \, x \right) \\
+&=&  \sum_{n=1}^{\infty}  \left( \frac{B_n}{\sqrt{2}}\right) \, \left[ \sqrt{\frac{2}{b}} \, \sin\left(\frac{\pi n}{b} \, x \right) \right]\\
 \end{eqnarray*}
-We determine the Fourier coefficients for the sines from:
+Where we have arranged the factors of $\sqrt{2}$ so that the function in square brackets $[\ldots]$ has unit normalization on $[0,b]$.  We determine the Fourier coefficients for the sines from:
 \begin{eqnarray*}
-B_n &=& \sqrt{\frac{1}{a}} \int_{-a}^{a} 
-\sin\left(\frac{\pi n}{a} \, x \right) \, f(x) \, dx = 0\\
+B_n &=& \sqrt{\frac{1}{b}} \int_{-b}^{b} 
+\sin\left(\frac{\pi n}{b} \, x \right) \, f(x) \, dx = 0\\
 \end{eqnarray*}
-but since the integrand is now even, the integral does not vanish, and in fact, we need only integrate in $[0,a]$ and multiply by a factor of two:
+but since the integrand is now even, the integral does not vanish, and in fact, we need only integrate in $[0,b]$ and multiply by a factor of two:
 \begin{eqnarray*}
-B_n &=& 2 \times \sqrt{\frac{1}{a}} \int_{0}^{a} 
-\sin\left(\frac{\pi n}{a} \, x \right) \, f(x) \, dx = 0\\[14pt]
-c_n \equiv \frac{B_n}{\sqrt{2}} &=& \int_{0}^{a} 
-\left( \sqrt{\frac{2}{a}} \sin\left(\frac{\pi n}{a} \, x \right) \right) f(x) dx \\
+B_n &=& 2 \times \sqrt{\frac{1}{b}} \int_{0}^{b} 
+\sin\left(\frac{\pi n}{b} \, x \right) \, f(x) \, dx = 0\\[14pt]
+c_n \equiv \frac{B_n}{\sqrt{2}} &=& \int_{0}^{b} 
+\left( \sqrt{\frac{2}{b}} \sin\left(\frac{\pi n}{b} \, x \right) \right) f(x) dx \\
 \end{eqnarray*}
-And since we are now integrating only from $[0,a]$ then 
+And since we are now integrating only from $[0,b]$ then 
 $$f(x) = \psi(x)$$ 
 and we can rewrite these equations in terms of 
 \begin{equation}
 \psi_n(x) = 
 \begin{cases}
-{\displaystyle \sqrt{\frac{2}{a}} \, \sin(k_n x)} & 0 \leq x \leq a\\[8pt]
+{\displaystyle \sqrt{\frac{2}{b}} \, \sin(k_n x)} & 0 \leq x \leq b\\[8pt]
 0 & \rm otherwise \\
 \end{cases}
 \end{equation}
 where
 \begin{eqnarray*}
-k_n&=&\frac{n\pi}{a}
+k_n&=&\frac{n\pi}{b}
 \end{eqnarray*}
-Any wave function can be expressed as a linear combination of these basis functions:
+Any wave function in [0,b] can be expressed as a linear combination of these basis functions:
 \begin{equation}
 \psi(x) = \sum_{n=1}^{\infty} \; c_n \psi_n(x)
 \end{equation}
-when $0 \leq x \leq a$ and $\psi(x) = 0$ otherwise.  And
+and
 \begin{eqnarray*}
-c_n &=& \braket{\psi_n| \psi} = \int_{0}^{a} \; \psi_n(x) \, \psi(x) \, dx \\
+c_n &=& \braket{\psi_n| \psi} = \int_{0}^{b} \; \psi_n(x) \, \psi(x) \, dx \\
 \end{eqnarray*}
 
 \section{Insights from the Infinite Square Well}
@@ -580,7 +587,7 @@ so that the total wave equation is:
 \end{equation*}
 We saw that these are {\bf stationary states} (the expectation values are constant in time) and they are {\bf states of definite energy} (every measurement of their energy will yield the results $E_n$).
 
-By design, the $\Psi_n(x,t)$ are solutions to the (time dependent) SE.  It's instructive to see exactly how that works:
+The wave functions $\Psi_n(x,t)$ are solutions to the (time dependent) SE.  It's instructive to see exactly how that works:
 \begin{eqnarray*}
 \hat{H} \, \Psi_n(x,t) &=& -\ihbar \frac{\partial\Psi}{\partial t}\\[8pt]
 \exp(-\frac{i E_n t}{\hbar}) \; \hat{H} \; \psi_n(x) &=& -\ihbar \psi_n(x) \, \frac{d}{dt}
@@ -589,8 +596,7 @@ By design, the $\Psi_n(x,t)$ are solutions to the (time dependent) SE.  It's ins
 \exp(-\frac{i E_n t}{\hbar})\\[8pt]
 E_n \Psi(x,t) &=& E_n \Psi(x,t)\\[8pt]
 \end{eqnarray*}
-
-Our detour into the Fourier series has given us a crucial additional insight.  The $\psi_n(x)$ are also a complete orthonormal basis (the Fourier series) for any function that meets the boundary conditions for this problem.  That means that we have in fact already found the {\em general solution} to this problem.
+The recognition of stationary states as the Fourier series gives us a crucial additional insight.  The $\psi_n(x)$ are also a complete orthonormal basis (the Fourier series) for any function that meets the boundary conditions for this problem.  That means that we have in fact already found the {\em general solution} to this problem.
 
 Let's see how this works.  Suppose the initial state of a particle is $\Psi(x,0) \equiv \psi_i(x)$.  This can be absolutely any function so long as it vanishes outside of $[0,a]$ and it is properly normalized.  Our job is to find $\Psi(x,t)$ that satisfies the SE for all future times.  We calculate the Fourier coefficients of $\psi_i(x)$ as:
 \begin{eqnarray*}
@@ -598,20 +604,19 @@ c_n &=& \braket{\psi_n| \psi_i} = \int_{0}^{a} \; \psi_n(x) \, \psi_i(x) \, dx \
 \end{eqnarray*}
 and by Fourier's theorem, we know that:
 \begin{eqnarray*}
-\Psi(x,0) &=& \sum_{n=0}^{\infty} c_n \psi_n(x)
+\Psi(x,0) &=& \sum_{n=0}^{\infty} c_n \, \psi_n(x)
 \end{eqnarray*}
 But what about $\Psi(x,t)$?  It really couldn't be any simpler:
-\begin{eqnarray*}
-\Psi(x,t) &=& \sum_{n=0}^{\infty} c_n \Psi_n(x,t)\\
-          &=& \sum_{n=0}^{\infty} c_n \exp(-\frac{i E_n t}{\hbar}) \, \psi_n(x)\\
-\end{eqnarray*}
+\begin{equation*}
+\Psi(x,t) \; = \; \sum_{n=0}^{\infty} c_n \, \Psi_n(x,t) \; = \; \sum_{n=0}^{\infty} c_n \, \exp(-\frac{i E_n t}{\hbar}) \, \psi_n(x)
+\end{equation*}
 It is left as an exercise to show explicitly that $\Psi(x,t)$ as defined here does satisfy the time-dependent SE and is equal to $\psi_i(x)$ at $t=0$. 
 
 There is still some insight to be gleamed from this simple example.  We specified that $\Psi(x,0)$ is normalized, and we showed that the SE preserves normalization, so we know that $\Psi(x,t)$ is normalized as well:
 \begin{equation*}
 \int_{-\infty}^{+\infty} |\Psi(x,t)|^2 \; dx = 1
 \end{equation*}
-And plugging in our Fourier Series solution for $\Psi(x,t)$:
+And plugging in the Fourier series for $\Psi(x,t)$:
 \begin{eqnarray*}
 1 &=& \int_{-\infty}^{+\infty} \Psi^*(x,t)\Psi(x,t) \; dx \\
   &=& \int_{-\infty}^{+\infty} \left( \sum_{n=1}^{\infty} c_n^* \Psi_n^*(x,t) \right) \left( \sum_{m=1}^{\infty} c_m \Psi_m(x,t) \right) \; dx \\
@@ -644,6 +649,7 @@ where $P(n)$ is the probability of observing the particle in state $n$.  This al
 
 At this point, it would be reasonable to assume that these results apply only to the infinite square well potential.  In fact, there is a generalization to the Fourier series called the Spectral Theorem which shows that these results apply more more widely.  The stationary solutions to the TISE will always be a complete orthonormal basis for the general solution, exactly as here. 
 
+
 \section{Commutators}
 
 Let's review the situation.  The state of a quantum system is contained entirely in a wave function $\Psi(x,t)$ which is a function of the position $x$ but not momentum $p$.  To calculate quantities involving momentum, instead of a variable, we must use the momentum operator:
@@ -668,12 +674,9 @@ or more simply:
 \label{eqn:pxcom}
 \left[\hat{x}, \hat{p}\right] = i \hbar 
 \end{equation}
-This small little equation is called the {\bf canonical commutation relation} and it as we will see, it is a central feature of quantum mechanics.
-
+This small little equation is called the {\bf canonical commutation relation} and as we will see, it is a central feature of quantum mechanics.
 
 \section{The Harmonic Oscillator}
-
-Summarizing Section 2.3 of Griffiths.
 
 The classical harmonic oscillator is a mass $m$ connected to a spring which follows Hooke's law:
 \begin{equation*}
@@ -703,7 +706,7 @@ In this section, we will turn our attention to the widely applicable quantum har
 \begin{equation*}
 \hat{H} = -\frac{\hbar^2}{2m}\,\frac{\partial^2}{\partial x^2} + \frac{1}{2} m \omega^2 x^2
 \end{equation*}
-We are first going to solve the differential the hard way, through the power series solution, and then solve it using an elegant algebraic method.
+We are first going to solve this the hard way, through the power series solution, and then solve it using an elegant algebraic method.
 
 \subsection{Power Series Solutions}
 
@@ -718,24 +721,24 @@ as this will make the coefficient of the RHS dimensionless, and get rid of the f
 -\frac{\hbar}{m\omega}\,\frac{d^2 \psi}{d x^2} + \frac{m \omega}{\hbar} x^2 \psi(x) = \frac{2E}{\hbar\omega} \psi(x)
 \end{equation*}
 and we can see the progress we've made if we put:
-$$a \equiv \sqrt{\frac{m \omega}{\hbar}}$$ 
+$$x_0 \equiv \sqrt{\frac{\hbar}{m \omega}}$$ 
 and 
 $$\epsilon \equiv \frac{2E}{\hbar\omega} $$
 Our equation becomes:
 \begin{equation*}
--\frac{1}{a^2}\frac{d^2 \psi}{d x^2} + a^2 x^2 \psi(x) = \epsilon \psi(x)
+-x_0^2 \; \frac{d^2 \psi}{d x^2} \, + \, \frac{x^2}{x_0^2} \, \psi(x) \; = \; \epsilon \, \psi(x)
 \end{equation*}
 which is already looking less tedious.  But note that we can define a dimensionless variable $u$ to replace $x$ as:
-$$u \equiv a x$$
+$$u \equiv \frac{x}{x_0}$$
 and noting that:
 $$\frac{d}{dx} = \frac{du}{dx}\frac{d}{du} = a \frac{d}{du}$$
 we have at last:
 \begin{equation*}
--\frac{d^2 \psi}{d u^2} + u^2 \psi(u) = \epsilon \psi(x)
+-\frac{d^2 \psi}{d u^2} \, + \, u^2 \, \psi(u) \; = \; \epsilon \, \psi(x)
 \end{equation*}
 or:
 \begin{equation*}
-\frac{d^2 \psi}{d u^2} =  (u^2 - \epsilon) \psi(u) 
+\frac{d^2 \psi}{d u^2} \; =  \; (u^2 - \epsilon) \, \psi(u) 
 \end{equation*}
 the same equation with the tedious constants hidden in our variable definitions.
 
@@ -743,7 +746,7 @@ Next we consider the behavior of $\psi$ at large $u$ (which is also large $x$). 
 \begin{equation*}
 \frac{d^2 \psi}{d u^2}  \approx u^2 \psi(u) 
 \end{equation*}
-Noticing that in this case, derivatives cause the power of $u$ to increase us leads us to try something like:
+Noticing that the derivatives cause the power of $u$ to increase leads us to try something like:
 \begin{equation*}
 \psi(u) = \exp\left(\frac{\alpha u^2}{2}\right)
 \end{equation*}
@@ -755,7 +758,7 @@ will do the trick.  Trying it out:
 $$\frac{d \psi}{d u}  = \left(\alpha u^{k+1} + k\,u^{k-1}\right) \, \exp\left(\frac{\alpha u^2}{2}\right) $$
 and
 $$\frac{d^2 \psi}{d u^2}  = \alpha^2 u^{k+2} \exp\left(\frac{\alpha u^2}{2}\right) \, \left(1 + \mathcal{O}(1/u^2)\right)$$
-where $\mathcal{O}(\epsilon)$ means terms of order $\epsilon$ and higher.  We can neglect these higher order terms relative to the leading 1, and get:
+where the symbol $\mathcal{O}(1/u^2)$ means terms of order $1/u^2$ and smaller.  Because $u$ is large, we can neglect these higher order terms relative to the leading 1, and get:
 $$\frac{d^2 \psi}{d u^2}  = \alpha^2 u^2 \psi$$
 which satisfies the differential equation if $\alpha^2 = 1$, i.e.:
 $$\psi(u) = A u^k \exp(-u^2/2) + B u^k \exp(+u^2/2)$$
@@ -820,7 +823,7 @@ $$a_{2(n+2)} \approx \frac{C}{(n+2)!}$$
 So the asymptotic behavior of $h_{\rm even}$ is:
 $$h_{\rm even}(u) \approx \sum_{n=0}^{\infty} \frac{C}{n!}u^{2n} = C\exp(u^2)$$
 and so:
-$$\psi(u) \approx h_{\rm even}(u) exp(-u^2/2) \approx C exp(u^2/2)$$
+$$\psi(u) \approx h_{\rm even}(u) \exp(-u^2/2) \approx C \exp(u^2/2)$$
 which we cannot possibly normalize.  In fact, this is {\bf exactly} the unusable solution to the TISE at large $u$ that we threw away, coming back to us.
 You might hope that $h_{\rm odd}(u)$ can save the day, but we can pick a large odd number $2n+1$ and proceed in exact same manner to find that $h_{\rm odd}(u)$
 
@@ -832,7 +835,7 @@ then $a_{n+2} = 0$.  Recalling our definition for $\epsilon$ we see that:
 E = \hbar \omega \left( n + \frac{1}{2} \right)
 \end{equation}
 The highest power term in the series defining $h(u)$ will be $u^n$, with the asymptotic before of $\psi(u)$ now:
-$$\psi(u) \approx h(u) exp(-u^2/2) \approx C u^n exp(-u^2/2)$$
+$$\psi(u) \; \approx \; h(u) \, \exp(-u^2/2) \; \approx \; C \, u^n \, \exp(-u^2/2)$$
 this is precisely the nice behavior we choose at the very start.
 
 We can work out explicit solutions.  It's convenient to rewrite the recursion formula in terms of the quantum number $n$ instead of $\epsilon = 2n+1$:
@@ -858,63 +861,79 @@ $$u \equiv \sqrt{\frac{m \omega}{\hbar}} x$$.
  
 \subsection{Algebraic Method}
 
-We write:
+We write the Hamiltonian for the harmonic oscillator in terms of the position and momentum operators:
 \begin{equation*}
-\hat{H} = \frac{1}{2m}\,\left[ \hat{p}^2 + (m \omega x)^2 \right]
+\hat{H} = \frac{1}{2m}\,\left[ \hat{p}^2 + \left( m \omega \hat{x} \right)^2 \right]
 \end{equation*}
-in this problem, the only parameter is $\omega$, the frequency of the classical harmonic oscillator, and so $\hbar \omega$ has units of energy. It's reasonable to consider the dimensionless quantity:
+In this problem, the only parameter is $\omega$, the frequency of the classical harmonic oscillator, and so $\hbar \omega$ has units of energy. It's reasonable to consider the dimensionless quantity:
 \begin{equation*}
-\frac{\hat{H}}{\hbar\omega} \; = \; \frac{\hat{p}^2 + (m \omega x)^2 }{2 \hbar m \omega }
+\frac{\hat{H}}{\hbar\omega} \; = \; \frac{\hat{p}^2 + (m \omega \hat{x})^2 }{2 \hbar m \omega }
+\; = \; \frac{1}{2} \, \left( \left(\frac{\hat{p}}{p_0}\right)^2 + \frac{m \omega \hat{x}^2 }{\hbar} \right)
 \end{equation*}
-We can try to write the dimensionless quantity on the right as a product of two factors, which we will call $a_+$ and $a_-$ for now, with:
+As before, we define:
+$$x_0 \equiv \sqrt{\frac{\hbar}{m \omega}}$$
+and also:
+$$p_0 \equiv \frac{\hbar}{x_0} = \sqrt{\hbar m \omega}$$
+so:
 \begin{equation*}
-a_{\pm} \equiv \frac{1}{\sqrt{2\hbar m \omega}}\left(\mp i \hat{p} + m \omega x \right)
+\frac{\hat{H}}{\hbar\omega} \; = \; \frac{1}{2} \, \left[ \left(\frac{\hat{p}}{p_0}\right)^2 + \left( \frac{\hat{x}}{x_0}\right)^2 \right]
 \end{equation*}
-and calculate:
+The algebraic solution we will use here is based on the observation that we can factor the dimensionless product in square brackets.  If these were ordinary real numbers we would have:
+$$\alpha^2 + \beta^2 = (\alpha + i\beta) \, (\alpha - i\beta) $$
+so we'll define:
 \begin{eqnarray*}
-a_{+}a_{-} \; &=& \; \frac{\hat{p}^2 + (m\omega x)^2 \; + \; i m \omega (x \hat{p} - \hat{p} x)}{2\hbar m \omega}\\[8pt]
-&=& \; \frac{\hat{H}}{\hbar\omega} \; + \; \frac{i \, [\hat{x}, \hat{p}]}{2 \hbar}\\
+\hat{a}_- &\equiv& \frac{1}{\sqrt{2}}\left(i \frac{\hat{p}}{p_0} + \frac{\hat{x}}{x_0}\right) \\
+\hat{a}_+ &\equiv& \frac{1}{\sqrt{2}}\left(-i \frac{\hat{p}}{p_0} + \frac{\hat{x}}{x_0} \right) \\
 \end{eqnarray*}
-Using the canonical commutation relation $[\hat{x}, \hat{p}] = i\hbar$:
+there are other possible choices for the sign and which term is made imaginary, and these would work as well in what follows, but this choice will give us the most conventional notation for our results.  We calculate:
+
 \begin{eqnarray*}
-a_{+}a_{-} &=& \; \frac{\hat{H}}{\hbar\omega} \; - \frac{1}{2}
+\hat{a}_{+}\, \hat{a}_{-} \; &=& \; \frac{1}{2} \left[
+\left( \frac{\hat{p}}{p_0}\right)^2 \; + \; \left( \frac{\hat{x}}{x_0}\right)^2
++ i \, \frac{\hat{x}\hat{p} - \hat{p}\hat{x}}{x_0 \, p_0}
+\right] \\[8pt]
+&=& \; \frac{\hat{H}}{\hbar \omega} \; + i \, \frac{[\hat{x},\hat{p}]}{\hbar}
 \end{eqnarray*}
-and a similar computation gives:
-\begin{eqnarray*}
-a_{-}a_{+} &=& \; \frac{\hat{H}}{\hbar\omega} \; + \frac{1}{2}
-\end{eqnarray*}
+where we have noted that $x_0 p_0 = \hbar$.  Using the canonical commutation relation $[\hat{x}, \hat{p}] = i\hbar$:
+\begin{equation*}
+\hat{a}_{+}\,\hat{a}_{-} \; = \; \frac{\hat{H}}{\hbar\omega} \; - \frac{1}{2}
+\end{equation*}
+and a similar calculation gives:
+\begin{equation*}
+\hat{a}_{-}\,\hat{a}_{+} \; = \; \frac{\hat{H}}{\hbar\omega} \; + \frac{1}{2}
+\end{equation*}
 so that:
 \begin{equation}
 \label{eqn:ladder-com}
-[a_-, a_+] = 1
+[\hat{a}_-, \hat{a}_+] \; = \; \hat{a}_- \, \hat{a}_+ - \hat{a}_+, \hat{a}_- \; = \;  1
 \end{equation}
 and
 \begin{equation}
 \label{eqn:ladder-ham}
-\hat{H} =  \hbar\omega \left( a_+ a_- + \frac{1}{2} \right)
+\hat{H} =  \hbar\omega \left( \hat{a}_+ \hat{a}_- + \frac{1}{2} \right)
 \end{equation}
 These two equations contain everything that we need.  Let's start by calculating:
 \begin{eqnarray*}
-[H,a_+] &=& \hbar \omega [a_+ a_-, a_+]  \\
-&=& \hbar \omega a_+ a_- a_+ - a_+ a_+ a_- \\
-&=& \hbar \omega a_+ (a_- a_+ - a_+ a_-)\\
-&=& \hbar \omega a_+ [a_-, a_+]\\
-&=& \hbar \omega a_+  \\
+[\hat{H}\,,\,\hat{a}_+] &=& \hbar \omega \; [\hat{a}_+ \hat{a}_-, \hat{a}_+]  \\
+&=& \hbar \omega \; \left( \hat{a}_+ \hat{a}_- \hat{a}_+ - \hat{a}_+ \hat{a}_+ \hat{a}_- \right) \\
+&=& \hbar \omega \; \hat{a}_+ (\hat{a}_- \hat{a}_+ - \hat{a}_+ \hat{a}_-)\\
+&=& \hbar \omega \; \hat{a}_+ [\hat{a}_-, \hat{a}_+]\\
+&=& \hbar \omega \; \hat{a}_+ 
 \end{eqnarray*}
 Similarly
 \begin{equation*}
-[H,a_-] = -\hbar \omega 
+[\hat{H},\hat{a}_-] = -\hbar \omega 
 \end{equation*}
 So now suppose we have a solution to the TISE, so that:
 $$\hat{H} \Psi = E \Psi$$
 then we also have:
 \begin{eqnarray*}
-\hat{H} \left( a_+ \Psi \right) &=& \left( \hat{H} a_+ \right) \Psi\\
-                                &=& \left( \hat{H} a_+ - a_+ \hat{H} + a_+ \hat{H} \right) \Psi\\
-                                &=& \left( [\hat{H}, a_+] + a_+ \hat{H} \right) \Psi\\
-                                &=& \left( \hbar\omega a_+ + a_+ \hat{H} \right) \Psi\\
-                                &=& \left( \hbar\omega a_+ + a_+ E \right) \Psi\\
-                                &=& \left( E + \hbar\omega \right) (a_+ \Psi)\\
+\hat{H} \left( \hat{a}_+ \Psi \right) &=& \left( \hat{H} \hat{a}_+ \right) \; \Psi\\
+     &=& \left( \hat{H} \hat{a}_+ \; - \; \hat{a}_+ \hat{H} \; + \; \hat{a}_+ \hat{H} \right) \; \Psi\\
+     &=& \left( [\hat{H}, \hat{a}_+] \; + \; \hat{a}_+ \hat{H} \right) \; \Psi\\
+     &=& \left( \hbar\omega \, \hat{a}_+ \; + \; \hat{a}_+ \hat{H} \right) \; \Psi\\
+     &=& \left( \hbar\omega \, \hat{a}_+ \; + \; \hat{a}_+ \, E \right) \; \Psi\\
+     &=& \left( E \; + \; \hbar\omega \right) \; (\hat{a}_+ \, \Psi)\\
 \end{eqnarray*}
 which shows that $\hat{a}_+ \Psi$ is a new solution to the TISE with energy $E+\hbar\omega$.  A similar calculation shows that:
 $$\hat{H} \left(\hat{a}_-\Psi\right) = \left( E - \hbar \omega \right) \left(\hat{a}_-\Psi\right)$$
@@ -947,19 +966,17 @@ Also:
 \hat{a}_- \hat{a}_+ \psi_n &=& \left(\hat{a}_+\hat{a}_- + [\hat{a}_-,\hat{a}_+]\right) \psi_n \\
 &=& (n+1) \psi_n
 \end{eqnarray*}
-
-
 From their definition, we have:
 \begin{equation*}
-x = \sqrt{\frac{\hbar}{2m\omega}} \left( a_+ + a_-\right)
+\hat{x} = \frac{x_0}{\sqrt{2}} \left( a_+ + a_-\right)
 \end{equation*}
 and 
 \begin{equation*}
-p = i\sqrt{\frac{\hbar m\omega}{2}} \left( a_+ - a_-\right)
+\hat{p} = \frac{i\,p_0}{\sqrt{2}} \left( a_+ - a_-\right)
 \end{equation*}
 So we can calculate:
 \begin{equation*}
-x^2 = \frac{\hbar}{2m\omega} \left( a_+^2 + a_+a_- + a_-a_+ + a_-^2 \right)
+x^2 = \frac{x_0^2}{2} \left( a_+^2 + a_+a_- + a_-a_+ + a_-^2 \right)
 \end{equation*}
 and so:
 \begin{equation*}
@@ -977,74 +994,126 @@ as does the integral involving $a_-^2$ leaving only:
 \braket{V} = \frac{\hbar \omega}{4} (n + n + 1) = \frac{\hbar \omega}{2} \left(n + \frac{1}{2}\right) 
 = \frac{E_n}{2}
 \end{equation*}
-
 In principle we can calculate any classical dynamical variable in terms of the a's.
 
 
 \section{Fourier Series for Complex Functions}
 
-The Fourier Series can be expressed in terms of the complex exponential by noting that:
+The Fourier series for a periodic function with period $a$ can be expressed in terms of the complex exponential by noting that:
 \begin{eqnarray*}
-\cos(k_n x) &=& \frac{\exp(i k_n x) + \exp(-i k_n x)}{2} \\
-\sin(k_n x) &=& \frac{\exp.(i k_n x) - \exp(-i k_n x)}{2i}
+\sin\theta \; = \; \frac{e^{i \theta} - e^{-i \theta}}{2i} \\[5pt]
+\cos\theta \; = \; \frac{e^{i \theta} + e^{-i \theta}}{2} \\
 \end{eqnarray*}
-So that Equation~\ref{eqn:lfs} can be rewritten as:
-\begin{eqnarray}
-f(x) &=& a_0 + \sum_{n=1}^{\infty}  \left\{ a_n \, \cos(k_n x ) + b_n \, \sin( k_n x ) \right\} \nonumber \\
-&=& a_0 + \sum_{n=1}^{\infty}  \left\{ a_n \,  \frac{\exp(i k_n x) + \exp(-i k_n x)}{2} 
-+ b_n \, \frac{\exp(i k_n x) - \exp(-i k_n x)}{2i} \right\} \nonumber \\
-&=& a_0 + \sum_{n=1}^{\infty}  \left\{ \frac{a_n - i b_n}{2} \exp(i k_n x) + 
-\frac{a_n + i b_n}{2} \exp(-i k_n x) \right\} \nonumber \\
-&=& a_0 + \sum_{n=1}^{\infty}  \left\{ c_n \exp(i k_n x) + 
-c_n^* \exp(-i k_n x) \right\} \label{eqn:cfsr} \label{eqn:cfsr} 
-\end{eqnarray}
-Where in the last step we have introduced the complex Fourier coefficient:
-\begin{displaymath}
-c_n \equiv \frac{a_n - i b_n}{2}.
-\end{displaymath}
-Note that each term of the sum in Equation~\ref{eqn:cfsr} contains two terms, with the second being the complex conjugate of the first, so that the $f(x)$ remains real valued.  If we replace our initial real valued function $f(x) $ with a complex valued function $\Psi(x)$, then the coefficients $c_n^*$ become independent complex Fourier coefficients $d_n$.  Furthermore, the real constant $a_0$ can be replaced by a complex constant $c_0$.  
+so:
 \begin{eqnarray*}
-\Psi(x)  &=& c_0 + \sum_{n=1}^{\infty}  \left\{ c_n \exp(i k_n x) + 
-d_n \exp(-i k_n x) \right\} \label{eqn:cfsr} \label{eqn:cfsr} 
+s_n(x) \; &=& \; \sqrt{\frac{2}{a}} \; \sin\left(\frac{2\pi n x}{a}\right) \; = \; \frac{e_n(x) - e_n^*(x)}{i \sqrt{2}}\\[8pt]
+c_n(x) \; &=& \; \sqrt{\frac{2}{a}} \; \cos\left(\frac{2\pi n x}{a}\right) \; = \; \frac{e_n(x) + e_n^*(x)}{\sqrt{2}}\\
 \end{eqnarray*}
-And finally, we note that we can simplify this equation even further by noting that 
-$k_{(-n)} = -k_n$ and defining $c_{(-n)} \equiv d_n$:
-\begin{eqnarray}
-\Psi(x) &=& \sum_{n=-\infty}^{\infty} c_n \exp(i k_n x). \label{eqn:cfs}
-\end{eqnarray}
-To determine the complex Fourier coefficients we calculate:
-\begin{eqnarray}
-c_n &\equiv& \frac{a_n - i b_n}{2}. \nonumber \\
-&=& \frac{1}{2} \left\{ 
-\frac{2}{a} \int_{-\frac{a}{2}}^{\frac{a}{2}}  \Psi(x) \cos( k_n x) \, dx
--i \frac{2}{a} \int_{-\frac{a}{2}}^{\frac{a}{2}}  \Psi(x) \sin( k_n x) \, dx
-\right\} \nonumber \\
-&=& \frac{1}{a} \int_{-\frac{a}{2}}^{\frac{a}{2}}  \Psi(x) \left\{\cos( k_n x) - i \sin( k_n x) \right\} \, dx \nonumber \\
-c_n &=& \frac{1}{a} \int_{-\frac{a}{2}}^{\frac{a}{2}}  \Psi(x) \exp(-i k_n x) \, dx \label{eqn:cfc}
-\end{eqnarray}
-This now correctly handles $n=0$ exactly as the other terms, unlike in the formulation with sines and cosines.  Now look closely at Equation~\ref{eqn:cfs} and Equation~\ref{eqn:cfc} and spot the negative sign in the exponential function of the latter.  It seems something strange has happened.  Our new basis functions are the complex exponentials:
+where:
 \begin{equation}
-e_n(x) \equiv \frac{1}{\sqrt{a}}\exp(i k_n x).  
+e_n(x) \equiv \frac{1}{\sqrt{a}}\exp\left( i \, \frac{2 \pi n x}{a}\right)
 \end{equation}
-But to calculate the Fourier coefficient, we integrate with respect to the complex conjugate:
+and note that:
+$$c_0(x) = e_0(x)$$
+So now the Fourier series for f(x) can be written:
+\begin{eqnarray*}
+f(x) &=& A_0 c_0(x) + \sum_{n=1}^{\infty}  \left\{ A_n \, c_n( x ) + B_n \, s_n( x ) \right\} \\
+&=& A_0 e_0(x) + \sum_{n=1}^{\infty}  \left\{ A_n \,  \frac{e_n(x) + e_n^*(x)}{\sqrt{2}}
++ B_n \,  \frac{e_n(x) - e_n^*(x)}{i\sqrt{2}} \right\} \\
+&=& A_0 e_0(x) + \sum_{n=1}^{\infty}  \left\{ \frac{A_n - i B_n}{\sqrt{2}}\, e_n(x) + 
+\frac{A_n + i B_n}{\sqrt{2}}\, e_n^*(x)\right\} \\
+\end{eqnarray*}
+If we define the complex Fourier Coefficient
+$$c_n \equiv \frac{A_n-iB_n}{\sqrt{2}}  \hspace{4cm} n=1,2,3,\ldots$$
+and put $c_0 \equiv A_0$ then we have:
+\begin{eqnarray*}
+f(x) &=& c_0 e_0(x) + \sum_{n=1}^{\infty}  \left\{ c_n \, e_n(x) + c_n^* \, e_n^*(x) \right\} \\
+\end{eqnarray*}
+Furthermore, if we note that:
+$$e_{-n}(x) = e_{n}^*(x)$$
+and define:
 \begin{equation}
-e_n^*(x) \equiv \frac{1}{\sqrt{a}}\exp(-i k_n x).  
+\label{eqn:cofreal}
+c_{-n} \equiv c_n^*
 \end{equation}
-This is handled tidily by the definition for the inner product of a complex valued periodic function with period $a$:
+we can write this all quite compactly:
+\begin{equation*}
+f(x) = \sum_{n=-\infty}^{\infty}  c_n \, e_n(x)  \\
+\end{equation*}
+Now we need only work out how to calculate the complex Fourier coefficients $c_n$. For $n>0$ we had
+\begin{eqnarray*}
+c_n &\equiv& \frac{A_n - i B_n}{\sqrt{2}}. \\
+&=& \frac{1}{\sqrt{2}} \left\{ 
+\sqrt{\frac{2}{a}} \int_{-\frac{a}{2}}^{\frac{a}{2}}  f(x) \cos\left( \frac{2\pi n x}{a}\right) \, dx
+-i \frac{2}{a} \int_{-\frac{a}{2}}^{\frac{a}{2}}  f(x) \sin\left(\frac{2\pi n x}{a}\right) \, dx
+\right\} \\
+&=& \frac{1}{\sqrt{a}} \int_{-\frac{a}{2}}^{\frac{a}{2}}  f(x) \left\{\cos\left( \frac{2\pi n x}{a}\right) - i \sin\left( \frac{2\pi n x}{a}\right)\right\} \, dx \\
+ &=& \int_{-\frac{a}{2}}^{\frac{a}{2}}  f(x) \; \frac{1}{\sqrt{a}}\exp\left(-i \frac{2\pi n x}{a}\right) \, dx \\
+\end{eqnarray*}
+or finally:
+\begin{equation*}
+c_n = \int_{-\frac{a}{2}}^{\frac{a}{2}}  f(x) \; e_n^*(x) \, dx 
+\end{equation*}
+What's going on?  It seems that to calculate the Fourier coefficient of the $e_n(x)$ we have to use it's complex conjugate $e_n^*(x)$ in the integral with $f(x)$. But we also expect to obtain these coefficients from the inner product of $f(x)$ and $e_n(x)$.  The conclusion is that the definition of the inner product for a vector space of a complex scalar field must include complex conjugation.  For $f(x), g(x) \in \mathbb{C}$ we have:
 \begin{equation}
-\braket{f|g} \equiv \int_{-\frac{a}{2}}^{\frac{a}{2}} f^*(x) \, g(x) \, dx
+\label{eqn:compips}
+\braket{f|g} = \int_{-\frac{a}{2}}^{\frac{a}{2}} f^*(x) g(x) dx
 \end{equation}
-It is left as an exercise to show that this definition meets the axiomatic properties I1 and I2 in Table~\ref{tbl:ipspace}.
+With this definition of the inner product, we can determine the Fourier coefficient as expected:
+\begin{equation}
+\label{eqn:cofscfs}
+c_n = \braket{e_n|f}
+\end{equation}
 
-The orthonormality of the basis functions is:
-\begin{eqnarray}
-\braket{e_n, e_m} &=& \frac{1}{a} \int_{-\frac{a}{2}}^{\frac{a}{2}}  \exp(-i k_n x) \exp(k_m x) \, dx \nonumber \\
-&=& \delta_{nm} \label{eqn:eno}
-\end{eqnarray}
-and the Fourier coefficients are calculated as:
+\noindent
+{\bf Exercise:} Show that the definition of the inner product in Equation~\ref{eqn:compips} satisfies properties I1 and I4 of Table~\ref{tbl:ipspace}\\
+
+\noindent
+{\bf Exercise:} Using the definition of the inner product in Equation~\ref{eqn:compips}, show that:
+$$\braket{e_n|e_m} = \delta_nm$$\\
+
+\noindent
+{\bf Exercise:} Show that for a real function $f$, according to Equation~\ref{eqn:cofscfs}, then
+$c_{-n} = c_{n}^*$ as required in Equation~\ref{eqn:cofreal}.\\  
+
+\noindent
+{\bf Exercise:} Show that for a periodic function $f$ 
+$$c_0 \; e_0(x) = \braket{e_0|f} e_0(x) = \frac{1}{a}\int_{-a}^{a} f(x) dx$$
+\noindent
+That is, the $n=0$ term in the Fourier series is just the average value of the function.\\
+
+Together these results show that this definition correctly and consistently covers all $n$, not just $n>0$ for which it was derived.\\
+
+\noindent
+{\bf Exercise:}  We've not yet considered the Fourier series of a complex periodic function $\psi(x)$.  
+Suppose that real periodic functions $f(x)$ and $g(x)$ with period $a$ have Fourier series:
+$$f(x) = \sum_n a_n e_n(x)$$
+and:
+$$g(x) = \sum_n b_n e_n(x)$$
+And suppose:
+$$\psi(x) = f(x) + i g(x)$$
+Calculate the complex Fourier coefficients:
+$$c_n = \braket{e_n, \psi}$$
+and show that:
+$$\sum_n c_n e_n(x) = f(x) + i g(x)$$.
+
+We can now summarize that a complex valued periodic function $\psi(x)$ has a Fourier series:
 \begin{equation}
-c_n = \frac{1}{a} \braket{e_n, \Psi} = \frac{1}{a} \int_{-\frac{a}{2}}^{\frac{a}{2}} \Psi(x) \exp(-i k_n x) \, dx
+\psi(x) = \sum_n c_n e_n(x)
 \end{equation}
+where:
+\begin{equation}
+c_n = \braket{e_n, \psi}
+\end{equation}
+
+\noindent
+{\bf Exercise:} For 
+$$\psi(x) = \sum_m c_m e_m(x)$$
+show by explicit calculation that:
+$$\braket{e_n, \psi} = c_n$$
+Do not compute any integrals: use the inner product notation only.
+
+
 
 \section{Hermetian Conjugates}
 The normalizable wave functions are a vector space over the complex numbers, with an inner product:
@@ -1092,8 +1161,7 @@ So:
 \begin{equation}
 z^\dagger = z^*
 \end{equation}
-
-Single derivative:
+For a single derivative:
 \begin{equation*}
 \int_{-\infty}^{\infty} f^*(x) \left( \frac{\partial}{\partial x} \right)^\dagger g(x) dx = 
 \int_{-\infty}^{\infty} \left(\frac{\partial f}{\partial x}\right)^* g(x) dx = 
