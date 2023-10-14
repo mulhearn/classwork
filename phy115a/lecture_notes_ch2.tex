@@ -251,7 +251,7 @@ We write the inner product as $\braket{x|y}$.  If a vector space $V$ has an inne
 which satisfies conditions I1-I5 in the table, it is an inner product space $H$ as well.  It is left as an exercise to show that the deducible properties D1-D4 listed in the table follow from the other properties.
 
 \begin{table}
-\caption{ \label{tbl:ipspace} Here we define the properties of a vector space $V$ over a scalar field $S$, and an inner product space $H$ as well, using a compact mathematical notation.  In this class the scalar field $S$ will only be the real numbers ($\mathbb{R}$) or the complex numbers ($\mathbb{R}$).
+\caption{ \label{tbl:ipspace} Here we define the properties of a vector space $V$ over a scalar field $S$, and an inner product space $H$ as well, using a compact mathematical notation.  In this class the scalar field $S$ will only be the real numbers ($\mathbb{R}$) or the complex numbers ($\mathbb{C}$).
 When $S=\mathbb{R}$, just ignore all complex conjugation below, e.g. take $\alpha^* = \alpha$.}
 \begin{center}
 {\bf Useful Math Symbols:}\\
@@ -1070,7 +1070,7 @@ c_n = \braket{e_n|f}
 
 \noindent
 {\bf Exercise:} Using the definition of the inner product in Equation~\ref{eqn:compips}, show that:
-$$\braket{e_n|e_m} = \delta_nm$$\\
+$$\braket{e_n|e_m} = \delta_{nm}$$\\
 
 \noindent
 {\bf Exercise:} Show that for a real function $f$, according to Equation~\ref{eqn:cofscfs}, then
@@ -1091,18 +1091,21 @@ $$f(x) = \sum_n a_n e_n(x)$$
 and:
 $$g(x) = \sum_n b_n e_n(x)$$
 And suppose:
-$$\psi(x) = f(x) + i g(x)$$
+$$\psi(x) \equiv f(x) + i g(x)$$
 Calculate the complex Fourier coefficients:
 $$c_n = \braket{e_n, \psi}$$
 and show that:
-$$\sum_n c_n e_n(x) = f(x) + i g(x)$$.
+$$\sum_n c_n e_n(x) = f(x) + i g(x) \equiv \psi(x)$$.
 
-We can now summarize that a complex valued periodic function $\psi(x)$ has a Fourier series:
+The previous exercise shows that these results hold for a complex valued periodic function $\psi(x)$.  Specifically the 
+Fourier series for $\psi(x)$ is
 \begin{equation}
+\label{eqn:compfs}
 \psi(x) = \sum_n c_n e_n(x)
 \end{equation}
-where:
+where the limits on $n$ are implicitly $-\infty$ to $\infty$ and
 \begin{equation}
+\label{eqn:compcoefs}
 c_n = \braket{e_n, \psi}
 \end{equation}
 
@@ -1112,6 +1115,56 @@ $$\psi(x) = \sum_m c_m e_m(x)$$
 show by explicit calculation that:
 $$\braket{e_n, \psi} = c_n$$
 Do not compute any integrals: use the inner product notation only.
+
+\noindent
+{\bf Exercise:} Now that our Equations~\ref{eqn:compfs} and \ref{eqn:compcoefs} apply to complex valued function $\psi(x)$, find an example $\psi(x)$ for which:
+ $$c_{-n} \neq c_{n}^*$$
+for some $n$. 
+
+\section{Fourier Transform}
+
+The Fourier series for a periodic complex valued function $\psi(x)$ with period $a$ is:
+\begin{equation*}
+\psi(x) = \sum_n c_n e_n(x)
+\end{equation*}
+where the Fourier coefficients are 
+\begin{equation*}
+c_n = \braket{e_n, \psi} = \int_{-\frac{a}{2}}^{\frac{a}{2}} \psi(x) e_n^*(x)
+\end{equation*}
+Consider the function:
+\begin{equation}
+\phi(x) =
+\begin{cases}
+   \psi(x)                      & \frac{a}{2} \leq x \leq \frac{a}{2} \\[8pt]
+   \psi\left(\frac{a}{2}\right) & {\rm otherwise} \\
+\end{cases}
+\end{equation}
+and convince yourself of two things:
+\begin{itemize}
+ \item $\phi(x)$ need not be a periodic function (and in fact $\phi(x)$ is a very trivial function if it is).
+ \item Nonetheless, we can calculate it's Fourier coefficients in the usual way:
+$$c_n = \braket{e_n, \phi}$$
+and they will work perfectly well:
+$$\phi(x) = \sum_n c_n e_n(x)$$
+as long as we restrict ourselves to:
+$$-\frac{a}{2} \leq x \leq \frac{a}{2}$$.
+\end{itemize}   
+
+
+We are going to extend the Fourier series to apply to any function $\psi(x)$ for which $\psi(x) \to 0$ as 
+
+
+
+
+\begin{itemize}
+ \item Any function that goes to zero as $x \to \pm \infty$ can be considered a periodic function with period $a \to \infty$. 
+ \item 
+\end{itemize}
+There are more mathematically formal ways to determine the Fourier series, but this is by far the most intuitive.
+
+
+
+
 
 
 
@@ -1187,6 +1240,58 @@ Expectations values of hermetian operators are real, and so we associate physica
 
 
 
+
+\section{The Fourier Transform}
+
+The Fourier Series is sufficient for periodic functions.  Unfortunately, this is of rather limited use in physics.  To realize the full potential of the Fourier Theorem, we need to extend the concept to apply to any function, with the only caveat that the function must approach zero as $x$ approaches both negative and positive infinity.
+
+The trick is to consider such a function as periodic with period $L$ in the limit $L \to \infty$.  Recall Equation~\ref{eqn:kn}:
+\begin{equation*}
+k_n \equiv \frac{2 \pi n}{L}.
+\end{equation*}
+When $L$ is very large, we will obtain a non-zero value for $k_n$ only for comparably large values of $n$.  But since $n$ is very large, the difference between $k_n$ and $k_{n+1}$ is infinitesimal.  We have moved from the discreet case, where we only have certain wave numbers $k_n$ for each integer $n=0,1,2,...$, to the continuous case, where $k$ can take any real value.  Fortunately, our vector analogy survives intact.
+
+Our inner product now extends between positive and negative infinity:
+\begin{equation}
+\braket{\Psi, \phi} \equiv \int_{-\infty}^{\infty} \Psi^*(x) \phi(x) \, dx
+\end{equation}
+Our basis functions, which are now defined for any value of $k$,
+\begin{equation}
+e_k = \frac{1}{\sqrt{2\pi}} \exp(i k x)
+\end{equation}
+are still orthonormal, but the condition looks a bit different in the continuum case:
+\begin{eqnarray*}
+\braket{e_k, e_{k'}} &=& \delta(k-k')
+\end{eqnarray*}
+See the appendix for more details on the Dirac delta function $\delta(x)$, which is zero everywhere but at $x=0$, where it is infinite.  It is the continuous version of $\delta_{nm}$.
+
+Our basis functions are also still complete.  In the discrete case we have a complex Fourier coefficient for every integer $n$.   Now we have a complex Fourier coefficient for any real value of $k$.  In place of Fourier coefficients, we have instead a function of $k$ which we call the Fourier transform: $\widetilde{\Psi}(k)$.
+Instead of a sum over discrete terms, we now have to integrate over all values of $k$:
+\begin{equation} \label{eqn:ift}
+\Psi(x) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} \widetilde{\Psi}(k) \exp(ikx) \, dk.
+\end{equation}
+Just as in the discrete case, we determine the Fourier transform from the inner product:
+\begin{equation} \label{eqn:ft}
+\widetilde{\Psi}(k) = \braket{e_k, \Psi} = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} {\Psi}(x) \exp(-ikx) \, dx
+\end{equation}
+Equation~\ref{eqn:ft} is generally referred to as the {\em Fourier Transform}, while Equation~\ref{eqn:ift} is referred to as the {\em Inverse Fourier Transform}.
+
+\section{The Fourier Transform in Quantum Mechanics}
+
+So far we have been considering the Fourier transform with respect to position $x$ and wave-number $k$.  A much more useful pair of variables for Quantum Mechanics turns out to be momentum $p$ and position $x$.  To relate $p$ to $k$ we need only apply the DeBroglie relation to the wavelength in the definition of the wavenumber:
+\begin{displaymath}
+k \equiv \frac{2 \pi}{\lambda} = \frac{2 \pi p}{h} = \frac{p}{\hbar}
+\end{displaymath}
+We could therefore make the substitution $k \to p/\hbar$ (and $dk \to dp / \hbar)$) in Equations~\ref{eqn:ift} and ~\ref{eqn:ft}.  It turns out that a marginally more useful equation results if we make the normalization factors symmetric, by splitting the normalization factor of $1/\hbar$ across both equations with $1/\sqrt{\hbar}$ applied to each:
+\begin{eqnarray} 
+\Psi(x) &=& \frac{1}{\sqrt{2\pi\hbar}} \int_{-\infty}^{\infty} \widetilde{\Psi}(p) \exp(ipx/\hbar) \, dp \\
+\widetilde{\Psi}(p) &=&  \frac{1}{\sqrt{2\pi\hbar}} \int_{-\infty}^{\infty} {\Psi}(x) \exp(-ipx/\hbar) \, dx
+\end{eqnarray}
+The major benefit of this symmetric form is that the normalization of $\Psi(x)$ and $\widetilde{\Psi}(p)$ in this case turns out to be the same:
+\begin{displaymath}
+\int_{-\infty}^{\infty} |\Psi(x)|^2 dx = \int_{-\infty}^{\infty} |\widetilde{\Psi}(p)|^2 dp = 1 
+\end{displaymath}
+Because we can always calculate $\Psi(x)$ from $\widetilde{\Psi}(p)$ either one completely describes the quantum mechanical state.  We call $\widetilde{\Psi}(p)$ the momentum wave function.   Whereas $|\Psi(x)|^2$ gives us the probability density for the quanton to be at position $x$, $|\Psi(p)|^2$ gives us the probability density for the quanton to have momentum $p$.
 
 
 
@@ -1460,289 +1565,7 @@ c_n = \frac{1}{L} \braket{e_n, \Psi} = \frac{1}{L} \int_{-\frac{L}{2}}^{\frac{L}
 
 \appendix
 
-\chapter{Fourier Transforms}
 
-\section{The Vector Analogy}
-
-A vector in ordinary space is completely specified by its displacement in each spatial direction.  Lets look at this familiar picture a bit formally, to prepare us to apply it in a less intuitive (but mathematically equivalent) setting.  The first thing we will need to know how to do is to calculate the dot product between any two vectors:  
-\begin{displaymath}
-\vec{v} \cdot \vec{w} = v_x w_x + v_y w_y + v_z w_z 
-\end{displaymath}
-You already know how to do this for ordinary vectors.  In other settings, we use the more general term {\em inner product}.  To describe any vector we need a set of {\em basis vectors}, in this case $\hat{x}$, $\hat{y}$, and $\hat{z}$.  These basis vectors are orthogonal:
-\begin{displaymath}
-\hat{x} \cdot \hat{y} = \hat{y} \cdot \hat{z} = \hat{z} \cdot \hat{x} = 0
-\end{displaymath}
-and normalized:
-\begin{displaymath}
-\hat{x} \cdot \hat{x} = \hat{y} \cdot \hat{y} = \hat{z} \cdot \hat{z} = 1.
-\end{displaymath}
-When the basis vectors have both of these properties, we call them {\em orthonormal}.
-
-For any possible vector $\vec{v}$, we can calculate its component in the direction of each basis vector by calculating the inner product:
-\begin{eqnarray*}
-v_x = \vec{v} \cdot \hat{x} \\
-v_y = \vec{v} \cdot \hat{y} \\
-v_z = \vec{v} \cdot \hat{z} \\
-\end{eqnarray*}
-We say that the basis vectors $\hat{x}$, $\hat{y}$, and $\hat{z}$ are "complete", because specifying the values of $v_x$, $v_y$, and $v_z$ completely describes the vector $v$.  The set of basis vectors $\hat{x}$ and $\hat{z}$ are orthonormal, but they are not complete in three dimensional space, because there are vectors which we cannot write using only these two directions.  For instance, there are no possible values for $v_x$ and $v_z$
-which make
-\begin{eqnarray*}
- \vec{v_1} = v_x \hat{x} + v_z \hat{z}
-\end{eqnarray*}
-equal to the vector
-\begin{eqnarray*}
- \vec{v_2} = 3 \hat{x} + 2 \hat{y} + 7 \hat{z}.
-\end{eqnarray*}
-
- 
-\section{The Fourier Series}
-
-Using the language of vectors, the Fourier Theorem states that the sines and cosines form a complete orthonormal basis for describing any periodic function.  
-
-To make sense of this, we need to define the inner product. If we restrict ourselves to real functions of $x$ with period $L$, the inner product between any two functions $f(x)$ and $g(x)$ is defined to be the integral:
-\begin{equation}
-\braket{f, g} \equiv \int_{-\frac{L}{2}}^{\frac{L}{2}} f(x) g(x) \, dx
-\end{equation}
-The orthonormal basis vectors are the specific sine and cosine functions
-\begin{eqnarray}
-s_n(x) \equiv \sqrt{\frac{2}{L}}\sin\left(\frac{2\pi n}{L} \, x \right)\\
-c_n(x) \equiv \sqrt{\frac{2}{L}}\cos\left(\frac{2\pi n}{L} \, x \right)
-\end{eqnarray}
-which are defined for
-\begin{eqnarray}
-n = 0,1,2,3,...
-\end{eqnarray}
-These are normalized because by our definition for the inner product we can see that:
-\begin{eqnarray*}
-\braket{s_n, s_n} &=& \frac{2}{L} \int_{-\frac{L}{2}}^{\frac{L}{2}} \sin^2\left(\frac{2\pi n}{L} \, x \right) \, dx = 1 \\
-\braket{c_n, c_n} &=& \frac{2}{L} \int_{-\frac{L}{2}}^{\frac{L}{2}} \sin^2\left(\frac{2\pi n}{L} \, x \right) \, dx = 1
-\end{eqnarray*}
-The demonstration that they are orthogonal is left as an exercise (See HW Problem 1):
-\begin{eqnarray*}
-\braket{s_n, s_m} &=& \frac{2}{L} \int_{-\frac{L}{2}}^{\frac{L}{2}} 
-\sin\left(\frac{2\pi n}{L} \, x \right) \sin\left(\frac{2\pi m}{L} \, x \right) \, dx = 0 ~~(n \neq m) \\
-\braket{c_n, c_m} &=& \frac{2}{L} \int_{-\frac{L}{2}}^{\frac{L}{2}} 
-\cos\left(\frac{2\pi n}{L} \, x \right) \cos\left(\frac{2\pi m}{L} \, x \right) \, dx = 0~~(n \neq m) \\
-\braket{s_n, c_m} &=& \frac{2}{L} \int_{-\frac{L}{2}}^{\frac{L}{2}} 
-\sin\left(\frac{2\pi n}{L} \, x \right) \cos\left(\frac{2\pi m}{L} \, x \right) \, dx = 0 
-\end{eqnarray*}
-We can combine the normalization and orthogonality conditions using the Kronecker delta symbol:
-\begin{displaymath}
-\delta_{nm} =  
-\left\{
-	\begin{array}{ll}
-		1  & \mbox{if } n=m \\
-		0 & \mbox{otherwise}
-	\end{array}
-\right.
-\end{displaymath}
-and write the above five equations as:
-\begin{eqnarray}
-\braket{s_n, s_m} &=& \frac{2}{L} \int_{-\frac{L}{2}}^{\frac{L}{2}} 
-\sin\left(\frac{2\pi n}{L} \, x \right) \sin\left(\frac{2\pi m}{L} \, x \right) \, dx = \delta_{nm} \label{eqn:oss}\\
-\braket{c_n, c_m} &=& \frac{2}{L} \int_{-\frac{L}{2}}^{\frac{L}{2}} 
-\cos\left(\frac{2\pi n}{L} \, x \right) \cos\left(\frac{2\pi m}{L} \, x \right) \, dx = \delta_{nm} \label{eqn:occ}\\
-\braket{s_n, c_m} &=& \frac{2}{L} \int_{-\frac{L}{2}}^{\frac{L}{2}} 
-\sin\left(\frac{2\pi n}{L} \, x \right) \cos\left(\frac{2\pi m}{L} \, x \right) \, dx = 0 \label{eqn:osc}
-\end{eqnarray}
-
-
-
-
-
-
-
-Last of all, they are {\em complete} because {any periodic function} with period $L$ can be written as a sum of these sines and cosines:
-\begin{eqnarray}
-f(x) = \sqrt{\frac{2}{L}} \sum_{n=0}^{\infty}  A_n \, \cos\left(\frac{2\pi n}{L} \, x \right) + \sqrt{\frac{2}{L}} \sum_{n=1}^{\infty} B_n \, \sin\left(\frac{2\pi n}{L} \, x \right) \label{eqn:lfs}
-\end{eqnarray}
-The values $A_n$ and $B_n$ are called {\em Fourier coefficients}.  Technically the $N$th term in the Fourier Series refers to the approximation for $f(x)$ from the first $N$ terms in the infinite sum above, and we say that the Fourier Series converges to the function $f(x)$.  Note that $s_0(x) = 0$, which is why the second sum begins at $n=1$.  The demonstration of completeness is optional reading, available in the Appendix.
-
-For a visual example of the Fourier Series, the first terms of the Fourier Series for a step function are shown in Fig.~\ref{fig:fall}.  
-
-\section{Determining the Fourier Coefficients}
-\label{sect:coeff}
-
-\begin{figure}[thb]
-\begin{center}
-{\includegraphics[width=0.40\textwidth]{figs/fsall.pdf}}
-\end{center}
-\caption{\label{fig:fall} The Fourier Series for a step function including one term, three terms, five terms, and nineteen terms.  The Fourier Theorem states that the series will converge, reproducing the original function, as the number of terms approaches infinity.}
-\end{figure}
-
-Just as in the vector analogy, we can determine the Fourier coefficients of a function $f$ by computing the inner products:
-\begin{eqnarray*}
-A_n = \braket{c_n, f} \\
-B_n = \braket{s_n, f}
-\end{eqnarray*}
-or, in terms of the inner product integrals:
-\begin{eqnarray}
-A_n &=& \sqrt{\frac{2}{L}} \int_{-\frac{L}{2}}^{\frac{L}{2}} 
-f(x) \cos\left(\frac{2\pi n}{L} \, x \right) \, dx \label{eqn:fca} \\
-B_n &=& \sqrt{\frac{2}{L}} \int_{-\frac{L}{2}}^{\frac{L}{2}} 
-f(x) \sin\left(\frac{2\pi n}{L} \, x \right) \, dx
-\end{eqnarray}
-
-Just as in the vector analogy, the inner product determines the correct coefficients only because the basis functions are complete and orthonormal.  We will illustrate this with a function that has all of the $B_n$ equal to zero.  Start with the completeness equation, but change the index from $n$ to $m$ in order to make the next step clearer.  
-\begin{displaymath}
-f(x) = \sqrt{\frac{2}{L}} \sum_{m=0}^{\infty}  A_m \, \cos\left(\frac{2\pi m}{L} \, x \right)
-\end{displaymath}
-Now we apply the prescription in Equation~\ref{eqn:fca} to both sides of this equation:
-\begin{eqnarray*}
-\sqrt{\frac{2}{L}} \int_{-\frac{L}{2}}^{\frac{L}{2}} 
-f(x) \cos\left(\frac{2\pi n}{L} \, x \right) \, dx  
-&=& \sqrt{\frac{2}{L}} \int_{-\frac{L}{2}}^{\frac{L}{2}} 
-\left\{
-\sqrt{\frac{2}{L}} \sum_{m=0}^{\infty}  A_m \, \cos\left(\frac{2\pi m}{L} \, x \right) \right\}
-\cos\left(\frac{2\pi n}{L} \, x \right) \, dx \\
-&=& \sum_{m=0}^{\infty}  A_m \, \left\{ \frac{2}{L} 
-\int_{-\frac{L}{2}}^{\frac{L}{2}} 
- \, \cos\left(\frac{2\pi m}{L} \, x \right) \cos\left(\frac{2\pi n}{L} \, x \right) \, dx \right\}\\
-&=& \sum_{m=0}^{\infty}  A_m \, \delta_{nm} \\
-&=& A_n
-\end{eqnarray*}
-Note that the last step follows from the fact that, because of the $\delta_{nm}$ in the product, the only non-zero value in the sum across $m$ is the term for $m=n$.
-
-\section{Compact Form of the Fourier Series}
-
-The Fourier Series developed above has the considerable advantage that it makes explicit the role of the sine and cosine functions as an orthonormal basis.  But it is a bit unwieldy as written.  Consider Equation~\ref{eqn:lfs} again:
-\begin{eqnarray*}
-f(x) = \sqrt{\frac{2}{L}} \sum_{n=0}^{\infty}  A_n \, \cos\left(\frac{2\pi n}{L} \, x \right) + \sqrt{\frac{2}{L}} \sum_{n=1}^{\infty} B_n \, \sin\left(\frac{2\pi n}{L} \, x \right) 
-\end{eqnarray*}
-Since $\cos(0) = 1$, the first term in the left sum is just a constant $A_0$.  It is also convenient to absorb the normalization factor $\sqrt{2/L}$ into the coefficients.  The series is therefore most often written in the much more compact form:
-\begin{eqnarray}
-f(x) = a_0 + \sum_{n=1}^{\infty}  \left\{ a_n \, \cos(k_n x ) + b_n \, \sin( k_n x ) \right\}\label{eqn:fs}
-\end{eqnarray}
-where we have introduced the wave numbers:
-\begin{equation}
-k_n \equiv \frac{2 \pi n}{L} \label{eqn:kn}
-\end{equation}
-and the new Fourier Coefficients:
-\begin{eqnarray}
-a_n &\equiv& \sqrt{\frac{2}{L}}  A_n = \frac{2}{L} \int_{-\frac{L}{2}}^{\frac{L}{2}} 
-f(x) \cos( k_n x) \, dx \label{eqn:fca} \\
-b_n &\equiv& \sqrt{\frac{2}{L}}  B_n = \frac{2}{L} \int_{-\frac{L}{2}}^{\frac{L}{2}} 
-f(x) \sin( k_n x) \, dx \label{eqn:fcb}
-\end{eqnarray}
-
-
-\section{Fourier Series for Complex Functions}
-
-The Fourier Series can be expressed in terms of the complex exponential by noting that:
-\begin{eqnarray*}
-\cos(k_n x) &=& \frac{\exp(i k_n x) + \exp(-i k_n x)}{2} \\
-\sin(k_n x) &=& \frac{\exp.(i k_n x) - \exp(-i k_n x)}{2i}
-\end{eqnarray*}
-So that Equation~\ref{eqn:fs} can be rewritten as:
-\begin{eqnarray}
-f(x) &=& a_0 + \sum_{n=1}^{\infty}  \left\{ a_n \, \cos(k_n x ) + b_n \, \sin( k_n x ) \right\} \nonumber \\
-&=& a_0 + \sum_{n=1}^{\infty}  \left\{ a_n \,  \frac{\exp(i k_n x) + \exp(-i k_n x)}{2} 
-+ b_n \, \frac{\exp(i k_n x) - \exp(-i k_n x)}{2i} \right\} \nonumber \\
-&=& a_0 + \sum_{n=1}^{\infty}  \left\{ \frac{a_n - i b_n}{2} \exp(i k_n x) + 
-\frac{a_n + i b_n}{2} \exp(-i k_n x) \right\} \nonumber \\
-&=& a_0 + \sum_{n=1}^{\infty}  \left\{ c_n \exp(i k_n x) + 
-c_n^* \exp(-i k_n x) \right\} \label{eqn:cfsr} \label{eqn:cfsr} 
-\end{eqnarray}
-Where in the last step we have introduced the complex Fourier coefficient:
-\begin{displaymath}
-c_n \equiv \frac{a_n - i b_n}{2}.
-\end{displaymath}
-Note that each term of the sum in Equation~\ref{eqn:cfsr} contains two terms, with the second being the complex conjugate of the first.  Since $z+z^*$ is always a real number, the function $f(x)$ is real valued, as was our initial assumption.
-
-If we replace our initial real function $f(x) $ with a complex valued function $\Psi(x)$ (such as a wave function in Quantum Mechanics!), the constraint that these coefficients are complex conjugates vanishes, and we can replace $c_n^*$ with new independent\footnote{If you prefer, you can construct the complex function from two real functions:  $\Psi(x) = f(x) + i g(x)$.  Either way, you have twice as many independent Fourier coefficients when the function is complex valued.} complex Fourier coefficients $d_n$.   Furthermore, the real constant $a_0$ can be replaced by a complex constant $c_0$.  
-\begin{eqnarray*}
-\Psi(x)  &=& c_0 + \sum_{n=1}^{\infty}  \left\{ c_n \exp(i k_n x) + 
-d_n \exp(-i k_n x) \right\} \label{eqn:cfsr} \label{eqn:cfsr} 
-\end{eqnarray*}
-And finally, we note that we can simplify this equation even further by being quite clever, noting that 
-$k_{(-n)} = -k_n$ and defining $c_{(-n)} \equiv d_n$:
-\begin{eqnarray}
-\Psi(x)  &=& c_0 + \sum_{n=1}^{\infty}  c_n \exp(i k_n x) + \sum_{n=1}^{\infty}  d_n \exp(-i k_n x) \nonumber \\
- &=& c_0 + \sum_{n=1}^{\infty}  c_n \exp(i k_n x) + \sum_{n=-\infty}^{-1}  c_n \exp(i k_n x) \nonumber \\
-\Psi(x) &=& \sum_{n=-\infty}^{\infty} c_n \exp(i k_n x). \label{eqn:cfs}
-\end{eqnarray}
-Its amusing to compare the size of Equation~\ref{eqn:lfs} with Equation~\ref{eqn:cfs}, and note that the latter form is considerably more powerful.  To determine the complex Fourier coefficients we calculate:
-\begin{eqnarray}
-c_n &\equiv& \frac{a_n - i b_n}{2}. \nonumber \\
-&=& \frac{1}{2} \left\{ 
-\frac{2}{L} \int_{-\frac{L}{2}}^{\frac{L}{2}}  \Psi(x) \cos( k_n x) \, dx
--i \frac{2}{L} \int_{-\frac{L}{2}}^{\frac{L}{2}}  \Psi(x) \sin( k_n x) \, dx
-\right\} \nonumber \\
-&=& \frac{1}{L} \int_{-\frac{L}{2}}^{\frac{L}{2}}  \Psi(x) \left\{\cos( k_n x) - i \sin( k_n x) \right\} \, dx \nonumber \\
-c_n &=& \frac{1}{L} \int_{-\frac{L}{2}}^{\frac{L}{2}}  \Psi(x) \exp(-i k_n x) \, dx \label{eqn:cfc}
-\end{eqnarray}
-
-Now look closely at Equation~\ref{eqn:cfs} and Equation~\ref{eqn:cfc} and spot the negative sign in the exponential function of the latter.  It seems something strange has happened.  Instead of the sines and cosines, we would like to think of our new orthonormal basis as the complex exponential functions 
-\begin{equation}
-e_n(x) \equiv \frac{1}{\sqrt{L}}\exp(i k_n x).  
-\end{equation}
-But to calculate the coefficient of $\exp(i k_n x)$, we integrate with respect to a {\em different} function $\exp(-i k_n x)$.  Can our vector analogy survive this?  It seems as though we are calculating the component along $\hat{x}$ by taking the dot product with $-\hat{x}$.   
-
-It turns out that for complex valued functions, we need to modify our inner product to include complex conjugation of one of the functions:
-\begin{equation}
-\braket{\Psi, \phi} \equiv \int_{-\frac{L}{2}}^{\frac{L}{2}} \Psi^*(x) \phi(x) \, dx
-\end{equation}
-With this simple tune up, the vector analogy for complex valued functions is saved!   We still have orthonormal basis functions:
-\begin{eqnarray}
-\braket{e_n, e_m} &=& \frac{1}{L} \int_{-\frac{L}{2}}^{\frac{L}{2}}  \exp(-i k_n x) \exp(k_m x) \, dx \nonumber \\
-&=& \delta_{nm} \label{eqn:eno}
-\end{eqnarray}
-(you will show this in HW Problem 2) and we still calculate the coefficient of $e_n(x)$ from the inner product:
-\begin{equation}
-c_n = \frac{1}{L} \braket{e_n, \Psi} = \frac{1}{L} \int_{-\frac{L}{2}}^{\frac{L}{2}}  \Psi(x) \exp(-i k_n x) \, dx
-\end{equation}
-
-\section{The Fourier Transform}
-
-The Fourier Series is sufficient for periodic functions.  Unfortunately, this is of rather limited use in physics.  To realize the full potential of the Fourier Theorem, we need to extend the concept to apply to any function, with the only caveat that the function must approach zero as $x$ approaches both negative and positive infinity.
-
-The trick is to consider such a function as periodic with period $L$ in the limit $L \to \infty$.  Recall Equation~\ref{eqn:kn}:
-\begin{equation*}
-k_n \equiv \frac{2 \pi n}{L}.
-\end{equation*}
-When $L$ is very large, we will obtain a non-zero value for $k_n$ only for comparably large values of $n$.  But since $n$ is very large, the difference between $k_n$ and $k_{n+1}$ is infinitesimal.  We have moved from the discreet case, where we only have certain wave numbers $k_n$ for each integer $n=0,1,2,...$, to the continuous case, where $k$ can take any real value.  Fortunately, our vector analogy survives intact.
-
-Our inner product now extends between positive and negative infinity:
-\begin{equation}
-\braket{\Psi, \phi} \equiv \int_{-\infty}^{\infty} \Psi^*(x) \phi(x) \, dx
-\end{equation}
-Our basis functions, which are now defined for any value of $k$,
-\begin{equation}
-e_k = \frac{1}{\sqrt{2\pi}} \exp(i k x)
-\end{equation}
-are still orthonormal, but the condition looks a bit different in the continuum case:
-\begin{eqnarray*}
-\braket{e_k, e_{k'}} &=& \delta(k-k')
-\end{eqnarray*}
-See the appendix for more details on the Dirac delta function $\delta(x)$, which is zero everywhere but at $x=0$, where it is infinite.  It is the continuous version of $\delta_{nm}$.
-
-Our basis functions are also still complete.  In the discrete case we have a complex Fourier coefficient for every integer $n$.   Now we have a complex Fourier coefficient for any real value of $k$.  In place of Fourier coefficients, we have instead a function of $k$ which we call the Fourier transform: $\widetilde{\Psi}(k)$.
-Instead of a sum over discrete terms, we now have to integrate over all values of $k$:
-\begin{equation} \label{eqn:ift}
-\Psi(x) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} \widetilde{\Psi}(k) \exp(ikx) \, dk.
-\end{equation}
-Just as in the discrete case, we determine the Fourier transform from the inner product:
-\begin{equation} \label{eqn:ft}
-\widetilde{\Psi}(k) = \braket{e_k, \Psi} = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} {\Psi}(x) \exp(-ikx) \, dx
-\end{equation}
-Equation~\ref{eqn:ft} is generally referred to as the {\em Fourier Transform}, while Equation~\ref{eqn:ift} is referred to as the {\em Inverse Fourier Transform}.
-
-\section{The Fourier Transform in Quantum Mechanics}
-
-So far we have been considering the Fourier transform with respect to position $x$ and wave-number $k$.  A much more useful pair of variables for Quantum Mechanics turns out to be momentum $p$ and position $x$.  To relate $p$ to $k$ we need only apply the DeBroglie relation to the wavelength in the definition of the wavenumber:
-\begin{displaymath}
-k \equiv \frac{2 \pi}{\lambda} = \frac{2 \pi p}{h} = \frac{p}{\hbar}
-\end{displaymath}
-We could therefore make the substitution $k \to p/\hbar$ (and $dk \to dp / \hbar)$) in Equations~\ref{eqn:ift} and ~\ref{eqn:ft}.  It turns out that a marginally more useful equation results if we make the normalization factors symmetric, by splitting the normalization factor of $1/\hbar$ across both equations with $1/\sqrt{\hbar}$ applied to each:
-\begin{eqnarray} 
-\Psi(x) &=& \frac{1}{\sqrt{2\pi\hbar}} \int_{-\infty}^{\infty} \widetilde{\Psi}(p) \exp(ipx/\hbar) \, dp \\
-\widetilde{\Psi}(p) &=&  \frac{1}{\sqrt{2\pi\hbar}} \int_{-\infty}^{\infty} {\Psi}(x) \exp(-ipx/\hbar) \, dx
-\end{eqnarray}
-The major benefit of this symmetric form is that the normalization of $\Psi(x)$ and $\widetilde{\Psi}(p)$ in this case turns out to be the same:
-\begin{displaymath}
-\int_{-\infty}^{\infty} |\Psi(x)|^2 dx = \int_{-\infty}^{\infty} |\widetilde{\Psi}(p)|^2 dp = 1 
-\end{displaymath}
-Because we can always calculate $\Psi(x)$ from $\widetilde{\Psi}(p)$ either one completely describes the quantum mechanical state.  We call $\widetilde{\Psi}(p)$ the momentum wave function.   Whereas $|\Psi(x)|^2$ gives us the probability density for the quanton to be at position $x$, $|\Psi(p)|^2$ gives us the probability density for the quanton to have momentum $p$.
 
 \section{The Uncertainty Principle}
 
