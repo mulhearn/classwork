@@ -1,0 +1,383 @@
+\documentclass[12pt]{article}
+
+
+\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.5in]{geometry}
+\usepackage{cite}
+\usepackage{slashed}
+\usepackage{graphicx}
+\usepackage{amsmath}
+
+
+\usepackage[american,fulldiode]{circuitikz}
+
+\begin{document}
+\ctikzset{bipoles/thickness=1}
+\ctikzset{bipoles/resistor/height=.115}
+\ctikzset{bipoles/resistor/width=.3}
+\ctikzset{bipoles/capacitor/height=.2}
+\ctikzset{bipoles/capacitor/width=.06}
+%\ctikzset{bipoles/length=.6cm}
+
+
+\title{Statistics of Radioactive Decay}
+\maketitle
+
+
+\section{Introduction}
+
+In this two-week long lab, which will require a long lab write-up, you
+will build the data acquisition (DAQ) unit for a Geiger counter which
+you will use to count decays of a radioactive element.  You will
+compare the data you collect using your custom DAQ to compare with the
+theoretical expectations for Poisson and Gaussian distributed random
+variables.
+
+\begin{figure}[htbp]
+\begin{center}
+{\includegraphics[width=0.75\textwidth]{figs/plan.pdf}}
+\end{center}
+\caption{\label{fig:plan} An overview of the lab setup.  The Geiger
+  counter and control unit are provided.  You will build the
+  discriminator stage and program an Arduino to complete the DAQ.}
+\end{figure}
+
+
+\begin{figure}[htbp]
+\begin{center}
+{\includegraphics[width=0.55\textwidth]{figs/geiger_pulse.jpg}}
+\end{center}
+\caption{\label{fig:geigerpulse} Typical pulse from the Geiger counter}
+\end{figure}
+
+An overview of the lab setup is shown in Fig.~\ref{fig:plan}.  Once
+properly setup, the Geiger counter will produce a pulse like the one
+shown in Fig.~\ref{fig:geigerpulse} each time ionizing radiation
+passes through the chamber.  The scope trace is AC-coupled, and
+therefore does not show the 5 volt offset (called a pedestal) that is
+present at the output.  The first stage of the discriminator removes
+this pedestal with a high-pass filter.  The subsequent stages convert
+these pulses above threshold into 5 volt digitized TTL pulses.  Once
+connected to the Arduino, the DAQ unit receives a single TTL digital
+pulse on an input pin for each incident ionizing particle.  The DAQ
+simply counts these pulses during a fixed time interval and reports
+the results over the serial connection.  You'll build the
+discriminator, the DAQ, collect the data, analyze it using scientific
+python, and report everything in a long write-up.
+
+\section{Precautions}
+
+\begin{figure}[htbp]
+\begin{center}
+ \includegraphics[width=0.55\textwidth]{figs/source.jpg};
+\caption{\label{fig:source} A sealed radioactive source.  A small amount of Cs-137 is contained within the small button shaped piece of plastic.  For your safety, the sources will be handled only by the TA.}
+\end{center}
+\end{figure}
+
+\noindent
+{\bf Precautions with the Geiger counter:}
+\begin{itemize}
+\item Leave the cable from the Geiger counter controller to the Geiger counter in place {\em at all times}.  This carries voltages of approximately 1000 volts.  If you leave the cable in place, nothing can be inadvertently plugged in (including fingers)
+\item Leave the Geiger tube in its holder.  It has a thin front window which is easily broken.
+\item Do not set the high voltage higher than 1000 volts.
+\end{itemize}
+
+\noindent
+{\bf Precautions with the radioactive source:}
+\begin{itemize}
+\item See Fig.~\ref{fig:source} to familiarize yourself with what the sources look like.
+\item Don't touch the source.
+\item Leave the source in the tray at all times.  The TA will provide the sources and handle moving them from place to place.
+\item Radiation falls off as $1/r^2$.  So minimize your time near sources and maximize your distance from them.
+\end{itemize}
+
+\section{AC-coupled Schmitt Trigger}
+
+The first stage of the DAQ is a Schmitt trigger discriminator based on the LM311 (See Fig.~\ref{fig:lm311}) that you will build yourself.  The LM311 is intended for TTL ($5~V$) logic and can be driven with a single-ended voltage all the way down to $5~\rm V$.  This makes it an ideal component to use with our $5~\rm V$ Arduino Uno.  We can power the LM311 from the Arduino $5~\rm V$ supply and send it's output directly to the Arduino.  There is no need to get out the bench-top DC supplies!
+
+\begin{figure}[thbp]
+\begin{center}
+{\includegraphics[height=0.2\textheight]{figs/LM311-scheme.png}}  \\
+(a) \\ \vskip 1cm
+\begin{tabular}{cc}
+{\includegraphics[height=0.2\textheight]{figs/LM311.png}} &
+{\includegraphics[height=0.2\textheight]{figs/LM311-trans.png}} \\
+(b) & (c) \\
+\end{tabular}
+\caption{\label{fig:lm311} The LM311 (a) schematic from datasheet, and in 8-pin PDIP as (b) conventionally and somewhat deceptively shown, and (c) with the output transistor explicitly shown.  The version (b) is still slightly deceptive, as it leaves out the not operation between the op-amp and the transistor base.}
+\end{center}
+\end{figure}
+
+
+The LM311 is an open-emitter open-collector comparator, that is, an op-amp driving the base of an NPN diode with both the collector and emitter available as outputs.   Typically the emitter of the output transistor is tied to ground and the collector output is therefore either grounded or high-impedance.  For this reason, a pull-up resistor is generally needed at the the collector output, so that the output is either $V_{\rm CC}$ or ground, depending on which of the two inputs is largest.
+
+\begin{figure}[htbp]
+\begin{center}
+\begin{circuitikz}[line width=1pt]
+\draw (0,0) node[op amp, yscale=-1](opamp){}  ++(2,0) node[not port](not){} ++(2,0) node[npn](npn){};
+\draw (opamp.out) to[short] (not.in);
+\draw (not.out) to[short] (npn.B);
+\draw (npn.C) node[right]{$(7)$} to[short,-*] ++(0,0.5) coordinate(X) to[short,-o] ++(1.0,0) node[right]{$v_{\rm out}$} ;
+\draw (X) to[R,l_=$R_4$,-*] ++(-5.5,0) coordinate(Y) |- (opamp.+); 
+\draw (X) to[R,l_=$R_5$] ++(0.0,1.5) coordinate(X) to[short,-o] ++(0.5,0) node[right]{$V_{\rm CC}$} ; 
+\draw (X) to[short,*-] ++(-6.0,0.0) to[R,l_=$R_2$] ++(0.0,-1.5) coordinate(X) to[short] (Y);
+\draw (X) to[R,l_=$R_3$,*-] ++(0.0,-1.5) coordinate(Y);
+\draw (npn.E) node[right]{$(1)$} to[short,-*] ++(0,-1.5) coordinate(X) node[ground, yscale=2.0]{};
+\draw (X) to [short,-*] ++(-6.0,0) coordinate(X) to[short](Y);
+\draw (opamp.-) node[below]{$(3)$} to[short,-*] ++(-2.0,0) coordinate(Y) to[R,l=$R_1$] ++(0.0,-1.5) |- (X);
+\draw (opamp.+) node[above]{$(2)$};
+\draw (Y) to[C,l=$C_1$,-o] ++(-1.5,0.0) node[left]{$v_{\rm in}$};
+\draw (1.0,-0.75) node[below]{LM311};
+\draw (5.5,-1.15) node[above]{$(4)$} node[ground,yscale=2.0]{};
+\draw (6.5,-0.4) node[below]{$(8)$} to[short,-o] ++(0,0.5) node[right]{$V_{\rm CC}$};
+\end{circuitikz} 
+\caption{An AC-coupled inverting Schmitt trigger based on the LM311.  The LM311 IC provides both the operational amplifier and the transistor. The numbers in parenthesis are pin numbers.}
+\label{fig:discrim}
+\end{center}
+\end{figure}
+
+The discriminator circuit you will be building is shown in Fig.~\ref{fig:discrim}.  The input to the discriminator
+is AC coupled by $R_1$ and $C_1$, which is needed to remove the pedestal (DC offset) present at the Geiger counter output.  This input is compared to a threshold predominantly set by the voltage divider $R_2$ and $R_3$.  When the input signal (at the {\em inverting} input) exceeds this threshold, the base of the transistor is driven high (note the NOT) and so the output is pulled to ground.  When the input signal is below the threshold, the base of the transistor is driven low, and the output is at $V_{\rm CC}$, due to pull-up resistor $R_{\rm 5}$.  The feedback resistor $R_4$ add hysteresis to the circuit, providing stability by pulling the threshold slightly higher once the output is high, and slightly lower once the output is low.
+
+Build the circuit shown in Fig.~\ref{fig:discrim} using $R_1=4.7~{\rm k\Omega}$, $C_1=10~{\rm nF}$,
+$R_2=8.2~{\rm k\Omega}$, $R_3=1.1~{\rm k\Omega}$, $R_4=82~{\rm k\Omega}$, $R_5=1.1~{\rm k\Omega}$.  
+
+\begin{figure}[htbp]
+\begin{center}
+{\includegraphics[width=0.55\textwidth]{figs/fake.pdf}}
+\end{center}
+\caption{\label{fig:fake} Side-by-side comparison of an actual Geiger output with the exponential decay function you will use to debug your data acquisition system.}
+\end{figure}
+
+For testing, you will need a reliable test signal that resembles the Geiger counter output.  Use your Tektronix AFG1022 function generator, and select the ``ExpDecay'' from Arb/Others/Built-in/Maths.
+Set the frequency to $1~\rm kHz$ and the amplitude to $2~\rm V$ peak-to-peak.  A side-by-side comparison of the exponential decay function and actual output from the Geiger counter is shown in Fig.~\ref{fig:fake}.  Typical output from the discriminator is shown in Fig.~\ref{fig:typout}.  Once your circuit is working properly, it is amusing to remove the feedback resistor $R_4$ and observe the resulting instability, as shown in Fig.~\ref{fig:bounce}.
+
+\begin{figure}[htbp]
+\begin{center}
+{\includegraphics[width=0.55\textwidth]{figs/discrim.pdf}}
+\end{center}
+\caption{\label{fig:typout} Typical output $v_{\rm out}$ of the discriminator circuit (at pin 7 of the LM311) compared to the input $v_{\rm in}$ (at pin3 of the LM311).}
+\end{figure}
+
+\begin{figure}[thbp]
+\begin{center}
+\begin{tabular}{cc}
+{\includegraphics[height=0.25\textheight]{figs/schmitty.pdf}} &
+{\includegraphics[height=0.25\textheight]{figs/bouncy.pdf}} \\
+(a) & (b) \\
+\end{tabular}
+\caption{\label{fig:bounce} Single trace for the rising edge of the discriminator circuit (a) as designed, and (b) with feedback resistor $R_4$ removed from the circuit.  Without feedback, there is no hysteresis, and the output is bouncy.  Once you have your DAQ working, you can check what removing this resistor would do to the stability and accuracy of your rate measurement.  Spoiler alert:  you need it!}
+\end{center}
+\end{figure}
+
+
+\section{Arduino Scalar}
+
+The next step in your DAQ is Arduino scalar.  The scalar, or counter, will simply count the number of discriminator pulses that arrive during an adjustable time interval.  These sums, and the duration of the time interval, will be displayed on the serial interface for your to analyze offline.
+
+The output of your discriminator circuit is easily handled by an Arduino microprocessor, as it has already been digitized at the $5~V$ logic level used by your Arduino Uno.  The digital pulses have a width of tens of microseconds, easily handled by an interrupt driven Arduino!
+
+To get you started, an example sketch, ``Interrupts", is available on the course website:
+
+\begin{verbatim}
+const byte ledPin = LED_BUILTIN;
+const byte interruptPin = 2;
+volatile byte state = LOW;
+
+void setup() {
+  pinMode(ledPin, OUTPUT);
+  pinMode(interruptPin, INPUT_PULLUP);
+  attachInterrupt(digitalPinToInterrupt(interruptPin), blink, RISING);
+}
+
+void loop() {
+  digitalWrite(ledPin, state);
+}
+
+void blink() {
+  state = !state;
+}
+\end{verbatim}
+
+This simple sketch sets up an interrupt service routine ({\tt blink}) to handle interrupts on the rising edge of transition on digital pin 2.  Every rising edge will cause the led to change state.  If you connect your discriminant output to the Arduino digital pin 2, and turn the frequency of the function generator down to $1~\rm Hz$, you should observe the led to blink at $1~\rm Hz$.
+
+Once you have this working, you should modify the blink interrupt service routine (suitably renamed!) to
+\begin{itemize}
+\item increment a count by one for every RISING (or FALLING) edge.
+\end{itemize}
+And modify the {\tt loop()} function to do the following every time it is called:
+\begin{itemize}
+\item measure the current time in microseconds, via {\tt micros()}.
+\item set the counter to zero.
+\item delay for a set time interval (e.g. 1 second:  {\tt delay(1000); }
+\item save the counter value
+\item measure the current time in microseconds.
+\item output the duration and count for this loop over the serial interface.
+\end{itemize}
+Technically, you should warn the compiler that the {\tt count} global variable is effective by an ISR by using the volatile keyword, e.g.:
+\begin{verbatim}
+volatile int count = 0;
+\end{verbatim}
+
+Once you have the counter working, you should verify that it is functioning properly by comparing the rate you measure with the Arduino to the rate your are sending with the function generator.
+
+
+\section{The Geiger Counter}
+
+
+\begin{figure}[htbp]
+\begin{center}
+\begin{tikzpicture}
+    \node[anchor=south west,inner sep=0] (image) at (0,0,0) {\includegraphics[width=0.55\textwidth]{figs/assembly.jpg}};
+
+    \node[right](X) at (10.0,3.0) {Timer};
+    \draw (X.west) -- (8.0,3.5);
+
+    \node[right](X) at (10.0,5.0) {\parbox{3cm}{\flushleft High-Voltage and Counter}};
+    \draw (X.west) -- (5.0,4.75);
+
+    \node[left](X) at (0.0,4.5) {\parbox{2.5cm}{\flushright Geiger Tube Holder}};
+    \draw[white,thick] (X.east) -- (1.25,5.0);
+    \draw (X.east) -- (1.25,5.0);
+
+    \node[left](X) at (0.0,3.0) {Source};
+    \draw (X.east) -- (1.35,4.05);
+
+\end{tikzpicture}
+\caption{\label{fig:geigersetup} The Geiger Counter assembly.}
+\end{center}
+\end{figure}
+
+To begin, you will familiarize yourself with the counter and timer
+features of your Geiger counter assembly using the built-in test mode.
+Your lab bench will already be prepared with a Geiger Counter assembly
+as shown in Fig.~\ref{fig:geigersetup}.  Ensure that the high-voltage
+(HV) is off by turning the knob labeled ``H.V. Adjust''
+counter-clockwise all the way to zero.  Now put the Geiger counter
+into test mode by flipping the left red switch to ``TEST''.  Flip the
+right red switch to ``COUNT'' and you should see the counter display
+begin incrementing.  Push the button on the front of your timer and
+you should see the Timer turn on and off.  Leave the timer
+incrementing.  Now flip right red switch to ``STOP'', and observe that
+the both the counter and the timer stop simultaneously.  The knob on
+left side of the old-school lab timer can be used to reset the time.
+Keep turning the knob clockwise until the time reads 0.  Use the black
+button on the Counter to reset the count to zero.
+
+Flip the right switch to ``COUNT'' and then back to ``STOP'' when 10
+seconds have passed.  During this time, the $60~\rm Hz$ test signal
+should increment the counter close to 600 times.  Try this a few times
+and make sure you can reliably count close to $600$ test pulses in a
+10 second interval.  You should reset the count each time, but there
+is no need to reset the timer.  Simply stop when the timer reaches the
+next factor of ten.  Due to your reaction time, you may well stop at
+one-to-two tenths of a second later.  This is OK, and will only add
+less than a few percent error to your measurements over 10 second
+intervals.
+
+\section{High-Voltage Calibration}
+
+When you are confident that you know how to operate the timer, switch
+the left red switch to ``USE'' mode.  Ask the TA to provide you with a
+sealed radioactive source in the second shelf from the top of your
+Geiger tube holder.  Switch the right switch to ``COUNT'' mode.  With
+the HV off, you should not see any pulses.  Turn the HV up until you
+begin to see counts increment on the display, and continue to the next
+interval of 50 volts (e.g. if it first starts incrementing at 730
+volts, set the dial to 750 volts).  Count the number of events in a
+ten second interval.
+
+Repeat this measurement, twice for each voltage setting, in 50 volt
+steps up to 1000 volts.  Do not exceed 1000 volts.
+
+Plot the rate (in Hz) as a function of high voltage, and include this plot in your write-up.  You should see a plateau region (a leveling off) which indicates the onset of the Geiger mode within the Geiger tube.   The plateau region will not be perfectly flat, the rate will continue to increase with voltage, just not as dramatically.  Chose a high-voltage near the beginning of the Geiger mode, and set the high-voltage to this calibrated value.
+
+Connect an oscilloscope to the output of the counter assembly (on the
+back, labeled ``SCOPE'').  Adjust your scope to view the Geiger pulses
+like that of Fig.~\ref{fig:geigerpulse}.  Note that the Geiger counter
+output contains a DC component in addition to the AC pulse, so you
+will want to use your scope in AC coupling mode which will remove the
+DC component and allow you to see the pulse.  You will also want to
+see the attenuation to 1X because you are not using an attenuating
+probe.  
+
+\section{The Geiger Counter}
+
+On the Geiger Controller, start with the HV set to zero at both the
+analog knob and the HV on-off switch.  Turn on the device and set the
+mode to``Test".  In this mode, the counter will be incremented at a
+fixed rate of $60~\rm Hz$.  While in this mode, play around with the
+``Count", ``Reset", and ``Lab-Chron" analog timer reset dial until you
+understand how all of these features work.
+
+Next check that you have a source in the second highest drawer of the
+Geiger Counter holder, asking the TA for help if this is not the case.
+Switch the mode back to ``Use", which will now use the Geiger counter
+as input to the count.  With the HV still off, place the controller in
+``Count" mode, and verify that the rate, with no HV, is zero.  Now,
+with the controller still in ``Count" mode, turn on the HV and turn
+the dial until you first see the counter incrementing.  Turn up the
+voltage to the next interval of 50 volts (e.g. if it first starts
+incrementing at 730 volts, set the dial to 750 volts).
+
+Tabulate the number of counts in a 10 seconds interval, twice for each voltage level, in 50 volt steps from your starting voltage up to 1000 volts.  Do not exceed 1000 volts.  From the data, select the start of the plateau region, where increasing the voltage by 50 volts raises the rate by less than $10\%$.  With another measurement, confirm that the rate at this plateau is of order $100~\rm Hz$ (this will vary from source to source).
+
+Look at the ``SCOPE" output of the Geiger counter controller on your
+oscilloscope, with AC coupling, and verify that you see output pulses
+similar to those in Fig.~\ref{fig:geigerpulse}.
+
+\section{Connect the DAQ}
+
+Now connect the ``SCOPE" output of the Geiger counter controller to the input of your discriminator circuit.  Check the output of your discriminator and verify that you have the expected TTL output pulse relative to the input geiger counter pulses, as in Fig.~\ref{fig:expected}.
+\begin{figure}[htbp]
+\begin{center}
+{\includegraphics[width=0.55\textwidth]{figs/real.pdf}}
+\end{center}
+\caption{\label{fig:expected} Output of the discriminant from actual Geiger counter ouput.}
+\end{figure}
+With the shape of the digital input pulse verified, plug this in as input to your Arduino DAQ.  Verify that the rate you obtain with the Aruduino is within about $20\%$ of the rate you estimated with the timer and counter features.
+ 
+\section{Collect Data}
+
+Now you are ready to collect the data you will use for your analysis.
+From your measured rate, estimate the sampling time interval needed to
+collect a mean number of events of $1$,$5$, and $10$.  For each of
+these sampling time intervals, collect the count for 1000 individual
+runs.  Before leaving, verify that the mean value for each run is near
+the target mean value (but it does not need to exact, the idea is to
+have three samples {\em near} 1, 5, and 10 for comparison.)  You could
+easily program your Arduino to take this average for you.
+
+\section{Monte-Carlo Data and Analysis}
+
+\begin{figure}[htbp]
+\begin{center}
+{\includegraphics[width=0.55\textwidth]{figs/montecarlo_eg.pdf}}
+\end{center}
+\caption{\label{fig:mceg} Analysis of Monte Carlo (simulated) data with $\lambda = 1$.}
+\end{figure}
+
+Your lab report should include a Monte-Carlo simulation of your experimental data.  Use the {\tt random.poisson} function to generate fake experimental data with means of means of 1, 5, and 10.
+Analyze this data using the exact same procedure that you will use to analyze the experimental data:
+\begin{itemize}
+ \item Determine the mean of the collected count data $\lambda_{\rm meas}$ using {\tt np.mean}.
+ \item Compare to the Poisson PMF ({\tt stat.poisson.pmf}) with Poisson $\lambda$ parameter ({\tt lmb})  set to the measured value:  $\lambda_{\rm meas}$.  Scale the PDF appropriately.
+ \item Compare to  a Gaussian with mean ({\tt loc}) set to $\lambda_{\rm meas}$ and sigma ({\tt scale}) set to $\sqrt{\lambda_{\rm meas}}$.  (You should explain why this is appropriate choice in your write-up.)  Scale the PDF appropriately.
+\end{itemize}
+An example comparison is shown in Fig.~\ref{fig:mceg}.  Notice that the discrete Poisson PMF is sample only at integer values, and plotted with format ``{\tt o-}'', while the continue Gaussian is sampled finely, to plot as a smooth function, with format ``{\tt --}''.
+
+\section{Long Report}
+
+This lab report requires a long write-up.  Your TA will provide a LaTeX~template for the report.  
+
+You should have the following sections:
+\begin{itemize}
+\item  {\bf Introduction:} Overview of experiment and its objective.
+\item {\bf Methods:} Setup of the experiment and calibration (e.g. Geiger HV setting).  It's appropriate to include results that validate the procedure in this section, e.g. the HV curve plot, collected scope traces, etc.  (The results section should be reserved for the results of your scientific inquiry.)
+\item {\bf Simulation: } Test of your analysis procedure on simulated data (Monte Carlo).
+\item {\bf Results: }  Analysis of your experimental data.  Compare collected data to Poisson and Gaussian PDFs.
+\item {\bf Conclusion:  }  Top-level summary of your results and what conclusions we can draw from them.
+\item {\bf Appendix:  }  Code listing.
+\end{itemize}
+
+\end{document}
+

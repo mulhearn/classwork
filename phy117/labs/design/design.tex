@@ -1,0 +1,71 @@
+\documentclass[12pt]{article}
+
+
+\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.75in]{geometry}
+\usepackage{cite}
+\usepackage{slashed}
+\usepackage{graphicx}
+\usepackage{amsmath}
+
+\usepackage[american,fulldiode]{circuitikz}
+
+\begin{document}
+\ctikzset{bipoles/thickness=1}
+\ctikzset{bipoles/length=.6cm}
+
+\title{Circuit Design}
+
+\maketitle
+
+
+\section{Design Tasks}
+\begin{enumerate}
+\item Choose an LED from Digikey.  Sketch a simple circuit that lights
+  the LED using a DC voltage source and resistor.  Choose a DC voltage
+  and a resistor value which ensures that the LED is lit brightly.
+
+\item Using a single generic NPN bipolar transistor (assume
+  $\beta=100$), design a follower that operates between 0 and 16
+  volts.  Use a voltage divider at the input and an emitter resistor
+  to set the DC operating point such that quiescent bias current is
+  100 mA and the AC output has the maximum dynamic range.  You may
+  assume all capacitors are infinitely large (short circuits to AC)
+  but specify all resistor values.  Calculate the input impedance of
+  your circuit.
+
+\item Suppose that input impedance of your circuit is insufficent.
+  Using the same single transistor, loosen one of the other design
+  constraints in order to achieve a factor of ten higher input
+  impedance.
+
+\item Using a single generic NPN bipoloar transistor (assume
+  $\beta=100$), design a common emmitter amplifier that operates
+  between 0 and 10 volts.  Use a voltage divider at the input and an
+  emitter and collector resistor.  Set the DC operating point such
+  that quiescent bias current is 100 mA and the AC output has the
+  maximum dynamic range.  Set the gain to five.  You may assume all
+  capacitors are infinitely large (short circuits to AC) but specify
+  all resistor values.
+
+\item Choose an operational amplifier on Digikey and design a circuit
+  with a gain of 50 up to 10 MHz using a single stage.
+  
+\item Using a single generic operational amplifier, design an active
+  low-pass filter with a corner frequency of 10 MHz and an input
+  impedance of $1~\rm M\Omega$ at 10~MHz.
+
+\item For this design, use (multiple instances) of a generic
+  operational amplifier.  Assume that is has a gain-bandwidth product
+  of $100~\rm MHz$.  Design a circuit that has input impedance of
+  $10~\rm M\Omega$ and a gain of 1000 for frequencies up to
+  $10~\rm~MHz$
+
+\item Lookup the specs for the LT3045 linear voltage regulator.  Sketch a circut which configures the LT3045 to deliver a fixed 10 V regulated output.
+  
+  
+\end{enumerate}
+
+
+
+ 
+\end{document}

@@ -1,0 +1,32 @@
+\documentclass[12pt,oneside]{book}
+
+\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.75in]{geometry}
+\usepackage{cite}
+\usepackage{slashed}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{enumitem}
+
+\usepackage[american,fulldiode]{circuitikz}
+\tikzset{component/.style={draw,thick,circle,fill=white,minimum size =0.75cm,inner sep=0pt}}
+
+\begin{document}
+\ctikzset{bipoles/thickness=1}
+\ctikzset{bipoles/length=.6cm}
+
+\title{Physics 116C Scientific Python Exercises}
+
+\maketitle
+
+\input{lab_plotting.tex}
+\input{lab_histograms.tex}
+\input{lab_fitting.tex}
+% fourier
+%\input{lab_uncertainties.tex}
+\end{document}
+
+% OTHER IDEAS:
+% Fourier Transforms
+% Monte Carlo techniques
+% Speed of Light in Cable
+% Measure e from shot noise

@@ -1,0 +1,144 @@
+\documentclass[12pt]{article}
+
+
+\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.5in]{geometry}
+\usepackage{cite}
+\usepackage{slashed}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage[american,fulldiode]{circuitikz}
+
+\begin{document}
+\ctikzset{bipoles/thickness=1}
+\ctikzset{bipoles/length=.6cm}
+
+
+
+\title{Homework Assignments}
+
+\maketitle
+
+\section{Homework 1 - Due Oct 20}
+
+From the text:  1.2 (p5), 1.4 (p6), 1.5 (p6), 1.6 (p6), 1.11 (p11), 1.15 (p21), 1.17(p23)\\
+
+\vskip 1cm
+\noindent
+{\bf Additional Problem 1.1:}  \\
+Show that the root-mean-square average 
+\begin{displaymath}
+V_{\rm rms} \equiv \sqrt{<V^2(t)>}
+\end{displaymath}
+for a sinusoidal AC current given by:
+\begin{displaymath}
+V(t) = V_0 \sin(\omega t)
+\end{displaymath}
+is:
+\begin{displaymath}
+V_{\rm rms} = V_0 / \sqrt{2}
+\end{displaymath}
+
+\section{Homework 2 - Due Nov 3}
+
+From text:  1.20 (p33), 1.31 (p51), 1.33 (p52), 1.35 (p54), 1.39 (p66), 1.43 (p67) \\
+
+\noindent
+{\em Notes:}  For problem 1.20, instead of ``Chose the appropriate AC input voltage'' it should read ``assume you will power this device from a 115 V AC wall outlet, and choose the turns ratio of the transformer appropriately.''
+
+\newpage
+
+\section{Homework 3 - Due Dec 4}
+
+\noindent
+
+{\bf Note:}  I promise that I will never (in an exam or homework) ask a question that requires using the hybrid-pi small signal model for the transistor without explicitly mentioning it and providing the diagram.  Most circuits can be analyzed for basic design purposes without using the hybrid-pi model.
+
+This assignment is a bit longer, and counts for twice as much as each of the previous two homework assignments.  Leave plenty of time!
+
+From text:  2.5 (p 81), 2.8 (p 85), 2.9 and 2.10 (p 86), and 4.1 (p 227).  Note that for exercise 2.9 and 2.10 the current source here is simply a voltage source with a large resistor in series!  Note for 4.1 that the INA105 is shown in Fig.~4.9, it is an integrated circuit (IC) that already includes precision resistors.
+
+\vskip 1cm
+\noindent
+{\bf Additional Problem 3.1:}  \\
+Consider the following CE amplifier driven by a sinusoidal voltage source with input impedance $R_S$ and where we  we will take $C=\infty$ (i.e. it is a short circuit for the AC signal):
+\begin{center}
+\begin{circuitikz}[line width=1pt]
+\draw
+%(2,4) node[right]{$P_2$} to[diode,l=$D$,o-o] (2,2) node[right] {$P_1$} to[resistor,l=$R$,-o](2,0) node[right]{$G$} -- (0,0)
+%(2,0) -- ++(0,0) node[ground,yscale=2.0]{}
+(0,0) node[npn](npn1){} 
+(npn1.B) -- ++(-0.5,0) coordinate(A) to [R,l_=$R_2$,*-] ++(0,-2) coordinate(X) 
+(npn1.E) to[R,l=$R_{\rm E}$,-*] ++(0,-1.5) node[ground,yscale=2.0]{} coordinate(B) -| (X) 
+(npn1.C) to[short,*-o] ++(1.0,0) node[right]{$v_{\rm out}$}
+(npn1.C) to[R,l_=$R_{\rm C}$,-*] ++(0,1.5) coordinate(C) to[short,-o] ++(0,.5) node[right]{$V_{\rm CC}$}
+(A) to[R,l=$R_1$] ++ (0,2) |- (C)
+(A) to[C,l=$C$,-o] ++ (-2.0,0) node[above=1]{$v_{\rm in}$} to[R,l=$R_{\rm S}$] ++ (-2,0) 
+;
+\path (B) ++ (-6,0) coordinate(X) node[ground,yscale=2.0]{} ;
+\draw (X) to[sinusoidal voltage source,bipoles/length=1.5cm,l_=$v(t)$] ++ (0,2.0) coordinate(X)
+(A) to[C,l=$C$,-o] ++ (-2.0,0) to[R,l=$R_{\rm S}$] ++ (-2,0) -| (X) 
+;
+\end{circuitikz} 
+\end{center} 
+
+\noindent
+(A) Suppose that we have a source impedance $R_S=500~\Omega$.  What is the maximum possible value for $R_1||R_2$ (parallel resistance of $R_1$ and $R_2$) that will keep the attenuation of $v_{\rm in}$ relative to $v(t)$ at no more than $10\%$? \\
+
+\noindent
+(B) Suppose we decide to keep $R_1 || R_2 = 10~\rm k\Omega$.  Assume for this calculation that $R_2 \sim 10~\rm k\Omega$ and that we are using a transistor with $\beta=100$.  What is the minimum value of $R_E$ that we can use which will prevent $R_E$ from significantly (more than $10\%$) affecting the DC bias point?\\
+
+\noindent
+(C) Suppose that $V_{\rm CC}=10~V$ and that we wish to bias the transistor with $I_C^Q = 10~\rm mA$.  Calculate the value of $R_C$ that puts the quiescent output voltage at $\frac{1}{2} V_{\rm CC}$.  Using 
+the minimum value of $R_E$ from part B,what is the maximum gain that you can achieve with this circuit?\\
+
+\noindent
+(D) Suppose that isn't enough!  You actually have a few options, but you will need to sacrifice something.
+First, suppose that your input signal is quite small, so even when amplified by a gain of 5, it will stay safely below $1~\rm V$ peak to peak.  Show that by moving the quiescent output point for $v_{\rm out}$ to $1~\rm V$ (instead of $\frac{1}{2} V_{\rm CC}$) by varying $R_C$, you can obtain a gain of 5.\\
+
+\noindent
+(E)  
+You can also crank up $V_{\rm CC}$!  Show that by raising $V_{\rm CC}$ you can return the quiescent operating point of $v_{\rm out}$ to $5~\rm V$ while still keeping the larger value of $R_C$ and a gain of $5$.\\
+
+\noindent
+(F) Suppose you must keep $V_{\rm CC}=10~\rm V$.  Another option is to place a capacitor parallel to $R_E$.  This will reduce the impedance at $R_E$ {\rm at high frequency} and therefore increase the gain.  
+Calculate the value of the capacitance needed to obtain a gain of $5$ at $10~\rm kHz$.\\
+
+\noindent
+(G) Design a CE amplifier using a single transistor, with an input impedance of $100~\rm k\Omega$, that provides a gain of 5 at $100~\rm kHz$.  Assume you want $I_C^Q=1~\rm mA$ for this device and $\beta=100$.  Set $V_{\rm CC}$ as you like.  Provide values for $R_1$, $R_2$, $R_C$, $R_E$, $C$ and any other components that you use. \\
+
+\noindent
+{\bf Additional Problem 3.2:}  \\
+(A) Design a transistor switch:
+
+\begin{center}
+\begin{circuitikz}[line width=1pt]
+\draw
+(0,0) node[npn](npn1){} 
+(npn1.E) to ++(0,-1.25) coordinate (A) node[ground,yscale=2.0]{}
+(npn1.B) to [R,l_=$R_B$] ++(-1.5,0)  to[square voltage source,bipoles/length=1.5cm,l_=$v(t)$] ++(0,-2) 
+to[short,-*] (A) 
+(npn1.C)+(0,2) coordinate (B)
+node[right]{$V_{\rm CC}$}
+(B) to[resistor,l_=$R_L$,o-]  (npn1.C)
+;
+\end{circuitikz} 
+\end{center} 
+capable of driving a $1~\rm k\Omega$ load ($R_L$) at $V_{\rm CC}=10~\rm V$ from a control signal with value of either $0$ or $1~\rm V$.   The design here involves choosing the correct value of $R_B$ to provide enough base current to drive the transistor into saturation.  Assume $\beta \sim 10$ at saturation. \\
+
+\noindent
+(B) Suppose that at saturation $V_{\rm CE} = 0.2~\rm V$.  How much power is your transistor consuming? \\
+
+\noindent
+(C) For $V_{\rm CC}=10~\rm V$ what is the smallest resistance $R_L$ you could drive at $10~\rm V$, assuming that your transistor is rated at $1~\rm W$ and $V_{\rm CE} = 0.2~\rm V$.\\
+
+\noindent
+{\bf Additional Problem 3.3:}  \\
+An import limitation for real operational amplifiers is their {\em gain-bandwidth limit}.  This limits the gain at high-frequency by placing a limit on the product of the frequency times the gain provided by the device.   In most ICs, this is due to a low-pass filter intentionally included in the design to avoid high-frequency instabilities and provide consistent response from device to device.  For the LM714 op amps used in lab, the gain bandwidth product is around $1~\rm MHz$.\\
+
+\noindent
+(A)  Design an LM714 op-amp based circuit that has (nearly) infinite input impedance, and an overall inverting gain of 100 for frequencies up to $100~\rm kHz$.   {\em Hint:  use multiple op amps to overcome the gain bandwidth limitations!} \\
+
+\noindent
+(B) Design a non-inverting amplifier based on the LM714 with (nearly) infinite input impedance, and an overall gain of 100 for frequencies up to $100~\rm kHz$.
+
+\end{document}
