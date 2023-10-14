@@ -1,0 +1,96 @@
+\documentclass[12pt,oneside]{book}
+
+\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.75in]{geometry}
+\usepackage{cite}
+\usepackage{slashed}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage{amsthm}
+\usepackage{braket}
+\usepackage{listings}
+\theoremstyle{definition}
+\usepackage{pythonhighlight}
+
+\usepackage[american,fulldiode]{circuitikz}
+\tikzset{component/.style={draw,thick,circle,fill=white,minimum size =0.75cm,inner sep=0pt}}
+
+\newcounter{plot}[chapter]
+\setcounter{plot}{0}
+
+\newcommand{\plot}{
+\stepcounter{plot}
+\noindent
+{\bf $\bigtriangleup$ Jupyter Notebook Exercise \thechapter.\theplot:}
+}
+
+
+\newcounter{pencil}[chapter]
+\setcounter{pencil}{0}
+
+\newcommand{\pencil}{
+\stepcounter{pencil}
+\noindent
+{\bf $\bigtriangleup$ Pencil and Paper Exercise \thechapter.\theplot:}
+}
+
+
+%\newtheorem{pencil}{Pencil Problem}[chapter]
+%\newtheorem{plot}{Jupyter Notebook}[chapter]
+
+
+\lstnewenvironment{algorithm}[1][] %defines the algorithm listing environment
+{   
+    \lstset{ %this is the stype
+        mathescape=true,
+        frame=tB,
+        numbers=left, 
+        numberstyle=\tiny,
+        basicstyle=\scriptsize, 
+        keywordstyle=\color{black}\bfseries\em,
+        keywords={,input, output, return, datatype, function, in, if, else, foreach, while, begin, end, repeat, print, calculate,} %add the keywords you want, or load a language as Rubens explains in his comment above.
+        numbers=left,
+        xleftmargin=.04\textwidth,
+        #1 % this is to add specific settings to an usage of this environment (for instnce, the caption and referable label)
+    }
+}
+{}
+
+
+\begin{document}
+\ctikzset{bipoles/thickness=1}
+\ctikzset{bipoles/length=.6cm}
+
+\title{Physics 40 Lab Manual}
+\author{Michael Mulhearn}
+\maketitle
+
+\tableofcontents
+
+\input{lab_install.tex}
+
+\input{lab_numbers.tex}
+
+\input{lab_series.tex}
+
+\input{lab_prime.tex}
+
+\input{lab_plotting.tex}
+
+\input{lab_projectiles.tex}
+
+\input{lab_pendulum.tex}
+
+\input{lab_roots.tex}
+
+\input{lab_ideal_gas.tex}
+
+\input{lab_planets.tex}
+
+%\appendix
+
+%\input{debugging.tex}
+
+\end{document}
+
+

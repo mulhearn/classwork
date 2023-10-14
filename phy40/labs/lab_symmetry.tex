@@ -1,0 +1,22 @@
+\chapter{Rotaions and Parity}
+  
+\section{Rotations and Parity}
+
+\begin{python}
+def rotz(theta):
+    cs = np.cos(theta)
+    sn = np.sin(theta)
+    R  = np.array([[cs, sn, 0],[-sn, cs, 0], [0, 0, 1]])
+    R=np.around(R,decimals=15)+0
+    return R
+\end{python}
+
+\begin{plot} With $\tau \equiv 2 \pi$ print the rotation matrix for $\theta = 0, \tau/4, \tau/2, 3 \tau/4, \tau$ corresponding to zero, quarter turn, half turn, 3/4 turn, and a full turn.\end{plot}
+
+
+
+\begin{plot} Show that $R(\vec{a} \times \vec{b}) = (R\vec{a}) \times (R\vec{a})$.\end{plot}
+
+
+\begin{plot} Show that $P(\vec{a} \times \vec{b}) \neq (P\vec{a}) \times (P\vec{a})$.\end{plot}
+

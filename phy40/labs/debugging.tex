@@ -1,0 +1,32 @@
+\chapter{Debugging}
+
+In our context, debugging is the process of finding and removing
+mistakes, called bugs, from your software.  Singling this process out
+is a bit deceptive, it makes it seems distinct from software
+development, as if you should write your software, and then debug it.
+Indeed many students start this way, but it is a painful and
+ineffective approach.  Experienced programs debug {\em while} developing
+their code.
+
+The fundamental approach to debugging (which works equally well
+outside of programming) is to break every problem down into simple,
+well defined parts, and then thoroughly test each part.  When one part
+does not work, you break it down into smaller parts.  This process can
+be quite simple, such as adding print statements to each step of a
+complicated calculation.  It can also be quite advanced, such as when
+teams of experienced software developers use automated builds and a
+suite of integration tests that validate every proposed change to code
+before it is accepted.  Experienced programs still produce bugs, they
+just get better at squashing them.
+
+There are a number of well-loved techniques to debugging:
+\begin{itemize}
+\item Print statements.
+\item Start with a simple problem.
+\item Test on special cases.
+\item Use paper and pencil.
+\item Decrease the size.
+\item Establish feedback.
+\item Write modular code.
+\item Maintain unit tests.
+\end{itemize}

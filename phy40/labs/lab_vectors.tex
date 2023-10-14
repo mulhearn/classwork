@@ -1,0 +1,105 @@
+\chapter{Vectors}
+
+\section{Introduction}
+
+In this lab, we will use numpy arrays to investigate the properties of
+vectors in Euclidean space.
+
+\section{Vector Dot Product and Cross Product }
+
+In this lab, we will use numpy arrays of length 3 to represent vectors
+in a Euclidean vector space.  So for example:
+\begin{python}
+  a = np.array([1.2, -3.2, 2.1])
+\end{python}
+is how we will represent the vector $\vec{a}$ with $a_x=1.2$,
+$a_y=-3.2$, and $a_z=2.1$.  To obtain the components of the vector, we retrieve the appropriate element of the array, so $a_x$ is \pyth{a[0]},
+$a_y$ is \pyth{a[1]}, and $a_z$ is \pyth{a[2]}.
+
+We construct the unit vectors $\hat{x}$, $\hat{y}$ and $\hat{z}$ as:
+\begin{python}
+  xhat = np.array([1, 0, 0])
+  yhat = np.array([0, 1, 0])
+  zhat = np.array([0, 0, 1])
+\end{python}
+which provides an alternative way to define vectors:
+\begin{displaymath}
+\vec{b} = 2\hat{x} - 4\hat{y}+1\hat{z}
+\end{displaymath}
+using the equivalent python code:
+\begin{python}
+  b = 2*xhat - 4*yhat + 1*zhat
+\end{python}
+
+The dot product of two vectors is defined as:
+\begin{displaymath}
+\vec{a}\cdot\vec{b} = a_x \, b_x +  a_y \, b_y +  a_z \, b_z.
+\end{displaymath}
+We can determine the magnitude of vector using the dot product:
+\begin{displaymath}
+  |\vec{a}| = \sqrt{\vec{a}\cdot\vec{a}}
+\end{displaymath}
+The cross product of two vectors is defined as:
+\begin{displaymath}
+  \vec{a}\times\vec{b} =
+  (a_y \, b_z -  a_z \, b_y) \; \hat{x}
+  + (a_z \, b_x -  a_x \, b_z) \; \hat{y}
+  + (a_x \, b_y -  a_y \, b_x) \; \hat{z}
+\end{displaymath}
+
+\vskip 0.25cm
+\plot Implement a function \pyth{dot(a,b)} which returns the dot product of vectors a and b.  You do not need to use a for loop in your implementation if you do not want to: explicitly calling each of three components is simple and clear.  Confirm that your code is working by calculating $\vec{b}\cdot\hat{x}$, $\vec{b}\cdot\hat{y}$, and $\vec{b}\cdot\hat{z}$. \\
+
+
+\plot Implement a function \pyth{mag(a)} which returns the magnitude of the vector a by calling your \pyth{dot(a,b)} function.  Show that your function works by comparing the magnitude of $\vec{b}$ return by your function with what you expect from paper and pencil.\\
+
+\plot Implement a function \pyth{cross(a,b)} which returns the cross products of the vectors a and b.  Show that your function works for:
+\begin{eqnarray*}
+  \hat{x} \times \hat{x} &=& 0\\    
+  \hat{x} \times \hat{y} &=& \hat{z}\\
+  \hat{x} \times \hat{z} &=& -\hat{y}\\
+  \hat{y} \times \hat{x} &=& -\hat{z}\\
+  \hat{y} \times \hat{z} &=& \hat{x} \\ 
+\end{eqnarray*}
+
+
+The follow example demonstrates that:
+\begin{displaymath}
+\vec{a} \cdot \vec{b} \leq |\vec{a}|\,|\vec{b}|
+\end{displaymath}
+by generating many random vectors and testing:
+\begin{python}
+TOL = 10*np.finfo(float).eps
+fail = 0
+for i in range(10000):
+    ra = np.random.rand(3)
+    rb = np.random.rand(3)
+    x = dot(ra,rb)-mag(ra)*mag(rb)
+    if (x>TOL):
+        fail = fail+1
+print("failures:  ", fail)
+\end{python}
+Notice the use of a tolerance instead of strict comparison with zero
+to account for the floating point precision.\\
+
+\begin{plot} Demonstrate\end{plot}
+\begin{displaymath}
+  |\vec{a} + \vec{b}| < |\vec{a}| + |\vec{b}|
+\end{displaymath}
+
+\vskip 0.25cm
+\begin{plot} Demonstrate the Jacobi identity:\end{plot}
+\begin{displaymath}
+ \vec{a} \times (\vec{b} \times \vec{c}) + \vec{b} \times (\vec{c} \times \vec{a}) + \vec{c} \times (\vec{a} \times \vec{b}) = 0
+\end{displaymath}
+
+\section{Numpy Tools}
+
+The numpy tools for dot and cross products are \pyth{np.dot} and \pyth{np.cross}
+\begin{python}
+print(np.dot([1,2,3],[0,0,1]))
+print(np.cross([1,0,0],[0,1,0]))
+\end{python}
+
+\section{Motion of a Charged Particle in a Magnetic Field}
+
