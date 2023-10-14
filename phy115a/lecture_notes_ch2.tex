@@ -835,7 +835,7 @@ then $a_{n+2} = 0$.  Recalling our definition for $\epsilon$ we see that:
 E = \hbar \omega \left( n + \frac{1}{2} \right)
 \end{equation}
 The highest power term in the series defining $h(u)$ will be $u^n$, with the asymptotic before of $\psi(u)$ now:
-$$\psi(u) \; \approx \; h(u) \, \exp(-u^2/2) \; \approx \; C \, u^n \, \exp(-u^2/2)$$
+$$\psi(u) \; \approx \; h(u) \, \exp(-u^2/2) \; \approx \; C \, u^n \, \exp(-u^2/2) \, dx $$
 this is precisely the nice behavior we choose at the very start.
 
 We can work out explicit solutions.  It's convenient to rewrite the recursion formula in terms of the quantum number $n$ instead of $\epsilon = 2n+1$:
@@ -1127,7 +1127,13 @@ The Fourier series for a periodic complex valued function $\psi(x)$ with period 
 \begin{equation*}
 \psi(x) = \sum_n c_n e_n(x)
 \end{equation*}
-where the Fourier coefficients are 
+Here it will be useful to define the wave number
+\begin{equation}
+k_n \equiv \frac{2 \pi n}{a}
+\end{equation}
+with 
+$$e_n(x) = \exp( i\, k_n \, x)$$
+As always the Fourier coefficients are determined as 
 \begin{equation*}
 c_n = \braket{e_n, \psi} = \int_{-\frac{a}{2}}^{\frac{a}{2}} \psi(x) e_n^*(x)
 \end{equation*}
@@ -1135,7 +1141,7 @@ Consider the function:
 \begin{equation}
 \phi(x) =
 \begin{cases}
-   \psi(x)                      & \frac{a}{2} \leq x \leq \frac{a}{2} \\[8pt]
+   \psi(x)                      & -\frac{a}{2} \leq x \leq \frac{a}{2} \\[8pt]
    \psi\left(\frac{a}{2}\right) & {\rm otherwise} \\
 \end{cases}
 \end{equation}
@@ -1149,24 +1155,53 @@ $$\phi(x) = \sum_n c_n e_n(x)$$
 as long as we restrict ourselves to:
 $$-\frac{a}{2} \leq x \leq \frac{a}{2}$$.
 \end{itemize}   
-
-
-We are going to extend the Fourier series to apply to any function $\psi(x)$ for which $\psi(x) \to 0$ as 
-
-
-
-
+We are going to extend the Fourier series to apply to any function $\psi(x)$ for which $\psi(x) \to 0$ as $x \to \pm\infty$.
 \begin{itemize}
- \item Any function that goes to zero as $x \to \pm \infty$ can be considered a periodic function with period $a \to \infty$. 
- \item 
+ \item In the limit $a \to \infty$, then 
+ $$\psi(-a/2) \to 0, \hspace{2cm } \psi(a/2) \to 0,$$
+ so
+ $$\psi(-a/2) \to \psi(a/2)$$
+ and so $\psi(x)$ has a Fourier series valid in 
+ $$[-a/2,a/2] \to [-\infty,\infty].$$
+ \item In the limit $a \to \infty$
+ $$k_{n+1}-k_n = \frac{2\pi}{a} \to 0$$
+ so we can now pick any value of $k_n$ we want, without concern for $n$, so we write:
+ $$k_n \to k$$
+ $k$ has become a continuous variable.
 \end{itemize}
-There are more mathematically formal ways to determine the Fourier series, but this is by far the most intuitive.
+Next we will turn our attention to the Fourier coefficients:
+$$c_n = \frac{1}{\sqrt{a}} \int_{-a/2}^{a/2} \; \psi(x) \; e^{-ik_nx} dx$$
+In the limit $a \to \infty$
+$$k_n \to k$$
+and considering just the integral:
+$$\int_{-a/2}^{a/2} \; \psi(x) \; e^{-ik_nx} dx \;\; \to \;\; C(k) \;\; \equiv \;\; \int_{-\infty}^{\infty} \; \psi(x) \; e^{-ikx} dx$$
+where, as is our right as physicists, we bravely assume $C(k)$ is a well defined integral.
+Now evidently in this limit:
+$$c_n \to \frac{C(k)}{\sqrt{a}} = 0$$
+which is not very useful.  The Fourier coefficients as we defined them carried a normalization factor that vanishes as $a \to \infty$.  More useful will be the quantity
+$$ \left(\sqrt{a} \; c_n \right) \; \to \; C(k) $$
+which we will show up again below.
 
-
-
-
-
-
+Next we consider the Fourier series itself:
+$$\psi(x) = \sum_n c_n e_n(x) = \frac{1}{\sqrt{a}} \sum_n c_n e^{i k_n x}$$
+and recalling:
+$$k_{n+1}-k_n = \frac{2\pi}{a}$$
+so that we can write:
+$$\psi(x) = \frac{1}{2\pi} \sum_n (\sqrt{a} \, c_n) \; e^{i k_n x} \; (k_{n+1}-k_{n})$$
+Now in the limit $a \to \infty$ the quantity $$k_{n+1}-k_{n}$$ becomes infinitesimal 
+and the sum becomes an integral:
+$$\psi(x) = \frac{1}{2\pi} \int_{-\infty}^{+\infty} C(k) \; e^{i k_n x} \; dk$$
+For a symmetric definition we define the Fourier transform of $\psi(x)$ as:
+\begin{equation*}
+\widetilde{\psi}(k) \equiv \frac{C(k)}{\sqrt{2\pi}} 
+\end{equation*}
+so that:
+\begin{eqnarray}
+\widetilde{\psi}(k) &=& \frac{1}{\sqrt{2\pi}} 
+\int_{-\infty}^{\infty} \; \psi(x) \; e^{-ikx} \; dx \\[8pt]
+\psi(x) &=& \frac{1}{\sqrt{2\pi}} 
+\int_{-\infty}^{\infty} \; \widetilde{\psi}(k) \; e^{ikx} \; dk
+\end{eqnarray}
 
 \section{Hermetian Conjugates}
 The normalizable wave functions are a vector space over the complex numbers, with an inner product:
@@ -1239,17 +1274,7 @@ When an operator has the property $\hat{o}^\dagger = \hat{o}$ we say that it is 
 Expectations values of hermetian operators are real, and so we associate physical observables with hermetian operators. 
 
 
-
-
-\section{The Fourier Transform}
-
-The Fourier Series is sufficient for periodic functions.  Unfortunately, this is of rather limited use in physics.  To realize the full potential of the Fourier Theorem, we need to extend the concept to apply to any function, with the only caveat that the function must approach zero as $x$ approaches both negative and positive infinity.
-
-The trick is to consider such a function as periodic with period $L$ in the limit $L \to \infty$.  Recall Equation~\ref{eqn:kn}:
-\begin{equation*}
-k_n \equiv \frac{2 \pi n}{L}.
-\end{equation*}
-When $L$ is very large, we will obtain a non-zero value for $k_n$ only for comparably large values of $n$.  But since $n$ is very large, the difference between $k_n$ and $k_{n+1}$ is infinitesimal.  We have moved from the discreet case, where we only have certain wave numbers $k_n$ for each integer $n=0,1,2,...$, to the continuous case, where $k$ can take any real value.  Fortunately, our vector analogy survives intact.
+\section{The Fourier Transform Revisited}
 
 Our inner product now extends between positive and negative infinity:
 \begin{equation}
