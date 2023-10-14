@@ -1,0 +1,156 @@
+\documentclass[12pt]{article}
+
+
+\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.5in]{geometry}
+\usepackage{cite}
+\usepackage{slashed}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage[american,fulldiode]{circuitikz}
+
+\begin{document}
+\ctikzset{bipoles/thickness=1}
+\ctikzset{bipoles/length=.6cm}
+
+\date{\vspace{-5ex}}
+
+\title{Homework Assignment 1 \\ Review}
+
+\maketitle
+
+\section*{Practice Problems}
+
+(No Practice Problems)
+
+\section*{Additional Problems}
+
+\vskip 1cm
+\noindent
+{\bf Problem 1:}  You have already covered\footnote{See Chapter 2, Section 11 of {\bf Mathematical Methods in the Physical Sciences (Third Edition)} by M.L.~Boas if you need a review.} linear algebra in PHY 104A.  Consider the real symmetric matrix:
+\begin{displaymath}
+  A =
+  \begin{pmatrix}
+    1 & 3 \\
+    3 & 1 \\
+  \end{pmatrix}
+\end{displaymath}
+(a) Find the eigenvalues of the matrix by finding the roots of the characteristic polynomial:
+\begin{displaymath}
+\det \left(A - \lambda I \right) = 0
+\end{displaymath}  
+(b) Find the two eigenvectors $\textbf{u}$ and $\textbf{v}$, and normalize them so that:
+\begin{displaymath}
+\textbf{u} \cdot \textbf{u} = \textbf{v} \cdot \textbf{v} = 1
+\end{displaymath}  
+(c) Note that $A=A^T$.  Show that the two eigenvectors are orthogonal, i.e.:
+\begin{displaymath}
+\textbf{u} \cdot \textbf{v} = 0
+\end{displaymath}  
+(d) For the vector:
+\begin{displaymath}
+  x =
+    \begin{pmatrix}
+    2 \\
+    3 \\
+  \end{pmatrix}
+\end{displaymath}  
+Find the values $a$ and $b$ such that:
+\begin{displaymath}
+x = a \textbf{u} + b \textbf{v}
+\end{displaymath}  
+
+\vskip 1cm
+\begin{center}
+Next problem on next page...
+\end{center}
+
+\newpage
+\noindent
+{\bf Problem 2:}  Show that:
+\begin{eqnarray*}
+\frac{2}{L} \int_{-\frac{L}{2}}^{\frac{L}{2}} 
+\sin\left(\frac{2\pi n}{L} \, x \right) \sin\left(\frac{2\pi m}{L} \, x \right) \, dx &=& \delta_{nm} \label{eqn:trigortha} \\
+ \frac{2}{L} \int_{-\frac{L}{2}}^{\frac{L}{2}} 
+\cos\left(\frac{2\pi n}{L} \, x \right) \cos\left(\frac{2\pi m}{L} \, x \right) \, dx &=& \delta_{nm} \label{eqn:trigorthb}\\
+\frac{2}{L} \int_{-\frac{L}{2}}^{\frac{L}{2}} 
+\sin\left(\frac{2\pi n}{L} \, x \right) \cos\left(\frac{2\pi m}{L} \, x \right) \, dx &=& 0 \label{eqn:trigorthc}
+\end{eqnarray*}
+for integers $n$ and $m$ where:
+\begin{displaymath}
+\delta_{nm} =  
+\left\{
+        \begin{array}{ll}
+                1  & \mbox{if } n=m \\
+                0 & \mbox{otherwise}
+        \end{array}
+\right.
+\end{displaymath}
+You may use the trigonometric identities:
+\begin{eqnarray*}
+\sin \alpha \sin \beta &=& \frac{1}{2} \{\cos(\alpha - \beta) - \cos(\alpha + \beta)\}\\
+\cos \alpha \cos \beta &=& \frac{1}{2} \{\cos(\alpha - \beta) + \cos(\alpha + \beta)\}\\
+\cos \alpha \sin \beta &=& \frac{1}{2} \{\sin(\alpha + \beta) - \sin(\alpha - \beta)\}.\\
+\end{eqnarray*}
+
+
+\end{document}
+
+
+
+
+
+You covered linear algebra in PHY 104A.  See Chapter 2, Section 11 of {\bf Mathematical Methods in the Physical Sciences (Third Edition)}, Boas if you need a review.  Consider the real symmetric matrix:
+\begin{displaymath}
+  A =
+  \begin{pmatrix}
+    1 & 3 \\
+    3 & 1 \\
+  \end{pmatrix}
+\end{displaymath}
+(a) Find the eigenvalues of the matrix by finding the roots of the characteristic polynomial:
+\begin{displaymath}
+\det \left(A - \lambda I \right)
+\end{displaymath}  
+(b) Find the two eigenvectors $u$ and $v$, and normalize them so that:
+\begin{displaymath}
+u \cdot u = v \cdot v = 1
+\end{displaymath}  
+(c) Note that $A=A^T$.  Show that the two eigenvectors are orthogonal, i.e.:
+\begin{displaymath}
+u \cdot v = 0
+\end{displaymath}  
+(d) For the vector:
+\begin{displaymath}
+  x =
+    \begin{pmatrix}
+    2 \\
+    3 \\
+  \end{pmatrix}
+\end{displaymath}  
+Find the values $a$ and $b$ such that:
+\begin{displaymath}
+x = a u + b v
+\end{displaymath}  
+
+
+
+
+
+
+
+
+
+Show that the root-mean-square average 
+\begin{displaymath}
+V_{\rm rms} \equiv \sqrt{<V^2(t)>}
+\end{displaymath}
+for a sinusoidal AC current given by:
+\begin{displaymath}
+V(t) = V_0 \sin(\omega t)
+\end{displaymath}
+is:
+\begin{displaymath}
+V_{\rm rms} = V_0 / \sqrt{2}
+\end{displaymath}
+
+\end{document}

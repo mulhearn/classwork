@@ -1,0 +1,110 @@
+\documentclass[12pt]{article}
+
+
+\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.5in]{geometry}
+\usepackage{cite}
+\usepackage{slashed}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{braket}
+\usepackage[american,fulldiode]{circuitikz}
+
+\begin{document}
+\newcommand{\ihbar}{\ensuremath{i \hbar}}
+\newcommand{\dPsidt}{\ensuremath{ \frac{\partial \Psi}{\partial t} }}
+\newcommand{\dPsidx}{\ensuremath{ \frac{\partial \Psi}{\partial x} }}
+\newcommand{\ddPsidx}{\ensuremath{ \frac{\partial^2 \Psi}{\partial x^2} }}
+\newcommand{\dPssdt}{\ensuremath{ \frac{\partial \Psi^*}{\partial t} }}
+\newcommand{\dPssdx}{\ensuremath{ \frac{\partial \Psi^*}{\partial x} }}
+\newcommand{\ddPssdx}{\ensuremath{ \frac{\partial^2 \Psi^*}{\partial x^2} }}
+
+\newcommand{\dphidt}{\ensuremath{ \frac{d \phi}{dt} }}
+\newcommand{\dpsidx}{\ensuremath{ \frac{d \psi}{dx} }}
+\newcommand{\ddpsidx}{\ensuremath{ \frac{d^2 \psi}{dx^2} }}
+
+
+\date{\vspace{-5ex}}
+
+\title{Homework Assignment 4 \\ Not-So-Simple Harmonic Oscillator}
+
+\maketitle
+
+\section*{Practice Problems}
+
+These problems are graded on effort only.\\
+
+\noindent
+{\bf Griffiths: P2.4, P2.7, P2.8} \\
+
+\section*{Additional Problems}
+
+\noindent
+{\bf Problem 1:} Show that:
+$$\frac{d}{dt}\braket{\hat{x}\hat{p}} = 2\braket{\hat{T}} - \braket{x \frac{dV}{dx}}$$
+where
+$$\hat{T} = \frac{\hat{p}^2}{2m}$$
+is the kinetic energy.  This is the quantum mechanical version of the virial theorem of classical mechanics.  Hint: look at the technique we used to derive Ehrenfest's Theorem in the chapter one lecture notes.\\
+
+\vskip 2cm
+
+\noindent
+{\bf Problem 2:} For the $n$th stationary state of the harmonic oscillator, use the operator method of Griffith's Example 2.5 (p.~47) to:\\
+
+\noindent
+(A) Show that $\braket{x} = \braket{p} = 0$.\\
+
+\noindent  
+(B) Calculate $\braket{x^2}$ and $\braket{p^2}$, and show that uncertainty principle is satisfied.\\
+
+\noindent
+(C) Calculate $\braket{x^7}$.  Hint:  think before you calculate.  What is the condition for a term to be non-zero?\\
+
+
+\newpage
+
+\noindent
+{\bf Problem 3:} Consider the Hermite Polynomials $H_n(u)$ that are part of the nth solution to the harmonic oscillator problem:
+$$\psi_n(x) = \left( \frac{m \omega}{\pi \hbar} \right)^{1/4} \frac{1}{\sqrt{2^n n!}}H_n(u) e^{-u^2/2}$$
+
+\noindent
+(A) In lecture, we determined a recursion relation:
+$$a_{m+2} = \frac{-2(n-m)}{(m+2)(m+1)} \; a_m$$
+for both the even and odd power series solutions:
+\begin{eqnarray*}
+h_{\rm even}(u)&=&a_0 + a_2 u^2 + a_4 u^4 + \ldots\\
+h_{\rm odd}(u)&=&a_1 u + a_3 u^3 + a_5 u^5 + \ldots\\
+\end{eqnarray*}
+Determine the terminating power series solutions for $n=0,1,2,3,4$.\\
+
+\noindent
+(B)  Suppose at some $n$ you have an even solution $h_{\rm even}(u)$ which terminates after coefficient $a_n$.  What will happen if you attempt to create an odd solution for $n$?\\
+
+\noindent
+(C) The generating function:
+$$\exp(-z^2+2zu) = \sum_{n=0}^{\infty} \frac{z^n}{n!}H_n(u)$$
+allows us to read off the Hermite Polynomial from its Taylor Series expansion.  Use this technique to determine $H_0(u)$,$H_1(u)$,$H_2(u)$,$H_3(u)$, and $H_4(u)$. Compare to your answers in part (A), and note that you are free to multiply your solutions by an arbitrary normalization factor.\\
+
+\noindent
+(D) For some $n$, what is the term with the highest power of $n$ in $H_n(u)$?\\
+
+\vskip 2cm
+
+\noindent
+{\bf Problem 4:} In lecture we defined the commutator of two operators $\hat{A}$ and $\hat{B}$ as:
+$$[\hat{A}, \hat{B}] = \hat{A}\hat{B} - \hat{B}\hat{A}$$.
+
+\noindent
+(A) Show that:
+$$ [\hat{A}\hat{B}, \hat{C}] = \hat{A}[\hat{B}, \hat{C}] + [\hat{A}, \hat{C}]\hat{B}$$
+
+\noindent
+(B) Prove the Jacobi Identity:
+$$ [\hat{A},[\hat{B}, \hat{C}]] + [\hat{B},[\hat{C}, \hat{A}]] + [\hat{C},[\hat{A}, \hat{B}]] = 0$$
+(This is the property of the algebra of commutators that replaces associativity)
+
+\end{document}
+
+
+
+
