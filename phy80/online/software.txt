@@ -1,0 +1,243 @@
+---------------------------------
+Software Needed for Physics 80
+---------------------------------
+
+This document describes the installation of the software which we will
+be using for the remote learning version of Physics 80.  You'll need
+to install all of the software described in this document in order to
+finish all of the projects in this class.
+
+This is an assignment, and it will be graded.
+
+If you run into problems, do some research on Google or elsewhere to
+become informed and to see if you can overcome the problem on your own
+*before* asking for help.  This is an important technique in getting
+help with technical problems that will serve you well in life.  You
+will more easily get useful technical help, from the sort of people
+most capable of offering it, when it is clear from your question that
+you are informed and have already tried all of the obvious things.
+Technically savy people tend to get innundated with questions from
+people that haven't done enough work on their own yet, and so these
+requests usually get ignored or deprioritized.  If you are still stuck
+after trying to solve a problem for yourself, then contact your TA or
+instructor with specific technical details about what is failing, and
+include your installation log file, which is described below.
+
+If you do find a problem with these instructions or manage to overcome
+a technical problem, advertise it on the course chat room so that
+other students can benefit from your expertise!
+
+------------
+Text Editor
+------------
+
+First of all, you will need a text editor, capable of producing files,
+such as this one, with the extension (*.txt).  Some applications refer
+to this as a "Plain Text" or "ASCII" file.  You likely already have at
+least one text editor installed.  Example text editors are vi, vim,
+emacs, TextEdit, and NotePad++.  It is well worth your time to learn
+either vim or emacs, but is not required for this course.  I mainly
+use emacs, but I also know the basics of vi/vim in case emacs isn't
+available on a particular system.  Find a text editor that you are
+comfortable using, and then use it to prepare a simple text logbook
+file of your installation process.  Call it "install.txt".  Use this
+file to record details about each step you took to install your
+software.  An example entry might look like:
+
+Downloaded windows installer from:
+  https://repo.anaconda.com/miniconda/Miniconda3-latest-Windows-x86_64.exe
+
+As another example, here is a text file from my own research, where I
+have recorded the installation steps for the Vivado software used to
+configure the Zynq System-on-Chip devices we are using for data
+acquisition systems used by the DUNE experiment:
+
+https://github.com/mulhearn/pacman/blob/master/docs/notes/install.txt
+
+You will submit your installation log file when you complete this
+assignment, but it will also make it easier for you to get help if you
+have a problem.
+
+--------------------------
+Operating System Details:
+--------------------------
+
+Determine which OS type and version you have on the desktop or laptop
+computer that you will be using for your coursework.  Our software for
+this course will work under Windows, Linux, or macOS.  You should also
+check whether you have a 32-bit or 64-bit OS (you can find
+instructions for how to determine this for your particular OS version
+with a Google search.)  Most desktop or laptop computers built in the
+last ten years are 64-bit.
+
+If you are using Linux or macOS, then from within a terminal type
+"echo $SHELL" to determine the shell you are using (typically "bash"
+these days).
+
+Record these details about your operating system in your installation
+log file.
+
+-----------
+Miniconda3 
+-----------
+
+We will be using Miniconda3 based on Python 3.8 for data analysis
+using Jupyter notebooks.  Miniconda is a lightweight package which we
+can use to install all of the remaining analysis software we will need
+in a consistent manner across all different operating systems.  Follow
+the instructions below approprate to your operating system.
+
+------------------------------------
+Already Have Conda Installed
+------------------------------------
+
+If you believe you already already have a version of conda installed
+(such as miniconda or ananconda) , check by running
+
+   conda --version
+
+If you see something like:
+
+  conda 4.8.2
+
+as output (even if the version is different) then you do have it
+installed with the base environment activated, and you can skip ahead
+to the "Physics 116C Conda Environment” section.
+
+If instead you get the message:
+
+   conda: command not found
+
+then most likely you have not installed any version of conda yet, or
+it is inactive, and the easiest solution is to simply follow the
+appropriate installation instructions for your operating system.
+
+------------------------------------
+Installing Miniconda3 under Windows
+------------------------------------
+
+Download and run the appropriate installer from:
+
+  https://docs.conda.io/en/latest/miniconda.html#
+
+If prompted, you should choose to:
+
+1) Accept the license / terms of use.
+2) Install for just the current user, not all users.
+
+Once installed, check that you can run the "Anaconda Prompt".  From the prompt, run the command:
+
+  conda --version
+
+and note the output in your installation log.  Then proceed to
+"Installing Physics 116C Conda Environment".
+
+--------------------------------------------
+Installing Miniconda3 under Linux or macOS
+--------------------------------------------
+
+Download the appropriate installer for your OS here:
+
+  https://docs.conda.io/en/latest/miniconda.html#
+
+For macOS, you can choose between a "package" or "bash" version. I
+find it easier to follow the bash version, but the package version
+will work too. I recommend you make the following choices described
+below.  
+
+1) Accept the license / terms of use.
+
+2) Do not install for all users, but just one the current user.
+
+3) You might be asked whether or not to allow the installer to issue
+"conda init".  Answering "no" will require you to activate conda
+yourself each time you open a new terminal, following the instructions
+that will be provided during installation.  Make sure you record these
+instructions if you choose "no".  I recommend answering "yes".  This
+will set some environment variables persistently in your shell so that
+conda is setup every time you open a terminal.  I recommend "yes", and
+the remaining instructions assume that you have done so.
+
+During the installation, take note of the installation location of
+miniconda in your log file.
+
+------------------------------------------
+Installing Physics 116C Conda Environment
+------------------------------------------
+
+Make sure your conda is fully up to date with:
+
+  conda update conda
+
+then follow the prompts, e.g. selecting "y" as needed to update any out-of-date packages.
+
+We'll be using a conda environment specifically for 116C to avoid
+conflicts with any other projects on your computer, and to ensure that
+we all have the same software installed.  To create our environment:
+
+  conda create -n phy80 python=3.8 numpy scipy matplotlib ipython jupyter
+
+-------------------------------------------------------------
+Starting Physics 116C Conda Environment and Jupyter Notebook
+-------------------------------------------------------------
+
+Activate the phy80 python environment with
+
+  conda activate phy80
+
+Then launch jupyter notebook with:
+
+  jupyter notebook
+
+Note that the directory in which you run this command will be the root
+directory in your jupyter notebook.  Keep this in mind when you are
+reading or writing data files!
+
+When you are done with Phy 80 for the session you can deactivate the
+environment with:
+
+  conda deactivate
+
+When you have succesfully launched jupyter notebook, this assignment
+is complete, and you can submit your "install.txt" file to complete
+the assignment.
+
+-------------------------------------------------------------
+Reversing Changes Made by "conda init" (For Reference Only)
+-------------------------------------------------------------
+
+For MacOS and Linux uses that followed these instructions, your base
+conda environment will be loaded automatically every time you open a
+terminal.  This is quite convenient, and I recommend you leave this as is.
+
+Howeer, the base environment advertises itself on every line in your
+terminal like this:
+
+(base) mulhearn@vonnegut:~$
+
+I personally find this rather annoying.  An easy work-around is to just deactivate
+the base environment with:
+
+conda deactivate
+
+which you can even place into your login initization scripts if you know how.
+
+This gets rid of the (base) when conda is not in use but still leaves
+changes made by "conda init" to your environment values (such as your
+PATH) in place.  In case these changes interfere with other software
+you are running (Xilinx Vivado is very fussy, for example) you can
+reverse the changes made by conda init permanently with:
+
+conda init --reverse
+
+You will then have to take care to initalize the conda environment
+manually each time you want to use it.  For example, with something like:
+
+source ~/miniconda3/etc/profile.d/conda.sh
+
+or:
+
+source ~/miniconda3/etc/profile.d/conda.csh
+
+
+
