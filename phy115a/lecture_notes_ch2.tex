@@ -997,7 +997,443 @@ as does the integral involving $a_-^2$ leaving only:
 In principle we can calculate any classical dynamical variable in terms of the a's.
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+\section{The Free Particle}
+
+We now consider the free particle, for which
+$$V(x)=0$$
+and the TISE is:
+\begin{equation*}
+-\frac{\hbar^2}{2m}\,\frac{d^2 \psi}{d x^2} = E \psi(x)
+\end{equation*}
+which can be written as:
+\begin{equation*}
+\frac{d^2 \psi}{d x^2} = -k^2 \psi(x), \hspace{2cm} k \equiv \frac{\sqrt{2mE}}{\hbar}.
+\end{equation*}
+This so far looks exactly like the infinite square well, except that there are no restrictions on the allowed energies beyond $E>0$. (Why must $E>0$?)  We know well the solutions to this differential equation but in this context we prefer the complex exponentials
+$$\psi(x) = A \, e^{ikx} \; + \; B \, e^{-ikx}$$
+over the sines and cosines, because the former will combine conveniently with the wiggle factor\footnote{Why can't the wiggle factor be a sine or cosine?  Have a look back at how we determined it!}  To determine the wiggle factor we note that:
+$$E = \frac{\hbar^2 k^2}{2m}, \hspace{2cm} \frac{E}{\hbar} = \frac{\hbar k^2}{2m} \equiv \omega$$
+and so
+$$\phi(t) \; = \; e^{\displaystyle -iEt/\hbar} \; = \; e^{\displaystyle -i\omega t} $$
+which we use to get the full wave function:
+$$\Psi(x,t) = A \, e^{\textstyle i (k x - \omega t)} + B \, e^{\textstyle -i (k x + \omega t)}$$
+For visualization, it is useful to consider the real part of $\Psi(x,t)$:
+$$\operatorname{Re}(\Psi(x,t)) = A \, \cos(k x - \omega t) + B \cos(k x + \omega t)$$
+Any function $f(x\pm |v| t)$ is a traveling wave.  Suppose for convenience that $f(x)$ has some distinctive feature (like a local minimum) at $x=0$, then for $f(x \pm |v|t)$, at some later time $t$ this feature will be located where:
+$$x \pm |v| \, t = 0, \hspace{3cm} x = \mp |v|t$$  
+The same analysis for any feature of $f(x)$ leads to the same conclusion, and so $f(x)$ is simply translated unchanged left or right along the x axis over time with speed $|v|$.
+
+In this case, the speed is $|v| = \omega/k$.  Note that as defined $\omega > 0$ and $k > 0$.
+Note, however, that our two solutions (with coefficients $A$ and $B$) just differ by the sign in front of $k$.  So we might as well take $k$ as a signed parameter and consider only one exponential function:
+\begin{equation}
+\label{eqn:fps}
+\Psi_k(x,t) = A e^{i (k x-\omega t)}
+\end{equation}
+where
+\begin{equation}
+k = \pm\frac{\sqrt{2mE}}{\hbar}
+\end{equation}
+and the sign of $k$ indicates the direction of the traveling wave:
+\begin{eqnarray*}
+k > 0 &\implies& {\rm wave~is~traveling~right} \\[5pt]
+k < 0 &\implies& {\rm wave~is~traveling~left} \\
+\end{eqnarray*}
+The quantity $\omega/k$ is signed now as well, so it is a velocity, which we call the phase velocity:
+\begin{equation}
+v_{\rm phase} = \frac{\omega}{k}
+\end{equation}
+There are few more important things to notice about the free particle solution in Equation~\ref{eqn:fps}:
+\begin{itemize}
+\item The wave completes one cycle when $x$ advances by one wave length $\lambda$, so $k(\lambda-0) = 2\pi$, and:
+$$k = \pm\frac{2\pi}{\lambda}$$
+\item The wave competes one cycle when the time advances by one period $T$, so $\omega(T-0) = 2\pi$, and:
+$$\omega = \frac{2\pi}{T}$$
+\item The phase velocity is:
+$$v_{\rm phase} = \frac{\omega}{k} = \pm \frac{\lambda}{T}$$
+\end{itemize}
+We have found that for the free particle:
+$$E = \frac{p^2}{2m} = \frac{\hbar^2 k^2}{2m}$$
+As we have established that the sign of $k$ indicates the direction of the particle, we conclude:
+\begin{equation}
+p = \hbar k 
+\end{equation}
+and
+\begin{equation}
+|p| = \hbar |k|  = \frac{2 \pi \hbar}{\lambda}
+\end{equation}
+This the de Broglie formula that relates a particles momentum to its wavelength.  We assumed the SE and derived the de Broglie formula.  But one can instead start from the de Broglie formula and deduce the SE.
+
+Now for the bad news.  The classical free particle has velocity
+$$v_{\rm classical} = \pm\sqrt{\frac{2E}{m}}$$
+But the phase velocity is:
+$$v_{\rm phase} = \frac{\omega}{k} = \frac{E}{\hbar k} = \frac{E}{\sqrt{2mE}} = \sqrt{\frac{E}{2m}}$$
+so:
+$$v_{\rm phase} = \frac{1}{2} \, v_{\rm classical} $$
+the wave is traveling at one half the speed of the corresponding classical particle.
+
+But that problem seems minor compared to the next one.  We can calculate:
+$$|\Psi_k(x,t)|^2 = \left( A e^{i (k x-\omega t)} \right) \, \left( A e^{i (k x-\omega t)} \right)^*
+= |A|^2$$ 
+which shows that $\Psi_k$ has no time dependence, as expected for a stationary state.  But it can't be normalized:
+$$\int_{-\infty}^{+\infty} |\Psi_k(x,t)|^2 dx = |A|^2 \int_{-\infty}^{+\infty} dx = \infty$$
+
+We'll need some more mathematical tools to tackle these problems...
+
 \section{Fourier Series for Complex Functions}
+
+The Fourier series for a periodic function with period $a$ can be expressed in terms of the complex exponential by noting that:
+\begin{eqnarray*}
+\sin\theta \; = \; \frac{e^{i \theta} - e^{-i \theta}}{2i} \\[5pt]
+\cos\theta \; = \; \frac{e^{i \theta} + e^{-i \theta}}{2} \\
+\end{eqnarray*}
+In the Appendix, we determine the Fourier series in terms of complex exponentials, and how to calculate the Fourier coefficients, by plugging Euler's Identities into the Fourier series for sines and cosines and working carefully through the bookkeeping to arrive at the corresponding formula's for the complex exponential.  This is satisfying and instructive to see, but a bit on the tedious side.  Let's see if we can cut right to chase instead, using our insights from vector space.
+
+First off, note that the periodic complex functions with period $a$ form a vector space just as well as periodic real functions.  Next, note that a periodic complex functions $\psi(x)$ has a Fourier series, as we can just write:
+$$\psi(x) = f(x) + i g(x)$$ 
+for real periodic functions $f(x)$ and $g(x)$, which each have a Fourier series.  And each sine and cosine can be written in terms of complex exponentials.  So we've concluded that Fourier's Theorem combined with the Euler Identities leads to conclusion that and complex periodic function with period $a$ has a Fourier series representation in terms of complex exponentials, that is:
+\begin{equation}
+f(x) = \sum_{n=-\infty}^{\infty}  c_n \, e_n(x)  \\
+\end{equation}
+where
+\begin{equation*}
+e_n(x) \equiv A \exp\left( i \, \frac{2 \pi n x}{a}\right)
+\end{equation*}
+and $A$ is some normalization factor.  Notice that the Fourier coefficients now extend to $-\infty$, that's because Euler's identities contain $e^{i\theta}$ and $e^{-i\theta}$.  (Remember, this is all worked out carefully in the Appendix if you find this too hand wavy.)
+
+So all that we need is to show that these new $e_n(x)$ are orthonormal.  And here we encounter our first problem:
+$$\int_{-a/2}^{a/2} e_n(x) e_n(x) dx \; = \; A^2 \int_{-a/2}^{a/2} \exp\left( i \, \frac{4 \pi n x}{a}\right) dx \; \propto \; \exp(2 \pi n) - \exp(-2 \pi n) = 0$$
+What is going on here?  It's zero because the complex exponential is periodic, with equal parts positive and negative, and so the integral is vanishing.  But this didn't happen for our sines and cosines, because e.g.:
+$$\int_{-a/2}^{a/2} \sin^2\left( \frac{2 \pi n x}{a}\right) dx = \frac{a}{2}$$
+And that explains the problems.  $\sin^2(\theta)$ is never negative, because $\sin(\theta)$ is a real valued function.  But $(e^i\theta)^2$ can be negative, because $e^i\theta$ is a complex number. For example, $e^{i\pi/2} = i$, so $\left( e^{i\pi/2} \right)^2 = -1$.  With this understood, we know exactly what we have to do, we want the integral to be:
+\begin{equation}
+\label{eqn:normexpfs}
+\int_{-a/2}^{a/2} |e_n(x)|^2 dx \; = \; \int_{-a/2}^{a/2} e_n^*(x) e_n(x) dx \; = \;
+|A|^2 \int_{-a/2}^{a/2} 1 dx = |A|^2 a
+\end{equation}
+since we want to set this normalization integral to one, we conclude $|A|^2=1/a$.  We might as well choose the positive real solution, so:
+\begin{equation}
+e_n(x) \equiv \sqrt{\frac{1}{a}} \exp\left( i \, \frac{2 \pi n x}{a}\right)
+\end{equation}
+But we need to modify our inner product so that we obtain the normalization integral in Equation~\ref{eqn:normexpfs} when we take the inner product of $e_n(x)$ with itself.  That is easily accomplished by defining the inner product of {\bf complex} valued functions $f(x), g(x) \in \mathbb{C}$ as:
+\begin{equation}
+\label{eqn:compips}
+\braket{f|g} = \int_{-\frac{a}{2}}^{\frac{a}{2}} f^*(x) g(x) dx
+\end{equation}
+It is left as an exercise to show that using this definition of inner product, we have:
+\begin{equation}
+\braket{e_n|e_m} = \delta_{nm}
+\end{equation}
+And thus we can determine the Fourier coefficients in the usual way via Fourier's trick:
+\begin{eqnarray*}
+f(x) &=& \sum_{m=-\infty}^{\infty}  c_m \, e_m(x) \\[5pt]
+\braket{e_n|f} &=& \int_{-\frac{a}{2}}^{\frac{a}{2}} e_n^*(x) \sum_{m=-\infty}^{\infty}  c_m \, e_m(x) dx\\[5pt]
+ &=& \sum_{m=-\infty}^{\infty}  c_m \int_{-\frac{a}{2}}^{\frac{a}{2}} e_n^*(x) \, e_m(x) dx\\[5pt]
+ &=& \sum_{m=-\infty}^{\infty}  c_m \delta_{nm}\\[5pt]
+ &=& c_n\\
+\end{eqnarray*}
+That is:
+\begin{equation}
+\label{eqn:cofscfs}
+c_n = \braket{e_n|f}
+\end{equation}
+
+\section{Fourier Transform}
+
+The Fourier series for a periodic complex valued function $\psi(x)$ with period $a$ is:
+\begin{equation*}
+\psi(x) = \sum_n c_n e_n(x)
+\end{equation*}
+Here it will be useful to define the wave number
+\begin{equation}
+k_n \equiv \frac{2 \pi n}{a}
+\end{equation}
+with 
+$$e_n(x) = \sqrt{\frac{1}{a}}\exp( i\, k_n \, x)$$
+As always the Fourier coefficients are determined as 
+\begin{equation*}
+c_n = \braket{e_n | \psi} = \int_{-\frac{a}{2}}^{\frac{a}{2}} \psi(x) e_n^*(x)
+\end{equation*}
+Consider the function:
+\begin{equation}
+\phi(x) =
+\begin{cases}
+   \psi(x)                      & -\frac{a}{2} \leq x \leq \frac{a}{2} \\[8pt]
+   \psi\left(\frac{a}{2}\right) & {\rm otherwise} \\
+\end{cases}
+\end{equation}
+and convince yourself of two things:
+\begin{itemize}
+ \item $\phi(x)$ need not be a periodic function (and in fact $\phi(x)$ is a very trivial function if it is).
+ \item Nonetheless, we can calculate it's Fourier coefficients in the usual way:
+$$c_n = \braket{e_n, \phi}$$
+and they will work perfectly well:
+$$\phi(x) = \sum_n c_n e_n(x)$$
+as long as we restrict ourselves to:
+$$-\frac{a}{2} \leq x \leq \frac{a}{2}$$.
+\end{itemize}   
+We are going to extend the Fourier series to apply to any function $\psi(x)$ for which $\psi(x) \to 0$ as $x \to \pm\infty$.
+\begin{itemize}
+ \item In the limit $a \to \infty$, then 
+ $$\psi(-a/2) \to 0, \hspace{2cm } \psi(a/2) \to 0,$$
+ so
+ $$\psi(-a/2) \to \psi(a/2)$$
+ and so $\psi(x)$ has a Fourier series valid in 
+ $$[-a/2,a/2] \to [-\infty,\infty].$$
+ \item In the limit $a \to \infty$
+ $$k_{n+1}-k_n = \frac{2\pi}{a} \to 0$$
+ so we can now pick any value of $k_n$ we want, without concern for $n$, so we write:
+ $$k_n \to k$$
+ $k$ has become a continuous variable.
+\end{itemize}
+Next we will turn our attention to the Fourier coefficients:
+$$c_n = \frac{1}{\sqrt{a}} \int_{-a/2}^{a/2} \; \psi(x) \; e^{-ik_nx} dx$$
+In the limit $a \to \infty$
+$$k_n \to k$$
+and considering just the integral:
+$$\int_{-a/2}^{a/2} \; \psi(x) \; e^{-ik_nx} dx \;\; \to \;\; C(k) \;\; \equiv \;\; \int_{-\infty}^{\infty} \; \psi(x) \; e^{-ikx} dx$$
+where, as is our right as physicists, we bravely assume $C(k)$ is a well defined integral.
+Now evidently in this limit:
+$$c_n \to \frac{C(k)}{\sqrt{a}} = 0$$
+which is not very useful.  The Fourier coefficients as we defined them carried a normalization factor that vanishes as $a \to \infty$.  More useful will be the quantity
+$$ \left(\sqrt{a} \; c_n \right) \; \to \; C(k) $$
+which we will show up again below.
+
+Next we consider the Fourier series itself:
+$$\psi(x) = \sum_n c_n e_n(x) = \frac{1}{\sqrt{a}} \sum_n c_n e^{i k_n x}$$
+and recalling:
+$$k_{n+1}-k_n = \frac{2\pi}{a}$$
+so that we can write:
+$$\psi(x) = \frac{1}{2\pi} \sum_n (\sqrt{a} \, c_n) \; e^{i k_n x} \; (k_{n+1}-k_{n})$$
+Now in the limit $a \to \infty$ the quantity $$k_{n+1}-k_{n}$$ becomes infinitesimal 
+and the sum becomes an integral:
+$$\psi(x) = \frac{1}{2\pi} \int_{-\infty}^{+\infty} C(k) \; e^{i k_n x} \; dk$$
+For a symmetric definition we define the Fourier transform of $\psi(x)$ as:
+\begin{equation*}
+\widetilde{\psi}(k) \equiv \frac{C(k)}{\sqrt{2\pi}} 
+\end{equation*}
+so that:
+\begin{eqnarray}
+\widetilde{\psi}(k) &=& \frac{1}{\sqrt{2\pi}} 
+\int_{-\infty}^{\infty} \; \psi(x) \; e^{-ikx} \; dx \\[8pt]
+\psi(x) &=& \frac{1}{\sqrt{2\pi}} 
+\int_{-\infty}^{\infty} \; \widetilde{\psi}(k) \; e^{ikx} \; dk
+\end{eqnarray}
+
+
+\section{Resolution of the Problems with the Free Particle}
+
+We are now ready to solve the problem with our Free Particle stationary state solutions.  We just have to accept that the simple plane wave solutions are not physical solutions, but they do still provide a complete solution to the SE for the free particle.  Let's see how it works.
+
+We are given a wave function at $\Psi(x,0)$ at $t=0$ describing the initial state.  This function must be normalized.  We calculate it's Fourier transform:
+$$ \widetilde{\Psi}(k,0) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} \; \Psi(x,0) \; e^{-ikx} \; dx $$
+and so then we can write $\Psi(x,0)$ as a integral of traveling waves:
+$$ \Psi(x,0) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} \; \widetilde{\Psi}(k,0) \; e^{ikx} \; dk $$
+The beautiful thing is, we know the time dependence for each traveling wave $e^{ikx}$ that appears in the integral.  These are stationary solution the TISE, so they have a wiggle factor:
+$$\phi(t) = \exp\left(-i\frac{E_k t}{\hbar}\right) = \exp\left(-i\frac{\hbar k^2}{2m}t\right)$$
+where we have used:
+$$E_k = \frac{\hbar k^2}{2m}$$
+so we have:
+$$ \Psi(x,t) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} \; \widetilde{\Psi}(k,0) \; 
+\exp\left[ik\left(x-\frac{\hbar k}{2m}t\right)\right]\; dk $$
+It is left as an exercise to show that this is indeed a solution to the SE.  Just note that $\hat{H}$
+and $-i\hbar \frac{\partial}{\partial t}$ both happily move inside the integral.  Since it is a solution to the SE, it preserves its normalization. So as $\Psi(x,0)$ must be normalized, $\Psi(x,t)$ is normalized as well.
+
+Group velocity...
+$$ \Psi(x,t) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} \; \widetilde{\Psi}(k,0) \;  
+e^{\displaystyle i(kx - \omega(k)t)}\; dk $$
+
+$$\omega(k) = \omega(k_0) + \omega'(k_0) (k - k_0) $$
+
+$$ \Psi(x,t) = \frac{1}{\sqrt{2\pi}} 
+e^{\displaystyle i(k_0x - \omega(k_0)t)}\;
+\int_{-\infty}^{\infty} \; \widetilde{\Psi}(k,0) \;  
+e^{\displaystyle i(k-k_0)(x - \omega'(k_0)t)}\; dk $$
+
+$$v_{\rm group} = \frac{d\omega}{dk}$$
+
+$$v_{\rm phase} = \frac{\omega}{k}$$
+
+For the free particle:
+$$\omega = \frac{E}{\hbar} = \frac{\hbar k^2}{2m}$$
+
+So:
+
+$$v_{\rm group} = 2 v_{rm phase} = v_{\rm classical}$$
+
+
+ 
+\section{Hermetian Conjugates}
+The normalizable wave functions are a vector space over the complex numbers, with an inner product:
+\begin{equation}
+\braket{f|g} \equiv \int_{-\infty}^{\infty} f^*(x) \, g(x) \, dx
+\end{equation}
+We can now recognize the normalization condition as a requirement on the inner product of the wave function with itself:
+\begin{equation}
+\braket{\Psi|\Psi} \equiv \int_{-\infty}^{\infty} |\Psi(x,t)|^2 dx = 1
+\end{equation}
+Expectation values are inner products as well:
+\begin{equation}
+\braket{O} = \braket{\Psi|\hat{O}\Psi} \equiv \int_{-\infty}^{\infty} \Psi^*(x,t)\hat{O}\Psi(x,t) dx
+\end{equation}
+We define the Hermetian conjugate of an operator $\hat{O}^{\dagger}$ by the property that:
+\begin{equation}
+\braket{f|\hat{O^\dagger}g} = \braket{\hat{O} f| g}
+\end{equation}
+Explicitly in terms of the integral:
+\begin{equation}
+\int_{-\infty}^{\infty} f^*(x,t)\hat{O}^\dagger g(x,t) dx = 
+\int_{-\infty}^{\infty} \left( \hat{O} f(x,t)\right)^* g(x,t) dx
+\end{equation}
+The Hermetian conjugate $\hat{O}^\dagger$ of an operator $\hat{O}$ is the operator that, when operating on function g, acts equivalently as the original operator acting on f.
+
+For the operator $\hat{x}$:
+\begin{equation*}
+\int_{-\infty}^{\infty} f^*(x)\hat{x}^\dagger g(x) dx = 
+\int_{-\infty}^{\infty} \left(x f(x)\right)^* g(x) dx = 
+\int_{-\infty}^{\infty} x f^*(x) g(x) dx = 
+\int_{-\infty}^{\infty} f^*(x) x g(x) dx 
+\end{equation*}
+So:
+\begin{equation}
+\hat{x}^\dagger = \hat{x}
+\end{equation}
+For a complex number z:
+\begin{equation*}
+\int_{-\infty}^{\infty} f^*(x)z^\dagger g(x) dx = 
+\int_{-\infty}^{\infty} \left(z f(x)\right)^* g(x) dx = 
+\int_{-\infty}^{\infty} z^* f^*(x) g(x) dx = 
+\int_{-\infty}^{\infty} f^*(x) z^* g(x) dx 
+\end{equation*}
+So:
+\begin{equation}
+z^\dagger = z^*
+\end{equation}
+For a single derivative:
+\begin{equation*}
+\int_{-\infty}^{\infty} f^*(x) \left( \frac{\partial}{\partial x} \right)^\dagger g(x) dx = 
+\int_{-\infty}^{\infty} \left(\frac{\partial f}{\partial x}\right)^* g(x) dx = 
+-\int_{-\infty}^{\infty} f^*(x) \frac{\partial g}{dx} dx  
+\end{equation*}
+where we used integration by parts in the last step (and assumed f and g vanish at the boundaries.
+\begin{equation}
+\left( \frac{\partial}{\partial x} \right)^{\dagger} = -\frac{\partial}{\partial x}
+\end{equation}
+It is left as an exercise to show that:
+\begin{equation}
+\hat{p}^\dagger = \hat{p}
+\end{equation}
+
+When an operator has the property $\hat{o}^\dagger = \hat{o}$ we say that it is hermetian.  
+
+\begin{equation}
+\braket{o} = \braket{\Psi|\hat{o}\Psi} = \braket{\Psi|\hat{o}^\dagger \Psi}
+= \braket{\hat{o} \Psi| \Psi} = \overline{\braket{\Psi| o \Psi}} = \braket{o}^*
+\end{equation}
+
+Expectations values of hermetian operators are real, and so we associate physical observables with hermetian operators. 
+
+\section{Ladder Operators Revisited}
+
+
+\section{The Dirac Delta Function}
+
+...
+
+Note that the Fourier Transform of the Dirac delta function is:
+$$
+\widetilde{\delta}(k) = \braket{e_k, \delta} = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} \delta(x) e^{-ikx} dx  = \frac{e^{-ik0}}{\sqrt{2\pi}} = \frac{1}{\sqrt{2\pi}} 
+$$
+and so we can write the Dirac delta function as:
+$$
+\delta(x) = \frac{1}{2\pi} \int_{-\infty}^{\infty} e^{ikx} dk
+$$
+and so also:
+$$
+\delta(x-x') = \frac{1}{2\pi} \int_{-\infty}^{\infty} e^{ik(x-x')} dk
+$$
+and (by changing variables):
+$$
+\delta(k-k') = \frac{1}{2\pi} \int_{-\infty}^{\infty} e^{i(k-k')x)} dx
+$$
+Very useful...  its' sort of a shortcut for remembering the FT...
+
+Proof Plancherel theorem...
+
+
+
+
+
+
+
+
+
+
+\section{The Fourier Transform Revisited}
+
+Our inner product now extends between positive and negative infinity:
+\begin{equation}
+\braket{\Psi, \phi} \equiv \int_{-\infty}^{\infty} \Psi^*(x) \phi(x) \, dx
+\end{equation}
+Our basis functions, which are now defined for any value of $k$,
+\begin{equation}
+e_k = \frac{1}{\sqrt{2\pi}} \exp(i k x)
+\end{equation}
+are still orthonormal, but the condition looks a bit different in the continuum case:
+\begin{eqnarray*}
+\braket{e_k, e_{k'}} &=& \delta(k-k')
+\end{eqnarray*}
+See the appendix for more details on the Dirac delta function $\delta(x)$, which is zero everywhere but at $x=0$, where it is infinite.  It is the continuous version of $\delta_{nm}$.
+
+Our basis functions are also still complete.  In the discrete case we have a complex Fourier coefficient for every integer $n$.   Now we have a complex Fourier coefficient for any real value of $k$.  In place of Fourier coefficients, we have instead a function of $k$ which we call the Fourier transform: $\widetilde{\Psi}(k)$.
+Instead of a sum over discrete terms, we now have to integrate over all values of $k$:
+\begin{equation} \label{eqn:ift}
+\Psi(x) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} \widetilde{\Psi}(k) \exp(ikx) \, dk.
+\end{equation}
+Just as in the discrete case, we determine the Fourier transform from the inner product:
+\begin{equation} \label{eqn:ft}
+\widetilde{\Psi}(k) = \braket{e_k, \Psi} = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} {\Psi}(x) \exp(-ikx) \, dx
+\end{equation}
+Equation~\ref{eqn:ft} is generally referred to as the {\em Fourier Transform}, while Equation~\ref{eqn:ift} is referred to as the {\em Inverse Fourier Transform}.
+
+\section{The Fourier Transform in Quantum Mechanics}
+
+So far we have been considering the Fourier transform with respect to position $x$ and wave-number $k$.  A much more useful pair of variables for Quantum Mechanics turns out to be momentum $p$ and position $x$.  To relate $p$ to $k$ we need only apply the DeBroglie relation to the wavelength in the definition of the wavenumber:
+\begin{displaymath}
+k \equiv \frac{2 \pi}{\lambda} = \frac{2 \pi p}{h} = \frac{p}{\hbar}
+\end{displaymath}
+We could therefore make the substitution $k \to p/\hbar$ (and $dk \to dp / \hbar)$) in Equations~\ref{eqn:ift} and ~\ref{eqn:ft}.  It turns out that a marginally more useful equation results if we make the normalization factors symmetric, by splitting the normalization factor of $1/\hbar$ across both equations with $1/\sqrt{\hbar}$ applied to each:
+\begin{eqnarray} 
+\Psi(x) &=& \frac{1}{\sqrt{2\pi\hbar}} \int_{-\infty}^{\infty} \widetilde{\Psi}(p) \exp(ipx/\hbar) \, dp \\
+\widetilde{\Psi}(p) &=&  \frac{1}{\sqrt{2\pi\hbar}} \int_{-\infty}^{\infty} {\Psi}(x) \exp(-ipx/\hbar) \, dx
+\end{eqnarray}
+The major benefit of this symmetric form is that the normalization of $\Psi(x)$ and $\widetilde{\Psi}(p)$ in this case turns out to be the same:
+\begin{displaymath}
+\int_{-\infty}^{\infty} |\Psi(x)|^2 dx = \int_{-\infty}^{\infty} |\widetilde{\Psi}(p)|^2 dp = 1 
+\end{displaymath}
+Because we can always calculate $\Psi(x)$ from $\widetilde{\Psi}(p)$ either one completely describes the quantum mechanical state.  We call $\widetilde{\Psi}(p)$ the momentum wave function.   Whereas $|\Psi(x)|^2$ gives us the probability density for the quanton to be at position $x$, $|\Psi(p)|^2$ gives us the probability density for the quanton to have momentum $p$.
+
+
+
+
+\section{Ladder Operators Revisited}
+
+
+
+\appendix
+
+\chapter{Fourier Series for Complex Functions}
 
 The Fourier series for a periodic function with period $a$ can be expressed in terms of the complex exponential by noting that:
 \begin{eqnarray*}
@@ -1202,133 +1638,6 @@ so that:
 \psi(x) &=& \frac{1}{\sqrt{2\pi}} 
 \int_{-\infty}^{\infty} \; \widetilde{\psi}(k) \; e^{ikx} \; dk
 \end{eqnarray}
-
-\section{Hermetian Conjugates}
-The normalizable wave functions are a vector space over the complex numbers, with an inner product:
-\begin{equation}
-\braket{f|g} \equiv \int_{-\infty}^{\infty} f^*(x) \, g(x) \, dx
-\end{equation}
-We can now recognize the normalization condition as a requirement on the inner product of the wave function with itself:
-\begin{equation}
-\braket{\Psi|\Psi} \equiv \int_{-\infty}^{\infty} |\Psi(x,t)|^2 dx = 1
-\end{equation}
-Expectation values are inner products as well:
-\begin{equation}
-\braket{O} = \braket{\Psi|\hat{O}\Psi} \equiv \int_{-\infty}^{\infty} \Psi^*(x,t)\hat{O}\Psi(x,t) dx
-\end{equation}
-We define the Hermetian conjugate of an operator $\hat{O}^{\dagger}$ by the property that:
-\begin{equation}
-\braket{f|\hat{O^\dagger}g} = \braket{\hat{O} f| g}
-\end{equation}
-Explicitly in terms of the integral:
-\begin{equation}
-\int_{-\infty}^{\infty} f^*(x,t)\hat{O}^\dagger g(x,t) dx = 
-\int_{-\infty}^{\infty} \left( \hat{O} f(x,t)\right)^* g(x,t) dx
-\end{equation}
-The Hermetian conjugate $\hat{O}^\dagger$ of an operator $\hat{O}$ is the operator that, when operating on function g, acts equivalently as the original operator acting on f.
-
-For the operator $\hat{x}$:
-\begin{equation*}
-\int_{-\infty}^{\infty} f^*(x)\hat{x}^\dagger g(x) dx = 
-\int_{-\infty}^{\infty} \left(x f(x)\right)^* g(x) dx = 
-\int_{-\infty}^{\infty} x f^*(x) g(x) dx = 
-\int_{-\infty}^{\infty} f^*(x) x g(x) dx 
-\end{equation*}
-So:
-\begin{equation}
-\hat{x}^\dagger = \hat{x}
-\end{equation}
-For a complex number z:
-\begin{equation*}
-\int_{-\infty}^{\infty} f^*(x)z^\dagger g(x) dx = 
-\int_{-\infty}^{\infty} \left(z f(x)\right)^* g(x) dx = 
-\int_{-\infty}^{\infty} z^* f^*(x) g(x) dx = 
-\int_{-\infty}^{\infty} f^*(x) z^* g(x) dx 
-\end{equation*}
-So:
-\begin{equation}
-z^\dagger = z^*
-\end{equation}
-For a single derivative:
-\begin{equation*}
-\int_{-\infty}^{\infty} f^*(x) \left( \frac{\partial}{\partial x} \right)^\dagger g(x) dx = 
-\int_{-\infty}^{\infty} \left(\frac{\partial f}{\partial x}\right)^* g(x) dx = 
--\int_{-\infty}^{\infty} f^*(x) \frac{\partial g}{dx} dx  
-\end{equation*}
-where we used integration by parts in the last step (and assumed f and g vanish at the boundaries.
-\begin{equation}
-\left( \frac{\partial}{\partial x} \right)^{\dagger} = -\frac{\partial}{\partial x}
-\end{equation}
-It is left as an exercise to show that:
-\begin{equation}
-\hat{p}^\dagger = \hat{p}
-\end{equation}
-
-When an operator has the property $\hat{o}^\dagger = \hat{o}$ we say that it is hermetian.  
-
-\begin{equation}
-\braket{o} = \braket{\Psi|\hat{o}\Psi} = \braket{\Psi|\hat{o}^\dagger \Psi}
-= \braket{\hat{o} \Psi| \Psi} = \overline{\braket{\Psi| o \Psi}} = \braket{o}^*
-\end{equation}
-
-Expectations values of hermetian operators are real, and so we associate physical observables with hermetian operators. 
-
-
-\section{The Fourier Transform Revisited}
-
-Our inner product now extends between positive and negative infinity:
-\begin{equation}
-\braket{\Psi, \phi} \equiv \int_{-\infty}^{\infty} \Psi^*(x) \phi(x) \, dx
-\end{equation}
-Our basis functions, which are now defined for any value of $k$,
-\begin{equation}
-e_k = \frac{1}{\sqrt{2\pi}} \exp(i k x)
-\end{equation}
-are still orthonormal, but the condition looks a bit different in the continuum case:
-\begin{eqnarray*}
-\braket{e_k, e_{k'}} &=& \delta(k-k')
-\end{eqnarray*}
-See the appendix for more details on the Dirac delta function $\delta(x)$, which is zero everywhere but at $x=0$, where it is infinite.  It is the continuous version of $\delta_{nm}$.
-
-Our basis functions are also still complete.  In the discrete case we have a complex Fourier coefficient for every integer $n$.   Now we have a complex Fourier coefficient for any real value of $k$.  In place of Fourier coefficients, we have instead a function of $k$ which we call the Fourier transform: $\widetilde{\Psi}(k)$.
-Instead of a sum over discrete terms, we now have to integrate over all values of $k$:
-\begin{equation} \label{eqn:ift}
-\Psi(x) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} \widetilde{\Psi}(k) \exp(ikx) \, dk.
-\end{equation}
-Just as in the discrete case, we determine the Fourier transform from the inner product:
-\begin{equation} \label{eqn:ft}
-\widetilde{\Psi}(k) = \braket{e_k, \Psi} = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} {\Psi}(x) \exp(-ikx) \, dx
-\end{equation}
-Equation~\ref{eqn:ft} is generally referred to as the {\em Fourier Transform}, while Equation~\ref{eqn:ift} is referred to as the {\em Inverse Fourier Transform}.
-
-\section{The Fourier Transform in Quantum Mechanics}
-
-So far we have been considering the Fourier transform with respect to position $x$ and wave-number $k$.  A much more useful pair of variables for Quantum Mechanics turns out to be momentum $p$ and position $x$.  To relate $p$ to $k$ we need only apply the DeBroglie relation to the wavelength in the definition of the wavenumber:
-\begin{displaymath}
-k \equiv \frac{2 \pi}{\lambda} = \frac{2 \pi p}{h} = \frac{p}{\hbar}
-\end{displaymath}
-We could therefore make the substitution $k \to p/\hbar$ (and $dk \to dp / \hbar)$) in Equations~\ref{eqn:ift} and ~\ref{eqn:ft}.  It turns out that a marginally more useful equation results if we make the normalization factors symmetric, by splitting the normalization factor of $1/\hbar$ across both equations with $1/\sqrt{\hbar}$ applied to each:
-\begin{eqnarray} 
-\Psi(x) &=& \frac{1}{\sqrt{2\pi\hbar}} \int_{-\infty}^{\infty} \widetilde{\Psi}(p) \exp(ipx/\hbar) \, dp \\
-\widetilde{\Psi}(p) &=&  \frac{1}{\sqrt{2\pi\hbar}} \int_{-\infty}^{\infty} {\Psi}(x) \exp(-ipx/\hbar) \, dx
-\end{eqnarray}
-The major benefit of this symmetric form is that the normalization of $\Psi(x)$ and $\widetilde{\Psi}(p)$ in this case turns out to be the same:
-\begin{displaymath}
-\int_{-\infty}^{\infty} |\Psi(x)|^2 dx = \int_{-\infty}^{\infty} |\widetilde{\Psi}(p)|^2 dp = 1 
-\end{displaymath}
-Because we can always calculate $\Psi(x)$ from $\widetilde{\Psi}(p)$ either one completely describes the quantum mechanical state.  We call $\widetilde{\Psi}(p)$ the momentum wave function.   Whereas $|\Psi(x)|^2$ gives us the probability density for the quanton to be at position $x$, $|\Psi(p)|^2$ gives us the probability density for the quanton to have momentum $p$.
-
-
-
-
-\section{Ladder Operators Revisited}
-
-
-
-\appendix
-
-
-
 
 
 
