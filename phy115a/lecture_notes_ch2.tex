@@ -495,11 +495,20 @@ f(x) \; = \; \sum_{m=0}^{\infty}  A_m \, c_m(x)  \; \; + \; \; \sum_{m=1}^{\inft
 \end{equation*}
 Then calculate:
 \begin{eqnarray*}
-\braket{c_n| f} \; &=& \; \sum_{m=0}^{\infty}  A_m \, \braket{c_n| c_m}  \; \; + \; \; \sum_{m=1}^{\infty} B_m \, \braket{c_m| s_m} \\[8pt]
+  \braket{c_n| f} \; &=& \; \braket{c_n | \sum_{m=0}^{\infty}  A_m \, c_m  \; \; + \; \; \sum_{m=1}^{\infty} B_m \, s_m }\\[8pt]
+  &=& \; \sum_{m=0}^{\infty}  A_m \, \braket{c_n| c_m}  \; \; + \; \; \sum_{m=1}^{\infty} B_m \, \braket{c_m| s_m} \\[8pt]
  &=& \; \sum_{m=0}^{\infty}  A_m \; \delta_{nm}  \; \; + \; \; \sum_{m=1}^{\infty} B_m \; 0 \\[8pt]
 \braket{c_n| f} \; &=& A_n \\
 \end{eqnarray*}
-Note that the last step follows from the fact that, because of the $\delta_{nm}$ in the product, the only non-zero value in the sum across $m$ is the term for $m=n$.  It is left as an exercise to work this out for $\braket{s_n | f}$.  (It is also helpful to work through these same steps using the integral form of the orthogonality conditions.  It's much more cumbersome notation, but much more explicit about what is going on.  I highly recommend doing this if you are finding the abstract notation confusing at this point.)
+Note that the second step follows from properties I2 and D4 of
+Table~\ref{tbl:ipspace}.  In the last step the only non-zero value in
+the sum across $m$ is the term for $m=n$, because of the
+$\delta_{nm}$.  It is left as an exercise to work this out for
+$\braket{s_n | f}$.  (It is also helpful to work through these same
+steps using the integral form of the orthogonality conditions.  It's
+much more cumbersome notation, but much more explicit about what is
+going on.  I highly recommend doing this if you are finding the
+abstract notation confusing at this point.)
 
 \subsection{Application of Fourier Series to Infinite Well}
 
@@ -996,19 +1005,6 @@ as does the integral involving $a_-^2$ leaving only:
 \end{equation*}
 In principle we can calculate any classical dynamical variable in terms of the a's.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 \section{The Free Particle}
 
 We now consider the free particle, for which
@@ -1075,21 +1071,15 @@ and
 \end{equation}
 This the de Broglie formula that relates a particles momentum to its wavelength.  We assumed the SE and derived the de Broglie formula.  But one can instead start from the de Broglie formula and deduce the SE.
 
-Now for the bad news.  The classical free particle has velocity
-$$v_{\rm classical} = \pm\sqrt{\frac{2E}{m}}$$
-But the phase velocity is:
-$$v_{\rm phase} = \frac{\omega}{k} = \frac{E}{\hbar k} = \frac{E}{\sqrt{2mE}} = \sqrt{\frac{E}{2m}}$$
-so:
-$$v_{\rm phase} = \frac{1}{2} \, v_{\rm classical} $$
-the wave is traveling at one half the speed of the corresponding classical particle.
 
-But that problem seems minor compared to the next one.  We can calculate:
+
+We can calculate:
 $$|\Psi_k(x,t)|^2 = \left( A e^{i (k x-\omega t)} \right) \, \left( A e^{i (k x-\omega t)} \right)^*
 = |A|^2$$ 
 which shows that $\Psi_k$ has no time dependence, as expected for a stationary state.  But it can't be normalized:
 $$\int_{-\infty}^{+\infty} |\Psi_k(x,t)|^2 dx = |A|^2 \int_{-\infty}^{+\infty} dx = \infty$$
 
-We'll need some more mathematical tools to tackle these problems...
+We'll need some more mathematical tools to tackle this problem...
 
 \section{Fourier Series for Complex Functions}
 
@@ -1104,7 +1094,7 @@ First off, note that the periodic complex functions with period $a$ form a vecto
 $$\psi(x) = f(x) + i g(x)$$ 
 for real periodic functions $f(x)$ and $g(x)$, which each have a Fourier series.  And each sine and cosine can be written in terms of complex exponentials.  So we've concluded that Fourier's Theorem combined with the Euler Identities leads to conclusion that and complex periodic function with period $a$ has a Fourier series representation in terms of complex exponentials, that is:
 \begin{equation}
-f(x) = \sum_{n=-\infty}^{\infty}  c_n \, e_n(x)  \\
+\psi(x) = \sum_{n=-\infty}^{\infty}  c_n \, e_n(x)  \\
 \end{equation}
 where
 \begin{equation*}
@@ -1116,7 +1106,7 @@ So all that we need is to show that these new $e_n(x)$ are orthonormal.  And her
 $$\int_{-a/2}^{a/2} e_n(x) e_n(x) dx \; = \; A^2 \int_{-a/2}^{a/2} \exp\left( i \, \frac{4 \pi n x}{a}\right) dx \; \propto \; \exp(2 \pi n) - \exp(-2 \pi n) = 0$$
 What is going on here?  It's zero because the complex exponential is periodic, with equal parts positive and negative, and so the integral is vanishing.  But this didn't happen for our sines and cosines, because e.g.:
 $$\int_{-a/2}^{a/2} \sin^2\left( \frac{2 \pi n x}{a}\right) dx = \frac{a}{2}$$
-And that explains the problems.  $\sin^2(\theta)$ is never negative, because $\sin(\theta)$ is a real valued function.  But $(e^i\theta)^2$ can be negative, because $e^i\theta$ is a complex number. For example, $e^{i\pi/2} = i$, so $\left( e^{i\pi/2} \right)^2 = -1$.  With this understood, we know exactly what we have to do, we want the integral to be:
+The difference is that $\sin\theta$ is a real valued function, so $\sin^2\theta$ is non-negative.  But $(e^{i\theta})^2$ can be negative, because $e^{i\theta}$ is a complex number. For example, $e^{i\pi/2} = i$, so $\left( e^{i\pi/2} \right)^2 = -1$.  With this understood, we know exactly what we have to do, we want the integral to be:
 \begin{equation}
 \label{eqn:normexpfs}
 \int_{-a/2}^{a/2} |e_n(x)|^2 dx \; = \; \int_{-a/2}^{a/2} e_n^*(x) e_n(x) dx \; = \;
@@ -1137,9 +1127,9 @@ It is left as an exercise to show that using this definition of inner product, w
 \end{equation}
 And thus we can determine the Fourier coefficients in the usual way via Fourier's trick:
 \begin{eqnarray*}
-f(x) &=& \sum_{m=-\infty}^{\infty}  c_m \, e_m(x) \\[5pt]
-\braket{e_n|f} &=& \int_{-\frac{a}{2}}^{\frac{a}{2}} e_n^*(x) \sum_{m=-\infty}^{\infty}  c_m \, e_m(x) dx\\[5pt]
- &=& \sum_{m=-\infty}^{\infty}  c_m \int_{-\frac{a}{2}}^{\frac{a}{2}} e_n^*(x) \, e_m(x) dx\\[5pt]
+\psi(x) &=& \sum_{m=-\infty}^{\infty}  c_m \, e_m(x) \\[5pt]
+\braket{e_n|\psi} &=& \braket{e_n | \sum_{m=-\infty}^{\infty}  c_m \, e_m } \\[5pt]
+ &=& \sum_{m=-\infty}^{\infty}  c_m \braket{e_n| e_m}\\[5pt]
  &=& \sum_{m=-\infty}^{\infty}  c_m \delta_{nm}\\[5pt]
  &=& c_n\\
 \end{eqnarray*}
@@ -1163,7 +1153,7 @@ with
 $$e_n(x) = \sqrt{\frac{1}{a}}\exp( i\, k_n \, x)$$
 As always the Fourier coefficients are determined as 
 \begin{equation*}
-c_n = \braket{e_n | \psi} = \int_{-\frac{a}{2}}^{\frac{a}{2}} \psi(x) e_n^*(x)
+c_n = \braket{e_n | \psi} = \int_{-\frac{a}{2}}^{\frac{a}{2}} e_n^*(x) \psi(x)  dx
 \end{equation*}
 Consider the function:
 \begin{equation}
@@ -1208,7 +1198,7 @@ Now evidently in this limit:
 $$c_n \to \frac{C(k)}{\sqrt{a}} = 0$$
 which is not very useful.  The Fourier coefficients as we defined them carried a normalization factor that vanishes as $a \to \infty$.  More useful will be the quantity
 $$ \left(\sqrt{a} \; c_n \right) \; \to \; C(k) $$
-which we will show up again below.
+which will show up again below.
 
 Next we consider the Fourier series itself:
 $$\psi(x) = \sum_n c_n e_n(x) = \frac{1}{\sqrt{a}} \sum_n c_n e^{i k_n x}$$
@@ -1232,46 +1222,76 @@ so that:
 \end{eqnarray}
 
 
-\section{Resolution of the Problems with the Free Particle}
+\section{Wave Packet}
 
-We are now ready to solve the problem with our Free Particle stationary state solutions.  We just have to accept that the simple plane wave solutions are not physical solutions, but they do still provide a complete solution to the SE for the free particle.  Let's see how it works.
+We saw before that the stationary soluctions to the Schrodinger
+equation from the free particle are non-normalizable: they cannot
+represent the actual physics state of a particle.  But we can still
+create a physically realizable state as the superposition of many
+stationary solutions, by making use of the Fourier Transform.  Let's
+see how that works.
 
-We are given a wave function at $\Psi(x,0)$ at $t=0$ describing the initial state.  This function must be normalized.  We calculate it's Fourier transform:
+We are given a wave function at $\Psi(x,0)$ at $t=0$ describing the
+initial state.  This function must be normalized.  We calculate it's
+Fourier transform:
 $$ \widetilde{\Psi}(k,0) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} \; \Psi(x,0) \; e^{-ikx} \; dx $$
 and so then we can write $\Psi(x,0)$ as a integral of traveling waves:
 $$ \Psi(x,0) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} \; \widetilde{\Psi}(k,0) \; e^{ikx} \; dk $$
-The beautiful thing is, we know the time dependence for each traveling wave $e^{ikx}$ that appears in the integral.  These are stationary solution the TISE, so they have a wiggle factor:
+The beautiful thing is, we know the time dependence for each traveling wave $e^{ikx}$ that appears in the integral.  These are stationary solution the TISE, so they each have a wiggle factor:
 $$\phi(t) = \exp\left(-i\frac{E_k t}{\hbar}\right) = \exp\left(-i\frac{\hbar k^2}{2m}t\right)$$
 where we have used:
-$$E_k = \frac{\hbar k^2}{2m}$$
+$$E_k = \frac{\hbar^2 k^2}{2m}$$
 so we have:
 $$ \Psi(x,t) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} \; \widetilde{\Psi}(k,0) \; 
 \exp\left[ik\left(x-\frac{\hbar k}{2m}t\right)\right]\; dk $$
 It is left as an exercise to show that this is indeed a solution to the SE.  Just note that $\hat{H}$
 and $-i\hbar \frac{\partial}{\partial t}$ both happily move inside the integral.  Since it is a solution to the SE, it preserves its normalization. So as $\Psi(x,0)$ must be normalized, $\Psi(x,t)$ is normalized as well.
 
-Group velocity...
+The classical free particle has velocity
+$$v_{\rm classical} = \pm\sqrt{\frac{2E}{m}}$$
+But the phase velocity is:
+$$v_{\rm phase} = \frac{\omega}{k} = \frac{E}{\hbar k} = \frac{E}{\sqrt{2mE}} = \sqrt{\frac{E}{2m}}$$
+so:
+$$v_{\rm phase} = \frac{1}{2} \, v_{\rm classical} $$
+the wave is traveling at one half the speed of the corresponding classical particle.
+
+But we already know that individual travelling waves do not represent
+physical states.  It we want to describe a particle with a position
+and velocity, we need to build a wave packet: a burst of localized
+wave action.  Your homework will include a very good example of a
+Gaussian wave packet, but we don't need to be so explicit here.  Let's
+assume that the Fourier transform $\widetilde{\psi}(k,0)$ of the wave
+packet is nonzero only close to a single value of $k$ which we will
+call $k_0$.  If this were not true, different parts of the wave packet
+will travel at different speeds, and the notion of the velocity of the
+particle will be poorly defined.
+
+We'll write our wave packet like this:
 $$ \Psi(x,t) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} \; \widetilde{\Psi}(k,0) \;  
 e^{\displaystyle i(kx - \omega(k)t)}\; dk $$
-
+Now in our specific case:
+$$\omega(k) = \frac{E}{\hbar} = \frac{\hbar k^2}{2m}$$
+but we are keeping things more general here.  Since our wave packet is
+zero unless $k$ is near $k_0$, we can Taylor expand $\omega(k)$ about
+$k_0$:
 $$\omega(k) = \omega(k_0) + \omega'(k_0) (k - k_0) $$
-
-$$ \Psi(x,t) = \frac{1}{\sqrt{2\pi}} 
+And so we can write:
+\begin{eqnarray*}
+\Psi(x,t) &=& \frac{1}{\sqrt{2\pi}} 
 e^{\displaystyle i(k_0x - \omega(k_0)t)}\;
 \int_{-\infty}^{\infty} \; \widetilde{\Psi}(k,0) \;  
-e^{\displaystyle i(k-k_0)(x - \omega'(k_0)t)}\; dk $$
-
-$$v_{\rm group} = \frac{d\omega}{dk}$$
-
-$$v_{\rm phase} = \frac{\omega}{k}$$
-
+e^{\displaystyle i(k-k_0)(x - \omega'(k_0)t)}\; dk\\ 
+&=& e^{\displaystyle i(k_0x - \omega(k_0)t)}\; F(x - \omega'(k_0)t)\\
+\end{eqnarray*}
+for some complex function $F$.  The first term in the product is a travelling wave moving at the phase velocity:
+$$v_{\rm phase} = \left. \frac{\omega(k)}{k} \right\rvert_{k_0}$$
+and the second is an envelope, that locally sets the amplitude of the travelling wave.  It is moving at what is called the group velocity:
+$$ v_{\rm group} = \omega'(k_0) = \left. \frac{d\omega}{dk} \right\rvert_{k_0}$$
 For the free particle:
 $$\omega = \frac{E}{\hbar} = \frac{\hbar k^2}{2m}$$
-
 So:
-
-$$v_{\rm group} = 2 v_{rm phase} = v_{\rm classical}$$
-
+$$v_{\rm group} = 2 v_{\rm phase} = v_{\rm classical}$$
+That is, the wave packet travels at the classical speed of the particle.
 
  
 \section{Hermetian Conjugates}
