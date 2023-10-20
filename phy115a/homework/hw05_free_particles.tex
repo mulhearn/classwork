@@ -1,0 +1,181 @@
+\documentclass[12pt]{article}
+
+
+\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.5in]{geometry}
+\usepackage{cite}
+\usepackage{slashed}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{braket}
+\usepackage[american,fulldiode]{circuitikz}
+
+\begin{document}
+\newcommand{\ihbar}{\ensuremath{i \hbar}}
+\newcommand{\dPsidt}{\ensuremath{ \frac{\partial \Psi}{\partial t} }}
+\newcommand{\dPsidx}{\ensuremath{ \frac{\partial \Psi}{\partial x} }}
+\newcommand{\ddPsidx}{\ensuremath{ \frac{\partial^2 \Psi}{\partial x^2} }}
+\newcommand{\dPssdt}{\ensuremath{ \frac{\partial \Psi^*}{\partial t} }}
+\newcommand{\dPssdx}{\ensuremath{ \frac{\partial \Psi^*}{\partial x} }}
+\newcommand{\ddPssdx}{\ensuremath{ \frac{\partial^2 \Psi^*}{\partial x^2} }}
+
+\newcommand{\dphidt}{\ensuremath{ \frac{d \phi}{dt} }}
+\newcommand{\dpsidx}{\ensuremath{ \frac{d \psi}{dx} }}
+\newcommand{\ddpsidx}{\ensuremath{ \frac{d^2 \psi}{dx^2} }}
+
+
+\date{\vspace{-5ex}}
+
+\title{Homework Assignment 5 \\ Particles Want To Be Free}
+
+\maketitle
+
+\section*{Practice Problems}
+
+These problems are graded on effort only.\\
+
+\noindent
+{\bf Griffiths: P2.13, P2.18, P2.21} \\
+
+\section*{Additional Problems}
+
+\noindent
+{\bf Problem 1:} Because it is so widely applicable, the Fourier series is written in many different ways, and this can be quite confusing.  But you never need to be told more than the Fourier series, as you can deduce the rest for yourself.  Suppose we write the Fourier series for a function $f(t)$ with period $T$ in this way:
+$$f(t) = \sum_m c_m \exp(i \omega_m t)$$
+where:
+$$\omega_m \equiv \frac{2 \pi m}{T}$$
+This form obscures the role of orthonormal basis functions in the series, but it is neater to write.\\
+
+\noindent
+(A) Calculate:
+$$ \int_{-T/2}^{+T/2} \exp(-i \omega_n t) \; \exp(i \omega_m t)  \; dt $$
+
+\noindent
+(B) Use Fourier's trick to determine the formulas for the coefficients $c_m$.  That is, calculate:
+$$ \int_{-T/2}^{+T/2} \exp(-i \omega_n t) f(x) dx $$
+and use the results to write a formula for calculating $c_n$.
+
+\newpage
+
+\noindent
+{\bf Problem 2:} At $t=0$ a free particle has the initial wave function:
+$$ \Psi(x,0) = 
+\begin{cases}    
+A & -a \leq x \leq a \\
+0 & {\rm otherwise} \\
+\end{cases} 
+$$
+
+\noindent
+(A) Find the value of $A$ that normalizes $\Psi(x,0)$ appropriately.\\
+
+\noindent
+(B) Find $\widetilde{\Psi}(k,0)$ the Fourier transform of $\Psi(x,0)$.\\
+
+\noindent
+(C) Write down $\Psi(x,t)$ as an integral.\\
+
+\vskip 2cm
+
+\noindent
+{\bf Problem 3:} For an operator $\hat{O}$ we defined its Hermetian adjoint $\hat{O}^\dagger$ by the defining equation:
+$$\braket{f|\hat{O}^\dagger g} = \braket{\hat{O} f | g}$$.
+
+\noindent
+(A) Find $\hat{p}^\dagger$ by writing $\braket{\hat{p} f | g}$ as an integral, and doing whatever it takes to move the action over to $g$.
+
+\noindent
+(B) Show that this definition this is equivalent to definition used by Griffiths:
+$$\braket{f|\hat{O} g} = \braket{\hat{O}^\dagger f | g}$$
+
+\noindent
+(C) Show that $\left(\hat{O}^\dagger\right)^\dagger = \hat{O}$
+
+\noindent
+(D) Show that $\left(\hat{A}\hat{B}\right)^\dagger = \hat{B}^\dagger\hat{A}^\dagger$
+
+\noindent
+(E) Is $\left(i\hat{x}\right)$ a Hermetian operator?
+
+\noindent
+(F) Is $\left(\hat{x}\hat{p}\right)$ a Hermetian operator?
+
+\noindent
+(G) Is $\left(\frac{\partial^2}{\partial x^2}\right)$ a Hermetian operator?
+
+\newpage
+
+\noindent
+{\bf Problem 4:}  This problem is broken into a lot of stops but each step is very doable.  Recall our beloved ladder operators for the simple harmonic oscillator:
+\begin{eqnarray*}
+\hat{a}_- &\equiv& \frac{1}{\sqrt{2}}\left(i \frac{\hat{p}}{p_0} + \frac{\hat{x}}{x_0}\right) \\
+\hat{a}_+ &\equiv& \frac{1}{\sqrt{2}}\left(-i \frac{\hat{p}}{p_0} + \frac{\hat{x}}{x_0} \right) \\
+\end{eqnarray*}
+where:
+$$x_0 \equiv \sqrt{\frac{\hbar}{m \omega}}, \hspace{1cm} {\rm and} \hspace{1cm} p_0 \equiv \frac{\hbar}{x_0} = \sqrt{\hbar m \omega}.$$
+
+\noindent
+(A) Show that:
+$$\hat{a}_+^\dagger = \hat{a}_-$$
+and:
+$$\hat{a}_-^\dagger = \hat{a}_+$$
+
+\noindent
+(B) For a particle in state $\psi_n$ show that the expectation value:
+$$\braket{\hat{a}_+\hat{a}_-} = n $$
+and:
+$$\braket{\hat{a}_-\hat{a}_+} = n+1$$
+You may use the known results from lecture:
+\begin{eqnarray*}
+\hat{a}_+\hat{a}_- \psi_n &=& n \, \psi_{n} \\
+\hat{a}_-\hat{a}_+ \psi_n &=& (n+1) \, \psi_{n} \\
+\end{eqnarray*}
+
+\noindent
+(C) We showed that these operators act as raising and lowering operators:
+\begin{eqnarray*}
+\hat{a}_+ \psi_n &=& c_n \psi_{n+1} \\
+\hat{a}_- \psi_n &=& d_n \psi_{n-1} 
+\end{eqnarray*}
+with unknown constants $c_n$ and $d_n$.  To determine the constant $c_n$ we calculate $\braket{\hat{a}_+\hat{a}_-}$ in a second way:
+\begin{eqnarray*}
+\braket{\hat{a}_+\hat{a}_-} &=& \braket{\psi_n | \hat{a}_+ \hat{a}_- \psi_n}\\
+ &=& \braket{\hat{a}_+^\dagger \psi_n | \hat{a}_- \psi_n}\\
+ &=& \braket{\hat{a}_- \psi_n | \hat{a}_- \psi_n}\\
+ &=& \braket{c_n \psi_n | c_n \psi_n}\\
+ &=& c_n^* c_n \braket{\psi_n | \psi_n}\\
+ &=& |c_n|^2\\ 
+\end{eqnarray*}
+and determined that $|c_n|^2 = n$.  Calculate 
+$\braket{\hat{a}_-\hat{a}_+}$ in similar fashion to determine $|d_n|^2$.
+
+\noindent
+(D) We conclude that:
+$$|c_n|^2 = n$$
+and
+$$|d_n|^2 = n+1$$
+But there is (one) arbitrary phase factor per stationary state $\psi_n$.  We can certainly pick:
+$$c_n = \sqrt{n}$$
+Show that this choice obligates us to choose:
+$$d_n = \sqrt{n+1}$$
+Hint: calculate $$\braket{\hat{a}_+\hat{a}_-}$$ a third way.
+
+\noindent
+(E) Suppose we picked instead:
+$$c_n = i\sqrt{n}$$
+what would $d_n$ be?  Would the spatial wave functions $\psi_n(x)$ be real functions?
+
+\noindent
+(F) Determine the ground state wave function from the simple differential equation:
+$$\hat{a}_- \psi_0 = 0$$
+
+\noindent
+(G) Determine $\psi_1(x)$ and $\psi_2(x)$ from:
+$$\psi_n(x) = \frac{1}{n!}(\hat{a}_+)^n \psi_0$$
+
+
+\end{document}
+
+
+
+
