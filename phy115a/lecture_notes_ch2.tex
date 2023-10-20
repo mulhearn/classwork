@@ -931,7 +931,7 @@ These two equations contain everything that we need.  Let's start by calculating
 \end{eqnarray*}
 Similarly
 \begin{equation*}
-[\hat{H},\hat{a}_-] = -\hbar \omega 
+[\hat{H},\hat{a}_-] = -\hbar \omega \hat{a}_-
 \end{equation*}
 So now suppose we have a solution to the TISE, so that:
 $$\hat{H} \Psi = E \Psi$$
@@ -1293,8 +1293,7 @@ So:
 $$v_{\rm group} = 2 v_{\rm phase} = v_{\rm classical}$$
 That is, the wave packet travels at the classical speed of the particle.
 
- 
-\section{Hermetian Conjugates}
+\section{Hermetian Adjoints and Hermetian Operators}
 The normalizable wave functions are a vector space over the complex numbers, with an inner product:
 \begin{equation}
 \braket{f|g} \equiv \int_{-\infty}^{\infty} f^*(x) \, g(x) \, dx
@@ -1307,16 +1306,17 @@ Expectation values are inner products as well:
 \begin{equation}
 \braket{O} = \braket{\Psi|\hat{O}\Psi} \equiv \int_{-\infty}^{\infty} \Psi^*(x,t)\hat{O}\Psi(x,t) dx
 \end{equation}
-We define the Hermetian conjugate of an operator $\hat{O}^{\dagger}$ by the property that:
+
+For an operator $\hat{O}$ we\footnote{Some authors (most?) define this differently, but you'll show that our definition is equivalent.} define it's Hermitian adjoint (or conjugate) $\hat{O}^\dagger$ by the property:
 \begin{equation}
 \braket{f|\hat{O^\dagger}g} = \braket{\hat{O} f| g}
 \end{equation}
-Explicitly in terms of the integral:
+That is $\hat{O}^\dagger$ operating on $g$ (i.e. in the "usual place") gives a result equivalent to the original operator $\hat{O}$ acting on $f$ (i.e. in the "unusual place").  Explicitly in terms of the integral definition of the inner product:
 \begin{equation}
 \int_{-\infty}^{\infty} f^*(x,t)\hat{O}^\dagger g(x,t) dx = 
 \int_{-\infty}^{\infty} \left( \hat{O} f(x,t)\right)^* g(x,t) dx
 \end{equation}
-The Hermetian conjugate $\hat{O}^\dagger$ of an operator $\hat{O}$ is the operator that, when operating on function g, acts equivalently as the original operator acting on f.
+So, to find the Hermetian adjoint of an operator $\hat{O}$, operate $\hat{O}$in the "unusual spot", then perform whatever manipulations are required to bring the operator over to the "usual spot".  Then read off the operator $\hat{O}^\dagger$.
 
 For the operator $\hat{x}$:
 \begin{equation*}
@@ -1350,26 +1350,118 @@ where we used integration by parts in the last step (and assumed f and g vanish 
 \begin{equation}
 \left( \frac{\partial}{\partial x} \right)^{\dagger} = -\frac{\partial}{\partial x}
 \end{equation}
-It is left as an exercise to show that:
+It is left as an exercise to show:
 \begin{equation}
 \hat{p}^\dagger = \hat{p}
 \end{equation}
-
 When an operator has the property $\hat{o}^\dagger = \hat{o}$ we say that it is hermetian.  
-
 \begin{equation}
 \braket{o} = \braket{\Psi|\hat{o}\Psi} = \braket{\Psi|\hat{o}^\dagger \Psi}
 = \braket{\hat{o} \Psi| \Psi} = \overline{\braket{\Psi| o \Psi}} = \braket{o}^*
 \end{equation}
-
 Expectations values of hermetian operators are real, and so we associate physical observables with hermetian operators. 
+
+It is left as an exercise to show that our definition is equivalent to Griffith's and others:
+$$\braket{f|\hat{O}g} = \braket{\hat{O}^\dagger f|g}$$
+Hint: just take the complex conjugate of both sides of the equation.
+
+\section{Orthogonality of the Stationary Solutions}
+It is left as an exercise, to show that the Hamiltonian is a Hermetian operator:
+$$\hat{H}^\dagger = \hat{H}$$
+Now suppose we have two solutions to the TISE $\psi_n(x)$ and $\psi_m(x)$ with:
+$$\hat{H}\psi_n(x) = E_n \psi_n(x), \hspace{1cm} \hat{H}\psi_m(x) = E_m \psi_m(x)$$
+Now notice that:
+\begin{eqnarray*}
+\braket{\psi_m|\hat{H}\psi_n} &=& \braket{\psi_m|E_n\psi_n}\\
+&=& E_n \braket{\psi_m|\psi_n}
+\end{eqnarray*}
+but also, as $\hat{H}^\dagger = \hat{H}$, we have:
+\begin{eqnarray*}
+\braket{\psi_m|\hat{H}\psi_n} &=& \braket{\hat{H}\psi_m|\psi_n}\\
+&=& \braket{E_m\psi_m|\psi_n}\\
+&=& E_m \braket{\psi_m|\psi_n}
+\end{eqnarray*}
+Why isn't it $E_m^*$ in the last step?  So now we have:
+$$(E_m-E_n)\braket{\psi_m|\psi_n} = 0$$
+That is, if $E_m \neq E_n$,
+\begin{equation}
+\braket{\psi_m|\psi_n} = 0
+\end{equation}
+For the cases we've seen so far, $E_n \neq E_m$ for $n \neq m$, so we see that our assumption that the stationary solutions are orthogonal was sound.  We'll handle the case of degeneracy (different states having same energy) later.
 
 \section{Ladder Operators Revisited}
 
+Recall our ladder operators:
+\begin{eqnarray*}
+\hat{a}_- &\equiv& \frac{1}{\sqrt{2}}\left(i \frac{\hat{p}}{p_0} + \frac{\hat{x}}{x_0}\right) \\
+\hat{a}_+ &\equiv& \frac{1}{\sqrt{2}}\left(-i \frac{\hat{p}}{p_0} + \frac{\hat{x}}{x_0} \right) \\
+\end{eqnarray*}
+where:
+$$x_0 \equiv \sqrt{\frac{\hbar}{m \omega}}, \hspace{1cm} {\rm and} \hspace{1cm} p_0 \equiv \frac{\hbar}{x_0} = \sqrt{\hbar m \omega}.$$
+with:
+\begin{equation*}
+[\hat{a}_-, \hat{a}_+] \; = \;  1
+\end{equation*}
+and:
+\begin{equation*}
+\hat{H} =  \hbar\omega \left( \hat{a}_+ \hat{a}_- + \frac{1}{2} \right)
+\end{equation*}
+We leave it as an exercise to show that $\hat{a}_-$ is the Hermetian adjoint of $\hat{a}_+$ and vice-versa, i.e.:
+\begin{eqnarray*}
+\hat{a}_- &=& \hat{a}_+^\dagger\\
+\hat{a}_+ &=& \hat{a}_-^\dagger
+\end{eqnarray*}
+We showed that these operators act as raising and lowering operators:
+\begin{eqnarray*}
+\hat{a}_+ \psi_n &=& c_n \psi_{n+1} \\
+\hat{a}_- \psi_n &=& d_n \psi_{n-1} 
+\end{eqnarray*}
+where:
+$$\hat{H}\psi_n = E_n \psi_n$$
+for:
+$$E_n = \hbar \omega \left(n + \frac{1}{2}\right)$$
+But we don't know the constants $c_n$ and $d_n$ yet, which is the only thing between us and rolling this machinery out to find the complete set of wave functions explicitly.
+We do have:
+\begin{eqnarray*}
+\hat{a}_+\hat{a}_- \psi_n &=& n \, \psi_{n} \\
+\hat{a}_-\hat{a}_+ \psi_n &=& (n+1) \, \psi_{n} \\
+\end{eqnarray*}
+The trick to determining $c_n$ is to work out the expectation value for $\braket{a_+a_-}$ 
+for the stationary state $\psi_n$ in two different ways.  First:
+\begin{eqnarray*}
+\braket{a_+a_-} &=& \braket{\psi_n | a_+ a_- \psi_n}\\
+ &=& \braket{\psi_n | n \psi_n}\\
+ &=& n \braket{\psi_n | \psi_n}\\
+ &=& n \\
+\end{eqnarray*}
+and second, using $\hat{a}_+^\dagger = \hat{a}_-$:
+\begin{eqnarray*}
+\braket{a_+a_-} &=& \braket{\psi_n | \hat{a}_+ \hat{a}_- \psi_n}\\
+ &=& \braket{\hat{a}_+^\dagger \psi_n | \hat{a}_- \psi_n}\\
+ &=& \braket{\hat{a}_- \psi_n | \hat{a}_- \psi_n}\\
+ &=& \braket{c_n \psi_n | c_n \psi_n}\\
+ &=& c_n^* c_n \braket{\psi_n | \psi_n}\\
+ &=& |c_n|^2\\ 
+\end{eqnarray*}
+so we conclude that:
+$$|c_n|^2 = n$$
+A similar calculation shows:
+$$|d_n|^2 = n+1$$
+But there is (one!) arbitrary phase factor.  It is left as an exercise to show that:
+\begin{eqnarray*}
+c_n &=& \sqrt{n}\\
+d_n &=& \sqrt{n+1} 
+\end{eqnarray*}
+are a mutually consistent choice of phase, and they keep the spatial wave functions real.
+
+Now we can produce the explicit solutions by solving the (simple!) differential equation for the ground state:
+$$\hat{a}_- \psi_0 = 0$$
+to find $\psi_0(x)$ and then use:
+$$\psi_n(x) = \frac{1}{n!}(\hat{a}_+)^n \psi_0$$
+to get the rest!
+
 
 \section{The Dirac Delta Function}
-
-...
 
 Note that the Fourier Transform of the Dirac delta function is:
 $$
@@ -1387,17 +1479,6 @@ and (by changing variables):
 $$
 \delta(k-k') = \frac{1}{2\pi} \int_{-\infty}^{\infty} e^{i(k-k')x)} dx
 $$
-Very useful...  its' sort of a shortcut for remembering the FT...
-
-Proof Plancherel theorem...
-
-
-
-
-
-
-
-
 
 
 \section{The Fourier Transform Revisited}
