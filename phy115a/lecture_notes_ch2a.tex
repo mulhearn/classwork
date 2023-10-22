@@ -277,7 +277,7 @@ f(x) =
   -\psi(-x) & -b \leq x < 0 \\
 \end{cases}   
 \end{equation*}
-It is an odd function by construction:  $f(-x) = -f(x)$.  Since f(b) = f(-b) = 0, we can consider it to be a periodic function with period $2b$. To evaluate it's Fourier series, we'll only need to evaluate it in the region $[-b,b]$ where it is defined\footnote{If you prefer, you can imagine making the helper function truly periodic by just stamping out a copy of $f(x)$ from $[-a,a]$ into $[a,3a]$, and so on.  It will have no effect in what follows.}.  When applying the formulas for the Fourier series, we will need to make the substitute $a \to 2b$ into the original formulas, because the period of $f(x)$ is $2b$.
+It is an odd function by construction:  $f(-x) = -f(x)$.  Since f(b) = f(-b) = 0, we can consider it to be a periodic function with period $2b$. To evaluate it's Fourier series, we'll only need to evaluate it in the region $[-b,b]$ where it is defined\footnote{If you prefer, you can imagine making the helper function truly periodic by just stamping out a copy of $f(x)$ from $[-b,b]$ into $[b,3b]$, and so on.  It will have no effect in what follows.}.  When applying the formulas for the Fourier series, we will need to make the substitute $a \to 2b$ into the original formulas, because the period of $f(x)$ is $2b$.
 
 For $f(x)$ the Fourier coefficients of the cosines all vanish:
 \begin{eqnarray*}
@@ -1069,6 +1069,7 @@ to find $\psi_0(x)$ and then use:
 $$\psi_n(x) = \frac{1}{n!}(\hat{a}_+)^n \psi_0$$
 to get the rest!
 
+\end{document}
 
 \section{The Dirac Delta Function}
 
@@ -1088,9 +1089,6 @@ and (by changing variables):
 $$
 \delta(k-k') = \frac{1}{2\pi} \int_{-\infty}^{\infty} e^{i(k-k')x)} dx
 $$
-
-\end{document}
-
 
 \section{The Fourier Transform Revisited}
 

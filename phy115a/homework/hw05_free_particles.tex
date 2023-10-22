@@ -48,10 +48,14 @@ This form obscures the role of orthonormal basis functions in the series, but it
 
 \noindent
 (A) Calculate:
+$$ \int_{-T/2}^{+T/2} \exp(-i \omega_m t) \; \exp(i \omega_m t)  \; dt $$
+
+\noindent
+(B) Without calculating integrals you alrady know are zero, write the general solution to this integral:
 $$ \int_{-T/2}^{+T/2} \exp(-i \omega_n t) \; \exp(i \omega_m t)  \; dt $$
 
 \noindent
-(B) Use Fourier's trick to determine the formulas for the coefficients $c_m$.  That is, calculate:
+(C) Use Fourier's trick to determine the formulas for the coefficients $c_m$.  That is, calculate:
 $$ \int_{-T/2}^{+T/2} \exp(-i \omega_n t) f(x) dx $$
 and use the results to write a formula for calculating $c_n$.
 
@@ -75,6 +79,9 @@ $$
 \noindent
 (C) Write down $\Psi(x,t)$ as an integral.\\
 
+\noindent
+(D) Demonstrate explicitly that $\Psi(x,t)$ is a solution to the Fourier series.\\
+
 \vskip 2cm
 
 \noindent
@@ -82,26 +89,26 @@ $$
 $$\braket{f|\hat{O}^\dagger g} = \braket{\hat{O} f | g}$$.
 
 \noindent
-(A) Find $\hat{p}^\dagger$ by writing $\braket{\hat{p} f | g}$ as an integral, and doing whatever it takes to move the action over to $g$.
+(A) Find $\hat{p}^\dagger$ by writing $\braket{\hat{p} f | g}$ as an integral, and doing whatever it takes to move the action over to $g$.\\[5pt]
 
 \noindent
-(B) Show that this definition this is equivalent to definition used by Griffiths:
+(B) Show that this definition is equivalent to the definition used by Griffiths:
 $$\braket{f|\hat{O} g} = \braket{\hat{O}^\dagger f | g}$$
 
 \noindent
-(C) Show that $\left(\hat{O}^\dagger\right)^\dagger = \hat{O}$
+(C) Show that $\left(\hat{O}^\dagger\right)^\dagger = \hat{O}$\\[5pt]
 
 \noindent
-(D) Show that $\left(\hat{A}\hat{B}\right)^\dagger = \hat{B}^\dagger\hat{A}^\dagger$
+(D) Show that $\left(\hat{A}\hat{B}\right)^\dagger = \hat{B}^\dagger\hat{A}^\dagger$\\[5pt]
 
 \noindent
-(E) Is $\left(i\hat{x}\right)$ a Hermetian operator?
+(E) Is $\left(i\hat{x}\right)$ a Hermetian operator?\\[5pt]
 
 \noindent
-(F) Is $\left(\hat{x}\hat{p}\right)$ a Hermetian operator?
+(F) Is $\left(\hat{x}\hat{p}\right)$ a Hermetian operator?\\[5pt]
 
 \noindent
-(G) Is $\left(\frac{\partial^2}{\partial x^2}\right)$ a Hermetian operator?
+(G) Is $\left(\frac{\partial^2}{\partial x^2}\right)$ a Hermetian operator?\\[5pt]
 
 \newpage
 
@@ -147,7 +154,10 @@ with unknown constants $c_n$ and $d_n$.  To determine the constant $c_n$ we calc
  &=& |c_n|^2\\ 
 \end{eqnarray*}
 and determined that $|c_n|^2 = n$.  Calculate 
-$\braket{\hat{a}_-\hat{a}_+}$ in similar fashion to determine $|d_n|^2$.
+$\braket{\hat{a}_-\hat{a}_+}$ in similar fashion to determine $|d_n|^2$.\\[5pt]
+
+\newpage
+
 
 \noindent
 (D) We conclude that:
@@ -158,12 +168,12 @@ But there is (one) arbitrary phase factor per stationary state $\psi_n$.  We can
 $$c_n = \sqrt{n}$$
 Show that this choice obligates us to choose:
 $$d_n = \sqrt{n+1}$$
-Hint: calculate $$\braket{\hat{a}_+\hat{a}_-}$$ a third way.
+Hint: calculate $$\braket{\hat{a}_+\hat{a}_-}$$ a third way.\\[5pt]
 
 \noindent
 (E) Suppose we picked instead:
 $$c_n = i\sqrt{n}$$
-what would $d_n$ be?  Would the spatial wave functions $\psi_n(x)$ be real functions?
+what would $d_n$ be?  Would the spatial wave functions $\psi_n(x)$ be real functions?\\[5pt]
 
 \noindent
 (F) Determine the ground state wave function from the simple differential equation:
@@ -171,7 +181,7 @@ $$\hat{a}_- \psi_0 = 0$$
 
 \noindent
 (G) Determine $\psi_1(x)$ and $\psi_2(x)$ from:
-$$\psi_n(x) = \frac{1}{n!}(\hat{a}_+)^n \psi_0$$
+$$\psi_n(x) = \frac{1}{\sqrt{n!}}(\hat{a}_+)^n \psi_0$$
 
 
 \end{document}
