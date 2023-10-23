@@ -1,0 +1,297 @@
+\documentclass[12pt]{book}
+
+\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.5in]{geometry}
+\usepackage{cite}
+\usepackage{slashed}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{braket}
+\begin{document}
+
+\newcommand{\ihbar}{\ensuremath{i \hbar}}
+\newcommand{\Pss}{\ensuremath{\Psi^*}}
+\newcommand{\dPsidt}{\ensuremath{ \frac{\partial \Psi}{\partial t} }}
+\newcommand{\dPsidx}{\ensuremath{ \frac{\partial \Psi}{\partial x} }}
+\newcommand{\ddPsidx}{\ensuremath{ \frac{\partial^2 \Psi}{\partial x^2} }}
+\newcommand{\dPssdt}{\ensuremath{ \frac{\partial \Psi^*}{\partial t} }}
+\newcommand{\dPssdx}{\ensuremath{ \frac{\partial \Psi^*}{\partial x} }}
+\newcommand{\ddPssdx}{\ensuremath{ \frac{\partial^2 \Psi^*}{\partial x^2} }}
+
+\newcommand{\dphidt}{\ensuremath{ \frac{d \phi}{dt} }}
+\newcommand{\dpsidx}{\ensuremath{ \frac{d \psi}{dx} }}
+\newcommand{\ddpsidx}{\ensuremath{ \frac{d^2 \psi}{dx^2} }}
+
+
+\title{PHY 115A \\ Lecture Notes 2B: \\ 
+Tunneling and Scattering \\
+(Griffith's 2.5-2.6,9.1-9.2)}
+\author{Michael Mulhearn}
+
+\maketitle
+
+\setcounter{chapter}{1}
+\chapter{Tunneling and Scattering}
+\setcounter{section}{25}
+\setcounter{equation}{70}
+
+\section{Continuity of the Wave Function}
+
+Let's start with the case $V(x)$ is finite everywhere, than we start from the TISE:
+$$-\frac{\hbar^2}{2m}\frac{d^2 \psi}{d x^2} + V(x) \psi(x) = E \psi(x)$$
+Without loss of generality, we'll investigate continuity at $x=0$, by integrating the TISE from $-\epsilon$ to $+\epsilon$:
+$$\int_{-\epsilon}^{+\epsilon}\frac{d^2 \psi}{d x^2} dx = \frac{2m}{\hbar^2}\int_{-\epsilon}^{+\epsilon} \left(V(x) - E\right) \; \psi(x) \, dx$$
+We'll assume that we keep $\epsilon > 0$ here and everywhere below.  By the fundamental theorem of calculus the LHS is:
+\begin{equation}
+\label{eqn:psicont}
+\left. \frac{d\psi}{d x} \right\rvert_{+\epsilon} 
+- \left. \frac{d\psi}{d x} \right\rvert_{-\epsilon}
+ = \frac{2m}{\hbar^2}\int_{-\epsilon}^{+\epsilon} \left(V(x) - E\right) \; \psi(x) \, dx
+\end{equation}
+In the limit $\epsilon \to 0$, the RHS vanishes since $V(x)$ is finite, so:
+$$ \lim_{\epsilon \to 0} \left( \left. \frac{d\psi}{d x} \right\rvert_{+\epsilon} 
+- \left. \frac{d\psi}{d x} \right\rvert_{-\epsilon} \right) = 0$$
+which is to say the derivative of the wave function is continuous, and so the wave function is continuous as well.
+
+But what about infinite (or undefined) $V(x)$?  Here we still insist that the wave function be continuous, as otherwise the state of a particle would be undefined at some point.  But the derivative need not be continuous, as the $V(x)$ term in LHS in Equation~\ref{eqn:psicont} no longer vanishes in the limit $\epsilon \to 0$:
+\begin{equation}
+\label{eqn:psidiscont}
+\lim_{\epsilon \to 0} \left( \left. \frac{d\psi}{d x} \right\rvert_{+\epsilon} 
+- \left. \frac{d\psi}{d x} \right\rvert_{-\epsilon} \right) = 
+\lim_{\epsilon \to 0}
+\frac{2m}{\hbar^2}\int_{-\epsilon}^{+\epsilon} V(x) \; \psi(x) \, dx
+\end{equation}
+
+\section{The Dirac Delta Function}
+
+The so-called ``Dirac Delta Function'' $\delta(x)$ is defined by it's behavior in an integral:
+\begin{equation}
+\int_{-\infty}^{+\infty} f(x) \, \delta(x) \, dx = f(0) 
+\end{equation}
+where it ``picks out'' the value of $f(x)$ at $x=0$.  It immediately follows (put $f(x)=1$) that:
+\begin{equation}
+\int_{-\infty}^{+\infty} \delta(x) \, dx = 1 
+\end{equation}
+Also, changing variables to make the subsitutions clearer:
+$$\int_{-\infty}^{+\infty} g(y) \, \delta(y) \, dy = g(0)$$
+and putting $y = x - a$, we get:
+$$\int_{-\infty}^{+\infty} g(x-a) \, \delta(x-a) \, dy = g(0)$$
+and defining $f(x) \equiv g(x-a)$ we have:
+\begin{equation}
+\int_{-\infty}^{+\infty} f(x) \, \delta(x-a) \, dy = f(a)
+\end{equation}
+The Dirac Delta Function isn't real a function at all, but it is often described as one:
+$$\delta(x) = \begin{cases}
+0, & x \neq 0 \\
+\infty, & x=0 \\
+\end{cases}
+$$
+but such a definition shouldn't be taken too seriously.  A better way to consider it is as a limit of perfectly reasonable functions with integral one, that get narrower and narrower around 0.  Just as the limit of a series of rational numbers can be an irrational number, the $\delta$-function is the limit of a sequence of integrable functions, but isn't itself square integrable.  We could try:
+\begin{equation}
+\int_{-\infty}^{+\infty} \delta^2(x) \, dy = \delta(0) 
+\end{equation}
+but what are we to make of $\delta(0)$? At best, we could say it is in infinity.  Mathematician's call the $\delta$-function a generalized function or distribution.  It only makes sense in the context of its defining integral equation above, and doesn't exist as a function on it's own.  If you think of what we actually do with wave functions (calculate integrals) this isn't really any limitation at all.
+
+For $x \neq 0$, $\delta(x) = 0$ is well defined.  But otherwise, just stick to its well defined properties (the numbered equations here) within integrals, and we will see the $\delta$-function is extremely useful.
+
+\section{Bound State of the Delta Function Potential}
+
+We turn to the very useful example a delta function potential.
+\begin{equation}
+V(x) = -\alpha \delta(x) 
+\end{equation}
+Since we've agreed to never discuss the delta function at $x=0$ outside of an integral, we will just say that $V(x)$ does not have a defined minimum, and so we are free to see if there are normalizable solution with $E<0$.  
+
+Away from $x=0$, where $\delta(x)$ is well defined, $V(x)=0$ and the TISE is:
+\begin{equation*}
+\frac{d^2 \psi}{d x^2} = -\frac{2mE}{\hbar^2}\psi(x) = \kappa^2 \psi(x), \hspace{2cm} \kappa \equiv \frac{\sqrt{-2mE}}{\hbar}.
+\end{equation*}
+which has general solutions:
+$$\psi(x) = A e^{\displaystyle - \kappa x} + B e^{\displaystyle \kappa x}$$
+But for the wave function to be well defined only:
+$$\psi(x) = A e^{\displaystyle - \kappa x}, \hspace{2cm} x>0$$ 
+and
+$$\psi(x) = B e^{\displaystyle \kappa x}, \hspace{2cm} x<0$$
+are acceptable.  From continuity of the wave function at $x=0$, we conclude:
+$$A=B$$
+and write $\psi(x)$ as:
+$$\psi(x) = \begin{cases}
+B e^{\displaystyle \kappa x} &  x\leq0 \\
+B e^{\displaystyle -\kappa x} &  x\geq0 \\
+\end{cases}
+$$
+We saw above that the presence of the $\delta$-function means the wave function need not be continuous at $x=0$, and in fact:
+$$
+\lim_{\epsilon \to 0} \left( \left. \frac{d\psi}{d x} \right\rvert_{+\epsilon} 
+- \left. \frac{d\psi}{d x} \right\rvert_{-\epsilon} \right) = 
+\lim_{\epsilon \to 0}
+\frac{2m}{\hbar^2}\int_{-\epsilon}^{+\epsilon} V(x) \; \left( -\alpha \delta(x) \right) \, dx
+$$
+The $\delta$-function is well defined in the context of this integral, which can be evaluated as:
+$$
+\lim_{\epsilon \to 0} \left( \left. \frac{d\psi}{d x} \right\rvert_{+\epsilon} 
+- \left. \frac{d\psi}{d x} \right\rvert_{-\epsilon} \right) = 
+\lim_{\epsilon \to 0} \left( -\frac{2m\alpha}{\hbar^2} \psi(0) \right) = -\frac{2m\alpha}{\hbar^2} \psi(0) 
+$$
+In our case:
+$$\psi(0) = B$$
+and:
+$$\frac{d\psi}{dx} = \begin{cases}
+\kappa B e^{\displaystyle \kappa x} &  x\leq0 \\
+-\kappa B e^{\displaystyle -\kappa x} &  x\geq0 \\
+\end{cases}
+$$
+so:
+$$
+\lim_{\epsilon \to 0} \left( \left. \frac{d\psi}{d x} \right\rvert_{+\epsilon} 
+- \left. \frac{d\psi}{d x} \right\rvert_{-\epsilon} \right) = -\kappa B - \kappa B = 
+-\frac{2m\alpha}{\hbar^2} B 
+$$
+or
+$$\kappa = \frac{m\alpha}{\hbar^2}$$
+or
+$$E = -\frac{\hbar^2 \kappa^2}{2m} = - \frac{m\alpha^2}{2\hbar^2}$$
+Normalizing the wave function is left as an exercise, it yields:
+$$|B|^2 = \kappa$$
+
+\section{Scattering States of the Delta Function Well}
+
+For the case that $E>0$, we have the free particle TISE for $x<0$:
+\begin{equation*}
+\frac{d^2 \psi}{d x^2} = -\frac{2mE}{\hbar^2}\psi(x) = -k^2 \psi(x), \hspace{2cm} k \equiv \frac{\sqrt{2mE}}{\hbar}.
+\end{equation*}
+with general solution:
+$$\psi(x) = A e^{\displaystyle ikx} + B e^{\displaystyle -ikx}$$
+Similarly, for $x>0$ the general solution is:
+$$\psi(x) = F e^{\displaystyle ikx} + G e^{\displaystyle -ikx}$$
+and so:
+$$\psi(x) = \begin{cases}
+A e^{\displaystyle ikx} + B e^{\displaystyle -ikx} &  x\leq0 \\
+F e^{\displaystyle ikx} + G e^{\displaystyle -ikx} &  x\geq0 \\
+\end{cases}
+$$
+and:
+$$\frac{d\psi}{dx} = \begin{cases}
+(iAk) e^{\displaystyle ikx} + (-iBk) e^{\displaystyle -ikx} &  x\leq0 \\
+(iFk) e^{\displaystyle ikx} + (-iGk) e^{\displaystyle -ikx} &  x\geq0 \\
+\end{cases}
+$$
+Continuity of $\psi(x)$ at $x=0$ requires:
+$$F+G=A+B$$
+and from:
+$$
+\lim_{\epsilon \to 0} \left( \left. \frac{d\psi}{d x} \right\rvert_{+\epsilon} 
+- \left. \frac{d\psi}{d x} \right\rvert_{-\epsilon} \right) = 
+-\frac{2m\alpha}{\hbar^2} \psi(0) 
+$$
+so:
+\begin{eqnarray*}
+ik(F-G-A+B) &=& -\frac{2m\alpha}{\hbar^2} (A+B) \\
+F-G &=& (A-B)+i\frac{2m\alpha}{k\hbar^2} (A+B) \\
+\end{eqnarray*}
+Finally:
+$$F-G = A (1+2i\beta) - B (1-2i\beta) $$
+where:
+$$\beta = \frac{m \alpha}{\hbar^2 k}$$
+
+To measure scattering, let $A$ represent the (known) incident wave and set
+$$G=0$$
+so now we have two equations and two unknowns:
+$$F = A + B$$
+and:
+$$F = A (1+2i\beta) - B (1-2i\beta) $$
+Solving for $F$ in terms of $A$:
+\begin{eqnarray*}
+F &=& A (1+2i\beta) - (F-A)\,(1-2i\beta)\\
+2F(1-i\beta) &=& 2A \\
+\end{eqnarray*}
+and so:
+$$F = \frac{A}{1-i\beta}$$
+similarlyy:
+$$B = \frac{i\beta}{1-i\beta}$$
+
+The reflection coefficient is:
+$$R = \frac{|B|^2}{|A|^2} = \frac{\beta^2}{1+\beta^2}$$
+and:
+$$T = \frac{|F|^2}{|A|^2} = \frac{1}{1+\beta^2}$$
+Notice that:
+$$R+T=1$$
+
+Now let's look at what happens for:
+$$V(x) = +\alpha \delta(x)$$
+Nothing changes until we reach the boundary condition on the derivative, which becomes:
+$$
+\lim_{\epsilon \to 0} \left( \left. \frac{d\psi}{d x} \right\rvert_{+\epsilon} 
+- \left. \frac{d\psi}{d x} \right\rvert_{-\epsilon} \right) = 
++\frac{2m\alpha}{\hbar^2} \psi(0) 
+$$
+So we can read off the solutions for this case by putting $\beta \to -\beta$ in the solutions:
+
+
+so the boundary conditions (keeping $G=0$) become:
+
+\begin{eqnarray*}
+F &=& A+B \\
+F &=& A (1-2i\beta) - B (1+2i\beta)\\
+\end{eqnarray*}
+
+
+
+
+\section{The Finite Square Well}
+
+\section{The WKB Approximation and the ``Classical'' Region}
+
+\section{Tunneling in the WKB Approximation }
+
+
+\section{The Fourier Transform Revisited}
+
+Our inner product now extends between positive and negative infinity:
+\begin{equation}
+\braket{\Psi, \phi} \equiv \int_{-\infty}^{\infty} \Psi^*(x) \phi(x) \, dx
+\end{equation}
+Our basis functions, which are now defined for any value of $k$,
+\begin{equation}
+e_k = \frac{1}{\sqrt{2\pi}} \exp(i k x)
+\end{equation}
+are still orthonormal, but the condition looks a bit different in the continuum case:
+\begin{eqnarray*}
+\braket{e_k, e_{k'}} &=& \delta(k-k')
+\end{eqnarray*}
+See the appendix for more details on the Dirac delta function $\delta(x)$, which is zero everywhere but at $x=0$, where it is infinite.  It is the continuous version of $\delta_{nm}$.
+
+Our basis functions are also still complete.  In the discrete case we have a complex Fourier coefficient for every integer $n$.   Now we have a complex Fourier coefficient for any real value of $k$.  In place of Fourier coefficients, we have instead a function of $k$ which we call the Fourier transform: $\widetilde{\Psi}(k)$.
+Instead of a sum over discrete terms, we now have to integrate over all values of $k$:
+\begin{equation} \label{eqn:ift}
+\Psi(x) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} \widetilde{\Psi}(k) \exp(ikx) \, dk.
+\end{equation}
+Just as in the discrete case, we determine the Fourier transform from the inner product:
+\begin{equation} \label{eqn:ft}
+\widetilde{\Psi}(k) = \braket{e_k, \Psi} = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} {\Psi}(x) \exp(-ikx) \, dx
+\end{equation}
+Equation~\ref{eqn:ft} is generally referred to as the {\em Fourier Transform}, while Equation~\ref{eqn:ift} is referred to as the {\em Inverse Fourier Transform}.
+
+\section{The Fourier Transform in Quantum Mechanics}
+
+So far we have been considering the Fourier transform with respect to position $x$ and wave-number $k$.  A much more useful pair of variables for Quantum Mechanics turns out to be momentum $p$ and position $x$.  To relate $p$ to $k$ we need only apply the DeBroglie relation to the wavelength in the definition of the wavenumber:
+\begin{displaymath}
+k \equiv \frac{2 \pi}{\lambda} = \frac{2 \pi p}{h} = \frac{p}{\hbar}
+\end{displaymath}
+We could therefore make the substitution $k \to p/\hbar$ (and $dk \to dp / \hbar)$) in Equations~\ref{eqn:ift} and ~\ref{eqn:ft}.  It turns out that a marginally more useful equation results if we make the normalization factors symmetric, by splitting the normalization factor of $1/\hbar$ across both equations with $1/\sqrt{\hbar}$ applied to each:
+\begin{eqnarray} 
+\Psi(x) &=& \frac{1}{\sqrt{2\pi\hbar}} \int_{-\infty}^{\infty} \widetilde{\Psi}(p) \exp(ipx/\hbar) \, dp \\
+\widetilde{\Psi}(p) &=&  \frac{1}{\sqrt{2\pi\hbar}} \int_{-\infty}^{\infty} {\Psi}(x) \exp(-ipx/\hbar) \, dx
+\end{eqnarray}
+The major benefit of this symmetric form is that the normalization of $\Psi(x)$ and $\widetilde{\Psi}(p)$ in this case turns out to be the same:
+\begin{displaymath}
+\int_{-\infty}^{\infty} |\Psi(x)|^2 dx = \int_{-\infty}^{\infty} |\widetilde{\Psi}(p)|^2 dp = 1 
+\end{displaymath}
+Because we can always calculate $\Psi(x)$ from $\widetilde{\Psi}(p)$ either one completely describes the quantum mechanical state.  We call $\widetilde{\Psi}(p)$ the momentum wave function.   Whereas $|\Psi(x)|^2$ gives us the probability density for the quanton to be at position $x$, $|\Psi(p)|^2$ gives us the probability density for the quanton to have momentum $p$.
+
+
+\end{document}
+
+
+
+
