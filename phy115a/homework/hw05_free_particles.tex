@@ -51,7 +51,7 @@ This form obscures the role of orthonormal basis functions in the series, but it
 $$ \int_{-T/2}^{+T/2} \exp(-i \omega_m t) \; \exp(i \omega_m t)  \; dt $$
 
 \noindent
-(B) Without calculating integrals you alrady know are zero, write the general solution to this integral:
+(B) Without calculating integrals you already know are zero, write the general solution to this integral:
 $$ \int_{-T/2}^{+T/2} \exp(-i \omega_n t) \; \exp(i \omega_m t)  \; dt $$
 
 \noindent
@@ -144,7 +144,7 @@ You may use the known results from lecture:
 \hat{a}_+ \psi_n &=& c_n \psi_{n+1} \\
 \hat{a}_- \psi_n &=& d_n \psi_{n-1} 
 \end{eqnarray*}
-with unknown constants $c_n$ and $d_n$.  To determine the constant $d_n$ we calculate $\braket{\hat{a}_+\hat{a}_-}$ in a second way:
+with unknown constants $c_n$ and $d_n$.  To determine the constant $d_n$, we calculate $\braket{\hat{a}_+\hat{a}_-}$ in a second way:
 \begin{eqnarray*}
 \braket{\hat{a}_+\hat{a}_-} &=& \braket{\psi_n | \hat{a}_+ \hat{a}_- \psi_n}\\
  &=& \braket{\hat{a}_+^\dagger \psi_n | \hat{a}_- \psi_n}\\
@@ -153,8 +153,9 @@ with unknown constants $c_n$ and $d_n$.  To determine the constant $d_n$ we calc
  &=& d_n^* d_n \braket{\psi_n | \psi_n}\\
  &=& |d_n|^2\\ 
 \end{eqnarray*}
-and determined that $|d_n|^2 = n$.  Calculate 
-$\braket{\hat{a}_-\hat{a}_+}$ in similar fashion to determine $|c_n|^2$.\\[5pt]
+so we see that:
+$$|d_n|^2 = n.$$
+Calculate $\braket{\hat{a}_-\hat{a}_+}$ in similar fashion to determine $|c_n|^2$.\\[5pt]
 
 \newpage
 
@@ -168,12 +169,12 @@ But there is (one) arbitrary phase factor per stationary state $\psi_n$.  We can
 $$d_n = \sqrt{n}$$
 Show that this choice obligates us to choose:
 $$c_n = \sqrt{n+1}$$
-Hint: calculate $$\braket{\hat{a}_+\hat{a}_-}$$ a third way.\\[5pt]
+Hint: calculate $\braket{\hat{a}_+\hat{a}_-}$ a third way.\\[5pt]
 
 \noindent
 (E) Suppose we picked instead:
 $$d_n = i\sqrt{n}$$
-what would $d_n$ be?  Would the spatial wave functions $\psi_n(x)$ be real functions?\\[5pt]
+what would $c_n$ be?  Would the spatial wave functions $\psi_n(x)$ be real functions?\\[5pt]
 
 \noindent
 (F) Determine the ground state wave function from the simple differential equation:
