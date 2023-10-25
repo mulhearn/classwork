@@ -235,10 +235,174 @@ F &=& A+B \\
 F &=& A (1-2i\beta) - B (1+2i\beta)\\
 \end{eqnarray*}
 
+\section{Bound States of the Finite Square Well}
+
+Next we consider the finite square well potential:
+$$V(x) = \begin{cases}
+-V_0, & -a \leq x \leq a \\
+0     & {\rm otherwise} \\
+\end{cases}
+$$
+As the potential is finite everywhere, we expect both $\psi$ and $d\psi/dx$ to be continuous.
+The bound state potentials will have $-V_0 < E < 0$.  For $x < -a$ and $x > a$, we encounter a familiar form of the TISE:
+\begin{equation*}
+\frac{d^2 \psi}{d x^2} = -\frac{2mE}{\hbar^2}\psi(x) = \kappa^2 \psi(x), \hspace{2cm} \kappa \equiv \frac{\sqrt{-2mE}}{\hbar}.
+\end{equation*}
+with the solutions
+$$\psi(x) = A e^{\displaystyle \kappa x}$$
+for $x<-a$ and
+$$\psi(x) = B e^{\displaystyle -\kappa x}$$
+for $x>a$.  Within the potential well at $-a \leq x \leq a$ we have:
+\begin{equation*}
+\frac{d^2 \psi}{d x^2} = -\frac{2m(V_0+E)}{\hbar^2}\psi(x) = -k^2 \psi(x), \hspace{2cm} k \equiv \frac{\sqrt{2m(V_0 + E)}}{\hbar}.
+\end{equation*}
+with general solution:
+$$\psi(x) = C \sin(kx) + D \cos(kx)$$
+At this point, we will save ourselves a lot of hassle by noting that $V(x)$ is even, and so the general solutions can be constructed as either even or odd solutions. (See Griffith's P2.1c).
+One major benefit of this, is that we need only establish continuity for $x \geq 0$ and we will automatically have it for $x \leq 0$.
+
+Starting with the even solutions and $x\geq0$, we write:
+$$\psi(x) = \begin{cases}
+Be^{\displaystyle -\kappa x} & x > a \\
+D \cos(kx) & 0 \leq x \leq a \\
+\end{cases}$$
+and continuity implies:
+\begin{equation}
+\label{eqn:fswcont}
+B e^{-\kappa a} = D \cos(ka)
+\end{equation}
+We see that the dimensionless quantities $\kappa a$ and $ka$ are of interest, so it will simplify things to note that:
+$$(ka)^2+(\kappa a)^2 = \frac{-2mEa^2}{\hbar^2} + \frac{2m(E+V_0)a^2}{\hbar^2} = 
+\frac{2mV_0a^2}{\hbar^2} \equiv z_0^2$$
+The derivative is:
+$$\frac{d\psi}{dx} = \begin{cases}
+-\kappa \, B \, e^{\displaystyle -\kappa x} & x > a \\
+-kD \sin(kx) & 0 \leq x \leq a \\
+\end{cases}$$
+which both must be continuous at $x=a$, so:
+\begin{eqnarray*}
+-\kappa B e^{-\kappa a} &=& -k D \sin(ka)\\
+ \kappa B e^{-\kappa a} &=& k D \sin(ka)\\
+ (\kappa a) B e^{-\kappa a} &=& (ka) D \sin(ka)\\
+\end{eqnarray*}
+where we have multiplied by $a$ so that the equation is in terms of the dimensionless constants $ka$ and $\kappa a$.  Dividing by Equation~\ref{eqn:fswcont} we obtain:
+\begin{eqnarray*}
+\kappa a &=& (ka) \, \tan(ka) \\
+\sqrt{z_0^2-(ka)^2} &=& (ka) \, \tan(ka) \\
+\sqrt{z_0^2-z^2} &=& z \, \tan(z) \\
+\end{eqnarray*}
+where we have defined 
+$$z \equiv ka = \frac{2m(E+V_0)a}{\hbar^2}$$
+and so finally:
+\begin{equation}
+\sqrt{\left(\frac{z_0}{z}\right)^2-1} = \tan(z) 
+\end{equation}
+
+(Interpretation, Limiting cases...)
+
+\section{Scattering States of the Finite Square Well}
+
+For $E>0$, we have only free particle solutions, but with two different wave numbers, so we'll take:
+$$k \equiv \frac{\sqrt{2mE}}{\hbar^2}, \hspace{1cm }{\rm and} \hspace{1cm} k' \equiv \frac{\sqrt{2m(E+V_0)}}{\hbar^2}$$
+with:
+$$\frac{k'}{k} = \sqrt{\frac{E+V_0}{E}} \equiv \eta$$
+and so:
+$$k' = \eta k$$
+Note that if this was an optics problem we would call $\eta$ the refractive index.  The piecewise general solution to the TISE is:
+\begin{eqnarray*}
+\psi(x) = \begin{cases}
+A e^{\displaystyle ikx} + B e^{\displaystyle -ikx} & x < -a \\ 
+C e^{\displaystyle i\eta kx} + D e^{\displaystyle -i\eta kx} & -a \leq x \leq a \\ 
+F e^{\displaystyle ikx} + G e^{\displaystyle -ikx} & x > a \\ 
+\end{cases}
+\end{eqnarray*}
+but we are going to write it this way instead:
+\begin{eqnarray*}
+\psi(x) = \begin{cases}
+A e^{\displaystyle ik(x+a)} + B e^{\displaystyle -ik(x+a)} & x < -a \\ 
+C e^{\displaystyle i\eta kx} + D e^{\displaystyle -i\eta kx} & -a \leq x \leq a \\ 
+F e^{\displaystyle ik(x-a)} + G e^{\displaystyle -ik(x-a)} & x > a \\ 
+\end{cases}
+\end{eqnarray*}
+which will make it much easier to evaluate at the boundaries ($x=\pm a$).  We are free to do this because:
+$$A e^{ik(x+a)} = (A e^{ika}) e^{ikx}$$
+where $A$ is a constant we have not yet determined.  The derivative is:
+\begin{eqnarray*}
+\frac{d\psi}{dx} = \begin{cases}
+ik \left(Ae^{\displaystyle ik(x+a)} - B e^{\displaystyle -ik(x+a)}\right) & x < -a \\ 
+i\eta k \left(Ce^{\displaystyle i\eta kx} - D e^{\displaystyle -i \eta k x}\right) & -a \leq x \leq a \\ 
+ik \left(Fe^{\displaystyle ik(x-a)} - G e^{\displaystyle -ik(x-a)}\right) & x > a \\ 
+\end{cases}
+\end{eqnarray*}
+
+Define:
+$$\alpha \equiv e^{i\eta ka}$$
+and note that:
+$$|\alpha|^2 = 1$$
+which will be useful later.  Now the four continuity equations are:
+\begin{eqnarray*}
+A + B &=& C \alpha^* + D \alpha \\
+A - B &=& \eta(C \alpha^* - D \alpha) \\
+C \alpha + D \alpha^* &=& F + G  \\
+\eta(C \alpha - D \alpha^*) &=& F - G \\
+\end{eqnarray*}
+The incoming waves are $A$ and $G$.  In principle, we can use two equations to eliminate the intermediate waves $C$ and $D$.  Then we can use the remaining two to calculate the outgoing waves $B$ and $F$ from the incoming waves $A$ and $G$. 
+
+Note that the first two equations can be added to eliminate $B$:
+$$A = \frac{(\eta+1) \alpha^*}{2} \, C - \frac{(\eta-1) \alpha}{2} \, D$$
+But now let's make our lives a little easier and set $G=0$.  Then the last two equations become:
+\begin{eqnarray*}
+\alpha C  + \alpha^* D &=& F   \\
+\eta \alpha C  - \eta \alpha^* D &=& F  \\
+\end{eqnarray*}
+Which we use to solve for $C$ and $D$ in terms of $F$:
+$$C = \frac{\eta+1}{2\eta}\alpha^* F$$
+and:
+$$D = \frac{\eta-1}{2\eta}\alpha F$$
+Plugging these back in to our expression for $A$:
+\begin{eqnarray*}
+A &=& \frac{(\eta+1)^2 (\alpha^2)^* - (\eta-1)^2 \alpha^2}{4 \eta} \, F \\
+  &=& \frac{\eta^2+1}{2\eta}\,\frac{(\alpha^2)^*-\alpha^2}{2}+\frac{(\alpha^2)^*+\alpha^2}{2}\\
+\end{eqnarray*}
+Recalling our definition for $\alpha$:
+$$A/F = \cos(2\eta ka) - i\frac{\eta^2+1}{2\eta} \sin(2\eta ka)$$
+and so the transmission is:
+$$\frac{1}{T} = 1 + \frac{\eta^2-1}{4\eta^2}\sin^2(2\eta ka) $$
+Notice that the transmission is one when either:
+$$\eta=1$$
+which corresponds to know change in index of refraction, i.e. $V_0=0$.  Or:
+$$\sin^2(2\eta ka) $$
+that is when:
+$$ 2a\frac{\sqrt{2m(E+V_0)}}{\hbar}= n \pi$$
+or:
+$$E+V_0 = \frac{n^2 \pi^2 \hbar^2}{2m (2a)^2}$$
+which you may recognize at the allowed energies from the infinite potential well.
+
+\section{save...}
+
+\begin{eqnarray*}
+B -      \alpha^* \, C  -       \alpha     \, D &=& -A, \\
+F -      \alpha   \, C  -       \alpha^*   \, D &=& -G, \\
+B + \eta \alpha^* \, C  -  \eta \alpha     \, D &=&  A, \\
+F - \eta \alpha   \, C  +  \eta \alpha^*   \, D &=&  G, \\
+\end{eqnarray*}
 
 
 
-\section{The Finite Square Well}
+
+
+Also, since:
+$$(k'a)^2 - (ka)^2 = \frac{2mV_0a^2}{\hbar^2} \equiv z_0^2$$
+it's related to our previous constant by:
+$$n^2-1 = (z_0/z)^2$$
+
+
+
+
+
+
+
+
 
 \section{The WKB Approximation and the ``Classical'' Region}
 
