@@ -36,6 +36,7 @@ These problems are graded on effort only.\\
 
 \noindent
 {\bf Griffiths: P2.13, P2.18, P2.21} \\
+Hints on P2.21 are at the end of the problem set.
 
 \section*{Additional Problems}
 
@@ -56,7 +57,7 @@ $$ \int_{-T/2}^{+T/2} \exp(-i \omega_n t) \; \exp(i \omega_m t)  \; dt $$
 
 \noindent
 (C) Use Fourier's trick to determine the formulas for the coefficients $c_m$.  That is, calculate:
-$$ \int_{-T/2}^{+T/2} \exp(-i \omega_n t) f(x) dx $$
+$$ \int_{-T/2}^{+T/2} \exp(-i \omega_n t) f(t) dt $$
 and use the results to write a formula for calculating $c_n$.
 
 \newpage
@@ -184,6 +185,31 @@ $$\hat{a}_- \psi_0 = 0$$
 (G) Determine $\psi_1(x)$ and $\psi_2(x)$ from:
 $$\psi_n(x) = \frac{1}{\sqrt{n!}}(\hat{a}_+)^n \psi_0$$
 
+\newpage
+
+\section*{Additional Hints}
+
+{\bf For P2.21:}
+
+\noindent
+You may use:
+$$\int_{-\infty}^{+\infty} e^{-x^2} dx = \sqrt{\pi}$$
+Use change of variables to handle additional constants.
+\noindent
+(A) You should get:
+$$A=\left( \frac{2a}{\pi}\right)^{\frac{1}{4}}$$
+if you choose a positive real normalization factor.
+
+\noindent
+(B) Calculate the Fourier transform of $\Psi(x,0)$ which I write as $\widetilde{\Psi}(k,0)$.  You should find:
+$$\widetilde{\Psi}(k,0) \; \propto \; \exp\left( - \frac{k^2}{4a}\right)$$
+Check dimensionality of $\widetilde{\Psi}$ you should find:
+$$[\widetilde{\Psi}] = \left[\frac{1}{\sqrt{k}}\right]$$
+Then calculate:
+$$\widetilde{\Psi}(k,t) \; = \; \widetilde{\Psi}(k,0) \exp(-i\omega t) \; = \; \widetilde{\Psi}(k,0) \exp\left(-i\frac{\hbar k^2 t}{2m}\right)$$
+make sure to identify the $\gamma$ term immediately... this will save you a lot of effort!  You should find:
+$$\widetilde{\Psi}(k,t) \; \propto \; \exp\left( - \frac{k^2}{4a}\gamma^2\right)$$
+Find $\Psi(x,t)$ as the inverse Fourier transform of $\widetilde{\Psi}(k,t)$.
 
 \end{document}
 

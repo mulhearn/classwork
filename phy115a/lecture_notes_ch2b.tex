@@ -292,13 +292,29 @@ where we have multiplied by $a$ so that the equation is in terms of the dimensio
 \sqrt{z_0^2-z^2} &=& z \, \tan(z) \\
 \end{eqnarray*}
 where we have defined 
-$$z \equiv ka = \frac{2m(E+V_0)a}{\hbar^2}$$
+$$z \equiv ka = \frac{\sqrt{2m(E+V_0)}a}{\hbar}$$
 and so finally:
 \begin{equation}
 \sqrt{\left(\frac{z_0}{z}\right)^2-1} = \tan(z) 
 \end{equation}
+This is an equation with no known algebraic solution.  It can be solved graphically or numerically.  See Fig.~\ref{fig:finitewell}.
+\begin{figure}[thb]
+\begin{center}
+{\includegraphics[width=0.60\textwidth]{python/finitewell.pdf}}
+\end{center}
+\caption{\label{fig:finitewell} The allowed energies for the finite potential occur at the intersection of these curves.}
+\end{figure}
+There are some interesting limiting cases to consider.  When:
+$$z0 < \frac{\pi}{2}$$
+there is only one bound state (we haven't found the odd solutions yet, which is why this is $\pi/2$ and not $\pi$, as you might expect from the figure...)  Recalling the definition for $z_0$, this amounts to:
+$$V_0\,a^2 < \frac{\pi^2 \hbar^2}{8m}$$
+which defines a shallow and narrow well.
 
-(Interpretation, Limiting cases...)
+Alternative, if $z_0$ is very large, then the intersection points are at:
+$$z = \frac{n\pi}{2}, \hspace{2cm} n=1,3,5,\ldots$$
+which means the allowed energies are:
+$$E + V_0 = \frac{n^2\pi^2\hbar^2}{2m(2a)^2}$$
+which (relative to the bottom of the well) are the energies of the infinite square well.
 
 \section{Scattering States of the Finite Square Well}
 
@@ -378,33 +394,81 @@ or:
 $$E+V_0 = \frac{n^2 \pi^2 \hbar^2}{2m (2a)^2}$$
 which you may recognize at the allowed energies from the infinite potential well.
 
-\section{save...}
-
-\begin{eqnarray*}
-B -      \alpha^* \, C  -       \alpha     \, D &=& -A, \\
-F -      \alpha   \, C  -       \alpha^*   \, D &=& -G, \\
-B + \eta \alpha^* \, C  -  \eta \alpha     \, D &=&  A, \\
-F - \eta \alpha   \, C  +  \eta \alpha^*   \, D &=&  G, \\
-\end{eqnarray*}
-
-
-
-
-
-Also, since:
-$$(k'a)^2 - (ka)^2 = \frac{2mV_0a^2}{\hbar^2} \equiv z_0^2$$
-it's related to our previous constant by:
-$$n^2-1 = (z_0/z)^2$$
-
-
-
-
-
-
-
-
 
 \section{The WKB Approximation and the ``Classical'' Region}
+
+The inspiration for this approximation comes from the free particle, with wave function:
+$$\psi(x) = A \exp(\pm ikx)$$
+Consider a particle in a region where the potential $V$ is constant, and $E>V$.  Then the wave function is the same as the free particle but with:
+$$k=\sqrt{2m(E-V)}/\hbar$$
+We are going to try to extend this solution to the case that the potential is slowly varying.  By slowly, we mean that $\psi(x)$ oscillates many times before the potential changes significantly.  In this case, we anticipate that $\psi(x)$ will continue to oscillate, but the amplitude and phase will change slowly.  We will therefore look for solutions of the form:
+\begin{equation}
+\Psi(x) = A(x) \, e^{\displaystyle i \phi(x)}
+\end{equation}
+where:
+$$A(x) \in \mathbb{R}, \hspace{1cm} {\rm and} \hspace{1cm} \phi(X) \in \mathbb{R}$$
+Our approximation is that $A(x)$ is slowly varying, in the sense that:
+$$\left| \frac{1}{A} \, \frac{d^2A}{dx^2}\right| << \left| \frac{1}{\psi}\,\frac{d^2 \psi}{dx^2} \right|$$
+In a region where $E > V(x)$ we can write the SE as:
+\begin{equation}
+\label{eqn:wkbse}
+\frac{d^2 \psi}{d x^2} = -\frac{p^2(x)}{\hbar^2} \psi(x)
+\end{equation}
+where
+$$p(x) = \sqrt{2m(E-V(x))}$$
+And so we can write our approximation as:
+$$\left| \frac{A''}{A} \right| << \left| \frac{\psi''}{\psi} \right| = \frac{p^2(x)}{\hbar^2}$$
+
+Returning to:
+$$\psi(x) = A(x) \, e^{\displaystyle i \phi(x)}$$
+we have:
+$$\frac{d\psi}{d x} = \left(A' + i\,A\,\phi'\right)\; e^{\displaystyle i \phi(x)}$$
+and:
+\begin{eqnarray*}
+\frac{d^2 \psi}{d x^2} &=&  \left\{A'' + i\,A'\,\phi' + i\,A\,\phi''
++ \left(A' + i\,A\,\phi'\right)\; i \phi' \right\} \; e^{\displaystyle i \phi(x)} \\
+&=& \left\{\left(A''-A\left(\phi'\right)^2\right) + i\left(2\,A'\,\phi' + A\,\phi''\right)\right\}\; e^{\displaystyle i \phi(x)} \\
+-\frac{p^2}{\hbar^2}\,A&=& 
+\left(A''-A\left(\phi'\right)^2\right) + i\left(2\,A'\,\phi' + A\,\phi''\right)\\
+\end{eqnarray*}
+where in the last line we have used Equation~\ref{eqn:wkbse}.  Since $A$ and $\phi$ are real, this amounts to two equations (one for the real and one for the imaginary part):
+\begin{equation}
+\label{eqn:wkbfirst}
+-\frac{p^2}{\hbar^2}\,A = \left(A''-A\left(\phi'\right)^2\right)
+\end{equation}
+and
+\begin{equation}
+\label{eqn:wkbsecond}
+2A'\phi'+A\phi'' = 0
+\end{equation}
+We first solve Equation~\ref{eqn:wkbsecond} by noting:
+$$\left(A^2\phi'\right)' = \left(2AA'\phi'+A^2\phi''\right) = A \left(2A'\phi'+A\phi''\right) = 0$$
+So:
+$$A^2 \phi' = C^2$$
+and:
+$$A(x) = \frac{C}{\sqrt{\phi'}}$$
+so we need only find $\phi(x)$ and we will have $A(x)$.  That should come from solving Equation~\ref{eqn:wkbsecond} which we write as:
+$$\left(\phi'\right)^2 = \frac{p^2}{\hbar^2} + \frac{A''}{A}$$
+We cannot solve this in general, but we have already decided to make the approximation that $A(x)$ is varying slowly:
+$$\left| \frac{A''}{A} \right| \ll \frac{p^2}{\hbar^2} $$
+This approximation leads to:
+\begin{eqnarray*}
+\left(\phi'\right)^2 &=& \frac{p^2}{\hbar^2}\\
+\frac{d\phi}{dx} &=& \pm \, \frac{p}{\hbar}\\
+\end{eqnarray*}
+and so:
+$$A(x) = \frac{C}{\sqrt{\phi'}} = \frac{C\sqrt{\hbar}}{\sqrt{p(x)}}$$
+Integrating $\phi'$ we get:
+$$\phi(x) = \pm \frac{i}{\hbar} \left( \int p(x) dx + D\right)$$
+where $D$ is a constant of integration.  Assembling this all together we get:
+$$\psi(x) = \frac{C \, \sqrt{\hbar} \, e^{\pm iD/\hbar}}{\sqrt{p(x)}} \exp\left(\pm\frac{i}{\hbar}\int p(x) \, dx \right)$$
+which we can write as:
+\begin{equation}
+\psi(x) = \frac{C}{\sqrt{p(x)}} \exp\left(\pm\frac{i}{\hbar}\int p(x) \, dx \right)
+\end{equation}
+where $C$ here is a new complex constant.  Notice that:
+$$|\psi(x)|^2 = \frac{|C|^2}{p(x)}$$
+
 
 \section{Tunneling in the WKB Approximation }
 

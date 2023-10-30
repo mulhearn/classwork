@@ -42,10 +42,178 @@ Hint for 2.23b:  use integration by parts to move the derivative off of $\theta(
 
 \noindent
 {\bf Problem 1:} 
-Construct the S-Matrix for the delta function potential.
-Show that it is unitary.
-Calculate Probablity Current for x<0 and x>0.
+Consider the vector space of 2x1 column vectors, for example the vectors $x$ and $y$:
+$$x = \begin{pmatrix} a \\ b \end{pmatrix}, \hspace{2cm } y = \begin{pmatrix} c \\ d \end{pmatrix}$$
+with transpose:
+$$x^T = \begin{pmatrix} a & b \end{pmatrix}$$
+We can create an inner product space by defining the inner product as:
+$$ \braket{x|y} \; \equiv \; \left( x^* \right)^T y \; = \; a^* \, c + b^* \, d$$
 
+\noindent
+(A) Verify that this definition does satisfy the properties of an inner product:\\
+
+\begin{tabular}{lll}
+  {\bf I1} & $\forall x,y \in H$ & $\braket{x|y} = \braket{y|x}^*$\\
+{\bf I2} & $\forall x,y,z \in H$and $\forall \alpha \in \mathbb{C}$ &
+$\braket{x|\alpha y} = \alpha \braket{x|y}$\\
+{\bf I3} & $\forall x,y,z \in H$ & $\braket{x+y|z} = \braket{x|z}+\braket{y|z}$\\
+{\bf I4} & $\forall x \in H$ & $\braket{x|x} \geq 0$ \\
+{\bf I5} & $\forall x \in H$ & $\braket{x|x}=0$ if and only if $x=0$ \\
+\end{tabular}
+
+\vskip 1cm
+
+\noindent
+By definition, operators return a new vector for a given vector.  In this finite-dimensional vector space, any linear operator $O$ can be represented as a 2x2 matrix:
+$$O \, x = 
+\begin{pmatrix} O_{11} & O_{12} \\ O_{21} & O_{22} \end{pmatrix}
+\begin{pmatrix} a \\ b \end{pmatrix}
+= 
+\begin{pmatrix} O_{11} \, a + O_{12}\, b\\ O_{21} \, a + O_{22} \, b \end{pmatrix}
+$$
+
+\noindent
+(B) Show that the hermetian adjoint of $O$ is given by:
+$$O^{\dagger} = \left(O^*\right)^T = \begin{pmatrix} O_{11}^* & O_{21}^* \\ O_{12}^* & O_{22}^* \end{pmatrix}$$
+from our definition:
+$$\braket{x|O^\dagger y} = \braket{Ox | y}$$
+Hint:  calculate:
+$$\braket{Ox|y}$$
+then do whatever it takes to bring the action over onto the $y$ instead, and then read off $O^\dagger$.
+You may use the property of matrices $A$ and $B$ that:
+$$(AB)^T = B^T A^T$$
+
+\vskip 1cm
+
+\noindent
+An operator $U$ is unitary if 
+$$U^\dagger U \, = \, \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} \equiv I$$
+Note that:
+$$Ix=x$$
+for any vector $x$.\\
+
+\noindent
+(C) Show that the rotation matrix:
+$$R \equiv  \begin{pmatrix} \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta \end{pmatrix}$$
+is unitary.
+
+\vskip 1cm
+
+\noindent
+(D) Show that for a unitary matrix $U$:
+$$\braket{Ux|Uy} = \braket{x|y}$$
+
+
+\newpage
+
+
+\noindent
+{\bf Problem 2:} 
+In lecture we studied the scattering states (with $E>0$) of the delta-function potential:
+$$V(x) = -\alpha \delta(x)$$
+We found that the general solution:
+$$\psi(x) = \begin{cases}
+A e^{\displaystyle ikx} + B e^{\displaystyle -ikx} &  x\leq0 \\
+F e^{\displaystyle ikx} + G e^{\displaystyle -ikx} &  x\geq0 \\
+\end{cases}
+$$
+has boundary conditions:
+$$F+G = A + B$$
+and
+$$F-G = A (1+2i\beta) - B (1-2i\beta) $$
+where:
+$$\beta = \frac{m \alpha}{\hbar^2 k}$$
+Notice that the waves (with coefficients) $A$ and $G$ are incoming, while the waves $B$ and $F$ are outgoing.  They are connected by the scattering matrix $S$:
+$$
+\begin{pmatrix} B \\ F \end{pmatrix}
+=
+\begin{pmatrix} S_{11} & S_{12} \\ S_{21} & S_{22} \end{pmatrix}
+\begin{pmatrix} A \\ G \end{pmatrix}
+$$
+
+\noindent
+(A) Calculate the $S$-matrix from the boundary conditions.\\
+
+\noindent
+Hint:  Put $B$ and $F$ on the LHS of the boundary conditions and $A$ and $G$ on the RHS.  Eliminate $F$ and solve for $B$ in terms of $A$ and $G$.  Then read off:
+$$B = S_{11} \, A + S_{12} \, G$$
+
+\noindent
+(B) Show that the $S$-matrix you calculated in (A) is unitary.\\
+
+\noindent
+(C) Calculate the probability current:
+$$J(x) = \frac{i\hbar}{2m} \left(\psi\frac{d\psi^*}{dx} - \psi^*\frac{d\psi}{dx} \right)$$
+for $x<0$.\\
+Hint: this explodes a bit but you should get nice cancellation leaving you just two terms in your answer.\\
+
+\noindent
+(D) Also calculate the probability current $J(x)$ for $x>0$.\\
+
+\noindent
+Hint: do not calculate this again from scratch!  Use your results from (C) and substitution!
+
+\vskip 1cm
+
+\noindent
+(E) For normalizable solutions, to the SE, we showed that:
+$$J(a) = J(-a)$$
+in the limit $a \to \infty$.  These are not normalizable solutions, but let's assume still that the probability current you calculated in (C) equals the probability current you calculated in (D).  Calculate a condition on $|A|^2$, $|B|^2$, $|F|^2$, and $|G|^2$ that results from this.
+
+\noindent
+(F) Define the outgoing waves $O$ and the incoming waves $I$ as:
+$$O = \begin{pmatrix} B \\ F \end{pmatrix}, \hspace{2cm } I = \begin{pmatrix} A \\ G \end{pmatrix}$$
+Calculate a condition on $|A|^2$, $|B|^2$, $|F|^2$, and $|G|^2$ from:
+$$\braket{O|O} = \braket{I|I}$$
+Compare to your condition in (E).\\
+
+\noindent
+(G) Show that:
+$$\braket{O|O} = \braket{I|I}$$
+implies that $S$ is unitary.\\[5pt]
+Hint: use $O = SI$.
+
+\vskip 1cm
+
+\noindent
+{\bf Problem 3:}
+Consider the potential: 
+$$V(x) = \begin{cases}
+0   &  x < 0 \\
+V_0 &  x \geq 0 \\
+\end{cases}
+$$
+and assume $E>V_0$.\\
+
+\noindent
+(A) Show that the general solutions to the SE can be written as:
+$$\psi(x) = \begin{cases}
+A e^{\displaystyle ikx} + B e^{\displaystyle -ikx} &  x\leq0 \\
+F e^{\displaystyle i\eta kx} + G e^{\displaystyle -i \eta kx} &  x\geq0 \\
+\end{cases}$$
+where:
+$$\eta \equiv \sqrt{\frac{E-V_0}{E}}$$
+
+\noindent
+(B) Determine the boundary conditions at $x=0$ and use these conditions to determine the scattering matrix $S$ defined by:
+$$
+\begin{pmatrix} B \\ F \end{pmatrix}
+=
+\begin{pmatrix} S_{11} & S_{12} \\ S_{21} & S_{22} \end{pmatrix}
+\begin{pmatrix} A \\ G \end{pmatrix}
+$$\\
+
+\noindent
+(C) Is $S$ unitary? Is there anything unphysical about this potential which might explain this?\\
+
+\noindent
+(D) Calculate the reflection from the left:
+$$R = \left. \frac{|B|^2}{|A|^2} \; \right\rvert_{G=0} $$
+
+\noindent
+(E) And transmission from the left:
+
+$$T = \left. \frac{|F|^2}{|A|^2} \; \right\rvert_{G=0} $$
 
 
 
