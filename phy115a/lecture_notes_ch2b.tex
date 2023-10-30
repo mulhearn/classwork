@@ -470,6 +470,46 @@ where $C$ here is a new complex constant.  Notice that:
 $$|\psi(x)|^2 = \frac{|C|^2}{p(x)}$$
 
 
+\section{Bound states of an Infinite Square Well with a Bumpy Bottom}
+
+Consider the example of the an infinite square well with some function $f(x)$ along the bottom (instead of $V(x)=0$) for $0 < x < a$.  The WKB approximation gives us the general solution:
+
+$$\psi(x)=\frac{1}{\sqrt{p(x)}}\left(C\,e^{\displaystyle i\phi(x)} 
++ D\,e^{\displaystyle -i\phi(x)}\right)$$
+
+where we calculate:
+$$\phi(x) = \frac{1}{h}\int_0^x p(x) dx$$
+Notice that we are free to choose the starting point for integration, and we need only take the postive version, since we've included $\pm\phi(x)$ in the general solution. 
+Since $\phi(0)=0$, and we must have $\psi(0)=0$, then we have:
+$$C+D=0 \implies D = -C$$
+and so:
+$$\psi(x) = \frac{C}{\sqrt{p(x)}}\,\left(e^{\displaystyle i\phi(x)} 
++ D\,e^{\displaystyle -i\phi(x)}\right)
+= \frac{i\,2\,C}{\sqrt{p(x)}}\sin(\phi(x)
+$$
+which we can write as:
+$$\psi(x) = \frac{C}{\sqrt{p(x)}}\sin(\phi(x))$$
+by absorbing other factors into the constant $C$.  Now we must also have:
+$$\psi(x)=0$$
+which we requires that:
+$$\phi(x) = n\pi$$
+or:
+$$\int_0^a p(x) dx = n\pi \hbar$$
+Notice that for $V(x)=0$ we have $p(x) = \sqrt{2mE}$ and so:
+$$\int_0^a p(x) dx = \sqrt{2mE}a = n \pi \hbar$$
+or:
+$$E_n = \frac{n^2 \pi^2 \hbar^2}{2\,m\,a^2}$$
+
+
+
+
+
+
+
+
+
+
+
 \section{Tunneling in the WKB Approximation }
 
 
