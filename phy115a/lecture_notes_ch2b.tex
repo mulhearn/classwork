@@ -37,8 +37,8 @@ Tunneling and Scattering \\
 
 \section{Continuity of the Wave Function}
 
-Let's start with the case $V(x)$ is finite everywhere, than we start from the TISE:
-$$-\frac{\hbar^2}{2m}\frac{d^2 \psi}{d x^2} + V(x) \psi(x) = E \psi(x)$$
+Let's consider with the case $V(x)$ is finite everywhere, then we start from the TISE:
+$$-\frac{\hbar^2}{2m}\,\frac{d^2 \psi}{d x^2} + V(x) \, \psi(x) = E \, \psi(x)$$
 Without loss of generality, we'll investigate continuity at $x=0$, by integrating the TISE from $-\epsilon$ to $+\epsilon$:
 $$\int_{-\epsilon}^{+\epsilon}\frac{d^2 \psi}{d x^2} dx = \frac{2m}{\hbar^2}\int_{-\epsilon}^{+\epsilon} \left(V(x) - E\right) \; \psi(x) \, dx$$
 We'll assume that we keep $\epsilon > 0$ here and everywhere below.  By the fundamental theorem of calculus the LHS is:
@@ -80,17 +80,17 @@ and defining $f(x) \equiv g(x-a)$ we have:
 \begin{equation}
 \int_{-\infty}^{+\infty} f(x) \, \delta(x-a) \, dy = f(a)
 \end{equation}
-The Dirac Delta Function isn't real a function at all, but it is often described as one:
+The Dirac Delta Function isn't really a function at all, but it is often described as one:
 $$\delta(x) = \begin{cases}
 0, & x \neq 0 \\
 \infty, & x=0 \\
 \end{cases}
 $$
-but such a definition shouldn't be taken too seriously.  A better way to consider it is as a limit of perfectly reasonable functions with integral one, that get narrower and narrower around 0.  Just as the limit of a series of rational numbers can be an irrational number, the $\delta$-function is the limit of a sequence of integrable functions, but isn't itself square integrable.  We could try:
-\begin{equation}
-\int_{-\infty}^{+\infty} \delta^2(x) \, dy = \delta(0) 
-\end{equation}
-but what are we to make of $\delta(0)$? At best, we could say it is in infinity.  Mathematician's call the $\delta$-function a generalized function or distribution.  It only makes sense in the context of its defining integral equation above, and doesn't exist as a function on it's own.  If you think of what we actually do with wave functions (calculate integrals) this isn't really any limitation at all.
+but such a definition shouldn't be taken too seriously.  A better way is to consider it is as a limit of perfectly reasonable functions with integral one, that get narrower and narrower around 0.  Just as the limit of a series of rational numbers can be an irrational number, the $\delta$-function is the limit of a sequence of integrable functions, but isn't itself square integrable.  We could try:
+\begin{equation*}
+\int_{-\infty}^{+\infty} \delta^2(x) \, dy = \delta(0)
+\end{equation*}
+but what are we to make of $\delta(0)$? At best, we could say it is in infinity.  Mathematician's call the $\delta$-function a generalized function or distribution.  It only makes sense in the context of its defining integral equation above, and doesn't exist as a function on its own.  If you think of what we actually do with wave functions (calculate integrals) this isn't really any limitation at all.
 
 For $x \neq 0$, $\delta(x) = 0$ is well defined.  But otherwise, just stick to its well defined properties (the numbered equations here) within integrals, and we will see the $\delta$-function is extremely useful.
 
@@ -121,18 +121,17 @@ B e^{\displaystyle -\kappa x} &  x\geq0 \\
 \end{cases}
 $$
 We saw above that the presence of the $\delta$-function means the wave function need not be continuous at $x=0$, and in fact:
-$$
+\begin{eqnarray*}
 \lim_{\epsilon \to 0} \left( \left. \frac{d\psi}{d x} \right\rvert_{+\epsilon} 
-- \left. \frac{d\psi}{d x} \right\rvert_{-\epsilon} \right) = 
+- \left. \frac{d\psi}{d x} \right\rvert_{-\epsilon} \right) &=& 
 \lim_{\epsilon \to 0}
-\frac{2m}{\hbar^2}\int_{-\epsilon}^{+\epsilon} V(x) \; \left( -\alpha \delta(x) \right) \, dx
-$$
-The $\delta$-function is well defined in the context of this integral, which can be evaluated as:
-$$
-\lim_{\epsilon \to 0} \left( \left. \frac{d\psi}{d x} \right\rvert_{+\epsilon} 
-- \left. \frac{d\psi}{d x} \right\rvert_{-\epsilon} \right) = 
-\lim_{\epsilon \to 0} \left( -\frac{2m\alpha}{\hbar^2} \psi(0) \right) = -\frac{2m\alpha}{\hbar^2} \psi(0) 
-$$
+\frac{2m}{\hbar^2}\int_{-\epsilon}^{+\epsilon} V(x) \, \Psi(x) \, dx \\
+&=& 
+\lim_{\epsilon \to 0}
+\frac{2m}{\hbar^2}\int_{-\epsilon}^{+\epsilon} \left( -\alpha \delta(x) \right) \Psi(x)\, dx\\
+&=& \lim_{\epsilon \to 0} \left( -\frac{2m\alpha}{\hbar^2} \psi(0) \right) \\
+&=& -\frac{2m\alpha}{\hbar^2} \psi(0) \\ 
+\end{eqnarray*}
 In our case:
 $$\psi(0) = B$$
 and:
@@ -193,30 +192,26 @@ Finally:
 $$F-G = A (1+2i\beta) - B (1-2i\beta) $$
 where:
 $$\beta = \frac{m \alpha}{\hbar^2 k}$$
-
-To measure scattering, let $A$ represent the (known) incident wave and set
-$$G=0$$
-so now we have two equations and two unknowns:
+For scattering from the left, let $A$ represent the (known) incident wave and set
+$$G=0$$ so that now we have two equations and two unknowns:
 $$F = A + B$$
 and:
 $$F = A (1+2i\beta) - B (1-2i\beta) $$
 Solving for $F$ in terms of $A$:
 \begin{eqnarray*}
 F &=& A (1+2i\beta) - (F-A)\,(1-2i\beta)\\
-2F(1-i\beta) &=& 2A \\
+2F(1-i\beta) &=& 2A 
 \end{eqnarray*}
 and so:
 $$F = \frac{A}{1-i\beta}$$
 similarlyy:
 $$B = \frac{i\beta}{1-i\beta}$$
-
 The reflection coefficient is:
 $$R = \frac{|B|^2}{|A|^2} = \frac{\beta^2}{1+\beta^2}$$
 and:
 $$T = \frac{|F|^2}{|A|^2} = \frac{1}{1+\beta^2}$$
 Notice that:
 $$R+T=1$$
-
 Now let's look at what happens for:
 $$V(x) = +\alpha \delta(x)$$
 Nothing changes until we reach the boundary condition on the derivative, which becomes:
@@ -225,15 +220,7 @@ $$
 - \left. \frac{d\psi}{d x} \right\rvert_{-\epsilon} \right) = 
 +\frac{2m\alpha}{\hbar^2} \psi(0) 
 $$
-So we can read off the solutions for this case by putting $\beta \to -\beta$ in the solutions:
-
-
-so the boundary conditions (keeping $G=0$) become:
-
-\begin{eqnarray*}
-F &=& A+B \\
-F &=& A (1-2i\beta) - B (1+2i\beta)\\
-\end{eqnarray*}
+So we can read off the solutions for this case by putting $\beta \to -\beta$ in the solutions above, which leaves the transmission and reflection unchanged.
 
 \section{Bound States of the Finite Square Well}
 
@@ -258,8 +245,7 @@ for $x>a$.  Within the potential well at $-a \leq x \leq a$ we have:
 \end{equation*}
 with general solution:
 $$\psi(x) = C \sin(kx) + D \cos(kx)$$
-At this point, we will save ourselves a lot of hassle by noting that $V(x)$ is even, and so the general solutions can be constructed as either even or odd solutions. (See Griffith's P2.1c).
-One major benefit of this, is that we need only establish continuity for $x \geq 0$ and we will automatically have it for $x \leq 0$.
+At this point, we will save ourselves a lot of hassle by noting that $V(x)$ is even, and so the general solutions can be constructed as either even or odd solutions\footnote{See Griffith's P2.1c.  Or note that if $\psi(x)$ is a solution, so is $\psi(-x)$, and we can add or subtract the two to get even and odd solutions.}  So we need only establish continuity for $x \geq 0$ and we will automatically have it for $x \leq 0$.
 
 Starting with the even solutions and $x\geq0$, we write:
 $$\psi(x) = \begin{cases}
@@ -305,7 +291,7 @@ This is an equation with no known algebraic solution.  It can be solved graphica
 \caption{\label{fig:finitewell} The allowed energies for the finite potential occur at the intersection of these curves.}
 \end{figure}
 There are some interesting limiting cases to consider.  When:
-$$z0 < \frac{\pi}{2}$$
+$$z_0 < \frac{\pi}{2}$$
 there is only one bound state (we haven't found the odd solutions yet, which is why this is $\pi/2$ and not $\pi$, as you might expect from the figure...)  Recalling the definition for $z_0$, this amounts to:
 $$V_0\,a^2 < \frac{\pi^2 \hbar^2}{8m}$$
 which defines a shallow and narrow well.
@@ -383,7 +369,11 @@ A &=& \frac{(\eta+1)^2 (\alpha^2)^* - (\eta-1)^2 \alpha^2}{4 \eta} \, F \\
 Recalling our definition for $\alpha$:
 $$A/F = \cos(2\eta ka) - i\frac{\eta^2+1}{2\eta} \sin(2\eta ka)$$
 and so the transmission is:
-$$\frac{1}{T} = 1 + \frac{\eta^2-1}{4\eta^2}\sin^2(2\eta ka) $$
+\begin{eqnarray*}
+\frac{1}{T} = \frac{|A|^2}{|F|^2} &=& \cos^2(2\eta ka) + \frac{(\eta^2+1)^2}{4\eta^2} \sin^2(2\eta ka) \\
+&=& 1 + \left(\frac{(\eta^2+1)^2}{4\eta^2} - 1\right)\sin^2(2\eta ka) \\
+&=& 1 + \frac{\eta^2-1}{4\eta^2}\sin^2(2\eta ka)\\
+\end{eqnarray*}
 Notice that the transmission is one when either:
 $$\eta=1$$
 which corresponds to know change in index of refraction, i.e. $V_0=0$.  Or:

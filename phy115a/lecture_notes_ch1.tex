@@ -407,7 +407,13 @@ which remains true in Quantum Mechanics in an average sense.
 
 \section{The Uncertainty Principle}
 
-From our review of statistics we know that the variance of $x$ can be calculated as:
+We can generalize the variance described in the review of statistics to any observable $o$, and note that the variance $\sigma^2_o$ of an observable $o$ can be calculated as:
+\begin{displaymath}
+\sigma_o^2 \equiv \braket{\,(o-\braket{o})^2\,} = \braket{o^2}-\braket{o}^2
+\end{displaymath}
+The square root of the variance is referred to as the uncertainty.  So $\sigma_o$ is the uncertainty in $o$.
+
+The variance of the position $x$ is:
 \begin{displaymath}
 \sigma_x^2 \equiv \braket{\,(x-\braket{x})^2\,} = \braket{x^2}-\braket{x}^2
 \end{displaymath}
@@ -423,9 +429,7 @@ and
  &=& \int_{-\infty}^{+\infty} \, \Psi^* \left[ \hat{x}^2 \right] \Psi \,dx \\
  &=& \int_{-\infty}^{+\infty} \, x^2|\Psi|^2 \,dx 
 \end{eqnarray}
-
-The variance of $p$ is:
-
+The variance of momentum $p$ is:
 \begin{displaymath}
 \sigma_p^2 \equiv \braket{\,(p-\braket{p})^2\,} = \braket{p^2}-\braket{p}^2
 \end{displaymath}
@@ -488,11 +492,11 @@ P_{ab}(t) = \int_a^b |\Psi(x,t)|^2 dx
 \braket{o}  &=& \int_{-\infty}^{+\infty} \, \Psi^* \left[ \hat{o} \right] \Psi \,dx 
 \end{eqnarray}
 The operator acts toward its right.
-\item For the position observable with have the position operator 
+\item For the position observable we have the position operator 
 \begin{equation}
 \hat{x} = x.
 \end{equation}
-\item For the momentum observable with have the momentum operator 
+\item For the momentum observable we have the momentum operator 
 \begin{equation}
 \hat{p} = - \ihbar \frac{\partial}{\partial x}.
 \end{equation}
@@ -500,11 +504,15 @@ The operator acts toward its right.
 \begin{eqnarray}
 \braket{f(x,p)}  &=& \int_{-\infty}^{+\infty} \, \Psi^* \left[ f(\hat{x},\hat{p}) \right] \Psi \,dx 
 \end{eqnarray}
-
 \item Newtons law is still true, but only in an average sense, by Ehrenfest's Theorem:
 \begin{eqnarray}
 \frac{d \braket{p}}{dt} &=& - \braket{\frac{\partial V}{\partial x}}
 \end{eqnarray}
+\item The variance $\sigma^2_o$ of an observable $o$ can be calculated as:
+\begin{equation}
+\sigma_o^2 \equiv \braket{\,(o-\braket{o})^2\,} = \braket{o^2}-\braket{o}^2
+\end{equation}
+The square root of the variance is referred to as the uncertainty.  
 \item The Heisenberg uncertainty relation states that:
 \begin{equation}
 \sigma_x \sigma_p \, \geq \, \frac{\hbar}{2}

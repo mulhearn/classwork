@@ -59,10 +59,10 @@ As the LHS is a function of $t$ only, and the RHS a function of $x$ only, both s
 \phi(t) &=& \exp(-\frac{iEt}{\hbar})\\
 \end{eqnarray*}
 The remaining equation is for $\psi(x)$ only
-\begin{eqnarray*}
-- \frac{\hbar^2}{2 m} \; \ddpsidx \, + \, V \, \psi &=& E \psi\\
-\end{eqnarray*}
-and is called the Time-Independent Schr\"odinger Equation (TISE), often just called the Schr\"odinger Equation when the meaning is clear.
+\begin{equation}
+- \frac{\hbar^2}{2 m} \; \ddpsidx \, + \, V(x) \, \psi(x) = E \, \psi(x)\\
+\end{equation}
+and is called the Time-Independent Schr\"odinger Equation (TISE), but often just called the Schr\"odinger Equation when the meaning is clear.
 
 In classical mechanics, the total energy (kinetic plus potential) is called the Hamiltonian:
 \begin{equation*}
@@ -82,22 +82,22 @@ with which we can write the TISE as:
 \label{eqn:htise}
 \hat{H} \, \psi(x) = E \, \psi(x)
 \end{equation}
+We say that separable solutions are eigenstates of the Hamiltonian operator.  (This is analogous to an eigenvector problem in linear algebra.)
+
 We'll demonstrate later the following boundary conditions on $\psi(x)$:
 \begin{itemize}
 \item $\psi(x)$ is always continuous.
 \item $d\psi/dx$ is continuous except where the potential is infinite.
 \end{itemize}
-Note that these conditions do not apply to $\Psi(x,t)$ no $\partial \Psi / \partial x$ which need not be continuous.
+Note that these conditions do not apply to $\Psi(x,t)$ which need not be continuous.
 
-\noindent
-Some observations left as exercises (See Griffith's problems 2.1 and 2.2)
+Some further observations left as exercises (See Griffith's problems 2.1 and 2.2)
 \begin{itemize}
-\item For normalizable solutions, we must the separation constant E real.
-\item $\psi(x)$ can always be taken real.
-\item If $V(x)$ is an even function, than $\psi(x)$ can be taken as even or odd.
-\item $E$ must be greater than the minimum value of $V(x)$.
+\item For normalizable solutions, the separation constant $E$ must be real.
+\item $\psi(x)$ can always be taken as a real function.
+\item If $V(x)$ is an even function, then the general solutions $\psi(x)$ can be constructed as either even or odd solutions.
+\item For normalizable solutions, $E$ must be greater than the minimum value of $V(x)$.
 \end{itemize}
-
 \noindent
 The separable solutions are important solutions because:
 \begin{itemize}
@@ -115,7 +115,6 @@ This means that every expectation value is constant wrt time as well.  It also f
 \begin{equation*}
 \int_{-\infty}^{+\infty}\, |\psi(x)|^2 dx = 1\\
 \end{equation*}
-
 \item They represent {\bf states of definite total energy:} the expectation value for the total energy of a separable solution is:
 \begin{eqnarray*}
 \braket{E} &=& \int_{-\infty}^{+\infty}\, \Psi^*(x,t) \, \hat{H} \, \Psi(x,t) \; dx \\[8pt]
@@ -234,20 +233,6 @@ k_n &=& \frac{n\pi}{b} = \frac{\sqrt{2mE_n}}{\hbar}\\[10pt]
 E_n &=& \frac{\hbar^2k_n^2}{2m}= \frac{n^2 \pi^2 \hbar^2}{2mb^2}
 \end{eqnarray}
 
-
-
-\begin{equation*}
-f(x) = A_0 \sqrt{\frac{1}{a}} + \sqrt{\frac{2}{a}} \sum_{n=1}^{\infty}  \left[ A_n \, \cos\left(\frac{2\pi n}{a} \, x \right) + B_n \, \sin\left(\frac{2\pi n}{a} \, x \right)\right]\end{equation*}
-with the Fourier coefficients determined by:
-\begin{eqnarray*}
-A_0 &=& \sqrt{\frac{1}{a}} \int_{-\frac{a}{2}}^{\frac{a}{2}} f(x) \, dx \\
-A_n &=& \sqrt{\frac{2}{a}} \int_{-\frac{a}{2}}^{\frac{a}{2}} 
-\cos\left(\frac{2\pi n}{a} \, x \right) \, f(x) \, dx \\
-B_n &=& \sqrt{\frac{2}{a}} \int_{-\frac{a}{2}}^{\frac{a}{2}} 
-\sin\left(\frac{2\pi n}{a} \, x \right) \, f(x) \, dx \\
-\end{eqnarray*}
-
-
 \subsection{Application of Fourier Series to Infinite Well}
 
 In the Fourier Series section of Appendix F we worked out that:
@@ -277,7 +262,7 @@ f(x) =
   -\psi(-x) & -b \leq x < 0 \\
 \end{cases}   
 \end{equation*}
-It is an odd function by construction:  $f(-x) = -f(x)$.  Since f(b) = f(-b) = 0, we can consider it to be a periodic function with period $2b$. To evaluate it's Fourier series, we'll only need to evaluate it in the region $[-b,b]$ where it is defined\footnote{If you prefer, you can imagine making the helper function truly periodic by just stamping out a copy of $f(x)$ from $[-b,b]$ into $[b,3b]$, and so on.  It will have no effect in what follows.}.  When applying the formulas for the Fourier series, we will need to make the substitute $a \to 2b$ into the original formulas, because the period of $f(x)$ is $2b$.
+It is an odd function by construction:  $f(-x) = -f(x)$.  Since f(b) = f(-b) = 0, we can consider it to be a periodic function with period $2b$. To evaluate it's Fourier series, we'll only need to evaluate it in the region $[-b,b]$ where it is defined\footnote{If you prefer, you can imagine making the helper function truly periodic by just stamping out a copy of $f(x)$ from $[-b,b]$ into $[b,3b]$, and so on.  It will have no effect on what follows.}.  When applying the formulas for the Fourier series, we will need to make the substitute $a \to 2b$ into the original formulas, because the period of $f(x)$ is $2b$.
 
 For $f(x)$ the Fourier coefficients of the cosines all vanish:
 \begin{eqnarray*}
@@ -902,7 +887,7 @@ So:
 $$v_{\rm group} = 2 v_{\rm phase} = v_{\rm classical}$$
 That is, the wave packet travels at the classical speed of the particle.
 
-\section{Hermetian Adjoints and Hermetian Operators}
+\section{Hermitian Adjoints and Hermitian Operators}
 The normalizable wave functions are a vector space over the complex numbers, with an inner product:
 \begin{equation}
 \braket{f|g} \equiv \int_{-\infty}^{\infty} f^*(x) \, g(x) \, dx
@@ -925,7 +910,7 @@ That is $\hat{O}^\dagger$ operating on $g$ (i.e. in the "usual place") gives a r
 \int_{-\infty}^{\infty} f^*(x,t)\hat{O}^\dagger g(x,t) dx = 
 \int_{-\infty}^{\infty} \left( \hat{O} f(x,t)\right)^* g(x,t) dx
 \end{equation}
-So, to find the Hermetian adjoint of an operator $\hat{O}$, operate $\hat{O}$in the "unusual spot", then perform whatever manipulations are required to bring the operator over to the "usual spot".  Then read off the operator $\hat{O}^\dagger$.
+So, to find the Hermitian adjoint of an operator $\hat{O}$, operate $\hat{O}$in the "unusual spot", then perform whatever manipulations are required to bring the operator over to the "usual spot".  Then read off the operator $\hat{O}^\dagger$.
 
 For the operator $\hat{x}$:
 \begin{equation*}
@@ -963,19 +948,19 @@ It is left as an exercise to show:
 \begin{equation}
 \hat{p}^\dagger = \hat{p}
 \end{equation}
-When an operator has the property $\hat{o}^\dagger = \hat{o}$ we say that it is hermetian.  
+When an operator has the property $\hat{o}^\dagger = \hat{o}$ we say that it is hermitian.  
 \begin{equation}
 \braket{o} = \braket{\Psi|\hat{o}\Psi} = \braket{\Psi|\hat{o}^\dagger \Psi}
 = \braket{\hat{o} \Psi| \Psi} = \overline{\braket{\Psi| o \Psi}} = \braket{o}^*
 \end{equation}
-Expectations values of hermetian operators are real, and so we associate physical observables with hermetian operators. 
+Expectations values of hermitian operators are real, and so we associate physical observables with hermitian operators. 
 
 It is left as an exercise to show that our definition is equivalent to Griffith's and others:
 $$\braket{f|\hat{O}g} = \braket{\hat{O}^\dagger f|g}$$
 Hint: just take the complex conjugate of both sides of the equation.
 
 \section{Orthogonality of the Stationary Solutions}
-It is left as an exercise, to show that the Hamiltonian is a Hermetian operator:
+It is left as an exercise, to show that the Hamiltonian is a Hermitian operator:
 $$\hat{H}^\dagger = \hat{H}$$
 Now suppose we have two solutions to the TISE $\psi_n(x)$ and $\psi_m(x)$ with:
 $$\hat{H}\psi_n(x) = E_n \psi_n(x), \hspace{1cm} \hat{H}\psi_m(x) = E_m \psi_m(x)$$
@@ -996,7 +981,10 @@ That is, if $E_m \neq E_n$,
 \begin{equation}
 \braket{\psi_m|\psi_n} = 0
 \end{equation}
-For the cases we've seen so far, $E_n \neq E_m$ for $n \neq m$, so we see that our assumption that the stationary solutions are orthogonal was sound.  We'll handle the case of degeneracy (different states having same energy) later.
+For the cases we've seen so far, $E_n \neq E_m$ for $n \neq m$, so we see that our assumption that the stationary solutions are orthogonal was sound.  We'll handle the case of degeneracy (different states having same energy) later, but for now we can just state that even in the case where the total energy is degenerate, we can always {\bf arrange} the eigenstates of the Hamiltonian operator such that:
+\begin{equation}
+\braket{\psi_m|\psi_n} = \delta_{mn}
+\end{equation}
 
 \section{Ladder Operators Revisited}
 
@@ -1015,7 +1003,7 @@ and:
 \begin{equation*}
 \hat{H} =  \hbar\omega \left( \hat{a}_+ \hat{a}_- + \frac{1}{2} \right)
 \end{equation*}
-We leave it as an exercise to show that $\hat{a}_-$ is the Hermetian adjoint of $\hat{a}_+$ and vice-versa, i.e.:
+We leave it as an exercise to show that $\hat{a}_-$ is the Hermitian adjoint of $\hat{a}_+$ and vice-versa, i.e.:
 \begin{eqnarray*}
 \hat{a}_- &=& \hat{a}_+^\dagger\\
 \hat{a}_+ &=& \hat{a}_-^\dagger
@@ -1069,74 +1057,204 @@ to find $\psi_0(x)$ and then use:
 $$\psi_n(x) = \frac{1}{n!}(\hat{a}_+)^n \psi_0$$
 to get the rest!
 
-\end{document}
+\section{Chapter Review}
 
-\section{The Dirac Delta Function}
 
-Note that the Fourier Transform of the Dirac delta function is:
-$$
-\widetilde{\delta}(k) = \braket{e_k, \delta} = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} \delta(x) e^{-ikx} dx  = \frac{e^{-ik0}}{\sqrt{2\pi}} = \frac{1}{\sqrt{2\pi}} 
-$$
-and so we can write the Dirac delta function as:
-$$
-\delta(x) = \frac{1}{2\pi} \int_{-\infty}^{\infty} e^{ikx} dk
-$$
-and so also:
-$$
-\delta(x-x') = \frac{1}{2\pi} \int_{-\infty}^{\infty} e^{ik(x-x')} dk
-$$
-and (by changing variables):
-$$
-\delta(k-k') = \frac{1}{2\pi} \int_{-\infty}^{\infty} e^{i(k-k')x)} dx
-$$
+\begin{itemize}
 
-\section{The Fourier Transform Revisited}
-
-Our inner product now extends between positive and negative infinity:
+\item If the potential is a function of position only ($V(x)$), and if we can find solutions to Schr\"odinger Equation (SE) which are separable:
 \begin{equation}
-\braket{\Psi, \phi} \equiv \int_{-\infty}^{\infty} \Psi^*(x) \phi(x) \, dx
+\Psi(x,t) \; = \; \psi(x) \,\phi(t)
 \end{equation}
-Our basis functions, which are now defined for any value of $k$,
+then for these solutions:
 \begin{equation}
-e_k = \frac{1}{\sqrt{2\pi}} \exp(i k x)
+\phi(t) \; = \; \exp\left( -i\frac{Et}{\hbar}\right)
 \end{equation}
-are still orthonormal, but the condition looks a bit different in the continuum case:
+and $\psi(x)$ satisfies the Time-Independent Schr\"odinger Equation (TISE):
+\begin{equation}
+- \frac{\hbar^2}{2 m} \; \ddpsidx \, + \, V(x) \, \psi(x) = E \, \psi(x)\\
+\end{equation}
+The boundary conditions on the solutions $\psi(x)$ are that:
+\begin{itemize}
+\item $\psi(x)$ is always continuous.
+\item $d\psi/dx$ is continuous except where the potential is infinite.
+\end{itemize}
+Other features:
+\begin{itemize}
+\item For normalizable solutions, the separation constant $E$ must be real.
+\item $\psi(x)$ can always be taken as a real function.
+\item If $V(x)$ is an even function, then the general solutions $\psi(x)$ can be constructed as either even or odd solutions.
+\item For normalizable solutions, $E$ must be greater than the minimum value of $V(x)$.
+\end{itemize}
+\item We can write the TISE as:
+\begin{equation}
+\hat{H} \, \psi(x) = E \, \psi(x)
+\end{equation}
+where:
+\begin{equation}
+\hat{H} = H(\hat{x}, \hat{p})= -\frac{\hbar^2}{2m}\,\frac{\partial^2}{\partial x^2} + V(x)
+\end{equation}
+is the Hamiltonian operator, which is the operator for the total energy observable.  We say that the separable solutions are eigenstates of the Hamiltonian operator.
+
+\item The separable solutions have some very nice properties indeed:
+\begin{itemize}
+\item They represent {\bf stationary states} for which
+$$|\Psi(x,t)|^2 = | \psi(x) |^2$$
+and so every expectation value is constant wrt time as well.  Also:
+\begin{equation*}
+\int_{-\infty}^{+\infty}\, |\psi(x)|^2 dx = 1\\
+\end{equation*}
+\item They represent {\bf states of definite total energy:} so:
+$$\braket{H} = E$$
+and:
+$$\sigma^2_H = 0$$
+every measurement of the total energy gives the same result $E$.
+\item They are {\bf orthogonal and complete}, as describe in more detail below.
+\end{itemize}
+
+\item The normalizable wave functions are a vector space over the complex numbers, with an inner product:
+\begin{equation}
+\braket{f|g} \equiv \int_{-\infty}^{\infty} f^*(x) \, g(x) \, dx
+\end{equation}
+Expectation values are inner products:
+\begin{equation}
+\braket{O} = \braket{\Psi|\hat{O}\Psi} \equiv \int_{-\infty}^{\infty} \Psi^*(x,t)\hat{O}\Psi(x,t) dx
+\end{equation}
+
+\item The stationary states $\psi_n(x)$ with:
+$$\hat{H} \psi_n(x) = E_n \psi_n(x)$$
+can be arranged to be orthonormal:
+\begin{equation}
+\braket{\psi_n|\psi_m}=\delta_{mn}
+\end{equation}
+This is automatic if $E_n \neq E_m$ when $n \neq m$ (the allowed energies are nondegenerate) as in all the cases we studied in this chapter.  The stationary states are also complete:
+\begin{equation}
+\Psi(x,t) = \sum_n c_n \; \psi_n(x) \; \exp\left(\frac{-E_n t}{\hbar}\right)
+\end{equation}
+where 
+$$\sum_n |c_n|^2 = 1$$
+and each $|c_n|^2$ is the probability that a measurement of the total energy gives result $E_n$.  The coefficients can be determined from the initial state $\Psi(x,0)$ using Fourier's trick:
+\begin{equation}
+c_n = \braket{\psi_n| \Psi(x,0)}
+\end{equation}
+\item We define the commutator of two operators $\hat{A}$ and $\hat{B}$ as:
+\begin{equation}
+[\hat{A},\hat{B}]=\hat{A}\hat{B} - \hat{B}\hat{A}
+\end{equation}
+If the commutator of two operators is zero, we say they commute.  Otherwise, we say they do not commute.  The momentum and position operators do not commute:
+\begin{equation}
+[\hat{x},\hat{p}]=i\hbar
+\end{equation}
+which is known as the {\bf canonical commutation relation}.  In the homework, you showed that
+for any operators $\hat{A}$, $\hat{B}$, and $\hat{C}$:
+$$ [\hat{A}\hat{B}, \hat{C}] = \hat{A}[\hat{B}, \hat{C}] + [\hat{A}, \hat{C}]\hat{B}.$$
+
+\item For an operator $\hat{O}$ we define it's Hermitian adjoint (or conjugate) $\hat{O}^\dagger$ by the property:
+\begin{equation}
+\braket{f|\hat{O^\dagger}g} = \braket{\hat{O} f| g}
+\end{equation}
+which implies:
+\begin{equation}
+\braket{f|\hat{O}g} = \braket{\hat{O^\dagger} f| g}
+\end{equation}
+When an operator is it's own Hermitian adjoint, we say the operator is Hermitian.  The expectation value of a hermitian operator are real, and so physical observables are always associated with hermitian operators.  In the homework, you showed that:
+$$\left(\hat{A}^\dagger\right)^\dagger = \hat{A}$$
+and:
+$$\left(\hat{A}\hat{B}\right)^\dagger = \hat{B}^\dagger \, \hat{A}^\dagger.$$
+for any operators $\hat{A}$ and $\hat{B}$.
+
+\item We studied the solutions to the infinite square well potential:
+\begin{equation}
+V(x) = 
+\begin{cases}    
+   0 & 0 \leq x \leq b \\
+   +\infty & {\rm otherwise} \\
+\end{cases}   
+\end{equation}
+and found the allowed energies:
+\begin{equation}
+E_n = \frac{n^2 \pi^2 \hbar^2}{2mb^2}.
+\end{equation}
+We showed that the eigenfunctions are the sine functions of the Fourier series:
+\begin{equation}
+\psi_n(x) = 
+\begin{cases}
+{\displaystyle \sqrt{\frac{2}{b}} \, \sin(k_n x)} & 0 \leq x \leq b\\[8pt]
+0 & \rm otherwise \\
+\end{cases}
+\end{equation}
+where
 \begin{eqnarray*}
-\braket{e_k, e_{k'}} &=& \delta(k-k')
+k_n&=&\frac{n\pi}{b}
 \end{eqnarray*}
-See the appendix for more details on the Dirac delta function $\delta(x)$, which is zero everywhere but at $x=0$, where it is infinite.  It is the continuous version of $\delta_{nm}$.
 
-Our basis functions are also still complete.  In the discrete case we have a complex Fourier coefficient for every integer $n$.   Now we have a complex Fourier coefficient for any real value of $k$.  In place of Fourier coefficients, we have instead a function of $k$ which we call the Fourier transform: $\widetilde{\Psi}(k)$.
-Instead of a sum over discrete terms, we now have to integrate over all values of $k$:
-\begin{equation} \label{eqn:ift}
-\Psi(x) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} \widetilde{\Psi}(k) \exp(ikx) \, dk.
+\item We studied the solutions of the harmonic oscillator potential:
+$$V(x) = \frac{1}{2}k x^2 = \frac{1}{2} m \omega^2 x^2$$
+where:
+$$\omega \equiv \sqrt{\frac{k}{m}}$$
+and showed that the power series solution diverges if it does not terminate, and it only terminates if:
+\begin{equation}
+E_n = \hbar \omega \left( n + \frac{1}{2} \right)
 \end{equation}
-Just as in the discrete case, we determine the Fourier transform from the inner product:
-\begin{equation} \label{eqn:ft}
-\widetilde{\Psi}(k) = \braket{e_k, \Psi} = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} {\Psi}(x) \exp(-ikx) \, dx
-\end{equation}
-Equation~\ref{eqn:ft} is generally referred to as the {\em Fourier Transform}, while Equation~\ref{eqn:ift} is referred to as the {\em Inverse Fourier Transform}.
+for
+$$n=0,1,2,3,\ldots$$
+We found explicit solutions in terms of the Hermite polynomials $H_n(u)$, which we can obtain from the generator function:
+$$\exp(-z^2+2zu) = \sum_{n=0}^{\infty} \frac{z_n}{n!}H_n(u)$$
+and the eigenfunctions are:
+$$\psi_n(x) = \left( \frac{m \omega}{\pi \hbar} \right)^{1/4} \frac{1}{\sqrt{2^n n!}}H_n(u) e^{-u^2/2}$$.
 
-\section{The Fourier Transform in Quantum Mechanics}
 
-So far we have been considering the Fourier transform with respect to position $x$ and wave-number $k$.  A much more useful pair of variables for Quantum Mechanics turns out to be momentum $p$ and position $x$.  To relate $p$ to $k$ we need only apply the DeBroglie relation to the wavelength in the definition of the wavenumber:
-\begin{displaymath}
-k \equiv \frac{2 \pi}{\lambda} = \frac{2 \pi p}{h} = \frac{p}{\hbar}
-\end{displaymath}
-We could therefore make the substitution $k \to p/\hbar$ (and $dk \to dp / \hbar)$) in Equations~\ref{eqn:ift} and ~\ref{eqn:ft}.  It turns out that a marginally more useful equation results if we make the normalization factors symmetric, by splitting the normalization factor of $1/\hbar$ across both equations with $1/\sqrt{\hbar}$ applied to each:
-\begin{eqnarray} 
-\Psi(x) &=& \frac{1}{\sqrt{2\pi\hbar}} \int_{-\infty}^{\infty} \widetilde{\Psi}(p) \exp(ipx/\hbar) \, dp \\
-\widetilde{\Psi}(p) &=&  \frac{1}{\sqrt{2\pi\hbar}} \int_{-\infty}^{\infty} {\Psi}(x) \exp(-ipx/\hbar) \, dx
+\item We studied the ladder operators of the harmonic oscillator potential:
+\begin{eqnarray}
+\hat{a}_- &\equiv& \frac{1}{\sqrt{2}}\left(i \frac{\hat{p}}{p_0} + \frac{\hat{x}}{x_0}\right) \notag \\
+\hat{a}_+ &\equiv& \frac{1}{\sqrt{2}}\left(-i \frac{\hat{p}}{p_0} + \frac{\hat{x}}{x_0} \right) \notag \\
 \end{eqnarray}
-The major benefit of this symmetric form is that the normalization of $\Psi(x)$ and $\widetilde{\Psi}(p)$ in this case turns out to be the same:
-\begin{displaymath}
-\int_{-\infty}^{\infty} |\Psi(x)|^2 dx = \int_{-\infty}^{\infty} |\widetilde{\Psi}(p)|^2 dp = 1 
-\end{displaymath}
-Because we can always calculate $\Psi(x)$ from $\widetilde{\Psi}(p)$ either one completely describes the quantum mechanical state.  We call $\widetilde{\Psi}(p)$ the momentum wave function.   Whereas $|\Psi(x)|^2$ gives us the probability density for the quanton to be at position $x$, $|\Psi(p)|^2$ gives us the probability density for the quanton to have momentum $p$.
+where
+$$x_0 \equiv \sqrt{\frac{\hbar}{m \omega}}$$
+and
+$$p_0 \equiv \frac{\hbar}{x_0} = \sqrt{\hbar m \omega}.$$
+We showed that the Hamiltonian operator can be written as:
+$$\hat{H} =  \hbar\omega \left( \hat{a}_+ \hat{a}_- + \frac{1}{2} \right)$$
+And that the ladder operators satisfy the following commutation relationships:
+\begin{eqnarray}
+\left[\hat{a}_-\,,\,\hat{a}_+\right] \; &=& \;  1 \notag \\  
+\left[\hat{H}\,,\,\hat{a}_+\right]   \; &=& \;  \hbar \omega \; \hat{a}_+ \notag \\ 
+\left[\hat{H}\,,\,\hat{a}_-\right]   \; &=& \; -\hbar \omega \; \hat{a}_- \notag \\
+\end{eqnarray}
+Using the algebra of these commutators, we showed that the ladder operators act as raising and lowering operators that move up and down the stationary solutions:
+\begin{eqnarray}
+\hat{a}_+ \psi_n &=& \sqrt{n+1} \; \psi_{n+1} \notag \\
+\hat{a}_- \psi_n &=& \sqrt{n} \; \psi_{n-1} \notag \\
+\end{eqnarray}
 
-
+\item We found the eigenstates of the Hamiltonian for the free particle ($V(x)=0$) as:
+\begin{equation}
+\Psi_k(x,t) = A e^{i (k x-\omega t)}
+\end{equation}
+where
+\begin{equation}
+k = \pm\frac{\sqrt{2mE}}{\hbar}
+\end{equation}
+and the sign of $k$ indicates the direction of the traveling wave:
+\begin{eqnarray*}
+k > 0 &\implies& {\rm wave~is~traveling~right} \\[5pt]
+k < 0 &\implies& {\rm wave~is~traveling~left} \\
+\end{eqnarray*}
+while these solutions are not normalizable, we found that we can construct wave packets:
+\begin{equation}
+\Psi(x,t) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} \; \widetilde{\Psi}(k,0) \; 
+\exp\left[ik\left(x-\frac{\hbar k}{2m}t\right)\right]\; dk 
+\end{equation}
+where $\widetilde{\Psi}(k,0)$ is the Fourier Transform of the initial state:
+\begin{equation}
+\widetilde{\Psi}(k,0) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} \; \Psi(x,0) \; e^{-ikx} \; dx 
+\end{equation}
+\end{itemize}
 \end{document}
 
 
 
 
+\item Free Particle...
+\end{itemize}
+\end{document}

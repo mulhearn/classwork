@@ -1,0 +1,233 @@
+\documentclass[12pt]{book}
+
+\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.5in]{geometry}
+\usepackage{cite}
+\usepackage{slashed}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{braket}
+\begin{document}
+
+\newcommand{\ihbar}{\ensuremath{i \hbar}}
+\newcommand{\Pss}{\ensuremath{\Psi^*}}
+\newcommand{\dPsidt}{\ensuremath{ \frac{\partial \Psi}{\partial t} }}
+\newcommand{\dPsidx}{\ensuremath{ \frac{\partial \Psi}{\partial x} }}
+\newcommand{\ddPsidx}{\ensuremath{ \frac{\partial^2 \Psi}{\partial x^2} }}
+\newcommand{\dPssdt}{\ensuremath{ \frac{\partial \Psi^*}{\partial t} }}
+\newcommand{\dPssdx}{\ensuremath{ \frac{\partial \Psi^*}{\partial x} }}
+\newcommand{\ddPssdx}{\ensuremath{ \frac{\partial^2 \Psi^*}{\partial x^2} }}
+
+\newcommand{\dphidt}{\ensuremath{ \frac{d \phi}{dt} }}
+\newcommand{\dpsidx}{\ensuremath{ \frac{d \psi}{dx} }}
+\newcommand{\ddpsidx}{\ensuremath{ \frac{d^2 \psi}{dx^2} }}
+
+
+\title{PHY 115A \\ Lecture Notes 3: \\ 
+Formalism \\
+(Griffith's Chapter 3)}
+\author{Michael Mulhearn}
+
+\maketitle
+
+\setcounter{chapter}{2}
+\chapter{Formalism}
+
+\section{Matter Waves}
+
+Early in the development of quantum mechanics it became clear that light was quantized as photons with discrete energy:
+$$E=h\nu$$
+but for a massless particle, we know that:
+$$E = pc$$
+and:
+$$pc = h\nu$$ 
+so that:
+$$\frac{h}{p} = \frac{\nu}{c} = \lambda$$
+where $\lambda$ is the wavelength of the light.  De Broglie made the hypothesis that matter was also described by a wave with frequency:
+$$\nu = \frac{E}{h}$$
+and wavelength:
+$$\lambda = \frac{h}{p}$$
+We are using the reduced Planck's constant:
+$$\hbar = \frac{h}{2\pi}$$
+so we write these relations equivalently as:
+$$E = h\nu = \hbar (2\pi \nu) = \hbar \omega$$
+and:
+$$p = \frac{h}{\lambda} = \hbar \frac{2\pi}{\lambda} = \hbar k$$
+Recall that in general a right traveling wave has the format:
+$$f(k\,x-\omega \, t)$$
+for $k>0$ and $\omega>0$.  So we can imagine several different functional forms for de Broglie's ``matter waves" traveling left:
+$$\Psi_1(x,t) = \cos(kx - \omega t)$$
+or:
+$$\Psi_2(x,t) = \sin(kx - \omega t)$$
+or
+$$\Psi_3(x,t) = \exp(ikx - i\omega t)$$
+where we don't care about the amplitude of the function yet.  But take care to note that:
+$$g(-k\,x+\omega \, t) = g(-(k\,x-\omega \, t))$$
+is also a right traveling wave, because it can be written as:
+$$f(k\,x-\omega \, t) \equiv g(-(k\,x-\omega \, t))$$
+But since:
+$$\cos(-k\,x+\omega \, t) = \cos(k\,x-\omega \, t)$$
+we don't need to consider that case.  And since:
+$$\sin(-k\,x+\omega \, t) = -\sin(k\,x-\omega \, t)$$
+and we don't care about the amplitude of the function yet, we can ignore that as well.  That only leaves one additional possibility to consider:
+$$\Psi_4(x,t) = \exp(-ikx + i\omega t)$$
+
+It seems like we could use any of these four options, but let's see what happens when we try to construct a standing wave by adding am equal mixture of right traveling and left traveling waves.  To switch to a left traveling wave, we just put:
+$$k \to -k$$
+Our standing wave using $\Psi_1$ is:
+$$\Psi(x) = \cos(k\,x-\omega \, t) + \cos(-k\,x-\omega \, t)$$
+but using:
+$$\cos(\alpha + \beta) = \cos(\alpha)\cos(\beta) - \sin(\alpha)\sin(\beta)$$
+we conclude:
+$$\Psi(x) = 2 \cos(k\,x) \cos(\omega \, t)$$
+which is an utter catastrophe, since the wave function vanishes everywhere whenever:
+$$\omega t = \frac{n \pi}{2} \hspace{2cm} n=1,3,5$$
+This would describe a particle that disappears and reappears from existence... not the theory we are trying to build!  So we discard option $\Psi_1$. Likewise for $\Psi_2$:
+$$\Psi(x) = \sin(k\,x-\omega \, t) + \sin(-k\,x-\omega \, t)$$
+but using:
+$$\sin(\alpha + \beta) = \sin(\alpha)\cos(\beta) + \cos(\alpha)\sin(\beta)$$
+we conclude:
+$$\Psi(x) = -2\cos(k\,x) \sin(\omega \, t)$$
+which is another catastrophe, since the wave function vanishes everywhere whenever:
+$$\omega t = n \pi \hspace{2cm} n=1,2,3,4,5$$
+But there is no such problem with $\Psi_3$ where:
+$$\Psi(x) = \exp(ik\,x-i\omega \, t) + \exp(-ik\,x-i\omega \, t) = 2 \cos(kx) e^{\displaystyle -i\omega t}$$
+this vanishes at specific locations in space, where the particle will never be found, but this is exactly what we would expect for a standing wave.  The only time-dependent factor 
+$$e^{\displaystyle -i \omega t}$$
+is never zero at any point in time.  Similarly, for $\Psi_4$:
+$$\Psi(x) = \exp(-ik\,x+i\omega \, t) + \exp(ik\,x+i\omega \, t) = 2 \cos(kx) e^{\displaystyle i\omega t}$$
+So it seems at this point that both $\Psi_3$ and $\Psi_4$ are valid options for a right-traveling matter waves, but if they are both valid, then we should be able to superimpose them:
+$$\Psi_3(x,t) + \Psi_4(x,t) = \exp(ik\,x-i\omega \, t) + \exp(-ik\,x+i\omega \, t)
+= 2 \cos(k\,x-\omega\,t)$$
+which we already saw was a problematic right traveling wave.  So we conclude that we can have $\Psi_3$ or $\Psi_4$, but {\bf not both}.  We choose the one that has $k>0$ for a right traveling wave, so that our right traveling matter wave is finally uniquely identified as:
+\begin{equation}
+\Psi_{\rm k}(x,t) \equiv \exp(ik\,x-i \omega \, t)
+\end{equation}
+with where:
+$$p=\hbar k, \hspace{1cm} {\rm and} \hspace{1cm} E = \hbar \omega.$$
+For the free particle, we also have:
+\begin{equation}
+E = \frac{p^2}{2m} = \frac{\hbar^2 k^2}{2m}
+\end{equation}
+and so:
+\begin{equation}
+\omega(k) = \frac{\hbar k^2}{2m} 
+\end{equation}
+The free particles have phase velocity:
+$$v_{\rm phase} = \frac{\omega}{k} = \frac{\hbar k}{2m}$$
+and group velocity:
+$$v_{\rm group} = \frac{d\omega}{dk} = \frac{\hbar k}{m}$$
+which is the classical velocity of the particle.  In chapter 2, we showed that this phase velocity is the velocity of a wave packet consisting of waves with wave numbers close to $k$.
+
+ \section{From Matter Waves to the Schr\"odinger Equation}
+
+With the matter waves in hand, we now will try to identify the wave equation that predicts matter waves for a free particle ($V(x)=0$), in the hope that we can generalize that equation in other contexts ($V(x) \neq 0$).
+
+The first thing we will try to do is determine the momentum of the matter wave.  Now, knowing that:
+$$\Psi_k(x,t) = \exp(ik\,x-i \omega \, t)$$
+we can of course simply read off the wave number $k$ and determine the momentum $p=\hbar k$.  But we cannot {\it generalize} that approach to other wave functions $\Psi(x,t)$.  In the general case, we will only know $\Psi(x,t)$, so we can only do things involving $x$ and $t$.  Here's something:
+$$-i\hbar \frac{\partial}{\partial x} \Psi_k(x,t) = (-i \hbar) (ik) \Psi_k(x,t) = \hbar k \Psi_k(x,t) = p \Psi_k(x,t)$$
+so we define the momentum operator:
+\begin{equation}
+\hat{p} \equiv -i \hbar \frac{\partial}{\partial x}
+\end{equation}
+and note that for our matter wave for free particles:
+\begin{equation}
+\hat{p} \, \Psi_k(x,t) = p \, \Psi_k(x,t)
+\end{equation}
+We say that the free particle solutions $\Psi_k(x,t)$ is an eigenstate of the momentum operator $\hat{p}$.  Note that this is true only for eigenstates.  For a general state with wave function $\Psi(x,t)$ generally:
+$$\hat{p} \, \Psi(x,t) \neq p \, \Psi(x,t)$$
+Note also that $\hat{p}$ and $p$ are two very different things.  Whereas $p$ is just a number, $\hat{p}$ is a complicated beast: an operator that when given a wave function returns a (possibly different) wave function.
+
+What about the position operator $\hat{x}$?  Since we have access to $x$ and $t$, for any wave function $\Psi(x,t)$, we need only write:
+\begin{equation}
+\hat{x} = x
+\end{equation}
+and so for {\em any wave function} $\Psi(x,t)$
+$$\hat{x} \, \Psi(x,t) = x \, \Psi(x,t)$$
+which looks like any $\Psi(x,t)$ is also an eigenstate of $\hat{x}$, but that is not so, because $x$ is not just a number here, and 
+$$x \, \Psi(x,t)$$
+is a new wave function that is distinct from $\Psi(x,t)$.
+
+Next we will try to find a recipe for determining the energy $E=\hbar \omega$ only through $\Psi(x,t)$.  We can try something similar:
+$$i\hbar \frac{\partial}{\partial t} \, \Psi_k(x,t) = (i\hbar)(-i\omega) \, \Psi_k(x,t) = \hbar \omega \, \Psi_k(x,t) = E \, \Psi_k(x,t)$$
+We also know that for the free particle:
+$$E = \frac{p^2}{2m}$$
+So let's find an operator $\hat{H}$ such that:
+$$\hat{H} \Psi_k(x,t) = \frac{p^2}{2m} \Psi_k(x,t)$$
+for our free particles.  Working with our definition of the momentum operator:
+$$\hat{H} \, \Psi_k(x,t) = \frac{p^2}{2m} \Psi_k(x,t) = \frac{p}{2m}(p\,\Psi_k(x,t)) = \frac{p}{2m}\;
+\left(-i \hbar \frac{\partial}{\partial x}\,\Psi_k(x,t)\right)$$
+but $p$ here is just a number (unlike $\hat{p}$ or $\partial/\partial x$) so we are free to move it right up against $\Psi_k(x,t)$ and continue on:
+$$\hat{H} \, \Psi_k(x,t) = \frac{-i\hbar}{2m}\;\frac{\partial}{\partial x}\;(p\,\Psi_k(x,t))
+= \frac{-i\hbar}{2m}\;\frac{\partial}{\partial x}\;
+\left(-i \hbar \frac{\partial}{\partial x}\,\Psi_k(x,t)\right)=-\frac{\hbar^2}{2m}\,\frac{\partial^2}{\partial x^2}\,\Psi_k(x,t)$$
+from which we read off the operator $\hat{H}$ for the free particle:
+$$\hat{H} = -\frac{\hbar^2}{2m}\frac{\partial^2}{\partial x^2} = \frac{\hat{p}^2}{2m}$$
+this is the Hamiltonian operator (for the free particle) which does not have any potential energy.  For a general potential, we need to find an operator $\hat{V}$ and the total energy will be obtained by:
+$$\hat{H} = \frac{\hat{p}^2}{2m} + \hat{V}$$
+But the potentials we will encounter will depend only on $x$ and $t$, so the operator $\hat{V}$ is trivial:
+$$\hat{V} = V(\hat{x},t) = V(x,t)$$
+So for the free particle with $V(x,t)=0$ we have shown that:
+$$i\hbar \frac{\partial}{\partial t} \Psi_k(x,t) = \hat{H} \, \Psi_k(x,t)$$
+but our assumption is that when $V(x,t) \neq 0$ we can determine the possible states as solutions to the equation:
+\begin{equation}
+i\hbar \frac{\partial}{\partial t} \Psi(x,t) = \hat{H} \, \Psi(x,t)
+\end{equation}
+or equivalently
+\begin{equation}
+i\hbar \frac{\partial}{\partial t} \Psi(x,t) = -\frac{\hbar^2}{2m}\frac{\partial^2}{\partial x^2}\, \Psi(x,t) + V(x,t) \Psi(x,t)
+\end{equation}
+So we have plausibly deduced the Schr\"odinger Equation from the deBroglie hypothesis via the Matter Waves.  
+
+
+\section{The Fourier Transform Revisited}
+
+Our inner product now extends between positive and negative infinity:
+\begin{equation}
+\braket{\Psi, \phi} \equiv \int_{-\infty}^{\infty} \Psi^*(x) \phi(x) \, dx
+\end{equation}
+Our basis functions, which are now defined for any value of $k$,
+\begin{equation}
+e_k = \frac{1}{\sqrt{2\pi}} \exp(i k x)
+\end{equation}
+are still orthonormal, but the condition looks a bit different in the continuum case:
+\begin{eqnarray*}
+\braket{e_k, e_{k'}} &=& \delta(k-k')
+\end{eqnarray*}
+See the appendix for more details on the Dirac delta function $\delta(x)$, which is zero everywhere but at $x=0$, where it is infinite.  It is the continuous version of $\delta_{nm}$.
+
+Our basis functions are also still complete.  In the discrete case we have a complex Fourier coefficient for every integer $n$.   Now we have a complex Fourier coefficient for any real value of $k$.  In place of Fourier coefficients, we have instead a function of $k$ which we call the Fourier transform: $\widetilde{\Psi}(k)$.
+Instead of a sum over discrete terms, we now have to integrate over all values of $k$:
+\begin{equation} \label{eqn:ift}
+\Psi(x) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} \widetilde{\Psi}(k) \exp(ikx) \, dk.
+\end{equation}
+Just as in the discrete case, we determine the Fourier transform from the inner product:
+\begin{equation} \label{eqn:ft}
+\widetilde{\Psi}(k) = \braket{e_k, \Psi} = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} {\Psi}(x) \exp(-ikx) \, dx
+\end{equation}
+Equation~\ref{eqn:ft} is generally referred to as the {\em Fourier Transform}, while Equation~\ref{eqn:ift} is referred to as the {\em Inverse Fourier Transform}.
+
+\section{The Fourier Transform in Quantum Mechanics}
+
+So far we have been considering the Fourier transform with respect to position $x$ and wave-number $k$.  A much more useful pair of variables for Quantum Mechanics turns out to be momentum $p$ and position $x$.  To relate $p$ to $k$ we need only apply the DeBroglie relation to the wavelength in the definition of the wavenumber:
+\begin{displaymath}
+k \equiv \frac{2 \pi}{\lambda} = \frac{2 \pi p}{h} = \frac{p}{\hbar}
+\end{displaymath}
+We could therefore make the substitution $k \to p/\hbar$ (and $dk \to dp / \hbar)$) in Equations~\ref{eqn:ift} and ~\ref{eqn:ft}.  It turns out that a marginally more useful equation results if we make the normalization factors symmetric, by splitting the normalization factor of $1/\hbar$ across both equations with $1/\sqrt{\hbar}$ applied to each:
+\begin{eqnarray} 
+\Psi(x) &=& \frac{1}{\sqrt{2\pi\hbar}} \int_{-\infty}^{\infty} \widetilde{\Psi}(p) \exp(ipx/\hbar) \, dp \\
+\widetilde{\Psi}(p) &=&  \frac{1}{\sqrt{2\pi\hbar}} \int_{-\infty}^{\infty} {\Psi}(x) \exp(-ipx/\hbar) \, dx
+\end{eqnarray}
+The major benefit of this symmetric form is that the normalization of $\Psi(x)$ and $\widetilde{\Psi}(p)$ in this case turns out to be the same:
+\begin{displaymath}
+\int_{-\infty}^{\infty} |\Psi(x)|^2 dx = \int_{-\infty}^{\infty} |\widetilde{\Psi}(p)|^2 dp = 1 
+\end{displaymath}
+Because we can always calculate $\Psi(x)$ from $\widetilde{\Psi}(p)$ either one completely describes the quantum mechanical state.  We call $\widetilde{\Psi}(p)$ the momentum wave function.   Whereas $|\Psi(x)|^2$ gives us the probability density for the quanton to be at position $x$, $|\Psi(p)|^2$ gives us the probability density for the quanton to have momentum $p$.
+
+
+\end{document}
+
+
+
+
