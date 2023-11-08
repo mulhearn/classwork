@@ -292,7 +292,7 @@ much more cumbersome notation, but much more explicit about what is
 going on.  I highly recommend doing this if you are finding the
 abstract notation confusing at this point.)
 
-\subsection{Fourier Series for Complex Functions}
+\subsection{Fourier Series for Complex-Valued Functions}
 
 The Fourier series for a periodic function with period $a$ can be expressed in terms of the complex exponential by noting that:
 \begin{eqnarray*}
@@ -301,7 +301,7 @@ The Fourier series for a periodic function with period $a$ can be expressed in t
 \end{eqnarray*}
 Later in the Appendix, we determine the Fourier series in terms of complex exponentials, and how to calculate the Fourier coefficients, by plugging Euler's Identities into the Fourier series for sines and cosines and working carefully through the bookkeeping to arrive at the corresponding formula's for the complex exponential.  This is satisfying and instructive to see, but a bit on the tedious side.  Let's see if we can cut right to chase instead, using our insights from vector space.
 
-First off, note that the periodic complex functions with period $a$ form a vector space just as well as periodic real functions.  Next, note that a periodic complex functions $\psi(x)$ has a Fourier series, as we can just write:
+First off, note that the periodic complex-valued functions with period $a$ form a vector space just as well as periodic real functions.  Next, note that a periodic complex-valued functions $\psi(x)$ has a Fourier series, as we can just write:
 $$\psi(x) = f(x) + i g(x)$$ 
 for real periodic functions $f(x)$ and $g(x)$, which each have a Fourier series.  And each sine and cosine can be written in terms of complex exponentials.  So we've concluded that Fourier's Theorem combined with the Euler Identities leads to conclusion that and complex periodic function with period $a$ has a Fourier series representation in terms of complex exponentials, that is:
 \begin{equation}
@@ -436,9 +436,9 @@ so that:
 
 \section{Optional Material}
 
-\subsection{Fourier Series for Complex Functions}
+\subsection{Fourier Series for Complex-Valued Functions}
 
-In this section, we explicitly work out the Fourier Series for Complex Functions from Euler's Identities and the Fourier Series for Sines and Cosines.
+In this section, we explicitly work out the Fourier Series for Complex-Valued Functions from Euler's Identities and the Fourier Series for Sines and Cosines.
 
 The Fourier series for a periodic function with period $a$ can be expressed in terms of the complex exponential by noting that:
 \begin{eqnarray*}
@@ -687,6 +687,126 @@ g(a) &=& 0 \\
 \end{eqnarray*}
 Since this is true for any value of $a$, we have $g(x) = 0$ and so $F(x) = f(x)$.
 
+\newpage
+
+\section{Summary}
+
+The main idea of this Appendix is that functions are (in a
+mathematically rigourous sense) vectors in an abstract vector space,
+with an inner product.  The precise definitions vary depending on what
+type of function we are considering, but the general properties always
+remain the same:
+\begin{itemize}
+\item The sines and cosines, or the closely related complex exponentials, form a complete orthnormal basis for the vector space.
+\item That is, any function in the vector space can be written as a sum or integral of the basis functions times coefficients (or transforms). 
+\item The coefficient (or transform) of each basis function can be determined using Fourier's trick, that is:  by calculating the inner product of a basis function with the original function.
+\end{itemize}
+We are left with three cases to consider, real periodic functions, complex-valued periodic functions, and normalizable complex-valued functions:
+\begin{itemize}
+\item For real periodic functions with period $a$, the inner product is:
+\begin{equation}
+\braket{f|g} \equiv \int_{-\frac{a}{2}}^{\frac{a}{2}} f(x) \, g(x) \, dx
+\end{equation}
+and the complete orthonormal basis functions are:
+\begin{eqnarray}
+s_n(x) &\equiv& \sqrt{\frac{2}{a}}\,\sin\left(\frac{2\pi n}{a} \, x \right)\\
+c_n(x) &\equiv& \sqrt{\frac{2}{a}}\,\cos\left(\frac{2\pi n}{a} \, x \right)
+\end{eqnarray}
+which are defined for
+\begin{eqnarray*}
+n = 1,2,3,...
+\end{eqnarray*}
+plus the constant function:
+\begin{eqnarray}
+c_0(x) \equiv \sqrt{\frac{1}{a}}
+\end{eqnarray}
+Note that if it existed, $s_0(x) = 0$ would not be normalizable.
+
+The orthonormality conditions are:
+\begin{eqnarray}
+\braket{s_n | s_m} &=& \delta_{nm}\notag\\[8pt]
+\braket{c_n | c_m} &=& \delta_{nm}\notag\\[8pt]
+\braket{s_n | c_m} &=& 0\notag\\[8pt]
+\end{eqnarray}
+for all $n$ and $m$, but take care that $c_0$ exists while $s_0$ does not.  
+For compact notation we use the Kronecker delta symbol:
+\begin{displaymath}
+\delta_{nm} =  
+\left\{
+        \begin{array}{ll}
+                1  & \mbox{if } n=m \\
+                0 & \mbox{otherwise}
+        \end{array}
+\right.
+\end{displaymath}
+
+Any function in this vector space (that is, any real periodic function with period $a$) can be written as a summer of the basis vectors:
+\begin{equation}
+f(x) \; = \; \sum_{n=0}^{\infty}  A_n \, c_n(x)  \; \; + \; \; \sum_{n=1}^{\infty} B_n \, s_n(x) \label{eqn:bfs}
+\end{equation}
+and the coefficients can be determined with Fourier's trick:
+\begin{eqnarray*}
+A_n = \braket{c_n| f} \\
+B_n = \braket{s_n| f}
+\end{eqnarray*}
+
+Explicitly in terms of sine and cosine functions, we have
+\begin{equation}
+f(x) = A_0 \sqrt{\frac{1}{a}} + \sqrt{\frac{2}{a}} \sum_{n=1}^{\infty}  \left[ A_n \, \cos\left(\frac{2\pi n}{a} \, x \right) + B_n \, \sin\left(\frac{2\pi n}{a} \, x \right)\right]\label{eqn :lfs}
+\end{equation}
+and:
+\begin{eqnarray*}
+A_0 &=& \sqrt{\frac{1}{a}} \int_{-\frac{a}{2}}^{\frac{a}{2}} f(x) \, dx \\
+A_n &=& \sqrt{\frac{2}{a}} \int_{-\frac{a}{2}}^{\frac{a}{2}} 
+\cos\left(\frac{2\pi n}{a} \, x \right) \, f(x) \, dx \\
+B_n &=& \sqrt{\frac{2}{a}} \int_{-\frac{a}{2}}^{\frac{a}{2}} 
+\sin\left(\frac{2\pi n}{a} \, x \right) \, f(x) \, dx \\
+\end{eqnarray*}
+
+\item For complex-valued functions with period $a$, the inner product is:
+\begin{equation}
+\braket{f|g} = \int_{-\frac{a}{2}}^{\frac{a}{2}} f^*(x) g(x) dx
+\end{equation}
+and the complete orthonormal basis functions are:
+\begin{equation}
+e_n(x) \equiv \sqrt{\frac{1}{a}} \exp\left( i \, \frac{2 \pi n x}{a}\right)
+\end{equation}
+with the orthormality properties:
+\begin{equation}
+\braket{e_n|e_m} = \delta_{nm}
+\end{equation}
+Any vector in this vector space (any complex-valued periodic function of period $a$) can be expressed as:
+\begin{equation}
+\psi(x) = \sum_{n=-\infty}^{\infty}  c_n \, e_n(x)  \\
+\end{equation}
+where the coefficients can be determined using Fourier's trick:
+\begin{equation}
+c_n = \braket{e_n|f}
+\end{equation}
+
+\newpage
+
+\item We carefully consider the limiting case of periodic functions with the period $a$ going to infinity, and concluded that any normalizable complex-valued function can be written as an integral over a complex exponential:
+\begin{eqnarray}
+\psi(x) &=& \frac{1}{\sqrt{2\pi}} 
+\int_{-\infty}^{\infty} \; \widetilde{\psi}(k) \; e^{ikx} \; dk
+\end{eqnarray}
+where
+\begin{eqnarray}
+\psi(x) &=& \frac{1}{\sqrt{2\pi}} 
+\int_{-\infty}^{\infty} \; \widetilde{\psi}(k) \; e^{ikx} \; dk
+\end{eqnarray}
+is the Fourier transform of $\psi(x)$.
+
+(Later, we'll connect this much more explicitly with completeness and orthonormality, but we'll have to expand our concept of orthogonality a bit first.)
+
+\end{itemize}
+  
+
+
+
+
+
 \end{document}
 
 
@@ -744,6 +864,7 @@ where:
 \begin{eqnarray*}
 \widetilde{\Psi}(k) &=& \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} \Psi(x) \, \exp(-ikx) \, dx \\
 \end{eqnarray*}
+
 
 
 

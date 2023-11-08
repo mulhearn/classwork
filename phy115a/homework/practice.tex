@@ -1,0 +1,148 @@
+\documentclass[12pt]{article}
+
+
+\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.5in]{geometry}
+\usepackage{cite}
+\usepackage{slashed}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{braket}
+\usepackage[american,fulldiode]{circuitikz}
+
+\begin{document}
+\newcommand{\ihbar}{\ensuremath{i \hbar}}
+\newcommand{\dPsidt}{\ensuremath{ \frac{\partial \Psi}{\partial t} }}
+\newcommand{\dPsidx}{\ensuremath{ \frac{\partial \Psi}{\partial x} }}
+\newcommand{\ddPsidx}{\ensuremath{ \frac{\partial^2 \Psi}{\partial x^2} }}
+\newcommand{\dPssdt}{\ensuremath{ \frac{\partial \Psi^*}{\partial t} }}
+\newcommand{\dPssdx}{\ensuremath{ \frac{\partial \Psi^*}{\partial x} }}
+\newcommand{\ddPssdx}{\ensuremath{ \frac{\partial^2 \Psi^*}{\partial x^2} }}
+
+\newcommand{\dphidt}{\ensuremath{ \frac{d \phi}{dt} }}
+\newcommand{\dpsidx}{\ensuremath{ \frac{d \psi}{dx} }}
+\newcommand{\ddpsidx}{\ensuremath{ \frac{d^2 \psi}{dx^2} }}
+
+
+\date{\vspace{-5ex}}
+
+\title{Practice Problems}
+
+\maketitle
+
+No solutions will be posted for these practice problems.. they are
+intended to focus your mind on the material and you should review the
+material and work these problems until you are fully confident in your
+abilities!
+
+\noindent
+{\bf Problem 1:}
+A particle is in an infinite square well potential of width $b$ for which we know that the allowed energies are:
+$$E_n = \frac{n^2 \pi^2 \hbar^2}{2mb^2}$$
+and the orthonormal stationary states are:
+$$
+\psi_n(x) = 
+\begin{cases}    
+   {\displaystyle \sqrt{\frac{2}{b}}\sin(k_n x)} & 0 {\displaystyle \leq x \leq b} \\[8pt]
+   0 & {\rm otherwise} \\
+\end{cases}   
+$$
+At time $t=0$, the particle is in a state where the wavefunction within the square well is:
+$$\Psi(x,0) = A\left( \psi_1(x) + i\psi_2(x) + \psi_3(x) \right)$$
+\noindent
+(A) What is the value of the constant $A$ which correctly normalizes $\Psi(x,0)$, if we take it to be positive and real?\\[5pt]
+(B) What is the probability that a measurement of the particles total energy at $t=0$ would yield the value $E_2$?
+(C) What is the probability that a measurement of the particles total energy at $t=0$ would yield the value $9*E_1$?
+(D) What is the probability that a measurement of the particles total energy at $t=0$ would yield the value $7*E_1$?
+(E) What is the probability that a measurement of the particles total energy at $t=0$ would yield the value $16*E_1$?
+(F) What is the expectation value for the total energy divided by E_1:
+$$\frac{\hat{H}}{E_1}$$
+(G) Write down the time-dependent wave function $\Psi(x,t)$, using $E_1$ when possible. 
+
+\noindent
+{\bf Problem 2:}
+A particle is in a harmonic oscillator potential
+
+
+
+
+in state:
+$$\Psi(x,0) = A\left( \psi_3(x) + 2\psi_4(x) \right)$$
+
+(A) What is the value of the constant $A$ which correctly normalizes $\Psi(x,0)$, if we take it to be positive and real?\\[5pt]
+
+(B) Calculate the expectation value of $x$ using an algebraid trick involving ladder operators:
+
+
+
+
+
+
+
+
+
+
+
+
+
+for
+$$n=1,2,3,\dots$$
+and the orthonormal stationary states are:
+$$
+\psi_n(x) = 
+\begin{cases}    
+   {\displaystyle \sqrt{\frac{2}{b}}\sin(k_n x)} & 0 {\displaystyle \leq x \leq b} \\[8pt]
+   0 & {\rm otherwise} \\
+\end{cases}   
+$$
+where
+$$k_n =\frac{n\pi}{b}$$
+Suppose that at $t=0$, within the well ($0 \leq x \leq b$) the wave function for the particle is given by:
+$$\Psi(x,0) = A \left( \sin(2\pi x/b) + i\sin(3\pi x/b)\right)$$
+
+\noindent
+(A) What is the positive real value of $A$ that correctly normalizes $\Psi(x,0)$?\\[5pt]
+
+\noindent
+(B) What is the probability that a measurement of the total energy will give a value of $7E_1$?\\[5pt]
+
+\noindent
+(C) What is the probability that a measurement of the total energy will give a value of $9E_1$?\\[5pt]
+
+\noindent
+(D) What is the expectation value of the energy? (Answer as a factor times $E_1$)\\[5pt]
+
+\noindent
+(E) Write down the time-dependent wave function $\psi(x,t)$.  (You may use $E_1$ as a parameter in your answer if you like.)\\[5pt]
+
+\newpage
+
+\noindent
+{\bf Problem 2:} A particle is in a harmonic oscillator potential.  We studied the ladder operators:
+\begin{eqnarray}
+\hat{a}_- &\equiv& \frac{1}{\sqrt{2}}\left(i \frac{\hat{p}}{p_0} + \frac{\hat{x}}{x_0}\right) \notag \\
+\hat{a}_+ &\equiv& \frac{1}{\sqrt{2}}\left(-i \frac{\hat{p}}{p_0} + \frac{\hat{x}}{x_0} \right) \notag \\
+\end{eqnarray}
+where
+$$x_0 \equiv \sqrt{\frac{\hbar}{m \omega}}$$
+and
+$$p_0 \equiv \frac{\hbar}{x_0} = \sqrt{\hbar m \omega}$$
+These operators have the commutator:
+$$\left[\hat{a}_-\,,\,\hat{a}_+\right] \; = \;  1$$
+In the homework, we used the trick of writing:
+\begin{eqnarray*}
+\hat{x} &=& \frac{x_0}{\sqrt{2}} \left(\hat{a}_+ + \hat{a}_-\right)\\
+\hat{p} &=& \frac{i\,p_0}{\sqrt{2}} \left(\hat{a}_+ - \hat{a}_-\right)\\
+\end{eqnarray*}
+
+\noindent
+(A) Show that:
+$$[\hat{x}, \hat{p}] = i\hbar$$
+follows from the commutation relationship for $\hat{a}_+$ and $\hat{a}_-$
+
+
+\end{document}
+
+
+
+
