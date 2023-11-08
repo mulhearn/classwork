@@ -1,0 +1,391 @@
+\documentclass[12pt]{article}
+
+\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.5in]{geometry}
+\usepackage{cite}
+\usepackage{slashed}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{braket}
+\begin{document}
+
+\newcommand{\ihbar}{\ensuremath{i \hbar}}
+\newcommand{\Pss}{\ensuremath{\Psi^*}}
+\newcommand{\dPsidt}{\ensuremath{ \frac{\partial \Psi}{\partial t} }}
+\newcommand{\dPsidx}{\ensuremath{ \frac{\partial \Psi}{\partial x} }}
+\newcommand{\ddPsidx}{\ensuremath{ \frac{\partial^2 \Psi}{\partial x^2} }}
+\newcommand{\dPssdt}{\ensuremath{ \frac{\partial \Psi^*}{\partial t} }}
+\newcommand{\dPssdx}{\ensuremath{ \frac{\partial \Psi^*}{\partial x} }}
+\newcommand{\ddPssdx}{\ensuremath{ \frac{\partial^2 \Psi^*}{\partial x^2} }}
+
+\newcommand{\dphidt}{\ensuremath{ \frac{d \phi}{dt} }}
+\newcommand{\dpsidx}{\ensuremath{ \frac{d \psi}{dx} }}
+\newcommand{\ddpsidx}{\ensuremath{ \frac{d^2 \psi}{dx^2} }}
+
+
+\title{PHY 115A \\ Summary\\}
+\author{Michael Mulhearn}
+
+\section{Review of Chapter 1}
+
+We are considering a particle of mass $m$, in one dimension $x$, in a potential $V$.
+
+\begin{itemize}
+\item The state of a particle is described by its wave function $\Psi(x,t)$.
+\item The wave function $\Psi(x,t)$ is a solution to the Schr\"odinger Equation (SE):
+\begin{equation}
+\label{eqn:se}
+\ihbar \dPsidt = - \frac{\hbar^2}{2 m}\ddPsidx + V \Psi
+\end{equation}
+\item The physical interpretation of the wave function is statistical.  The probability $P_{ab}(t)$ that the particle will be found between points $a$ and $b$ at time $t$ is:
+\begin{equation}
+\label{eqn:prob}
+P_{ab}(t) = \int_a^b |\Psi(x,t)|^2 dx
+\end{equation}
+\item The wave functions are normalized such that
+\begin{equation}
+\int_{-\infty}^{+\infty} |\Psi(x,t)|^2 dx = 1
+\end{equation}
+\item Once a wave function is normalized, it will remain normalized for all time as a consequence of the Schr\"odinger equation.
+\item Measurements of observable quantities are associated with operators.  Given an operator $\hat{o}$ we can calculate the expectation value for the observable $o$ as:
+\begin{eqnarray}
+\braket{o}  &=& \int_{-\infty}^{+\infty} \, \Psi^* \left[ \hat{o} \right] \Psi \,dx 
+\end{eqnarray}
+The operator acts toward its right.
+\item For the position observable we have the position operator 
+\begin{equation}
+\hat{x} = x.
+\end{equation}
+\item For the momentum observable we have the momentum operator 
+\begin{equation}
+\hat{p} = - \ihbar \frac{\partial}{\partial x}.
+\end{equation}
+\item Any classical dynamical variable can be calculated from the position and momentum, and we can calculate its expectation value as:
+\begin{eqnarray}
+\braket{f(x,p)}  &=& \int_{-\infty}^{+\infty} \, \Psi^* \left[ f(\hat{x},\hat{p}) \right] \Psi \,dx 
+\end{eqnarray}
+\item Newtons law is still true, but only in an average sense, by Ehrenfest's Theorem:
+\begin{eqnarray}
+\frac{d \braket{p}}{dt} &=& - \braket{\frac{\partial V}{\partial x}}
+\end{eqnarray}
+\item The variance $\sigma^2_o$ of an observable $o$ can be calculated as:
+\begin{equation}
+\sigma_o^2 \equiv \braket{\,(o-\braket{o})^2\,} = \braket{o^2}-\braket{o}^2
+\end{equation}
+The square root of the variance is referred to as the uncertainty.  
+\item The Heisenberg uncertainty relation states that:
+\begin{equation}
+\sigma_x \sigma_p \, \geq \, \frac{\hbar}{2}
+\end{equation}
+
+\end{itemize}
+
+\section{Review of Chapter 2 Part A}
+
+\begin{itemize}
+
+\item If the potential is a function of position only ($V(x)$), and if we can find solutions to Schr\"odinger Equation (SE) which are separable:
+\begin{equation}
+\Psi(x,t) \; = \; \psi(x) \,\phi(t)
+\end{equation}
+then for these solutions:
+\begin{equation}
+\phi(t) \; = \; \exp\left( -i\frac{Et}{\hbar}\right)
+\end{equation}
+and $\psi(x)$ satisfies the Time-Independent Schr\"odinger Equation (TISE):
+\begin{equation}
+- \frac{\hbar^2}{2 m} \; \ddpsidx \, + \, V(x) \, \psi(x) = E \, \psi(x)\\
+\end{equation}
+The boundary conditions on the solutions $\psi(x)$ are that:
+\begin{itemize}
+\item $\psi(x)$ is always continuous.
+\item $d\psi/dx$ is continuous except where the potential is infinite.
+\end{itemize}
+Other features:
+\begin{itemize}
+\item For normalizable solutions, the separation constant $E$ must be real.
+\item $\psi(x)$ can always be taken as a real function.
+\item If $V(x)$ is an even function, then the general solutions $\psi(x)$ can be constructed as either even or odd solutions.
+\item For normalizable solutions, $E$ must be greater than the minimum value of $V(x)$.
+\end{itemize}
+\item We can write the TISE as:
+\begin{equation}
+\hat{H} \, \psi(x) = E \, \psi(x)
+\end{equation}
+where:
+\begin{equation}
+\hat{H} = H(\hat{x}, \hat{p})= -\frac{\hbar^2}{2m}\,\frac{\partial^2}{\partial x^2} + V(x)
+\end{equation}
+is the Hamiltonian operator, which is the operator for the total energy observable.  We say that the separable solutions are eigenstates of the Hamiltonian operator.
+
+\item The separable solutions have some very nice properties indeed:
+\begin{itemize}
+\item They represent {\bf stationary states} for which
+$$|\Psi(x,t)|^2 = | \psi(x) |^2$$
+and so every expectation value is constant wrt time as well.  Also:
+\begin{equation*}
+\int_{-\infty}^{+\infty}\, |\psi(x)|^2 dx = 1\\
+\end{equation*}
+\item They represent {\bf states of definite total energy:} so:
+$$\braket{H} = E$$
+and:
+$$\sigma^2_H = 0$$
+every measurement of the total energy gives the same result $E$.
+\item They are {\bf orthogonal and complete}, as describe in more detail below.
+\end{itemize}
+
+\item The normalizable wave functions are a vector space over the complex numbers, with an inner product:
+\begin{equation}
+\braket{f|g} \equiv \int_{-\infty}^{\infty} f^*(x) \, g(x) \, dx
+\end{equation}
+Expectation values are inner products:
+\begin{equation}
+\braket{O} = \braket{\Psi|\hat{O}\Psi} \equiv \int_{-\infty}^{\infty} \Psi^*(x,t)\hat{O}\Psi(x,t) dx
+\end{equation}
+
+\item The stationary states $\psi_n(x)$ with:
+$$\hat{H} \psi_n(x) = E_n \psi_n(x)$$
+can be arranged to be orthonormal:
+\begin{equation}
+\braket{\psi_n|\psi_m}=\delta_{mn}
+\end{equation}
+This is automatic if $E_n \neq E_m$ when $n \neq m$ (the allowed energies are nondegenerate) as in all the cases we studied in this chapter.  The stationary states are also complete:
+\begin{equation}
+\Psi(x,t) = \sum_n c_n \; \psi_n(x) \; \exp\left(\frac{-E_n t}{\hbar}\right)
+\end{equation}
+where 
+$$\sum_n |c_n|^2 = 1$$
+and each $|c_n|^2$ is the probability that a measurement of the total energy gives result $E_n$.  The coefficients can be determined from the initial state $\Psi(x,0)$ using Fourier's trick:
+\begin{equation}
+c_n = \braket{\psi_n| \Psi(x,0)}
+\end{equation}
+\item We define the commutator of two operators $\hat{A}$ and $\hat{B}$ as:
+\begin{equation}
+[\hat{A},\hat{B}]=\hat{A}\hat{B} - \hat{B}\hat{A}
+\end{equation}
+If the commutator of two operators is zero, we say they commute.  Otherwise, we say they do not commute.  The momentum and position operators do not commute:
+\begin{equation}
+[\hat{x},\hat{p}]=i\hbar
+\end{equation}
+which is known as the {\bf canonical commutation relation}.  In the homework, you showed that
+for any operators $\hat{A}$, $\hat{B}$, and $\hat{C}$:
+$$ [\hat{A}\hat{B}, \hat{C}] = \hat{A}[\hat{B}, \hat{C}] + [\hat{A}, \hat{C}]\hat{B}.$$
+
+\item For an operator $\hat{O}$ we define it's Hermitian adjoint (or conjugate) $\hat{O}^\dagger$ by the property:
+\begin{equation}
+\braket{f|\hat{O^\dagger}g} = \braket{\hat{O} f| g}
+\end{equation}
+which implies:
+\begin{equation}
+\braket{f|\hat{O}g} = \braket{\hat{O^\dagger} f| g}
+\end{equation}
+When an operator is it's own Hermitian adjoint, we say the operator is Hermitian.  The expectation value of a hermitian operator are real, and so physical observables are always associated with hermitian operators.  In the homework, you showed that:
+$$\left(\hat{A}^\dagger\right)^\dagger = \hat{A}$$
+and:
+$$\left(\hat{A}\hat{B}\right)^\dagger = \hat{B}^\dagger \, \hat{A}^\dagger.$$
+for any operators $\hat{A}$ and $\hat{B}$.
+
+\item We studied the solutions to the infinite square well potential:
+\begin{equation}
+V(x) = 
+\begin{cases}    
+   0 & 0 \leq x \leq b \\
+   +\infty & {\rm otherwise} \\
+\end{cases}   
+\end{equation}
+and found the allowed energies:
+\begin{equation}
+E_n = \frac{n^2 \pi^2 \hbar^2}{2mb^2}.
+\end{equation}
+We showed that the eigenfunctions are the sine functions of the Fourier series:
+\begin{equation}
+\psi_n(x) = 
+\begin{cases}
+{\displaystyle \sqrt{\frac{2}{b}} \, \sin(k_n x)} & 0 \leq x \leq b\\[8pt]
+0 & \rm otherwise \\
+\end{cases}
+\end{equation}
+where
+\begin{eqnarray*}
+k_n&=&\frac{n\pi}{b}
+\end{eqnarray*}
+
+\item We studied the solutions of the harmonic oscillator potential:
+$$V(x) = \frac{1}{2}k x^2 = \frac{1}{2} m \omega^2 x^2$$
+where:
+$$\omega \equiv \sqrt{\frac{k}{m}}$$
+and showed that the power series solution diverges if it does not terminate, and it only terminates if:
+\begin{equation}
+E_n = \hbar \omega \left( n + \frac{1}{2} \right)
+\end{equation}
+for
+$$n=0,1,2,3,\ldots$$
+We found explicit solutions in terms of the Hermite polynomials $H_n(u)$, which we can obtain from the generator function:
+$$\exp(-z^2+2zu) = \sum_{n=0}^{\infty} \frac{z_n}{n!}H_n(u)$$
+and the eigenfunctions are:
+$$\psi_n(x) = \left( \frac{m \omega}{\pi \hbar} \right)^{1/4} \frac{1}{\sqrt{2^n n!}}H_n(u) e^{-u^2/2}$$.
+
+
+\item We studied the ladder operators of the harmonic oscillator potential:
+\begin{eqnarray}
+\hat{a}_- &\equiv& \frac{1}{\sqrt{2}}\left(i \frac{\hat{p}}{p_0} + \frac{\hat{x}}{x_0}\right) \notag \\
+\hat{a}_+ &\equiv& \frac{1}{\sqrt{2}}\left(-i \frac{\hat{p}}{p_0} + \frac{\hat{x}}{x_0} \right) \notag \\
+\end{eqnarray}
+where
+$$x_0 \equiv \sqrt{\frac{\hbar}{m \omega}}$$
+and
+$$p_0 \equiv \frac{\hbar}{x_0} = \sqrt{\hbar m \omega}.$$
+We showed that the Hamiltonian operator can be written as:
+$$\hat{H} =  \hbar\omega \left( \hat{a}_+ \hat{a}_- + \frac{1}{2} \right)$$
+And that the ladder operators satisfy the following commutation relationships:
+\begin{eqnarray}
+\left[\hat{a}_-\,,\,\hat{a}_+\right] \; &=& \;  1 \notag \\  
+\left[\hat{H}\,,\,\hat{a}_+\right]   \; &=& \;  \hbar \omega \; \hat{a}_+ \notag \\ 
+\left[\hat{H}\,,\,\hat{a}_-\right]   \; &=& \; -\hbar \omega \; \hat{a}_- \notag \\
+\end{eqnarray}
+Using the algebra of these commutators, we showed that the ladder operators act as raising and lowering operators that move up and down the stationary solutions:
+\begin{eqnarray}
+\hat{a}_+ \psi_n &=& \sqrt{n+1} \; \psi_{n+1} \notag \\
+\hat{a}_- \psi_n &=& \sqrt{n} \; \psi_{n-1} \notag \\
+\end{eqnarray}
+
+\item We found the eigenstates of the Hamiltonian for the free particle ($V(x)=0$) as:
+\begin{equation}
+\Psi_k(x,t) = A e^{i (k x-\omega t)}
+\end{equation}
+where
+\begin{equation}
+k = \pm\frac{\sqrt{2mE}}{\hbar}
+\end{equation}
+and the sign of $k$ indicates the direction of the traveling wave:
+\begin{eqnarray*}
+k > 0 &\implies& {\rm wave~is~traveling~right} \\[5pt]
+k < 0 &\implies& {\rm wave~is~traveling~left} \\
+\end{eqnarray*}
+while these solutions are not normalizable, we found that we can construct wave packets:
+\begin{equation}
+\Psi(x,t) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} \; \widetilde{\Psi}(k,0) \; 
+\exp\left[ik\left(x-\frac{\hbar k}{2m}t\right)\right]\; dk 
+\end{equation}
+where $\widetilde{\Psi}(k,0)$ is the Fourier Transform of the initial state:
+\begin{equation}
+\widetilde{\Psi}(k,0) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} \; \Psi(x,0) \; e^{-ikx} \; dx 
+\end{equation}
+\end{itemize}
+
+\section{Review of Fourier Series and Transform}
+
+The main idea of this Appendix is that functions are (in a
+mathematically rigourous sense) vectors in an abstract vector space,
+with an inner product.  The precise definitions vary depending on what
+type of function we are considering, but the general properties always
+remain the same:
+\begin{itemize}
+\item The sines and cosines, or the closely related complex exponentials, form a complete orthnormal basis for the vector space.
+\item That is, any function in the vector space can be written as a sum or integral of the basis functions times coefficients (or transforms). 
+\item The coefficient (or transform) of each basis function can be determined using Fourier's trick, that is:  by calculating the inner product of a basis function with the original function.
+\end{itemize}
+We are left with three cases to consider, real periodic functions, complex-valued periodic functions, and normalizable complex-valued functions:
+\begin{itemize}
+\item For real periodic functions with period $a$, the inner product is:
+\begin{equation}
+\braket{f|g} \equiv \int_{-\frac{a}{2}}^{\frac{a}{2}} f(x) \, g(x) \, dx
+\end{equation}
+and the complete orthonormal basis functions are:
+\begin{eqnarray}
+s_n(x) &\equiv& \sqrt{\frac{2}{a}}\,\sin\left(\frac{2\pi n}{a} \, x \right)\\
+c_n(x) &\equiv& \sqrt{\frac{2}{a}}\,\cos\left(\frac{2\pi n}{a} \, x \right)
+\end{eqnarray}
+which are defined for
+\begin{eqnarray*}
+n = 1,2,3,...
+\end{eqnarray*}
+plus the constant function:
+\begin{eqnarray}
+c_0(x) \equiv \sqrt{\frac{1}{a}}
+\end{eqnarray}
+Note that if it existed, $s_0(x) = 0$ would not be normalizable.
+
+The orthonormality conditions are:
+\begin{eqnarray}
+\braket{s_n | s_m} &=& \delta_{nm}\notag\\[8pt]
+\braket{c_n | c_m} &=& \delta_{nm}\notag\\[8pt]
+\braket{s_n | c_m} &=& 0\notag\\[8pt]
+\end{eqnarray}
+for all $n$ and $m$, but take care that $c_0$ exists while $s_0$ does not.  
+For compact notation we use the Kronecker delta symbol:
+\begin{displaymath}
+\delta_{nm} =  
+\left\{
+        \begin{array}{ll}
+                1  & \mbox{if } n=m \\
+                0 & \mbox{otherwise}
+        \end{array}
+\right.
+\end{displaymath}
+
+Any function in this vector space (that is, any real periodic function with period $a$) can be written as a summer of the basis vectors:
+\begin{equation}
+f(x) \; = \; \sum_{n=0}^{\infty}  A_n \, c_n(x)  \; \; + \; \; \sum_{n=1}^{\infty} B_n \, s_n(x) \label{eqn:bfs}
+\end{equation}
+and the coefficients can be determined with Fourier's trick:
+\begin{eqnarray*}
+A_n = \braket{c_n| f} \\
+B_n = \braket{s_n| f}
+\end{eqnarray*}
+
+Explicitly in terms of sine and cosine functions, we have
+\begin{equation}
+f(x) = A_0 \sqrt{\frac{1}{a}} + \sqrt{\frac{2}{a}} \sum_{n=1}^{\infty}  \left[ A_n \, \cos\left(\frac{2\pi n}{a} \, x \right) + B_n \, \sin\left(\frac{2\pi n}{a} \, x \right)\right]\label{eqn :lfs}
+\end{equation}
+and:
+\begin{eqnarray*}
+A_0 &=& \sqrt{\frac{1}{a}} \int_{-\frac{a}{2}}^{\frac{a}{2}} f(x) \, dx \\
+A_n &=& \sqrt{\frac{2}{a}} \int_{-\frac{a}{2}}^{\frac{a}{2}} 
+\cos\left(\frac{2\pi n}{a} \, x \right) \, f(x) \, dx \\
+B_n &=& \sqrt{\frac{2}{a}} \int_{-\frac{a}{2}}^{\frac{a}{2}} 
+\sin\left(\frac{2\pi n}{a} \, x \right) \, f(x) \, dx \\
+\end{eqnarray*}
+
+\item For complex-valued functions with period $a$, the inner product is:
+\begin{equation}
+\braket{f|g} = \int_{-\frac{a}{2}}^{\frac{a}{2}} f^*(x) g(x) dx
+\end{equation}
+and the complete orthonormal basis functions are:
+\begin{equation}
+e_n(x) \equiv \sqrt{\frac{1}{a}} \exp\left( i \, \frac{2 \pi n x}{a}\right)
+\end{equation}
+with the orthormality properties:
+\begin{equation}
+\braket{e_n|e_m} = \delta_{nm}
+\end{equation}
+Any vector in this vector space (any complex-valued periodic function of period $a$) can be expressed as:
+\begin{equation}
+\psi(x) = \sum_{n=-\infty}^{\infty}  c_n \, e_n(x)  \\
+\end{equation}
+where the coefficients can be determined using Fourier's trick:
+\begin{equation}
+c_n = \braket{e_n|f}
+\end{equation}
+
+\item We carefully consider the limiting case of periodic functions with the period $a$ going to infinity, and concluded that any normalizable complex-valued function can be written as an integral over a complex exponential:
+\begin{eqnarray}
+\psi(x) &=& \frac{1}{\sqrt{2\pi}} 
+\int_{-\infty}^{\infty} \; \widetilde{\psi}(k) \; e^{ikx} \; dk
+\end{eqnarray}
+where
+\begin{eqnarray}
+\psi(x) &=& \frac{1}{\sqrt{2\pi}} 
+\int_{-\infty}^{\infty} \; \widetilde{\psi}(k) \; e^{ikx} \; dk
+\end{eqnarray}
+is the Fourier transform of $\psi(x)$.
+
+(Later, we'll connect this much more explicitly with completeness and orthonormality, but we'll have to expand our concept of orthogonality a bit first.)
+\end{itemize}
+  
+\end{document}
+
+
+
+
+
+
