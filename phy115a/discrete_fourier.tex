@@ -1,0 +1,91 @@
+\documentclass[12pt]{book}
+
+\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.5in]{geometry}
+\usepackage{cite}
+\usepackage{slashed}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{braket}
+\begin{document}
+
+\title{The Discrete Fourier Transform \\} 
+\author{Michael Mulhearn}
+
+\maketitle
+
+\appendix
+\setcounter{chapter}{6}
+\chapter{The Discrete Fourier Transform}
+
+\subsection{Fourier Series for Complex-Valued Functions}
+
+Recall that a complex periodic function with period $a$ can be represented as a series:
+\begin{equation}
+\psi(x) = \sum_{n=-\infty}^{\infty}  c_n \, e_n(x)
+\end{equation}
+of complex exponential basis functions:
+\begin{equation}
+e_n(x) \equiv \sqrt{\frac{1}{a}} \exp\left( i \, \frac{2 \pi n x}{a}\right)
+\end{equation}
+For the inner product defined over one period\footnote{We've started at 0 to make our notation below cleaner}:
+\begin{equation}
+\braket{f|g} = \int_{0}^{a} f^*(x) g(x) dx
+\end{equation}
+the complex exponential basis functions are orthonormal:
+\begin{equation}
+\braket{e_n|e_m} = \delta_{nm}
+\end{equation}
+so the coefficients can be determined using Fourier's trick:
+\begin{equation}
+c_n = \braket{e_n|f}
+\end{equation}
+
+When doing numerical analysis, we encounter discrete data sets, so instead of the continuous variable $x$ in $[0,a]$ we have $N$ discrete values:
+$$x_j \equiv \lambda \, j, \hspace{1cm} \lambda \equiv \frac{a}{N}, \hspace{1cm} j=0,1,2,\ldots,(N-1)$$
+so instead of the continuous function $\Psi(x)$ we have:
+$$\Psi_j \equiv \Psi(x_j)$$
+so we have:
+$$\Psi(x) \to \sum_{j=0}^{N-1}\delta(x-\lambda j) \, \Psi_j \, \lambda $$
+so the Fourier coefficients are:
+\begin{eqnarray*}
+c_m &=& \braket{e_m|\Psi}\\
+&=& \int_{0}^{a} \; \Psi(x) \; e_m^*(x) \, dx \\
+&=& \lambda \sqrt{\frac{1}{a}} \sum_j  \Psi_j \exp\left( -i \, \frac{2 \pi m \lambda j}{a}\right)\\
+\frac{c_m}{\sqrt{\lambda}}&=& \sqrt{\frac{1}{N}} \sum_j  \Psi_j \exp\left( -i \, \frac{2 \pi m j}{N}\right)\\
+\end{eqnarray*}
+And:
+
+\begin{eqnarray*}
+\psi(x) &=& \sum_{m=-\infty}^{\infty}  c_m \, e_m(x)\\
+        &=& \sum_{m=-\infty}^{\infty}  \frac{c_m}{\sqrt{\lambda}} \,        
+        \frac{1}{\sqrt{n}}\exp\left( -i \, \frac{2 \pi m j}{N}\right)\\
+\end{eqnarray*}
+We can clean this up nicely by noting that for
+\begin{equation}
+\braket{f|g} = \sum_{j=0}^{(n-1)} f^*(x_j) \, g(x_j) 
+\end{equation}
+with:
+\begin{equation}
+e_m(x) \equiv \sqrt{\frac{1}{N}} \exp\left( i \, \frac{2 \pi m j}{N}\right)
+\end{equation}
+we still have:
+\begin{equation}
+\braket{e_n|e_m} = \delta_{nm}
+\end{equation}
+and so:
+\begin{equation}
+c_m = \sqrt{\frac{1}{N}} \sum_j  \Psi_j \exp\left( -i \, \frac{2 \pi m j}{N}\right)
+\end{equation}
+which in scipy is just FFT of $\Psi$ using the option norm=``ortho''.
+
+
+
+
+
+\end{document}
+
+
+
+
+
