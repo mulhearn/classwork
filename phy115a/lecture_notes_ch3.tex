@@ -180,6 +180,87 @@ i\hbar \frac{\partial}{\partial t} \Psi(x,t) = -\frac{\hbar^2}{2m}\frac{\partial
 \end{equation}
 So we have plausibly deduced the Schr\"odinger Equation from the deBroglie hypothesis via the Matter Waves.  
 
+\section{Hilbert Space}
+
+In quantum mechanics, the state of a system is represented by a wave function, $\Psi(x,t)$ and we interpret $|\Psi(x,t)|^2$ as the probability density for measuring the particle at position $x$ at time $t$.  For this interpretation to work, we must have:
+$$\int_{-\infty}^{+\infty} |\Psi(x,t)|^2 dx = 1$$
+But for a function $f(x)$ to be a candidate for a wave function we need only statisfy the weaker condition:
+$$\int_{-\infty}^{+\infty} |f(x)|^2 dx = C < \infty$$
+for then we can always just multiple $f(x)$ by $\sqrt{1/C}$ to obtain a properly normalized wave function.  We call such a function a square-integrable function.
+
+We saw in the Fourier Series appendix that periodic functions satisfy the axiomatic properties of an abstract vector space.  What about square-integrable functions?  They are closed under addition as a consequence of the Schwarz inequality:
+\begin{equation}
+\left|\int_a^b \, f(x)^* g(x) \, dx\right| \leq \sqrt{\int_a^b |f(x)|^2 \, dx \; \int_a^b |g(x)|^2 \, dx}
+\end{equation}
+with which you should be able to show that if $f(x)$ and $g(x)$ are square integrable, then:
+$$\int_{-\infty}^{+\infty} f(x) + g(x) \; dx < \, \infty$$
+The other properties are of an abstract vector space are easy to establish for square integrable functions, as they follow immediately from the familiar algebraic properties of functions. 
+
+We define an inner product for this vector space as:
+$$\braket{f|g} \equiv \int_a^b \, f(x)^* g(x) \, dx$$
+Here again the Schwarz inequality shows that for vectors $f$ and $g$ the inner product is finite.  Most of the properties of an inner product again follow directly from familiar algebraic properties.  One subtlety arises when showing that:
+$$\braket{f|f}=0$$
+if and only if:
+$$f(x)=0$$
+To see the challenge, consider the (non-continuous) square-integrable function:
+$$f(x)=
+\begin{cases}
+1 & x=\pi \\
+0 & {\rm otherwise} \\
+\end{cases}
+$$
+which has $\braket{f|f}=0$ but is not $f(x)=0$.  The solution is to define two functions $f$ and $g$ as equivalent (the same vector) whenever:
+$$\int_{-\infty}^{+\infty} |f(x) - g(x)|^2 \; dx = 0 $$
+So now clearly if:
+$$\braket{f|f} = 0$$
+then:
+$$\int_{-\infty}^{+\infty} |f(x)|^2 \; dx = 0 $$
+and so too:
+$$\int_{-\infty}^{+\infty} |f(x) - 0|^2 \; dx = 0 $$
+so that $f(x)$ is equivalent to $g(x)=0$.
+
+Last we turn to the property of completeness:  any sequence of functions that gets closer and closer together will converge to a vector in the inner-product space.
+That is, if a sequence of functions $\{f_n(x)\}$ has the property that:
+$$\int_{-\infty}^{+\infty} |f_n(x) - f_m(x)|^2 \; dx \to 0, \hspace{1cm} {\rm as} \hspace{1cm} m,n \to \infty$$
+then:
+$$f_n(x) \to f(x), \hspace{1cm} {\rm as} \hspace{1cm} n \to \infty$$
+for some vector $f(x)$ in the vector space.
+
+And with this property, we run into serious trouble, for we already know that $\delta(x)$ is the limit of a sequence of taller and narrower square-integrable functions, but it isn't itself square integrable.  Nonetheless, the fact is that one can build a complete inner product space that contains the $\delta$-function and the limits of any sequence of square-integrable functions.  But to do so requires complicating {\bf everything} in order to properly handle vectors like the $\delta$ function.  Physicists make a different choice: we keep to our much simple definitions that apply perfectly well to the square integrable wave functions we encounter, and simply accept that we will also occasionally encounter the delta function posing as if it were an actual function.  We find that, inevitably, we integrate this delta function away before obtaining any observable result.
+
+The mathematical term for a complete inner-product space is a Hilbert Space.  Apart from side-stepped the issue of completeness, we have shown that the square-integrable functions form a Hilbert Space.  
+For the state described by wave function:
+$$\Psi(x,t)$$
+we will write this as a vector in Hilbert space like this:
+$$\ket{\Psi}$$.
+
+\section{Observables}
+
+We've already seen that observable quantities are associated with operators, such as $\hat{x}$ and $\hat{p}$.  In the context of Hilbert Space, an operator $\hat{O}$ is function that returns a (possibly new) vector for any given vector:
+$$\hat{O}\ket{\Psi} = \ket{\Phi}$$ 
+or we might choose to write that equivalently as:
+$$\hat{O}\ket{\Psi} = \ket{\hat{O} \Psi}$$ 
+where the LHS is an operator acting on the vector $\Psi$ whereas the RHS is the vector obtained by acting on $\Psi$ with the operator $\hat{O}$.  We will only consider linear operators with the defining properties:
+$$\hat{O}(\ket{\Psi}+\ket{\Phi}) = \hat{O}\ket{\Psi}+\hat{O}\ket{\Phi}$$
+and:
+$$\hat{O}\,(\alpha\ket{\Psi}) = \alpha \,\hat{O}\,\ket{\Psi}$$
+
+We associate expectation values with inner products:
+$$\braket{O} \equiv \braket{\Psi|\hat{O}\Psi} = \int_{-\infty}^{+\infty}\; \Psi^*(x,t) \, \hat{O} \, \Psi(x,t) \, dx$$
+For an operator $\hat{O}$ we define its hermitian adjoint $\hat{O}^\dagger$ by the behavior:
+$$\braket{f|\hat{O}^\dagger g} = \braket{\hat{O} f| g}$$
+or equivalently:
+$$\braket{f|\hat{O} g} = \braket{\hat{O}^\dagger f| g}$$
+When an operator is its own hermitian adjoint:
+$$\hat{A}^\dagger = \hat{A}$$
+we call it a hermitian operator, and it's expectation value is real:
+$$\braket{A} = \braket{\Psi|\hat{A}\Psi} = \braket{\hat{A}^\dagger \Psi|\Psi}=\braket{\hat{A}\Psi|\Psi}=\braket{\Psi|\hat{A}\Psi}^* = \braket{A}^*$$
+Therefore, we associate physical observables with hermitian operators.
+
+
+
+
+
 
 \section{The Fourier Transform Revisited}
 
@@ -224,6 +305,7 @@ The major benefit of this symmetric form is that the normalization of $\Psi(x)$ 
 \int_{-\infty}^{\infty} |\Psi(x)|^2 dx = \int_{-\infty}^{\infty} |\widetilde{\Psi}(p)|^2 dp = 1 
 \end{displaymath}
 Because we can always calculate $\Psi(x)$ from $\widetilde{\Psi}(p)$ either one completely describes the quantum mechanical state.  We call $\widetilde{\Psi}(p)$ the momentum wave function.   Whereas $|\Psi(x)|^2$ gives us the probability density for the quanton to be at position $x$, $|\Psi(p)|^2$ gives us the probability density for the quanton to have momentum $p$.
+$$\int_{-\\infty}^{+\infty} |f(x)|^2 dx < \infty$$
 
 
 \end{document}
