@@ -275,8 +275,8 @@ $$\braket{\hat{Q}} = q$$
 but also:
 $$\sigma^2 = \braket{\left(\hat{Q}-\braket{Q}\right)^2} = 0$$
 and so:
-$$0 = \braket{\left(\hat{Q}-q\right)^2} = \braket{\left(\Psi|(\hat{Q}-q\right)^2\Psi}$$
-but since $Q$ is an observable and $q$ is a real number $Q-q$ is a hermitian operator so:
+$$0 = \braket{\left(\hat{Q}-q\right)^2} = \braket{\Psi|\left(\hat{Q}-q\right)^2\Psi}$$
+but since $\hat{Q}$ is an observable and $q$ is a real number $\hat{Q}-q$ is a hermitian operator so:
 
 $$\braket{\Psi|\left(\hat{Q}-q\right)^2\Psi} = \braket{\left(\hat{Q}-q\right)\Psi|\left(\hat{Q}-q\right)\Psi} = 0$$
 but an axiomatic property of the inner product is that:
@@ -290,26 +290,113 @@ so we have:
 So, exactly as we found already for the specific case of the Hamiltonian operator, the eigenvectors of any observable (hermetian operator) $\hat{Q}$ are determinate states.
 Note that the vector $0$ is never considered to be an eigenvector (as
 it would trivially be an eigenvector of every operator, adding nothing
-of value), but the value $0$ can certainly be an eigenvalue.
+of value), but the value $0$ can certainly be an eigenvalue.  The collection of all the eigenvalues is called the spectrum of an operator.  
 
-The collection of all the eigenvalues is called the spectrum of an operator.
+\section{Eigenfunctions of Operators with Discrete and Non-Degenerate Spectra}
 
-\section{Eigenfunctions of Operators with Discrete Spectra}
+Let's consider the case of an operator $\hat{Q}$ with a discrete (whether finite or infinite) spectrum of eigenvalues $\{\alpha_i\}$.  In this case, it is convenient to label the state vector of each determinate state by it's eigenvalue:
+$$\hat{Q}\ket{\alpha_i} = \alpha_i \ket{\alpha_i}$$
+
+If one vector is a scalar times another vector:
+$$\ket{\alpha_i} = k \ket{\alpha_j}$$
+we call them linearly dependent.  When this is not the case they are linearly independent.
+Sometimes two linearly independent vectors $\ket{\alpha_i}$ and $\ket{\alpha_j}$ have the same eigenvalue for an operator $\hat{Q}$:
+$$\alpha_i = \alpha_j$$
+In this case, we call the spectrum degenerate.  Here we are assuming the spectrum is non-degenerate, and tackle the minor complexity of degeneracy later.
+
+In the case an operator with discrete non-generate spectrum, the determinate states have some useful properties:
+
+\begin{itemize} 
+\item {\bf Their eigenvalues are real.}  This is much like we showed the expectation values of a hermitian operators are real.  Because $\hat{Q}$ is hermitian we have:
+$$\braket{\alpha_i | \hat{Q} \alpha_i} = \braket{\hat{Q} \alpha_i | \alpha_i}$$
+so:
+\begin{eqnarray*}
+q \braket{\alpha_i | \alpha_i} &=& q^* \braket{\alpha_i | \alpha_i}\\
+(q-q^*) \braket{\alpha_i | \alpha_i} &=& 0\\
+\end{eqnarray*}
+But by definition eigenvectors cannot be zero, so:
+$$\ket{\alpha_i} \neq 0 \implies \braket{\alpha_i | \alpha_i} \neq 0$$
+So 
+$$q=q^*$$
+which shows that $q$ is real.
+\item {\bf They are orthogonal if their eigenvalues are distinct:}  
+\begin{eqnarray*}
+\braket{\alpha_i | \hat{Q} \alpha_j} &=& \braket{\hat{Q} \alpha_i | \alpha_j}\\
+\alpha_j \braket{\alpha_i | \alpha_j} &=& \alpha_i \braket{\alpha_i | \alpha_j}\\
+(\alpha_j-\alpha_i) \braket{\alpha_i | \alpha_j} &=& 0\\
+\end{eqnarray*}
+So:
+$$\alpha_j \neq \alpha_i \implies \braket{\alpha_i | \alpha_j} = 0$$
+
+\item {\bf They are complete.}  Below we show this in the general case for a finite dimensional Hilbert space.  We've also already seen it hold true in infinite dimensions in the case of the Fourier series solutions to the infinite square well potential.  Beyond this, we will ``assume the eigenfunctions of an observable are complete unless proven otherwise.'' 
+
+\end{itemize}
+
+\section{Eigenfunctions of Hermitian Operators with Degenerate Spectra}
+
+If one vector is a scalar times another vector:
+$$\ket{\alpha_i} = k \ket{\alpha_j}$$
+we call them linearly dependent.  When this is not the case they are linearly independent.
+Sometimes two linearly independent vectors $\ket{\alpha_i}$ and $\ket{\alpha_j}$ have the same eigenvalue for an operator $\hat{Q}$:
+$$\alpha_i = \alpha_j$$
+and in this case we say the spectrum is degenerate\footnote{By the way, be careful not to take our notation too literally here, we still have:
+$$\ket{\alpha_i} \neq \ket{\alpha_j}$$
+because it is completely clear which vector is which, even though $\alpha_i=\alpha_j$!}
+In this case, even though we cannot assume these eigenfunctions are orthogonal, we can arrange them so.  Consider the vector:
+$$\ket{x} \equiv \ket{\alpha_j} - \braket{\alpha_i|\alpha_j}\ket{\alpha_i}$$
+it is orthogonal to $\ket{\alpha_i}$ as we can see from:
+$$\braket{\alpha_i| x} = \braket{\alpha_i | \alpha_j} - \braket{\alpha_i|\alpha_j} \braket{\alpha_i|\alpha_i} = 0$$
+Furthermore, it cannot be zero for otherwise we would have:
+$$\ket{\alpha_j} = \braket{\alpha_i|\alpha_j}\ket{\alpha_i}$$
+and we already said $\ket{\alpha_j}$ and $\ket{\alpha_i}$ were linearly independent.
+Lastly, it too has eigenvalue $\alpha_j$:
+\begin{eqnarray*}
+\hat{Q}\ket{x} &=& \hat{Q}\ket{\alpha_j} - \braket{\alpha_i|\alpha_j}\hat{Q}\ket{\alpha_i}\\
+&=&\alpha_j \ket{\alpha_j} - \braket{\alpha_i|\alpha_j} \alpha_i \ket{\alpha_i}\\
+&=& \alpha_j \ket{x}\\
+\end{eqnarray*}
+This means $\ket{x}$ has the same eigenvalue as $\ket{\alpha_j}$ but is also orthogonal to $\ket{\alpha_i}$.  So we need only normalize $\ket{x}$ and then redefine:
+$$\ket{\alpha_j} \equiv \ket{x}$$
+so that now:
+$$\braket{\alpha_i | \alpha_j} = 0$$
+even though:
+$$\alpha_i = \alpha_j$$
+We can extend this to any number of vectors with degenerate eigenvalues as needed to obtain an orthogonal set of eigenvectors.  This process is called the Gram-Schmidt orthogonalization. 
+
+To summarize, for a hermitian operator $\hat{Q}$ with non-degenerate discrete spectrum $\{\alpha_i\}$ then the eigenfunctions, once properly normalized, are orthonormal:
+$$\braket{\alpha_i | \alpha_j} = \delta_ij$$
+For a degenerate discrete spectrum, we obtain the same result, but only by applying the Gram-Schmidt orthogonalization procedure first.
+
+\section{The Dirac Delta Function}
+
+It is both mathematically dubious and extremely useful to consider the Fourier Transform of the Dirac Delta function:
+$$
+\widetilde{\delta}(k) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} \delta(x) e^{-ikx} dx  = \frac{e^{-ik0}}{\sqrt{2\pi}} = \frac{1}{\sqrt{2\pi}} 
+$$
+and so we can write the Dirac delta function as:
+$$
+\delta(x) = \frac{1}{2\pi} \int_{-\infty}^{\infty} e^{ikx} dk
+$$
+and so also:
+$$
+\delta(x-x') = \frac{1}{2\pi} \int_{-\infty}^{\infty} e^{ik(x-x')} dk
+$$
+and (by changing variables):
+$$
+\delta(k-k') = \frac{1}{2\pi} \int_{-\infty}^{\infty} e^{i(k-k')x)} dx
+$$
 
 
+\section{Eigenfunctions of Hermitian Operators with Continuous Spectra}
 
-Degeneracy and Linear Independence.
+Let's consider the case of an operator $\hat{Q}$ with a discrete (whether finite or infinite) spectrum of eigenvalues $\{\alpha\}$.  In this case, it is convenient to label the state vector of each determinate state by it's eigenvalue:
+$$\hat{Q}\ket{\alpha} = \alpha \ket{\alpha}$$
+and 
+$$\hat{Q}\ket{\beta} = \alpha \ket{\beta}$$
 
-\section{More on the delta function...}
+For the case of discrete non-generate spectrum, we saw that the eigenvalues were real, and the eigenvectors were orthogonal and complete.
 
-\section{Eigenfunctions of Operators with Continuous Spectra}
-
-  
-
-
-
-  
-
+In the case of continuous spectra, the reality follows exactly as it did in the discrete case.
 
 
 
@@ -359,6 +446,35 @@ The major benefit of this symmetric form is that the normalization of $\Psi(x)$ 
 \end{displaymath}
 Because we can always calculate $\Psi(x)$ from $\widetilde{\Psi}(p)$ either one completely describes the quantum mechanical state.  We call $\widetilde{\Psi}(p)$ the momentum wave function.   Whereas $|\Psi(x)|^2$ gives us the probability density for the quanton to be at position $x$, $|\Psi(p)|^2$ gives us the probability density for the quanton to have momentum $p$.
 $$\int_{-\\infty}^{+\infty} |f(x)|^2 dx < \infty$$
+
+
+\section{Completeness of Eigenvectors of a Hermitian Operator}
+
+Here we will show that the eigenvectors of a Hermitian operator $Q$ are complete in any $n$ dimensional Hilbert space.
+
+It is evidently true for $n=1$.  We will assume it is true for $n-1$ and show that it is true for $n$.  The proof will follow from induction.
+
+Take any eigenvector of $\hat{Q}$ in an $n$-dimensional Hilbert space  $V$.
+$$\hat{Q}\ket{\lambda_0} = \lambda_0 \ket{\lambda_0}$$
+Now consider the subspace $S^\perp$ of all vectors perpendicular to $\ket{\lambda}$:
+$$S^\perp \equiv \{ \ket{x} \; {\rm such \; that} \; \braket{x|\lambda_0}=0 \}$$
+
+The subspace $S^\perp$ has dimension $n-1$ by construction.  To see this, note that $S^\perp$ has dimension $n$ at most, so we can write any $\ket{x}$ in $S^\perp$ in terms of $n$ orthonormal basis vectors:
+$$\ket{x} = A_0 \ket{\lambda_0} + A_1 \ket{x_1} + A_2 \ket{x_2} \ldots A_{n-1} \ket{x_{n-1}}$$
+but
+$$A_0 = \braket{\lambda_0|x} = 0$$
+so really:
+$$\ket{x} = A_1 \ket{x_1} + A_2 \ket{x_2} \ldots A_{n-1} \ket{x_{n-1}}$$
+and we see that $S^\perp$ has $n-1$ dimensions as intended.
+
+Next we'll show that the $n-1$ dimensional subspace $S^\perp$ is closed under $\hat{Q}$, so that 
+we can consider $\hat{Q}$ as a Hermitian operator in an $n-1$ dimensional space, and the induction hypothesis applies.  For $\ket{x} \in S^\perp$ we have:
+$$\braket{Qx|\lambda} = \braket{x| Q\lambda} = \lambda \braket{x|\lambda} = 0$$
+which shows that $Q\ket{x}$ is in $S^\perp$ as well.  
+
+That means $n-1$ eigenvectors of $\hat{Q}$ span the $n-1$ dimensional space by our induction hypothesis.  
+
+As the $n-1$ dimensional subspace $S^\perp$ is closed under $\hat{Q}$ 
 
 
 \end{document}
