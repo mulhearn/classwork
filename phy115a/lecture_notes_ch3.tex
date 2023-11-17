@@ -258,6 +258,59 @@ $$\braket{A} = \braket{\Psi|\hat{A}\Psi} = \braket{\hat{A}^\dagger \Psi|\Psi}=\b
 Therefore, we associate physical observables with hermitian operators.
 
 
+\section{Determinate States}
+
+We've accepted that Quantum Mechanics is indeterminate, in the sense
+that if we prepare many copies of a system, each described by the same
+state vector $\ket{\Psi}$, and we repeat the same measurement for each
+copy, then the outcome of each of those measurements may be different.
+
+Now we wish to consider if it is possible to prepare a system that is
+gauranteed to give a particular result $q$ for the measurement of an observable $\hat{Q}$.  We already know of one example of such a state:  the stational solutions of the Schrodinger equations have definite energy, and we saw that they are Eigenenfunctions of the Hamiltonian operator.  We can write this with our updated notation as:
+$$\hat{H} \ket{\psi} = E \ket{\psi}$$
+which says equivalently that they are Eigenvectors of the Hamilitonian operator.  Let's see if this generalizes.
+
+For a determinate state, every measurement results in $q$, so then:
+$$\braket{\hat{Q}} = q$$
+but also:
+$$\sigma^2 = \braket{\left(\hat{Q}-\braket{Q}\right)^2} = 0$$
+and so:
+$$0 = \braket{\left(\hat{Q}-q\right)^2} = \braket{\left(\Psi|(\hat{Q}-q\right)^2\Psi}$$
+but since $Q$ is an observable and $q$ is a real number $Q-q$ is a hermitian operator so:
+
+$$\braket{\Psi|\left(\hat{Q}-q\right)^2\Psi} = \braket{\left(\hat{Q}-q\right)\Psi|\left(\hat{Q}-q\right)\Psi} = 0$$
+but an axiomatic property of the inner product is that:
+$$\braket{f|f} = 0 \iff \ket{f} = 0$$
+so we have:
+\begin{eqnarray*}
+ 0 &=& \ket{\left(\hat{Q}-q\right)\Psi}\\
+ 0 &=& \left(\hat{Q}-q\right)\ket{\Psi}\\
+\hat{Q}\ket{\Psi} &=& q \ket{\Psi}\\
+\end{eqnarray*}
+So, exactly as we found already for the specific case of the Hamiltonian operator, the eigenvectors of any observable (hermetian operator) $\hat{Q}$ are determinate states.
+Note that the vector $0$ is never considered to be an eigenvector (as
+it would trivially be an eigenvector of every operator, adding nothing
+of value), but the value $0$ can certainly be an eigenvalue.
+
+The collection of all the eigenvalues is called the spectrum of an operator.
+
+\section{Eigenfunctions of Operators with Discrete Spectra}
+
+
+
+Degeneracy and Linear Independence.
+
+\section{More on the delta function...}
+
+\section{Eigenfunctions of Operators with Continuous Spectra}
+
+  
+
+
+
+  
+
+
 
 
 
