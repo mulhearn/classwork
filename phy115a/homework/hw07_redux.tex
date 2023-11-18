@@ -1,0 +1,134 @@
+\documentclass[12pt]{article}
+
+\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.5in]{geometry}
+\usepackage{cite}
+\usepackage{slashed}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{braket}
+\usepackage[american,fulldiode]{circuitikz}
+
+\begin{document}
+\newcommand{\ihbar}{\ensuremath{i \hbar}}
+\newcommand{\dPsidt}{\ensuremath{ \frac{\partial \Psi}{\partial t} }}
+\newcommand{\dPsidx}{\ensuremath{ \frac{\partial \Psi}{\partial x} }}
+\newcommand{\ddPsidx}{\ensuremath{ \frac{\partial^2 \Psi}{\partial x^2} }}
+\newcommand{\dPssdt}{\ensuremath{ \frac{\partial \Psi^*}{\partial t} }}
+\newcommand{\dPssdx}{\ensuremath{ \frac{\partial \Psi^*}{\partial x} }}
+\newcommand{\ddPssdx}{\ensuremath{ \frac{\partial^2 \Psi^*}{\partial x^2} }}
+
+\newcommand{\dphidt}{\ensuremath{ \frac{d \phi}{dt} }}
+\newcommand{\dpsidx}{\ensuremath{ \frac{d \psi}{dx} }}
+\newcommand{\ddpsidx}{\ensuremath{ \frac{d^2 \psi}{dx^2} }}
+
+
+\date{\vspace{-5ex}}
+
+\title{Homework Assignment 7 \\ ``Just when I thought I was out...''}
+
+\maketitle
+
+\section*{Practice Problems}
+
+These problems are graded on effort only.\\
+
+\noindent
+{\bf Griffiths: P2.44} \\[5pt]
+{\bf Hint}: evaluate
+$$\psi_2\frac{d\psi_1}{dx} - \psi_1\frac{d\psi_2}{dx}$$
+at $x \to +\infty$ to determine it's constant value.
+  
+\section*{Additional Problems}
+
+The first two problems are from the midterm exam.  If you are confident of
+your solution there, you may just indicate ``done'' as your solution and we will substitute your exam solution.\\
+
+\noindent
+{\bf Problem 1:}  From the midterm exam:\\
+
+A particle is in a certain potential $V(x)$ with corresponding Hamiltonian operator~$\hat{H}$.  Suppose that the properly normalized stationary states $\psi_1(x)$, $\psi_2(x)$, and $\psi_3(x)$ have definite energies:
+$$E_1=2\,\epsilon, \hspace{1cm} E_2=3\,\epsilon, \hspace{1cm} E_3=5\,\epsilon$$
+for some positive real constant $\epsilon$.  Using positive real constants when possible, construct a state $\Psi(x,t)$ with the properties:
+$$\braket{\Psi|\psi_2} = 0$$
+and:
+$$\braket{\hat{H}} = 3\epsilon$$
+
+\noindent
+{\bf Problem 2:} From the midterm exam:\\
+
+\noindent
+Consider a particle in a harmonic oscillator potential with allowed energies:
+\begin{equation}
+E_n = \hbar \omega \left( n + \frac{1}{2} \right)
+\end{equation}
+for
+$$n=0,1,2,3,\ldots$$
+Consider a general solution:
+$$\Psi(x,t) = \sum_n c_n \, \psi_n(x) \, e^{-i\,n\,\omega\,t}$$
+Using the ladder operators $\hat{a}_+$ and $\hat{a}_-$, with the properties recalled in Problem 2, verify that Ehrenfest's Theorem holds in this case:
+$$\frac{d}{dt}\braket{p} = -\braket{\frac{dV}{dx}} = -m\omega^2 \braket{x}$$
+Suggested approach:\\
+(A) Calculate $\braket{\psi_m|\hat{a}_+\psi_n}$ and $\braket{\psi_m|\hat{a}_-\psi_n}$ and express the answer in terms of $\delta_{ij}$.\\[5pt]
+(B) Calculate $\braket{\Psi|\hat{a}_+\Psi}$ and $\braket{\Psi|\hat{a}_-\Psi}$ and leave your answer as an infinite series.\\[5pt]
+(C) Calculate $\braket{p}$ and $\braket{x}$ from the (B).\\[5pt]
+(D) Calculate:
+$$\frac{d}{dt}\braket{p}$$
+and hope that it all works out!\\[5pt]
+
+\noindent
+{\bf Problem 3:}
+Recall that the probability current for a wave function $\psi(x)$ is defined as:
+$$J(x) \equiv \frac{i\hbar}{2m}\left( \psi \frac{d\psi^*}{dx} - \psi^* \frac{d\psi}{dx}\right)$$
+In Problem 3 of the previous homework assignent (HW06) we considered the 
+$$V(x) = \begin{cases}
+0   &  x < 0 \\
+V_0 &  x \geq 0 \\
+\end{cases}
+$$
+and assumed that $E>V_0$.  You showed that the general solution is:
+$$\psi(x) = \begin{cases}
+A e^{\displaystyle ikx} + B e^{\displaystyle -ikx} &  x\leq0 \\
+F e^{\displaystyle i\eta kx} + G e^{\displaystyle -i \eta kx} &  x\geq0 \\
+\end{cases}$$
+where:
+$$\eta \equiv \sqrt{\frac{E-V_0}{E}}.$$
+In this problem, we will assume scattering from the left, i.e. $G=0$.\\[5pt]
+
+\noindent
+(A) Calculate the probability current $J_i$ for just the incoming wave:
+$$\Psi_i = A e^{ikx}$$
+
+\noindent
+(B) Calculate the probability current $J_r$ for just the reflected wave:
+$$\Psi_r = B e^{-ikx}$$
+
+\noindent
+(C) Define the coefficient of reflection as:
+$$R \equiv \frac{J_r}{J_i}$$
+and compare to your answer for Problem 3D of the previous homework.
+
+\noindent
+(D) Calculate the probability current $J_t$ for just the transmitted wave:
+$$\Psi_t = F e^{-i\eta kx}$$
+
+\noindent
+(E) Define the coefficient of transmission as:
+$$T \equiv \frac{J_t}{J_i}$$
+and compare to your answer for Problem 3E of the previous homework.\\[5pt]
+
+\noindent
+(F) Calculate the current density $J_L$ for the complete solution for $x<0$.\\[5pt]
+
+\noindent
+(G) Calculate the current density $J_R$ for the complete solution for $x>0$. (We still have $G=0$)\\[5pt]
+
+\noindent
+(H) Set $J_L = J_R$ and show that:
+$$T + R = 1$$
+
+\end{document}
+
+
+
+
