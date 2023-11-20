@@ -234,9 +234,9 @@ $$\Psi(x,t)$$
 we will write this as a vector in Hilbert space like this:
 $$\ket{\Psi}$$.
 
-\section{Observables}
+\section{Operators and Observables}
 
-We've already seen that observable quantities are associated with operators, such as $\hat{x}$ and $\hat{p}$.  In the context of Hilbert Space, an operator $\hat{O}$ is function that returns a (possibly new) vector for any given vector:
+An operator $\hat{O}$ in a Hilbert Space $H$ is a mapping of vectors in $H$ to vectors in $H$.  We could just call it a function, but that terminology would be confusing as the vectors it has as input and output are themselves square-integrable functions.  Given a vector $\ket{\Psi}$ in the Hilbert Space, an operator returns a (possibly new) vector $\ket{\Phi}$:
 $$\hat{O}\ket{\Psi} = \ket{\Phi}$$ 
 or we might choose to write that equivalently as:
 $$\hat{O}\ket{\Psi} = \ket{\hat{O} \Psi}$$ 
@@ -252,10 +252,10 @@ $$\braket{f|\hat{O}^\dagger g} = \braket{\hat{O} f| g}$$
 or equivalently:
 $$\braket{f|\hat{O} g} = \braket{\hat{O}^\dagger f| g}$$
 When an operator is its own hermitian adjoint:
-$$\hat{A}^\dagger = \hat{A}$$
+$$\hat{Q}^\dagger = \hat{Q}$$
 we call it a hermitian operator, and it's expectation value is real:
-$$\braket{A} = \braket{\Psi|\hat{A}\Psi} = \braket{\hat{A}^\dagger \Psi|\Psi}=\braket{\hat{A}\Psi|\Psi}=\braket{\Psi|\hat{A}\Psi}^* = \braket{A}^*$$
-Therefore, we associate physical observables with hermitian operators.
+$$\braket{Q} = \braket{\Psi|\hat{Q}\Psi} = \braket{\hat{Q}^\dagger \Psi|\Psi}=\braket{\hat{Q}\Psi|\Psi}=\braket{\Psi|\hat{Q}\Psi}^* = \braket{Q}^*$$
+Therefore, we associate physical observables with hermitian operators, as in ``the observable $\hat{Q}$''.
 
 
 \section{Determinate States}
@@ -266,8 +266,8 @@ state vector $\ket{\Psi}$, and we repeat the same measurement for each
 copy, then the outcome of each of those measurements may be different.
 
 Now we wish to consider if it is possible to prepare a system that is
-gauranteed to give a particular result $q$ for the measurement of an observable $\hat{Q}$.  We already know of one example of such a state:  the stational solutions of the Schrodinger equations have definite energy, and we saw that they are Eigenenfunctions of the Hamiltonian operator.  We can write this with our updated notation as:
-$$\hat{H} \ket{\psi} = E \ket{\psi}$$
+guaranteed to give a particular result $q$ for the measurement of an observable $\hat{Q}$.  We already know of one example of such a state:  the stational solutions of the Schrodinger equations have definite energy, and we saw that they are Eigenenfunctions of the Hamiltonian operator.  We can write this with our updated notation as:
+$$\hat{H} \ket{\Psi} = E \ket{\Psi}$$
 which says equivalently that they are Eigenvectors of the Hamilitonian operator.  Let's see if this generalizes.
 
 For a determinate state, every measurement results in $q$, so then:
@@ -290,13 +290,37 @@ so we have:
 So, exactly as we found already for the specific case of the Hamiltonian operator, the eigenvectors of any observable (hermetian operator) $\hat{Q}$ are determinate states.
 Note that the vector $0$ is never considered to be an eigenvector (as
 it would trivially be an eigenvector of every operator, adding nothing
-of value), but the value $0$ can certainly be an eigenvalue.  The collection of all the eigenvalues is called the spectrum of an operator.  
+of value), but the value $0$ can certainly be an eigenvalue.  
 
-\section{Eigenfunctions of Operators with Discrete and Non-Degenerate Spectra}
+\section{Eigenvalues of Observables}
+
+Operators associated with physical observables, that is, hermitian operators, have a special property:
+\begin{itemize}
+\item {\bf The eigenvalues of hermitian operators are real.}  Suppose $\ket{\Psi}$ is an eigenvector of hermitian operator $\hat{Q}$ with eigenvalue $q$:
+$$\hat{Q}\ket{\Psi} = q \ket{\Psi}$$
+We know that for a determinate state $\braket{Q} = q$, and since the expectation values of hermitian operators are real, then $q$ is real too.  
+\end{itemize}
+
+\noindent
+It's useful practice to work this result out explicitly:
+$$\braket{\Psi | \hat{Q} \Psi} = \braket{\hat{Q} \Psi | \Psi}$$
+so:
+\begin{eqnarray*}
+q \braket{\Psi | \Psi} &=& q^* \braket{\Psi | \Psi}\\
+(q-q^*) \braket{\Psi | \Psi} &=& 0\\
+\end{eqnarray*}
+But by definition eigenvectors cannot be zero, so:
+$$\ket{\Psi} \neq 0 \implies \braket{\Psi | \Psi} \neq 0$$
+So 
+$$q=q^*$$
+which shows that $q$ is real.
+
+The collection of eigenvalues of an operator is called its spectrum.  In what follows we will consider discrete spectra and continuous spectra separately, but no matter the type of spectra {\bf the eigenvalues of a hermitian operator are real.}
+
+\section{Eigenvectors of Observables with Discrete and Non-Degenerate Spectra}
 
 Let's consider the case of an operator $\hat{Q}$ with a discrete (whether finite or infinite) spectrum of eigenvalues $\{\alpha_i\}$.  In this case, it is convenient to label the state vector of each determinate state by it's eigenvalue:
 $$\hat{Q}\ket{\alpha_i} = \alpha_i \ket{\alpha_i}$$
-
 If one vector is a scalar times another vector:
 $$\ket{\alpha_i} = k \ket{\alpha_j}$$
 we call them linearly dependent.  When this is not the case they are linearly independent.
@@ -307,32 +331,81 @@ In this case, we call the spectrum degenerate.  Here we are assuming the spectru
 In the case an operator with discrete non-generate spectrum, the determinate states have some useful properties:
 
 \begin{itemize} 
-\item {\bf Their eigenvalues are real.}  This is much like we showed the expectation values of a hermitian operators are real.  Because $\hat{Q}$ is hermitian we have:
-$$\braket{\alpha_i | \hat{Q} \alpha_i} = \braket{\hat{Q} \alpha_i | \alpha_i}$$
-so:
-\begin{eqnarray*}
-q \braket{\alpha_i | \alpha_i} &=& q^* \braket{\alpha_i | \alpha_i}\\
-(q-q^*) \braket{\alpha_i | \alpha_i} &=& 0\\
-\end{eqnarray*}
-But by definition eigenvectors cannot be zero, so:
-$$\ket{\alpha_i} \neq 0 \implies \braket{\alpha_i | \alpha_i} \neq 0$$
-So 
-$$q=q^*$$
-which shows that $q$ is real.
-\item {\bf They are orthogonal if their eigenvalues are distinct:}  
+\item {\bf They are orthogonal:}  
 \begin{eqnarray*}
 \braket{\alpha_i | \hat{Q} \alpha_j} &=& \braket{\hat{Q} \alpha_i | \alpha_j}\\
 \alpha_j \braket{\alpha_i | \alpha_j} &=& \alpha_i \braket{\alpha_i | \alpha_j}\\
 (\alpha_j-\alpha_i) \braket{\alpha_i | \alpha_j} &=& 0\\
 \end{eqnarray*}
-So:
+As we are assuming non-degenerate spectrum in this section:
 $$\alpha_j \neq \alpha_i \implies \braket{\alpha_i | \alpha_j} = 0$$
+Furthermore, as the $\ket{\alpha_i}$ are vectors in the Hilbert space of square-integrable functions,
+they can be properly normalized, so that:
+$$\braket{\alpha_n|\alpha_m} = \delta_{nm}$$.
 
 \item {\bf They are complete.}  Below we show this in the general case for a finite dimensional Hilbert space.  We've also already seen it hold true in infinite dimensions in the case of the Fourier series solutions to the infinite square well potential.  Beyond this, we will ``assume the eigenfunctions of an observable are complete unless proven otherwise.'' 
-
 \end{itemize}
 
-\section{Eigenfunctions of Hermitian Operators with Degenerate Spectra}
+\section{Generalized Statistical Interpretation}
+
+We've seen that the eigenvectors of an observable with a discrete non-degenerate spectrum have the ``Big Three'' properties:  (1) they have real eigenvalues, (2) they be arranged to be orthonormal, and (3) they are complete.  In this context, we are now ready to state {\bf the most important material of this quarter}:  the general statistical interpretation of the eigenfunctions of an observable.
+
+Because of property (3), we can express any state vector $\ket{\Psi}$ as a sum of eigenvectors of {\bf any} observable $\hat{Q}$:
+\begin{equation}
+\label{eqn:sumeigen}
+\ket{\Psi} = \sum_n c_n(t) \ket{\alpha_n}
+\end{equation}
+The sum over $n$ here is over all possible values, which will vary from case to case (e.g. finite for bounds states of a square well, infinite starting at $n=1$ for the infinite square well, infinite starting at $0$ for the harmonic oscillator potential).  The eigenvectors $\ket{\alpha_n}$ have the defining property:
+$$\hat{Q} \ket{\alpha_n} = \alpha_n \ket{\alpha_n}$$
+and property (1) informs us that every $\alpha_n$ is real.  
+
+
+Because of property (2), we can determine the coefficients $c_n(t)$ via Fourier's trick:
+\begin{eqnarray*}
+\braket{\alpha_n| \Psi} &=& \braket{\alpha_n | \sum_m c_m(t) \alpha_m}\\
+\end{eqnarray*}
+Notice that we have changed the sum over $n$ in Equation~\ref{eqn:sumeigen} to a sum over $m$.  We {\rm can} do this because it is a dummy variable (it has no meaning outside the sum), and we {\bf must} do this in order to avoid getting confused the $n$ in $c_n$.  Moving out the sum and coefficient:
+\begin{eqnarray*}
+\braket{\alpha_n| \Psi} &=& \sum_m c_m(t) \braket{\alpha_n | \alpha_m}\\
+ &=& \sum_m c_m(t) \delta_{nm}\\
+ &=& c_n(t) \\
+\end{eqnarray*}
+{\bf Memorize it if you must (even better to understand it well) but you will have to reproduce this entire calculation in some form on your final exam, and without resorting to any integrals!}
+
+Now let's see how to obtain the expectation value for the observable $\hat{Q}$:
+\begin{eqnarray*}
+\braket{\hat{Q}} &=& \braket{\Psi | \hat{Q} \Psi}\\[5pt]
+&=& \braket{\sum_n c_n(t) \alpha_n | \hat{Q} \, \sum_m c_m(t) \alpha_m}\\
+&=& \sum_{n,m} c_n^*(t) c_m(t) \braket{\alpha_n | \hat{Q} \alpha_m}\\
+&=& \sum_{n,m} c_n^*(t) c_m(t) \alpha_m \braket{\alpha_n | \alpha_m}\\
+&=& \sum_{n,m} c_n^*(t) c_m(t) \alpha_m \delta_{nm}\\
+&=& \sum_n |c_n(t)|^2 \; \alpha_n
+\end{eqnarray*}
+But our statistical interpretation of an expectation value is the weighted average of possible outcomes, with the weight equal to the probability of each outcome.  So evidently {\bf \boldmath the probability that a measurement will yield outcome $\alpha_n$ is $|c_n(t)|^2$.}
+
+For this interpretation to work we should have:
+$$\sum_n |c_n(t)|^2 = 1$$
+and sure enough:
+\begin{eqnarray*}
+1 &=&\braket{\Psi | \Psi} \\
+&=& \braket{\sum_n c_n(t) \alpha_n | \sum_m c_m(t) \alpha_m}\\
+&=& \sum_{n,m} c_n^*(t) c_m(t) \braket{\alpha_n | \alpha_m}\\
+&=& \sum_{n,m} c_n^*(t) c_m(t) \delta_{nm}\\
+&=& \sum_n |c_n(t)|^2 \\ 
+\end{eqnarray*}
+
+To summarize:  the eigenvectors of any observable $\hat{Q}$ have the defining property:
+$$\hat{Q} \ket{\alpha_n} = \alpha_n \ket{\alpha_n}$$
+These eigenvectors have the big three properties: (1) their eigenvalyes ($\alpha_n$) are real, (2) they can be arranged to be orthonormal, and (3) they are complete.  Therefore, any state vector can be expressed as a sum of eigenvectors:
+$$\ket{\Psi} = \sum_n c_n(t) \ket{\alpha_n}$$
+The probability that a measurement of the observable $\hat{Q}$ results in the particular real value $\alpha_n$ is $|c_n(t)|^2$. 
+
+Notice that as a logical consequence, the outcome of a measurement is limited to one of the eigenvalues of the operator.  Furthermore, as we first discussed in Chapter 1 (but have done little with so far), the action of making a measurement causes the wave function to collapse.  We can be more specific now, and say that after a measurement of outcome $\alpha_n$, the wave function collapses
+\footnote{There are other possible interpretations, but this is consistent with the Copenhagen interpretation which we will take as our baseline interpretation for this course.} to the unique eigenstate corresponding to that eigenvalue (we are not considering degenerate spectra yet.)
+$$\ket{\Psi} \longrightarrow \ket{\alpha_n}$$
+So, assuming that the wave function does not evolve further, subsequence measurements of the observable $\hat{Q}$ will yield the value $\alpha_n$ with $|c_n(t)|^2 = 1 = 100\%$ certainty.
+
+\section{Eigenvectors of Hermitian Operators with Degenerate Spectra}
 
 If one vector is a scalar times another vector:
 $$\ket{\alpha_i} = k \ket{\alpha_j}$$
@@ -363,41 +436,222 @@ even though:
 $$\alpha_i = \alpha_j$$
 We can extend this to any number of vectors with degenerate eigenvalues as needed to obtain an orthogonal set of eigenvectors.  This process is called the Gram-Schmidt orthogonalization. 
 
-To summarize, for a hermitian operator $\hat{Q}$ with non-degenerate discrete spectrum $\{\alpha_i\}$ then the eigenfunctions, once properly normalized, are orthonormal:
-$$\braket{\alpha_i | \alpha_j} = \delta_ij$$
-For a degenerate discrete spectrum, we obtain the same result, but only by applying the Gram-Schmidt orthogonalization procedure first.
+To summarize, for a degenerate discrete spectrum, the eigenvectors can be arranged, via the Gram-Schmidt orthogonalization, such that:
+$$\braket{\alpha_i | \alpha_j} = \delta_{ij}$$
+and thus arranged to have the same ``Big Three'' properties as do the eigenvectors of non-degenerate discrete spectrum.
 
-\section{The Dirac Delta Function}
+As a consequence, the standard statistical interpretation applies for degenerate spectra in exactly the same manner as for non-degenerate spectra.  The only minor subtlety is what happens in the case that the outcome of a measurement yields a degenerate result.  In this case, the wave function still collapses, but now to a linear combination of the (degenerate) eigenvectors.
+
+To illustrate, suppose the state vector is: 
+$$\ket{\Psi} = \frac{1}{2}\left(\ket{\alpha_1} + i\,\ket{\alpha_2} + \sqrt{2}\,\ket{\alpha_3}\right)$$
+where $\ket{\alpha_i}$ are eigenfunctions of the observable $\hat{Q}$ and $\alpha_1 = \alpha_2$ but $\alpha_3 \neq \alpha_1$.
+The probability that a measurement of $\hat{Q}$ results in $\alpha_3$ is:
+$$\left|\frac{\sqrt{2}}{2}\right|^2 = \frac{1}{2}$$
+After a measurement with outcome $\alpha_3$ the wave function collapses to:
+$$\ket{\Psi} \longrightarrow \ket{\alpha_3}$$
+On the other hand, the probability that a measurement of $\hat{Q}$ results in $\alpha_1 = \alpha_2$ is:
+$$\left|\frac{1}{2}\right|^2 + \left|\frac{i}{2}\right|^2 = \frac{1}{2}$$
+After a measurement with outcome $\alpha_1=\alpha_2$ the wave function collapses to:
+$$\ket{\Psi} \longrightarrow \frac{1}{\sqrt{2}}\left(\ket{\alpha_1} + i\,\ket{\alpha_2}\right)$$
+In all of the cases, we used our freedom to choose the overall phase of the wave-function, but notice that the relative phase of $\ket{\alpha_1}$ and $\ket{\alpha_2}$ is preserved by the collapse.
+
+\section{The Dirac Delta function and the Fourier Transform}
 
 It is both mathematically dubious and extremely useful to consider the Fourier Transform of the Dirac Delta function:
 $$
 \widetilde{\delta}(k) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} \delta(x) e^{-ikx} dx  = \frac{e^{-ik0}}{\sqrt{2\pi}} = \frac{1}{\sqrt{2\pi}} 
 $$
 and so we can write the Dirac delta function as:
-$$
+\begin{equation}
+\label{eqn:fourierdelta}
 \delta(x) = \frac{1}{2\pi} \int_{-\infty}^{\infty} e^{ikx} dk
+\end{equation}
+and by interchanging variables:
+\begin{equation*}
+\delta(k) = \frac{1}{2\pi} \int_{-\infty}^{\infty} e^{ikx} dx
+\end{equation*}
+As always when dealing with the Dirac delta function, these relations are only really valid within another integral, and that is precisely how we will use them in what follows.
+
+By substitution of variables\footnote{Don't get confused here, we are still in one-dimension, and $y$ is just a different dummy variable in the same direction as $x$.  You can think of it as $x'$ if you prefer, but $x'$ doesn't show up well on the board, so we use $y$ in lecture.}
 $$
-and so also:
+\delta(x-y) = \frac{1}{2\pi} \int_{-\infty}^{\infty} e^{ik(x-y)} dk
 $$
-\delta(x-x') = \frac{1}{2\pi} \int_{-\infty}^{\infty} e^{ik(x-x')} dk
+and:
 $$
-and (by changing variables):
+\delta(k-l) = \frac{1}{2\pi} \int_{-\infty}^{\infty} e^{i(k-l)x} dx
 $$
-\delta(k-k') = \frac{1}{2\pi} \int_{-\infty}^{\infty} e^{i(k-k')x)} dx
-$$
+Equation~\ref{eqn:fourierdelta} is a kind of shorthand for the Fourier Transform, for we can use to derive the Fourier and Inverse Fourier Transforms directly:
+\begin{eqnarray*}
+\psi(x) &=& \int_{-\infty}^{+\infty} \psi(y) \; \delta(x-y) \; dy \\
+&=& \frac{1}{2\pi}\int_{-\infty}^{+\infty} \int_{-\infty}^{+\infty} \psi(y) \; e^{ik(x-y)} \; dk \, dy \\
+&=& \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{+\infty} e^{ikx} 
+ \left( \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{+\infty} \psi(y) \; e^{-iky} \; dy \right) \, dk \\
+\end{eqnarray*}
+The quantity in parenthesis is just the fourier transform of $\psi(x)$, don't be fooled by the dummy variable $y$, so we have only to define:
+$$\widetilde{\psi}(k) \equiv \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{+\infty} \psi(x) \; e^{-ikx} \; dx $$
+and we have immediately:
+$$\psi(x) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{+\infty} \widetilde{\psi}(k) \; e^{ikx} \; dk $$
+Notice we could have made other choices here about how to distribute the factor of $1/2\pi$, we've chosen to write these in the most symmetric fashion.
+
+There's another very useful result that the delta function allows us to calculate relatively easily, the normalization of the Fourier transform:
+\begin{eqnarray*}
+\int_{-\infty}^{+\infty} |\widetilde{\psi}(k)|^2 dk &=& \int_{-\infty}^{+\infty} \widetilde{\psi^*}(k) 
+\widetilde{\psi}(k) dk\\
+&=& \int_{-\infty}^{+\infty} 
+\left( \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{+\infty} e^{-ikx} \psi(x) dx \right)^* 
+\left( \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{+\infty} e^{-iky} \psi(y) dy \right)
+dk\\
+&=& \int_{-\infty}^{+\infty} \; \int_{-\infty}^{+\infty} 
+\psi^*(x) \psi(y) \left( \frac{1}{2\pi} \int_{-\infty}^{+\infty} e^{ik(x-y)} dk \right) dx dy\\
+&=& \int_{-\infty}^{+\infty} \; \int_{-\infty}^{+\infty} 
+\psi^*(x) \psi(y) \delta(x-y) dx dy\\
+&=& \int_{-\infty}^{+\infty} |\psi(x)|^2 \ dx\\
+\end{eqnarray*}
+This is called Parseval's theorem.
 
 
-\section{Eigenfunctions of Hermitian Operators with Continuous Spectra}
+\section{Eigenvectors of Observables with Continuous Spectra}
 
-Let's consider the case of an operator $\hat{Q}$ with a discrete (whether finite or infinite) spectrum of eigenvalues $\{\alpha\}$.  In this case, it is convenient to label the state vector of each determinate state by it's eigenvalue:
-$$\hat{Q}\ket{\alpha} = \alpha \ket{\alpha}$$
-and 
-$$\hat{Q}\ket{\beta} = \alpha \ket{\beta}$$
+Let's consider the case of an operator $\hat{Q}$ with a continuous spectrum of eigenvalues $\{\alpha\}$.  In this case, it is convenient to label the state vector of each determinate state by it's eigenvalue:
+$$\hat{Q}\ket{\alpha} = \alpha \ket{\alpha}, \hspace{1cm} \hat{Q}\ket{\beta} = \beta \ket{\beta}$$
+where now there is no index $i$ on the eigenvalues, as the spectrum is uncountably infinite.  As $\hat{Q}$ is hermitian, the eigenvalues ($\alpha$ and $\beta$ here) are real.  Furthermore, we can show that:
+$$\braket{\alpha|\beta} = 0, \hspace{2cm} {\rm for} \;\alpha \neq \beta$$ 
+using the same calculation as for the discrete case, so the eigenfunctions are orthogonal too.  As is our right as physicists, we may assume (until proven otherwise) that the eigenvectors are complete, so we can write:
+$$\ket{\Psi} = \int_{-\infty}^{+\infty} a(\alpha) \ket{\alpha}d\alpha$$
+where we have replaced the sum over discrete eigenvalues with an integral over continuous eigenvalues.
+We expect to be able to determine the coefficients $a(\beta)$ using Fourier's trick:
+\begin{eqnarray*}
+\braket{\beta|\Psi} &=& \int_{-\infty}^{+\infty} a(\alpha) \braket{\beta | \alpha} d\alpha \\
+\end{eqnarray*}
+So for this to work, we need $\braket{\beta | \alpha}$ to pick out the particular value $a(\beta)$ from the integral.  No ordinary function will do this, but the delta function.  With:
+$$\braket{\beta|\alpha} = \delta(\alpha-\beta)$$
+we obtain:
+$$\braket{\beta|\Psi} = a(\beta)$$
+as expected.
 
-For the case of discrete non-generate spectrum, we saw that the eigenvalues were real, and the eigenvectors were orthogonal and complete.
+Evidently, the eigenfunctions of continuous spectra are not normalizable!  We therefore cannot have normal orthonormality, but we have instead what Griffith's calls ``Dirac othonormality'', which replaces the Kronecker delta with the Dirac delta function.\\ 
 
-In the case of continuous spectra, the reality follows exactly as it did in the discrete case.
+Let's look at some concrete examples:
+\begin{itemize}
+\item {\bf Eigenvectors of the momentum operator:}  For a concrete example, let's consider the eigenvectors of the momentum operator:
+$$\hat{p} \ket{p} = p \ket{p}$$
+The state vector $\ket{p}$ has an associated wave function $\psi_p(x)$, for which the momentum operator takes it's familiar form $\hat{p} = -i\hbar d/dx$, so we have:
+$$-i\hbar \frac{d}{dx}\psi_p(x) = p \psi_p(x)$$
+with solutions:
+$$\psi_p(x) = A e^{\displaystyle ipx/\hbar}$$
+These are none other than our plane wave solutions to the free particle SE.  This is no surprise, since the free-particle Hamiltonian depends only on $\hat{p}$, and so:
+$$\hat{H} \ket{p} = \frac{\hat{p}^2}{2m} \ket{p} = \frac{p^2}{2m} \ket{p}$$
+That is, eigenvectors of $\hat{p}$ are also eigenvectors of $\hat{H}$.
 
+We can check the orthogonality by calculating the inner product of the $\ket{p}$ with another eigenvector of the momentum operator $\ket{q}$:
+$$\braket{q|p} = |A|^2\int_{-\infty}^{+\infty} e^{i(p-q)x/\hbar} dx = |A|^2 \, 2\pi\hbar \, \delta(p-q)$$
+So if we take:
+$$\psi_p(x) = \frac{1}{\sqrt{2\pi \hbar}} e^{\displaystyle ipx/\hbar}$$
+Then:
+$$\braket{q|p} = \delta(p-q)$$
+which is Dirac orthonormality, exactly as we expect.  We can write any state vector as an integral over the eigenvectors:
+$$\ket{\Psi} = \int_{-\infty}^{+\infty} c(p) \ket{p} dp $$
+and obtain the coefficients from Fourier's Trick:
+\begin{eqnarray*}
+\braket{p|\Psi} &=& \int_{-\infty}^{+\infty} c(q) \, \braket{p|q} \, dq \\
+                &=& \int_{-\infty}^{+\infty} c(q) \, \delta(q-p) \, dq \\
+				&=& c(p) \\
+\end{eqnarray*}
+
+\item {\bf Eigenvectors of the position operator:}  Next let's consider the eigenvectors $\ket{y}$ of the position operator:
+$$\hat{x} \ket{y} = y \ket{y}$$
+Here we are using $y$ to indicate a specific value of the variable $x$.  The state vector $\ket{y}$ has an associated wave function $\psi_y(x)$ for which:
+$$\hat{x} \psi_y(x) = x \psi_y(x) = y \psi_y(x)$$
+where $x$ is a variable and $y$ is a specific value.  The solution is:
+$$\psi_y(x) = A \delta(x-y)$$
+for then:
+$$x \psi_y(x) = x A \delta(x-y) = y A \delta(x-y) = y \psi_y(x)$$
+as needed.  We can check orthogonality:
+$$\braket{y|z} = |A|^2 \int_{-\infty}^{+\infty} \delta(x-y) \delta(x-z) dx = |A|^2 \delta(y-z)$$
+If we choose $A=1$ we have:
+$$\braket{y|x} = \delta(x-y)$$
+From completeness we have:
+$$\ket{\psi} = \int_{-\infty}^{+\infty} c(x) \ket{x} dp $$
+and Fourier's Trick gives the expected outcome:
+\begin{eqnarray*}
+\braket{y|\psi} &=& \int_{-\infty}^{+\infty} c(x) \braket{y|x} dx \\
+                &=& \int_{-\infty}^{+\infty} c(x) \delta(y-x) dx \\
+                &=& c(x) \\
+\end{eqnarray*}
+and also:
+$$\braket{y|\psi} = \int_{-\infty}^{+\infty} \delta(x-y) \psi(x) dx = \psi(y)$$
+or equivalently:
+$$\psi(x) = \braket{x|\psi}$$
+\end{itemize}
+which at last precisely connects our Hilbert space state vectors to the wave function: the wave function is the inner product of the position eigenvector with the state vector.
+
+\section{Position and Momentum Space Wave Functions}
+
+We found in the previous sections that the eigenvector $\ket{y}$ of position has wave function:
+$$\psi_y(x) = \delta(x-y)$$
+which led to the formal connection between the state vector and wave function:
+$$\braket{x|\Psi} = \Psi(x,t)$$
+
+The eigenvector of momentum $\ket{p}$ has wave function:
+$$\psi_p(x) = \frac{1}{\sqrt{2\pi \hbar}} e^{\displaystyle i p x / \hbar}$$
+Now let's consider the inner product:
+$$\braket{p|\Psi} = \frac{1}{\sqrt{2\pi\hbar}}\int_{-\infty}^{+\infty} \Psi(x,t) e^{-ipx/\hbar} dx $$
+which we see is just the Fourier Transform of $\Psi(x,t)$, but with $k \to p/\hbar$.   We call this the momentum space wave function:
+$$\braket{p|\Psi} = \widetilde{\Psi}(p,t)$$
+We can expand the wave function as:
+$$\ket{\Psi} = \int c(x) \ket{x} dx$$
+or
+$$\ket{\Psi} = \int c(p) \ket{p} dp$$
+But we can determine the coefficients, as always, using Fourier's trick:
+$$c(x) = \braket{x|\Psi} = \Psi(x,t)$$
+and
+$$c(p) = \braket{p|\Psi} = \widetilde{\Psi}(p,t)$$
+So:
+$$\ket{\Psi} = \int \Psi(x,t) \ket{x} dx$$
+or
+$$\ket{\Psi} = \int \widetilde{\Psi}(p,t) \ket{p} dp$$
+In the case of discrete eigenvalues, we have:
+$$\ket{\Psi} = \sum_n c_n \ket{\alpha_n}$$
+and we saw that the probability of measuring value $\alpha_n$ was 
+$$P(n) = |c_n|^2 = |\braket{\alpha_n|\Psi}|^2$$
+In the continuous case we have:
+$$P(a\leq x \leq b) = \int_{a}^{b}|\Psi(x)|^2 dx = \int_{a}^{b}|\braket{x|\Psi}|^2 dx$$
+and
+$$P(a \leq p \leq b) = \int_{a}^{b}|\widetilde{\Psi}(p)|^2 dp = \int_{a}^{b}|\braket{p|\Psi}|^2 dp$$
+
+ 
+
+
+
+\section{Summary of Determinate States}
+
+The eigenfunctions of hermitian operators (observables) have the "Big Three" properties:  (1) their eigenvalues of real, (2) they can be arranged into an orthonormal basis, and (3) they are complete.
+If the spectrum is degenerate, the Gram-Schmitt procedure must be used to produce an orthonormal basis.   If the spectrum is continuous, the normal orthonormality is replaced by Dirac orthonormality.
+
+\begin{center}
+\begin{tabular}{lll}
+Property       & Discrete & Continuous \\[8pt]
+Orthonormality & $\braket{\alpha_m|\alpha_n} = \delta_{mn}$ & $\braket{\alpha|\beta} = \delta(\alpha-\beta)$ \\[8pt]
+Completeness   & $\displaystyle \ket{\Psi} = \sum_n c_n \ket{\alpha_n}$ & 
+$\displaystyle \ket{\Psi} = \int_{-\infty}^{+\infty} c(\alpha) \ket{\alpha}$\\[8pt]
+Normalization  & $\displaystyle \sum_n |c_n|^2 = 1$ & 
+$\displaystyle \int_{-\infty}^{+\infty} |c(\alpha)|^2  = 1$ \\[8pt]
+\end{tabular}
+\end{center}
+
+
+
+
+
+
+\section{Continuous and Discrete Spectra}
+
+\begin{tabular}{lll}
+Property      & Discrete & Continuous \\[8pt]
+Orthogonality & $\braket{\alpha_m|\alpha_n} = \delta_{ij}$ & $\braket{k|l} = \delta(k-l)$ \\[8pt]
+Completeness  & $\displaystyle \ket{\Psi} = \sum_n c_n \ket{\alpha_n}$ & \\[8pt]
+Normalization & $\displaystyle \sum_n |c_n|^2 = 1$ & \\[8pt]
+\end{tabular}
 
 
 
