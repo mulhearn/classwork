@@ -620,13 +620,14 @@ and
 $$P(a \leq p \leq b) = \int_{a}^{b}|\widetilde{\Psi}(p)|^2 dp = \int_{a}^{b}|\braket{p|\Psi}|^2 dp$$
 
  
-
-
-
 \section{Summary of Determinate States}
 
-The eigenfunctions of hermitian operators (observables) have the "Big Three" properties:  (1) their eigenvalues of real, (2) they can be arranged into an orthonormal basis, and (3) they are complete.
-If the spectrum is degenerate, the Gram-Schmitt procedure must be used to produce an orthonormal basis.   If the spectrum is continuous, the normal orthonormality is replaced by Dirac orthonormality.
+The eigenfunctions of hermitian operators (observables) have the ``Big
+Three'' properties: (1) their eigenvalues of real, (2) they can be
+arranged into an orthonormal basis, and (3) they are complete.  If the
+spectrum is degenerate, the Gram-Schmitt procedure must be used to
+produce an orthonormal basis.  If the spectrum is continuous, the
+normal orthonormality is replaced by Dirac orthonormality.
 
 \begin{center}
 \begin{tabular}{lll}
@@ -639,97 +640,51 @@ $\displaystyle \int_{-\infty}^{+\infty} |c(\alpha)|^2  = 1$ \\[8pt]
 \end{tabular}
 \end{center}
 
+\section{The Generalized Uncertainty Principle}
 
+\section{Commuting Observables}
 
+\section{The Energy-Time Uncertainty Principle}
 
+\section{Dirac Notation}
 
+\section{Optional:  Completeness of Eigenvectors of a Hermitian Operator in Finite Dimensions}
 
-\section{Continuous and Discrete Spectra}
-
-\begin{tabular}{lll}
-Property      & Discrete & Continuous \\[8pt]
-Orthogonality & $\braket{\alpha_m|\alpha_n} = \delta_{ij}$ & $\braket{k|l} = \delta(k-l)$ \\[8pt]
-Completeness  & $\displaystyle \ket{\Psi} = \sum_n c_n \ket{\alpha_n}$ & \\[8pt]
-Normalization & $\displaystyle \sum_n |c_n|^2 = 1$ & \\[8pt]
-\end{tabular}
-
-
-
-
-\section{The Fourier Transform Revisited}
-
-Our inner product now extends between positive and negative infinity:
-\begin{equation}
-\braket{\Psi, \phi} \equiv \int_{-\infty}^{\infty} \Psi^*(x) \phi(x) \, dx
-\end{equation}
-Our basis functions, which are now defined for any value of $k$,
-\begin{equation}
-e_k = \frac{1}{\sqrt{2\pi}} \exp(i k x)
-\end{equation}
-are still orthonormal, but the condition looks a bit different in the continuum case:
-\begin{eqnarray*}
-\braket{e_k, e_{k'}} &=& \delta(k-k')
-\end{eqnarray*}
-See the appendix for more details on the Dirac delta function $\delta(x)$, which is zero everywhere but at $x=0$, where it is infinite.  It is the continuous version of $\delta_{nm}$.
-
-Our basis functions are also still complete.  In the discrete case we have a complex Fourier coefficient for every integer $n$.   Now we have a complex Fourier coefficient for any real value of $k$.  In place of Fourier coefficients, we have instead a function of $k$ which we call the Fourier transform: $\widetilde{\Psi}(k)$.
-Instead of a sum over discrete terms, we now have to integrate over all values of $k$:
-\begin{equation} \label{eqn:ift}
-\Psi(x) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} \widetilde{\Psi}(k) \exp(ikx) \, dk.
-\end{equation}
-Just as in the discrete case, we determine the Fourier transform from the inner product:
-\begin{equation} \label{eqn:ft}
-\widetilde{\Psi}(k) = \braket{e_k, \Psi} = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} {\Psi}(x) \exp(-ikx) \, dx
-\end{equation}
-Equation~\ref{eqn:ft} is generally referred to as the {\em Fourier Transform}, while Equation~\ref{eqn:ift} is referred to as the {\em Inverse Fourier Transform}.
-
-\section{The Fourier Transform in Quantum Mechanics}
-
-So far we have been considering the Fourier transform with respect to position $x$ and wave-number $k$.  A much more useful pair of variables for Quantum Mechanics turns out to be momentum $p$ and position $x$.  To relate $p$ to $k$ we need only apply the DeBroglie relation to the wavelength in the definition of the wavenumber:
-\begin{displaymath}
-k \equiv \frac{2 \pi}{\lambda} = \frac{2 \pi p}{h} = \frac{p}{\hbar}
-\end{displaymath}
-We could therefore make the substitution $k \to p/\hbar$ (and $dk \to dp / \hbar)$) in Equations~\ref{eqn:ift} and ~\ref{eqn:ft}.  It turns out that a marginally more useful equation results if we make the normalization factors symmetric, by splitting the normalization factor of $1/\hbar$ across both equations with $1/\sqrt{\hbar}$ applied to each:
-\begin{eqnarray} 
-\Psi(x) &=& \frac{1}{\sqrt{2\pi\hbar}} \int_{-\infty}^{\infty} \widetilde{\Psi}(p) \exp(ipx/\hbar) \, dp \\
-\widetilde{\Psi}(p) &=&  \frac{1}{\sqrt{2\pi\hbar}} \int_{-\infty}^{\infty} {\Psi}(x) \exp(-ipx/\hbar) \, dx
-\end{eqnarray}
-The major benefit of this symmetric form is that the normalization of $\Psi(x)$ and $\widetilde{\Psi}(p)$ in this case turns out to be the same:
-\begin{displaymath}
-\int_{-\infty}^{\infty} |\Psi(x)|^2 dx = \int_{-\infty}^{\infty} |\widetilde{\Psi}(p)|^2 dp = 1 
-\end{displaymath}
-Because we can always calculate $\Psi(x)$ from $\widetilde{\Psi}(p)$ either one completely describes the quantum mechanical state.  We call $\widetilde{\Psi}(p)$ the momentum wave function.   Whereas $|\Psi(x)|^2$ gives us the probability density for the quanton to be at position $x$, $|\Psi(p)|^2$ gives us the probability density for the quanton to have momentum $p$.
-$$\int_{-\\infty}^{+\infty} |f(x)|^2 dx < \infty$$
-
-
-\section{Completeness of Eigenvectors of a Hermitian Operator}
-
-Here we will show that the eigenvectors of a Hermitian operator $Q$ are complete in any $n$ dimensional Hilbert space.
+{\bf This is just for fun, don't worry about this material.}  Here we
+will show that the eigenvectors of a Hermitian operator $Q$ are
+complete in any $n$ dimensional Hilbert space.
 
 It is evidently true for $n=1$.  We will assume it is true for $n-1$ and show that it is true for $n$.  The proof will follow from induction.
 
-Take any eigenvector of $\hat{Q}$ in an $n$-dimensional Hilbert space  $V$.
-$$\hat{Q}\ket{\lambda_0} = \lambda_0 \ket{\lambda_0}$$
-Now consider the subspace $S^\perp$ of all vectors perpendicular to $\ket{\lambda}$:
-$$S^\perp \equiv \{ \ket{x} \; {\rm such \; that} \; \braket{x|\lambda_0}=0 \}$$
+Take any normalized eigenvector of $\hat{Q}$ in an $n$-dimensional Hilbert space $V$ can label it by it's eigenvalue $\lambda_n$:
+$$\hat{Q}\ket{\lambda_n} = \lambda_n \ket{\lambda_n}$$
+Now consider the subspace $S^\perp$ of all vectors perpendicular to $\ket{\lambda_n}$:
+$$S^\perp \equiv \{ \ket{x} \; {\rm such \; that} \; \braket{x|\lambda_n}=0 \}$$
+The subspace $S^\perp$ has dimension $n-1$ by construction.  To see
+this, note that $S^\perp$ has dimension $n$ at most, so we can write
+any $\ket{x}$ in $S^\perp$ in terms of $n$ orthonormal basis vectors, including $\ket{\lambda_n}$
 
-The subspace $S^\perp$ has dimension $n-1$ by construction.  To see this, note that $S^\perp$ has dimension $n$ at most, so we can write any $\ket{x}$ in $S^\perp$ in terms of $n$ orthonormal basis vectors:
-$$\ket{x} = A_0 \ket{\lambda_0} + A_1 \ket{x_1} + A_2 \ket{x_2} \ldots A_{n-1} \ket{x_{n-1}}$$
+$$\ket{x} = A_n \ket{\lambda_n} + A_1 \ket{x_1} + A_2 \ket{x_2} + \ldots  + A_{n-1} \ket{x_{n-1}}$$
 but
-$$A_0 = \braket{\lambda_0|x} = 0$$
+$$A_n = \braket{\lambda_n|x} = 0$$
 so really:
 $$\ket{x} = A_1 \ket{x_1} + A_2 \ket{x_2} \ldots A_{n-1} \ket{x_{n-1}}$$
 and we see that $S^\perp$ has $n-1$ dimensions as intended.
 
 Next we'll show that the $n-1$ dimensional subspace $S^\perp$ is closed under $\hat{Q}$, so that 
 we can consider $\hat{Q}$ as a Hermitian operator in an $n-1$ dimensional space, and the induction hypothesis applies.  For $\ket{x} \in S^\perp$ we have:
-$$\braket{Qx|\lambda} = \braket{x| Q\lambda} = \lambda \braket{x|\lambda} = 0$$
+$$\braket{Qx|\lambda_n} = \braket{x| Q\lambda_n} = \lambda_n \braket{x|\lambda_n} = 0$$
 which shows that $Q\ket{x}$ is in $S^\perp$ as well.  
 
-That means $n-1$ eigenvectors of $\hat{Q}$ span the $n-1$ dimensional space by our induction hypothesis.  
-
-As the $n-1$ dimensional subspace $S^\perp$ is closed under $\hat{Q}$ 
-
+That means $n-1$ eigenvectors of $\hat{Q}$ are complete in the $n-1$
+dimensional space $S^\perp$ by our induction hypothesis, and so they
+are linearly indepdent.  Call them
+$$\{\ket{\lambda_1},\ket{\lambda_2}, \ldots, \ket{\lambda_{n-1}}\}$$
+As each is an element of $S^\perp$ they are also orthogonal to $\ket{\lambda_n}$:
+$$\braket{\lambda_i|\lambda_n} = 0, \hspace{2cm} i<n$$
+So
+$$\{\ket{\lambda_1}, \ket{\lambda_2}, \ldots, \ket{\lambda_{n-1}}, \ket{\lambda_n}\}$$
+is a set of $n$ eigenvectors of $V$, which are linearly independent, and therefore complete in $V$.
 
 \end{document}
 
