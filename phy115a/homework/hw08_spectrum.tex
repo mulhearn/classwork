@@ -1,0 +1,109 @@
+\documentclass[12pt]{article}
+
+\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.5in]{geometry}
+\usepackage{cite}
+\usepackage{slashed}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{braket}
+\usepackage[american,fulldiode]{circuitikz}
+
+\begin{document}
+\newcommand{\ihbar}{\ensuremath{i \hbar}}
+\newcommand{\dPsidt}{\ensuremath{ \frac{\partial \Psi}{\partial t} }}
+\newcommand{\dPsidx}{\ensuremath{ \frac{\partial \Psi}{\partial x} }}
+\newcommand{\ddPsidx}{\ensuremath{ \frac{\partial^2 \Psi}{\partial x^2} }}
+\newcommand{\dPssdt}{\ensuremath{ \frac{\partial \Psi^*}{\partial t} }}
+\newcommand{\dPssdx}{\ensuremath{ \frac{\partial \Psi^*}{\partial x} }}
+\newcommand{\ddPssdx}{\ensuremath{ \frac{\partial^2 \Psi^*}{\partial x^2} }}
+
+\newcommand{\dphidt}{\ensuremath{ \frac{d \phi}{dt} }}
+\newcommand{\dpsidx}{\ensuremath{ \frac{d \psi}{dx} }}
+\newcommand{\ddpsidx}{\ensuremath{ \frac{d^2 \psi}{dx^2} }}
+
+
+\date{\vspace{-5ex}}
+
+\title{Homework Assignment 8 \\ ``A spectrum of possibilities''}
+
+\maketitle
+
+\section*{Practice Problems}
+
+These problems are graded on effort only.\\
+
+\noindent
+{\bf Griffiths: P3.16, P3.32, P3.33} \\
+  
+\section*{Additional Problems}
+
+\noindent
+{\bf Problem 1:}  Suppose that an observable $\hat{Q}$ has a discrete spectrum of eigenvalues 
+$\{ \lambda_i \}$ with corresponding eigenvectors $\ket{\lambda_i}$ so that:
+$$\hat{Q} \ket{\lambda_i} = \lambda_i \ket{\lambda_i}$$
+and at $t=0$ the state vector is:
+$$\ket{\Psi_0} = \sqrt{\frac{2}{5}}\ket{\lambda_1} + i\,\sqrt{\frac{2}{5}}\ket{\lambda_2} + k\,\ket{\lambda_3}$$
+where $k$ is a positive real number.\\
+
+\noindent
+(A) What is the value of $k$?\\[8pt]
+\noindent
+(B) What is the expectation value of the observable $\hat{Q}$? (Write your answer in terms of $\lambda_1$, $\lambda_2$, and $\lambda_3$.)\\[8pt]
+\noindent
+(C) Suppose the spectrum is non-degenerate.  What is the probability that a measurement of the observable $\hat{Q}$ would result in the outcome $\lambda_1$?\\[8pt]
+\noindent
+(D) Suppose the measurement in (C) was made with outcome $\lambda_1$. What is the state vector 
+$\ket{\Psi_1}$ immediately after the measurement?\\[8pt]
+\noindent
+(E) Suppose the spectrum is degenerate with $\lambda_1 = \lambda_2$ and $\lambda_1 \neq \lambda_3$ and the state vector is $\ket{\Psi_0}$ above.  What is the probability that a measurement of the observable $\hat{Q}$ would result in the outcome $\lambda_1$?\\[8pt]
+\noindent
+(F) Suppose the measurement in (E) was made with outcome $\lambda_1$. What is the state vector 
+$\ket{\Psi_1}$ immediately after the measurement?\\[8pt]
+
+\newpage
+
+\noindent
+{\bf Problem 2:}  Suppose that an observable $\hat{Q}$ has a discrete non-degenerate spectrum of eigenvalues $\{ \lambda_i \}$ for $i=1,2,3,\ldots$ with corresponding eigenvectors $\ket{\lambda_i}$ so that:
+$$\hat{Q} \ket{\lambda_i} = \lambda_i \ket{\lambda_i}$$
+Also suppose that the Hamiltonian $\hat{H}$ has a discrete non-generate spectrum of eigenvalues 
+$\{ E_i \}$ for $i=1,2,3,\ldots$ with corresponding stationary states $\ket{E_i}$ so that:
+$$\hat{H} \ket{E_i} = E_i \ket{E_i}$$
+Last, suppose we know the inner products:
+$$\braket{E_1|\lambda_1} = a, \hspace{1cm} \braket{E_2|\lambda_1} = b, \hspace{1cm} \braket{E_i|\lambda_1} = 0 \hspace{2cm} (i>2) $$ 
+and:
+$$\braket{E_1|\lambda_2} = c, \hspace{1cm} \braket{E_2|\lambda_2} = d, \hspace{1cm} \braket{E_i|\lambda_2} = 0 \hspace{2cm} (i>2) $$ 
+\\[2pt]
+\noindent
+(A) Suppose at $t=0$, a measurement of $\hat{Q}$ has outcome $\lambda_1$.  What is the state vector at time $t=0$? (You may choose the overall phase factor to be something convenient, like 1) \\[8 pt]
+\noindent
+(B) Determine the time-dependent state vector $\ket{\Psi(t)}$ appropriate for later times.  Write your answer in terms of $a$, $b$, $E_i$, and the stationary state vectors $\ket{E_i}$. {\bf Hint:} You do not know the time-dependence of the $\ket{\lambda_i}$ but you do know the time-dependence of $\ket{E_i}$.  So write your answer from (A) in terms of $\ket{E_i}$, using Fourier's trick to determine each coefficient, then just slap on the time-dependence.\\[8pt]
+\noindent
+(C) Suppose the state vector from part (B) evolves until time $t$.  What is the probability that a measurement of $\hat{Q}$ will measure value $\lambda_2$? {\bf Hint:} use Fourier's trick!\\[8pt]
+
+\noindent
+{\bf Problem 3:}  There's a bit more integration in this problem, but the insights are totally worth it!  For a Gaussian PDF:
+$$G(y;\sigma) \equiv \frac{1}{\sigma \sqrt{2\pi}}\exp\left(-\frac{y^2}{2\sigma^2}\right)$$
+you may assume use the following Gaussian integrals without calculating them again:
+\begin{eqnarray*}
+\int_{-\infty}^{+\infty} G(y;\sigma) \, dy       &=& 1\\
+\int_{-\infty}^{+\infty} y \, G(y;\sigma) \, dy     &=& 0\\
+\int_{-\infty}^{+\infty} y^2 \, G(y; \sigma) \, dy  &=& \sigma^2\\
+\end{eqnarray*}
+Consider a stationary Gaussian wave packet:\\
+$$\psi(x) = \left( \frac{1}{2\pi \sigma_x^2}\right)^{\frac{1}{4}} \exp\left(-\frac{x^2}{4\sigma_x^2}\right)$$
+\\[5pt]
+\noindent
+(A) Using the Gaussian integrals above, confirm that $\braket{x^2} - \braket{x}^2 = \sigma_x^2$.  (If it were otherwise, the choice of parameter name $\sigma_x$ would have been very confusing!)\\[8pt]
+(B) Calculate the ``momentum space wave function'' $\widetilde{\psi}(p)$ which is the Fourier transform of $\psi(x)$ but in terms of momentum $p=\hbar k$ instead of just $k$:
+$$\widetilde{\psi}(p) \equiv \frac{1}{\sqrt{2 \pi \hbar}} \int_{-\infty}^{+\infty} \, \psi(x) \, e^{-ipx/\hbar} \, dx$$
+{\bf Hint:} use the technique of completing the square (used previously) to calculate this integral.\\[8pt]
+(C) Show that:
+$$|\widetilde{\psi}(p)|^2 = G(p;\sigma_p)$$
+for a suitable choice of $\sigma_p$.\\[8pt]
+(D) Calculate the uncertainty product $\sigma_x \sigma_p$ and compare your result to the uncertainty principle. 
+\end{document}
+
+
+
+
