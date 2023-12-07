@@ -639,12 +639,6 @@ $\displaystyle \int_{-\infty}^{+\infty} |c(\alpha)|^2  = 1$ \\[8pt]
 \end{tabular}
 \end{center}
 
-\section{The Generalized Uncertainty Principle}
-
-\section{Commuting Observables}
-
-\section{The Energy-Time Uncertainty Principle}
-
 \section{Dirac Notation}
 
 In this course, we started with position-space wave functions $\Psi(x,t)$.  We saw that the wave functions form a Hilbert space with an inner product:
@@ -669,27 +663,225 @@ But what is $\bra{\alpha}$?  It's not an operator!  An operator $\hat{O}$
 $$\hat{O} \ket{\Psi} = \ket{\Phi}$$
 acts on a vector to create a new vector, so we can say it maps a vector to a vector.  But:
 $$(\bra{\alpha}) \ket{\beta} = \braket{\alpha|\beta} \in \mathbb{C}$$
-so $\bra{\alpha}$ maps a vector to scalar.  It's a complex function (like a wave function) but takes a vector as input.  Just as our position-space wave functions were part of a Hilbert space, the $\bar{\alpha}$ are elements of a dual space.  But we don't really need to delve into those details, we need only recognize that when we multiply a member of the dual space, $\bra{\alpha}$, which we call a ``\bra''
+so $\bra{\alpha}$ maps a vector to scalar.  It's a complex function (like a wave function) but takes a vector as input.  Just as our position-space wave functions were part of a Hilbert space, the $\bar{\alpha}$ are elements of a dual space.  But we don't really need to delve into those details, we need only recognize that when we multiply a member of the dual space, $\bra{\alpha}$, which we call a ``bra''
+by an element of a the Hilbert space, $\ket{\beta}$, which we call a ``ket'', we get the inner product
+$\braket{\alpha|\beta}$, which is also called a bracket\footnote{Get it??!!  Quantum mechanics has the worst jokes!  The only one that comes close to being funny is ``In Hilbert space, no one can hear you scream.'' If you want good jokes, take Stat Mech.  Now they have some great jokes!}.
+
+It helps to see a concrete example.  In a finite dimensional Hilbert space, we can write the kets as column vectors with respect to some basis:
+$$\ket{\beta} =
+\begin{pmatrix}
+           b_{1} \\
+           b_{2} \\
+           \vdots \\
+           b_{n}
+\end{pmatrix}
+$$
+so then bras will be row vectors:
+$$\bra{\alpha} =
+\begin{pmatrix}
+a_{1}^* & a_{2}^* & \ldots & a_{n}^*\\
+\end{pmatrix}
+$$
+with inner product:
+$$
+\braket{\alpha|\beta}
+\hspace{0.5cm} = \hspace{0.5cm}
+\begin{pmatrix}
+a_{1}^* & a_{2}^* & \ldots & a_{n}^*\\
+\end{pmatrix}
+\begin{pmatrix}
+           b_{1} \\
+           b_{2} \\
+           \vdots \\
+           b_{n}
+\end{pmatrix}
+\hspace{0.5cm} = \hspace{0.5cm} a_1^* \; b_{1} + a_2^* \; b_{2} + \ldots + a_n^* \; b_{n}\\
+$$
+
+To recap we have vectors written as kets:
+$$\ket{\beta}$$
+We have dual vectors written as bras:
+$$\bra{\alpha}$$
+Inner products written as brackets:
+$$\braket{\alpha|\beta}$$
 
 
-%This makes $\bra{\alpha}$ an element of a Hilbert space, specifically, the dual of the Hilbert space of which $\ket{\alpha}$ is an element.\\[5py]
-%$\ldots$\\[5pt]
+The preliminaries behind us, let's look at a few more advanced features of the notation:
+
+\subsection{Matrix Elements}
+
+Bras and kets are now separate entities, that form an inner product when multiplied.  Consider the ket that we get by hitting the ket $\beta$ with operator $\hat{O}$:
+$$\ket{\hat{O}\beta} \equiv \hat{O} \ket{\beta}$$
+Then:
+$$\braket{\alpha|\hat{O}\beta} = \braket{\alpha|\hat{O}|\beta}$$
+So we can sandwich an operator between a bra and a ket, and it all makes perfect sense.  Here the operator $O$ acts on the ket $\ket{\beta}$ to create a new ket $\ket{O\beta}$, which when hit by the bra $\bra{\alpha}$ forms the inner product $\braket{\alpha|O\beta}$.  For reasons that will become clear below, we call this arrangement a ``matrix element''.
+
+This does raise an interesting question.  From:
+$$\braket{\alpha|\beta} = \braket{\beta|\alpha}^*$$
+we can read off that:
+$$\ket{\beta} \overset{\text{dual}}{\longleftrightarrow} \bra{\beta}$$
+But what is the dual to $\hat{O}\ket{\beta}$?  I suppse we could write:
+$$\hat{O}\ket{\beta} = \ket{\hat{O}\beta}$$
+and:
+$$\ket{O\beta} \overset{\text{dual}}{\longleftrightarrow} \bra{O\beta}$$
+but the interior of the bra and ket is just a label, so this really isn't illuminating at all!  Let's work it out a bit more carefully:
+$$\braket{\alpha|\hat{O}|\beta} = \braket{\alpha|\hat{O}\beta} = \braket{\hat{O}^\dagger\alpha|\beta}
+= \braket{\beta | \hat{O}^\dagger\alpha}^* = \braket{\beta | \hat{O}^\dagger | \alpha}^*$$
+from which\footnote{This is one of the things that drives mathematicians crazy about the Dirac notation... since the interior is just a label, we are just changing labels around here.  It's a valid criticism, but we are using well-chosen labels!} we read off:
+$$\hat{O}\ket{\beta} \overset{\text{dual}}{\longleftrightarrow} \bra{\beta} \hat{O}^\dagger$$
+For a hermitian operator $\hat{Q}$ we have:
+$$\hat{Q}\ket{\beta} \overset{\text{dual}}{\longleftrightarrow} \bra{\beta} \hat{Q}$$
+so Hermitian operators can act to either the left or the right when sandwiched in a braket.
 
 
+\subsection{Outer Products and Inserting Complete Sets}
 
+We have one more interesting shape to consider, which we call an ``outer product'':
+$$\ket{\alpha}\bra{\beta}$$
+This is an operator, which we can see by hitting a ket with it:
+$$(\ket{\alpha}\bra{\beta}) \ket{\Psi} = (\braket{\beta|\Psi}) \; \ket{\alpha}$$
+which has the form:
+$$\hat{O} \ket{\Psi} = \ket{\Phi}$$
+The outer product is the killer feature of Dirac notation.  Let's see why.  We already have a super compact notation for orthonormality using the Kroenecker delta:
+$$\braket{\lambda_n | \lambda_m} = \delta_{nm}$$
+With the Dirac notation, we also have a compact way to express completeness:
+$$\sum_n \ket{n}\bra{n} = 1$$
+Let's see how this works:
+$$\ket{\Psi} = 1 \, \ket{\Psi} = \left( \sum_n \ket{n}\bra{n} \right) \ket{\Psi}
+= \sum_n \braket{n|\Psi} \ket{n} = \sum_n c_n \ket{n}
+$$
+where:
+$$c_n = \braket{n | \Psi}$$
+evidently, our notation knows Fourier's trick!  For continuous eigenvalues, orthonormality becomes:
+$$\braket{k|l} = \delta(k-l)$$
+and completeness is:
+$$\int \ket{k} \bra{k} dk = 1$$
+For example, the position eigenvectors:
+$$\int \ket{x} \bra{x} dx = 1$$
+and the momentum eigenvectors:
+$$\int \ket{p} \bra{p} dx = 1$$
+We now live in the Hilbert space where the state is represented by a ket $\Psi$ that is more general than the position space, wave function, but our notation knows how to calculate inner products in terms of the position wave functions:
+$$\braket{\Psi | \Phi} = \bra{\Psi}\left( 1 \right) \ket{\Phi}
+= \bra{\Psi}\left( \int \ket{x} \bra{x} dx \right) \ket{\Phi}
+= \int \braket{\Psi | x} \braket{x | \Phi} \, dx
+= \int \Psi^*(x) \, \Phi(x) \, dx
+$$
+I find it almost magical!
 
+\subsection{Fourier Space}
 
+We can calculate:
+\begin{eqnarray*}
+  \braket{p|\Psi} &=& \braket{p|\left( \int \ket{x} \bra{x} dx \right)|\Psi} \\
+  &=& \int \braket{p|x} \braket{x|\Psi} dx \\
+  &=& \int \braket{x|p}^* \braket{x|\Psi} dx \\
+\end{eqnarray*}
+But $\braket{x|p}$ is just the wave function of the eigenvectors of the momentum operators, which we found previously were just the free particle wave functions:
+$$\braket{x|p} = \Psi_p(x) = \frac{1}{\sqrt{2\pi \hbar}} \exp(ipx/\hbar)$$
+So we have:
+\begin{eqnarray*}
+  \braket{p|\Psi} &=& \int \Psi^*_p(x) \Psi(x) dx \\
+  \widetilde{\Psi}(p) &=& \frac{1}{\sqrt{2\pi\hbar}}\int \exp(-ipx/\hbar) \, \Psi(x) \, dx \\
+\end{eqnarray*}
+So evidently our notation knows the Fourier transform.  Similarly:
+\begin{eqnarray*}
+  \braket{x|\Psi} &=& \braket{x|\left( \int \ket{p} \bra{p} dp \right)|\Psi} \\
+  &=& \int \braket{x|p} \braket{p|\Psi} dx \\
+  &=& \int \Psi^*_p(x) \widetilde{\Psi}(p) dp \\
+  \Psi(x) &=& \frac{1}{\sqrt{2\pi\hbar}}\int \exp(ipx/\hbar) \, \widetilde{\Psi}(p) \, dx \\
+\end{eqnarray*}
+So our notation knows the inverse Fourier transform as well.
 
+In the homework, you will use the Dirac notation to prove the Parseval-Plancherel identity:
+$$\int_{-\infty}^{+\infty} |\Psi(x)|^2 \, dx \; = \; \int_{-\infty}^{+\infty} |\widetilde{\Psi}(p)|^2 \, dp$$
 
+\subsection{Basis Vectors, Operators, and Matrix Elements}
 
+The state vector $\ket{\Psi}$ can now be represented in a number of different, ways, which we can obtain by inserting a complete set:
+\begin{itemize}
+\item of eigenvectors of the position operator:
+ $$\ket{\Psi} = \int \ket{x}\braket{x|\Psi} dx = \int \Psi(x) \ket{x} dx $$
+\item of eigenvectors of the momentum operator:
+  $$\ket{\Psi} = \int \ket{p}\braket{p|\Psi} dp = \int \widetilde{\Psi}(p) \ket{p} dp $$
+\item any complete set of orthonormal eigenvectors with discrete eigenvalues:
+ $$\ket{\Psi} = \sum_n \ket{n}\braket{n|\Psi} = \sum_n c_n \ket{n}$$
+\end{itemize}
+We say that $\ket{\Psi}$ can be represented by it's components in a particular basis.
 
+We can also represent operators in a particular basis, for example, consider calculating:
+\begin{eqnarray*}
+ \braket{\alpha|\hat{Q}\beta} &=& \braket{\alpha|Q|\beta}\\
+ &=& \braket{\alpha|\left( \sum_m \ket{m}\bra{m} \right) Q \left( \sum_n \ket{n}\bra{n} \right) |\beta}\\
+ &=& \sum_{m,n} \braket{\alpha|m} \braket{m | Q | n}  \braket{n|\beta}\\
+\end{eqnarray*}
+Defining:
+$$a_m = \braket{m|\alpha} \hspace{2cm} b_m = \braket{m|\beta}$$
+We could write this, for a finite dimensional Hilbert space, as:
+$$
+\begin{pmatrix}
+a_{1}^* & a_{2}^* & \ldots & a_{n}^*\\
+\end{pmatrix}
+\begin{pmatrix}
+           Q_{11} & Q_{12} & \ldots & Q_{1N} \\
+           Q_{21} & Q_{22} &        &        \\
+           \vdots &        & \ddots &        \\
+           Q_{N1} &        &        & Q_{NN} \\    
+\end{pmatrix}
+\begin{pmatrix}
+           b_{1} \\
+           b_{2} \\
+           \vdots \\
+           b_{n}
+\end{pmatrix}
+$$
+where:
+$$Q_{m,n} \equiv \braket{m|Q|n}$$
+are the ``matrix elements'' of $\hat{Q}$.
 
+\subsection{Matrix Elements of the position and momentum operator}
 
+Consider the position operator $\hat{x}$.  We know that:
+$$\hat{x} \ket{x} = x \ket{x}$$
+and, because it is Hermitian, also:
+$$\bra{x} \hat{x} = \bar{x} x$$
+So we have:
+$$\braket{x|\hat{x}|\Psi} = x \braket{x|\Psi}$$
+which is how we write:
+$$\hat{x} \Psi(x) = x \Psi(x)$$
+in the Dirac notation.  But what about the momentum basis?  
+\begin{eqnarray*}
+\braket{p|\hat{x}|\Psi} &=& \braket{p|\left( \int \ket{x}\bra{x}dx \right)\hat{x}|\Psi} \\
+&=& \int \braket{p|x}\braket{x|\hat{x}|\Psi} dx\\
+&=& \int \braket{p|x}x\braket{x|\Psi} dx\\
+&=& \int (x\braket{p|x})\braket{x|\Psi} dx\\
+\end{eqnarray*}
+To make progress, we'd like to find a way to replace the $x$ in $x\braket{p|x}$ as something we can pull outside of the integral.  Working it out:
+\begin{eqnarray*}
+  x \braket{p|x} &=& x \braket{x|p}^* = x \Psi_p^*(x) \\
+  &=& \frac{x}{\sqrt{2\pi\hbar}} \; \exp(-ipx/\hbar)\\
+  &=& \frac{1}{\sqrt{2\pi\hbar}} i\hbar\frac{\partial}{\partial p} \exp(-ipx/\hbar)\\
+  &=& i\hbar\frac{\partial}{\partial p} \braket{p|x}\\
+\end{eqnarray*}
+So returning to our original matrix element we have now:
+\begin{eqnarray*}
+ \braket{p|\hat{x}|\Psi} &=& i\hbar\frac{\partial}{\partial p} \int \braket{p|x}\braket{x|\Psi} dx\\
+&=& i\hbar \frac{\partial}{\partial p} \braket{p|\Psi}
+\end{eqnarray*}
+Which says that:
+$$\hat{x} \; \widetilde{\Psi}(p) = i \hbar \frac{\partial}{\partial p} \; \widetilde{\Psi}(p) $$
 
+So while in the position-space basis we have been using, all along:
+$$\hat{x} \longrightarrow x$$
+and:
+$$\hat{p} \longrightarrow i\hbar\frac{\partial}{\partial x}$$
+We now see that this is just one possible representation.  In the momentum basis:
+$$\hat{x} \longrightarrow i\hbar \frac{\partial}{\partial p} $$
+and (left as an exercise):
+$$\hat{p} \longrightarrow p$$
 
+\subsection{Closing Thoughts on the Dirac Notation}
 
-
-
+In quantum mechanics, we are constantly switching between different bases.  If we want to know the time evolution of the state, we need to know the wave function in the basis of the stationary states.  If we want to predict (probabilistically) the outcome of a measurement, we need to to know the wave function in the basis of the eigenvectors of the observable corresponding to that measurement.  As a result, we are constantly changing from one basis to another.  The Dirac notation makes it easy (by inserting complete sets) to change from one basis to another.  That is the main reason why it is such a useful notation.  The fact that it is also quite beautiful is just a bonus!
 
 \section{Optional:  Completeness of Eigenvectors of a Hermitian Operator in Finite Dimensions}
 
