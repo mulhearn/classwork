@@ -71,8 +71,7 @@ we don't need to consider that case.  And since:
 $$\sin(-k\,x+\omega \, t) = -\sin(k\,x-\omega \, t)$$
 and we don't care about the amplitude of the function yet, we can ignore that as well.  That only leaves one additional possibility to consider:
 $$\Psi_4(x,t) = \exp(-ikx + i\omega t)$$
-
-It seems like we could use any of these four options, but let's see what happens when we try to construct a standing wave by adding am equal mixture of right traveling and left traveling waves.  To switch to a left traveling wave, we just put:
+It seems like we could use any of these four options, but let's see what happens when we try to construct a standing wave by adding an equal mixture of right traveling and left traveling waves.  To switch to a left traveling wave, we just put:
 $$k \to -k$$
 Our standing wave using $\Psi_1$ is:
 $$\Psi(x) = \cos(k\,x-\omega \, t) + \cos(-k\,x-\omega \, t)$$
@@ -647,6 +646,50 @@ $\displaystyle \int_{-\infty}^{+\infty} |c(\alpha)|^2  = 1$ \\[8pt]
 \section{The Energy-Time Uncertainty Principle}
 
 \section{Dirac Notation}
+
+In this course, we started with position-space wave functions $\Psi(x,t)$.  We saw that the wave functions form a Hilbert space with an inner product:
+$$\braket{f|\Psi} = \int_{-\infty}^{+\infty} f^*(x,t) \, \Psi(x,t) \, dx$$
+More recently, we've come to associate the position-space wave function with a state vector:
+$$\ket{\Psi}$$
+with:
+$$\Psi(x,t) = \braket{x|\Psi(t)}$$
+That is, the value of the wave function at value $x$ is the inner product of the state vector 
+$\ket{\Psi(t)}$ with the eigenvectors of position $\ket{x}$.  The state $\ket{\Psi(t)}$ is more general than the position-space wave function, because, e.g. the state of the system can be equally well expressed by a momentum-space wave function:
+$$\widetilde{\Psi}(p,t) = \braket{p|\Psi(t)}$$
+
+We are going to drop the explicit time dependence in what follows (because there is more than enough going on already) and write:
+$$\Psi(x) = \braket{x|\Psi}$$
+it follows that:
+$$\Psi^*(x) = \braket{\Psi|x}$$
+While $\Psi(x)$ and $\Psi^*(x)$ are connected via complex conjugation:
+$$\Psi(x) \overset{\text{CC}}{\longleftrightarrow} \Psi^*(x)$$
+we should also have some connection (to be defined) between $\ket{\Psi}$ and $\bra{\Psi}$:
+$$\ket{\Psi} \overset{\text{dual}}{\longleftrightarrow} \bra{\Psi}$$
+But what is $\bra{\alpha}$?  It's not an operator!  An operator $\hat{O}$
+$$\hat{O} \ket{\Psi} = \ket{\Phi}$$
+acts on a vector to create a new vector, so we can say it maps a vector to a vector.  But:
+$$(\bra{\alpha}) \ket{\beta} = \braket{\alpha|\beta} \in \mathbb{C}$$
+so $\bra{\alpha}$ maps a vector to scalar.  It's a complex function (like a wave function) but takes a vector as input.  Just as our position-space wave functions were part of a Hilbert space, the $\bar{\alpha}$ are elements of a dual space.  But we don't really need to delve into those details, we need only recognize that when we multiply a member of the dual space, $\bra{\alpha}$, which we call a ``\bra''
+
+
+%This makes $\bra{\alpha}$ an element of a Hilbert space, specifically, the dual of the Hilbert space of which $\ket{\alpha}$ is an element.\\[5py]
+%$\ldots$\\[5pt]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \section{Optional:  Completeness of Eigenvectors of a Hermitian Operator in Finite Dimensions}
 
