@@ -1,0 +1,109 @@
+\documentclass[12pt]{article}
+
+
+\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.5in]{geometry}
+\usepackage{cite}
+\usepackage{slashed}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{braket}
+\usepackage[american,fulldiode]{circuitikz}
+
+\begin{document}
+\newcommand{\ihbar}{\ensuremath{i \hbar}}
+\newcommand{\dPsidt}{\ensuremath{ \frac{\partial \Psi}{\partial t} }}
+\newcommand{\dPsidx}{\ensuremath{ \frac{\partial \Psi}{\partial x} }}
+\newcommand{\ddPsidx}{\ensuremath{ \frac{\partial^2 \Psi}{\partial x^2} }}
+\newcommand{\dPssdt}{\ensuremath{ \frac{\partial \Psi^*}{\partial t} }}
+\newcommand{\dPssdx}{\ensuremath{ \frac{\partial \Psi^*}{\partial x} }}
+\newcommand{\ddPssdx}{\ensuremath{ \frac{\partial^2 \Psi^*}{\partial x^2} }}
+
+\newcommand{\dphidt}{\ensuremath{ \frac{d \phi}{dt} }}
+\newcommand{\dpsidx}{\ensuremath{ \frac{d \psi}{dx} }}
+\newcommand{\ddpsidx}{\ensuremath{ \frac{d^2 \psi}{dx^2} }}
+
+
+\date{\vspace{-5ex}}
+
+\title{Practice Problems for Final Exam (Volume 1)}
+
+\maketitle
+
+This is not a practice final.  These are practice problems to help you prepare for the final.  You should add to this the homework problems, as well as the midterm exam problems (which will be posted with solutions).  If I have time, I will add a few more problems, but this should get you off to a good start!\\[5pt]
+
+\noindent
+{\bf Problem 1:}
+In what follows $\hat{A}$ is an operator with no other specified properties.  Indicate whether each of the following operators are hermitian ($\hat{O}=\hat{O}^\dagger$), anti-hermitian ($\hat{O}=-\hat{O}^\dagger$), or neither.\\[5pt]
+(A) $\hat{p}$ \\[5pt]
+(B) $i \hat{x}$ \\[5pt]
+(C) The operator corresponding to an observable. \\[5pt]
+(D) $\hat{A} + \hat{A}^\dagger$ \\[5pt] 
+(E) $\hat{x} \hat{p}$\\[5pt]
+
+\noindent
+{\bf Problem 2:}
+The eigenvectors of the Hamiltonian $\hat{H}$ for a system are labeled $\ket{E_i}$ with:
+$$\hat{H} \ket{E_i} = E_i \ket{E_i}$$
+At t=0, the state vector of a system is:
+$$\ket{\Psi(0)} = A((1+i)\ket{E_1} + (1-i)\ket{E_2})$$
+Where $A$ is positive and real.  Determine the following (no work needed):\\[5pt]
+(A) The quantity $A$ as a numerical value.\\[5pt]
+(B) The probability of measuring the total energy at $t=0$ as $E_1$ as a numerical value.\\[5pt]
+(C) The expectation value of for the total energy $E$ as numerical values and factors of $E_1$ and $E_2$\\[5pt]
+(D) The time dependent state vector $\ket{\Psi(t)}$\\[5pt]
+
+
+\noindent
+{\bf Problem 3:} 
+Suppose an exotic new material has a dispersion relation:
+$$\omega(k) = C k^3$$
+for some constant $C$.\\[5pt]
+(A) What are the dimensions of the constant $C$?\\[5pt]
+(B) What is the phase velocity of wave with wave number $k_0$?\\[5pt]
+(C) What is the group velocity of a wave packet centered around wave number $k_0$?\\[5pt]
+
+
+\noindent
+{\bf Problem 4:}
+A particle is in an infinite square well potential of width $b$ for which we know that the allowed energies are:
+$$E_n = \frac{n^2 \pi^2 \hbar^2}{2mb^2} \equiv E_1 \, n^2$$
+for
+$$n=1,2,3,4,\ldots$$
+and the orthonormal stationary states are:
+$$
+\psi_n(x) = 
+\begin{cases}    
+   {\displaystyle \sqrt{\frac{2}{b}}\sin(k_n x)} & 0 {\displaystyle \leq x \leq b} \\[8pt]
+   0 & {\rm otherwise} \\
+\end{cases}   
+$$
+where
+\begin{eqnarray*}
+k_n&=&\frac{n\pi}{b}
+\end{eqnarray*}
+At time $t=0$, the particle is in a state where the wave function within the square well is:
+$$\Psi(x,0) = A\left( \sin\left(\frac{\pi x}{b}\right) + 2i \sin\left(\frac{2 \pi x}{b}\right) \right)$$
+where $A$ is a positive real constant.  {\bf DO NOT COMPUTE ANY INTEGRALS TO SOLVE THIS PROBLEM.}\\[5pt]
+
+\noindent
+(A) What is the value of the constant $A$ which correctly normalizes $\Psi(x,0)$? (Answer with a numerical value)\\[8pt]
+(B) What is the probability that a measurement of the particles total energy at $t=0$ would yield the value $E_1$? (Answer with a numerical value)\\[8pt]
+(B) What is the probability that a measurement of the particles total energy at $t=0$ would yield the value $4\,E_1$? (Answer with a numerical value)\\[8pt]
+(C) What is the probability that a measurement of the particles total energy at $t=0$ would yield the value $9\,E_1$? (Answer with a numerical value)\\[8pt]
+(D) What is the expectation value for the total energy at $t=0$?  (Answer with a numerical value times a factor of $E_1$)\\[8pt]
+(E) Write down the time-dependent wave function $\Psi(x,t)$.\\[8pt]
+(F) What is the expectation value for the total energy at time $t$?  (Answer with a numerical value times a factor of $E_1$)\\[8pt]
+
+
+\noindent
+{\bf Problem 5:}  Suppose that an observable $\hat{Q}$ has a discrete non-degenerate spectrum with eigenvalues$\{\lambda_n\}$, with corresponding eigenvectors $\lambda_{n}$.  Suppose:
+$$\ket{\Psi} = \sum_n c_n \ket{\lambda_n}$$
+Show explicitly that Fourier's trick correctly determines the coefficients $c_n$.
+
+
+\end{document}
+
+
+
+

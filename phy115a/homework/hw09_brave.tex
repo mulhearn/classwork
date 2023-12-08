@@ -73,10 +73,10 @@ where $\ket{\lambda_n}$ is a properly normalized eigenvector of an observable $\
 
 \noindent
 {\bf Problem 3:} Suppose that the properly-normalized state vector at $t=0$ is:
-$$\ket{\Psi} = C \left( \ket{a_1} + \ket{a_2} \right)$$
+$$\ket{\Psi} = C \left( \ket{a_1} + i\ket{a_2} \right)$$
 where $C$ is a positive real constant and $\ket{a_n}$ is a properly normalized eigenvector of an observable $\hat{A}$ with eigenvalue $a_n$.  Assume $\hat{A}$ has a non-degenerate discrete spectrum (with $n=1,2,3,\ldots$). Further suppose the spectrum of the Hamiltonian is discrete and non-degenerate with eigenvalues $\{E_i\}$ and properly normalized eigenvectors $\ket{E_i}$.  Suppose we can write:
-$$\ket{E_1} = \frac{1}{\sqrt{2}} \ket{a_1} + \frac{i}{\sqrt{2}} \ket{a_2}$$
-$$\ket{E_2} = -\frac{i}{\sqrt{2}} \ket{a_1} + \frac{1}{\sqrt{2}} \ket{a_2}$$
+$$\ket{E_1} = \frac{1}{\sqrt{2}} \ket{a_1} + \frac{1}{\sqrt{2}} \ket{a_2}$$
+$$\ket{E_2} = -\frac{i}{\sqrt{2}} \ket{a_1} + \frac{i}{\sqrt{2}} \ket{a_2}$$
 Do not leave an explicit dependence on $C$ in any your answers below (i.e. solve for $C$).\\[5pt]
 
 \noindent
@@ -97,16 +97,16 @@ $$1 = \sum_i \ket{E_i}\bra{E_i}$$
 and using your results from A-D.\\[5pt]
 
 \noindent
-(F) What is the expectation value for the observable $\hat{A}$?\\[5pt]
+(F) What is the expectation value for the observable $\hat{A}$ at $t=0$?\\[5pt]
 
 \noindent
 (G) What is the expectation value for the total energy?\\[5pt]
 
 \noindent
-(H) Write the time-dependent state vector $\ket{\Psi(t)}$?\\[5pt]
+(H) Write down the time-dependent state vector $\ket{\Psi(t)}$.\\[5pt]
 
 \noindent
-(I) Write the time-dependent wave function $\Psi(x,t)$ in terms of the wave functions of the stationary states:
+(I) Deterimine the time-dependent wave function $\Psi(x,t)$ in terms of the wave functions of the stationary states:
 $$\Psi_{i}(x) \equiv \braket{x|E_i}$$\\[5pt]
 You must start from your answer in (H) and explicitly use the Dirac notation to determine the wave function $\Psi(x,t)$.
 
@@ -119,7 +119,7 @@ shows that if a position-space wave function $\Psi(x)$ is normalized, then so is
 
 \noindent
 (A) Derive the Parseval-Plancherel identity by explicit integration.  {\bf Hint:  } start with the LHS and write out $\Psi(x)$ and $\Psi^*(x)$ in terms of their Fourier transforms.  Make sure you use two different dummy variables for the integral over momentum (e.g. dq and dp) .  At this point, you should have {\bf three} integrals: $dx$,$dp$, and $dq$.  Look carefully and note that only two factors involve $x$.  Move the integral $dx$ to include just those factors, and use the orthogonality of the complex exponentials:
-$$\frac{1}{2\pi\hbar}\int_{-\infty}^{+\infty} \exp((q-p)x/\hbar) \, dx = \delta(q-p)$$
+$$\frac{1}{2\pi\hbar}\int_{-\infty}^{+\infty} \exp(i(q-p)x/\hbar) \, dx = \delta(q-p)$$
 This kills the integral over $dx$, then use the resulting $\delta$-function to kill the integral of dq.\\[5pt]
 
 \noindent
