@@ -11,6 +11,7 @@
 \usepackage{capt-of}
 \usepackage{amsmath}
 \usepackage{cite}
+\usepackage{lineno}
 \usepackage[hyperfootnotes=false,hidelinks]{hyperref}
 \usepackage[shortlabels]{enumitem}
 \newcommand{\tcr}{\textcolor{red}}
@@ -23,6 +24,10 @@
 \ctikzset{bipoles/thickness=1}
 \ctikzset{bipoles/length=.6cm}
 
+% DRAFT ONLY:
+\linenumbers
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -32,7 +37,9 @@
 
 \maketitle
 
+\newpage
 \section{Overview of the major}
+\label{sec:overview}
 
 {\bf Questions: What are the Program Learning Outcomes identified for this major? What is the role of this major in undergraduate education on the campus, i.e., how does the major contribute to the undergraduate educational mission of the campus? Is the major clearly distinguished from other similar majors on campus?}\\[3pt]
 
@@ -40,23 +47,24 @@
 %{\it {\color{red} Refer to the catalog description of the major and the other majors reviewed in the same cluster (Appendi%x A). Describe any inaccuracies in the catalog description and explain plans for correcting them. Identify the other majors% in the cluster that are most similar to yours and explain how your major differs from them.}}\\[3pt]
 
 \noindent
-The physics major plays a vital role in the undergraduate education
-mission of the campus.  Ours is an ancient discipline, and much of the
-undergraduate program is spent learning theoretical physics from a
-hundred years ago or more.  Yet these ideas and concepts remain highly
-potent in the modern world and are equally challenging and rewarding
-to master.  While studying fundamental physics concepts, our students
-are exposed to the latest cutting-edge research and concepts
-concerning the physics of the small (nuclear processes, atomic
-structure, particle searches, and cellular processes) and the large
-(dark matter, dark energy, cosmology).  Our majors are trained in the
-techniques of experimental physics, and we have recently dramatically
-expanded our training in computational physics.
+The Department of Physics and Astronomy, and our majors, play a vital
+role in the undergraduate education mission of the campus.  Ours is an
+ancient discipline, and much of the undergraduate program is spent
+learning theoretical and experimental physics from a hundred years ago
+or more.  Yet these ideas and concepts remain highly potent in the
+modern world, and equally challenging and rewarding to master.  While
+studying fundamental physics concepts, our students are exposed to the
+latest cutting-edge research and concepts concerning the physics of
+the small (nuclear processes, atomic structure, particle searches, and
+cellular processes) and the large (dark matter, dark energy,
+cosmology).  Our majors are trained in the techniques of experimental
+physics, and we have recently dramatically expanded our training in
+computational physics.
 
 We are in the process of updating our undergraduate curriculum, as
 described below.  The catalog description of the major provides an
 accurate overview of the program, and the proposed undergraduate
-curriculum update includes updates to the catalog to maintain its
+curriculum update includes changes to the catalog to maintain its
 accuracy under the new program.
 
 Our department is distinguished from other departments in the cluster
@@ -69,14 +77,14 @@ objectives specific to our major are described in detail below.\\[3pt]
 \noindent
 {\bf Undergraduate Curriculum Update (UCU):}
 The physics department, led by the undergraduate curriculum committee,
-has been developing over the past five years on an update to the
+has been developing over the past five years an update to the
 undergraduate physics curriculum.  The proposal was subjected to an
 extensive vetting process that involved assigned department readers
 who were not involved in formulating the initial plan.  The proposal
 was unanimously supported by the department in a December 2021 vote.
 All new and modified courses have been approved in the UC Davis
 Integrated Curriculum Management System (ICMS).  We are working toward
-final approval, by campus, of proposal during AY 2023-2024.
+final approval, by campus, of the proposal during AY 2023-2024.
 
 The proposed changes to our program reflect three main observations about our current program: 
 \begin{itemize}
@@ -94,22 +102,23 @@ There are many other aims of the update, but these are the primary motivations.
 {\bf The proposed undergraduate curriculum update will be widely
   referenced throughout this document by the acronym UCU.}  The
 proposal itself is far too ponderous of a document to include as an
-appendix to this document.  It will be provided as a stand-alone file.
+appendix here.  It will be provided as a stand-alone file.
 The latest version of the proposal is also available for download
 online\footnote{See
-  \href{https://github.com/mulhearn/classwork/blob/main/curriculum/curriculum.pdf}{https://github.com/mulhearn/classwork/blob/main/curriculum/curriculum.pdf}
-  and use the download option to view the entire document from the
-  pull down menu to view the entire document.}.\\[3pt]
+  \href{https://github.com/mulhearn/classwork/blob/main/curriculum/curriculum.pdf}{https://github.com/mulhearn/classwork/blob/main/curriculum/curriculum.pdf (click for link)}
+  and use the download option from the pull down menu to view the entire document.}.\\[3pt]
 
 \noindent
-{\bf Program Learning Objectives:} Although we did not use the
-specific term program learning objectives (PLOs) in that document,
-these objectives were carefully considered as part of the development
-of the UCU (see Sections 4-6 in particular).
+{\bf Program Learning Objectives (PLOs)}: Although we did not use the
+specific term PLO\footnote{We prefer to use the word objectives over
+outcomes, as outcomes could be accident al, whereas objectives are
+intentional.  Fortunately, they both have have the same acronym.} in
+that document, these objectives were carefully considered as part of
+the development of the UCU (see Sections 4-6 in particular).
 
 There are a number of objectives that are both widely applicable and
 central to the discipline of physics, most of which are reinforced in
-nearly every physics course that a physics major  takes:
+nearly every physics course that our majors take:
 \begin{itemize}
  \item Using logic and analytic reasoning to make predictions.
  \item Applying general principles (e.g. conservation of energy, symmetry) in specific situations. 
@@ -117,7 +126,7 @@ nearly every physics course that a physics major  takes:
  \item Dividing complex problems into manageable steps.
  \item Establishing feedback to determine if something is working or not.
 \end{itemize}  
-The next set of objectives are related to mathematical preparation:
+The next set of objectives is related to mathematical preparation:
 \begin{itemize}
 \item Understand the theory and practical application of differential, integral, and vector calculus, linear algebra, ordinary and partial differential equations.  (MAT 21ABCD, 22AB, and PHY 104A.)
 \end{itemize}
@@ -139,18 +148,22 @@ While these concepts are first introduced in those courses, they are continuousl
 A major focus of the curriculum update has been to devote more coursework to computational physics.
 \begin{itemize}
  \item Develop programming skills sufficient for tackling problems from computational physics (PHY 40,45)
- \item Apply the techniques of computational physics to problems from theoretical physics (PHY 110L, PHY 112L, 115L).
+ \item Apply the techniques of computational physics to problems from theoretical physics (PHY 110L, 112L, 115L).
 \end{itemize}
-The next set of objectives are related to experimental physics:
+Our current programming toolset includes Python (first encountered in
+PHY 40) and C/C++ (first encountered in PHY 45) but these may tools
+may evolve over time.  The next set of objectives are related to
+experimental physics:
 \begin{itemize}
- \item Learn how to conduct and report scientific experiments (PHY 80,117,118,122A/B)
- \item Gain practical hands-on knowledge of lab equipment, electronics, and technical trouble-shooting (PHY 80,117,118,122A/B
+ \item Learn how to conduct and report scientific experiments (PHY 80, 117, 118, 122A/B, 157).
+ \item Gain practical hands-on knowledge of lab equipment, electronics, and technical trouble-shooting (PHY 80, 117, 118, 122A/B, 157).
 \end{itemize}
-The objectives is for student to apply what they have learned previously to advanced specialized topics such as nuclear physics, particle physics, condensed matter, and astronomy.  We refer to these courses as capstone courses:
+The objective is for students to apply what they have learned previously to advanced specialized topics such as nuclear physics, particle physics, condensed matter, and astronomy.  We refer to these courses as capstone courses:
 \begin{itemize}
- \item Demonstrate mastery of physics by applying it to advanced topics (PHY 129AB, 130AB, 140AB, 151-155)
+ \item Demonstrate mastery of physics by applying it to advanced topics (PHY 129AB, 130AB, 140AB, 151-158).
 \end{itemize}
 
+\newpage
 \section{Outcome of Previous Program Review}
 \label{sec:previous}
 
@@ -174,19 +187,20 @@ weaknesses:
   funding available for renovations is limited.  Fortunately, we have
   received vigorous support from campus with several sizable grants
   for both equipment and renovations, for which we are deeply
-  appreciative.  This issue is discussed in more detail below (Section~\ref{sec:instruction})
+  appreciative.  This issue is discussed in more detail below (Section~\ref{sec:instruction}).
   
 \item {\bf Transfer Student Readiness:} the review team was concerned
-  that a large fraction of incoming transfer students were not
-  prepared for a physics major, and were dropping out or changing
-  major at a high rate.  Following the recommendations of the review
-  team and committee, we began selective major review in time for
-  academic year (AY) 2021-2022.  The department has since seen a
-  substantial drop in transfer enrollment at a level that we find
-  potentially troubling, if it persists.  This is discussed in more
-  detail below (Section~\ref{sec:students}: Students in the major).
-  {\bf Improving the experience for incoming transfer students was a major
-  focus of the UCU.}
+  that many incoming transfer students were not prepared for a physics
+  major, and were dropping out or changing major at a high rate.
+  Following the recommendations of the review team and committee, we
+  began selective major review in time for academic year (AY)
+  2021-2022.  The department has since seen a substantial drop in
+  transfer enrollment at a level that we find potentially troubling,
+  if it persists.  This is discussed in more detail below
+  (Section~\ref{sec:students}: Students in the major).  {\bf Improving
+    the experience for incoming transfer students was a major focus of
+    the UCU.}  By ensuring transfer students are retained, we hope to
+  mitigate the loss of initial enrollment.
 
 \item {\bf Computational Instruction:} The review team noted that
   programming coursework students were taking outside of the
@@ -199,25 +213,37 @@ weaknesses:
   
 \item {\bf Academic Advising:} The review team noted low satisfaction
   with campus and department advising.  In this report, we note that
-  student satisfaction with advising has improved, most noticeably with
-  respect to faculty advising.  The likely contributions to this
-  improvement, as well as some lingering concerns, are described below
-  (Section~\ref{sec:perceptions}: Student perceptions of the major).
+  student satisfaction with advising has improved.  The likely
+  contributions to this improvement, as well as some lingering
+  concerns, are described below (Section~\ref{sec:perceptions}:
+  Student perceptions of the major).  The size of our undergraduate
+  program has increased by $50\%$, but we still have only one
+  undergraduate advisor.
 
 \item {\bf PHY 122: Advanced Physics Laboratory} the review team was
   concerned that students were generally poorly prepared for this
   upper division lab course.  Following the recommendations of the
-  committee, we have introduced a new course (PHY 80: Experimental Techniques) as a prerequisite for PHY 122.  {\bf As part of the UCU, PHY 80 is now a required course for all physics majors (not just those taking PHY 122).}  This is discussed in more detail below (Section~\ref{sec:snws}: Major strengths and weaknesses)
+  committee, we have introduced a new course (PHY 80: Experimental
+  Techniques) as a prerequisite for PHY 122.  {\bf As part of the UCU,
+    PHY 80 is now a required course for all physics majors (not just
+    those taking PHY 122).}  This is discussed in more detail below
+  (Section~\ref{sec:snws}: Major strengths and weaknesses)
   
-\item {\bf PHY 157:}
-  The review team noted that demand for PHY 157 is greater than it's
-  capacity.  Regrettably, and despite diligent effort by Prof. Tucker Jones in particular, we have struggled to  maintain the same level of throughput in this course, due to the retirement of the previous instructor.  The practical challenges here and future plans are discussed below (Section~\ref{sec:snws}: Major strengths and weaknesses)
+\item {\bf PHY 157:} The review team noted that demand for PHY 157 is
+  greater than it's capacity.  Regrettably, and despite diligent
+  effort by Prof. Tucker Jones in particular, we have struggled to
+  maintain the same level of throughput in this course, due to the
+  retirement of the previous instructor.  The practical challenges
+  here and future plans are discussed below (Section~\ref{sec:snws}:
+  Major strengths and weaknesses)
 
 \item {\bf Communication Skills:} The review team reported anecdotal
   evidence of student dissatisfaction with the level of development of
-  skills in writing and oral presentation.  Although this concern has
-  not been treated with same level of priority as the concerns above,
-  we discuss this issue, along with related concerns about creativity
+  skills in writing and oral presentation.  As currently taught, upper
+  division physics lab courses (PHY 157 and 122A/B) satisfy the upper
+  division English composition requirement (WR104E) for which we have
+  recently sought approval English Language and Literacy Committee.
+  We discuss this issue, along with related concerns about creativity
   and qualitative reasoning, in more detail below
   (Section~\ref{sec:perceptions}: Student perceptions about the
   major.)
@@ -225,15 +251,18 @@ weaknesses:
 \end{itemize}
 
 We have taken the concerns raised during the previous review quite
-seriously, and have made as much progress as we could manage, too the
-clear benefit of our department, including our students.  We therefore
+seriously, and have made as much progress as we could manage, to the
+clear benefit of our department, especially our students.  We therefore
 look forward to a fruitful collaboration during this review as well.
 
-
+\newpage
 \section{Faculty in the major}
 \label{sec:faculty}
 
-{\bf Questions: Who does the bulk of teaching in the major? What are the demographics of instructors in the major? Will the program be affected by substantial changes in the faculty (e.g. anticipated retirements) in the next review period?}\\[3pt]
+{\bf Questions: Who does the bulk of teaching in the major? What are
+  the demographics of instructors in the major? Will the program be
+  affected by substantial changes in the faculty (e.g. anticipated
+  retirements) in the next review period?}\\[3pt]
 
 %Refer to the Tableau data concerning faculty in your department and the other departments reviewed in the same cluster (Appendix B, Tables 1-5). Based on those data and any additional information you wish to include, comment on each of the following for your major over the review period, referring when appropriate, to differences between your major and others in the cluster:
 %    a) Table 1.  Instructional Faculty – FTE and Percent by Rank 
@@ -258,7 +287,7 @@ increase readability.}  {\color{red} TODO: copy to other sections as
 Our teaching responsibilities are evenly shared by the faculty, and
 the demographics of our course instructors largely reflects the
 demographics of our faculty.  A long period of limited hiring has put
-the department in a very uncomfortable position: new hiring is not
+the department in an uncomfortable position: new hiring is not
 keeping up with retirements and the size of the faculty is shrinking.
 This contraction is occurring when the number of physics majors, and
 demand for introductory physics courses by non-majors, are both
@@ -266,13 +295,13 @@ increasing.\\[3pt]
 
 \noindent {\bf Rank and Age of Faculty:} There are clear trends
 revealed in [B1-2].  The Physics department faculty is significantly
-older than the the average for the L\&S, and the size of the faculty
-is shrinking.  These trends are correlated: retirements are out-pacing
-new hires.  While these numbers do not reflect our most recent hires
-(Profs. Matthew Citron and Nancy Argawal) even this recent brisk pace
-of hiring has not been fast enough to avoid a shrinking department.
-Retirements have also left us with no LSOE (lecturers with
-ladder-rank) faculty at present.
+older than the the average for the College of Letters and Science
+(L\&S), and the size of the faculty is shrinking.  These trends are
+correlated: retirements are out-pacing new hires.  While these numbers
+do not reflect our most recent hires (Profs. Matthew Citron and Nancy
+Arggawal) this has not been fast enough to avoid a shrinking
+department.  Retirements have also left us with no LSOE (i.e. Teaching Professors
+with ladder-rank) faculty at present.
 
 A significant obstacle to hiring at an even faster rate is the
 availability of startup funding.  Under the current budget model, the
@@ -284,7 +313,7 @@ further.\\[3pt]
 {\bf Diversity, Inclusion, and Equity:} The data provided in [B3-5] is
 incomplete, so we will address the topic of diversity of the faculty
 in purely qualitative terms.  Most importantly, our faculty is
-overwhelming supportive of taking strong measures to to improve the
+overwhelming supportive of taking strong measures to improve the
 diversity of our faculty within the limits of what we are legally
 allowed to do.  We are not looking for quick and easy fixes.  Instead,
 we have been studying and adopting best-practices in hiring.  For
@@ -296,13 +325,14 @@ interview process in general, because evidence shows that members of
 URGs are systematically disadvantaged when such details are assumed to
 be already known.  As is often the case when adopting best practices,
 we found that these steps have also made the interview process better
-overall. For example, when provided with the questions in advanced,
+overall. For example, when provided with the questions in advance,
 applicants gave better, more thoughtful, and more useful responses.
-This remains an urgent issue, and their remains much to be done here.\\[3pt]
+This remains an urgent issue, and there remains much to be done here.\\[3pt]
 
 \noindent
 {\bf Discussion Checklist:} (a-e) Discussed above [B1-5].
-    
+
+\newpage
 \section{Instruction, advising, and resources in the major}
 \label{sec:instruction}
 
@@ -341,11 +371,11 @@ and facilities are all adequate for our purposes.  In the sections
 that follow, we attempt to provide evidence to support this bold
 assessment, as well as call out areas where we hope to do better than
 ``adequate''.  Undergraduate physics is largely focused on the
-cutting-edge theoretical physics of a hundred years ago or more. But
-yet we do stay relevant in the modern world: those old ideas remain
-challenging to master and highly potent.  Our multi-year continuing
-commitment to the UCU is strong evidence that we continue to innovate
-within our ancient discipline.  One exception: outside of emergencies,
+cutting-edge theoretical physics of a hundred years ago or more.  Yet
+we do stay relevant in the modern world: those old ideas remain
+challenging to master and highly potent to cutting-edge applications.
+Our multi-year continuing commitment to the UCU is strong evidence
+that we continue to innovate.  One exception: outside of emergencies,
 we have no plans to include virtual or hybrid courses in our program,
 as we have found, for our discipline, that no reasonable amount of
 effort can produce such a course which is as effective as learning in
@@ -359,14 +389,19 @@ document, for one example\footnote{We can update this report with one
 {\bf Grading Policy:} The grade distribution in [B12] shows that
 physics (and chemistry) are grading significantly more strictly than
 L\&S overall, which is a conscious decision on our part.  Our
-adherence to rigorous academic standards adds significant value to
-the physics degree, and to physics coursework in general.  For
-example, our top students are regularly accepted into top graduate
-programs, likely in part because the A's they receive in our courses
-represent a meaningful accomplishment.  We are concerned about the
-ability of UCD to continue as a forefront research institution and
-engine of social mobility if the grade inflation that we see
-in L\&S overall is allowed to continue or accelerate.\\[3pt]
+adherence to rigorous academic standards adds significant value to the
+physics degree, and to physics coursework in general.  For example,
+our top students are regularly accepted into top graduate programs,
+likely in part because the A's they receive in our courses represent a
+meaningful accomplishment.  We are concerned about the ability of UCD
+to continue as a forefront research institution and engine of social
+mobility if the grade inflation that we see in L\&S overall is allowed
+to continue or accelerate.  Our students are at a disadvantage for
+receiving graduation honors because the thresholds are set
+unachievably high due to grade inflation elsewhere.  For example, the
+L\&S GPA threshold for Honors in June 2023 was around 3.85, which
+included 16\% of the graduating class.  But only thre physics
+graduarts, or about 5\%, graduated with Honors.\\[3pt]
 
 \noindent
 {\bf Instructors:} Our department prioritizes providing physics majors
@@ -376,9 +411,9 @@ is the result of both an increase in the number of physics majors and
 a decrease in the number of faculty.  Despite the challenges from a
 shrinking faculty, physics majors are being taught by ladder faculty
 [B9-10] for $90\%$ of their upper division coursework, a larger
-fraction than any other L\&S department considered this cycle.
-Undergraduate physics majors are being taught by ladder faculty for
-$58.5\%$ of their physics coursework, also above average for L\&S.
+fraction than any other L\&S department considered this cycle.  They
+are being taught by ladder faculty for $58.5\%$ of their
+lower-division physics coursework, also above average for L\&S.
 
 For introductory physics coursework, we also utilize the
 highly-effective pedagogy of Continuing Lecturers.  Dr. Dina
@@ -387,20 +422,20 @@ bioscience) and Dr. Weideman manages the PHY 9 series (introductory
 physics aimed at natural science and engineering).  They are both
 deeply committed to innovative pedagogy, are great assets to our
 department, and regularly share their wisdom with the rest of the
-faculty.  We regularly hire unit-18 pre-six instructors as well.  Some
-of our graduate students are interested in more extensive teaching
-experience than typical TA assignments afford, and, when we believe
-they are up to the challenge, we also hire Associate Instructors to
-teach in PHY 7 and 9.\\[3pt]
+faculty.  We regularly hire Unit-18 pre-Six Instructors (temporary
+lecturers) as well.  Some of our graduate students are interested in
+more extensive teaching experience than typical TA assignments afford,
+and, when we believe they are up to the challenge, we also hire
+Associate Instructors to teach in PHY 7 and 9.\\[3pt]
 
 \noindent
 {\bf Staff Support:}
 Physics is a unique discipline with its own unique culture, and we are profoundly grateful to the staff members that work alongside us to maintain it.
-({\color{red} TODO:  Discuss with Tracy how we would like to describe the adequacy of staff support overall, Mike can meanwhile describe the key players in instructional support})\\[3pt]
+({\color{red} TODO:  Discuss with Tracy how we would like to describe the adequacy of staff support overall, Mike can meanwhile describe the key players in instructional support}  Richards comment about same number of advisors.)\\[3pt]
 
 
 \noindent
-{\bf Instructional Space, Equipment, and Facilities} While total
+{\bf Instructional Space, Equipment, and Facilities:} While total
 assignable space has increased [B11], it has not been faster than the
 number of student FTEs has increase.  The overall amount of assignable
 space is above average for L\&S, but this reflects our need for
@@ -430,25 +465,30 @@ computational physics (particularly PHY 40: Introduction to
 Computational Physics, a course with no college-level prerequisites)
 focuses on the bare minimum of programming techniques necessary to
 tackle challenging physics problems (See Section~\ref{sec:snws}).  It
-moves very quickly from ``introductory programming'' to
+moves quickly from ``introductory programming'' to
 ``computational physics''.  This makes the course highly complementary
 to coursework in the Computer Science and Engineering department, and the markedly different emphasis may be of interest to other disciplines as well.\\[3pt]
 
 \noindent
-{\bf Discussion Checklist:} (a) Discussed above [B6].  (b)
-Nearly $70\%$ of students enrolled in upper division physics courses are physics majors [B7].  The other students are from a wide variety of other departments, and their willingness to tackle these challenging courses illustrate  the broad appeal of physics. (c) There is an expected
-increase [B8] in the number of TAs that resulted from new courses,
-particularly PHY 80, PHY 40 and PHY 45, which require significant TA
-support for lab sections, as well the addition of discussion sections
-to some core upper division courses.  (d-e) Discussed above
-[B9-10]. (f) Discussed above (Instructional Space, Equipment, and
-Facilities) (g) Discussed above [B12] (h) Discussed above (introductory remarks) (i) Discussed above (Staff
-Support) (j) Staff advising is discussed in
+{\bf Discussion Checklist:} (a) Discussed above [B6].  (b) According
+to table [B7] only about $70\%$ of students enrolled in upper division
+physics courses arephysics majors.  We suspect this is innaccurate,
+most likely double majors are not being handled correctly.  But we
+would certainly be delighted if 30\% of our upper-division students
+were from other majors! (c) There is an expected increase [B8] in the
+number of TAs that resulted from new courses, particularly PHY 80, PHY
+40 and PHY 45, which require significant TA support for lab sections,
+as well as the addition of discussion sections to some core upper
+division courses.  (d-e) Discussed above [B9-10]. (f) Discussed above
+(Instructional Space, Equipment, and Facilities) (g) Discussed above
+[B12] (h) Discussed above (introductory remarks) (i) Discussed above
+(Staff Support) (j) Staff advising is discussed in
 Section~\ref{sec:perceptions} (Academic Advising).  (k) Discussed
-above (Instructional Space, Equipment, and Facilities) (l)
-Discussed above (introductory remarks) (m) Discussed above
-(Collaboration with other programs) (n) Discussed above (introductory remarks).
+above (Instructional Space, Equipment, and Facilities) (l) Discussed
+above (introductory remarks) (m) Discussed above (Collaboration with
+other programs) (n) Discussed above (introductory remarks).
 
+\newpage
 \section{Students in the major}
 \label{sec:students}
 
@@ -477,23 +517,25 @@ Discussed above (introductory remarks) (m) Discussed above
 %\end{enumerate}
 
 \noindent
+
 As described in detail below, during this review period, the
-undergraduate program has grown in both size and diversity.  We do not
-plan to increase the size any further, but we do hope that the
-diversity will continue to increase.  By most measures are student
-academic achievement, physics students are performing just slightly
-below the average for L\&S, which is a notable accomplishment given
-that we have established physics courses are graded significantly more
-stringently then L\&S on average.  The most concerning metrics are a
-dramatic drop in transfer student admissions to eight total in AY
-202-2023, and a four-year time-to-graduation for $73\%$ of physics
-majors, which is significantly lower than for L\&S overall (85\%).
-The UCU includes a number of changes to our program, including the
-removal of bottlenecks, that we expect to impact these and other
-metrics.  However, it is too soon to judge the efficacy of these
-changes.  Looking at the available metrics all together, we see that
-our program is successful at attracting, retaining, and graduating
-students.
+undergraduate program has grown in both size and diversity.  We
+believe there is strong demand by students for excellent physics
+programs, and by employers for those we train.  With sufficient
+resources, our department could grow fruther to meet that demand.  We
+hope that we continue to grow in Diversity as well.  By most of the
+measures of student academic achievement which we consider below,
+physics students are performing just slightly below the average for
+L\&S, which is a notable accomplishment given that physics courses are
+graded significantly more stringently then L\&S on average.  The most
+concerning metrics are a dramatic drop in transfer student admissions
+to eight total in AY 202-2023, and a four-year time-to-graduation for
+$73\%$ of physics majors, which is significantly lower than for L\&S
+overall (85\%).  The UCU includes a number of changes to our program,
+including the removal of bottlenecks, that we expect to impact these
+and other metrics.  However, it is too soon to judge their efficacy.
+Looking at the available metrics all together, we see that our program
+is successful at attracting, retaining, and graduating students.
 
 The primary source of information about our major is the department
 website, the UC Davis course catalog, and the undergraduate academic
@@ -505,24 +547,24 @@ Section~\ref{sec:perceptions} under ``Academic advising''.\\[3pt]
 {\bf Size of the undergraduate program:} The number of physics and
 applied majors has been growing, as the result of a mutual agreement
 between the university and department to begin admitting about $50\%$
-more students into the program starting in time for AY 2019-2020.
-This amount was targeted as the maximum number of additional students
-that physics could handle without the need for additional lecture
-sections in core physics courses.  This increase is the main trend
-evident in [B13] and [B17] Taking applied physics and physics
-together, the number of international students in physics [B25] has
-increased by roughly $25\%$, consistent with the increase in L\&S.  To
-accommodate the increase in the number of students, we added TA-led
-discussion sections to some of the upper-division physics course
-courses, which is something physics majors had been requesting even
-before the class size increase.  These tables also put the ratio of
-applied physics to physics majors historically at 1:2, but of late the
-share of applied physics majors appears to be growing.\\[3pt]
+more students into the program starting in AY 2019-2020.  This amount
+was targeted as the maximum number of additional students that physics
+could handle without the need for additional lecture sections in core
+physics courses.  This increase is the main trend evident in [B13] and
+[B17]. Taking applied physics and physics together, the number of
+international students in physics [B25] has increased by roughly
+$25\%$, consistent with the increase in L\&S.  To accommodate the
+increase in the number of students, we added TA-led discussion
+sections to some of the upper-division physics course courses, which
+is something physics majors had been requesting even before the class
+size increase.  These tables also put the ratio of applied physics to
+physics majors historically at 1:2, but of late the share of applied
+physics majors appears to be growing.\\[3pt]
 
 \noindent
 {\bf Diversity of physics majors:}
 Combining physics and applied physics majors, the fraction [B15] who
-are women has increase just slightly during the review period, while
+are women has increased just slightly during the review period, while
 the fraction of women in L\&S overall has decreased by about $3\%$.
 Again combining physics and applied physics majors, the fraction [B16]
 who are from underrepresented groups (URGs) has increased from $14\%$
@@ -532,18 +574,16 @@ increase in the number of students from URGs is statistically
 significant.\\[3pt]
 
 \noindent
-{\bf Double majors and minors:}
-There has been a noticeable increase in the number of physics majors
-who are double majors [B14] but the rate is still lower than the
-average for L\&S.  We expect that this reflects the challenging nature
-of the physics major.  The number of applied physics majors who are
-double majors has remained even lower, and we suspect this reflects
-that applied physics majors already complete significant coursework
-outside of the physics department.  Physics advisors do not actively
-encourage double majors.  In our experience, double majors in physics
-have very little flexibility left in their schedule to pursue other
-interests and electives.  We do heartily encourage minors, but yet
-very few physics complete one [B24].\\[3pt]
+{\bf Double majors and minors:} There has been a noticeable increase
+in the number of physics majors who are double majors [B14] but the
+rate is still lower than the average for L\&S.  This lower rate is the
+combination of unit caps on the amount of total coursework a student
+can take (imposed by L\&S) coupled to the hierarchical structure of
+most science disciplines.  In our experience, double majors in physics
+have little flexibility left in their schedule to pursue other
+interests and electives, so we generally do not advise them.  We do
+heartily encourage minors, but yet few physics majors complete one
+[B24].\\[3pt]
 
 \noindent
 {\bf Transfer students and their experience:}
@@ -559,15 +599,23 @@ students who drop out of the program.  A major focus of the UCU was
 improving the experience of transfer students, by leveling out their
 coursework in the first year to avoid a ``brick wall'' of intense
 coursework that previous students faced in their first quarter.  It is
-too early the judge the effectiveness of any of these majors.
+too early the judge the effectiveness of any of these changes.
 
 Omitting AY 2020-2021 from consideration due to the pandemic, we see
 that since AY 2021-2022 there has been a significant drop [B18] in the
-number of new transfer students, which reflects the lower acceptance
-rate due to selective major review.  However, we are concerned by the
-size of this reduction: there were only eight new transfer students in
-AY 2022-2023.  This is a much larger drop than the (still sizable)
-$35\%$ reduction of transfer student in L\&S overall.
+number of new transfer students, the result of a drop in applications
+and the tighter admission requirements of selective major review.
+Prior to selective major review, in a typical year we would have
+120-130 applicants.  Of those accepted, typically 30-35 students would
+start as physcics majors, but typically only 10-12 would remain as
+physics majors past the first year.  In recent years, applications
+have fallen to as low as 90 students, and typically about 75\% of
+student pass selective major review.  In AY 2022-2023, we had about
+eight new transfer students [B18] but in AY 2023-2024 (not in the
+appendix data set), we had 13 new transfer students.  Assuming that
+selective major review allows us to retain those students, we should
+not reduce the number of transfer students that graduate as physics
+majors.
 
 A significant number of transfer students in applied physics and
 physics require an additional year to graduate: only $22\%$ of applied
@@ -576,13 +624,16 @@ intended [B22].  This is significantly lower than $64\%$ for L\&S overall.
 Improving this experience for transfer students was a major focus of
 the UCU.
 
-We believe it is too soon to draw any conclusions about the changes to
-our program that we have made which impact transfer students.
-However, we have made a request for reports of additional metrics
-pertaining to transfer students\footnote{Perhaps we will have historic
-  data in time for the site visit...}  We plan to scrutinize these
-statistics to judge the impact and efficacy of these changes to our
-program.\\[3pt]
+It is too soon to draw any conclusions about the changes to our
+program that we have made which impact transfer students.  However, we
+have made a request for reports of additional metrics pertaining to
+transfer students.  We plan to scrutinize these statistics to judge
+the impact and efficacy of these changes to our program.  We are also
+considering outreach to community colleges to boost the application
+rate.  These considerations fall within the scope of our departments
+DEI efforts as well, as many students from URGs access the university
+through their community colleges.  It is vital that we maintain a
+viable path for transfer students through our program.\\[3pt]
 
 \noindent
 {\bf Student Academic Performance:}
@@ -596,7 +647,7 @@ In [B20] we see qualitatively similar results with respect to the
 fraction of students in good standing, which ranges from $79\%$ to
 $94\%$ depending on the class and major, and is slightly lower than
 L\&S overall.  We see a slight increase in degrees conferred [B21], for both physics
-and applied physics majors.  When the data for AY 2023-2024 is
+and applied physics majors.  When the data for AY 2023-2024 are
 available, we should start to see an increase due to the larger number
 of physics majors.
 
@@ -615,8 +666,9 @@ efficacy of these changes.\\[3pt]
 
 \noindent
 {\bf Discussion Checklist:}
-(a-m) Discussed above [B13-25] (n-o) Discussed above (introductory remarks) 
+(a-m) Discussed above [B13-25] (n-o) Discussed above (introductory remarks).
 
+\newpage
 \section{Student perceptions of the major}
 \label{sec:perceptions}
 
@@ -626,7 +678,7 @@ Our students' opinion of the physics and applied physics majors are
 for the most part consistent with college averages, within the limited
 statistics available from survey responses.  In the discussion that follows,
 we note some areas of encouragement and concern, and include anecdotal
-data where pertinent.
+data where pertinent.\\
 
 %\noindent
 %Refer to the Tableau data obtained from surveys of current students and alumni concerning their perceptions of the quality of the major and the other majors reviewed in the same cluster (Appendix C, Figures 1-53). Based on those data and any additional information you wish to include (e.g., results of departmentally administered course evaluations), comment on each of the following for your major over the review period, referring, when appropriate to differences between your major and others in the cluster:
@@ -643,25 +695,21 @@ data where pertinent.
 students is a useful and important diagnostic tool, but the results
 must be carefully interpreted.  We know that student evaluations
 reflect significant implicit biases\footnote{See,
-for example: Kreitzer, Rebecca J. \& Sweet-Cushman, Jennie
-(2021). Evaluating Student Evaluations of Teaching: a Review of
+for example: Kreitzer, Rebecca J. \& Sweet-Cushman, Jennie. Evaluating Student Evaluations of Teaching: a Review of
 Measurement and Equity Bias in SETs and Recommendations for Ethical
-Reform. Journal of Academic Ethics 20 (1):73-84.}  and are strongly
+Reform. Journal of Academic Ethics 20 (1):73-84 (2021).}  and are strongly
 correlated with student perceptions of their course grades.  For
-example (referring [B12] and [C29]) we are not surprised to see that the
-music department is an outlier with respect to both grading ($85\%$ of
-letter grades are A's) and student satisfaction with faculty
-instruction ($88\%$).  In the physics department, $33\%$ of letter
+example (referring [B12] and [C29]) we are not surprised to see that a department which is an outlier with respect to grading ($85\%$ of
+letter grades are A's) is also an outlier with respect to student satisfaction with faculty instruction ($88\%$).  In the physics department, $33\%$ of letter
 grades are A's and student satisfaction (amongst junior and senior physics majors) with faculty
-instruction is a more modest $67\%$.  We should not conclude that the
-music department is performing any better (or worse, for that matter)
+instruction is a more modest $67\%$.  We should not conclude that the other department is performing any better (or worse, for that matter)
 than the physics department, only that our approaches are different,
 likely reflecting the different needs of our students.\\[3pt]
 
 \noindent
-{\bf Limited Statistical Uncertainty from Alumni Responses}
+{\bf Limited Statistics from Alumni Responses:}
 We also need to be careful not to draw sharp conclusions from samples
-with limited statistics.  There were very few responses collected from
+with limited statistics.  There were  few responses collected from
 physics alumni: three from applied physics majors and 17 from physics
 majors.  We have carefully checked all of the alumni responses
 [C12-22], [C31-36], [C41-43], and [C49-54].  Amongst the questions,
@@ -759,7 +807,7 @@ average, it is disappointing to learn that so many students feel this
 way.  This is something we should consider as a faculty.\\[3pt]
 
 \noindent
-{\bf Satisfaction with Instruction} Using the combined survey results
+{\bf Satisfaction with Instruction:} Using the combined survey results
 in Table~\ref{tbl:appc} we see that our majors believe plagiarism is
 not being adequately explained [C23].  We encounter plagiarism most
 frequently in physics courses through the use of online websites, such
@@ -767,7 +815,7 @@ as Chegg, to provide answers to homework questions.  There is growing
 evidence that using sites such as Chegg for cheating expanded during
 the pandemic and hasn't receded.  We wonder if the low score here is
 reflecting student and faculty disagreement as to what constitutes
-plagiarism, or, conversely, if it indicates students concerns that we
+plagiarism, or, conversely, if it indicates students' concerns that we
 are not doing enough to discourage and condemn this relatively new
 form of cheating.  Clearly more discussion between students and
 faculty is needed about cheating.
@@ -778,7 +826,7 @@ and ideas.  However, when it comes to qualitative judgment [C27] and
 creativity [C28] physics majors reported lower than average practice,
 which we discuss further below.
 
-Our majors are quite well satisfied with their TAs ($75\% pm 5\%$)
+Our majors are quite well satisfied with their TAs ($75\% \pm 5\%$)
 compared to the college average ($61\%$).  This is heartening, if not
 surprising.  TA's are most often cast in roles which directly support
 students, helping them work through their homework problems in
@@ -805,31 +853,31 @@ courses is needed to determine the root causes of this elevated
 dissatisfaction.\\[3pt]
 
 \noindent
-{\bf Academic Advising:}
-The satisfaction of alumni with advising was all
-consistent with the college average, within the statistical uncertainty
-of the sample.  The only exception was a question regarding peer
-advising, which physics does not provide.  Amongst our majors, using
-the combined sample of Table~\ref{tbl:appc}, we see that students are
-satisfied with the quality of academic advising (55\% $\pm$ 6\%)
-slightly higher than the college average (52\%) and with access to
-academic advising (56\% $\pm$ 6\% ) higher than the college average
-(47\%).  Only the latter is (borderline) statistically significant.
+{\bf Academic Advising:} The satisfaction of alumni with advising was
+all consistent with the college average, within the statistical
+uncertainty of the sample.  The only exception was a question
+regarding peer advising, which the physics department has just
+recently begun providing.  Amongst our majors, using the combined
+sample of Table~\ref{tbl:appc}, we see that students are satisfied
+with the quality of academic advising (55\% $\pm$ 6\%) slightly higher
+than the college average (52\%) and with access to academic advising
+(56\% $\pm$ 6\% ) higher than the college average (47\%).  Only the
+latter is (borderline) statistically significant.
 
 These results are encouraging.  As discussed in
 Section~\ref{sec:previous}, low satisfaction with advising was noted
 by the previous review.  We believe we understand the source of the
 improvement, based on our own anecdotal data from individual student
 interactions.  Most importantly, Prof. Boeshaar runs a physics career
-seminar and Prof. Know runs an alumni speaker seminar.  These are not
+seminar and Prof. Knox runs an alumni speaker seminar.  These are not
 required courses, but the scope of discussion typically extends to
 academic advising, particularly for subjects that students are
-concerned about.  Secondly, the staff undergraduate advisor, Amy Foelz
+concerned about.  Secondly, the staff undergraduate advisor, Amy Folz
 and the vice-chair for the undergraduate program, Prof. Mulhearn, have
 devised a highly effective triage system, whereby typical issues are
-handled by Foelz, and more complicated problems are immediately kicked
+handled by Folz, and more complicated problems are immediately kicked
 up to Prof. Mulhearn.  We have found this arrangement to be quite
-effective.  Foelz also arranges multiple annual outreach events (pizza
+effective.  Folz also arranges multiple annual outreach events (pizza
 nights) which provide a forum for academic advising.  Prof. Mulhearn
 is an annual speaker in the physics career seminar.  Lastly, a
 significant number of students participate in undergraduate research,
@@ -844,63 +892,67 @@ indefinitely.\\[3pt]
 
 \noindent
 {\bf Course Offerings:} Using the combined data sample from
-Table~\ref{tbl:appc}, we that our students rated access to small class
-sizes [C44] higher (46\% $\pm$ 6\%) than the college average ($37\%$).
-Our students rated the availability of courses needed to graduate
-[C46] at lower (41\% $\pm$ 6\%) than the college average (54\%), and
-this lower level of satisfaction is present for both physics and
-applied physics majors.  Anecdotally, we are aware that applied
-physics majors struggle to schedule their coursework outside of the
-department.  We are addressing this problem in the UCU by increasing
-the number of choices available to applied physics majors for their
-coursework outside of the department.  We are also discussing with the
-computer science department the possibility to give higher priority to
-our applied physics (computational physics) majors in their impacted
+Table~\ref{tbl:appc}, we note that our students rated access to small
+class sizes [C44] higher (46\% $\pm$ 6\%) than the college average
+($37\%$).  Our students rated the availability of courses needed to
+graduate [C46] at lower (41\% $\pm$ 6\%) than the college average
+(54\%), and this lower level of satisfaction is present for both
+physics and applied physics majors.  Anecdotally, we are aware that
+applied physics majors struggle to schedule their outside coursework.
+We are addressing this problem in the UCU by increasing the number of
+choices available to applied physics majors for their coursework
+outside of the department.  We are also discussing with the computer
+science department the possibility to give higher priority to our
+applied physics (computational physics) majors in their impacted
 courses.  We are also aware that physics majors struggle to schedule
 advanced physics labs, and we are attempting to improve throughput in
 these courses as well.  We offered a fall section of advanced physics
-lab for the first time in AT 2023-2024.  We have also begun renovations
-to provide more space, and are adding additional lab modules, toward
-increasing the number of students in each section.  Our students rated
-the availability of general education courses [C45] and the variety or
-courses [C47] at levels consistent with the college average within
-the statistical uncertainty of the sample.  The alumni responses were
-all consistent with the college average within the statistical
-uncertainty of the sample.\\[3pt]
+lab for the first time in AY 2023-2024.  We have also begun
+renovations to provide more space, and are adding additional lab
+modules, toward increasing the number of students in each section.
+Our students rated the availability of general education courses [C45]
+and the variety or courses [C47] at levels consistent with the college
+average within the statistical uncertainty of the sample.  The alumni
+responses were all consistent with the college average within the
+statistical uncertainty of the sample.\\[3pt]
 
 \noindent
-{\bf Communication, Creativity, and Qualitative Judgment:} {\color{red}TODO}
-Communication was mentioned as a concern in the previous program
-review.  Addressing this deficiency immediately runs into several
-major practical challenges.  With a throughput of order 60 students
-per year, even having each student provide a 15 minute presentation
-would be a commitment of 15 hours: 50\% of standard lecture course.
-As we are limited in the number of units which we can require of our
-majors, we have already made difficult cuts to required coursework.
-We don't see a way to definitely address this problem that doesn't
-include either (1) an increase in the number of units we are allowed
-to require for our students, or (2) improving the quality of GE
-instruction so that students receive adequate training in writing and
-oral communication as part of the 50\% of the coursework they
-complete outside of their major requirements.  However, one
-anticipated outcome of the updated curriculum is that four-year
-students will have more time for elective offerings in physics.  We
-think therefore, that an incremental way forward here is to provide an
-elective course designed to provide more opportunities for practicing
-scientific communication.
+{\bf Communication, Creativity, and Qualitative Judgment:} Oral and
+written communication was mentioned as a concern in the previous
+program review.  Our students gain experience in scientific writing by
+writing lab reports in their experimental physics courses.  One area
+where we could probably add more practice with writing is in student
+homework.  We generally grade homework looking for just enough steps
+to show the student understood the problem.  We could easily assign
+students longer write-ups for specific problems, in which they would
+need to explain what they are doing in a clear and concise manner.
+If done correctly, this might actually make homework easier to grade!
 
-and applied physics major reported significantly lower than average
-practice.  This is disappointing, if not entirely surprising.  A large
+When it comes to oral communication, this immediately runs into
+several practical challenges.  With a throughput of order 60 students
+per year, even having each student provide a 15 minute presentation
+would be a commitment of 15 hours: 50\% of a standard lecture course.
+That's a big tine committment, and one we cannot afford in our core
+required cousework.  However, many instructors of upper division
+specialty courses include oral presentations as part of their
+curriculum.  We also note that students are free to choose about 50\%
+of their undergraduate coursework, so they could take ``CMN 001:
+Introduction to Public Speaking'' as just one of many possible avenues
+for gaining additional practice in oral communication.
+
+We saw above that when it comes to qualitative judgment [C27] and
+creativity [C28] physics majors reported lower than average practice.
+This is disappointing, if not entirely surprising.  A large
 fraction of the undergraduate physics degree is invested toward
 understanding well-established theories which more mostly developed a
 century ago or more.  Problems for these theories which have exact
 analytic solutions are limited and so students invest a lot of time
 solving problems that have been being solved by students for a century
 or more as well.  This paints perhaps too bleak a picture, as
-instructors do labor to breath life into their subjects every quarter,
+instructors do labor to breathe life into their subjects every quarter,
 but they are facing strong headwinds, and these results most likely
-reflect those headwinds.  One are of the undergraduate physics degree
-where creativity and qualitative judgment is more naturally exercises
+reflect those headwinds.  One area of the undergraduate physics degree
+where creativity and qualitative judgment are more naturally exercised
 is in computational physics and experimental physics.  Here students
 devise and debug their own code or experimental apparatus, face new
 problems not constrained to those with exact analytic solutions.  It
@@ -909,61 +961,170 @@ these subjects in the curriculum update will lead to students getting
 more practice in these topics.\\[3pt]
 
 \noindent
-{\bf Discussion Checklist:} (a-e) Discussed above [C1-52] 
+{\bf Discussion Checklist:} (a-e) Discussed above [C1-52].
 
-
-\end{document}
-
+\newpage
 \section{Post-graduate Preparation}
-Questions: How well does the major prepare students for postgraduate education and careers? Do the students have opportunities to meet and work with faculty outside the classroom setting? Is there sufficient support for internships or experiential learning opportunities? Are there ample opportunities for students to learn about career options?  
-Refer to the Tableau data obtained from surveys of current students and alumni concerning preparation by the major for postgraduate education and careers (Appendix C, Figures 54-80). Based on those data and any additional information you wish to include, comment on each of the following for your major over the review period, referring, when appropriate to differences between your major and others in the cluster:
+%Questions: How well does the major prepare students for postgraduate education and careers? Do the students have opportunities to meet and work with faculty outside the classroom setting? Is there sufficient support for internships or experiential learning opportunities? Are there ample opportunities for students to learn about career options?  
+%Refer to the Tableau data obtained from surveys of current students and alumni concerning preparation by the major for postgraduate education and careers (Appendix C, Figures 54-80). Based on those data and any additional information you wish to include, comment on each of the following for your major over the review period, referring, when appropriate to differences between your major and others in the cluster:
 
-    a) quantity and quality of research and creative activities provided by the major (Figures 54-59)
-    b) quality of preparation by the major for postgraduate education (Figures 60-64)
-    c) quality of preparation by the major for the workforce (Figures 65-74)
-    d) the degree to which students have sufficient contact with faculty to help them in their postgraduate education and careers (Figures 75-80).
+%    a) quantity and quality of research and creative activities provided by the major (Figures 54-59)
+%    b) quality of preparation by the major for postgraduate education (Figures 60-64)
+%    c) quality of preparation by the major for the workforce (Figures 65-74)
+%    d) the degree to which students have sufficient contact with faculty to help them in their postgraduate education and careers (Figures 75-80).
 
-Enter your text here.
+Skipping for now, due to exhaustion with these bullshit survey results.
 
-\section{Educational objectives and Assessment}
+\newpage
+\section{Educational Objectives and Assessment}
 
-Question: How does the program monitor and evaluate its success in achieving its Program  Learning Outcomes (section 1)?  
+{\bf Question: How does the program monitor and evaluate its success in achieving its Program  Learning Outcomes (Section 1)?}\\[3pt]
 
-Specifically:
-    a) Please confirm that the PLOs are clearly listed in an easily accessible location on the program website and provide the URL for that website.
-    b) Please provide a program curriculum matrix or map which identifies the required courses in which each PLO is specifically addressed and assessed. Attach sample syllabi for up to six of the required core courses for the major. An additional resource for completing the curriculum Map/Matrix is available on the UIPRC website.
-    c) What unit (committee or officer) in your program is responsible for collecting and analyzing data on student progress toward PLOs?
-    d) Please list the direct evidence of student learning used to assess student achievement of PLOs. Examples of direct evidence include projects, scores from exams or quizzes, and written work. For this data, describe the methodology for sample selection and size.  
-    e) Please list sources of indirect data used to contextualize student achievement of PLOs. Examples of indirect data include student evaluations, peer evaluation of teaching, and the survey data from current students and graduates provided for this review.
-    f) In what ways do the results of this self-review reveal particular areas of strength or weakness in student progress toward achieving PLOs?
-    g) What changes will the program make based on the results of the program assessment of student learning?
+%Specifically:
+%    a) Please confirm that the PLOs are clearly listed in an easily accessible location on the program website and provide the URL for that website.
+%    b) Please provide a program curriculum matrix or map which identifies the required courses in which each PLO is specifically addressed and assessed. Attach sample syllabi for up to six of the required core courses for the major. An additional resource for completing the curriculum Map/Matrix is available on the UIPRC website.
+%    c) What unit (committee or officer) in your program is responsible for collecting and analyzing data on student progress toward PLOs?
+%    d) Please list the direct evidence of student learning used to assess student achievement of PLOs. Examples of direct evidence include projects, scores from exams or quizzes, and written work. For this data, describe the methodology for sample selection and size.  
+%    e) Please list sources of indirect data used to contextualize student achievement of PLOs. Examples of indirect data include student evaluations, peer evaluation of teaching, and the survey data from current students and graduates provided for this review.
+%    f) In what ways do the results of this self-review reveal particular areas of strength or weakness in student progress toward achieving PLOs?
+%    g) What changes will the program make based on the results of the program assessment of student learning?
 
-Programs are encouraged to contact the Academic Assessment team (assessment@ucdavis.edu) in the Center for Educational Effectiveness (Office of Undergraduate Education) to learn more about assessment of student learning outcomes.
+%Programs are encouraged to contact the Academic Assessment team
+%(assessment@ucdavis.edu) in the Center for Educational Effectiveness
+%(Office of Undergraduate Education) to learn more about assessment of
+%student learning outcomes.
 
-Enter your text here.
+\noindent
+The PLOs for our majors are defined in Section~\ref{sec:overview}
+along with specific courses which reinforce those objectives.  We have
+not historically hosted these objectives publically, but as this has
+been requested as part of the review we are planning to do
+so. {\color{red} Let's get these hosted PLOs hosted somewhere ASAP.}
 
-(a) {\color{red} We need to do this (put this on a webpage).}
-(b) The required courses which relate to each PLO were already listed in Section 1.
-({\color{red} TODO: we can make a little table here to make folks happy.})
-(c) The vice-chair for the undergraduate program and the undergraduate curriculum, in collaboration with the physics faculty, are responsible for evaluating the performance of the undergraduate program.
-As part of the curriculum update, we have developed a new procedure for maintaining the curriculum.  Each spring, the undergraduate curriculum committee organizes a faculty meeting devoted to reviewing the undergraduate program.  The instructors of core courses prepare short summaries of their courses, covering how they taught the course, including notable differences from the example syllabi, and any observed shortcomings in student preparation from prerequisite courses.  If any changes to the example syllabi are needed, the UGCC prepares new version, upon which the faculty vote.
-(d) The acquisition of PLOs related to mathematics and theoretical physics are most directly assessed through final exams in core courses (e.g. 104A, 105AB, 110AB, 112, 115AB).  The experimental physics PLOs are assessed through student lab reports.  Instructors of PHY 80 have also recently introduced a lab practical examination which we have found to be quite successful.  The assessment of PLOs are based on submitted student programs, cross-checked by in-class evaluation based on Parsons problems (correctly ordering provided lines of code to answer a prompt) and predicting the output of provide code snippets.
-Because physics is quite hierarchical, there are multiple opportunities to assess students acquisition of the PLOs.  For one example, several years ago we learned that PHY 104A was not consistently covering vector calculus because the 110AB instructor reported having to review this material, and we made adjustments to address this deficiency.(e-f) {\color{red} TODO.}
- 
+Responsiblity for monitoring the effectiveness of our program at
+enabling our student to reach these objectives lies with the
+vice-chair for the undergraduate program and the undergraduate
+curriculum, in collaboration with the physics faculty.  As part of the
+curriculum update, we have developed a new procedure for continuously
+monitoring, discussing, and revising the curriculum.  Each spring, the
+undergraduate curriculum committee organizes a faculty meeting devoted
+entirely to the undergraduate program.  The instructors of core
+undergraduate courses prepare short summaries of their courses,
+covering how they taught the course, including notable differences
+from example syllabi which we now maintain, and any observed
+shortcomings in student preparation from prerequisite courses.  If any
+changes to the example syllabi are needed, the UGCC prepares new
+versions, and the faculty votes on whether or not to adopt the new
+versions.
+
+The acquisition of PLOs related to mathematics and theoretical physics
+are most directly assessed through in-person final exams in core
+courses (e.g. 104A, 105AB, 110AB, 112, 115AB).  The faculty members
+that teach core courses are generally able to immediately spot
+short-comings in student progress from the final exam performance.
+The experimental physics PLOs are assessed mainly through student lab
+reports.  Instructors of PHY 80 have also recently introduced a lab
+practical examination which we have found to be quite successful.
+
+Professors engaged in teaching our new computational physics courses
+are learning new pedagogy appropriate to that discipline.  We have
+become quite found of Parsons problems, which have students provide
+the correct ordering of (scrambled) lines of code, in order to meet a
+given prompt.  Not only are these a fast and practical means for
+evaluating programming abilities in person, they also train students
+to ``complile in their head'' instead of relying (as many
+new students do) on trial and error.  We dp also evaluate submitted
+programs, but we are concerned, in the long run, that students might
+get by on simply copying existing solutions, unless we have an
+effective means of in-person evaluation.
+
+This self-review is synergistic with the years of prior effort that
+our department has invested in understanding the performance of our
+program, and proposing improvements.  The strengths and weaknesses we
+have identified are summarized in Section~\ref{sec:snws} and our
+future plans in Section~\ref{sec:future}.  However, we heartily
+encourage the reviewers to read through the UCU proposal document.  It
+is rather long, but it represents years of effort on our part.\\[3pt]
+
+\noindent
+{\bf Discussion Checklist:} (a-g) Discussed above.
+
+\newpage
 \section{Major strengths and weaknesses}
 \label{sec:snws}
 
-{\bf Theoretical Physics:}
+{\bf Summarize the major overall strengths of the program as well as any current problems that you perceive.}\\[3pt]
+
+\noindent
+All happy departments are alike; each unhappy department is unhappy in
+its own way.  Fortunately, ours is a happy department, and so our
+strengths are those fairly universal ones.  We have a collegial
+faculty that works well together, allowing each faculty member to
+effectively add their unique talents and interests.  Our staff is
+dedicated and effective.  Our students are deligent and inquisitive,
+and they support one another.  They are remarkably empathetic.
+Together we have built an impressive and productive departmental
+culture.
+
+Our small class sizes and an active undergraduate research program
+promote strong ties between faculty and students.  Ours students
+receive a considerable amount of personal attenion both in and out of
+class.  We have an exceptionally varied offering of advanced
+undergraduate specialty courses, the work of a dedicated faculty
+directed at its students.\\[3pt]
+
+\noindent
+{\bf Computational Physics:} Our curriculum now include a substantial
+number of required computational physics courses.  In PHY 40
+(Introduction to Computational Physics) students learn the basics of
+Python and then move directly into solving numerical and physical
+problems using computational methods.  In PHY 45 (Computational
+Physics) they are introduced to C++, without much concern for advanced
+language features, and tackle more advanced physics problems based on
+their coursework in introductory physics.  Later, they take 2-3
+one-unit computional lab courses, designed to work alongside their
+upper division coursework.  Much of the earlier computational physics
+problems focused on mechanics; now they use computational physics to
+tackle problems from upper division quantum mechanics, electricity and
+magnetsm, and statistical mechanics. These courses are just the core.
+As the faculty gains confidence in our students computational
+abilities, we should see computational physics spread throughout our
+program.  We cannot make every physics major a computer scientists any
+more than we can make every one a mathematician, but we can make every
+physics major as effective at solving physics problems with computer
+programs as they are with calculus.\\[3pt]
+
+\noindent
+{\bf Experimental Physics:}\\ Following the advice of the previous
+committee, we introduced PHY 80: Experimental Techniques to better
+prepare students for the PHY 122A: Advanced Lab in Condensed Matter
+Physics and PHY 122B: Advanced Lab in Particle Physics.  We developed
+a course that introduces basic laboratory equipment, analog
+electronics (up to the diode), statistical analysis of experimental
+data, and data presentation.  These techniques are applied to
+measuring fundamental constants like the speed of light and Planck's
+constant.  We've been teaching PHY 80 for quite a few years now, and
+yet it is still too soon to tell if it's had the impact we hope for on
+PHY 122.  This is because many students took this course during the
+pandemic, and so we have not yet had a few years of PHY 122 where
+every student took PHY 80 in person.
+
+Nonetheless, we are confident enough in the value of PHY 80 that we
+have made it a required course for every physics major.  We've
+adjusted the other upper division lab courses to take advantage of it:
+The sequence 116ABC (Electronic Instrumentation) has been replaced
+with PHY 80, PHY 117 (Physics Instrumentation with Analog and Digital
+Electronics) plus PHY 118 (Physics Instrumentation for Data Acquisition).
+The latter two courses are in a nearly continuous state of renewal by
+Prof. Prebys to take advantage of new technology (such as systems that
+host programmable digital logic and a CPU on a single chip) well suited for
+students.
+
+We are attempting to 
 
 
-{\bf Computational Physics:}
-Mostly strengths now.
 
-
-{\bf Experimental Physics:}
-Discuss the role of PHY 80.
-
-Discuss challenges with PHY 157.  This throughput is limited by several
+This throughput is limited by several
 practical concerns: the time of year during which weather is favorable
 for observation, safety concerns which limit the number of people
 that can be on the room for observation, and limited faculty capable
@@ -973,62 +1134,168 @@ to maintain throughput, let alone increase it.  We recently acquired a
 grant for a new telescope, and perhaps this can improve the situation?
 Talk with Pat...
 
+{\bf Unit Caps on Required Coursework:} {\color{red} TODO}
 
 
+\newpage
 \section{Future Plans}
-Describe current or proposed plans to strengthen educational objectives of the program, such as increasing enrollments, improving student performance, and increasing the contribution of the program to the campus educational objectives. Comment on the long term strategy or goals regarding hybrid and virtual instruction in this program. Describe and justify if new resources are needed to preserve or strengthen the program.
+{\bf Describe current or proposed plans to strengthen educational
+objectives of the program, such as increasing enrollments, improving
+student performance, and increasing the contribution of the program to
+the campus educational objectives. Comment on the long term strategy
+or goals regarding hybrid and virtual instruction in this
+program. Describe and justify if new resources are needed to preserve
+or strengthen the program.}
 
-Enter your text here.
+Our most immediate future plans for the undergraduate program are
+centered on receiving final approval and finishing the implementation
+of the UCU.  Following that, we will want to monitor the performance
+of the program carefully.  Of particular importance are the impact of
+selective major review and the curriculum changes to transfer
+students.  Ideally we will see that we continue to graduate at least
+10-12 transfer students in physics each year, with hardly any leaving
+the program.
 
-	
+We have an annual faculty meeting devoted to a review of the
+undergraduate program, and evaluating the impact of the UCU will be a
+central topic for the next few years at least.  We will likely want to
+make small further adjustments.  This process has given us expertise
+in the various tools for updating course descriptions and catolog
+copy, and so we would like to invest some time in bringing those up to
+date as well.  The scope of the undergraduate curriculum update did
+not include introductory physics (PHY 7 and PHY 9) so we plan to
+tackle those next.
+
+We see our substantial investment in computational physics as merely a
+start.  Our hope is that professors will beging to take advantage of
+student expertise in computational physics in more and more places.
+For when you calculate an analytic solution {\em and} write a computer
+program for the same problem, and they agree, then you have
+understanding and {\em confidence}.
+
+The biggest challenge facing our department is the decrease in the
+size of the faculty, because hiring is not keeping up with
+retirements.  While the faculty is shrinking the demands on our
+department are increasing.  We have more physics majors, but also more
+undergraduate students taking our introductory physics courses.  We
+need substantial investments from campus to dramatically increase our
+hiring rate.  Here the main hold-up is startup.  And yet these
+retirements are saving campus enormous sums of money.  If we direct
+some fraction of those savings toward start-up expenses of new hires,
+we could likely avert disaster for our department.  We also need more
+investment in staff.  We have only one undergraduate student advisor
+on the faculty who is severaly taxed to keep up with not only our
+majors, but the myriad of issues that arise with the {\em thousands}
+of students that take introductory physics each year.
+
+\newpage	
 \section{Minors}
-Please comment on the minors currently administered by your department. Include all minors, and for each:
+%Please comment on the minors currently administered by your department. Include all minors, and for each:
 
-    a) Briefly explain the history of the minor.
-    b) Briefly explain the rational for the minor, including the importance of the minor to students.
-    c) Provide a brief overview of the minor, especially how students receive academic
-guidance through the minor.
-    d) Comment on numbers of students who have declared the minor during the review period.
-    e) Describe the faculty participation in, and staff administrative support for, the minor.
-    f) Describe your approach to ensuring that course listings for the minor are regularly updated and are realistic for students to complete in four years.
-    g) Describe faculty participation in the minor. e.g., classroom instruction, co-ordination of
-undergraduate events, supervision of undergraduate theses.
-    h) Describe your approach to assessing the effectiveness of the minor on students’ learning and preparation for the future.
-    i) Describe the current goals of the minor. Have goals changed over time? If so, explain
-how the goals have changed.
-    j) What are the strengths of the minor and benefits to students of the minor?
-    k) What are the weaknesses of the minor? Describe any steps taken to address the
-weaknesses.
-    l) What are faculty members’ future plans for the minor?
+%    a) Briefly explain the history of the minor.
+%    b) Briefly explain the rational for the minor, including the importance of the minor to students.
+%    c) Provide a brief overview of the minor, especially how students receive academic guidance through the minor.
+%    d) Comment on numbers of students who have declared the minor during the review period.
+%    e) Describe the faculty participation in, and staff administrative support for, the minor.
+%    f) Describe your approach to ensuring that course listings for the minor are regularly updated and are realistic for students to complete in four years.
+%    g) Describe faculty participation in the minor. e.g., classroom instruction, co-ordination of undergraduate events, supervision of undergraduate theses.
+%    h) Describe your approach to assessing the effectiveness of the minor on students’ learning and preparation for the future.
+%    i) Describe the current goals of the minor. Have goals changed over time? If so, explain how the goals have changed.
+%    j) What are the strengths of the minor and benefits to students of the minor?
+%    k) What are the weaknesses of the minor? Describe any steps taken to address the weaknesses.
+%    l) What are faculty members’ future plans for the minor?
 
-Attachments:
-    m) If it was not supplied in Appendix A, please attach the current catalog copy for the minor.
-    n) Please provide a chart indicating the number of students who have declared the minor for each year in the review period.
+%Attachments:
+%    m) If it was not supplied in Appendix A, please attach the current catalog copy for the minor.
+%    n) Please provide a chart indicating the number of students who have declared the minor for each year in the review period.
 
-Enter your text here.
+%Enter your text here.
 
+We have only 1-3 minors in physics per year.  The objective for the
+physics minor is to provide an opportunity for students to gain a
+meaningful understanding of physics concepts and expertise in putting
+them to practical use, but without committing to an entire degree.
 
+The requirements for the minor are quite simple to state: students
+must complete six upper division physics courses (excluding a small
+set of ineligible courses, e.g. independent study).  However,
+achieving this minor is quite challenging due to the hiearchical
+nature of our coursework.  Upper division coursework generally
+requires completing six courses in mathematics, four courses in
+introductory physics, and many courses further require PHY 104A (Math
+Methods in Physics).  This large number of prerequisites likely
+discourages many students.  And those that have completed these
+prerequisites for their own major are likely already science majors,
+and therefore see little benefit to a physics minor.
+
+We believe the physics minor is well designed for those relatively few
+students dedicated enough to their interest to pursue.  We see no need
+to make adjustments and we accept that demand for the minor is small.
+
+\newpage
 \section{Emergency Remote Instruction}
 \label{sec:remote}
 
-The review team, UIPRC, and UGC understand that the emergency remote instructional environment required by the COVID-19 pandemic presented extraordinary demands on department faculty, staff, and students. Please address the successes and challenges faced by your program during emergency remote instruction. Provide information about any new practices that were beneficial and the program plans to continue, as well as any practices and outcomes that fell short of your standards.
+{\bf The review team, UIPRC, and UGC understand that the emergency remote
+instructional environment required by the COVID-19 pandemic presented
+extraordinary demands on department faculty, staff, and
+students. Please address the successes and challenges faced by your
+program during emergency remote instruction. Provide information about
+any new practices that were beneficial and the program plans to
+continue, as well as any practices and outcomes that fell short of
+your standards.}\\[3pt]
 
-Some items you may want to address:
-    • Student experience: Student response to remote instruction; Student engagement with courses and department; Student interactions with faculty and staff (Zoom appointments, online office hours, etc.); Student retention of course information; Student progress toward degree
-    • Faculty experience: Impacts of teaching remotely; Costs and benefits
-    • TA experience: Interactions with faculty; Interactions with students
-    • Staff / advising experience: Costs and benefits
-    • Course equivalency: Degree of equivalency between normal and emergency remote instruction with regards to course learning outcomes and variability by learning activity (lecture courses, discussion courses, writing courses, laboratory courses, etc.)
-    • Assessment of student learning: Strategies used for remote assignments and exams and their efficacy
-    • Lessons learned for future virtual or hybrid instruction or advising in the program
+%Some items you may want to address:
+%    • Student experience: Student response to remote instruction; Student engagement with courses and department; Student interactions with faculty and staff (Zoom appointments, online office hours, etc.); Student retention of course information; Student progress toward degree
+%    • Faculty experience: Impacts of teaching remotely; Costs and benefits
+%    • TA experience: Interactions with faculty; Interactions with students
+%    • Staff / advising experience: Costs and benefits
+%    • Course equivalency: Degree of equivalency between normal and emergency remote instruction with regards to course learning outcomes and variability by learning activity (lecture courses, discussion courses, writing courses, laboratory courses, etc.)
+%    • Assessment of student learning: Strategies used for remote assignments and exams and their efficacy
+%    • Lessons learned for future virtual or hybrid instruction or advising in the program
 
-Enter your text here.
+\noindent
+Our faculty made a heroic effort during the COVID-19 pandemic, but the
+quality of instruction suffered tremendously nonetheless.  In
+qualitative terms, we saw that the top 1/3 of students managed
+reasonable well with remote instruction, but the bottom fell out for
+the remaining 2/3.  We believe we saw a dramatic increase in cheating,
+and there is growing evidence that it has not receded.  We also
+believe that we are still seeing residual effects of the pandemic on
+current students.  Specifically, the level of mathematical preparation
+and study habits have not fully recovered to pre-pandemic levels.
+These are subjective evaluations, but they have been widely observed
+by our faculty.
 
-Our faculty made a heroic effort during the COVID-19 pandemic, but the quality of instruction suffered tremendously, and we believe we still see evidence that students have not fully recovered.  In qualitative terms, we saw that the top 1/3 of students managed reasonable well with remote instruction, but the bottom fell out for the remaining 2/3.  We believe we saw a dramatic increase in cheating, and there is growing evidence that this was a widespread phenomenon.  We also believe that we are still seeing residual effects of the pandemic on current students.  Specifically, the level of mathematical preparation and study habits have not fully recovered to pre-pandemic levels.  These are subjective evaluations, but they have been widely observed by our faculty.
+During emergency remote instruction, student engagement dropped
+precipitously.  Early advice to instructors urged us to provide
+asynchronous coursework as much as possible, to accommodate students
+that might struggle, under the circumstances, to connect at a fixed
+time.  We soon discovered, however, that fully asynchronous courses
+were disasterous for student engagement and morale.  Most instructors
+quickly reverted back to fully live (via zoom) lectures, a mixture of
+{\bf short} asynchronous pre-recorded lectures\footnote{Video hosting
+  sites which monitor viewer engagement over time showed that students
+  generally drop out of pre-recorded lectures after about ten minutes}
+punctuated with live in-person discussions.
 
-During emergency remote instruction, student engagement dropped precipitously.  Those brave instructors that continued live (via zoom) lectures were faced with a wall of black: students left their cameras off.  As a result, with few exceptions, faculty despised remote instruction.  But we did our best.  An approach that emerged as somewhat effective was providing a mixture of {\bf short} asynchronous pre-recorded lectures and live in-person recap discussions.  For faculty teaching lab courses, the burden was even greater.  These are crucial experiences for our students, and faculty generally went to extraordinary lengths to provide kits or other means for students to get some hands on experience, which required redesigning entire courses with little notice.  
+For faculty teaching lab courses, the burden was even greater.  These
+are crucial experiences for our students, and faculty generally went
+to extraordinary lengths to provide kits or other means for students
+to gain some hands on experience.  This generally required redesigning
+entire courses with little notice.
 
-And despite all of these efforts, there was no meaningful equivalency between the online courses we provided and in-person courses.  Any instructor has seen that students that do not attend lecture generally become demoralized, detached, and perform well below their abilities.  COVID forced something like that onto every one of our students.  May we never have to do that again.
+During live (via zoom) lectures, instructors were generally faced with
+a wall of blankness: students nearly universely leave their cameras
+off, and deeply resent being forced to turn them on.  With few
+exceptions, faculty despised remote instruction.  But we did our best.
+
+And despite all of these efforts, there was no meaningful equivalency
+between the online courses we provided and our traditional in-person
+courses.  Any instructor has seen that students that do not attend
+lecture generally become demoralized, detached, and perform well below
+their abilities.  COVID-19 forced something like that onto every single
+one of our students.  May we never have to do that again.
 
 \end{document}
 
