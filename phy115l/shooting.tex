@@ -1,0 +1,183 @@
+\documentclass[12pt]{book}
+
+\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.5in]{geometry}
+\usepackage{cite}
+\usepackage{slashed}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{braket}
+\usepackage{pythonhighlight}
+\begin{document}
+
+\newcommand{\ihbar}{\ensuremath{i \hbar}}
+\newcommand{\Pss}{\ensuremath{\Psi^*}}
+\newcommand{\dPsidt}{\ensuremath{ \frac{\partial \Psi}{\partial t} }}
+\newcommand{\dPsidx}{\ensuremath{ \frac{\partial \Psi}{\partial x} }}
+\newcommand{\ddPsidx}{\ensuremath{ \frac{\partial^2 \Psi}{\partial x^2} }}
+\newcommand{\dPssdt}{\ensuremath{ \frac{\partial \Psi^*}{\partial t} }}
+\newcommand{\dPssdx}{\ensuremath{ \frac{\partial \Psi^*}{\partial x} }}
+\newcommand{\ddPssdx}{\ensuremath{ \frac{\partial^2 \Psi^*}{\partial x^2} }}
+
+\newcommand{\dphidt}{\ensuremath{ \frac{d \phi}{dt} }}
+\newcommand{\dpsidx}{\ensuremath{ \frac{d \psi}{dx} }}
+\newcommand{\ddpsidx}{\ensuremath{ \frac{d^2 \psi}{dx^2} }}
+
+
+\title{PHY 115L \\ Shooting Method }
+\author{Michael Mulhearn}
+
+\maketitle
+
+\setcounter{chapter}{0}
+\chapter{Time-Independent Schr\"odinger Equation}
+
+We will numerically integrate the Time-Independent Schr\"odinger Equation (TISE):
+\begin{equation}
+- \frac{\hbar^2}{2 m} \; \ddpsidx \, + \, V(x) \, \psi(x) = E \, \psi(x)\\
+\end{equation}
+For numerical work, it is a good habit to introduce a system of units that keeps quantities near ``1''.  We'll introduce a characteristic length $a$ to be determined by the particular problem we are solving.  Multiplying both sides by $a^2$ and rearranging we have:
+\begin{equation}
+a^2 \, \ddpsidx = - \frac{2ma^2}{\hbar^2}\,\left(E - V(x)\right) \, \psi(x)\\
+\end{equation}
+Defining:
+\begin{equation}
+E_0 \equiv \frac{\hbar^2}{2ma^2}
+\end{equation}
+We have:
+\begin{equation}
+a^2 \; \ddpsidx = - \frac{E - V(x)}{E_0} \; \psi(x)\\
+\end{equation}
+We will integrate this equation using the Runge-Kutta technique for a first order differential equation, so we define a new variable $\phi$ by:
+\begin{equation}
+a \, \frac{d\psi}{dx} \equiv \phi
+\end{equation}
+and so:
+\begin{equation}
+a \, \frac{d\phi}{dx} = - \frac{E - V(x)}{E_0} \; \psi(x)\\
+\end{equation}
+In our computer programs, we'll measure $x$ in units of $a$ and $E$ in units of $E_0$.  In these units $a=1$ and $E_0=1$, so our equations will read:
+\begin{equation}
+\frac{d\psi}{dx} \equiv \phi
+\end{equation}
+and so:
+\begin{equation}
+\frac{d\phi}{dx} = \left( V(x) - E \right) \; \psi(x)\\
+\end{equation}
+
+\section{Euler's Method}
+We can write our system of first order differential equations by defining:
+\begin{equation}
+Y \equiv \begin{pmatrix} \psi \\ \phi \end{pmatrix}
+\end{equation}
+and
+\begin{equation}
+\frac{dY}{dx} = \begin{pmatrix} {\displaystyle \frac{d\psi}{dx}} \\[10pt] {\displaystyle \frac{d\phi}{dx}} \end{pmatrix} = F(Y,x,E)
+\end{equation}
+where:
+\begin{equation}
+F(Y,x,E) \equiv \begin{pmatrix} \phi \\ (V(x)-E)\;\psi \end{pmatrix}
+\end{equation}
+for Euler's method, we approximate the change to $Y$ during a step in $x$ of size $h$ as:
+$$K_1 = h \frac{dY}{dx} = h F(Y, x, E)$$
+and at each step we have:
+$$Y \to Y + K_1$$
+which have global error of $h$.
+
+\section{Fourth-Order Runge-Kutta Method}
+The Euler method is actually a 1st-order Runge-Kutta Method.  The fourth order method samples the derivative column matrix $F$ in more places:
+\begin{eqnarray*}
+K_1 &=& h \; \; F(Y, x, E) \\[5pt]
+K_2 &=& h \; \; F\left(Y + \frac{K_1}{2}, x+\frac{h}{2}, E\right) \\[5pt]
+K_3 &=& h \; \; F\left(Y + \frac{K_2}{2}, x+\frac{h}{2}, E\right) \\[5pt]
+K_4 &=& h \; \; F(Y+K_3, x+h, E) \\
+\end{eqnarray*}
+where:
+\begin{equation}
+Y \equiv \begin{pmatrix} \psi \\ \phi \end{pmatrix}
+\end{equation}
+and
+\begin{equation}
+F(Y,x,E) \equiv \begin{pmatrix} \phi \\ (V(x)-E)\;\psi \end{pmatrix}
+\end{equation}
+At each step we have:
+$$Y \to Y + \frac{K_1 + 2\,K_2 + 2\, K_3 + K_4}{6}$$
+
+\section{The Infinite Square Well}
+An example python code for numerically integrating the TISE for the infinite square well using Euler's method is provide:
+\begin{python}
+# System of Units:
+# Position:  a = 1
+# Energy:   E0 = hbar^2 / (2 m a^2)
+
+# Potential V(x) in units of E0
+def V(x):
+    return 0
+
+# TISE as two first order diff eqs:
+# Y = (psi, phi)
+# F = dY/dx = (dpsi/dx, dphi/dx)
+# dpsi/dx = phi
+# dphi/dx = (V-E) psi
+def F(Y,x,E):
+    psi = Y[0]
+    phi = Y[1]
+    dpsi_dx = phi
+    dphi_dx = (V(x)-E)*psi
+    F = np.array([dpsi_dx, dphi_dx], float)
+    return F
+
+# Numerical integration (using Runge-Kutta Order 1)
+def tise_rk1(E,psi0,phi0,a,b,h):
+    Y = np.array([psi0, phi0], float)
+    X   = np.arange(a,b,h, float)
+    PSI = np.array([psi0], float)
+    for x in X:
+        # 1st order Runge-Kutta:
+        K1 = h*F(Y,x,E)
+        Y += K1
+        PSI = append(PSI,Y[0])
+    X = np.append(X,b)
+    return X,PSI
+
+X,PSI = tise_rk1(E=20,psi0=1,phi0=0,a=0,b=0.5,h=0.01)
+print("psi(b) = ", PSI[-1])
+
+plt.plot(X,PSI,"b")
+plt.axhline(c="k")
+plt.axvline(x=0.5, c="k")
+plt.ylim(-1.5,1.5)
+plt.xlabel("x")
+plt.ylabel("psi(x)")
+\end{python}
+
+\section{The Harmonic Oscillator}
+
+For the harmonic oscillator with
+\begin{equation*}
+\omega = \sqrt{\frac{k}{m}}
+\end{equation*}
+we take our characteristic length scale as:
+$$a \equiv \sqrt{\frac{\hbar}{m \omega}}$$
+and so:
+$$E_0 = \frac{\hbar^2}{2ma^2} = \frac{\hbar \omega}{2}$$
+
+\section{Homework Problems}
+
+\noindent
+{\bf Problem 1:}  For an infinite potential well of width $a$, the allowed energies are
+$$E = \frac{\pi^2 \hbar^2 n^2}{2 \, m \, a^2}$$  
+Determine the allowed energies in units of 
+$$E_0 = \frac{\hbar^2}{2 \, m \, a^2}$$\\[3pt]
+\noindent
+(A) Use your own code or modify the example code to numerically integrate the TISE for $n=1$ which should meet boundary condition $\psi(1/2)=0$.  Make a plot that shows $n=1$ meets the boundary conditions but $n=0.7$ and $n=1.3$ do not.\\[5pt]
+(B) Create plots of for $n=1,3,5$ with $h=0.01$  You should notice that Euler's method 
+is not stable:  the amplitude of the wave function is changing!\\[5pt]
+(C) Make a copy of the function {\tt tise\_rk1} called {\tt tise\_rk4} and modify it to implement the 4th order Runge-Kutta method.  You should not need to change much!  Just the calculation of the $K_i$ and the weighted average!  Make a plot comparing the output of RK-1 and RK-4 for the same step size that illustrates the instability of Euler's method. \\[5pt]
+(D) As written, the software will only integrate an even solution.  Modify your code so that it can handle odd solutions as well.  In the same plot, show the {\em properly normalized wave functions} for $n=1,2,3,4,5,6$ from $x=-1/2$ to $x=1/2$.  Be clever about how you deduce the wave function in $[-1/2,0]$.\\[5pt]
+
+{\bf Problem 2-4:}
+(There will be a few more problems that will explore the tool you have just created, but I wanted to post this ASAP so you can get started...)
+
+
+\end{document}

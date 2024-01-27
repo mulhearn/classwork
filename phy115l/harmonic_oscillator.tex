@@ -26,7 +26,7 @@
 \title{PHY 115L \\
 Numerical Approaches to the \\
 Harmonic Oscillator \\ 
-(Theory:  Griffith's Section 2.3)}
+(Theory:  Griffiths Section 2.3)}
 \author{Michael Mulhearn}
 
 \maketitle
@@ -84,57 +84,12 @@ with which we can write the TISE as:
 \end{equation}
 We say that separable solutions are eigenstates of the Hamiltonian operator.  (This is analogous to an eigenvector problem in linear algebra.)
 
-We'll demonstrate later the following boundary conditions on $\psi(x)$:
+The boundary conditions on $\psi(x)$ are:
 \begin{itemize}
 \item $\psi(x)$ is always continuous.
 \item $d\psi/dx$ is continuous except where the potential is infinite.
 \end{itemize}
 Note that these conditions do not apply to $\Psi(x,t)$ which need not be continuous.
-
-Some further observations left as exercises (See Griffith's problems 2.1 and 2.2)
-\begin{itemize}
-\item For normalizable solutions, the separation constant $E$ must be real.
-\item $\psi(x)$ can always be taken as a real function.
-\item If $V(x)$ is an even function, then the general solutions $\psi(x)$ can be constructed as either even or odd solutions.
-\item For normalizable solutions, $E$ must be greater than the minimum value of $V(x)$.
-\end{itemize}
-\noindent
-The separable solutions are important solutions because:
-\begin{itemize}
-\item They represent {\bf stationary states}:  even though the ``full'' wave function
-\begin{equation*}
-\Psi(x,t) = \phi(t) \, \psi(x) = e^{-iEt/h} \, \psi(x)
-\end{equation*}
-has a time dependence, the probability density is constant with time:
-\begin{eqnarray*}
-|\Psi(x,t)|^2 &=& \left(e^{-iEt/h} \, \psi(x)\right)^* \; \left(e^{-iEt/h} \, \psi(x)\right)\\[8pt]
-&=& e^{iEt/h-iEt/h} \, \psi^*(x) \psi(x)\\[8pt]
-&=& | \psi(x) |^2
-\end{eqnarray*}
-This means that every expectation value is constant wrt time as well.  It also follows that:
-\begin{equation*}
-\int_{-\infty}^{+\infty}\, |\psi(x)|^2 dx = 1\\
-\end{equation*}
-\item They represent {\bf states of definite total energy:} the expectation value for the total energy of a separable solution is:
-\begin{eqnarray*}
-\braket{E} &=& \int_{-\infty}^{+\infty}\, \Psi^*(x,t) \, \hat{H} \, \Psi(x,t) \; dx \\[8pt]
-           &=& \int_{-\infty}^{+\infty}\, \psi^*(x) \, \hat{H} \, \psi(x) \; dx \\[8pt]
-           &=& \int_{-\infty}^{+\infty}\, \psi^*(x) \, E \, \psi(x) \; dx \\[8pt]
-           &=& E \int_{-\infty}^{+\infty}\, |\psi(x)| \; dx \\[8pt]
-           &=& E           
-\end{eqnarray*}
-Remember that we just chose $E$ as the symbol for the constant value when using separation of variables.  This shows why we choose $E$, as that constant is the expectation value of the total energy.  Now calculate in a similar fashion:
-\begin{eqnarray*}
-\braket{E^2} &=& \int_{-\infty}^{+\infty}\, \Psi^*(x) \, \hat{H}^2 \, \Psi(x) \; dx \\[8pt]
-           &=& E^2
-\end{eqnarray*}
-From which it follows:
-\begin{equation*}
-\sigma^2_H = \braket{E^2} - \braket{E}^2 = E^2 - E^2 = 0
-\end{equation*}
-This means that every measurement of the particles total energy will yield the result $E$.
-\item There is more, but (unlike Griffiths) we will leave those features for later.
-\end{itemize}
 
 \section{The Harmonic Oscillator}
 
@@ -256,7 +211,7 @@ with the index in the sum changed to $n$ (for simplicity below) and where the fi
 $$\frac{d^2h}{du^2} = \sum_{m=0}^{\infty} (m+2) (m+1) a_{m+2} u^{m}$$
 and the TISE for $h(u)$ becomes:
 $$\sum_{m=0}^{\infty} \left[(\epsilon-1)\;a_m -2 \, m \, a_m + (m+2) (m+1) a_{m+2} \right] u^{m} = 0$$
-to be zero everywhere, the coefficients of every power of $u$ must vanish, leading to:
+to be zero everywhere, the coefficients of every power of $u$ must vanish\footnote{Consider the sum as a function $f(u)=0$.  So all the derivatives vanish everywhere as well, and so $f^{(n)}(0) = 0$.}, leading to:
 $$(\epsilon-1)\;a_m -2 \, m \, a_m + (m+2) (m+1) a_{m+2} = 0$$
 which can be written as the recursion relationship:
 \begin{equation}
@@ -324,45 +279,44 @@ $$u \equiv \sqrt{\frac{m \omega}{\hbar}} x$$.
 \section{Homework Problems}
 
 \noindent
-{\bf Problem 1:} Write a program to determine the coefficients of the Hermite polynomial $H_n(\epsilon)$ for any degree $n$ by using the recursion formula from
+{\bf Problem 1:} Write a program to determine the coefficients of the Hermite polynomial $H_n(u)$ for any degree $n$ by using the recursion formula from
 the power series solution.  Remember to apply the normalization
-condition for each $H_n(\epsilon)$ that the coefficient of
-$\epsilon^n$ is $2^n$.  Print the non-zero coeffients for $n=0$ to $5$ and
-compare to e.g. Griffith's Table 2.1\\[5pt]
+condition for each $H_n(u)$ that the coefficient of
+$\epsilon^n$ is $2^n$.  Print the non-zero coefficients for $n=0$ to $5$ and
+compare to e.g. Griffiths Table 2.1\\[5pt]
 
 \noindent
-{\bf Problem 2:} Write a program to determine the coefficients of the Hermite polynomial $H_n(\epsilon)$ for any degree $n$ by using the generating function:
+{\bf Problem 2:} Write a program to determine the coefficients of the Hermite polynomial $H_n(u)$ for any degree $n$ by using the generating function:
 $$\exp(-z^2+2zu) = \sum_{n=0}^{\infty} \frac{z_n}{n!}H_n(u)$$
-Print the non-zero coeffients for $n=0$ to $5$ and
-compre to e.g. Griffith's Table 2.1\\[5pt]
-
+Print the non-zero coefficients for $n=0$ to $5$ and
+compare to e.g. Griffiths Table 2.1\\[5pt]
 
 \noindent
 {\bf Problem 3:} (A) Write a program to calculate the Hermite polynomial
-$H_n(\epsilon)$ for a particular value $\epsilon$ and for any degree
+$H_n(u)$ for a particular value $u$ and for any degree
 $n$ by using the recursion formula:
-$$H_{n+1}(\epsilon) = 2 \epsilon H_n(\epsilon) - 2 n H_{n-1}(\epsilon)$$.\\
+$$H_{n+1}(u) = 2 u H_n(u) - 2 n H_{n-1}(u)$$.\\
 
 \noindent
 (B) Test your function {\bf thoroughly} against the Python library results
 (scipy.special.hermite) using randomly chosen values.  That is, pick a
 random integer $n$ from $0$ to some reasonable maximum test value $N$, then
-pick a randomly choosen $\epsilon$ value from some reasonably range,
+pick a randomly chosen $u$ value from some reasonably range,
 and compare the results of your program with that of the python library.  You
 want to do this many many times, so you'll have to figure out a way to
-handle the fact the agreement will not be pefect and yet still say
+handle the fact the agreement will not be perfect and yet still say
 something definitive.\\[5pt]
 
 \noindent
-{\bf Problem 5:} Plot the wave function $\psi_n(x)$ and
+{\bf Problem 4:} Plot the wave function $\psi_n(x)$ and
 $|\psi_n(x)|^2$ for $n=0,1,2,3$.  You are aiming to reproduce Fig
-2.7(a) in Griffith's.  (Let me know if you don't have access to this textbook
+2.7(a) in Griffiths.  (Let me know if you don't have access to this textbook
 and I will include photocopies of the needed figures on the course
 site.)  Remember that $\psi_n(x)$ is not just the Hermite polynomical!
 You may use the python library for the Hermite polynomials.\\[5pt]
 
 \noindent
-{\bf Problem 6:} Numerically verify that the $\psi_n(x)$ are
+{\bf Problem 5:} Numerically verify that the $\psi_n(x)$ are
 orthonormal.  Keep to $n<10$.  (Depending on your approach, you won't
 get exactly 1 and 0 so you will need some way to handle this and still
 give a definitive answer...there are many valid approaches)\\[5pt]
