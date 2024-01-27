@@ -24,7 +24,7 @@
 \newcommand{\ddpsidx}{\ensuremath{ \frac{d^2 \psi}{dx^2} }}
 
 
-\title{PHY 115L \\ Shooting Method }
+\title{PHY 115L \\ Wag-the-Dog }
 \author{Michael Mulhearn}
 
 \maketitle
@@ -159,8 +159,12 @@ For the harmonic oscillator with
 \end{equation*}
 we take our characteristic length scale as:
 $$a \equiv \sqrt{\frac{\hbar}{m \omega}}$$
-and so:
+and:
 $$E_0 = \frac{\hbar^2}{2ma^2} = \frac{\hbar \omega}{2}$$
+so that in our system of units:
+$$\frac{V(x)}{E_0} = \frac{1}{2}m\omega^2 \, x^2 \cdot \frac{2}{\hbar \omega} = \frac{x^2}{a^2}$$
+The allowed energies in our system of units\footnote{Notice that our choice of $a$ has ensured that $E_n/E_0 = 1$ for $n=0$} are:
+$$\frac{E_n}{E_0} = 2n+1  \hspace{2cm n=0,1,2,\ldots}$$
 
 \section{Homework Problems}
 
@@ -176,8 +180,45 @@ is not stable:  the amplitude of the wave function is changing!\\[5pt]
 (C) Make a copy of the function {\tt tise\_rk1} called {\tt tise\_rk4} and modify it to implement the 4th order Runge-Kutta method.  You should not need to change much!  Just the calculation of the $K_i$ and the weighted average!  Make a plot comparing the output of RK-1 and RK-4 for the same step size that illustrates the instability of Euler's method. \\[5pt]
 (D) As written, the software will only integrate an even solution.  Modify your code so that it can handle odd solutions as well.  In the same plot, show the {\em properly normalized wave functions} for $n=1,2,3,4,5,6$ from $x=-1/2$ to $x=1/2$.  Be clever about how you deduce the wave function in $[-1/2,0]$.\\[5pt]
 
-{\bf Problem 2-4:}
-(There will be a few more problems that will explore the tool you have just created, but I wanted to post this ASAP so you can get started...)
+\noindent
+{\bf Problem 2:}  In this problem, we'll apply RK-4 numerical integration to the harmonic oscillator potential.  You should be able to reuse the same RK-4 function that you developed for Problem 1 without any changes.  You will only need to change the definition of the potential to $V(x) = x^2$ in our system of units with $a=1$.\\[5pt]
 
+\noindent
+(A) Numerically integrate the harmonic oscillator potential from $x=0$ to $x=5$ using $h=0.01$ for the four lowest energy solutions.  Take care to properly set the boundary conditions for even and odd solutions.  Plot the normalized wave functions for these four solutions from $x=-5$ to $x=5$.\\[5pt]
+
+\noindent
+(B) Extend your numerical integration further, say, out to $x=10$, plot the results, and show that your wave functions begin to diverge from the $x$-axis.\\[5pt]
+
+\noindent
+Just what is going on here?  Notice that if we have for some $x_0$:
+$$\psi(x_0) = \left.\frac{d\psi}{dx}\right\rvert_{x_0} = 0$$
+then the TISE shows that:
+$$\psi(x) = 0$$
+for all $x$.  The wave functions at the allowed energies approach this behavior asymptotically, so that both $\psi(x)$ and $d\psi/dx$ go to zero.  This is trivial to consider analytically (just the line $y=0$) but it is a bit of a nightmare computationally, because round-off errors will always dominate as quantities approach zero.  You should see that all of your solutions approach the asymptotic behavior, run along the $x$-axis for awhile, and only then begin to diverge (due to round off errors).  Fortunately, we don't need to rely on our numerical integration to predict what happens after the wave function and its derivative become very small, because we already know what happens at that point all the way out to infinity.  {\bf Therefore, you are justified to simply cut off your numerical simulation once the wave function and derivative are small!}\\[5pt]
+
+\noindent
+{\bf Problem 3:}
+So far, we have already known the allowed energies ahead of time, but how can we determine them using computational techniques in cases where we do not?  Before considering that case, let's practice first on this potential.  We'll use the ``wag-the-dog'' method.  For each energy $E$ we integrate the TISE out to $x=b$ for some large value of $b$.  We note the sign of $\Psi(b)$, and find the energies $E$ at which the sign of $\Psi(b)$ changes... like the tail of a dog wagging up and down.  Numerically, we are finding the roots of the function:
+$$f(E) \equiv \Psi_E(b)$$
+To implement the wag-the-dog method, you can use the {\tt scipy.optimize.bisect} function.  You'll need to define a helper function (e.g. {\tt f(E)}) that takes a single parameter $E$, then runs your numerical integration out to $x=b$, and returns $\psi(b)$.  Note that the value $\psi(b)$ in the example function {\tt tise\_rk1} is available as {\tt PSI[-1]} (i.e. the last entry in the array of $\psi$ values returned by the numerical simulation).
+I find it convenient to define two helper functions {\tt feven(E)} and {\tt fodd(E)} which set up the numerical integration for even and odd solutions respectively.  You'll also want to set the parameter {\tt xtol=1E-4} to save time: we don't need {\tt bisect} finding 
+the roots out to 16 significant digits!
+
+\noindent
+(A) Find the first six allowed energies of the harmonic oscillator potential using the wag-the-dog method.\\[5pt]
+
+\noindent
+{\bf Problem 4:}  In this problem we'll consider a potential for which we have not yet found the allowed energies, the saw tooth potential:
+$$V(x) = |x|$$
+in our units where $a=1$.\\[5pt]
+
+\noindent
+(A) Find the first six allowed energies of the saw tooth potential using the wag-the-dog method.\\[5pt]
+
+\noindent
+(B) Plot the properly normalized wave functions for the first six allowed energies of the saw tooth potential.\\[5pt]
+
+\noindent
+These solutions are the Airy functions, which exhibit both exponential and sinusoidal behavior.  They are used in the WKB approximation near the classical turning point, when the walls of the potential are not infinitely steep.
 
 \end{document}
