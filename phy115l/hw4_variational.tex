@@ -1,0 +1,81 @@
+\documentclass[12pt]{book}
+
+\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.5in]{geometry}
+\usepackage{cite}
+\usepackage{slashed}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{braket}
+\usepackage{pythonhighlight}
+\begin{document}
+
+\newcommand{\ihbar}{\ensuremath{i \hbar}}
+\newcommand{\Pss}{\ensuremath{\Psi^*}}
+\newcommand{\dPsidt}{\ensuremath{ \frac{\partial \Psi}{\partial t} }}
+\newcommand{\dPsidx}{\ensuremath{ \frac{\partial \Psi}{\partial x} }}
+\newcommand{\ddPsidx}{\ensuremath{ \frac{\partial^2 \Psi}{\partial x^2} }}
+\newcommand{\dPssdt}{\ensuremath{ \frac{\partial \Psi^*}{\partial t} }}
+\newcommand{\dPssdx}{\ensuremath{ \frac{\partial \Psi^*}{\partial x} }}
+\newcommand{\ddPssdx}{\ensuremath{ \frac{\partial^2 \Psi^*}{\partial x^2} }}
+
+\newcommand{\dphidt}{\ensuremath{ \frac{d \phi}{dt} }}
+\newcommand{\dpsidx}{\ensuremath{ \frac{d \psi}{dx} }}
+\newcommand{\ddpsidx}{\ensuremath{ \frac{d^2 \psi}{dx^2} }}
+
+
+\title{PHY 115L \\ Variational Method to Find the Ground State }
+\author{Michael Mulhearn}
+
+\maketitle
+
+\setcounter{chapter}{0}
+\chapter{Variational Approach}
+
+We will use a variational approach to find the ground state $\Psi_0(x)$ of the Time-Independent Schr\"odinger Equation (TISE):
+$$\hat{H} \; \psi_0(x) = E_0 \; \psi_0(x)$$
+where the Hamiltonian operator is defined by:
+\begin{equation}
+\hat{H} = \frac{\hbar^2}{2 m} \; \frac{d^2}{dx^2} \, + \, V(x)
+\end{equation}
+As before, we will use a system of units based on a characteristic length scale $a$ and an energy:
+\begin{equation}
+\epsilon \equiv \frac{\hbar^2}{2ma^2}
+\end{equation}
+(In previous homeworks we called this quantity $E_0$ but this could too easily be confused with the ground state!)  With these units, we have:
+\begin{equation}
+\frac{\hat{H}}{\epsilon} = a^2\frac{d^2}{dx^2} + \frac{V(x)}{\epsilon}
+\end{equation}
+
+We will calculate second derivatives using a second-order approximation:
+$$f''(x) = \frac{f(x+h)-2f(x)+f(x-h)}{h^2}$$
+We'll assume that we calculate our function with a constant spacing so that:
+$$x_j = x_0 + h * j$$
+and given $y$ values:
+$$y_j = f(x_j)$$
+we can calculate the second derivative as:
+$$f(x_j) = \frac{y_{j + 1} - 2 y_j + y_{j-1}}{h^2}$$
+One challenge with this technique is how to handle the edges.  As we are going to be considering functions that go to zero nicely at the boundary, we could simply set the function and its derivative to zero at the edges.  Another approach is to use periodic boundary conditions:  $y_{-1} = y_{n}$ and $y_{n+1}=y_{0}$.  This can be handled nicely in python using {\tt np.roll}.  An advantage of this approach is that we can test our function with periodic functions, as in Problem 1.
+
+Our technique is based on the observation that:
+$$\braket{\psi|\hat{H}|\psi} \geq E_0$$
+for all $\psi$.  Which you can see by expanding $\ket{\psi}$ in the complete set of energy eigenstates:
+$$\ket{\psi} = \sum c_n \ket{E_n}$$
+so:
+$$\braket{\psi|\hat{H}|\psi} = \sum |c_n|^2 E_n = |c_0|^2 E_0 + \sum_{n>0} |c_n|^2 E_n$$
+but:
+$$\sum |c_n|^2 = 1 \;\; \implies \;\; |c_0|^2 = 1 - \sum_{n>0} |c_n|^2$$
+so:
+$$\braket{\psi|\hat{H}|\psi} = E_0 + \sum_{n>0} |c_n|^2 (E_n - E_0)$$
+but as $E_n \geq E_0$ we have:
+$$\braket{\psi|\hat{H}|\psi} \geq E_0$$
+
+\section{Homework Problems}
+
+\noindent
+{\bf Problem 1:}  Implement a function that, when provided with an array of y values, calculates the second derivative using a second-order numerical technique as described above.  Validate your function for $f(x) = \sin(x)$ and $f(x) = \cos(x)$.  For the periodic boundary conditions to work properly, you'll want to use the $x$ interval $[0, 2\pi-h]$.  That is, you'll want to omit to the $2\pi$ value, which you can do conveniently with the {\tt endpoint=False} option to {\tt np.linspace}.  (You can certainly check what happens if you include the $2\pi$ point if you like... you'll get an artifact in the derivative at the boundary)
+
+
+
+
+\end{document}
