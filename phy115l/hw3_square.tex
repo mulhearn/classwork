@@ -24,7 +24,7 @@
 \newcommand{\ddpsidx}{\ensuremath{ \frac{d^2 \psi}{dx^2} }}
 
 
-\title{PHY 115L \\ Finite Square Well}
+\title{PHY 115L \\ Finite Square-Well}
 \author{Michael Mulhearn}
 
 \maketitle
@@ -124,17 +124,21 @@ which means the allowed energies are:
 $$E + V_0 = \frac{n^2\pi^2\hbar^2}{2m(2a)^2}$$
 which (relative to the bottom of the well) are the energies of the infinite square well.
 
+\newpage
 \section{Homework Problems}
+
+The questions posed (in paranthesis) in this assignment are there to guide your thinking about the problem.  You need not record an answer, but do think about your answer to the questions.\\[5pt]
 
 \noindent
 {\bf Problem 1:}  The allowed energies for even solutions of the finite square well potential can be determined by finding the roots of the equation:
-$$f_{\rm even}(z) = \sqrt{z_0^2-z^2} \; - \; \tan(z)$$
+$$f_{\rm even}(z) = \sqrt{(z_0/z)^2-1} \; - \; \tan(z)$$
+This is a transcendental equation with no known analytic solution.  In this problem, we will solve it numerically.
 
 \noindent
 (A) For $z_0 = \pi/2$ find the root of the $f_{\rm even}$ and compute the corresponding allowed energy.  This is the only allowed energy for this narrow and shallow well.\\[5pt]
 
 \noindent
-(B) Determine the equation $f_{\rm odd}(z)$ corresponding to odd solutions.\\[5pt]
+(B) Determine the equation $f_{\rm odd}(z)$ corresponding to odd solutions, and implement it as python function.\\[5pt]
 
 \noindent
 (C) For $z_0 = \pi$, find one root of $f_{\rm even}$ and one root of $f_{\rm odd}$, and compute the corresponding allowed energies (in units of $E_0$).\\[5pt]
@@ -143,26 +147,34 @@ $$f_{\rm even}(z) = \sqrt{z_0^2-z^2} \; - \; \tan(z)$$
 (D) For $z_0 = 3\pi$, find all allowed energies for even and odd solutions.\\[5pt]
 
 \noindent
-(E) Show that for large $z_0$, the first four allowed energies correspond to a kinetic energy:
+(E) Use your code to demonstrate that for large $z_0$, the first four allowed energies correspond to a kinetic energy:
 $$K/E_0 = E + z_0^2$$
 which approaches the first four allowed energies of the infinite square well potential.  Hint:  these corresponding to roots
-$$z = \frac{n \pi}{2} \hspace{2cm} n=1,2,3,4.$$\\[5pt]
+$$z = \frac{n \pi}{2} \hspace{2cm} n=1,2,3,4.$$
 
 \noindent
-{\bf Problem 2:} Use your RK-4 numerical integration to find the even and odd solutions for $z^0 = \pi$.  Compare to your results to the results of Problem 1, and plot the normalized wave functions.\\[5pt]
+    {\bf Problem 2:} Use your RK-4 numerical integration to find the even and odd solutions for $z_0 = \pi$.  (Are your results consistent with the results ofof Problem 1?)  Plot the normalized wave functions.\\[5pt]
 
 \noindent
-{\bf Problem 3:}  In this problem, you will model two finite square wells of width $2a$ with $z_0=\pi/2$ separated by a small distance $2 \delta a$ where $\delta$ is a small dimensionless quantity.\\[5pt]
+{\bf Problem 3:}  In this problem, you will model two finite square wells of width $2a$ with $z_0=\pi/2$ separated by a distance $2 \delta a$ where $\delta$ is a dimensionless quantity.\\[5pt]
 
 \noindent
-(A) Use your RK-4 numerical integration to find an even solution for $\delta=0.1$.  Hint: the allowed energy will be near your solution to 1A.  Plot the results.\\[5pt]
+(A) Use your RK-4 numerical integration to find an even solution for $\delta=3$.  Hint: the allowed energy will be near your solution to 1A.  Plot the results.\\[5pt]
 
 \noindent
-(B) Use your RK-4 numerical integration to find an odd solution for $\delta=0.1$.  Hint: the allowed energy will be near your solution to 1A.  Plot the results.  (Are you surprised you now have two solutions?)\\[5pt]
+(B) Use your RK-4 numerical integration to find an odd solution for
+$\delta=3$. Plot the results.  (Do you understand why you now have two
+solutions, one even and one odd, while in 1A you had only one, even,
+solution?)\\[5pt]
 
 \noindent
-(C) The difference between the energy of the even solution and your answer to Problem 1A can be though of as a bonding energy.  Plot the bonding as a function of $\delta$.\\[5pt]
+(C) The difference between the energy of the even solution and your answer to Problem 1A can be thought of as a bonding energy.  Plot the bonding energy as a function of $\delta$ for $\delta=0$ to $\delta=3$.\\[5pt]
 
+\noindent
+(D) Plot the normalized wave function for two even solutions, one with with $\delta=3$ and one with $\delta=0.5$.\\[5pt] 
+
+\noindent
+(E) Plot the normalized wave function for two odd solutions, one with with $\delta=3$ and one with $\delta=0.5$.  
 
 \end{document}
 

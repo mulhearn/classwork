@@ -70,6 +70,28 @@ $$\braket{\psi|\hat{H}|\psi} = E_0 + \sum_{n>0} |c_n|^2 (E_n - E_0)$$
 but as $E_n \geq E_0$ we have:
 $$\braket{\psi|\hat{H}|\psi} \geq E_0$$
 
+\begin{itemize}
+\item Choose the range $[a,b]$ of $x$ wide enough so that the wave-function can be considered zero outside of this range.
+\item Divide $[a,b]$ into $n$ discrete points, with
+$$x_j = a + h\,j$$
+for $0 \leq j < n$ and step size $h = (b-a)/n$.
+\item Choose a starting function $\psi_i(x)$.
+\item Construct an array of $y$ values from:
+  $y_i = \psi_i(x)$
+\item Set $y_0 = y_{n-1} = 0$
+\item Normalize the function represented by $y_i$, by find the appropriate scale factor such that:
+$$h \, \sum_j y_j^2 = 1$$
+\end{itemize}
+Next we iterate as needed, doing the following:
+\begin{itemize}
+\item Choose a random integer n from $1$ to $n-2$ inclusive (notice this avoids the end points, which we are fixing to zero)
+\item Choose a random (floating point) value $delta y$ from 0 to $\Delta y$, where $\Delta y$ is a parameter indicating the maximum amount of change in each iteration.
+\item Put $y_i \to y_i + \delta y$
+\item Normalize the $y$ values as above
+\item Calculate the expectation value for the energy $\braket{y|\hat{H}|y}$.
+\item If the expectation value for the energy has decreased, keep the changes to wave function.  If not, discrard the change from this iteration.
+\end{itemize}  
+
 \section{Homework Problems}
 
 \noindent
