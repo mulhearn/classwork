@@ -1,0 +1,78 @@
+\documentclass[12pt]{article}
+
+\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.5in]{geometry}
+\usepackage{cite}
+\usepackage{slashed}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{braket}
+\usepackage[american,fulldiode]{circuitikz}
+
+\begin{document}
+\newcommand{\ihbar}{\ensuremath{i \hbar}}
+\newcommand{\dPsidt}{\ensuremath{ \frac{\partial \Psi}{\partial t} }}
+\newcommand{\dPsidx}{\ensuremath{ \frac{\partial \Psi}{\partial x} }}
+\newcommand{\ddPsidx}{\ensuremath{ \frac{\partial^2 \Psi}{\partial x^2} }}
+\newcommand{\dPssdt}{\ensuremath{ \frac{\partial \Psi^*}{\partial t} }}
+\newcommand{\dPssdx}{\ensuremath{ \frac{\partial \Psi^*}{\partial x} }}
+\newcommand{\ddPssdx}{\ensuremath{ \frac{\partial^2 \Psi^*}{\partial x^2} }}
+
+\newcommand{\dphidt}{\ensuremath{ \frac{d \phi}{dt} }}
+\newcommand{\dpsidx}{\ensuremath{ \frac{d \psi}{dx} }}
+\newcommand{\ddpsidx}{\ensuremath{ \frac{d^2 \psi}{dx^2} }}
+
+
+\date{\vspace{-5ex}}
+
+\title{Homework Assignment 3 \\ ``Some Toy!''}
+
+\maketitle
+
+\noindent
+All problems are graded on effort only.\\
+
+\noindent
+{\bf Griffiths: P6.8, P6.12, P6.15}\\[5pt]
+
+\noindent
+{\bf These are serious problems}, particularly P6.15, so leave yourself plenty
+of time!\\[5pt] 
+
+\noindent
+{\bf Note on P6.12:} Draw all six amplitudes, but you need only calculate one of the amplitudes.  (The rest can be reasoned out from symmetry, but you need not do so.)\\[5pt]
+
+\noindent
+{\bf Hints on P6.15:} This is an extremely challenging problem.  But remember the upside. We do these incredibly difficult calculations and they open up the subatomic world to experimental inquiry: totally worth it!  Plus I will give you plenty of help.\\[5pt]
+
+\noindent
+Let's use a consistent labeling to keep things clear below.  Incoming particles: $A$ has four-momentum $p_1$, $B$ has $p_2$.  Outgoing particles: $B$ has $p_3$ and $A$ has $p_4$.  The scattering angle $\theta$ is the angle between the incoming and outgoing $A$, so:
+$$\vec{p_1} \cdot \vec{p_4} = |\vec{p_1}| |\vec{p_4}| \cos\theta$$\\
+
+\noindent
+{\bf P6.15a}: The outgoing particles are not identical, so the second diagram does not come from crossing the outgoing particles (as in $A+A \to B+B$).  This process still has two diagrams, one with the internal $C$ line horizontal (we call this an $s$-channel process) and one with internal $C$ line vertical (we call this a $t$-channel process).  Your answer will look like this:
+$${\cal M} = g^2 \left[\frac{1}{(p_1+p_2)^2-m_C^2c^2} + X \right]$$
+where $X$ is something similar to the first term.  You might even be able to guess it if I tell you that $s$-channel refers to the invariant quantity (total CMS energy) $s=(p_1+p_2)^2c^2$ and $t$-channel refers to the invariant quantity $t\equiv(p_1-p_3)^2c^2$.\\[5pt]
+
+\noindent
+{\bf P6.15b}: Notice that now $\vec{p_2}=-\vec{p_1}$ and $\vec{p_4}=-\vec{p_3}$.  Also:
+$$|\vec{p_1}| = |\vec{p_2}| = |\vec{p_3}| = |\vec{p_4}| \equiv p$$  First show that:
+$$\frac{s}{c^2} = (p_1+p_2)^2 = 4 \frac{E^2}{c^2}$$
+and
+$$\frac{t}{c^2} = (p_1-p_3)^2 = -2 p^2 \, (1 + \cos\theta) = -4 p^2 \cos^2\left( \frac{\theta}{2}\right)$$
+Make sure your answer for $d\sigma/d\Omega$ is a function of $E$ and $\theta$ variables only.  If you like, you can simplify a factor like:
+$$\left( \frac{a}{b} + \frac{c}{d}\right)^2 \to \left(\frac{ad+cd}{bd}\right)^2$$
+but it won't get that much prettier.\\[5pt]
+
+\noindent
+{\bf P6.15c:} Use P6.8.  Also show that in the limit of large $m_B$:
+$$s = t = m_B^2 c^4$$
+
+\noindent
+{\bf P6.15d:} Easy integral!  No $\theta$ or $\phi$ dependence!
+
+\end{document}
+
+
+
+
