@@ -43,7 +43,7 @@ As before, we will use a system of units based on a characteristic length scale 
 \end{equation}
 (In previous homeworks we called this quantity $E_0$ but this could too easily be confused with the ground state!)  With these units, we have:
 \begin{equation}
-\frac{\hat{H}}{\epsilon} = a^2\frac{d^2}{dx^2} + \frac{V(x)}{\epsilon}
+\frac{\hat{H}}{\epsilon} = -a^2\frac{d^2}{dx^2} + \frac{V(x)}{\epsilon}
 \end{equation}
 
 \section{Numerical Method for Finding the Second Derivative}
@@ -90,7 +90,7 @@ $$h \, \sum_j y_j^2 = 1$$
 Next we iterate as needed, doing the following at each iteration:
 \begin{itemize}
 \item Choose a random integer n from $1$ to $n-1$ inclusive (notice this avoids the end points, which we are fixing to zero).
-\item Choose a random (uniform) value $delta y$ from 0 to $\Delta y$, where $\Delta y$ is a parameter indicating the maximum amount of change in each iteration.
+\item Choose a random (uniform) value $\delta y$ from $-\Delta y$ to $\Delta y$, where $\Delta y$ is a parameter indicating the maximum amount of change in each iteration.
 \item Put $y_i \to y_i + \delta y$
 \item Normalize the $y$ values as above
 \item Calculate the expectation value for the energy $\braket{y|\hat{H}|y}$.
