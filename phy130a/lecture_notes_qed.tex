@@ -27,6 +27,122 @@ QED \\
 
 \section{Solutions to the Dirac Equation}
 
+We'll find solutions to the Dirac equation:
+$$i\hbar \gamma^u \partial_u \psi -mc \psi = 0$$
+Let's first consider solutions with $\vec{p}=0$, so:
+$$\frac{\partial\psi}{\partial x} = \frac{\partial\psi}{\partial y} = \frac{\partial\psi}{\partial z} = 0$$
+and the Dirac equation becomes:
+$$\gamma^0 \frac{\partial \psi}{\partial t} = -i \frac{mc^2}{\hbar} \psi $$
+if we wrote this out the long way, it looks like:
+$$
+\begin{pmatrix} 
+1 & 0 & 0 & 0\\
+0 & 1 & 0 & 0\\
+0 & 0 &-1 & 0\\
+0 & 0 & 0 &-1\\
+\end{pmatrix}
+\frac{\partial}{\partial t}
+\begin{pmatrix} 
+\psi_1\\
+\psi_2\\
+\psi_3\\
+\psi_4\\
+\end{pmatrix}
+=
+-i \frac{mc^2}{\hbar}
+\begin{pmatrix} 
+\psi_1\\
+\psi_2\\
+\psi_3\\
+\psi_4\\
+\end{pmatrix}
+$$
+Or:
+$$
+\begin{pmatrix} 
+\displaystyle \frac{\partial \psi_1}{\partial x}\\[8pt]
+\displaystyle \frac{\partial \psi_2}{\partial x}\\[8pt]
+\displaystyle -\frac{\partial \psi_3}{\partial x}\\[8pt]
+\displaystyle -\frac{\partial \psi_4}{\partial x}\\[8pt]
+\end{pmatrix}
+=
+-i \frac{mc^2}{\hbar}
+\begin{pmatrix} 
+\psi_1\\
+\psi_2\\
+\psi_3\\
+\psi_4\\
+\end{pmatrix}
+$$
+Ignoring normalization for now, their are four independent solutions:
+$$
+\psi^{(1)} = \exp\left(- i \frac{mc^2}{\hbar} t\right)
+\begin{pmatrix} 
+1\\
+0\\
+0\\
+0\\
+\end{pmatrix},
+\hspace{1cm}
+\psi^{(2)} = \exp\left(- i \frac{mc^2}{\hbar} t\right)
+\begin{pmatrix} 
+0\\
+1\\
+0\\
+0\\
+\end{pmatrix},
+$$
+and
+$$
+\psi^{(3)} = \exp\left(+ i \frac{mc^2}{\hbar} t\right)
+\begin{pmatrix} 
+0\\
+0\\
+1\\
+0\\
+\end{pmatrix},
+\hspace{1cm}
+\psi^{(4)} = \exp\left(+ i \frac{mc^2}{\hbar} t\right)
+\begin{pmatrix} 
+0\\
+0\\
+0\\
+1\\
+\end{pmatrix},
+$$
+Notice that $\psi_1$ and $\psi_2$ have the usual quantum mechanical time dependence for $E=mc^2$.  But $\psi_3$ and $\psi_4$ appear to have $E=-mc^2$.  We interpret these as anti-particles with {\bf positive} energy.
+
+But why do we have two particle solutions and two anti-particle solutions?  The gamma matrices feature the Pauli matrices, with we can define the $z$ component of spin operations as:
+$$S_z \equiv \frac{\hbar}{2} \sigma_3 = \frac{\hbar}{2} \begin{pmatrix}
+1 & 0 \\
+0 & -1 \\
+\end{pmatrix}
+$$
+The eigenstates are spinors of spin up and down:
+$$\ket{\uparrow} = \begin{pmatrix} 1 \\ 0 \\ \end{pmatrix},
+\hspace{2cm}
+\ket{\downarrow} = \begin{pmatrix} 0 \\ 1 \\ \end{pmatrix}
+$$
+So we strongly suspect that what we have is a particle spinor (two components) and an anti-particle spinor (two components) which leads to the four component bi-spinor solution the Dirac equation.  But to make sense of things, we need to know what the $S_z$ operator is for the bi-spinor space.
+
+Suppose we have a group $G$ with $a,b,c \in G$ and $ab = c$.  We can always build a new group by taking putting each element of $G$ along the diagonal of a 2x2 matrix, for example:
+$$a \to \begin{pmatrix} a & 0 \\ 0 & a \\ \end{pmatrix}$$
+the new group will preserve all the features of the old group because:
+$$\begin{pmatrix} a & 0 \\ 0 & a \\ \end{pmatrix}
+\begin{pmatrix} b & 0 \\ 0 & b \\ \end{pmatrix}
+= \begin{pmatrix} ab & 0 \\ 0 & ab \\ \end{pmatrix} = 
+\begin{pmatrix} c & 0 \\ 0 & c \\ \end{pmatrix}$$
+We can therefore construct the $S_z$ operator appropriate for a bi-spinor by recycling the definition appropriate for a spinor:
+$$S_z = \frac{h}{2} \begin{pmatrix} \sigma_3 & 0 \\ 0 & \sigma_3 \end{pmatrix}
+= \begin{pmatrix} 
+1 & 0 & 0 & 0 \\ 
+0 &-1 & 0 & 0 \\ 
+0 & 0 & 1 & 0 \\ 
+0 & 0 & 0 &-1 \\ 
+\end{pmatrix}
+$$
+With this operator in hand, we see that $\psi^{(1)}$ and $\psi^{(3)}$ have spin up, and 
+$\psi^{(2)}$ and $\psi^{(4)}$ have spin down.
 
 \section{A Remarkable Matrix}
 Let's start by defining a matrix $S$ and exploring its properties:
