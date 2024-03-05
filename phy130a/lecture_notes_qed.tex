@@ -18,12 +18,174 @@ QED \\
 
 \maketitle
 
+\setcounter{chapter}{3}
+\chapter{Relativistic Kinematics}
+
+\section{The Lorentz Transformation and Four-Vectors}
+
+\section{The Metric Tensor of Relativity}
+$$\Lambda^u_\alpha \Lambda^w_\beta g^{\alpha \beta} = g^{u w}$$
+
+Follows:
+$$\Lambda^u_\alpha \Lambda^w_\beta g^{\alpha \beta}g_{w \sigma} = g^{u w} g_{w \sigma}
+= \delta^{u}_{\sigma}$$
+That is:
+$$\Lambda^u_\alpha (g^{\alpha \beta} \Lambda^w_\beta g_{w \sigma}) = \delta^{u}_{\sigma}$$
+This is the tensor notation for:
+$$\Lambda(g \Lambda g) = I$$
+or
+$$g \Lambda g = \Lambda^{-1} = M$$
+or back to tensor notation:
+$$M^u_w = g^u\alpha \Lambda^\beta_\alpha g_{\beta w}$$
+
+\section{Covariant and Contravariant Vectors}
+
 \setcounter{chapter}{7}
 \chapter{QED}
 
-\section{Dirac Equation}
+\section{QM Operators revisited}
+In Non-Relativistic Quantum Mechanics we replaced the classical quantities total energy and momentum with operators:
+$$E \to i\hbar \frac{\partial}{\partial t}, \hspace{2cm}
+\vec{p} \to -i\hbar \nabla
+$$
+We can now recognize $E$ and $\vec{p}$ as part of a four vector:
+$$p^u = \left( \frac{E}{c}, \vec{p}\right) \to \left( i\hbar \frac{\partial}{\partial t},
+-i\hbar \nabla \right)$$
+Remember that the impact of raising (or lowering) an index is to multiply the spatial components by a factor of -1.  So we can write this equivalently as a covariant four-vector without the minus sign:
+$$p_u = \left( \frac{E}{c}, -\vec{p}\right) \to \left( i\hbar \frac{\partial}{\partial t},
+i\hbar \nabla \right)$$
+Which we can now write more compactly as:
+$$p_u \to i \hbar \partial_u$$
+where:
+$$\partial_u \equiv \frac{\partial}{\partial x^u}$$
+Because $p_u$ is a covariant four-vector (lower index) and $i \hbar$ is a scalar (relativistic invariant) we can immediately conclude that $\partial_u$ must also be a covariant four-vector, justifying our notation.  However, it is instructive to show that $\partial_u$ transforms as a covariant four-vector directly.  We consider how the derivative in a primed frame acts on a scalar quantity $\phi$:
+$$\widetilde{\partial_u} \phi = \frac{\partial \phi}{\partial \widetilde{x}^u} = 
+\frac{\partial x^w}{\partial \widetilde{x}^u} \frac{\partial \phi}{\partial x^w}
+$$
+We know that $x^u$ transforms as a contra-variant four-vector:
+$$\widetilde{x}^u = \Lambda^u_w x^w, \hspace{1cm} x^w = M^w_u \widetilde{x}^u$$
+where as always $M = \Lambda^{-1} = \Lambda(\beta \to -\beta)$ is the inverse Lorentz transform that brings us back to the original frame from the frame boosted by $\Lambda$.
+From this we conclude that:
+$$\widetilde{\partial_u} \phi = M^w_u \partial_w \phi$$ 
+which shows that $\delta_u$ is a covariant four-vector (you get to the prime frame via transformation $M$).
 
-\section{Matrices of the Dirac Equation}
+\section{Klein-Gordan Equation}
+One approach to developing a relativistic quantum mechanics would 
+to start with the relativistic energy equation:
+$$E^2 = p^2c^c + m^2c^4$$
+which can be written in terms of a four-vector squared as:
+$$p^u p_u - (mc)^2 = 0$$
+And make the replacement:
+$$p_u \to i \hbar \partial_u$$
+The result is the Klein-Gordan equation:
+$$-\hbar^2 \partial_u \partial^u \psi - m^2c^2 \psi = 0$$
+or equivalently:
+$$-\frac{1}{c^2} \frac{\partial^2 \psi}{\partial t^2} + \nabla^2 \psi = \left(\frac{mc}{\hbar}\right)^2 \psi$$
+This equation has several issues which can be seen from the fact that there are solutions of the form:
+$$\psi = A \sin\left(-\frac{E t}{\hbar}\right) $$
+This is a solution as long as:
+$$E^2 = (mc^2)^2 \implies E = \pm mc^2$$
+The existence of negative energy solutions is not a fatal problem (as we shall see).  The fatal flaw (for our present purposes at least) is that $\psi$ vanishes everywhere whenever
+$$\frac{E t}{\hbar} = n\pi$$
+but is non-zero at other times.  This means that $|\psi|^2$ cannot possibly represent a probability.  It is in fact possible to construct other quantities which are conserved for this equation (as probability is conserved in NRQM) but the conserved quantity is not strictly positive.
+
+Despite these shortcomings, this was the equation that Schr\"odinger started with (he was well aware of relativity!) but he discarded it when it failed to reproduce the spectrum of the hydrogen atom, and retreated to Non-Relativistic Quantum Mechanics.  The K-G equation fails here because it is not a valid description for spin 1/2 particles like the electron in a Hydrogen atom.
+
+\section{Dirac's Inspiration}
+
+For what is coming next I think it best to think about the brave mathematicians who boldly asserted that one could take the square root of negative number:
+$$\sqrt{-1} = i$$
+and carefully followed that assertion through to all of its logical consequences.  They discovered the complex numbers, complex algebra, and brought us an indispensable new tool.  Imagine trying to do Quantum Mechanics without complex numbers!  The complex numbers also gave us profound new insights.  Something very similar is about to happen here!
+
+The shortcomings of the Klein-Gordan equation result from the square of the energy in the relativistic energy equation:
+$$E^2 = p^2c^2 + m^2c^4$$
+Non-relativistic Quantum Mechanics has no such difficulties because the energy equation is:
+$$E = \frac{p^2}{2m}$$.
+Dirac considered the equation:
+$$E = \sqrt{p^2c^2 + m^2c^4}$$
+and thought that we must be able to take that square root.  When he followed that through to its logical conclusions, he discovered field theory.  Our approach, in the next section, will be based on factoring the quadratic relativistic energy equation.  So if Dirac's square root is $\alpha$, we will be factoring:
+$$0 = E^2 - \alpha^2 = (E-\alpha)(E+\alpha)$$
+
+\section{Dirac Equation}
+Following Dirac, we are attempting to factor the equation:
+$$0 = p^u p_u - m^2 c^2$$
+by finding appropriate $\gamma^u$ and $\beta^u$ such that:
+$$p^u p_u - m^2 c^2 = (\beta^u p_u + mc) (\gamma^w p_w - mc)$$
+Calculating:
+$$(\beta^u p_u + mc) (\gamma^w p_w - mc) 
+= \beta^u \gamma^w p_u p_w - m^2c^4 + mc (\gamma^w p_w - \beta^u p_u)$$
+When dealing with the last term, note that we are free to adjust the dummy indices so that:
+$$\gamma^w p_w - \beta^u p_u = (\gamma^u - \beta^u) p_u$$
+which amounts to combining terms with the same indices from two different sums.  We can therefore conclude that the unneeded and unwanted terms that are linear in $p^u$ can be eliminated simply by taking $\beta^u = \gamma^u$.  So we have now:
+$$p^u p_u - m^2 c^2 = (\gamma^u p_u + mc) (\gamma^w p_w - mc)$$
+which we will write out explicitly on both sides as:
+\begin{multline*}
+(p^0)^2-(p^1)^2-(p^2)^2-(p^3)^2-m^2c^2 \\
+= (\gamma^0)^2 (p^0)^2 + (\gamma^0)^2 (p^0)^2 + (\gamma^0)^2 (p^0)^2 + (\gamma^0)^2 (p^0)^2
+-m^2c^2 + {\rm CTs}
+\end{multline*}
+where we have neglected the cross-terms (CTs) and have used, for example, $(p_1)^2=(p^1)^2$.  We can match each term on LHS with one on the RHS if we arrange that:
+\begin{equation}
+\label{eqn:gammasq}
+(\gamma^0)^2=1, \hspace{1cm} (\gamma^1)^2=-1,  \hspace{1cm} (\gamma^2)^2=-1,
+ \hspace{1cm} (\gamma^3)^2=-1
+\end{equation}
+Then we will have equality as long as the cross-terms are all zero.  The cross terms are of form
+$$\gamma^0 \gamma^1 p_0 p_1 + \gamma^1 \gamma^0 p_1 p_0$$.
+And now we have to face a bit of reality.  The terms $p_0$ and $p_1$ are coefficients of a four vector, just numbers, so they commute.  If $\gamma^0$ and $\gamma^1$ are simply coefficients, numbers, than they commute too, and we this cross terms collapses to:
+$$2 \gamma^0 \gamma^1 p_0 p_1$$
+since the cross-terms have to be zero for all possible $p^u$, we would need $\gamma^0 \gamma^1 = 0$, which would mean either $\gamma^0 = 0$ for $\gamma^1=0$.  But this is impossible to reconcile with the condition that $(\gamma^0)^2 = 1$ and $(\gamma^1)^2 = -1$.
+But what if the $\gamma^u$ are matrices?  In this case, they need not commute, and the cross terms are of the form:
+$$(\gamma^u \gamma^w + \gamma^u \gamma^w) p_u p_w$$
+Notice that we have commuted the $p_u$ and $p_w$ which are the components of four-vectors, i.e. just numbers.  So we need matrices with the property that:
+\begin{equation}
+\label{eqn:gammacross}
+\gamma^u \gamma^w + \gamma^w \gamma^u = 0, \hspace{1cm} (u \neq w)
+\end{equation}
+Using the {\bf anti-commutator} between $A$ and $B$ defined as:
+$$\{A, B\} \equiv A B + B A$$
+we can compactly express the requirements of Equations~\ref{eqn:gammasq} and \ref{eqn:gammacross} as:
+\begin{equation}
+\label{eqn:gammaanti}
+\{\gamma^u, \gamma^w\} = \gamma^u \gamma^w + \gamma^w \gamma^u = 2 g^{uw}
+\end{equation}
+This is the defining characteristic of the gamma matrices which form the gamma group.  There are an infinite number of matrices that satisfy these requirements 
+but the smallest possible set are 4x4 in dimension.  The representation of the group that we will use is:
+\begin{equation}
+\label{eqn:gammamats}
+\gamma^0 = \begin{pmatrix} I & 0 \\ 0 & -I \end{pmatrix}, \hspace{2cm}
+\gamma^i = \begin{pmatrix} 0 & \sigma_i \\ -\sigma_i & 0 \\ \end{pmatrix}
+\hspace{1cm} (i=1,2,3)
+\end{equation}
+where $I$ is the 2x2 identity matrix:
+$$I = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} $$
+and the three $\sigma_i$ are the Pauli spin matrices:
+$$\sigma_1 = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}, \hspace{2cm}
+\sigma_2 = \begin{pmatrix} 0 & i \\ -i & 0 \end{pmatrix}, \hspace{2cm}
+\sigma_3 = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}\\
+\hspace{1cm} 
+$$
+Notice that the $\gamma$ matrices are 4x4, so written out in full:
+$$\gamma^0 = \begin{pmatrix} 
+1 & 0 & 0 & 0 \\ 
+0 & 1 & 0 & 0 \\ 
+0 & 0 &-1 & 0 \\ 
+0 & 0 & 0 &-1 \\ 
+\end{pmatrix}$$
+With a solution in hand, we now return to our original problem, which was to factor the relativistic energy equation as:
+$$p^up_u-m^2c^2 = \left( \gamma^u p_u - mc \right) \left( \gamma^w p_w + mc \right) = 0$$
+Setting either of the two factors equal to zero will set the entire equation to zero (as needed).  It only makes a superficial difference which one we choose, but the conventional choice is to set:
+$$\gamma^u p_u - mc = 0$$
+Now we can make the substitution:
+$$p_u \to i \hbar \partial_u$$
+To obtain the Dirac Equation:
+\begin{equation}
+\label{eqn:dirac}
+i\hbar\gamma^u\partial_u \psi - mc \psi = 0
+\end{equation}
+Notice that $\psi$ can not be a scalar function, for that would have us adding a scalar to a 4x4 matrix.  The simplest solution is for $\psi$ to be a four element column matrix:
+$$\psi = \begin{pmatrix} \psi_1 \\ \psi_2 \\ \psi_3 \\ \psi_4 \\ \end{pmatrix}$$
+Despite having four components, $\psi$ is {\bf not} a four-vector.  Four-vectors are defined by their transformation under a Lorentz boost, and $\psi$ does not transform like a four-vector.
 
 \section{Solutions to the Dirac Equation}
 
