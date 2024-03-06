@@ -10,7 +10,6 @@
 \begin{document}
 
 
-
 \title{PHY 130A \\ Lecture Notes: \\ 
 QED \\
 (Griffith's Chapter 7)}
@@ -161,7 +160,7 @@ where $I$ is the 2x2 identity matrix:
 $$I = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} $$
 and the three $\sigma_i$ are the Pauli spin matrices:
 $$\sigma_1 = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}, \hspace{2cm}
-\sigma_2 = \begin{pmatrix} 0 & i \\ -i & 0 \end{pmatrix}, \hspace{2cm}
+\sigma_2 = \begin{pmatrix} 0 & -i \\ i & 0 \end{pmatrix}, \hspace{2cm}
 \sigma_3 = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}\\
 \hspace{1cm} 
 $$
@@ -171,7 +170,26 @@ $$\gamma^0 = \begin{pmatrix}
 0 & 1 & 0 & 0 \\ 
 0 & 0 &-1 & 0 \\ 
 0 & 0 & 0 &-1 \\ 
-\end{pmatrix}$$
+\end{pmatrix} \;\;
+\gamma^1 = \begin{pmatrix} 
+0 & 0 & 0 & 1 \\ 
+0 & 0 & 1 & 0 \\ 
+0 &-1 & 0 & 0 \\ 
+-1& 0 & 0 & 0 \\ 
+\end{pmatrix} \;\;
+\gamma^2 = \begin{pmatrix} 
+ 0 & 0 & 0 &-i \\ 
+ 0 & 0 & i & 0 \\ 
+ 0 & i & 0 & 0 \\ 
+-i & 0 & 0 & 0 \\ 
+\end{pmatrix} \;\;
+\gamma^3 = \begin{pmatrix} 
+0 & 0 & 1 & 0 \\ 
+0 & 0 & 0 &-1 \\ 
+-1& 0 & 0 & 0 \\ 
+0 & 1 & 0 & 0 \\ 
+\end{pmatrix}.
+$$
 With a solution in hand, we now return to our original problem, which was to factor the relativistic energy equation as:
 $$p^up_u-m^2c^2 = \left( \gamma^u p_u - mc \right) \left( \gamma^w p_w + mc \right) = 0$$
 Setting either of the two factors equal to zero will set the entire equation to zero (as needed).  It only makes a superficial difference which one we choose, but the conventional choice is to set:
@@ -219,24 +237,48 @@ $$
 \psi_4\\
 \end{pmatrix}
 $$
-Or:
+But as the gamma matrices are 2x2 block matrices, it is convenient to define two spinners:
+$$\psi_A \equiv \begin{pmatrix} \psi_1\\ \psi_2\\ \end{pmatrix}, \hspace{1cm}
+\psi_B \equiv \begin{pmatrix} \psi_3\\ \psi_4\\ \end{pmatrix}
+$$
+So that the Dirac equation can be written:
 $$
 \begin{pmatrix} 
-\displaystyle \frac{\partial \psi_1}{\partial x}\\[8pt]
-\displaystyle \frac{\partial \psi_2}{\partial x}\\[8pt]
-\displaystyle -\frac{\partial \psi_3}{\partial x}\\[8pt]
-\displaystyle -\frac{\partial \psi_4}{\partial x}\\[8pt]
+I &  0\\
+0 & -I\\
+\end{pmatrix}
+\frac{\partial}{\partial t}
+\begin{pmatrix} 
+\psi_A\\
+\psi_B\\
 \end{pmatrix}
 =
 -i \frac{mc^2}{\hbar}
 \begin{pmatrix} 
-\psi_1\\
-\psi_2\\
-\psi_3\\
-\psi_4\\
+\psi_A\\
+\psi_B\\
 \end{pmatrix}
 $$
-Ignoring normalization for now, their are four independent solutions:
+Or:
+$$
+\begin{pmatrix} 
+\displaystyle \frac{\partial \psi_A}{\partial t}\\[10pt]
+\displaystyle -\frac{\partial \psi_B}{\partial t}\\[10pt]
+\end{pmatrix}
+=
+-i \frac{mc^2}{\hbar}
+\begin{pmatrix} 
+\psi_A\\
+\psi_B\\
+\end{pmatrix}
+$$
+with solutions:
+$$\psi_A(t) = \exp\left( -i\frac{mc^2t}{\hbar}\right) \psi_A(0)$$
+and 
+$$\psi_B(t) = \exp\left( +i\frac{mc^2t}{\hbar}\right) \psi_A(0)$$
+Recalling the time dependence of non-relativistic wave equations, we see that $\psi_A$ corresponds to a positive energy solution, whereas $\Psi_B$ appears to have a negative energy.  We interpret $\psi_B$ as a positive energy anti-particle with time dependence that has opposite sign to that of a particle.  It is rather fascinating that despite our successful endeavor to find an equation linear in $E$, the negative energy solutions (corresponding to anti-particles) persists.  If the minimal representation of the gamma group were 2x2 matrices, instead of 4x4, we might live in a universe with no antiparticles!
+
+Recalling that $\psi_A$ and $\psi_B$ each have two components, there are four independent solutions:
 $$
 \psi^{(1)} = \exp\left(- i \frac{mc^2}{\hbar} t\right)
 \begin{pmatrix} 
@@ -288,7 +330,10 @@ $$
 So we strongly suspect that what we have is a particle spinor (two components) and an anti-particle spinor (two components) which leads to the four component bi-spinor solution the Dirac equation.  But to make sense of things, we need to know what the $S_z$ operator is for the bi-spinor space.
 
 Suppose we have a group $G$ with $a,b,c \in G$ and $ab = c$.  We can always build a new group by taking putting each element of $G$ along the diagonal of a 2x2 matrix, for example:
-$$a \to \begin{pmatrix} a & 0 \\ 0 & a \\ \end{pmatrix}$$
+$$a \to \begin{pmatrix} a & 0 \\ 0 & a \\ \end{pmatrix}, \hspace{1cm}
+b \to \begin{pmatrix} b & 0 \\ 0 & b \\ \end{pmatrix}, \hspace{1cm}
+c \to \begin{pmatrix} c & 0 \\ 0 & c \\ \end{pmatrix}, \hspace{1cm}
+$$
 the new group will preserve all the features of the old group because:
 $$\begin{pmatrix} a & 0 \\ 0 & a \\ \end{pmatrix}
 \begin{pmatrix} b & 0 \\ 0 & b \\ \end{pmatrix}
@@ -305,6 +350,157 @@ $$S_z = \frac{h}{2} \begin{pmatrix} \sigma_3 & 0 \\ 0 & \sigma_3 \end{pmatrix}
 $$
 With this operator in hand, we see that $\psi^{(1)}$ and $\psi^{(3)}$ have spin up, and 
 $\psi^{(2)}$ and $\psi^{(4)}$ have spin down.
+
+\section{Notation}
+
+There is some new notation to help us navigate the strange new world Dirac revealed by taking his square-root.  Because the three Pauli matrices ($\sigma_1, \sigma_2, \sigma_3$) are often associated with the three spatial coordinates ($x, y, z$) we can consider them as a forming three-vector:
+$$\vec{\sigma} = \begin{pmatrix} \sigma_1, \sigma_2, \sigma_3 \end{pmatrix}$$
+whose components are matrices.  This three-vector can be dotted with other three vectors, e.g.:
+$$\vec{a} \cdot \vec{\sigma} = a_x \sigma_1 + a_y \sigma_2 + a_z \sigma_3
+= \begin{pmatrix} a_z & a_x - i a_y \\ a_x + i a_y & -a_z \end{pmatrix}
+$$
+It is useful to note that:
+\begin{eqnarray*}
+(\vec{a} \cdot \vec{\sigma})^2 &=& (a_x \sigma_1 + a_y \sigma_2 + a_z \sigma_3)^2\\[5pt]
+&=& a_x^2 (\sigma_1)^2 + a_y^2 (\sigma_2)^2 + a_z^2 (\sigma_3)^2 + {\rm CTs}\\
+\end{eqnarray*}
+The cross-terms (CTs) are all zero, as the Pauli matrices anti-commute, for example:
+$$a_x a_y (\sigma_1 \sigma_2 + \sigma_2 \sigma_1) = 0$$
+Recalling that also:
+$$(\sigma_1)^2 = (\sigma_2)^2 = (\sigma_3)^2 = 1$$
+we conclude:
+$$(\vec{a}\cdot\vec{\sigma})^2 = |\vec{a}|^2$$
+
+We encounter gamma matrices contracted with four vectors so often the combinations gets it's own notation, the Feynman slash notation:
+\begin{eqnarray*}
+\slashed{a} &\equiv& \gamma^u a_u = a^o \begin{pmatrix} I & 0 \\ 0 & -I \end{pmatrix}
+- \vec{a} \cdot \begin{pmatrix} 0 & \vec{\sigma} \\ 0 & -\vec{\sigma} \end{pmatrix}\\
+&=& \begin{pmatrix} a^0 I & - \vec{a}\cdot\vec{\sigma} \\ \vec{a}\cdot\vec{\sigma} & -a^0 I \end{pmatrix}
+\end{eqnarray*}
+While we are discussing notation, we won't be writing out $I$ explicitly much longer, when it can be inferred from context.  The above, for example, would usually be written as:
+\begin{eqnarray*}
+\slashed{a} &\equiv& \gamma^u a_u = a^o \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}
+- \vec{a} \cdot \begin{pmatrix} 0 & \vec{\sigma} \\ 0 & -\vec{\sigma} \end{pmatrix}\\
+&=& \begin{pmatrix} a^0 & - \vec{a}\cdot\vec{\sigma} \\ \vec{a}\cdot\vec{\sigma} & -a^0 \end{pmatrix}
+\end{eqnarray*}
+
+\section{Plane Wave Solutions}
+
+We are now ready to tackle the plane wave solutions.  You may recall from NRQM that these are all we will need for describing scattering experiments, since our experiments measure particles only far away from the interaction potentials, at infinity effectively, where they are free particles well described by plane waves, or a wave packet composed of plane waves.
+
+We will therefore attempt to find solutions of the form:
+$$\psi = a \, e^{-ikx} \, u(k)$$
+where $a$ is a normalization factor, to be considered later, and the exponential contains a factor
+$$kx = k^u x_u$$
+which is the only space and time dependence.  The $u(k)$ is the bi-spinor part which we can write as two spinors or four components:
+$$u(k) \equiv \begin{pmatrix} u_A \\ u_B \\ \end{pmatrix} \equiv 
+\begin{pmatrix} u_1 \\ u_2\\ u_3 \\ u_4 \end{pmatrix}
+$$
+where we the components are still dependent on $k$ but we have dropped the explicit dependence for brevity.  Our rather humble notation hides quite a bit!  Note that:
+$$\partial_u \psi = \frac{\partial \psi}{\partial x^u} = a \left( \frac{\partial}{\partial x^u} \exp(-ik_u x^u)\right) u(k) = -ik_u \psi$$
+The Dirac equation:
+$$i\hbar \gamma^u \partial_u \psi - mc \psi = 0$$
+when applied to the plane wave yields:
+\begin{eqnarray*}
+(\hbar \gamma^u k_u - mc) \; \psi &=& 0 \\[5pt]
+(\hbar \gamma^u k_u - mc) \; a \, e^{-ikx} \, u(k) &=& 0 \\[5pt]
+(\slashed{k} - mc/\hbar) \; u(k) &=& 0 \\[5pt]
+\begin{pmatrix}
+\hbar k^0-mc & - \hbar \vec{k}\cdot\vec{\sigma} \\
+\hbar \vec{k}\cdot\vec{\sigma} & -\hbar k^0-mc \\
+\end{pmatrix}
+\begin{pmatrix} 
+u_A\\
+u_B\\
+\end{pmatrix}&=&0\\
+\end{eqnarray*}
+Solving the last matrix equation we obtain:
+\begin{eqnarray}
+u_A &=& \frac{\hbar\vec{k}\cdot\vec{\sigma}}{\hbar k^0-mc} u_B \label{eqn:ua} \\
+u_B &=& \frac{\hbar\vec{k}\cdot\vec{\sigma}}{\hbar k^0+mc} u_A \label{eqn:ub} \\
+\notag
+\end{eqnarray}
+Plugging the second equation into the first:
+\begin{eqnarray*}
+u_A &=& \frac{(\hbar\vec{k}\cdot\vec{\sigma})^2}{(\hbar k^0)^2-(mc)^2} u_A \\
+    &=& \frac{\hbar^2|\vec{k}|^2}{(\hbar k^0)^2-(mc)^2} u_A \\
+(mc)^2 &=& \hbar^2((k^0)^2-|\vec{k}|^2) = \hbar^2 k^u k_u \\
+\end{eqnarray*}
+But we already know a four-vector who's square is $mc^2$, the four-momentum:
+$$p^2 = (mc)^2$$
+We are left with:
+$$p^u = \pm \hbar k^u$$
+which, as we shall see, provides solutions for both particles (positive sign) and anti-particles (negative sign).\\[5pt]
+
+\noindent
+{\bf Particle Solutions:  } First taking:
+$$p^u = +\hbar k^u$$
+we find:
+$$\psi = a \, e^{-ikx} \, u(k) = a \, \exp(- iEt/\hbar) \exp(i\vec{p}\cdot\vec{x}) u(k)$$
+this is the familiar time dependence from non-relativistic quantum mechanics, and we associate it with a particle of energy $E$ and momentum $\vec{p}$.  We may rewrite Equation~\ref{eqn:ub} as:
+$$u_B = \frac{\vec{p}\cdot\vec{\sigma}}{p^0+mc} u_A = \frac{c}{E+mc^2} \; \vec{p}\cdot\vec{\sigma} \; u_A$$
+and writing out $\vec{p}\cdot\vec{\sigma}$ as a matrix:
+$$u_B = \frac{c}{E+mc^2} \; \begin{pmatrix} p_z & p_x - i p_y \\ p_x + i p_y & -p_z \\ \end{pmatrix} u_A
+$$
+And next we find two solutions by applying this result to a starting choice for $u_A$:
+\begin{eqnarray*}
+u_A = \begin{pmatrix} 1 \\ 0 \\ \end{pmatrix} &\implies& 
+u_B = \frac{c}{E+mc^2} \begin{pmatrix} p_z \\ p_x + i p_y \\ \end{pmatrix}\\
+u_A = \begin{pmatrix} 0 \\ 1 \\ \end{pmatrix} &\implies& 
+u_B = \frac{c}{E+mc^2} \begin{pmatrix} p_x - i p_y \\ -p_z \\ \end{pmatrix}\\
+\end{eqnarray*}
+For particles, we can go no further.  If we attempt to make a choice for $u_B$, then we would be obliged to use Equation~\ref{eqn:ua}, which will blow up when $E=mc^2$ due to the negative sign in the denominator.
+
+We assemble $u_A$ and $u_B$ to form the entire bi-spinor for the particle solutions:
+$$u^{(1)} = N \frac{c}{E+mc^2} \begin{pmatrix} 1 \\ 0 \\ p_z \\ p_x + i p_y \end{pmatrix}, 
+\hspace{1cm}
+u^{(2)} = -N \frac{c}{E+mc^2} \begin{pmatrix} 0 \\ 1 \\ p_x - i p_y \\ -p_z \end{pmatrix}.
+$$
+where $N$ is a not-yet-determined normalization factor. 
+
+\noindent
+{\bf Anti-Particle Solutions:  } Next taking:
+$$p^u = -\hbar k^u \implies k^u = -p^u / \hbar$$
+we find:
+$$\psi = a \, e^{-ikx} \, u(k) = a \, \exp( iEt/\hbar) \exp(-i\vec{p}\cdot\vec{x}) u(k)$$
+this is opposite the time dependence from non-relativistic quantum mechanics, and we associate it with an anti-particle of energy $E$ and momentum $\vec{p}$.  We rewrite Equation~\ref{eqn:ua} (watch closely what happens to signs): 
+$$u_A = \frac{\vec{-p}\cdot\vec{\sigma}}{-p^0-mc} u_B = 
+\frac{\vec{p}\cdot\vec{\sigma}}{p^0+mc} u_B = \frac{c}{E+mc^2} \; \vec{p}\cdot\vec{\sigma} \; u_B$$
+and writing out $\vec{p}\cdot\vec{\sigma}$ as a matrix:
+$$u_B = \frac{c}{E+mc^2} \; \begin{pmatrix} p_z & p_x - i p_y \\ p_x + i p_y & -p_z \\ \end{pmatrix} u_A
+$$
+And next we find two solutions by applying this result to a starting choice for $u_A$:
+\begin{eqnarray*}
+u_B = \begin{pmatrix} 1 \\ 0 \\ \end{pmatrix} &\implies& 
+u_A = \frac{c}{E+mc^2} \begin{pmatrix} p_z \\ p_x + i p_y \\ \end{pmatrix}\\
+u_B = \begin{pmatrix} 0 \\ 1 \\ \end{pmatrix} &\implies& 
+u_A = \frac{c}{E+mc^2} \begin{pmatrix} p_x - i p_y \\ -p_z \\ \end{pmatrix}\\
+\end{eqnarray*}
+And once again, we can go no further.  If we attempt to make a choice for $u_A$, then we would be obliged to use Equation~\ref{eqn:ub}, which will blow up when $E=mc^2$ due to the positive sign in the denominator.
+
+We assemble $u_A$ and $u_B$ to form the entire bi-spinor for the anti-particle solutions:
+$$v^{(1)} = -N \frac{c}{E+mc^2} \begin{pmatrix} p_x - i p_y \\ -p_z \\ 0 \\ 1 \end{pmatrix}, 
+\hspace{1cm}
+v^{(2)} = N \frac{c}{E+mc^2} \begin{pmatrix} p_z \\ p_x + i p_y \\ 1 \\ 0 \end{pmatrix}, 
+$$
+where $N$ is a not-yet-determined normalization factor.
+The rationale for ordering the solutions this way, and the reason for the overall negative sign in front of $v^{(2)}$ will need to wait.
+
+We will use $u$ for particles and $v$ for antiparticles.  The Dirac equation for particles in terms of the momentum now reads:
+$$(\slashed{p}-mc) u = 0$$
+For particles, $k^u = -p^u / \hbar$, and the Dirac equation reads:
+$$(\slashed{p}+mc) v = 0$$
+
+Unlike in the case of particles at rest, these solutions are {\bf not} eigenstates of the spin component in the $z$ direction:
+$$S_z = \frac{h}{2} \begin{pmatrix} \sigma_3 & 0 \\ 0 & \sigma_3 \end{pmatrix}
+= \begin{pmatrix} 
+1 & 0 & 0 & 0 \\ 
+0 &-1 & 0 & 0 \\ 
+0 & 0 & 1 & 0 \\ 
+0 & 0 & 0 &-1 \\ 
+\end{pmatrix}
+$$
+However, in the case $p_x=p_y=0$ they are eigenstates.
 
 \section{A Remarkable Matrix}
 Let's start by defining a matrix $S$ and exploring its properties:
