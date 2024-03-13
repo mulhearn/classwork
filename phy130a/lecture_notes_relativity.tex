@@ -1,0 +1,154 @@
+\documentclass[12pt]{book}
+
+\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.5in]{geometry}
+\usepackage{cite}
+\usepackage{slashed}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{braket}
+\begin{document}
+
+
+\title{PHY 130A \\ Lecture Notes: \\ 
+Special Relativity and Relativistic Kinematics\\
+(Griffith's Chapter 3)}
+\author{Michael Mulhearn}
+
+\maketitle
+
+\setcounter{chapter}{3}
+\chapter{Relativistic Kinematics}
+
+\section{Invariance of the Space-Time Interval}
+
+Special relativity is based on two postulates:  (1) physical laws are the same for all inertial frames, and (2) the speed of light in vacuum is universal.  In this section, we are going to show how these two postulates directly lead to invariance of the space-time interval.  In what follows, we will only consider inertial frames, so we will drop the word ``inertial''.
+
+Suppose in some frame F, light is emitted (Event 1) at $(t_1,x_1,y_1,z_1)$ and then travels through the vacuum until it is absorbed (Event 2) at $(t_2,x_2,y_2,z_2)$.  Because the speed of light in vacuum is universal we have:
+$$c = \frac{\sqrt{(x_2-x_1)^2 + (y_2-y_1)^2 + (z_2-z_1)^2}}{t_2-t_1}$$
+or equivalently:
+$$(x_2-x_1)^2 + (y_2-y_1)^2 + (z_2-z_1)^2 - c^2(t_2-t_1)^2 = 0$$
+In any other inertial frame $\widetilde{F}$ where Event 1 occurs at
+$(\widetilde{t}_1,\widetilde{x}_1,\widetilde{y}_1,\widetilde{z}_1)$
+and Event 2 at $(\widetilde{t}_2,\widetilde{x}_2,\widetilde{y}_2,\widetilde{z}_2)$ we likewise will have:
+$$(\widetilde{x}_2-\widetilde{x}_1)^2+(\widetilde{y}_2-\widetilde{y}_1)^2
++(\widetilde{z}_2-\widetilde{z}_1)^2- c^2(\widetilde{t}_2-\widetilde{t}_1)^2 = 0$$
+We define the space-time interval between any two events as:
+$$\Delta S^2 = (x_2-x_1)^2 + (y_2-y_1)^2 + (z_2-z_1)^2 - c^2(t_2-t_1)^2$$
+We've just shown that if $\Delta S^2=0$ in some frame $S$, then $\Delta \widetilde{S}^2=0$
+in any frame $\widetilde{S}$.  We also note that $\Delta S^2$ is invariant with respect to rotations and translations of the coordinate system.
+
+Next we shall see that {\bf all frames with relative speed $\beta<c$ agree on the sign of $\Delta S^2$ between any two events}.  Suppose otherwise, then we have two events, say Event $A$ and Event $C$, and some frame $F$ where $\Delta S^2<0$ and some other frame $\widetilde{F}$ where $\Delta S^2>0$.  In frame $F$, we emit a light pulse at Event A.  The light pulse travels through vacuum until Event B, where it is absorbed and recorded, at the location (but not time) of Event C.  The record remains at rest, until Event C.
+Now consider how this looks in frame $\widetilde{F}$.  A light pulse leaves Event A and travels through vacuum until it is absorbed and recorded at Event B.  Then the record travels at speed $\beta$ until Event C.  Since $\beta < c$, the distance between Event A and Event C must therefore be less than $c(\widetilde{t}_2-\widetilde{t}_1)$ so $\Delta \widetilde{S}^2 < 0$ which contradicts our assumption.  This proves our claim by contradiction.  
+
+Finally, we will show that $\Delta S$ is frame invariant.  We do so by considering an infinitesimal spacetime interval $dS^2$.  Then:
+$$d\widetilde{S}^2 = a + b \, dS^2 + c \, (dS^2)^2 + \ldots $$
+but $dS$ is infinitesimal so:
+$$d\widetilde{S}^2 = a + b \, dS^2$$
+but $d\widetilde{S}^2=0$ if $dS^2=0$, so $a=0$ and:
+$$d\widetilde{S}^2 = b \, dS^2$$
+But $\Delta S^2$ is invariant with respect to rotations, so only the relative speed between $S$ and $\widetilde{S}$ is relevant, and from symmetry we must therefore have:
+$$ dS^2 = b \widetilde{S}^2$$
+It follows that $b^2=1$ so $b=1$ or $b=-1$.  But all frames agree on the sign of $\Delta S$, so $b=1$.  So all frames agree on $dS^2$, and, therefore, all frames agree on $\Delta S^2$.
+
+\section{Linearity of Transformation between Inertial Frames}
+
+Suppose we have frames $F$ and $\widetilde{F}$.  For simplicity, we will consider only the time and x position, for which there is a coordinate transformation:
+\begin{eqnarray*}
+\widetilde{x} &=& f(x,t)\\
+\widetilde{t} &=& g(x,t)\\
+\end{eqnarray*}
+So then:
+\begin{eqnarray*}
+d\widetilde{x} &=& \frac{\partial f}{\partial x}dx + \frac{\partial f}{\partial t}dt \\
+d\widetilde{t} &=& \frac{\partial g}{\partial x}dx + \frac{\partial g}{\partial t}dt \\
+\end{eqnarray*}
+and:
+\begin{eqnarray*}
+\frac{d\widetilde{x}}{d\widetilde{t}} &=& 
+\frac{\displaystyle \frac{\partial f}{\partial x}\frac{dx}{dt} + \frac{\partial f}{\partial t}}
+{\displaystyle \frac{\partial g}{\partial x}\frac{dx}{dt} + \frac{\partial g}{\partial t}}\\
+\end{eqnarray*}
+Now suppose $x$ and $t$ refer to an object in frame $F$ moving at a constant velocity $dx/dt$.  Then, as the laws of physics are frame invariant, the object must be moving at constant speed $d\widetilde{x}/d\widetilde{t}$.  This implies that the partial derivatives $$\frac{\partial f}{\partial x}, \hspace{0.5cm}\frac{\partial f}{\partial t},  \hspace{0.5cm}\frac{\partial g}{\partial x},  \hspace{0.5cm}\frac{\partial g}{\partial t}$$
+must all be constant along the trajectory of a constant moving particle.  But you can connect any two points in space-time using two particles at rest and one particle moving at a constant speed, so in fact they must be constant everywhere. 
+Therefore:
+\begin{eqnarray*}
+\widetilde{x} &=& A x + B t + C \\
+\widetilde{t} &=& D x + E t + F \\
+\end{eqnarray*}
+If we take the origin to coincide, we have:
+\begin{eqnarray*}
+\widetilde{x} &=& A x + B t\\
+\widetilde{t} &=& D x + E t\\
+\end{eqnarray*}
+showing the linearity of the transformations between inertial frames.
+
+\section{Four Vectors and The Metric Tensor}
+
+We can calculate the invariant $\Delta S^2$ between an event at $(t,x,y,z)$ and the origin (0,0,0,0) as:
+$$
+\Delta S^2 = 
+\begin{pmatrix} 
+ct & x & y & z \\ 
+\end{pmatrix}
+\begin{pmatrix} 
+-1 & 0 & 0 & 0 \\ 
+ 0 & 1 & 0 & 0 \\ 
+ 0 & 0 & 1 & 0 \\ 
+ 0 & 0 & 0 & 1 \\ 
+\end{pmatrix}
+\begin{pmatrix} 
+ct \\ 
+x \\ 
+y \\ 
+z \\ 
+\end{pmatrix}
+=(ct)^2 - x^2 - y^2 - z^2
+$$
+We define the spacetime four-vector $x^u$ by it's four components:
+$$x^0=ct, \hspace{0.5cm} x^1=x, \hspace{0.5cm} x^2=y, \hspace{0.5cm} x^3=z$$
+And the metric tensor $g_{uw}$ by:
+$$g_{00}=-1, \hspace{0.5cm} g_{11}=g_{22}=g_{33}=1$$
+with all other elements zero.  So then in tensor notation:
+$$\Delta S^2 = x^u x^w g_{uw}$$
+
+We showed that the transformation of coordinates between frames is linear, which we can write as:
+$$\widetilde{x}^u = \Lambda^u_w x^w$$
+here $\Lambda^u_w$ has 4x4=16 components, which together from a 4x4 matrix, just enough for defining a linear transformation of a four-component vector.  We also have an inverse transformation $M = \Lambda^-1$, so that:
+$$ x^w = M^w_u\widetilde{x}^u$$
+In case you noticed it, don't worry yet about why some indices are low and some are high, we'll get to that soon.
+
+\section{The Metric Tensor and Lorentz Transformations}
+
+There's a profound connection between coordinate transformations and the metric tensor.
+We know that $\Delta S^2$ is invariant, so:
+\begin{eqnarray*}
+g_{uw} x^u x^w &=& g_{uw} \widetilde{x}^u \widetilde{x}^w\\
+&=& g_{uw} (\Lambda^u_\alpha x^\alpha)(\Lambda^w_\beta x^\beta)\\
+g_{\alpha\beta} x^\alpha x^\beta &=& g_{uw} \Lambda^u_\alpha \Lambda^w_\beta x^\alpha x^\beta)\\
+\end{eqnarray*}
+We changed dummy variables on the LHS in the last step, for clarity.  It follows that:
+$$g_{\alpha\beta} = g_{uw} \Lambda^u_\alpha \Lambda^w_\beta$$
+This is the defining feature of the Lorentz Transformation, we will use it to derive the Lorenz Transformation.
+
+\section{Covariant and Contravariant Components}
+$$\ldots$$
+
+\section{Inverse Lorentz Transformation}
+Not sure this goes here but recording:
+\begin{eqnarray*}
+g_{\alpha\beta} &=& g_{uw} \Lambda^u_\alpha \Lambda^w_{\beta}\\
+g^{\alpha\gamma} g_{\alpha\beta} &=& g_{uw} \Lambda^u_{\alpha} g^{\alpha_\gamma}\Lambda^w_\beta\\
+\delta^\gamma_\beta &=& (g_{uw} \Lambda^u_{\alpha} g^{\alpha_\gamma}) \Lambda^w_\beta
+\end{eqnarray*}
+Recalling that the inverse of $\Lambda$ is $M$ so:
+$$\delta^\gamma_\beta = M^\gamma_w \Lambda^w_\beta$$
+we see that:
+$$M^\gamma_w = g_{uw} \Lambda^u_{\alpha} g^{\alpha_\gamma}$$
+
+
+\end{document}
+
+
+
+

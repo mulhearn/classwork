@@ -761,7 +761,7 @@ $$\widetilde{\psi}^\dagger \gamma^0 \widetilde{\psi}
 = \psi^\dagger (S^\dagger \gamma^0 S) \psi
 = \psi^\dagger \gamma^0 \psi
 $$
-which shows that this is indeed a relativistic invariant (scalar).  To clean up our notation, let's define the adjoint bi-spinor:
+which shows that this is indeed a relativistic invariant (scalar).  To clean up our notation, let's define the Dirac adjoint of a bi-spinor as:
 $$\overline{\psi} \equiv \psi^\dagger \gamma^0 $$
 We've just seen that $\overline{\psi} \psi$ is a scalar.  Next let's see how $\overline{\psi} \gamma^u \psi$ transforms.  We have:
 \begin{eqnarray*}
@@ -780,18 +780,138 @@ Notice the different roles that $S^\dagger$ and $S^{-1}$ play here.  Returning t
 $$\widetilde{\overline{\psi} \gamma^u \psi} = \Lambda^u_w \overline{\psi} \gamma^w \psi$$
 which shows that $\overline{\psi} \gamma^u \psi$ is a four-vector.
 
+\section{Hermicity of the Gamma Matrices}
 
+Any representation of the gamma group, must have:
+$$(\gamma^0)^2=1$$
+If we further impose that:
+$$(\gamma^0)^\dagger = \gamma^0$$
+then we see that $\gamma^0$ is unitary:
+$$(\gamma^0)^\dagger \gamma^0 = 1$$
+Furthermore we must have,
+$$(\gamma^1)^2=-1, (\gamma^2)^2=-1, (\gamma^3)^2=-1$$
+so if we impose that:
+$$(\gamma^1)^\dagger = -\gamma^1$$
+then $\gamma^1$ is unitary by:
+$$(\gamma^1)^\dagger \gamma^1 = - (\gamma^1)^2 = 1$$
+and likewise for $\gamma^2$ and $\gamma^3$.  We can impose these four conditions as:
+$$(\gamma^u)^\dagger = \gamma^0 \gamma^u \gamma^0$$
+because e.g. 
+$$(\gamma^1)^\dagger = \gamma^0 \gamma^1 \gamma^0 = - \gamma^1 (\gamma^0)^2 = -\gamma^1$$
 
+\section{Adjoint Form of Dirac Equation}
 
+The Dirac adjoint bi-spinor:
+$$\overline{\psi} \equiv \psi^\dagger \gamma^0$$
+satisfies an adjoint form of the Dirac equation.  Starting from the Dirac equation:
+$$\gamma^u \, \delta_u \psi = mc \, \psi $$
+and taking the ``normal'' adjoint of both sides:
+$$\delta_u \psi^\dagger (\gamma^u)^\dagger = mc \psi^\dagger  $$
+From the Hermicity of the gamma matrices, we have:
+$$(\gamma^u)^\dagger = \gamma^0 \gamma^u \gamma^0$$
+so:
+$$\delta_u \psi^\dagger \gamma^0 \gamma^u \gamma^0 = mc \psi^\dagger$$
+Multiplying both sides by $\gamma^0$ and using $(\gamma^0)^2=1$ so:
+$$\delta_u \overline{\psi}  \gamma^u  =  mc \, \overline{\psi}$$
+For the plane-wave particles, we have:
+$$(\slashed{p} - mc) u = 0, \hspace{1cm} \overline{u} (\slashed{p} - mc) = 0$$
+For the plane-wave anti-particles, we have:
+$$(\slashed{p} + mc) w = 0, \hspace{1cm} \overline{w} (\slashed{p} + mc) = 0$$
 
+\section{Othornormality of Bispinors}
 
+With the Dirac adjoint operation defined, we can now tackle the orthogonality and completeness of the plane-wave solutions.  Recall, that the particle solutions were of the form:
+$$u^{(i)} = N \begin{pmatrix}  \displaystyle u_A^{(i)} \\[5pt] \displaystyle \frac{\vec{p}\cdot\vec{\sigma}}{p^0 + mc} u_A^{(i)}\\ \end{pmatrix}$$
+where $N$ is a normalization factor we will soon determine, and we took:
+$$u_A^{(1)}=\begin{pmatrix} 1 \\ 0 \\ \end{pmatrix}, \hspace{1cm} u_A^{(2)}=\begin{pmatrix} 0 \\ 1 \\ \end{pmatrix}$$
+We can now determine:
+\begin{eqnarray*}
+\overline{u}^{(i)} &=& (u^{(i)})^\dagger \gamma^0 = 
+N^*
+\begin{pmatrix} 
+\displaystyle (u_A^{(i)})^\dagger & \displaystyle \frac{\vec{p}\cdot\vec{\sigma}}{p^0 + mc} (u_A^{(i)})^\dagger \\
+\end{pmatrix}
+\begin{pmatrix} 1 & 0 \\ 0 & -1 \\ \end{pmatrix}\\
+\overline{u}^{(i)} &=& N^* \begin{pmatrix} 
+\displaystyle (u_A^{(i)})^\dagger & \displaystyle -\frac{\vec{p}\cdot\vec{\sigma}}{p^0 + mc} (u_A^{(i)})^\dagger \\
+\end{pmatrix} \\
+\end{eqnarray*}
+We can finally calculate:
+\begin{eqnarray*}
+\overline{u}^{(i)} u^{(j)} &=& |N|^2 \left( 1 - \frac{(\vec{p}\cdot \vec{\sigma})^2}{(p^0+mc)^2}\right) (u_A^{(i)})^\dagger u_A^{(j)}\\ 
+\end{eqnarray*}
+Next recalling:
+$$(\vec{p}\cdot \vec{\sigma})^2 = |\vec{p}|^2 = (p^0)^2-(mc)^2 = (p^0+mc)(p^0-mc)$$
+We have:
+\begin{eqnarray*}
+\overline{u}^{(i)} u^{(j)} &=& |N|^2 \frac{2mc}{p^0+mc} (u_A^{(i)})^\dagger u_A^{(j)}\\ 
+\end{eqnarray*}
+Choosing:
+$$N = \sqrt{p^0+mc} = \sqrt{\frac{E+mc^2}{c}}$$
+We have:
+$$\overline{u}^{(i)} u^{(j)} = 2mc \; (u_A^{(i)})^\dagger u_A^{(j)}$$
+Now we arranged that:
+$$(u_A^{(i)})^\dagger u_A^{(j)} = \delta_{ij}$$
+so finally:
+$$\overline{u}^{(i)} u^{(j)} = 2mc \; \delta_{ij}$$
+Which shows are solutions are orthogonal.  For antiparticles, we find similarly:
+$$\overline{w}^{(i)} w^{(j)} = 2mc \; \delta_{ij}$$
 
+\section{Completeness of Bispinors}
 
-
-
-
+Remember in non-relativistic QM we wrote completeness like:
+$$\sum \ket{k} \bra{k} = 1$$
+Our spinors $u_A^{(i)}$ are also complete, as their outer products sum to unity:
+\begin{eqnarray*}
+\sum_i u_A^{(i)} (u_A^{(i)})^\dagger &=& 
+\begin{pmatrix} 1 \\ 0 \\ \end{pmatrix}
+\begin{pmatrix} 1 & 0 \\\end{pmatrix}
++
+\begin{pmatrix} 0 \\ 1 \\ \end{pmatrix}
+\begin{pmatrix} 0 & 1 \\\end{pmatrix}\\
+&=& \begin{pmatrix} 1 & 0 \\ 0 & 0 \\ \end{pmatrix}
++ \begin{pmatrix} 0 & 0 \\ 0 & 1 \\ \end{pmatrix}\\
+&=& \begin{pmatrix} 1 & 0 \\ 0 & 1 \\ \end{pmatrix} = I\\ 
+\end{eqnarray*}
+If we take an outer product of bispinors, we get a 4x4 matrix.  So, using our results from the previous section:
+\begin{eqnarray*}
+\sum_i u^{(i)} \overline{u}^{(i)}  &=& |N|^2 
+\begin{pmatrix} 
+\displaystyle I & -\displaystyle \frac{\vec{p}\cdot \vec{\sigma}}{p^0+mc} \\
+\displaystyle \frac{\vec{p}\cdot\vec{\sigma}}{p^0+mc} &
+-\displaystyle \frac{(\vec{p}\cdot\vec{\sigma})^2}{p^0+mc}\\ 
+\end{pmatrix}\\
+&=&
+\begin{pmatrix} 
+\displaystyle (p^0+mc) I & \displaystyle -\vec{p}\cdot \vec{\sigma} \\
+\displaystyle \vec{p}\cdot\vec{\sigma} &
+\displaystyle -(p^0-mc) I\\ 
+\end{pmatrix}\\
+&=& p^0 \begin{pmatrix} I & 0 \\ 0 & -I \end{pmatrix} 
+- \begin{pmatrix} 0 & \vec{\sigma} \\ -\vec{\sigma} & 0 \end{pmatrix} \cdot \vec{p} 
++ mc \begin{pmatrix} I & 0 \\ 0 & I \end{pmatrix} \\
+&=& \gamma^u p_u + mc \\
+&=& \slashed{p} + mc \\
+\end{eqnarray*}
+For anti-particles:
+$$\sum_i w^{(i)} \overline{w}^{(i)} = \slashed{p} - mc$$
 
 \section{Feynman Rules for QED without External Photons}
+
+At long last, we are able to state the Feynman Rules for QED.  Throughout your studies as a physicist, you have been working with a sequence of theories, each of which is superseded by a better and more complete theory.  QED is in complete agreement with experiment, despite a nearly 70 year experimental onslaught.  So here it is, humanities best attempt at describing fundamental particles so far!
+
+For simplicity, we are not going to consider external photons.  
+\begin{enumerate}
+\item Notation:  Just as in the Toy Model, label external and internal momentum with a direction.
+\item External lines: Incoming fermion ($u$), Outgoing fermion ($\overline{u}$), 
+Incoming anti-fermion ($\overline{w}$), Outgoing anti-fermion ($w$).
+\item Vertex Factors:  $i g_e \gamma^u$ where $g_e = \sqrt{4\pi \alpha}$
+\item Photon Propagator:  $-ig_{uv}/q^2$  (We won't need Fermion propagators)
+\item Conservation of Energy (as in toy).
+\item Integrate over internal momentum (as in toy).
+\item Cancel the delta function, multiply by $i$ (as in the toy).
+\end{enumerate}
+Order matters now, so best approach is to track each fermion line backwards through the diagram.
 
 \end{document}
 
