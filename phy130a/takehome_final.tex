@@ -1,0 +1,121 @@
+\documentclass[12pt]{article}
+
+
+\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.5in]{geometry}
+\usepackage{cite}
+\usepackage{slashed}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{braket}
+\usepackage{feynman}
+
+\DeclareMathOperator{\Tr}{Tr}
+\newcommand{\gv} {\ensuremath{g_{\mathrm v}}}
+\newcommand{\ga} {\ensuremath{g_{\mathrm a}}}
+\newcommand{\Ps} {\ensuremath{\slashed{P}}}
+\newcommand{\Qs} {\ensuremath{\slashed{Q}}}
+\newcommand{\Rs} {\ensuremath{\slashed{R}}}
+\newcommand{\Ss} {\ensuremath{\slashed{S}}}
+\newcommand{\ps}{\ensuremath{\slashed{p}}}
+\newcommand{\GeV} {\ensuremath{\mathrm{Ge\kern -0.08em V}}}
+
+\begin{document}
+
+\title{Take-Home Portion of Final Exam: \\
+QED Cross Sections \\ for Electron-Positron Annihilation}
+
+\maketitle
+
+\noindent
+In this assignment, you will calculate the QED cross-section for $e^+ + e^- \to \mu^+ + \mu^-$.  We will assume the center of mass energy is much higher than the mass of the muon, so that the particle masses $m_e$ and $m_\mu$ may be neglected.  This is a serious, graduate-level problem, but it has been broken into small steps with plenty of guidance!
+
+\begin{figure}[htbp]
+\begin{center}
+\begin{feynman}
+    \fermion{0.0, 0.2}{1.00, 1.00}
+    \fermion{1.00, 1.00}{0.0, 1.8}
+    \electroweak{1.00, 1.00}{2.00, 1.00}
+    \fermion{2.00, 1.00}{3.00, 0.2}
+    \fermion{3.00, 1.8}{2.00, 1.00}
+    \node at (0,0) {$a \equiv u^{(s_1)}(p_1)$};
+    \node at (0,2) {$\overline{b} \equiv \overline{w}^{(s_2)}(p_2)$};
+    \node at (3,2) {$d \equiv w^{(s_4)}(p_4)$};
+    \node at (3,0) {$\overline{c} \equiv \overline{u}^{(s_3)}(p_3)$};
+    \node at (1.5,1.2) {$\gamma$};
+    \node at (0,0.4) {$e$};
+    \node at (0,1.6) {$e$};
+    \node at (3.0,0.4) {$\mu$};
+    \node at (3.0,1.6) {$\mu$};
+\end{feynman}
+\caption{\label{fig:feyn} Feynman diagram for the process $e^- + e^+ \to \gamma \to \mu^- + \mu^+$.  The particle plane-wave bi-spinor is $u$ and the anti-particle plane-wave bi-spinor is $w$.  We have $p_i$ and $s_i$ for the four-momentum and spin of particle $i$.
+Notice the shorthand notation for the four bispinors: $a$,$\overline{b}$,$c$, and $\overline{d}$.  
+This will save us from writing out things like $u^{(s_1)}(p_1)$ a million times!}
+\end{center}
+\end{figure}
+
+\noindent
+{\bf Part A:}  Draw your own Feynman diagram for the process and label it according to the Feynman rules.\\[5pt]
+
+\noindent
+{\bf Part B:}  Work through the Feynman rules for QED to determine the amplitude:
+\begin{eqnarray}
+\mathcal{M}  &=&  -\frac{g_e^2}{(p_1+p_2)^2} \left( \overline{b} \gamma^\mu a \right) \left( \bar{c} \gamma_\mu d \right) \label{eqn:mg}\\ 
+\end{eqnarray}
+
+\noindent
+{\bf Part C:}  In this part, you will calculate the spin average of the amplitude squared:
+$$ \braket{|\mathcal{M}|^2} = \frac{1}{4}\sum_{s_1,s_2,s_3,s_4} |\mathcal{M}|^2 
+\equiv \frac{1}{4}\sum_{\rm spins} |\mathcal{M}|^2$$
+We will use Casimir's Trick.  For any plane-wave bi-spinors $g$ and $h$ and matrices $\Gamma_1$ and $\Gamma_2$, and in the limit that we can neglect the particle masses, Casimir's trick is the identity:
+$$\sum_{\rm spins} \;[\,\overline{g}\,\Gamma_1 \,h\,]\;[\,\overline{g}\,\Gamma_2\,h\,]^* 
+= \Tr(\Gamma_1 \slashed{p}_h \overline{\Gamma_2} \slashed{p}_g) $$
+where 
+$$\overline{\Gamma}_2 \equiv \gamma^0 \, \Gamma_2^\dagger \, \gamma^0$$
+and
+$$\slashed{p}_g \equiv \gamma^u (p_g)_u$$
+with $p_g$ the four-momentum of bi-spinor $g$.
+(Note that in our case, we are neglecting $m_e$ and $m_u$, so Casimir's trick is the same for particles and anti-particles, but note that the trick still works, but it takes different forms for particles and anti-particles, when the masses cannot be neglected. See Griffith's 7.7)  Use Casimir's trick to show that the spin averaged amplitude squared is:
+$$\braket{|\mathcal{M}|^2} = \frac{g_e^4}{4(p_1+p_2)^4}
+\Tr(\gamma^u\slashed{p_1}\gamma^w\slashed{p_2})
+\Tr(\gamma_u\slashed{p_4}\gamma_w\slashed{p_3})$$
+Hint: The gamma matrices have the property that:
+$$\overline{\gamma_u} = \gamma_u$$
+which you will need.\\[5pt]
+
+\noindent
+{\bf Part D:} Calculate the traces and show that:
+$$ \braket{|\mathcal{M}|^2} 
+= \frac{8 g_e^4}{(p_1+p_2)^4}
+\left((p_1\cdot p_3)(p_2\cdot p_4) + (p_1\cdot p_4)(p_2\cdot p_3)\right)
+$$
+Hint: Griffith's works through a very similar product of traces in Example 7.6 (just note that we are taking $m$ and $M$ as zero).  You will need the identities:
+$$\Tr(\gamma^u \gamma^w \gamma^\alpha \gamma^\beta) 
+= 4 \, 
+(    \, g^{uw}\,g^{\alpha \beta}
+\, - \, g^{u\alpha}\,g^{w \beta}
+\, + \, g^{u\beta}\,g^{w \alpha} \, )$$
+and:
+$$g_{uw}g^{uw} = 4$$
+
+
+\noindent
+{\bf Part D:} Show that in the CMS, we have:
+$$ \braket{|\mathcal{M}|^2} = g_e^4 (1 + \cos^2 \theta)$$
+where $\theta$ is the angle between $\vec{p}_3$ and $\vec{p}_1$. 
+Hint: you want to show, for example, that:
+$$p_1\cdot p_3 = \frac{E^2}{c^2}(1 - \cos \theta)$$
+where $E$ is the energy of particle 1.\\[5pt]
+
+\noindent
+{\bf Part E:} Fermi's Golden Rule for $1+2 \to 3+4$ scattering in the CMS and averaging over spins is:
+$$ \frac{d\sigma}{d\Omega} = \left( \frac{\hbar c}{8 \pi}\right)^2 \frac{S \braket{|\mathcal{M}|^2}
+}{(E_1+E_2)^2}\frac{|\vec{p}_3|}{|\vec{p}_1|}$$
+Show that in our case, we have:
+$$\frac{d\sigma}{d\Omega} = \left( \frac{\hbar c}{8 \pi}\right)^2 \frac{g_e^4}{(2E)^2}
+(1 + \cos^2 \theta)$$
+(Note: you might see this result elsewhere in the form:
+$$\frac{d\sigma}{d\Omega} = (\hbar c)^2 \; \frac{\alpha^2}{4s} \; (1 + \cos^2 \theta)$$
+where $g_e = \sqrt{4\pi\alpha}$ and $s = (p_1 + p_2)^2$.)
+
+\end{document}
+
