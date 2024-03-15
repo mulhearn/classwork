@@ -913,6 +913,36 @@ Incoming anti-fermion ($\overline{w}$), Outgoing anti-fermion ($w$).
 \end{enumerate}
 Order matters now, so best approach is to track each fermion line backwards through the diagram.
 
+
+\section{Casimir's Trick}
+
+Suppose we want to calculate:
+$$X = \sum_{spins} [\overline{a} \Gamma_1 b][\overline{a} \Gamma_2 b]^* $$
+First work out:
+$$[\overline{a} \Gamma_2 b]^* = [\overline{a} \Gamma_2 b]^\dagger
+= [a^\dagger \gamma^0 \Gamma_2 b]^\dagger = b^\dagger \Gamma_2^\dagger (\gamma^0)^\dagger a$$
+Since $(\gamma^0)^\dagger = \gamma^0$ and $(\gamma^0)^2 = 1$ we have:
+$$[\overline{a} \Gamma_2 b]^* = b^\dagger \gamma^0 \gamma^0 \Gamma_2^\dagger \gamma^0 a
+= \overline{b} \; \overline{\Gamma}_2 \; a$$
+where:
+$$\overline{\Gamma}_2 = \gamma^0 \overline{\Gamma}_2^\dagger \gamma^0$$
+And so:
+$$X = \sum_{k,l} \overline{a}^{(l)} \Gamma_1 \; b^{(k)} \overline{b}^{(k)} \; \overline{\Gamma}_2 a(l)$$
+$$ X = 
+\sum_{l} \overline{a}^{(l)} \Gamma_1 \; \left(\sum_k b^{(k)} \overline{b}^{(k)} \right) \; \overline{\Gamma}_2 a^{(l)}$$
+$$ X = 
+\sum_{l} \overline{a}^{(l)} \Gamma_1 \; \left(\slashed{p}_b + mc \right) \; \overline{\Gamma}_2 a^{(l)}$$
+We can think of any number as the trace of a 1x1 matrix, so:
+$$ X = \sum_{l} {\rm Tr}\left(\overline{a}^{(l)} \Gamma_1 \; \left(\slashed{p}_b + mc \right) \; \overline{\Gamma}_2 a^{(l)}\right)$$
+and we can change the order inside a trace:
+$$ X = \sum_{l} {\rm Tr}\left(\Gamma_1 \; \left(\slashed{p}_b + mc \right) \; \overline{\Gamma}_2 a^{(l)} \overline{a}^{(l)} \right)$$
+
+$$ X = {\rm Tr}\left(\Gamma_1 \; \left(\slashed{p}_b + mc \right) \; \overline{\Gamma}_2 \sum_{l} a^{(l)} \overline{a}^{(l)} \right)$$
+
+$$ X = {\rm Tr}\left(\Gamma_1 \; \left(\slashed{p}_b + mc \right) \; \overline{\Gamma}_2  \left(\slashed{p}_a + mc \right) \right)$$
+
+
+
 \end{document}
 
 
