@@ -20,6 +20,126 @@ Special Relativity and Relativistic Kinematics\\
 \setcounter{chapter}{3}
 \chapter{Relativistic Kinematics}
 
+\section{Coordinate Transformations}
+
+Consider a reference frame $F$ in two dimensions ($x$ and $y$) with basis vectors:
+\begin{equation*}
+  \hat{e}_1 \equiv \hat{x} = \begin{pmatrix} 1 \\ 0 \end{pmatrix}, \;\;\;\;
+  \hat{e}_2 \equiv \hat{y} = \begin{pmatrix} 0 \\ 1 \end{pmatrix}.
+\end{equation*}
+We can write a vector $\vec{x}$ in this space in terms of its
+coordinates $x_1$ and $x_2$ in frame $F$ as:
+\begin{equation*}
+  \vec{x} = x_1 \, \hat{e}_1 + x_2 \, \hat{e}_2 = \sum_i x_i \, \hat{e}_i
+\end{equation*}
+Hopefully by now in your studies, you have come to appreciate the
+importance of a good notation.  The concepts we will encounter in this
+course are most easily expressed using a new highly compressed
+notation, where the above expression becomes:
+\begin{equation*}
+  x = x^i \, \hat{e}_i
+\end{equation*}
+Now the indices can appear as either superscripts or subscripts so
+that the coordinates $x_i$ have been written as $x^i$.  We have also
+dropped the decoration of $\vec{x}$, but here $x$ and is still a
+vector.  The most significant change is that we are now using the
+Einstein summation convention: we infer the sum over $i$ from the fact
+that the dummy index $i$ is repeated with one superscript and one
+subscript.
+
+Even though it is not conventional, I have left the decoration on
+$\hat{e}_i$ to explicitly indicate that this is a unit vector.  This
+is to make it quite explicit that $x^i$ and $\hat{e}_i$ are very
+different mathematical entities: each $x^i$ is the component (in frame
+$F$) of a vector, whereas each $e^i$ is itself a vector.
+
+Next we consider a new reference frame $F'$ which has the same
+origin as the frame $F$ but is rotated by an angle theta.  We can
+determine the coordinates (in frame $F$) for the basis vectors of the
+frame $\tilde{F}$ by applying the rotation matrix:
+\begin{equation}
+R(\theta) \equiv \begin{pmatrix} \cos\theta & -\sin \theta \\ \sin \theta & \cos \theta \end{pmatrix}.
+\end{equation}
+You are probably used to seeing the elements of an array written out as $R_{ij}$ where $i$ is the row and $j$ is the column, but in our new notation, with indices allowed to be superscripts or subscripts we will be writing this array as:
+
+\begin{equation}
+R(\theta) \equiv \begin{pmatrix} \cos\theta & -\sin \theta \\ \sin \theta & \cos \theta \end{pmatrix}.
+\end{equation}
+
+
+
+
+
+
+
+
+
+so that we find:
+\begin{eqnarray*}
+\hat{e}_1' &=& R(\theta) \, \hat{e}_1 = \begin{pmatrix} \cos\theta & -\sin \theta \\ \sin \theta & \cos \theta \end{pmatrix} \begin{pmatrix} 1 \\ 0 \end{pmatrix} = \begin{pmatrix} \cos \theta \\ \sin \theta \end{pmatrix},\\
+\hat{e}_2' &=& R(\theta) \, \hat{e}_2 = \begin{pmatrix} \cos\theta & -\sin \theta \\ \sin \theta & \cos \theta \end{pmatrix} \begin{pmatrix} 0 \\ 1 \end{pmatrix} = \begin{pmatrix} -\sin \theta \\ \cos \theta  \end{pmatrix}\\
+\end{eqnarray*}
+We can write this much more compactly using our new notation:
+\begin{equation*}
+\hat{e}_i' = R_{\cdot j}^{i\cdot} \hat{e}_i 
+\end{equation*}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+We are going to invest in a new notation that is going to make what
+follows in this course much simpler to write down.  We are used to seeing vectors written out in terms of their components like this:
+where $\vec{x}$ is a vector, and it has coordinates $x_i$ in the reference frame with basic vectors $\hat{e}_i$.
+
+In our new notation we will write a vector $x$ as follows a
+\begin{equation*}
+  x = x^i e_i = \begin{pmatrix} x^1 \\ x^2 \\ x^3 \end{pmatrix}
+\end{equation*}
+where $x$ is a vector with components $x^i$ in the coordinate system with basis vectors:
+\begin{equation*}
+  e_1 = \begin{pmatrix} 1 \\ 0 \\ 0 \end{pmatrix}, \;\;
+  e_2 = \begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix}, \;\;
+  e_3 = \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix}, \;\;
+\end{equation*}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \section{Invariance of the Space-Time Interval}
 
 Special relativity is based on two postulates:  (1) physical laws are the same for all inertial frames, and (2) the speed of light in vacuum is universal.  In this section, we are going to show how these two postulates directly lead to invariance of the space-time interval.  In what follows, we will only consider inertial frames, so we will drop the word ``inertial''.

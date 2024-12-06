@@ -17,33 +17,20 @@ QED \\
 
 \maketitle
 
-\setcounter{chapter}{3}
-\chapter{Relativistic Kinematics}
 
-\section{The Lorentz Transformation and Four-Vectors}
-
-\section{The Metric Tensor of Relativity}
-$$\Lambda^u_\alpha \Lambda^w_\beta g^{\alpha \beta} = g^{u w}$$
-
-Follows:
-$$\Lambda^u_\alpha \Lambda^w_\beta g^{\alpha \beta}g_{w \sigma} = g^{u w} g_{w \sigma}
-= \delta^{u}_{\sigma}$$
-That is:
-$$\Lambda^u_\alpha (g^{\alpha \beta} \Lambda^w_\beta g_{w \sigma}) = \delta^{u}_{\sigma}$$
-This is the tensor notation for:
-$$\Lambda(g \Lambda g) = I$$
-or
-$$g \Lambda g = \Lambda^{-1} = M$$
-or back to tensor notation:
-$$M^u_w = g^u\alpha \Lambda^\beta_\alpha g_{\beta w}$$
-
-\section{Covariant and Contravariant Vectors}
-
-\setcounter{chapter}{7}
+\setcounter{chapter}{6}
 \chapter{QED}
 
+\section{How to use these Notes}
+These lecture notes are meant to accompany Griffiths Chapter 7, and
+are not complete on their own.  However, they should provide a parth
+through Griffiths chapter 7 that allows skipping some sections.
+Specifically, you should be able to skip 7.4 (The Photon) and 7.8
+(Renormalization), as well as the examples that include external
+photon lines.
+
 \section{QM Operators revisited}
-In Non-Relativistic Quantum Mechanics we replaced the classical quantities total energy and momentum with operators:
+In Non-Relativistic Quantum Mechanics we replace the classical quantities total energy and momentum with operators:
 $$E \to i\hbar \frac{\partial}{\partial t}, \hspace{2cm}
 \vec{p} \to -i\hbar \nabla
 $$
@@ -71,7 +58,7 @@ which shows that $\delta_u$ is a covariant four-vector (you get to the prime fra
 \section{Klein-Gordan Equation}
 One approach to developing a relativistic quantum mechanics would 
 to start with the relativistic energy equation:
-$$E^2 = p^2c^c + m^2c^4$$
+$$E^2 = p^2c^2 + m^2c^4$$
 which can be written in terms of a four-vector squared as:
 $$p^u p_u - (mc)^2 = 0$$
 And make the replacement:
@@ -99,7 +86,7 @@ and carefully followed that assertion through to all of its logical consequences
 The shortcomings of the Klein-Gordan equation result from the square of the energy in the relativistic energy equation:
 $$E^2 = p^2c^2 + m^2c^4$$
 Non-relativistic Quantum Mechanics has no such difficulties because the energy equation is:
-$$E = \frac{p^2}{2m}$$.
+$$E = \frac{p^2}{2m}$$
 Dirac considered the equation:
 $$E = \sqrt{p^2c^2 + m^2c^4}$$
 and thought that we must be able to take that square root.  When he followed that through to its logical conclusions, he discovered field theory.  Our approach, in the next section, will be based on factoring the quadratic relativistic energy equation.  So if Dirac's square root is $\alpha$, we will be factoring:
@@ -120,7 +107,7 @@ $$p^u p_u - m^2 c^2 = (\gamma^u p_u + mc) (\gamma^w p_w - mc)$$
 which we will write out explicitly on both sides as:
 \begin{multline*}
 (p^0)^2-(p^1)^2-(p^2)^2-(p^3)^2-m^2c^2 \\
-= (\gamma^0)^2 (p^0)^2 + (\gamma^0)^2 (p^0)^2 + (\gamma^0)^2 (p^0)^2 + (\gamma^0)^2 (p^0)^2
+= (\gamma^0)^2 (p^0)^2 + (\gamma^1)^2 (p^1)^2 + (\gamma^2)^2 (p^2)^2 + (\gamma^3)^2 (p^3)^2
 -m^2c^2 + {\rm CTs}
 \end{multline*}
 where we have neglected the cross-terms (CTs) and have used, for example, $(p_1)^2=(p^1)^2$.  We can match each term on LHS with one on the RHS if we arrange that:
@@ -130,13 +117,13 @@ where we have neglected the cross-terms (CTs) and have used, for example, $(p_1)
  \hspace{1cm} (\gamma^3)^2=-1
 \end{equation}
 Then we will have equality as long as the cross-terms are all zero.  The cross terms are of form
-$$\gamma^0 \gamma^1 p_0 p_1 + \gamma^1 \gamma^0 p_1 p_0$$.
-And now we have to face a bit of reality.  The terms $p_0$ and $p_1$ are coefficients of a four vector, just numbers, so they commute.  If $\gamma^0$ and $\gamma^1$ are simply coefficients, numbers, than they commute too, and we this cross terms collapses to:
+$$\gamma^0 \gamma^1 p_0 p_1 + \gamma^1 \gamma^0 p_1 p_0$$
+And now we have to face a bit of cold reality.  The terms $p_0$ and $p_1$ are coefficients of a four vector, just numbers, so they commute.  If $\gamma^0$ and $\gamma^1$ are simply coefficients, numbers, than they commute too, and so the cross terms simplify to quantities like:
 $$2 \gamma^0 \gamma^1 p_0 p_1$$
-since the cross-terms have to be zero for all possible $p^u$, we would need $\gamma^0 \gamma^1 = 0$, which would mean either $\gamma^0 = 0$ for $\gamma^1=0$.  But this is impossible to reconcile with the condition that $(\gamma^0)^2 = 1$ and $(\gamma^1)^2 = -1$.
+Now as the cross-terms have to be zero for all possible $p^u$, we would need $\gamma^0 \gamma^1 = 0$, which would mean either $\gamma^0 = 0$ for $\gamma^1=0$.  But this is impossible to reconcile with the condition that $(\gamma^0)^2 = 1$ and $(\gamma^1)^2 = -1$.
 But what if the $\gamma^u$ are matrices?  In this case, they need not commute, and the cross terms are of the form:
 $$(\gamma^u \gamma^w + \gamma^u \gamma^w) p_u p_w$$
-Notice that we have commuted the $p_u$ and $p_w$ which are the components of four-vectors, i.e. just numbers.  So we need matrices with the property that:
+Notice that we have still commuted the $p_u$ and $p_w$ which are still the components of four-vectors, i.e. just numbers.  So we need matrices with the property that:
 \begin{equation}
 \label{eqn:gammacross}
 \gamma^u \gamma^w + \gamma^w \gamma^u = 0, \hspace{1cm} (u \neq w)
@@ -149,7 +136,7 @@ we can compactly express the requirements of Equations~\ref{eqn:gammasq} and \re
 \{\gamma^u, \gamma^w\} = \gamma^u \gamma^w + \gamma^w \gamma^u = 2 g^{uw}
 \end{equation}
 This is the defining characteristic of the gamma matrices which form the gamma group.  There are an infinite number of matrices that satisfy these requirements 
-but the smallest possible set are 4x4 in dimension.  The representation of the group that we will use is:
+but the smallest possible set are 4x4 in dimension.  The representation that we will use is the ``Dirac representation'':
 \begin{equation}
 \label{eqn:gammamats}
 \gamma^0 = \begin{pmatrix} I & 0 \\ 0 & -I \end{pmatrix}, \hspace{2cm}
@@ -237,7 +224,7 @@ $$
 \psi_4\\
 \end{pmatrix}
 $$
-But as the gamma matrices are 2x2 block matrices, it is convenient to define two spinners:
+But as the gamma matrices are 2x2 block matrices, it is convenient to define two spinors:
 $$\psi_A \equiv \begin{pmatrix} \psi_1\\ \psi_2\\ \end{pmatrix}, \hspace{1cm}
 \psi_B \equiv \begin{pmatrix} \psi_3\\ \psi_4\\ \end{pmatrix}
 $$
@@ -276,7 +263,7 @@ with solutions:
 $$\psi_A(t) = \exp\left( -i\frac{mc^2t}{\hbar}\right) \psi_A(0)$$
 and 
 $$\psi_B(t) = \exp\left( +i\frac{mc^2t}{\hbar}\right) \psi_A(0)$$
-Recalling the time dependence of non-relativistic wave equations, we see that $\psi_A$ corresponds to a positive energy solution, whereas $\Psi_B$ appears to have a negative energy.  We interpret $\psi_B$ as a positive energy anti-particle with time dependence that has opposite sign to that of a particle.  It is rather fascinating that despite our successful endeavor to find an equation linear in $E$, the negative energy solutions (corresponding to anti-particles) persists.  If the minimal representation of the gamma group were 2x2 matrices, instead of 4x4, we might live in a universe with no antiparticles!
+Recalling the time dependence of non-relativistic wave equations, we see that $\psi_A$ corresponds to a positive energy solution, whereas $\Psi_B$ appears to have a negative energy.  We interpret $\psi_B$ as a positive energy anti-particle with time dependence that has opposite sign to that of a particle.  It is rather fascinating that despite our successful endeavor to find an equation linear in $E$, the negative energy solutions (corresponding to anti-particles) persists.
 
 Recalling that $\psi_A$ and $\psi_B$ each have two components, there are four independent solutions:
 $$
@@ -386,17 +373,22 @@ While we are discussing notation, we won't be writing out $I$ explicitly much lo
 
 \section{Plane Wave Solutions}
 
-We are now ready to tackle the plane wave solutions.  You may recall from NRQM that these are all we will need for describing scattering experiments, since our experiments measure particles only far away from the interaction potentials, at infinity effectively, where they are free particles well described by plane waves, or a wave packet composed of plane waves.
+We are now ready to tackle the plane wave solutions.  You may recall
+from NRQM that these are all we will need for describing scattering
+experiments, since our experiments measure particles only far away
+from the interaction potentials, at infinity effectively, where they
+are free particles well described by plane waves (or a wave packet
+from the superposition of plane waves).
 
 We will therefore attempt to find solutions of the form:
 $$\psi = a \, e^{-ikx} \, u(k)$$
-where $a$ is a normalization factor, to be considered later, and the exponential contains a factor
+where $a$ is a normalization factor, and the exponential contains a factor
 $$kx = k^u x_u$$
-which is the only space and time dependence.  The $u(k)$ is the bi-spinor part which we can write as two spinors or four components:
+which is the only space and time dependence.  The $u(k)$ is the bi-spinor part which we can write as either two spinors or four components:
 $$u(k) \equiv \begin{pmatrix} u_A \\ u_B \\ \end{pmatrix} \equiv 
 \begin{pmatrix} u_1 \\ u_2\\ u_3 \\ u_4 \end{pmatrix}
 $$
-where we the components are still dependent on $k$ but we have dropped the explicit dependence for brevity.  Our rather humble notation hides quite a bit!  Note that:
+The components are still dependent on $k$ but we have dropped the explicit dependence for brevity.  Our rather humble notation hides quite a bit!  Note that:
 $$\partial_u \psi = \frac{\partial \psi}{\partial x^u} = a \left( \frac{\partial}{\partial x^u} \exp(-ik_u x^u)\right) u(k) = -ik_u \psi$$
 The Dirac equation:
 $$i\hbar \gamma^u \partial_u \psi - mc \psi = 0$$
@@ -521,7 +513,7 @@ $$I \equiv \begin{pmatrix}
 0 & 1 \\
 \end{pmatrix}
 $$
-even though this is very often left out of expressions when its existence can be inferred implicitly.  Recall also that $\sigma_1$ is the Pauli matrix associated with $x$:
+even though this is very often left out of expressions when its existence can be inferred implicitly.  Recall also that $\sigma_1$ is the Pauli matrix:
 $$\sigma_1 = \begin{pmatrix} 
 0 & 1 \\ 
 1 & 0 \\
@@ -613,8 +605,7 @@ We can write this as:
 $$S^{-1} = a_+ - a_- \gamma_0 \gamma_1$$
 We are now well prepared to calculate the main result from this section, which is to calculate:
 $$S^{-1} \gamma^u S$$
-This is called a "similarity transformation" and appears frequently in linear algebra and group theory.  But for now you'll have to trust that the results will be useful to us.
-We can work this out as:
+This is called a ``similarity transformation'' and appears frequently in linear algebra and group theory.  We can work this out as:
 \begin{eqnarray*}
 S^{-1} \gamma^u S &=& (a_+ - a_- \gamma^0 \gamma^1) \gamma^u (a_+ - a_- \gamma^0 \gamma^1)\\
 &=& a_+^2 \, \gamma^u - a_-^2 \, \gamma^0 \gamma^1 \gamma^u \gamma^0 \gamma^1
@@ -659,7 +650,7 @@ $$S^{-1} \gamma^u S = \Lambda^u_w \gamma^w$$
 Technically, we have only shown this for the particular Lorentz transformation $\Lambda^u_w$ with $\beta$ in the positive $x$-direction, but we can always change coordinates to arrange that this is so.
 
 \subsection{Relativistic Transformation of Bi-Spinors}
-We Dirac equation, derived consistent with special relativity, must be equivalent in all reference frames, so that:
+The Dirac equation, which we derived to be consistent with special relativity, must therefore be equivalent in all reference frames:
 $$i\hbar \gamma^u \delta_u \psi = mc \psi \Leftrightarrow 
 i\hbar \gamma^u \widetilde{\delta}_u \widetilde{\psi} = mc \widetilde{\psi}$$
 where $\psi$ and $\widetilde{\psi}$ are the bi-spinor in two frames related by a Lorentz transformation:
@@ -775,7 +766,7 @@ $$S^\dagger \gamma^0 \gamma^u S = (S^\dagger \gamma^0 S) (S^{-1}\gamma^u S)
 where we have used:
 $$S^\dagger \gamma^0 S = \gamma^0$$
 and
-$$S^{-1} \gamma^u S = \Lambda^u_w \gamma^w$$.
+$$S^{-1} \gamma^u S = \Lambda^u_w \gamma^w$$
 Notice the different roles that $S^\dagger$ and $S^{-1}$ play here.  Returning to our original calculation we have now:
 $$\widetilde{\overline{\psi} \gamma^u \psi} = \Lambda^u_w \overline{\psi} \gamma^w \psi$$
 which shows that $\overline{\psi} \gamma^u \psi$ is a four-vector.
@@ -854,7 +845,7 @@ Now we arranged that:
 $$(u_A^{(i)})^\dagger u_A^{(j)} = \delta_{ij}$$
 so finally:
 $$\overline{u}^{(i)} u^{(j)} = 2mc \; \delta_{ij}$$
-Which shows are solutions are orthogonal.  For antiparticles, we find similarly:
+Which shows our solutions are orthogonal.  For antiparticles, we find similarly:
 $$\overline{w}^{(i)} w^{(j)} = 2mc \; \delta_{ij}$$
 
 \section{Completeness of Bispinors}
@@ -898,7 +889,7 @@ $$\sum_i w^{(i)} \overline{w}^{(i)} = \slashed{p} - mc$$
 
 \section{Feynman Rules for QED without External Photons}
 
-At long last, we are able to state the Feynman Rules for QED.  Throughout your studies as a physicist, you have been working with a sequence of theories, each of which is superseded by a better and more complete theory.  QED is in complete agreement with experiment, despite a nearly 70 year experimental onslaught.  So here it is, humanities best attempt at describing fundamental particles so far!
+At long last, we are able to state the Feynman Rules for QED.  Throughout your studies as a physicist, you have been working with a sequence of theories, each of which is superseded by a better and more complete theory.  QED is in complete agreement with experiment, despite a nearly 70 year experimental onslaught.  So here it is, one of humanities best attempts yet at describing fundamental particles!
 
 For simplicity, we are not going to consider external photons.  
 \begin{enumerate}
@@ -942,6 +933,9 @@ $$ X = {\rm Tr}\left(\Gamma_1 \; \left(\slashed{p}_b + mc \right) \; \overline{\
 $$ X = {\rm Tr}\left(\Gamma_1 \; \left(\slashed{p}_b + mc \right) \; \overline{\Gamma}_2  \left(\slashed{p}_a + mc \right) \right)$$
 
 
+\section{Example Calculation}
+
+The application of these ideas is handled in the take-home portion of the final exam.
 
 \end{document}
 
