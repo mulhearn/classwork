@@ -22,7 +22,7 @@ Special Relativity and Relativistic Kinematics\\
 
 \section{Vectors and Change of Basis}
 
-One of the first concepts encountered in introductory physics is the vector as a geometric object with both a magnitude and a direction.  In more advanced subjects, like quantum mechanics, we introduce the abstract definition of a vector space $V$ over a scalar field $F$ (such as the real or complex numbers).  The vector space is closed under vector addition and scalar multiplication, and has the following defining properties:
+One of the first concepts encountered in introductory physics is the vector as a geometric object with both a magnitude and a direction.  In more advanced subjects, like quantum mechanics, we introduce the abstract definition of a vector space $V$ over a scalar field $F$ (e.g. the real or complex numbers).  The vector space is closed under vector addition and scalar multiplication, and has the following defining properties:
 \begin{center}
 \begin{tabular}{ll}
 {\bf (1)} & $v+w = v+w$ for all $v,w \in V$.\\
@@ -35,7 +35,8 @@ One of the first concepts encountered in introductory physics is the vector as a
 {\bf (8)} & $c_1(c+2 v) = (c_1 c_2 ) v$ for all $v \in V$ and $c_1,c_2 \in F$).\\
 \end{tabular}
 \end{center}
-The vector space ${\mathbb R}^n$ was the inspiration for the abstract vector space, but there are many more examples:  matrices in $n$ dimensions, square integrable real-valued functions, etc.  It is left as an exercise to deduce the following additional properties of any vector space using the axioms:
+It is left as an exercise to show that the following additional
+properties of any vector space follow directly from the axioms:
 \begin{center}
 \begin{tabular}{lll}
 {\bf (9)}  & $0 \in V$ is unique & (Show $0'+v = v \implies 0' = 0$) \\
@@ -43,9 +44,12 @@ The vector space ${\mathbb R}^n$ was the inspiration for the abstract vector spa
 {\bf (11)} & $-v \in V$ is unique & (Show that $v+(-v') = 0 \implies -v = -v')$\\
 \end{tabular}
 \end{center}
+The vector space ${\mathbb R}^n$ was the inspiration for the abstract
+vector space, but there are many more examples: $n \times m$ matrices
+dimensions, square integrable real-valued functions, and so on.
 
 \noindent
-{\bf Exercise: } Show that following are vector spaces: (a) complex numbers, (b) 2x2 matrices, (c) periodic functions $f(x)$ with period $T$.\\
+{\bf Exercise: } Show that following are vector spaces: (a) complex numbers, (b) $2 \times 2$ matrices, (c) periodic functions $f(x)$ with period $T$.\\
 
 \noindent
 {\bf Exercise: } Show that the following are {\bf not} vector spaces: (a) positive numbers with ordinary addition, (b) 2x2 matrices with matrix multiplication as the $+$ operation.\\ 
@@ -58,17 +62,14 @@ only if $c^i=0$ for all $i$.
 \item They span the space, that is for every $v \in V$ there exists $v^i$ such that:
 $$v = \sum_i v^i e_i$$.
 \end{itemize}
-
-
 The scalar quantities $v^i$ are called the coordinates of the vector, and they depend on the basis $\mathcal{B}$ chosen.  This is crucial point to understand, so it bears repeating: a vector $v$ exists independently of any basis, but the coordinates $v^i$ depend on the basis chosen $\mathcal{B} = \{e_i\}$.\\  
 
 \noindent
-{\bf Exercise: } Show that the coordinates $v^i$ of a vector $v$ for basis $\mathcal{B}$ are unique. (This is essential for many of the proofs that follow.)\\
-
+{\bf Exercise: } Show that the coordinates $v^i$ of a vector $v$ for basis $\mathcal{B}$ are unique. (This is essential for many of the results that follow.)\\
 \noindent
 Throughout this course, we will use the Einstein summation convention, whereby there is an implicit sum over repeated dummy indices with one a superscript and the other a subscript, e.g.:
 $$v = v^i e_i \equiv \sum_i v^i e_i$$
-Only {\bf after} a basis is chosen, it is possible to represent a vector as a column vector:
+Only {\bf after} a basis $\mathcal{B}$ is chosen, it is possible to represent a vector as a column vector:
 $$[v]_{\mathcal{B}} = \begin{pmatrix} v^1 \\ v^2 \\ \vdots \\ v^n \end{pmatrix}$$
 or a row vector:
 $$[v]_{\mathcal{B}}^T = \begin{pmatrix} v^1 & v^2 & \cdots & v^n \end{pmatrix}$$.
@@ -112,17 +113,73 @@ In an exercise above you show that the coordinates of a vector within a basis (s
 $$v^{i} = A^{i}_{j'} \, v^{j'}$$
 In a similar fashion, we can find that:
 $$v^{j'} = A^{j'}_{i} \, v^{i}$$
-Compare this transformation rule to Equation~\ref{eqn:tfbasis}, we see that the coordinates $v^i$ transform via $A^{j'}_i$, whereas the basis vectors $e_i$ transform via $A^{i}_{j'}$.  That is, they transform in a complementary fashion.  We call the vector components $v^i$ contra-variant, and we indicate this with an upper index.  We call the basis vector $e_i$ covariant, and we indicate this with the lower index.
+Compare this transformation rule to Equation~\ref{eqn:tfbasis}, we see that the coordinates $v^i$ transform via $A^{j'}_i$, whereas the basis vectors $e_i$ transform via $A^{i}_{j'}$.  That is, they transform in a complementary fashion.  We call the vector components $v^i$ contravariant, and we indicate this with an upper index.  We call the basis vector $e_i$ covariant, and we indicate this with the lower index.
 
 There is an intuitive way to think about this.  Suppose we scale all of the basis vectors in a particular basis by doubling their length to obtain a new basis.  How must we change the coordinates of a vector when moving from the old basis to the new basis?  If we left them unchanged, the vector would double in actual size.  So we have to scale the coordinates by $1/2$ in order to keep the actual size of the vector unchanged.  Thus coordinates change in an opposite manner to the basis vectors, which is the origin of the term contravariant.  I'm not a fan of the terminology, because contravariant sounds ``weird'' but it is really just ``ordinary''.  But the terminology is widely used, so just remember that contra-variant coordinates are the coordinates of ordinary vectors.\\
 
 \noindent
 {\bf Exercise:} The elementary notion of a vector is as a geometric object with a magnitude and direction.  We just reasoned that the contravariant coordinates of a vector transform in the opposite manner to a scale factor applied to the basis vectors.  Now suppose instead we rotate the basis vectors by an angle $\theta$ in a certain plane.  How will the contravariant coordinates of a vector change?
 
+\section{Tensors}
+
+A traditional physics definition of a tensor is ``a quantity with indices that transforms in a certain way''.  For example, the components of a contravariant vector (a rank one tensor) transform according to:
+$$v^{j'} = A^{j'}_i v^i$$
+This definition is perfectly reasonable, but it is not particularly insightful, and things (like the transformation rules) seem to come from nowhere.  
+
+We are going to use a more modern definition of tensor, which is
+dequivalent, but clarifies the situation considerably.  To keep things
+simple, for now we will only consider a rank-two covariant tensors
+(but it will be easy to expand these concept to contravariant and
+mixed tensors of different ranks later.)
+
+We define a rank-two covariant tensor $T$ as an $F$-valued multilinear function of two vectors (hence rank two):
+\begin{displaymath}
+T:V \times V \to F
+\end{displaymath}
+The scalar value returned for $v, w \in V$ is written as:
+$$T(v, w)$$
+A defining feature of a tensor is that it is multilinear, so 
+\begin{eqnarray*}
+T(v_1 + c v_2, w) &=& T(v_1, w) + c \, T(v_2, w)\\
+T(v, w_1 + c w_2) &=& T(v, w1) + c \, T(v, w_2)\\
+\end{eqnarray*}
+Because of multilinearity, a tensor is completely described by its action on any set of basis vectors.  With the components of $T$ defined as
+$$T_{ij} \equiv T(e_i, e_j)$$
+we can calculate 
+$$T(v,w) = T(v^i \, e_i, w^j \, e_j) = v^i T_{ij} v^j,$$
+which shows we can calcualte $T(v,w)$ using only the component $T_{ij}$.
+
+It is typical for students to feel quite uneasy about the different
+between matrices and rank-two tensors.  With our modern definition, we can
+see clearly the difference.  Remember that vectors are geometric objects that exist independently of any particular basis.  Only after a basis has been selected, we can refer to them by their components, and arrange their components into row or column vectors.  In exactly the same way, a tensor is a geometric object that exists independently of any basis.  But once we define a basis $\mathcal{B}$ we can refer to a vector by it's components.  We can arrange the components of a vector into a row vector (denoted $[v]_\mathcal{B}$) or a column vector (denoted $[v]^T_{\mathcal{B}}$).  Likewise, we can arrange the compments of a tensor into a matrix, denoted $[T]_{\mathcal{B}}$.  We can calculate the action of $T$ on vectors $v$ and $w$ via matrix multiplication:
+
+\begin{displaymath}
+T(v,w) = v^i \, T_{ij} \, w^j = [v]_\mathcal{B}^T \, [T]_\mathcal{B} \, [v]_\mathcal{B} = \begin{pmatrix} v_1 \, v_2 \, \cdots \, v_n \end{pmatrix}
+\begin{pmatrix}
+  T_{11} & T_{12} & \cdots & T_{1n} \\
+  T_{21} & T_{22} & \cdots & T_{2n} \\
+  \vdots & \vdots & \ddots &        \\ 
+  T_{n1} & T_{n2} &        & T_{nn} \\ \end{pmatrix}
+\begin{pmatrix} w_1 \\ w_2 \\ \vdots \\ w_n \end{pmatrix}
+\end{displaymath}
+
+Another benefit of the modern definition is that we can derive the transformation law for the components of the tensor, instead of treating that as part of the definition.  
+
+{\bf Exercise:} Suppose that a basis $\mathcal{B}$ is related to another basis $\matchal{B}'$ by:
+$$e_{i'} = A^{j}_{i'} e_{j}$$
+and
+$$e_{i} = A^{j'}_{i} e_{j'}$$
+Use multilinearity to show that:
+$$T_{i'j'} = A_{i'}^k A_{j'}^l T_{kl}$$
+and:
+$$T_{ij} = A_i^{k'} A_j^{l'} T_{k'l'}$$
+
+
 \section{Dual Spaces}
 
 For a vector space $V$ over a scalar field $F$, we define a dual vector $f$ as an $F$-valued linear function on $V$.  That is, if $f$ is a dual vector, then for any $v \in V$ we have $f(v) \in F$.  The linearity means that for any $v,w \in V$ and $c \in F$ we have also:
 $$f(c v + w) = c f(v) + f(w)$$
+The set of all dual vectors to a vector space $V$ is called the dual space of $V$, denoted as $V^*$.\\
 
 \noindent
 {\bf Exercise:} For a vector space $V$ over scaler field $F$, show that its dual space ($V^*$) is itself a vector space.\\
@@ -132,30 +189,35 @@ First consider, for each basis vector $e_i$, the $F$-valued function defined by:
 $$e^i(v) \equiv v^i$$
 This function is linear as a consequence of the linearity of vector addition and scalar multiplication.  So each $e^i(v)$ is indeed a dual vector.  Notice also that 
 $$e^i(e_j) = \delta^i_j$$
-because $e_j$ is itself a vector in $V$, with coordinates $v^i$ that are zero everywhere except for $v^j = 1$.
+because $e_j$ is itself a vector in $V$, with coordinates $v^i$ that are zero everywhere except for $v^j = 1$.  In the following exercises, you will show that $\{e^i\}$ is a basis
+for the dual space $V^*$, by showing that they span the space and are
+linearly independent. \\
 
-To show that $\{e^i\}$ is a basis, we need to show two properties:  they span the space $V^*$ and they are linearly independent.  To show that they span the space, we have to show that we can write any $F$-valued function $f(v)$ in terms of the dual vectors $e^i$.
-First notice that:
-$$f(v) = f(v^i e_i) = v^i f(e_i) = v^i f_i$$
-where we see that the scalar values
+\noindent
+{\bf Exercise:} Define the components of a dual vector $f$ by:
 $$f_i \equiv f(e_i)$$
-which we call the components of $f$ (for the basis $\mathcal{B})$, do 
-fully specify the action of $f$.  Therefore,
-$$f = f_i e^i$$
-because
-$$f(v) = f_i e^i(v) = f_i e^i(v^j e_j) = f_i v^j e^i(e_j) = f_i v^j \delta^j_i = f_i v^i$$
-for any vector $v$, exactly as needed.  So $\{e^i\}$ span the dual space.
-To show that they are linearly independent, notes that if:
-$$a_i e^i = 0$$
-we can define a function $a$ with components $a_i$ and
-$$a(v) = 0$$
-So then, for any $j$ we have:
-$$a(e_j) = a_i e^i(e_j) = a_i \delta^i_j = a_j$$
-but $a(v)$ is always zero so we have shown that $a_j = 0$ for all $j$.  So the $\{e^i\}$ are linearly independent.  
+(Notice that while $f$ is a dual vector, $f_i$ is a scalar)  Then show that:
+$$f(v) = f_i v^i$$
+Then show that any $f$ can be equivalently expressed as 
+$$f = f_i e_i$$
+by evaluating $f(v)$ for any vector $v$.  This shows that $\{e^i\}$ spans the dual space.
 
-So to recap, we showed that given a basis $\mathcal{B} = \{e_i\}$ for a vector space $V$ we can define a basis for its dual space $V^*$ by:
+
+\noindent
+{\bf Exercise:} Show that if:
+$a_i e^i = 0$
+(remember there is an implicit sum here) then:
+$a_i = 0$
+(no sum here) for all $i$.  Hint: define the dual vector
+$a = a_i e^i$
+and evaluate $a(e_j)$.
+
+We have shown that taken together, the dual vectors of a vector space $V$ with basis $\mathcal{B}$ defined by:
 $$e^i(v) \equiv v^i$$
-We call this particularly basis the dual basis for $\mathcal{B}^* = \{e_i\}$.  We also see that if a vector space is finite dimensional, its dual space has the same dimension.  The dual space is starting to look more and more like the original vector space!\\
+form a basis to the dual space, which we call the dual basis:
+$$\mathcal{B}^* = \{ e^i \}$$.
+
+We also see that if a vector space is finite dimensional, its dual space has the same dimension.  The dual space is starting to look more and more like the original vector space!\\
 
 \noindent
 {\bf Example}:  Consider the familiar vector space of $\mathbb{R}^3$ where any vector can be written in terms of basis vectors:
@@ -171,41 +233,54 @@ $$f(v) = \vec{a} \cdot \vec{v}$$
 can be written in this bases as:
 $$f(\vec{v}) = a_x \, f_x(\vec{v}) + a_y \, f_y(\vec{v}) + a_z \, f_z(\vec{v})$$
 
-In quantum mechanics, we saw that a Hilbert space is a vector space with an inner product defined.  It turns out that an inner product is a bit too restrictive for our purposes (special relativity) because of the requirement for positive definiteness:
+
+
+
+
+
+\section{
+  Non-degenerate Hermitian Forms}
+
+In quantum mechanics, we saw that a Hilbert space is a vector space
+with an inner product defined.  It turns out that an inner product is
+a bit too restrictive for our purposes (special relativity) because of
+the requirement for positive definiteness:
 $$\braket{v|v} > 0$$
-if $v \neq 0$.  So we will instead define an Non-degenerate Hermitian form:
+if $v \neq 0$.  So we will need a slightly more general concept.
 
-(TODO).
+A non-degenerate Hermitian form on a vector space $V$ is an $F$-valued
+function, denoted $(\cdot|\cdot)$, which assigns to any ordered pair
+of vectors $v$ and $w$ the scalar value denoted $(v|w)$, and has the
+following properties:
+\begin{center}
+\begin{tabular}{ll}
+{\bf (1)} & $(v,w_1+c\, w_2) = (v|w_1) + c\, (v|w_1)$ for all  $v,w_1,w_2 \in
+V$ and $c \in F$.\\
+{\bf (2)} & $(v,w) = \overline{(w,v)}$ for all $v,w \in V$ where the bar is complex conjugation.\\
+{\bf (3)} & For $v \in V$ and $v \neq 0$ there exists $w \in V$ with $(v,w) \neq 0$.\\
+\end{tabular}
+\end{center}
+Now hopefully properties (1) and (2) are quite familiar properties of
+the inner products you already encountered in quantum mechanics, but
+property (3) is new.  Notice, however, that property (3) is
+automatically satisfied for a Hilbert space, which is by definition
+positive definite:
+$$\braket{v|v} > 0$$
+for all $v \in V$ with $v \neq 0$.  So a non-degenerate form is indeed just an inner product but with the requirement of positive definiteness loosened to property (3) instead.
 
+\noindent
+    {\bf Exercise:} Show that for any non-degenerate Hermitian form $(\cdot|\cdot)$:
+$$(v_1+c \, v+2| w) = (v_1| w) + c^* (v_2| w)$$
+for all $v_1,v_2,w \in V$ and $c \in F$
+    
+
+
+
+  
 Given a vector $v$ in a vector space $V$ with non-degenerate Hermitian form $(\cdot|\cdot)$ we can define a dual vector:
-$$\tilde{v}(w) = (v|w)$$
+/$$\tilde{v}(w) = (v|w)$$
 
 (TODO)
-
-\section{Tensors}
-
-The traditional definition of a tensor (for physicists) is "a quantity with indices that transforms in a certain way".  For example, the components of a contravariant vector (a rank one tensor) transform according to:
-$$v^{j'} = \sum_i A^{j'}_i v^i$$
-This definition is a perfectly reasonable definition, but it is not particularly insightful, and things (like the transformation rules) seem to come from nowhere.
-
-We are going to use a more modern definition of tensor, which is equivalent, but much easier to understand and use.  We define a tensor as a function of a certain number of vectors (its rank) that returns a scalar.  The characteristic feature of a tensor is that it is multilinear, that is, it is linear in each of its arguments.  So for a rank-two tensor $T$ we would have:
-\begin{eqnarray*}
-T(v_1 + c v_2, w) &=& T(v_1, w) + c \, T(v_2, w)\\
-T(v, w_1 + c w_2) &=& T(v, w1) + c \, T(v, w_2)\\
-\end{eqnarray*}
-Suppose we are in $R^3$ frame $F$ with basis vectors $\hat{e}_i$.  Because of multilinearity, the tensor is completely described by its action of the basis vectors:
-$T_ij \equiv T(e_i, e_j)$
-because:
-$$T(v,w) = T(v^i \, e_i, w^j \, e_j) = v^i T_{ij} v^j$$
-
-$$T(v,w) = [v]_F^T [T]_F [v]_F = \begin{pmatrix} v_1 v_2 v_3 \end{pmatrix}
-\begin{pmatrix} T_{11} T_{12} T_{13} \\ T_{21} T_{22} T_{23} \\ T_{31} T_{32} T_{33} \end{pmatrix}
-\begin{pmatrix} w_1 \\ w_2 \\ w_3 \end{pmatrix}
-$$
-
-(Derive transformation law)
-
-(Equivalence of the two definitions)
 
 
 
