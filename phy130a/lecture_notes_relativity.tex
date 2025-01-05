@@ -1,6 +1,6 @@
 \documentclass[12pt]{book}
 
-\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.5in]{geometry}
+\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.75in]{geometry}
 \usepackage{cite}
 \usepackage{slashed}
 \usepackage{graphicx}
@@ -9,7 +9,6 @@
 \usepackage{braket}
 \begin{document}
 
-
 \title{PHY 130A \\ Lecture Notes: \\ 
 Special Relativity and Relativistic Kinematics\\
 (Griffith's Chapter 3)}
@@ -17,7 +16,16 @@ Special Relativity and Relativistic Kinematics\\
 
 \maketitle
 
-\setcounter{chapter}{3}
+\setcounter{chapter}{2}
+\newcounter{exercise}[chapter]
+\setcounter{exercise}{0}
+
+\newcommand{\exercise}{
+\stepcounter{exercise}
+\noindent
+{\bf Exercise \thechapter.\theexercise:}
+}
+
 \chapter{Relativistic Kinematics}
 
 \section{Vectors and Change of Basis}
@@ -31,11 +39,12 @@ One of the first concepts encountered in introductory physics is the vector as a
 {\bf (4)} & For all $v \in V$ there exists $-v$ such that $v + (-v) = 0$.\\
 {\bf (5)} & $c(v+w) = cv + cw$ for all $v,w \in V$ and $c \in F$.\\
 {\bf (6)} & $1v = v$ for all $v \in V$ (note: $1 \in F$).\\
-{\bf (7)} & $(c_1+c+2)v = c_1 v + c_2 v$ for all $v \in V$ and $c_1,c_2 \in F$).\\
+{\bf (7)} & $(c_1+c_2)v = c_1 v + c_2 v$ for all $v \in V$ and $c_1,c_2 \in F$).\\
 {\bf (8)} & $c_1(c+2 v) = (c_1 c_2 ) v$ for all $v \in V$ and $c_1,c_2 \in F$).\\
 \end{tabular}
 \end{center}
-It is left as an exercise to show that the following additional
+
+\exercise Show that the following additional
 properties of any vector space follow directly from the axioms:
 \begin{center}
 \begin{tabular}{lll}
@@ -44,16 +53,26 @@ properties of any vector space follow directly from the axioms:
 {\bf (11)} & $-v \in V$ is unique & (Show that $v+(-v') = 0 \implies -v = -v')$\\
 \end{tabular}
 \end{center}
+$\square$ \\[3pt]
+
 The vector space ${\mathbb R}^n$ was the inspiration for the abstract
-vector space, but there are many more examples: $n \times m$ matrices
-dimensions, square integrable real-valued functions, and so on.
+vector space, but there are many more examples, as explored in the following exercises.\\[3pt]
+
+\exercise
+Show that following are vector spaces over the field of real numbers:
+(a) complex numbers with complex addition, and multiplication by a
+scalar, (b) $2 \times 2$ complex matrices with matrix addition and
+element-wise multiplication by a real number (scalar), (c) real-valued
+periodic functions $f(x)$ of a real variable with period $T$, with
+ordinary addition and mulitiplication. $\square$ \\[3pt]
+
+\exercise
+One of the above examples is not a vector space over the field of complex numbers.  Which one, and why? $\square$ \\[3pt]
+
+\exercise
+Show that the following are {\bf not} vector spaces: (a) positive numbers with ordinary addition, (b) 2x2 matrices with matrix multiplication as the $+$ operation. $\square$ \\[3pt]
 
 \noindent
-{\bf Exercise: } Show that following are vector spaces: (a) complex numbers, (b) $2 \times 2$ matrices, (c) periodic functions $f(x)$ with period $T$.\\
-
-\noindent
-{\bf Exercise: } Show that the following are {\bf not} vector spaces: (a) positive numbers with ordinary addition, (b) 2x2 matrices with matrix multiplication as the $+$ operation.\\ 
-
 A basis $\mathcal{B}$ for a vector space $V$ is an ordered set of vectors $\mathcal{B} = {e_1, e_2, \cdots, e_m}$ with the following properties:
 \begin{itemize}
 \item They are linearly independent, that is:
@@ -64,8 +83,11 @@ $$v = \sum_i v^i e_i$$.
 \end{itemize}
 The scalar quantities $v^i$ are called the coordinates of the vector, and they depend on the basis $\mathcal{B}$ chosen.  This is crucial point to understand, so it bears repeating: a vector $v$ exists independently of any basis, but the coordinates $v^i$ depend on the basis chosen $\mathcal{B} = \{e_i\}$.\\  
 
-\noindent
-{\bf Exercise: } Show that the coordinates $v^i$ of a vector $v$ for basis $\mathcal{B}$ are unique. (This is essential for many of the results that follow.)\\
+\exercise
+Show that the coordinates $v^i$ of a vector $v$ for
+basis $\mathcal{B}$ are unique. (This is essential for many of the
+results that follow.) $\square$ \\[3pt]
+
 \noindent
 Throughout this course, we will use the Einstein summation convention, whereby there is an implicit sum over repeated dummy indices with one a superscript and the other a subscript, e.g.:
 $$v = v^i e_i \equiv \sum_i v^i e_i$$
@@ -74,11 +96,27 @@ $$[v]_{\mathcal{B}} = \begin{pmatrix} v^1 \\ v^2 \\ \vdots \\ v^n \end{pmatrix}$
 or a row vector:
 $$[v]_{\mathcal{B}}^T = \begin{pmatrix} v^1 & v^2 & \cdots & v^n \end{pmatrix}$$.
 
-\noindent
-{\bf Exercise: }  $R^n$ $\cdot$\\
+\exercise
+We can think of the complex numbers as a (2D) vector space with the real numbers as scalars.  Show that $e_1 = 1$ and $e_2 = i$ are a basis $\mathcal{B}$ for this vector space.  For $v = a + b i$, write the column vector $[v]_\mathcal{B}$.  This is why we are able to visualize the complex plane as a 2D space. $\square$ \\[3pt]
 
-\noindent
-{\bf Exercise: }  Pauli matrices $\cdot$\\
+\exercise 
+  The Pauli matrices:
+$$\sigma_x = \begin{pmatrix}
+  0 &  1 \\ 1  & 0 \\
+\end{pmatrix},\hspace{1cm}
+\sigma_y = \begin{pmatrix}
+  0 &  -i \\ i  & 0 \\
+\end{pmatrix},\hspace{1cm}
+\sigma_z = \begin{pmatrix}
+  1 &  0 \\ 0  & -1 \\
+\end{pmatrix},
+$$
+are a basis for the vector space of traceless $2\times2$ Hermitian matrices.  Write the $2\times2$ matrix (an element of this vector space):
+$$v =
+\begin{pmatrix}
+  z &  x-iy \\ x+iy  & -z \\
+\end{pmatrix}$$
+as a column vector $[v]_B$. $\square$ \\[3pt]
 
 \noindent
 Now suppose we have two bases $\mathcal{B}$ and $\mathcal{B}'$.  We have:
@@ -89,7 +127,7 @@ Notice that the index $i$ is primed to indicate it is an index in the $\mathcal{
 
 Since each $e_i$ is a vector in $V$, and $\{e_{i'}\}$ is a basis, there must (by definition of basis, as above) exist scalar values $A^i_{j'}$ such that:
 $$e_i = A^{j'}_i e_{j'}$$
-(Remember there is an implicit sum across $j'$ here.)  Similarly, since each $e_{i'}$ is a vector in $V$, and $\{e_i\}$ is a basis, there must be some scalar values $A^{i'}_{j}$ such that:
+(Remember there is an implicit sum across $j'$ here.)  Similarly, since each $e_{i'}$ is a vector in $V$, and $\{e_i\}$ is a basis, there must be some scalar values $A^{j}_{i'}$ such that:
 $$e_{i'} = A^{j}_{i'} e_j$$
 Remember, the location of the prime matters, so $A^{i}_{j'}$ refers to something altogether different from $A^{j}_{i'}$.  But they are related:
 $$e_i = A^{j'}_{i} e_{j'} = A^{j'}_i A^{k}_{j'}e_{k}$$
@@ -97,8 +135,6 @@ which requires (recall that the coordinates of a basis are unique) that:
 $$A^{j'}_i A^{k}_{j'} = \delta^k_i$$
 and similarly:
 $$A^i_{j'} A^{j'}_k = \delta^i_k$$
-One can therefore interpret $A^i_{j'}$ as the components of a matrix with 
-$A^{i'}_{j}$ the components of its inverse, but it would be a bit unweildly to explore this here, as each $e_i$ is itself a vector, and not just a scalar coordinate.
 
 Any vector $v$ can be expressed in terms of basis $\mathcal{B}$ or $\mathcal{B}'$, which we write as:
 $$v = v^{i}e_{i} = v^{j'}e_{j'}$$
@@ -117,41 +153,68 @@ Compare this transformation rule to Equation~\ref{eqn:tfbasis}, we see that the 
 
 There is an intuitive way to think about this.  Suppose we scale all of the basis vectors in a particular basis by doubling their length to obtain a new basis.  How must we change the coordinates of a vector when moving from the old basis to the new basis?  If we left them unchanged, the vector would double in actual size.  So we have to scale the coordinates by $1/2$ in order to keep the actual size of the vector unchanged.  Thus coordinates change in an opposite manner to the basis vectors, which is the origin of the term contravariant.  I'm not a fan of the terminology, because contravariant sounds ``weird'' but it is really just ``ordinary''.  But the terminology is widely used, so just remember that contra-variant coordinates are the coordinates of ordinary vectors.\\
 
-\noindent
-{\bf Exercise:} The elementary notion of a vector is as a geometric object with a magnitude and direction.  We just reasoned that the contravariant coordinates of a vector transform in the opposite manner to a scale factor applied to the basis vectors.  Now suppose instead we rotate the basis vectors by an angle $\theta$ in a certain plane.  How will the contravariant coordinates of a vector change?
+\exercise 
+ The elementary definition of a vector is a geometric
+representation of magnitude and direction.  We just reasoned that the
+contravariant coordinates of a vector transform in the opposite manner
+to a scale factor applied to the basis vectors.  Now suppose instead
+we rotate the basis vectors by an angle $\theta$ around a certain
+axis.  How will the contravariant coordinates of the vector change in
+this case? $\square$ \\[3pt] 
 
 \section{Tensors}
 
-A traditional physics definition of a tensor is ``a quantity with indices that transforms in a certain way''.  For example, the components of a contravariant vector (a rank one tensor) transform according to:
-$$v^{j'} = A^{j'}_i v^i$$
-This definition is perfectly reasonable, but it is not particularly insightful, and things (like the transformation rules) seem to come from nowhere.  
-
-We are going to use a more modern definition of tensor, which is
-dequivalent, but clarifies the situation considerably.  To keep things
-simple, for now we will only consider a rank-two covariant tensors
-(but it will be easy to expand these concept to contravariant and
-mixed tensors of different ranks later.)
+A traditional physics definition of a tensor is a generalization of
+scalars and vectors, to include quantities with muliple indices which
+transforms in a specific way when changing coordinates.  This
+definition is perfectly reasonable, but it is not particularly
+insightful, and things (like the transformation rules) seem to come
+from nowhere.  We are going to use a more modern definition of a tensor,
+which is equivalent, but clarifies the situation considerably.  To
+keep things simple, for now we will only consider a rank-two covariant
+tensors (but it will be easy to expand the concept to contravariant
+and mixed tensors of different ranks later.)
 
 We define a rank-two covariant tensor $T$ as an $F$-valued multilinear function of two vectors (hence rank two):
 \begin{displaymath}
 T:V \times V \to F
 \end{displaymath}
-The scalar value returned for $v, w \in V$ is written as:
+The scalar value returned for $v, w \in V$ is written as
 $$T(v, w)$$
-A defining feature of a tensor is that it is multilinear, so 
+and the defining feature of a tensor, that it is multilinear, means that 
 \begin{eqnarray*}
-T(v_1 + c v_2, w) &=& T(v_1, w) + c \, T(v_2, w)\\
-T(v, w_1 + c w_2) &=& T(v, w1) + c \, T(v, w_2)\\
+T(v_1 + c v_2, w_1) &=& T(v_1, w_1) + c \, T(v_2, w_1)\\
+T(v_1, w_1 + c w_2) &=& T(v_1, w1) + c \, T(v_1, w_2)\\
 \end{eqnarray*}
-Because of multilinearity, a tensor is completely described by its action on any set of basis vectors.  With the components of $T$ defined as
+for $v_1,v_2,w_1,w_2 \in V$ and $c \in F$.  Because of multilinearity,
+a tensor is completely described by its action on any set of basis
+vectors.  With the components of $T$ defined as
 $$T_{ij} \equiv T(e_i, e_j)$$
 we can calculate 
 $$T(v,w) = T(v^i \, e_i, w^j \, e_j) = v^i T_{ij} v^j,$$
-which shows we can calcualte $T(v,w)$ using only the component $T_{ij}$.
+which shows we can calculate $T(v,w)$ from only the components $T_{ij}$.\\[3pt]
 
-It is typical for students to feel quite uneasy about the different
-between matrices and rank-two tensors.  With our modern definition, we can
-see clearly the difference.  Remember that vectors are geometric objects that exist independently of any particular basis.  Only after a basis has been selected, we can refer to them by their components, and arrange their components into row or column vectors.  In exactly the same way, a tensor is a geometric object that exists independently of any basis.  But once we define a basis $\mathcal{B}$ we can refer to a vector by it's components.  We can arrange the components of a vector into a row vector (denoted $[v]_\mathcal{B}$) or a column vector (denoted $[v]^T_{\mathcal{B}}$).  Likewise, we can arrange the compments of a tensor into a matrix, denoted $[T]_{\mathcal{B}}$.  We can calculate the action of $T$ on vectors $v$ and $w$ via matrix multiplication:
+\exercise 
+ Define tensor addition for rank-two tensors $T$ and $S$ by:
+$$(T+S)(v,u) \equiv T(v,u) + S(v,u)$$
+for all $v,u \in F$.  Define scalar multiplication by:
+$$(cT)(v,u) \equiv c \, T(v,u)$$
+Show that the set of all covariant rank-two tensors forms a vector space.$\square$\\[3pt]
+
+\noindent
+From the modern definition of a tensor, we can clearly see the
+difference between a tensor and matrix.  Remember that vectors are
+geometric objects that exist independently of any particular basis.
+Only after a basis has been selected, we can refer to them by their
+components, and arrange their components into row or column vectors.
+In exactly the same way, a tensor is a geometric object that exists
+independently of any basis.  But once we define a basis $\mathcal{B}$
+we can refer to a vector by it's components.  We can arrange the
+components of a vector into a row vector (denoted $[v]_\mathcal{B}$)
+or a column vector (denoted $[v]^T_{\mathcal{B}}$).  Likewise, we can
+arrange the compments of a covariant rank-two tensor into a matrix, denoted
+$[T]_{\mathcal{B}}$.  We can calculate the action of $T$ on vectors
+$v$ and $w$ via matrix multiplication:
 
 \begin{displaymath}
 T(v,w) = v^i \, T_{ij} \, w^j = [v]_\mathcal{B}^T \, [T]_\mathcal{B} \, [v]_\mathcal{B} = \begin{pmatrix} v_1 \, v_2 \, \cdots \, v_n \end{pmatrix}
@@ -162,17 +225,18 @@ T(v,w) = v^i \, T_{ij} \, w^j = [v]_\mathcal{B}^T \, [T]_\mathcal{B} \, [v]_\mat
   T_{n1} & T_{n2} &        & T_{nn} \\ \end{pmatrix}
 \begin{pmatrix} w_1 \\ w_2 \\ \vdots \\ w_n \end{pmatrix}
 \end{displaymath}
+Another benefit of the modern definition is that we can derive the transformation law for the components of the tensor, instead of treating that as part of the definition.\\[3pt]
 
-Another benefit of the modern definition is that we can derive the transformation law for the components of the tensor, instead of treating that as part of the definition.  
-
-{\bf Exercise:} Suppose that a basis $\mathcal{B}$ is related to another basis $\matchal{B}'$ by:
+\exercise 
+ Suppose that a basis $\mathcal{B}$ is related to another basis $\mathcal{B}'$ by:
 $$e_{i'} = A^{j}_{i'} e_{j}$$
 and
 $$e_{i} = A^{j'}_{i} e_{j'}$$
 Use multilinearity to show that:
 $$T_{i'j'} = A_{i'}^k A_{j'}^l T_{kl}$$
 and:
-$$T_{ij} = A_i^{k'} A_j^{l'} T_{k'l'}$$
+$$T_{ij} = A_i^{k'} A_j^{l'} T_{k'l'} $$
+$\square$ \\[3pt]
 
 
 \section{Dual Spaces}
@@ -181,42 +245,43 @@ For a vector space $V$ over a scalar field $F$, we define a dual vector $f$ as a
 $$f(c v + w) = c f(v) + f(w)$$
 The set of all dual vectors to a vector space $V$ is called the dual space of $V$, denoted as $V^*$.\\
 
-\noindent
-{\bf Exercise:} For a vector space $V$ over scaler field $F$, show that its dual space ($V^*$) is itself a vector space.\\
+\exercise 
+ For a vector space $V$ over scaler field $F$, show that its dual space ($V^*$) is itself a vector space. $\square$ \\[3pt]
 
+\noindent
 Suppose we have a basis $\mathcal{B} = \{ e_i\}$ for a vector field $V$.  Our next task will be to find a basis for it's dual space $V^*$ which we shall call $\mathcal{B}^*$.
 First consider, for each basis vector $e_i$, the $F$-valued function defined by:
 $$e^i(v) \equiv v^i$$
-This function is linear as a consequence of the linearity of vector addition and scalar multiplication.  So each $e^i(v)$ is indeed a dual vector.  Notice also that 
+This function is linear as a consequence of the linearity of vector addition and scalar multiplication.  So each $e^i$ is indeed a dual vector.  Notice also that 
 $$e^i(e_j) = \delta^i_j$$
 because $e_j$ is itself a vector in $V$, with coordinates $v^i$ that are zero everywhere except for $v^j = 1$.  In the following exercises, you will show that $\{e^i\}$ is a basis
 for the dual space $V^*$, by showing that they span the space and are
-linearly independent. \\
+linearly independent.\\[3pt]
 
-\noindent
-{\bf Exercise:} Define the components of a dual vector $f$ by:
+\exercise 
+ Define the components of a dual vector $f$ by:
 $$f_i \equiv f(e_i)$$
-(Notice that while $f$ is a dual vector, $f_i$ is a scalar)  Then show that:
+Notice that while $f$ is a dual vector, each $f_i$ is a scalar.  First show that:
 $$f(v) = f_i v^i$$
-Then show that any $f$ can be equivalently expressed as 
+Then, show that any $f$ can be equivalently expressed as 
 $$f = f_i e_i$$
-by evaluating $f(v)$ for any vector $v$.  This shows that $\{e^i\}$ spans the dual space.
+by evaluating $f(v)$ for any vector $v$.  This shows that $\{e^i\}$ spans the dual space.$\square$ \\[3pt]
 
-
-\noindent
-{\bf Exercise:} Show that if:
+\exercise 
+Show that if:
 $a_i e^i = 0$
-(remember there is an implicit sum here) then:
+(remember the implicit sum!) then:
 $a_i = 0$
 (no sum here) for all $i$.  Hint: define the dual vector
 $a = a_i e^i$
-and evaluate $a(e_j)$.
+and evaluate $a(e_i)$ for each $i$. $\square$ \\[3pt]
 
-We have shown that taken together, the dual vectors of a vector space $V$ with basis $\mathcal{B}$ defined by:
+\noindent
+In the two preceding exercises, we have shown that the dual vectors of
+a vector space $V$ with basis $\mathcal{B}$ defined by:
 $$e^i(v) \equiv v^i$$
 form a basis to the dual space, which we call the dual basis:
 $$\mathcal{B}^* = \{ e^i \}$$.
-
 We also see that if a vector space is finite dimensional, its dual space has the same dimension.  The dual space is starting to look more and more like the original vector space!\\
 
 \noindent
@@ -233,20 +298,15 @@ $$f(v) = \vec{a} \cdot \vec{v}$$
 can be written in this bases as:
 $$f(\vec{v}) = a_x \, f_x(\vec{v}) + a_y \, f_y(\vec{v}) + a_z \, f_z(\vec{v})$$
 
-
-
-
-
-
 \section{
   Non-degenerate Hermitian Forms}
 
-In quantum mechanics, we saw that a Hilbert space is a vector space
+In quantum mechanics, we saw that a Hilbert space $H$ is a vector space
 with an inner product defined.  It turns out that an inner product is
 a bit too restrictive for our purposes (special relativity) because of
 the requirement for positive definiteness:
 $$\braket{v|v} > 0$$
-if $v \neq 0$.  So we will need a slightly more general concept.
+for $v \in H$ and $v \neq 0$.  We will need a slightly more general concept.
 
 A non-degenerate Hermitian form on a vector space $V$ is an $F$-valued
 function, denoted $(\cdot|\cdot)$, which assigns to any ordered pair
@@ -254,10 +314,10 @@ of vectors $v$ and $w$ the scalar value denoted $(v|w)$, and has the
 following properties:
 \begin{center}
 \begin{tabular}{ll}
-{\bf (1)} & $(v,w_1+c\, w_2) = (v|w_1) + c\, (v|w_1)$ for all  $v,w_1,w_2 \in
+{\bf (1)} & $(v|w_1+c\, w_2) = (v|w_1) + c\, (v|w_2)$ for all  $v,w_1,w_2 \in
 V$ and $c \in F$.\\
-{\bf (2)} & $(v,w) = \overline{(w,v)}$ for all $v,w \in V$ where the bar is complex conjugation.\\
-{\bf (3)} & For $v \in V$ and $v \neq 0$ there exists $w \in V$ with $(v,w) \neq 0$.\\
+{\bf (2)} & $(v|w) = \overline{(w|v)}$ for all $v,w \in V$ where the bar is complex conjugation.\\
+{\bf (3)} & For $v \in V$ and $v \neq 0$ there exists $w \in V$ with $(v|w) \neq 0$.\\
 \end{tabular}
 \end{center}
 Now hopefully properties (1) and (2) are quite familiar properties of
@@ -266,246 +326,258 @@ property (3) is new.  Notice, however, that property (3) is
 automatically satisfied for a Hilbert space, which is by definition
 positive definite:
 $$\braket{v|v} > 0$$
-for all $v \in V$ with $v \neq 0$.  So a non-degenerate form is indeed just an inner product but with the requirement of positive definiteness loosened to property (3) instead.
+for all $v \in V$ with $v \neq 0$.  So a non-degenerate form is indeed just an inner product but with the requirement of positive definiteness loosened to property (3) instead.\\[3pt]
+
+\exercise 
+Show that for any non-degenerate Hermitian form $(\cdot|\cdot)$:
+$$(v_1+c \, v_2| w) = (v_1| w) + c^* (v_2| w)$$
+for all $v_1,v_2,w \in V$ and $c \in F$ $\square$ \\[3pt]
 
 \noindent
-    {\bf Exercise:} Show that for any non-degenerate Hermitian form $(\cdot|\cdot)$:
-$$(v_1+c \, v+2| w) = (v_1| w) + c^* (v_2| w)$$
-for all $v_1,v_2,w \in V$ and $c \in F$
-    
+Given a vector $v \in V$ with non-degenerate Hermitian form
+$(\cdot|\cdot)$ we can define a dual vector $\tilde{v}$ by:
+$$\tilde{v}(w) = (v|w)$$
+for all $w \in V$.  We call the dual vector $\tilde{v}$ the metric dual of $v$.  We sometimes write:
+$$\widetilde{v} = (v|\cdot)$$.
 
+Now consider the map $L: V \to V^*$ that sends a vector to it's metric dual:
+$$L(v) \equiv \tilde{v}$$
 
+\exercise Show that $L$ is conjugate linear, that is for $v_1,v_2 \in V$ and $c \in F$ then
+$$L(c v_1 + v_2) = c^* L(v_1) + L(v_2)$$
+Hint: $(L(c v_1 + v_2))(w) = (c \, v_1+v_2|w)$ $\square$ \\[3pt]
 
-  
-Given a vector $v$ in a vector space $V$ with non-degenerate Hermitian form $(\cdot|\cdot)$ we can define a dual vector:
-/$$\tilde{v}(w) = (v|w)$$
+\exercise Show that $L$ sends zero to zero. That is, show $L(0) = 0$. $\square$ \\[3pt]
 
-(TODO)
+\exercise Show that $L$ is a one-to-one map of $V \to V^*$, that is, show that:
+$$L(w) = L(v) \implies w=v$$
+Hint: use non-degeneracy, i.e. if for all $x \in V$
+$$(v|x) = 0$$
+then
+$$v=0$$
+$\square$ \\[3pt]
 
-
-
-
-
-\section{Linear Operators and Dual Vectors}
-
-
-In quantum mechanics, we made wide use of linear operators, which provided a vector return a (possibly) new vector.  Mathematically, we say that a linear operator $T$ on a vector space $V$ is a map from $V \to V$ with the defining property that:
-$$T(c v + w) = c T(v) = T(w)$$
-for all $v,w \in V$ and any scalar $c$.\\
+\exercise Show that the only vector $L$ sends to zero is zero, that is:
+$$L(w)=0 \implies w=0$$
+$\square$ \\[3pt]
 
 \noindent
-{\bf Exercise: }  Show that $T$ is invertible if and only if it maps zero to zero, that is:
-$$T(0) = 0$$
-
-\noindent
-For any basis $\mathcal{B}=\{e_i\}$ for $V$, then we can write the vector $T(e_i)$ in terms of its coordinates ${T_i}^j$ as:
-$$T(e_i) \equiv {T_i}^j e_j$$
-These components completely specify the action of $T$ on any vector:
-$$T(v) = T(v^i \, e_i) = v^i \, T(e_i) = v^i \, {T_i}^j \, e_j$$
-
-For the basis $\mathcal{B}$ we have the following column vectors:
-$$[v]_{\mathcal{B}} = \begin{pmatrix} v^1 \\ v^2 \\ \vdots \\ v^n \end{pmatrix}
-\hspace{2cm}
-[T(v)]_{\mathcal{B}} = \begin{pmatrix} v^i {T_i}^1 \\ v^i {T_i}^2 \\ \vdots \\ v^i {T_i}^n \end{pmatrix}
-$$
-Each row in $[T(v)]_{\mathcal{B}}$ has an implicit sum, which suggests vector multiplication.  If we define:
-$$
-[T]_{\mathcal{B}} \equiv \begin{pmatrix} 
-{T_1}^1 & {T_2}^1 & \cdots & {T_n}^1\\ 
-{T_1}^2 & {T_2}^2 & \cdots & {T_n}^2\\ 
-\vdots  & \vdots  & \ddots & \vdots \\
-{T_1}^n & {T_2}^n & \cdots & {T_n}^n \end{pmatrix}
-$$
-then we have:
-$$[T(v)]_{\mathcal{B}} = [T]_{\mathcal{B}} [v]_{\mathcal{B}}$$
-
-\section{Vectors, Basis Vectors, and Coordinate Transformations}
-
-Let's consider a vector $\vec{x}$ in two-dimensions.  The vector $\vec{v}$ represents something that exists independently of any chosen reference frame.  It is only after we specify a reference frame (say $F$), and corresponding basis vectors, e.g. $\hat{e}_1 \equiv \hat{x}$ and $\hat{e}_2 \equiv \hat{y}$, that we can refer to $\vec{v}$ by its coordinates $v_1$ and $v_2$, with
-$$\vec{v} = v_1 \hat{e_1} + v_2 \hat{e_2} = \sum_i v_i \hat{e}_i$$
-Now, suppose we choose some other reference frame ($F'$) with basis vectors $\hat{e}'_1$ and $\hat{e}'_2$.  The vector $\vec{v}$, which has of course stayed put this entire time, will nonetheless have new coordinates $v_1'$ and $v_2'$ in the reference frame $F'$.  They are related to the coordinates of frame $F$ by a coordinate transformation $A$:
-$$v_i' = \sum_j A_{ij} v_j$$
-
-(make this explicit with a rotation, and maybe introduce contra-variance, tensor notation)
-
-(moving between tensor notation and matrices, e.g. adding T as needed.)
-
-\section{Tensors}
-
-Vectors are one type of tensor, specifically a rank-one tensor.  The traditional definition of a tensor (for physicists) is "a quantity with indices that transforms in a certain way", e.g. as in:
-$$v_i' = \sum_i A_{ij} v_j$$
-
-We are going to use a more modern definition of tensor, which is equivalent, but much easier to understand and use.  We define a tensor a function of a certain number of vectors (its rank) that returns a scalar.  The characteristic feature of a tensor is that it is multilinear, that is, it is linear in each of its arguments.  So for a rank-two tensor $T$ we would have:
-\begin{eqnarray*}
-T(\vec{v}_1 + c\vec{v}_2, \vec{w}) &=& T(\vec{v}_1, \vec{w}) + c \, T(\vec{v}_2, \vec{w})\\
-T(\vec{v}, \vec{w}_1 + c\vec{w}_2) &=& T(\vec{v}, \vec{w}_1) + c \, T(\vec{v}, \vec{w}_2)\\
-\end{eqnarray*}
-Suppose we are in $R^3$ frame $F$ with basis vectors $\hat{e}_i$.  Because of multilinearity, the tensor is completely described by its action of the basis vectors:
-$T_ij \equiv T(e_i, e_j)$
-because:
-$$T(v,w) = T(v^i \, e_i, w^j \, e_j) = v^i T_{ij} v^j$$
-
-$$T(v,w) = [v]_F^T [T]_F [v]_F = \begin{pmatrix} v_1 v_2 v_3 \end{pmatrix}
-\begin{pmatrix} T_{11} T_{12} T_{13} \\ T_{21} T_{22} T_{23} \\ T_{31} T_{32} T_{33} \end{pmatrix}
-\begin{pmatrix} w_1 \\ w_2 \\ w_3 \end{pmatrix}
-$$
-
-(Derive transformation law)
-
-(Equivalence of the two definitions)
-
-
-
-\section{Coordinate Transformations}
-
-Consider a reference frame $F$ in two dimensions ($x$ and $y$) with basis vectors:
-\begin{equation*}
-  \hat{e}_1 \equiv \hat{x} = \begin{pmatrix} 1 \\ 0 \end{pmatrix}, \;\;\;\;
-  \hat{e}_2 \equiv \hat{y} = \begin{pmatrix} 0 \\ 1 \end{pmatrix}.
-\end{equation*}
-We can write a vector $\vec{x}$ in this space in terms of its
-coordinates $x_1$ and $x_2$ in frame $F$ as:
-\begin{equation*}
-  \vec{x} = x_1 \, \hat{e}_1 + x_2 \, \hat{e}_2 = \sum_i x_i \, \hat{e}_i
-\end{equation*}
-Hopefully by now in your studies, you have come to appreciate the
-importance of a good notation.  The concepts we will encounter in this
-course are most easily expressed using a new highly compressed
-notation, where the above expression becomes:
-\begin{equation*}
-  x = x^i \, \hat{e}_i
-\end{equation*}
-Now the indices can appear as either superscripts or subscripts so
-that the coordinates $x_i$ have been written as $x^i$.  We have also
-dropped the decoration of $\vec{x}$, but here $x$ and is still a
-vector.  The most significant change is that we are now using the
-Einstein summation convention: we infer the sum over $i$ from the fact
-that the dummy index $i$ is repeated with one superscript and one
-subscript.
-
-Even though it is not conventional, I have left the decoration on
-$\hat{e}_i$ to explicitly indicate that this is a unit vector.  This
-is to make it quite explicit that $x^i$ and $\hat{e}_i$ are very
-different mathematical entities: each $x^i$ is the component (in frame
-$F$) of a vector, whereas each $e^i$ is itself a vector.
-
-Next we consider a new reference frame $F'$ which has the same
-origin as the frame $F$ but is rotated by an angle theta.  We can
-determine the coordinates (in frame $F$) for the basis vectors of the
-frame $\tilde{F}$ by applying the rotation matrix:
-\begin{equation}
-R(\theta) \equiv \begin{pmatrix} \cos\theta & -\sin \theta \\ \sin \theta & \cos \theta \end{pmatrix}.
-\end{equation}
-You are probably used to seeing the elements of an array written out as $R_{ij}$ where $i$ is the row and $j$ is the column, but in our new notation, with indices allowed to be superscripts or subscripts we will be writing this array as:
-
-\begin{equation}
-R(\theta) \equiv \begin{pmatrix} \cos\theta & -\sin \theta \\ \sin \theta & \cos \theta \end{pmatrix}.
-\end{equation}
-
-
-
-
-
-
-
-
-
-so that we find:
-\begin{eqnarray*}
-\hat{e}_1' &=& R(\theta) \, \hat{e}_1 = \begin{pmatrix} \cos\theta & -\sin \theta \\ \sin \theta & \cos \theta \end{pmatrix} \begin{pmatrix} 1 \\ 0 \end{pmatrix} = \begin{pmatrix} \cos \theta \\ \sin \theta \end{pmatrix},\\
-\hat{e}_2' &=& R(\theta) \, \hat{e}_2 = \begin{pmatrix} \cos\theta & -\sin \theta \\ \sin \theta & \cos \theta \end{pmatrix} \begin{pmatrix} 0 \\ 1 \end{pmatrix} = \begin{pmatrix} -\sin \theta \\ \cos \theta  \end{pmatrix}\\
-\end{eqnarray*}
-We can write this much more compactly using our new notation:
-\begin{equation*}
-\hat{e}_i' = R_{\cdot j}^{i\cdot} \hat{e}_i 
-\end{equation*}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-We are going to invest in a new notation that is going to make what
-follows in this course much simpler to write down.  We are used to seeing vectors written out in terms of their components like this:
-where $\vec{x}$ is a vector, and it has coordinates $x_i$ in the reference frame with basic vectors $\hat{e}_i$.
-
-In our new notation we will write a vector $x$ as follows a
-\begin{equation*}
-  x = x^i e_i = \begin{pmatrix} x^1 \\ x^2 \\ x^3 \end{pmatrix}
-\end{equation*}
-where $x$ is a vector with components $x^i$ in the coordinate system with basis vectors:
-\begin{equation*}
-  e_1 = \begin{pmatrix} 1 \\ 0 \\ 0 \end{pmatrix}, \;\;
-  e_2 = \begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix}, \;\;
-  e_3 = \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix}, \;\;
-\end{equation*}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+For a finite-dimensional vector space $V$ recall that the dual space
+$V^*$ has the same dimension as $V$.  Let $\mathcal{B} = \{ e_i\}$ be
+a basis for $V$.  Using the results of the previous exercises, we can
+show that the set of dual vectors $\mathcal{B}^*=\{L(e_i)\}$ is a
+basis for $V^*$. Because $L$ is one-to-one, $\mathcal{B}^*$ has the
+same number of elements as $\mathcal{B}$.  As long as they are
+linearly indepdent, they will span $V^*$, because $V$ and $V^*$ have
+the same dimension.
+
+To prove that the elements of $\mathcal{B}^*$ are linearly independent, assume they are not.  Then there is some set of scalars $a^i$ not all zero such that:
+$$a^i L(e_i) = 0$$
+Then:
+$$v \equiv a^i e_i \neq 0 $$
+because not all $a^i$ are zero.  And so:
+$$L(v) = L(a^i e_i) = a^i L(e_i) = 0$$
+As shown in a previous exercise, this implies that $v=0$, which contradicts $v \neq 0$.  So then $\{L(e_i)\}$ are linearly independent, and therefore span the space of dual vectors $V^*$, and form a basis for $V^*$
+
+\exercise Given that $\{L(e_i)\}$ is a basis for $V^*$, show that the mapping $L$ from $V$ to $V^*$ is onto.  That is, show that for any $b \in V^*$, there is an $a \in V$ such that
+$$L(a) = b$$.
+$\square$ \\[3pt]
+
+By now we have shown that the mapping $L$ is both one-to-one and onto,
+which means that it is an invertible mapping.  We can move freely from
+a vector to its metric dual and back again with no ambiguity.
+
+For a Hilbert space $H$ with inner product $\braket{\cdot|\cdot}$.  In
+Dirac notation, a vector $\psi \in H$ is written as a ket
+$\ket{\psi}$. It's metric dual $L(\psi)$ is written as bra
+$\bra{\psi}$.\\[3pt]
+
+\exercise For $\psi \in H$ and $c \in F$, show that
+$$\bra{c \psi} = \overline{c} \bra{\psi}$$
+$\square$ \\[3pt]
+
+That completes the math prelimineraries we will need for our
+invariance-based treatment of special relativity.
+t
 \section{Invariance of the Space-Time Interval}
 
-Special relativity is based on two postulates:  (1) physical laws are the same for all inertial frames, and (2) the speed of light in vacuum is universal.  In this section, we are going to show how these two postulates directly lead to invariance of the space-time interval.  In what follows, we will only consider inertial frames, so we will drop the word ``inertial''.
+Special relativity, as formulated by Einstein, is based on two postulates:
+\begin{center}
+\begin{tabular}{ll}
+  {\bf (1)} & Physical laws are the same for all inertial frames \\
+  {\bf (2)} & The speed of light in free space has the same value $c$ in all inertial frames \\
+\end{tabular}
+\end{center}
+In what follows, we will only consider inertial frames, so we will
+drop the word ``inertial''.
 
-Suppose in some frame F, light is emitted (Event 1) at $(t_1,x_1,y_1,z_1)$ and then travels through the vacuum until it is absorbed (Event 2) at $(t_2,x_2,y_2,z_2)$.  Because the speed of light in vacuum is universal we have:
-$$c = \frac{\sqrt{(x_2-x_1)^2 + (y_2-y_1)^2 + (z_2-z_1)^2}}{t_2-t_1}$$
+Suppose that in some frame $F$, light is emitted at time $t_{\rm A}$
+and position $(x_{\rm A}, y_{\rm A}, z_{\rm A})$.  The light travels
+through free space until some later time $t_{\rm B}$, when the light
+is aborbed at position $(x_{\rm B}, y_{\rm B}, z_{\rm B})$.  Because
+the speed of light in vacuum is the universal constant $c$ we have:
+$$c = \frac{\sqrt{(x_{\rm B}-x_{\rm A})^2 + (y_{\rm B}-y_{\rm A})^2 + (z_{\rm B}-z_{\rm A})^2}}{t_{\rm B}-t_{\rm A}}$$
 or equivalently:
-$$(x_2-x_1)^2 + (y_2-y_1)^2 + (z_2-z_1)^2 - c^2(t_2-t_1)^2 = 0$$
-In any other inertial frame $\widetilde{F}$ where Event 1 occurs at
-$(\widetilde{t}_1,\widetilde{x}_1,\widetilde{y}_1,\widetilde{z}_1)$
-and Event 2 at $(\widetilde{t}_2,\widetilde{x}_2,\widetilde{y}_2,\widetilde{z}_2)$ we likewise will have:
-$$(\widetilde{x}_2-\widetilde{x}_1)^2+(\widetilde{y}_2-\widetilde{y}_1)^2
-+(\widetilde{z}_2-\widetilde{z}_1)^2- c^2(\widetilde{t}_2-\widetilde{t}_1)^2 = 0$$
-We define the space-time interval between any two events as:
-$$\Delta S^2 = (x_2-x_1)^2 + (y_2-y_1)^2 + (z_2-z_1)^2 - c^2(t_2-t_1)^2$$
-We've just shown that if $\Delta S^2=0$ in some frame $S$, then $\Delta \widetilde{S}^2=0$
-in any frame $\widetilde{S}$.  We also note that $\Delta S^2$ is invariant with respect to rotations and translations of the coordinate system.
+$$c^2(t_{\rm B}-t_{\rm A})^2 - (x_{\rm B}-x_{\rm A})^2 - (y_{\rm B}-y_{\rm A})^2 - (z_{\rm B}-z_{\rm A})^2  = 0$$
+In any other inertial frame $F'$, in which the light is
+emitted at time $t'_{\rm A}$ and position $(x'_{\rm A}, y'_{\rm A}, z'_{\rm A})$ and absorbed 
+at time $t'_{\rm B}$ and position $(x'_{\rm B}, y'_{\rm B}, z'_{\rm B})$,
+$$c^2(t'_{\rm B}-t'_{\rm A})^2 - (x'_{\rm B}-x'_{\rm A})^2 - (y'_{\rm B}-y'_{\rm A})^2 - (z'_{\rm B}-z'_{\rm A})^2  = 0$$
 
-Next we shall see that {\bf all frames with relative speed $\beta<c$ agree on the sign of $\Delta S^2$ between any two events}.  Suppose otherwise, then we have two events, say Event $A$ and Event $C$, and some frame $F$ where $\Delta S^2<0$ and some other frame $\widetilde{F}$ where $\Delta S^2>0$.  In frame $F$, we emit a light pulse at Event A.  The light pulse travels through vacuum until Event B, where it is absorbed and recorded, at the location (but not time) of Event C.  The record remains at rest, until Event C.
-Now consider how this looks in frame $\widetilde{F}$.  A light pulse leaves Event A and travels through vacuum until it is absorbed and recorded at Event B.  Then the record travels at speed $\beta$ until Event C.  Since $\beta < c$, the distance between Event A and Event C must therefore be less than $c(\widetilde{t}_2-\widetilde{t}_1)$ so $\Delta \widetilde{S}^2 < 0$ which contradicts our assumption.  This proves our claim by contradiction.  
+Quantities that have the same value in every reference frame are
+precious.  So this result alone is enough motivation to define the space-time
+interval $\Delta S*2$ between any two events A and B as:
+\begin{equation}
+\Delta S^2 \equiv c (t_{\rm B}-t_{\rm A})^2 - (x_{\rm B}-x_{\rm A})^2 - (y_{\rm B}-y_{\rm A})^2 - (z_{\rm B}-z_{\rm A})^2
+\end{equation}
+The space-time interval thus defined has several properties: 
+\begin{center}
+\begin{tabular}{ll}
+ {\bf (A)} & If $\Delta S^2 = 0$ in one frame, then it is zero in every frame.\\
+  {\bf (B)} & $\Delta S^2$ is invariant with respect to rotations in space.\\
+  {\bf (C)} & $\Delta S^2$ is invariant with respect to translations in space and time.\\
+\end{tabular}
+\end{center}
+Property (A) is evident from the calculation that motivated the
+definition.  Property (B) follows because $\Delta S^2$ only involves
+the spatial coordinates via the usual Euclidean metric:
+$$\Delta D^2 \equiv (x_{\rm B}-x_{\rm A})^2 + (y_{\rm B}-y_{\rm A})^2 + (z_{\rm B}-z_{\rm A})^2$$
+which is invariant under rotations.
+Property (C) follows because $\Delta S^2$ only involves differences in time and spatial coordinates, e.g. $t_{\rm B} - t_{\rm A}$.
 
-Finally, we will show that $\Delta S$ is frame invariant.  We do so by considering an infinitesimal spacetime interval $dS^2$.  Then:
-$$d\widetilde{S}^2 = a + b \, dS^2 + c \, (dS^2)^2 + \ldots $$
-but $dS$ is infinitesimal so:
-$$d\widetilde{S}^2 = a + b \, dS^2$$
-but $d\widetilde{S}^2=0$ if $dS^2=0$, so $a=0$ and:
-$$d\widetilde{S}^2 = b \, dS^2$$
-But $\Delta S^2$ is invariant with respect to rotations, so only the relative speed between $S$ and $\widetilde{S}$ is relevant, and from symmetry we must therefore have:
-$$ dS^2 = b \widetilde{S}^2$$
-It follows that $b^2=1$ so $b=1$ or $b=-1$.  But all frames agree on the sign of $\Delta S$, so $b=1$.  So all frames agree on $dS^2$, and, therefore, all frames agree on $\Delta S^2$.
+Next consider an infinitesimal $\Delta S^2$ calculated in frame $F$,
+which we will write as $dS^2$, and the same quantity cacluated in
+frame $F'$, which we will call $d{S^2}'$.  We can write $d{S^2}'$ as a
+power series in $dS^2$:
+$$d{S^2}' = a + b dS^2 + c (dS^2)^2 + \cdots $$
+with coefficients $a,b,c,\cdots$ to be determined.  From property (A) we see that $a=0$.  And because $dS^2$ is small we can neglect higher order terms. This leads to:
+$$d{S^2}' = b dS^2$$
+with $b$ still an unknown coefficient.  But $b$ cannot depedent on the absolute position in space and time, because of property (C).  It can depend on the relative motion between the $F$ and $F'$ frames, but not the direction, because of property (B).  So it can only dependent on the relative speed of $F$ and $F'$.  But this is the same in both frames, so we must also have:
+$$d{S^2} = b d{S^2}'$$
+and so:
+$$d{S^2} = b^2 d{S^2}$$
+from which we conclude $b=\pm1$ and so:
+$$d{S^2}' = \pm dS^2$$
+If we can exclude $b=-1$ always then $dS^2$ is invariant, and (by integration) $\Delta S^2$ is invariant as well.  Indeed that is the case, but to show it we will need to demonstrate one more property of $\Delta S^2$:
+\begin{center}
+\begin{tabular}{ll}
+{\bf (D)} & The sign of $\Delta S^2$ is invariant \\
+\end{tabular}
+\end{center}
+
+Suppose there are two events, labeled A and C, and some frame
+$F$ where $\Delta S^2<0$. In frame $F$, we emit a light pulse at Event
+A.  The light pulse travels through vacuum until it reaches the
+location of Event C, where it is aborbed and recorded, at event we
+label B.  The record remains at rest until event C.  Next consider how
+this looks in some other frame $F'$ traveling at velocity $v<c$ wrt
+frame $F$.  The light is emitted at Event A, and absorbed and recorded
+at Event B, but now the record travels at speed $v<c$ until Event C.
+Since $v < c$, the distance between Event A and Event C must therefore
+be less than $c(t'_{\rm B}-t'_{\rm A})$ so $\Delta S^2 < 0$.
+
+We categorize space time intervals by the sign of the space-time interval as follows:
+\begin{center}
+\begin{tabular}{lcl}
+  $\Delta S^2 = 0$ & $\iff$ & light-like \\
+  $\Delta S^2 < 0$ & $\iff$ & space-like \\
+  $\Delta S^2 > 0$ & $\iff$ & time-like \\
+\end{tabular}
+\end{center}
+
+From property (A) we see that if the space-time interval between two
+events in one frame is light-like, it is light-like in all frames.  We
+have also just shown that if the interval is space-like in one frame, it is
+space-like in all frames.  It follows that if the interval is
+time-like in one frame, it is time-like in all frames (or else we
+would have a contradiction of one of the previous two results).  Which demonstrates property (D).
+
+Thus we conclude with the main result of this section, {\bf the space-time interval defined as:}
+\begin{equation}
+  \Delta S^2 = c \Delta t^2 - \Delta x^2 - \Delta y^2 - \Delta z^2
+\end{equation}
+{\bf is frame invariant.}
+
+\section{Four-Vectors and the Metric of Space-Time}
+
+Consider the vector space $R^4$, with each vector an ordered set of
+four real numbers, real numbers as scalars, and the usual addition and
+scalar multiplication of reals.  $R^n$ is the OG vector space, so we
+won't waste any time proving that it is a vector space.
+
+Consider a frame $F$, where we'll use the standard basis $\mathcal{B}=\{e_\mu\}$ with:
+\begin{eqnarray*}
+  e_0 &=& (1,0,0,0) \\
+  e_1 &=& (0,1,0,0) \\
+  e_2 &=& (0,0,1,0) \\
+  e_3 &=& (0,0,0,1) \\
+\end{eqnarray*}
+We can write and $v \in V$ as:
+$$v = v^\mu e_\mu$$
+where we have used greek indices, as is conventional for the case that
+the indices run from 0 to 3.   We call $v$ a four-vector and $v^\mu$.  (Most unfortunately, we also often speak of the four-vector $v^\mu$.)
+
+Now consider an event which in frame $F$ has coordinates at time $t$
+and position $(x,y,z)$.  We will associate this with a vector $v \in
+V$ by the conventional assignment:
+\begin{equation}
+v^0 = ct, \hspace{1cm} v^1 = x, \hspace{1cm} v^2 = y, \hspace{1cm} v^3 = z, \hspace{1cm} 
+\end{equation}
+We call a vector so defined a position four-vector.
+
+We would like to add to our four-vector space a non-degenerate Hermitian form, and the preceding section provides us with an excellent candidate.  We define:
+\begin{equation}
+(a|b) = a^0 b^0 - a^1 b^1 - a^2 b^2 - a^3 b^3
+\end{equation}
+
+\exercise
+Show that $(\cot|\cdot)$ so defined is a non-generate Hermitian form (by demonstrating that it has the three definining properties). $\square$ \\[3pt]
+
+\exercise
+For position four-vectors $a,b \in V$ show that
+$$(b-a|b-a) = \Delta S^2$$
+$\square$ \\[3pt]
+
+\exercise
+Show that $(\cot|\cdot)$ as defined above is {\bf not} an inner product.
+$\square$ \\[3pt]
+
+
+We can also interpret our non-Degnerate Hermitian form as multilinear
+map $g: V\times V \to R$.  That is, as a rank-two covariant tensor:
+$$g(a,b) \equiv (a | b)$$
+As always, we can work out the coordinates of the tensor in the standard basis $\mathcal{B}$ with
+$$g_{\mu\nu} \equiv g(e_\mu, e_\nu)$$
+So now we can write:
+$$(a|b) = g(a,b) = g(a^\mu e_\mu, b^\nu e_\nu) =  a^\mu b^\nu g(e_\mu, e_\nu) = a^\mu b^\nu g_{\mu\nu} $$
+
+In the exercises you will show that
+\begin{equation}
+\label{eqn:metric-matrix}
+[g]_\mathcal{B} =
+\begin{pmatrix} 
+1 &  0 &  0 &  0 \\ 
+0 & -1 &  0 &  0 \\ 
+0 &  0 & -1 &  0 \\ 
+0 &  0 &  0 & -1 \\ 
+\end{pmatrix}
+\end{equation}
+
+\exercise
+Verify equation \ref{eqn:metric-matrix} by calculating the matrix coodinates.
+
+
+\exercise
+For position four-vectors $a$ and $b$ given by:
+$$\cdot$$
+calculate $(a|b)$ using matrices via:
+$$(a|b) = a^\mu b^\nu g_{\mu \nu} = [a]^T_\mathcal{B} [g]_\mathcal{B} [b]_\mathcal{B}.
+
+
+
+
+TODO:  Raising / Lowering opperator...
+
 
 \section{Linearity of Transformation between Inertial Frames}
 
@@ -603,8 +675,37 @@ we see that:
 $$M^\gamma_w = g_{uw} \Lambda^u_{\alpha} g^{\alpha_\gamma}$$
 
 
+
+\section{EXTRA Linear Operators and Dual Vectors}
+
+In quantum mechanics, we made wide use of linear operators, which
+provided a vector return a (possibly) new vector.  Mathematically, we
+say that a linear operator $T$ on a vector space $V$ is a map from $V
+\to V$ with the defining property that:
+$$T(c v + w) = c T(v) = T(w)$$
+for all $v,w \in V$ and any scalar $c$.\\
+
+
+\noindent
+For any basis $\mathcal{B}=\{e_i\}$ for $V$, then we can write the vector $T(e_i)$ in terms of its coordinates ${T_i}^j$ as:
+$$T(e_i) \equiv {T_i}^j e_j$$
+These components completely specify the action of $T$ on any vector:
+$$T(v) = T(v^i \, e_i) = v^i \, T(e_i) = v^i \, {T_i}^j \, e_j$$
+
+For the basis $\mathcal{B}$ we have the following column vectors:
+$$[v]_{\mathcal{B}} = \begin{pmatrix} v^1 \\ v^2 \\ \vdots \\ v^n \end{pmatrix}
+\hspace{2cm}
+[T(v)]_{\mathcal{B}} = \begin{pmatrix} v^i {T_i}^1 \\ v^i {T_i}^2 \\ \vdots \\ v^i {T_i}^n \end{pmatrix}
+$$
+Each row in $[T(v)]_{\mathcal{B}}$ has an implicit sum, which suggests vector multiplication.  If we define:
+$$
+[T]_{\mathcal{B}} \equiv \begin{pmatrix} 
+{T_1}^1 & {T_2}^1 & \cdots & {T_n}^1\\ 
+{T_1}^2 & {T_2}^2 & \cdots & {T_n}^2\\ 
+\vdots  & \vdots  & \ddots & \vdots \\
+{T_1}^n & {T_2}^n & \cdots & {T_n}^n \end{pmatrix}
+$$
+then we have:
+$$[T(v)]_{\mathcal{B}} = [T]_{\mathcal{B}} [v]_{\mathcal{B}}$$
+
 \end{document}
-
-
-
-
