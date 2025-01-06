@@ -30,7 +30,13 @@ Special Relativity and Relativistic Kinematics\\
 
 \section{Vectors and Change of Basis}
 
-One of the first concepts encountered in introductory physics is the vector as a geometric object with both a magnitude and a direction.  In more advanced subjects, like quantum mechanics, we introduce the abstract definition of a vector space $V$ over a scalar field $F$ (e.g. the real or complex numbers).  The vector space is closed under vector addition and scalar multiplication, and has the following defining properties:
+One of the first concepts encountered in introductory physics is the
+vector as a geometric object with both a magnitude and a direction.
+In more advanced subjects, like quantum mechanics, we introduce the
+abstract definition of a vector space $V$ over a scalar field $F$
+(e.g. the real or complex numbers).  The vector space is closed under
+vector addition and scalar multiplication, and has the following
+defining properties:
 \begin{center}
 \begin{tabular}{ll}
 {\bf (1)} & $v+w = v+w$ for all $v,w \in V$.\\
@@ -43,34 +49,48 @@ One of the first concepts encountered in introductory physics is the vector as a
 {\bf (8)} & $c_1(c+2 v) = (c_1 c_2 ) v$ for all $v \in V$ and $c_1,c_2 \in F$).\\
 \end{tabular}
 \end{center}
-
-\exercise Show that the following additional
-properties of any vector space follow directly from the axioms:
+As you will show in the exercise below, additional basic properties are deducible from these axioms:
 \begin{center}
-\begin{tabular}{lll}
+  \begin{tabular}{lll}
 {\bf (9)}  & $0 \in V$ is unique & (Show $0'+v = v \implies 0' = 0$) \\
-{\bf (10)} & $0 v = 0$ for all $v \in V$ & (Use $0+0=0$) \\
+{\bf (10)} & $0 v = 0$ for all $v \in V$ & (Use $0+0=0$ for scalars) \\
 {\bf (11)} & $-v \in V$ is unique & (Show that $v+(-v') = 0 \implies -v = -v')$\\
+{\bf (12)} & $(-1)v = -v$ for all $v \in V$ & (Use $1+(-1)=0$ for scalars)\\
 \end{tabular}
 \end{center}
+Note that we use the same symbol ($0$) for both the scalar zero and the zero vector; you must infer which one it refers to from context.\\
+
+\exercise (*) Deduce properties (9)-(12) from axioms (1)-(8) and known
+properties of the scalar field. $\square$ \\[3pt]
+
+\noindent
+The vector space ${\mathbb R}^n$ was the inspiration for the abstract
+vector space, but there are many more examples: complex numbers as
+vectors over the field of complex numbers, $n \times m$ real matrices
+over the scalar field of real numbers with ordinary matrix addition
+and scalar multiplication, real-valued periodic functions $f(x)$ of a
+real variable with period $T$ over the scalar field of real numbers
+with ordinary addition and mulitiplication. 
+
+\exercise (*)
+Let $V$ be the positive real numbers, and $F$ be the positive real numbers as scalars, with ordinary addition and multiplication.  Show that $V$ is {\bf not} a vector space.
+
+\exercise 
+For a vector space $V$ scalar multiplication is a null operation, that
+is $a v = v$ for all $a \in F$ and $v \in V$.  Deduce all of the
+vectors in the vector space $V$. $\square$ \\[3pt]
+
+\exercise (*)
+The set $V$ is the positive reals, with all reals as the scalar field $F$.  For clarity in what follows, we'll use $\oplus$ for vector addition and $\odot$ for scalar multiplication.  Vector addition is defined as multiplication of the real numbers, which we write as:
+$$v \oplus w = v \, w  \hspace{1cm} v,w \in V$$
+for $w,v \in V$.  Scalar multiplication is exponentiation, which we write as:
+$$c \odot v = v^c  \hspace{1cm} v \in V, c \in F$$
+Show that $V$ is a vector space.  What is the real number corresponding to the vector $0$?
 $\square$ \\[3pt]
 
-The vector space ${\mathbb R}^n$ was the inspiration for the abstract
-vector space, but there are many more examples, as explored in the following exercises.\\[3pt]
-
-\exercise
-Show that following are vector spaces over the field of real numbers:
-(a) complex numbers with complex addition, and multiplication by a
-scalar, (b) $2 \times 2$ complex matrices with matrix addition and
-element-wise multiplication by a real number (scalar), (c) real-valued
-periodic functions $f(x)$ of a real variable with period $T$, with
-ordinary addition and mulitiplication. $\square$ \\[3pt]
-
-\exercise
-One of the above examples is not a vector space over the field of complex numbers.  Which one, and why? $\square$ \\[3pt]
-
-\exercise
-Show that the following are {\bf not} vector spaces: (a) positive numbers with ordinary addition, (b) 2x2 matrices with matrix multiplication as the $+$ operation. $\square$ \\[3pt]
+\exercise (*)
+For the previous exercise, verify explicitly that derived properties (10) and (12) hold for this vector space.
+$\square$ \\[3pt]
 
 \noindent
 A basis $\mathcal{B}$ for a vector space $V$ is an ordered set of vectors $\mathcal{B} = {e_1, e_2, \cdots, e_m}$ with the following properties:
@@ -78,13 +98,13 @@ A basis $\mathcal{B}$ for a vector space $V$ is an ordered set of vectors $\math
 \item They are linearly independent, that is:
 $$c^1 e_1 + c^2 e_2 + \cdots + c^n e_n = 0$$
 only if $c^i=0$ for all $i$.
-\item They span the space, that is for every $v \in V$ there exists $v^i$ such that:
+\item They span the space, that is for every $v \in V$ there exists a set of scalars $\{v^i \in F\}$ such that:
 $$v = \sum_i v^i e_i$$.
 \end{itemize}
-The scalar quantities $v^i$ are called the coordinates of the vector, and they depend on the basis $\mathcal{B}$ chosen.  This is crucial point to understand, so it bears repeating: a vector $v$ exists independently of any basis, but the coordinates $v^i$ depend on the basis chosen $\mathcal{B} = \{e_i\}$.\\  
+The scalar quantities $v^i$ are called the components of the vector, and they depend on the basis $\mathcal{B}$ chosen.  This is crucial point to understand, so it bears repeating: {\bf a vector $v$ exists independently of any basis, but its components $v^i$ depend on the basis chosen $\mathcal{B} = \{e_i\}$.}\\  
 
 \exercise
-Show that the coordinates $v^i$ of a vector $v$ for
+Show that the components $v^i$ of a vector $v$ for
 basis $\mathcal{B}$ are unique. (This is essential for many of the
 results that follow.) $\square$ \\[3pt]
 
@@ -97,10 +117,10 @@ or a row vector:
 $$[v]_{\mathcal{B}}^T = \begin{pmatrix} v^1 & v^2 & \cdots & v^n \end{pmatrix}$$.
 
 \exercise
-We can think of the complex numbers as a (2D) vector space with the real numbers as scalars.  Show that $e_1 = 1$ and $e_2 = i$ are a basis $\mathcal{B}$ for this vector space.  For $v = a + b i$, write the column vector $[v]_\mathcal{B}$.  This is why we are able to visualize the complex plane as a 2D space. $\square$ \\[3pt]
+We can think of the complex numbers as 2-D vector space with the real numbers as scalars.  Show that $e_1 = 1$ and $e_2 = i$ are a basis $\mathcal{B}$ for this vector space.  For $v = a + b i$, write the column vector $[v]_\mathcal{B}$.  This is why we are able to visualize the complex plane as a 2-D space. $\square$ \\[3pt]
 
-\exercise 
-  The Pauli matrices:
+\exercise (*)
+The Pauli matrices:
 $$\sigma_x = \begin{pmatrix}
   0 &  1 \\ 1  & 0 \\
 \end{pmatrix},\hspace{1cm}
@@ -116,10 +136,10 @@ $$v =
 \begin{pmatrix}
   z &  x-iy \\ x+iy  & -z \\
 \end{pmatrix}$$
-as a column vector $[v]_B$. $\square$ \\[3pt]
+as a column vector $[v]_\mathcal{B}$ with basis $\mathcal{B}=\{\sigma_x, \sigma_y, \sigma_z \}$ $\square$ \\[3pt]
 
 \noindent
-Now suppose we have two bases $\mathcal{B}$ and $\mathcal{B}'$.  We have:
+Suppose we have two bases $\mathcal{B}$ and $\mathcal{B}'$.  We have:
 $$\mathcal{B} = \{e_i\}$$
 as before, but for the primed basis we will write:
 $$\mathcal{B}' = \{e_{i'}\}.$$
@@ -131,12 +151,12 @@ $$e_i = A^{j'}_i e_{j'}$$
 $$e_{i'} = A^{j}_{i'} e_j$$
 Remember, the location of the prime matters, so $A^{i}_{j'}$ refers to something altogether different from $A^{j}_{i'}$.  But they are related:
 $$e_i = A^{j'}_{i} e_{j'} = A^{j'}_i A^{k}_{j'}e_{k}$$
-which requires (recall that the coordinates of a basis are unique) that:
+which requires (recall that the components of a basis are unique) that:
 $$A^{j'}_i A^{k}_{j'} = \delta^k_i$$
 and similarly:
 $$A^i_{j'} A^{j'}_k = \delta^i_k$$
 
-Any vector $v$ can be expressed in terms of basis $\mathcal{B}$ or $\mathcal{B}'$, which we write as:
+Any vector $v$ can be expressed in terms of either basis $\mathcal{B}$ or basis $\mathcal{B}'$, which we write as:
 $$v = v^{i}e_{i} = v^{j'}e_{j'}$$
 but we also have:
 \begin{equation}
@@ -145,28 +165,40 @@ e_{j'} = A^{i}_{j'} e_i
 \end{equation}
 so that:
 $$v^{i}e_{i} = v^{j'}e_{j'} = v^{j'} \, (A^{i}_{j'} \, e_i) = (A^{i}_{j'} \, v^{j'}) \, e_i$$
-In an exercise above you show that the coordinates of a vector within a basis (such as $\{e_i\}$ here) are unique.  Therefore, we can conclude that for all $i$:
+In a previous exercise you showed that the components of a vector within a basis (such as $\{e_i\}$ here) are unique.  Therefore, we can conclude that for all $i$:
 $$v^{i} = A^{i}_{j'} \, v^{j'}$$
 In a similar fashion, we can find that:
 $$v^{j'} = A^{j'}_{i} \, v^{i}$$
-Compare this transformation rule to Equation~\ref{eqn:tfbasis}, we see that the coordinates $v^i$ transform via $A^{j'}_i$, whereas the basis vectors $e_i$ transform via $A^{i}_{j'}$.  That is, they transform in a complementary fashion.  We call the vector components $v^i$ contravariant, and we indicate this with an upper index.  We call the basis vector $e_i$ covariant, and we indicate this with the lower index.
+Compare this transformation rule to Equation~\ref{eqn:tfbasis}, we see that the components $v^i$ transform via $A^{j'}_i$, whereas the basis vectors $e_i$ transform via $A^{i}_{j'}$.  That is, they transform in a contary fashion.  We call the vector components $v^i$ contravariant, and we indicate this with an upper index.  We call the basis vector $e_i$ covariant, and we indicate this with the lower index.
+\begin{center}
+\begin{tabular}{lllll}
+ & index location & quantity & transformation & inverse transformation \\
+\hline
+$v^i$ & upper index & contravariant component & $v^{i'} = A^{i'}_{j} v^{j}$ & $v^{i} = A^{i}_{j'} v^{j'}$ \\
+$e_i$ & lower index & covariant basis vector & $e_{i'} = A^{j}_{i'} e_{j}$ & $e_{i} = A^{j'}_{i} e_{j'}$ \\
+\end{tabular}
+\end{center}
 
-There is an intuitive way to think about this.  Suppose we scale all of the basis vectors in a particular basis by doubling their length to obtain a new basis.  How must we change the coordinates of a vector when moving from the old basis to the new basis?  If we left them unchanged, the vector would double in actual size.  So we have to scale the coordinates by $1/2$ in order to keep the actual size of the vector unchanged.  Thus coordinates change in an opposite manner to the basis vectors, which is the origin of the term contravariant.  I'm not a fan of the terminology, because contravariant sounds ``weird'' but it is really just ``ordinary''.  But the terminology is widely used, so just remember that contra-variant coordinates are the coordinates of ordinary vectors.\\
 
-\exercise 
- The elementary definition of a vector is a geometric
-representation of magnitude and direction.  We just reasoned that the
-contravariant coordinates of a vector transform in the opposite manner
-to a scale factor applied to the basis vectors.  Now suppose instead
-we rotate the basis vectors by an angle $\theta$ around a certain
-axis.  How will the contravariant coordinates of the vector change in
-this case? $\square$ \\[3pt] 
+\exercise Our first definition of a vector is a geometric object with a
+magnitude and direction.  Suppose we scale each basis vector by a
+scalar $s$, to obtain a new basis.  We must scale the components from
+the original basis by some scalar value in order to obtain new
+components for the new basis which preserve the magnitude of the
+vector.  What is that scalar value?  Does the ``contra'' in
+contravariant components make sense in this context? $\square$ \\[3pt]
+
+\exercise Consider the previous exercise, but instead of scaling, we
+rotate the original basis vectors by an angle $\theta$ about some axis
+$w$ to obtain a new basis.  Now we must rotate the components from the original basis about the axis $w$ by some angle, in order to obtain new components for the new basis which preserve the direction of the vector.  What is that angle?  Does the ``contra'' in contravariant components make sense in this context?
+$\square$ \\[3pt]
+
 
 \section{Tensors}
 
 A traditional physics definition of a tensor is a generalization of
 scalars and vectors, to include quantities with muliple indices which
-transforms in a specific way when changing coordinates.  This
+transforms in a specific way when changing components.  This
 definition is perfectly reasonable, but it is not particularly
 insightful, and things (like the transformation rules) seem to come
 from nowhere.  We are going to use a more modern definition of a tensor,
@@ -207,14 +239,14 @@ difference between a tensor and matrix.  Remember that vectors are
 geometric objects that exist independently of any particular basis.
 Only after a basis has been selected, we can refer to them by their
 components, and arrange their components into row or column vectors.
-In exactly the same way, a tensor is a geometric object that exists
-independently of any basis.  But once we define a basis $\mathcal{B}$
-we can refer to a vector by it's components.  We can arrange the
-components of a vector into a row vector (denoted $[v]_\mathcal{B}$)
-or a column vector (denoted $[v]^T_{\mathcal{B}}$).  Likewise, we can
-arrange the compments of a covariant rank-two tensor into a matrix, denoted
-$[T]_{\mathcal{B}}$.  We can calculate the action of $T$ on vectors
-$v$ and $w$ via matrix multiplication:
+In exactly the same way, a tensor exists independently of any basis.
+But once we define a basis $\mathcal{B}$ we can refer to a vector by
+it's components.  We can arrange the components of a vector into a row
+vector (denoted $[v]_\mathcal{B}$) or a column vector (denoted
+$[v]^T_{\mathcal{B}}$).  Likewise, we can arrange the compments of a
+covariant rank-two tensor into a matrix, denoted $[T]_{\mathcal{B}}$.
+We can calculate the action of $T$ on vectors $v$ and $w$ via matrix
+multiplication:
 
 \begin{displaymath}
 T(v,w) = v^i \, T_{ij} \, w^j = [v]_\mathcal{B}^T \, [T]_\mathcal{B} \, [v]_\mathcal{B} = \begin{pmatrix} v_1 \, v_2 \, \cdots \, v_n \end{pmatrix}
@@ -254,7 +286,7 @@ First consider, for each basis vector $e_i$, the $F$-valued function defined by:
 $$e^i(v) \equiv v^i$$
 This function is linear as a consequence of the linearity of vector addition and scalar multiplication.  So each $e^i$ is indeed a dual vector.  Notice also that 
 $$e^i(e_j) = \delta^i_j$$
-because $e_j$ is itself a vector in $V$, with coordinates $v^i$ that are zero everywhere except for $v^j = 1$.  In the following exercises, you will show that $\{e^i\}$ is a basis
+because $e_j$ is itself a vector in $V$, with components $v^i$ that are zero everywhere except for $v^j = 1$.  In the following exercises, you will show that $\{e^i\}$ is a basis
 for the dual space $V^*$, by showing that they span the space and are
 linearly independent.\\[3pt]
 
@@ -277,12 +309,11 @@ $a = a_i e^i$
 and evaluate $a(e_i)$ for each $i$. $\square$ \\[3pt]
 
 \noindent
-In the two preceding exercises, we have shown that the dual vectors of
-a vector space $V$ with basis $\mathcal{B}$ defined by:
+In the two preceding exercises, we have shown that for a vector space $V$ with basis $\mathcal{B}$, the dual vectors defined by:
 $$e^i(v) \equiv v^i$$
-form a basis to the dual space, which we call the dual basis:
+form a basis to the dual space, which we call the {\bf dual basis}:
 $$\mathcal{B}^* = \{ e^i \}$$.
-We also see that if a vector space is finite dimensional, its dual space has the same dimension.  The dual space is starting to look more and more like the original vector space!\\
+We also see that {\bf if a vector space is finite dimensional, its dual space has the same dimension.}\\
 
 \noindent
 {\bf Example}:  Consider the familiar vector space of $\mathbb{R}^3$ where any vector can be written in terms of basis vectors:
@@ -298,8 +329,8 @@ $$f(v) = \vec{a} \cdot \vec{v}$$
 can be written in this bases as:
 $$f(\vec{v}) = a_x \, f_x(\vec{v}) + a_y \, f_y(\vec{v}) + a_z \, f_z(\vec{v})$$
 
-\section{
-  Non-degenerate Hermitian Forms}
+\section{Non-degenerate Hermitian Forms and Metric Duals}
+\label{sec:metricduals}
 
 In quantum mechanics, we saw that a Hilbert space $H$ is a vector space
 with an inner product defined.  It turns out that an inner product is
@@ -440,10 +471,10 @@ The space-time interval thus defined has several properties:
 \end{center}
 Property (A) is evident from the calculation that motivated the
 definition.  Property (B) follows because $\Delta S^2$ only involves
-the spatial coordinates via the usual Euclidean metric:
+the spatial components via the usual Euclidean metric:
 $$\Delta D^2 \equiv (x_{\rm B}-x_{\rm A})^2 + (y_{\rm B}-y_{\rm A})^2 + (z_{\rm B}-z_{\rm A})^2$$
 which is invariant under rotations.
-Property (C) follows because $\Delta S^2$ only involves differences in time and spatial coordinates, e.g. $t_{\rm B} - t_{\rm A}$.
+Property (C) follows because $\Delta S^2$ only involves differences in time and spatial components, e.g. $t_{\rm B} - t_{\rm A}$.
 
 Next consider an infinitesimal $\Delta S^2$ calculated in frame $F$,
 which we will write as $dS^2$, and the same quantity cacluated in
@@ -512,45 +543,47 @@ Consider a frame $F$, where we'll use the standard basis $\mathcal{B}=\{e_\mu\}$
   e_2 &=& (0,0,1,0) \\
   e_3 &=& (0,0,0,1) \\
 \end{eqnarray*}
-We can write and $v \in V$ as:
+With this basis, we can write any $v \in V$ as:
 $$v = v^\mu e_\mu$$
 where we have used greek indices, as is conventional for the case that
-the indices run from 0 to 3.   We call $v$ a four-vector and $v^\mu$.  (Most unfortunately, we also often speak of the four-vector $v^\mu$.)
+the indices run from 0 to 3.   We call $v$ a four-vector and $v^\mu$ are its components in basis $\mathcal{B}$.
 
-Now consider an event which in frame $F$ has coordinates at time $t$
+Now consider an event which in frame $F$ has components at time $t$
 and position $(x,y,z)$.  We will associate this with a vector $v \in
 V$ by the conventional assignment:
 \begin{equation}
 v^0 = ct, \hspace{1cm} v^1 = x, \hspace{1cm} v^2 = y, \hspace{1cm} v^3 = z, \hspace{1cm} 
 \end{equation}
-We call a vector so defined a position four-vector.
+We call a vector with components so defined a position four-vector.
 
-We would like to add to our four-vector space a non-degenerate Hermitian form, and the preceding section provides us with an excellent candidate.  We define:
+We would like to add to our four-vector space a non-degenerate Hermitian form, and the preceding section suggests an excellent candidate.  We define:
 \begin{equation}
 (a|b) = a^0 b^0 - a^1 b^1 - a^2 b^2 - a^3 b^3
 \end{equation}
 
 \exercise
-Show that $(\cot|\cdot)$ so defined is a non-generate Hermitian form (by demonstrating that it has the three definining properties). $\square$ \\[3pt]
+Show that $(\cdot|\cdot)$ as defined above is a non-degenerate Hermitian form, by demonstrating that it has the three definining properties. $\square$ \\[3pt]
 
 \exercise
-For position four-vectors $a,b \in V$ show that
+For position four-vectors $a,b \in V$ with space time interval is $\Delta S^2$, show that:
 $$(b-a|b-a) = \Delta S^2$$
 $\square$ \\[3pt]
 
 \exercise
-Show that $(\cot|\cdot)$ as defined above is {\bf not} an inner product.
+Show that $(\cdot|\cdot)$ as defined above is {\bf not} an inner product.
 $\square$ \\[3pt]
 
-
-We can also interpret our non-Degnerate Hermitian form as multilinear
+\noindent
+We can also interpret our non-degenerate Hermitian form as multilinear
 map $g: V\times V \to R$.  That is, as a rank-two covariant tensor:
 $$g(a,b) \equiv (a | b)$$
-As always, we can work out the coordinates of the tensor in the standard basis $\mathcal{B}$ with
-$$g_{\mu\nu} \equiv g(e_\mu, e_\nu)$$
+As always, we can work out the components of the tensor in the standard basis $\mathcal{B}$ with
+\begin{equation}
+\label{eqn:metrictensor}
+g_{\mu\nu} \equiv g(e_\mu, e_\nu) = (e_\mu | e_\nu)
+\end{equation}
 So now we can write:
 $$(a|b) = g(a,b) = g(a^\mu e_\mu, b^\nu e_\nu) =  a^\mu b^\nu g(e_\mu, e_\nu) = a^\mu b^\nu g_{\mu\nu} $$
-
 In the exercises you will show that
 \begin{equation}
 \label{eqn:metric-matrix}
@@ -565,18 +598,41 @@ In the exercises you will show that
 
 \exercise
 Verify equation \ref{eqn:metric-matrix} by calculating the matrix coodinates.
+$\square$ \\[3pt]
 
 
 \exercise
 For position four-vectors $a$ and $b$ given by:
-$$\cdot$$
+$$\cdots \text{TODO} \cdots$$
 calculate $(a|b)$ using matrices via:
-$$(a|b) = a^\mu b^\nu g_{\mu \nu} = [a]^T_\mathcal{B} [g]_\mathcal{B} [b]_\mathcal{B}.
+$$(a|b) = a^\mu b^\nu g_{\mu \nu} = [a]^T_\mathcal{B} [g]_\mathcal{B} [b]_\mathcal{B}$$
+.$\square$ \\[3pt]
 
 
+With our Non-Degenerate Hermitian Form $(\cdot|\cdot)$ defined, as
+shown in Section~\ref{sec:metricdual}, to each vector $v \in V$ we can
+associate a metric dual
+$$\tilde{v} \equiv (v|\cdot)$$
+which is shorthand for defining its action on any vector $w \in V$
+$$\tilde{v}(w) = (v|w)$$
+We can also fully describe $\tilde{v}$ by its components with respect to the basis vectors $\mathcal{B} = \{{e_\mu}\}$, because:
+$$\tilde{v}(w) = \tilde{v}(w^\mu e_\mu) = w^\mu \tilde{v}(e_\mu) = w^\mu \tilde{v}_\mu$$
+where the components of $\tilde{v}$ are:
+$$\tilde{v}_\mu \equiv \tilde{v}(e_\mu) = (v|e_\mu) = (v^\nu e_\nu | e_\mu)
+= v^\nu (e_\nu | e_\mu) = v^\nu g(e_\mu, e_\nu) = v^\nu g_{\mu \nu}$$
+and using Equation~\ref{eqn:metrictensor} we have a very useful results:
+\begin{equation}
+\tilde{v}_\mu = g_{\mu \nu} v^\nu 
+\end{equation}
+In matrices, this reads:
+$$[\tilde{v}]_\mathcal{B^*} = [g]_\mathcal{B} [v]_\mathcal{B}$$
 
-
-TODO:  Raising / Lowering opperator...
+\exercise
+Consider the position four-vector with components in the standard basis $\mathcal{B}$:
+$$[v]_\mathcal{B} = \begin{pmatrix} ct \\ x \\ y \\ z\end{pmatrix}$$
+Using matrices, show that the components of its metric dual in the
+dual basis are
+$$[\tilde{v}]_{\mathcal{B}^*} = \begin{pmatrix} ct \\ -x \\ -y \\ -z\end{pmatrix}$$
 
 
 \section{Linearity of Transformation between Inertial Frames}
@@ -640,7 +696,7 @@ $$g_{00}=-1, \hspace{0.5cm} g_{11}=g_{22}=g_{33}=1$$
 with all other elements zero.  So then in tensor notation:
 $$\Delta S^2 = x^u x^w g_{uw}$$
 
-We showed that the transformation of coordinates between frames is linear, which we can write as:
+We showed that the transformation of components between frames is linear, which we can write as:
 $$\widetilde{x}^u = \Lambda^u_w x^w$$
 here $\Lambda^u_w$ has 4x4=16 components, which together from a 4x4 matrix, just enough for defining a linear transformation of a four-component vector.  We also have an inverse transformation $M = \Lambda^-1$, so that:
 $$ x^w = M^w_u\widetilde{x}^u$$
@@ -687,7 +743,7 @@ for all $v,w \in V$ and any scalar $c$.\\
 
 
 \noindent
-For any basis $\mathcal{B}=\{e_i\}$ for $V$, then we can write the vector $T(e_i)$ in terms of its coordinates ${T_i}^j$ as:
+For any basis $\mathcal{B}=\{e_i\}$ for $V$, then we can write the vector $T(e_i)$ in terms of its components ${T_i}^j$ as:
 $$T(e_i) \equiv {T_i}^j e_j$$
 These components completely specify the action of $T$ on any vector:
 $$T(v) = T(v^i \, e_i) = v^i \, T(e_i) = v^i \, {T_i}^j \, e_j$$
