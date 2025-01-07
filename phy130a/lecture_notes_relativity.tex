@@ -4,6 +4,7 @@
 \usepackage{cite}
 \usepackage{slashed}
 \usepackage{graphicx}
+\usepackage{mathtools}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{braket}
@@ -110,7 +111,7 @@ results that follow.) $\square$ \\[3pt]
 
 \noindent
 Throughout this course, we will use the Einstein summation convention, whereby there is an implicit sum over repeated dummy indices with one a superscript and the other a subscript, e.g.:
-$$v = v^i e_i \equiv \sum_i v^i e_i$$
+$$v = v^i e_i \coloneqq \sum_i v^i e_i$$
 Only {\bf after} a basis $\mathcal{B}$ is chosen, it is possible to represent a vector as a column vector:
 $$[v]_{\mathcal{B}} = \begin{pmatrix} v^1 \\ v^2 \\ \vdots \\ v^n \end{pmatrix}$$
 or a row vector:
@@ -193,21 +194,97 @@ rotate the original basis vectors by an angle $\theta$ about some axis
 $w$ to obtain a new basis.  Now we must rotate the components from the original basis about the axis $w$ by some angle, in order to obtain new components for the new basis which preserve the direction of the vector.  What is that angle?  Does the ``contra'' in contravariant components make sense in this context?
 $\square$ \\[3pt]
 
+\section{Dual Spaces}
 
-\section{Tensors}
+For a vector space $V$ over a scalar field $F$, we define a dual
+vector $f$ as an $F$-valued linear function on $V$:
+$$f: V \to F $$
+That is, if $f$ is a dual vector, then for any $v \in V$ we have $f(v)
+\in F$.  The linearity means that for any $v,w \in V$ and $c \in F$ we
+have also:
+$$f(v + c \, w) = f(v) + c \, f(w)$$
+The set of all dual vectors to a vector space $V$ is called the {\bf
+  dual space of $V$}, and it is denoted as $V^*$.  As you will verify in the
+exercise below, the dual space is itself a vector space.\\[3pt]
+
+\exercise 
+For a vector space $V$ over scaler field $F$, show that its dual space
+($V^*$) is itself a vector space.  Vector addition (addition of dual
+vectors) and scalar multiplication are defined such that:
+$$(f+cg)(v) = f(v) + c g(v) \hspace{2cm} f,g \in V^*,\; v \in V,\; c \in F $$
+$\square$ \\[3pt]
+
+\noindent
+Assume that $\mathcal{B} = \{ e_i\}$ is a basis for the vector space $V$.
+The action of any dual vector $f \in V^*$ on any vector $v \in V$ is completely determined by
+its action of $f$ on the basis vectors $e_i$.  For each i, we define a scalar quantity
+$$f_i \coloneqq f(e_i)$$
+and we see that:
+\begin{equation}
+\label{eqn:dualout}
+f(v) = f (v^i e_i) = v^i f(e_i) = v^i f_i
+\end{equation}
+  
+For each $i$, we also define a dual vector $e^i \in V^*$ by:
+$$e^i(v) = v^i$$
+We say the $e^i$ picks off the $i$th component of $v$.
+You will show in the exercises below that the set of dual vectors $\{e^i\}$ are a basis for $V^*$, which we call the dual basis and denote as $\mathcal{B}^*$.
+You will also show that the scalar quanties $f_i$ are in fact the components of $f$ in the $\mathcal{B}$, so we have:
+$$f = f_i e^i$$.
+which shows a dual vector $f$ expanded in terms of its components $f_i$ and basis vectors $e^i$.
+
+The dual basis $\mathcal{B}^*$ depends entirely on the basis $\mathcal{B}$ of
+$V$.  As $\mathcal{B}^*$ has one basis vector defined for each basis vector in
+$\mathcal{B}$, we see that {\bf if $V$ is finite dimensional, then it's
+dual space $V^*$ has the same dimension.}\\[3pt]
+
+\exercise
+Verify that $e^i(v + c w) = e^i(v) + c e^i(w)$ so that $e^i$ is indeed a dual vector.$\square$ \\[3pt]
+
+\exercise Show that
+$$f = f_i e^i$$
+is a valid expansion for $f$, by verifying that
+$$f(v) = v^i f_i$$
+as required by Equation~\ref{eqn:dualout}. This shows that $\{e^i\}$ spans the dual space.$\square$ \\[3pt]
+
+\exercise 
+Show that if:
+$a_i e^i = 0$
+then, for all $i$
+$a_i = 0$
+This shows that $\{e^i\}$ is linearly independent.
+Hint: define the dual vector
+$a = a_i e^i$
+and evaluate $a(e_i)$ for each $i$. $\square$ \\[3pt]
+
+\exercise:
+Consider the vector space $V=\mathbb{R}^3$ with the basis $e_1=i, e_2=j, e_3=k$.  For a vector $\vec{v} \in V$, write out the dual basis components $e^i(\vec{v})$ explicitly in terms of dot products.  For a dual vector $f \in V^*$, write out it's components $f_i$.  Write $f(\vec{v})$ expanded in terms of these components and basis vectors.
+
+\exercise
+Show that a dual vector transforms as ...
+
+
+\section{Introduction to Tensors}
 
 A traditional physics definition of a tensor is a generalization of
 scalars and vectors, to include quantities with muliple indices which
-transforms in a specific way when changing components.  This
-definition is perfectly reasonable, but it is not particularly
-insightful, and things (like the transformation rules) seem to come
-from nowhere.  We are going to use a more modern definition of a tensor,
-which is equivalent, but clarifies the situation considerably.  To
-keep things simple, for now we will only consider a rank-two covariant
-tensors (but it will be easy to expand the concept to contravariant
-and mixed tensors of different ranks later.)
+transform in a specific way when changing the basis.  This definition
+is perfectly reasonable, but it is not particularly insightful, and
+things (like the transformation rules) seem to come from nowhere.  We
+are going to use a more modern definition of a tensor, which is
+equivalent, but clarifies the situation considerably.
 
-We define a rank-two covariant tensor $T$ as an $F$-valued multilinear function of two vectors (hence rank two):
+Let $V$ be vector space and $V^*$ its dual space.  We define an $(r,s)$ tensor as an $F$-valued multilinear function of $r$ vectors and $s$ dual vectors:
+\begin{displaymath}
+  T:\underbrace{V \times V \times \cdots \times V}_{r~\text{times}} \times \underbrace{V^* \times V^* \times \cdots \times V^*}_{s~\text{times}} \to F
+\end{displaymath}
+Notice a (1,0) tensor is a dual vector.  We can consider a scalar to be a (0,0) tensor.
+
+A bit more challenging:  a vector is isomophic to a (0,1) tensor by the mapping each vector $v$ to an equivalent (0,1) tensor, defined by it's action on any dual vector $f \in V^*$:
+$$v(f) \coloneqq f(v)$$
+Let's put it this way.  You have an ordinary vector $v$ but you want to convince me that it is (0,1) tensor, that is, a function that takes in a dual vector and spits out a scalar.  This is no problem, for when I hand you any dual vector, you cleverly feed it your ordinary vector $v$ and get a scalar $f(v)$.  You hand me back that scalar, and voila:  you have turned your ordinary vector into a (0,1) tensor.
+
+Next we'll consider a (2,0) tensor $T$.  By definition $T$ as an $F$-valued multilinear function of two vectors:
 \begin{displaymath}
 T:V \times V \to F
 \end{displaymath}
@@ -218,20 +295,16 @@ and the defining feature of a tensor, that it is multilinear, means that
 T(v_1 + c v_2, w_1) &=& T(v_1, w_1) + c \, T(v_2, w_1)\\
 T(v_1, w_1 + c w_2) &=& T(v_1, w1) + c \, T(v_1, w_2)\\
 \end{eqnarray*}
-for $v_1,v_2,w_1,w_2 \in V$ and $c \in F$.  Because of multilinearity,
-a tensor is completely described by its action on any set of basis
-vectors.  With the components of $T$ defined as
-$$T_{ij} \equiv T(e_i, e_j)$$
+for $v_1,v_2,w_1,w_2 \in V$ and $c \in F$.
+You'll show in the exercises that the set of all (2,0) tensors is a vector space.
+
+A tensor is completely described by its action on any set of basis
+vectors.  The components of $T$ are defined as
+$$T_{ij} \coloneqq T(e_i, e_j)$$
 we can calculate 
-$$T(v,w) = T(v^i \, e_i, w^j \, e_j) = v^i T_{ij} v^j,$$
+$$T(v,w) = T(v^i \, e_i, w^j \, e_j) = v^i T_{ij} w^j,$$
 which shows we can calculate $T(v,w)$ from only the components $T_{ij}$.\\[3pt]
 
-\exercise 
- Define tensor addition for rank-two tensors $T$ and $S$ by:
-$$(T+S)(v,u) \equiv T(v,u) + S(v,u)$$
-for all $v,u \in F$.  Define scalar multiplication by:
-$$(cT)(v,u) \equiv c \, T(v,u)$$
-Show that the set of all covariant rank-two tensors forms a vector space.$\square$\\[3pt]
 
 \noindent
 From the modern definition of a tensor, we can clearly see the
@@ -244,7 +317,7 @@ But once we define a basis $\mathcal{B}$ we can refer to a vector by
 it's components.  We can arrange the components of a vector into a row
 vector (denoted $[v]_\mathcal{B}$) or a column vector (denoted
 $[v]^T_{\mathcal{B}}$).  Likewise, we can arrange the compments of a
-covariant rank-two tensor into a matrix, denoted $[T]_{\mathcal{B}}$.
+(2,0) tensor into a matrix, denoted $[T]_{\mathcal{B}}$.
 We can calculate the action of $T$ on vectors $v$ and $w$ via matrix
 multiplication:
 
@@ -270,64 +343,17 @@ and:
 $$T_{ij} = A_i^{k'} A_j^{l'} T_{k'l'} $$
 $\square$ \\[3pt]
 
+We can easily expand our notion of a covariant rank-two tensor
 
-\section{Dual Spaces}
-
-For a vector space $V$ over a scalar field $F$, we define a dual vector $f$ as an $F$-valued linear function on $V$.  That is, if $f$ is a dual vector, then for any $v \in V$ we have $f(v) \in F$.  The linearity means that for any $v,w \in V$ and $c \in F$ we have also:
-$$f(c v + w) = c f(v) + f(w)$$
-The set of all dual vectors to a vector space $V$ is called the dual space of $V$, denoted as $V^*$.\\
 
 \exercise 
- For a vector space $V$ over scaler field $F$, show that its dual space ($V^*$) is itself a vector space. $\square$ \\[3pt]
+For a vector space $V$ over scaler field $F$, show that the set of all (2,0) tensors is a vector space.
+For any two tensors $T$ and $S$, vector addition (addition of tensors) and scalar multiplication are defined such that:
+$$(T+c\,S)(v,w) = T(v,w) + c \,S(v,w) \hspace{2cm} v,w \in V,\; c \in F $$
+$\square$ \\[3pt]
 
-\noindent
-Suppose we have a basis $\mathcal{B} = \{ e_i\}$ for a vector field $V$.  Our next task will be to find a basis for it's dual space $V^*$ which we shall call $\mathcal{B}^*$.
-First consider, for each basis vector $e_i$, the $F$-valued function defined by:
-$$e^i(v) \equiv v^i$$
-This function is linear as a consequence of the linearity of vector addition and scalar multiplication.  So each $e^i$ is indeed a dual vector.  Notice also that 
-$$e^i(e_j) = \delta^i_j$$
-because $e_j$ is itself a vector in $V$, with components $v^i$ that are zero everywhere except for $v^j = 1$.  In the following exercises, you will show that $\{e^i\}$ is a basis
-for the dual space $V^*$, by showing that they span the space and are
-linearly independent.\\[3pt]
 
-\exercise 
- Define the components of a dual vector $f$ by:
-$$f_i \equiv f(e_i)$$
-Notice that while $f$ is a dual vector, each $f_i$ is a scalar.  First show that:
-$$f(v) = f_i v^i$$
-Then, show that any $f$ can be equivalently expressed as 
-$$f = f_i e_i$$
-by evaluating $f(v)$ for any vector $v$.  This shows that $\{e^i\}$ spans the dual space.$\square$ \\[3pt]
 
-\exercise 
-Show that if:
-$a_i e^i = 0$
-(remember the implicit sum!) then:
-$a_i = 0$
-(no sum here) for all $i$.  Hint: define the dual vector
-$a = a_i e^i$
-and evaluate $a(e_i)$ for each $i$. $\square$ \\[3pt]
-
-\noindent
-In the two preceding exercises, we have shown that for a vector space $V$ with basis $\mathcal{B}$, the dual vectors defined by:
-$$e^i(v) \equiv v^i$$
-form a basis to the dual space, which we call the {\bf dual basis}:
-$$\mathcal{B}^* = \{ e^i \}$$.
-We also see that {\bf if a vector space is finite dimensional, its dual space has the same dimension.}\\
-
-\noindent
-{\bf Example}:  Consider the familiar vector space of $\mathbb{R}^3$ where any vector can be written in terms of basis vectors:
-$$\vec{v} = v_x \hat{x} + v_y \hat{y} + v_z \hat{z}$$
-the dual basis is the set of functions:
-\begin{eqnarray*}
-f_x(\vec{v}) &=& \hat{x} \cdot \vec{v}\\
-f_y(\vec{v}) &=& \hat{y} \cdot \vec{v}\\
-f_z(\vec{v}) &=& \hat{z} \cdot \vec{v}\\
-\end{eqnarray*}
-Any $F$-valued linear function:
-$$f(v) = \vec{a} \cdot \vec{v}$$
-can be written in this bases as:
-$$f(\vec{v}) = a_x \, f_x(\vec{v}) + a_y \, f_y(\vec{v}) + a_z \, f_z(\vec{v})$$
 
 \section{Non-degenerate Hermitian Forms and Metric Duals}
 \label{sec:metricduals}
@@ -372,7 +398,7 @@ for all $w \in V$.  We call the dual vector $\tilde{v}$ the metric dual of $v$. 
 $$\widetilde{v} = (v|\cdot)$$.
 
 Now consider the map $L: V \to V^*$ that sends a vector to it's metric dual:
-$$L(v) \equiv \tilde{v}$$
+$$L(v) \coloneqq \tilde{v}$$
 
 \exercise Show that $L$ is conjugate linear, that is for $v_1,v_2 \in V$ and $c \in F$ then
 $$L(c v_1 + v_2) = c^* L(v_1) + L(v_2)$$
@@ -405,7 +431,7 @@ the same dimension.
 To prove that the elements of $\mathcal{B}^*$ are linearly independent, assume they are not.  Then there is some set of scalars $a^i$ not all zero such that:
 $$a^i L(e_i) = 0$$
 Then:
-$$v \equiv a^i e_i \neq 0 $$
+$$v \coloneqq a^i e_i \neq 0 $$
 because not all $a^i$ are zero.  And so:
 $$L(v) = L(a^i e_i) = a^i L(e_i) = 0$$
 As shown in a previous exercise, this implies that $v=0$, which contradicts $v \neq 0$.  So then $\{L(e_i)\}$ are linearly independent, and therefore span the space of dual vectors $V^*$, and form a basis for $V^*$
@@ -459,7 +485,7 @@ Quantities that have the same value in every reference frame are
 precious.  So this result alone is enough motivation to define the space-time
 interval $\Delta S*2$ between any two events A and B as:
 \begin{equation}
-\Delta S^2 \equiv c (t_{\rm B}-t_{\rm A})^2 - (x_{\rm B}-x_{\rm A})^2 - (y_{\rm B}-y_{\rm A})^2 - (z_{\rm B}-z_{\rm A})^2
+\Delta S^2 \coloneqq c (t_{\rm B}-t_{\rm A})^2 - (x_{\rm B}-x_{\rm A})^2 - (y_{\rm B}-y_{\rm A})^2 - (z_{\rm B}-z_{\rm A})^2
 \end{equation}
 The space-time interval thus defined has several properties: 
 \begin{center}
@@ -472,7 +498,7 @@ The space-time interval thus defined has several properties:
 Property (A) is evident from the calculation that motivated the
 definition.  Property (B) follows because $\Delta S^2$ only involves
 the spatial components via the usual Euclidean metric:
-$$\Delta D^2 \equiv (x_{\rm B}-x_{\rm A})^2 + (y_{\rm B}-y_{\rm A})^2 + (z_{\rm B}-z_{\rm A})^2$$
+$$\Delta D^2 \coloneqq (x_{\rm B}-x_{\rm A})^2 + (y_{\rm B}-y_{\rm A})^2 + (z_{\rm B}-z_{\rm A})^2$$
 which is invariant under rotations.
 Property (C) follows because $\Delta S^2$ only involves differences in time and spatial components, e.g. $t_{\rm B} - t_{\rm A}$.
 
@@ -576,11 +602,11 @@ $\square$ \\[3pt]
 \noindent
 We can also interpret our non-degenerate Hermitian form as multilinear
 map $g: V\times V \to R$.  That is, as a rank-two covariant tensor:
-$$g(a,b) \equiv (a | b)$$
+$$g(a,b) \coloneqq (a | b)$$
 As always, we can work out the components of the tensor in the standard basis $\mathcal{B}$ with
 \begin{equation}
 \label{eqn:metrictensor}
-g_{\mu\nu} \equiv g(e_\mu, e_\nu) = (e_\mu | e_\nu)
+g_{\mu\nu} \coloneqq g(e_\mu, e_\nu) = (e_\mu | e_\nu)
 \end{equation}
 So now we can write:
 $$(a|b) = g(a,b) = g(a^\mu e_\mu, b^\nu e_\nu) =  a^\mu b^\nu g(e_\mu, e_\nu) = a^\mu b^\nu g_{\mu\nu} $$
@@ -612,13 +638,13 @@ $$(a|b) = a^\mu b^\nu g_{\mu \nu} = [a]^T_\mathcal{B} [g]_\mathcal{B} [b]_\mathc
 With our Non-Degenerate Hermitian Form $(\cdot|\cdot)$ defined, as
 shown in Section~\ref{sec:metricdual}, to each vector $v \in V$ we can
 associate a metric dual
-$$\tilde{v} \equiv (v|\cdot)$$
+$$\tilde{v} \coloneqq (v|\cdot)$$
 which is shorthand for defining its action on any vector $w \in V$
 $$\tilde{v}(w) = (v|w)$$
 We can also fully describe $\tilde{v}$ by its components with respect to the basis vectors $\mathcal{B} = \{{e_\mu}\}$, because:
 $$\tilde{v}(w) = \tilde{v}(w^\mu e_\mu) = w^\mu \tilde{v}(e_\mu) = w^\mu \tilde{v}_\mu$$
 where the components of $\tilde{v}$ are:
-$$\tilde{v}_\mu \equiv \tilde{v}(e_\mu) = (v|e_\mu) = (v^\nu e_\nu | e_\mu)
+$$\tilde{v}_\mu \coloneqq \tilde{v}(e_\mu) = (v|e_\mu) = (v^\nu e_\nu | e_\mu)
 = v^\nu (e_\nu | e_\mu) = v^\nu g(e_\mu, e_\nu) = v^\nu g_{\mu \nu}$$
 and using Equation~\ref{eqn:metrictensor} we have a very useful results:
 \begin{equation}
@@ -744,7 +770,7 @@ for all $v,w \in V$ and any scalar $c$.\\
 
 \noindent
 For any basis $\mathcal{B}=\{e_i\}$ for $V$, then we can write the vector $T(e_i)$ in terms of its components ${T_i}^j$ as:
-$$T(e_i) \equiv {T_i}^j e_j$$
+$$T(e_i) \coloneqq {T_i}^j e_j$$
 These components completely specify the action of $T$ on any vector:
 $$T(v) = T(v^i \, e_i) = v^i \, T(e_i) = v^i \, {T_i}^j \, e_j$$
 
@@ -755,7 +781,7 @@ $$[v]_{\mathcal{B}} = \begin{pmatrix} v^1 \\ v^2 \\ \vdots \\ v^n \end{pmatrix}
 $$
 Each row in $[T(v)]_{\mathcal{B}}$ has an implicit sum, which suggests vector multiplication.  If we define:
 $$
-[T]_{\mathcal{B}} \equiv \begin{pmatrix} 
+[T]_{\mathcal{B}} \coloneqq \begin{pmatrix} 
 {T_1}^1 & {T_2}^1 & \cdots & {T_n}^1\\ 
 {T_1}^2 & {T_2}^2 & \cdots & {T_n}^2\\ 
 \vdots  & \vdots  & \ddots & \vdots \\
