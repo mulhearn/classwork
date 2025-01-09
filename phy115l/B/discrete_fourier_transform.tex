@@ -1,0 +1,192 @@
+\documentclass[12pt]{book}
+
+\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.5in]{geometry}
+\usepackage{cite}
+\usepackage{slashed}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{braket}
+
+\DeclareMathOperator{\sinc}{sinc}
+
+\begin{document}
+
+
+\title{PHY 115L \\
+Introduction to the \\
+Discrete Fourier Transform \\ 
+\author{Michael Mulhearn}}
+
+\maketitle
+
+\setcounter{chapter}{1}
+\chapter{Discrete Fourier Transform}
+
+\section{Fourier Series for Complex-Valued Functions}
+
+We will treat the Fourier Series in the context of the inner product space of square-integrable periodic functions of period $a$,  with an inner product defined as:
+$$ \braket{f|g} \coloneqq \int_{-\frac{a}{2}}^{\frac{a}{2}} f^*(x) g(x) dx$$
+The complex exponential functions
+$$e_k(x) \coloneqq \sqrt{\frac{1}{a}} \exp\left(i \frac{2\pi k x}{a}\right)$$
+are orthonormal vectors.  To verify:
+\begin{eqnarray*}
+  \braket{e_j|e_k} &=& \frac{1}{a} \int_{-\frac{a}{2}}^{\frac{a}{2}}
+  \exp\left(i \frac{2\pi (k-j) x}{a}\right) dx \\[7pt]
+  &=& \frac{1}{\pi (k-j)} \cdot \frac{\exp\left(i \pi (k-j) \right)-\exp\left(-i \pi (k-j) \right)}{2i}\\[7pt]
+  &=& \sinc(\pi (k-j))
+\end{eqnarray*}
+As $k$ and $j$ are integers, and $\sinc$ is zero for every integer multiple of $\pi$ except for $sin(0)=1$, we have shown:
+\begin{equation}
+  \braket{e_j|e_k} = \delta_{kj}
+\end{equation}
+We will not derive it here, but the complex functions are also a complete basis, so we can expand any function in terms of the basis of complex exponentials by:
+\begin{equation}
+ \psi(x) = \sum_{j=-\infty}^{+\infty} c_j e_j (x)
+\end{equation}
+Because of othonormality, we can determine the Fourier coeeficients by:
+\begin{equation}
+c_k = \braket{e_k | \psi}
+\end{equation}
+
+\section{Discrete Fourier Transform}
+
+Next we want to consider the case where we only know the value of $\psi(x)$ at $n$ discrete positions of $x$, specifically:
+$$x_j = x_0 + \lambda j$$
+for $x_0=-a/2$, $j=0,1,\ldots,n-1$ and $\lambda$ the interval between data points:
+$$\lambda = \frac{a}{n}$$
+Notice that the sequence ends before $x=a/2$ because this point is redundant to $x=-a/2$ for the periodic functions that we are considering.
+
+We account for the discrete sampling by making the replacement:
+$$\psi(x) \to \sum_{m=0}^{n-1} \delta(x-x_j) \lambda f(x)$$
+which is choosen because:
+$$\int_{x_1}^{x_2} \sum_{m=0}^{n-1} \delta(x-x_j) \lambda f(x) dx = \sum_{m=m_1}^{m_2} \lambda f_m \; \xrightarrow[\lambda \to 0]{} \; \int_{x_1}^{x_2} f(x) dx $$
+showing that integration (smoothing) of discrete sampled function
+reproduces the integral of the original function as the space between
+samples approaches zero.  We do expect this sampling to introduce
+high-frequency artifacts which must be considered, which we will
+discuss later.
+
+Calculating the fourier series coefficients with the sampled function we obtain:
+\begin{eqnarray*}
+  c_k &=& \braket{e_k | \psi} \\[5pt]
+  &=& \sqrt{\frac{1}{a}} \int_{-\frac{a}{2}}^{\frac{a}{2}}
+  \exp\left(-i \frac{2\pi k x}{a}\right) \sum_{m=0}^{n-1} \delta(x-x_j) \lambda f(x) dx \\[7pt]
+  &=& \sqrt{\frac{\lambda}{n}} \sum_{m=0}^{n-1}
+  \exp\left(-i \frac{2\pi m k}{n}\right) \exp\left(-i \frac{2\pi k x_0}{a}\right) f_j dx \\[7pt]
+\end{eqnarray*}
+which we can reorganize as:
+\begin{equation}
+  \frac{c_k}{\sqrt{\lambda}} \exp\left(i \frac{2\pi k x_0}{a}\right)
+ = \frac{1}{\sqrt{n}} \sum_{m=0}^{n-1}
+  \exp\left(-i \frac{2\pi m k}{n}\right) f_m \equiv A_k  
+\end{equation}
+where $A_k$ are the Fourier coefficients from {\tt numpy.fft.fft} if called with the normalization option {\tt norm=``ortho''}.  The complex exponential on the left hand side is a phase factor that accounts the location of the first data point $x_0$.  Notice that the right hand side depends only on indices, not the actual $x$ positions.
+
+Something very interesting has happened to our Fourier coefficients as a direct result of discretizing the data.  Notice that:
+$$c_{k+n} = c_{k}$$
+so evidently we have only $n$ unique Fourier coefficients.
+
+Blah Blah Blah... Nyquist... Blah Blah blah.
+
+\begin{eqnarray*}
+  \psi(x) &=& \sum_{j=j_a}^{j_b} c_j e_j (x) \\
+  &=& \frac{1}{\sqrt{a}}\sum_{j=j_a}^{j_b} c_j  \exp\left(i \frac{2\pi j x}{a}\right) \\
+  &=& \frac{1}{\sqrt{n}}\sum_{j=j_a}^{j_b} A_j  \exp\left(i \frac{2\pi j (x-x_0)}{a}\right) \\  
+\end{eqnarray*}
+
+
+\section{Homework Problems}
+
+\noindent
+{\bf Problem 1:} Use python {\tt fft.fft} to calculate FS for a sine and cosine.  Plot the magnitude and phase at each wave number and compare to what you expect.
+
+
+{\bf Problem 2:} Plot $f(x)$ by expanding using the Fourier coefficents from Problem 1.
+Do not use inverse discrete fourier transform!  We want a smooth function!
+
+
+{\bf Problem 3:} For square wave, plot coefficents, then plot f(x) obtained from expansion in fourier coefficents/
+
+...
+    
+
+
+    
+
+    
+
+    
+
+
+
+
+\noindent
+{\bf Problem 2:} Write a program to determine the coefficients of the Hermite polynomial $H_n(u)$ for any degree $n$ by using the generating function:
+$$\exp(-z^2+2zu) = \sum_{n=0}^{\infty} \frac{z_n}{n!}H_n(u)$$
+Print the non-zero coefficients for $n=0$ to $5$ and
+compare to e.g. Griffiths Table 2.1\\[5pt]
+
+\noindent
+{\bf Problem 3:} (A) Write a program to calculate the Hermite polynomial
+$H_n(u)$ for a particular value $u$ and for any degree
+$n$ by using the recursion formula:
+$$H_{n+1}(u) = 2 u H_n(u) - 2 n H_{n-1}(u)$$.\\
+
+\noindent
+(B) Test your function {\bf thoroughly} against the Python library results
+(scipy.special.hermite) using randomly chosen values.  That is, pick a
+random integer $n$ from $0$ to some reasonable maximum test value $N$, then
+pick a randomly chosen $u$ value from some reasonably range,
+and compare the results of your program with that of the python library.  You
+want to do this many many times, so you'll have to figure out a way to
+handle the fact the agreement will not be perfect and yet still say
+something definitive.\\[5pt]
+
+\noindent
+{\bf Problem 4:} Plot the wave function $\psi_n(x)$ and
+$|\psi_n(x)|^2$ for $n=0,1,2,3$.  You are aiming to reproduce Fig
+2.7(a) in Griffiths.  (Let me know if you don't have access to this textbook
+and I will include photocopies of the needed figures on the course
+site.)  Remember that $\psi_n(x)$ is not just the Hermite polynomical!
+You may use the python library for the Hermite polynomials.\\[5pt]
+
+\noindent
+{\bf Problem 5:} Numerically verify that the $\psi_n(x)$ are
+orthonormal.  Keep to $n<10$.  (Depending on your approach, you won't
+get exactly 1 and 0 so you will need some way to handle this and still
+give a definitive answer...there are many valid approaches)\\[5pt]
+
+\end{document}
+\documentclass[12pt]{book}
+
+\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.5in]{geometry}
+\usepackage{cite}
+\usepackage{slashed}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{braket}
+\begin{document}
+
+\title{The Discrete Fourier Transform \\} 
+\author{Michael Mulhearn}
+
+\maketitle
+
+\appendix
+\setcounter{chapter}{6}
+\chapter{The Discrete Fourier Transform}
+
+
+
+
+
+
+\end{document}
+
+
+
+
+
