@@ -1,4 +1,4 @@
-\documentclass[12pt]{book}
+\documentclass[12pt]{article}
 
 \usepackage[dvips,letterpaper,margin=0.75in,bottom=0.5in]{geometry}
 \usepackage{cite}
@@ -21,8 +21,6 @@ Discrete Fourier Transform \\
 
 \maketitle
 
-\setcounter{chapter}{1}
-\chapter{Discrete Fourier Transform}
 
 \section{Fourier Series for Complex-Valued Functions}
 
@@ -37,7 +35,7 @@ are orthonormal vectors.  To verify:
   &=& \frac{1}{\pi (k-j)} \cdot \frac{\exp\left(i \pi (k-j) \right)-\exp\left(-i \pi (k-j) \right)}{2i}\\[7pt]
   &=& \sinc(\pi (k-j))
 \end{eqnarray*}
-As $k$ and $j$ are integers, and $\sinc$ is zero for every integer multiple of $\pi$ except for $sin(0)=1$, we have shown:
+As $k$ and $j$ are integers, and $\sinc$ is zero for every integer multiple of $\pi$ except for $\sinc(0)=1$, we have shown:
 \begin{equation}
   \braket{e_j|e_k} = \delta_{kj}
 \end{equation}
@@ -45,7 +43,7 @@ We will not derive it here, but the complex functions are also a complete basis,
 \begin{equation}
  \psi(x) = \sum_{j=-\infty}^{+\infty} c_j e_j (x)
 \end{equation}
-Because of othonormality, we can determine the Fourier coeeficients by:
+Because of othonormality, we can determine the Fourier coefficients by:
 \begin{equation}
 c_k = \braket{e_k | \psi}
 \end{equation}
@@ -53,136 +51,174 @@ c_k = \braket{e_k | \psi}
 \section{Discrete Fourier Transform}
 
 Next we want to consider the case where we only know the value of $\psi(x)$ at $n$ discrete positions of $x$, specifically:
-$$x_j = x_0 + \lambda j$$
-for $x_0=-a/2$, $j=0,1,\ldots,n-1$ and $\lambda$ the interval between data points:
-$$\lambda = \frac{a}{n}$$
+$$x_j = x_0 + \frac{a}{n} j$$
+for $x_0=-a/2$ and $j=0,1,\ldots,n-1$.
 Notice that the sequence ends before $x=a/2$ because this point is redundant to $x=-a/2$ for the periodic functions that we are considering.
 
 We account for the discrete sampling by making the replacement:
-$$\psi(x) \to \sum_{m=0}^{n-1} \delta(x-x_j) \lambda f(x)$$
+$$\psi(x) \to \frac{a}{n} \, \sum_{m=0}^{n-1} \, \delta(x-x_j)  \; \psi(x)$$
 which is choosen because:
-$$\int_{x_1}^{x_2} \sum_{m=0}^{n-1} \delta(x-x_j) \lambda f(x) dx = \sum_{m=m_1}^{m_2} \lambda f_m \; \xrightarrow[\lambda \to 0]{} \; \int_{x_1}^{x_2} f(x) dx $$
+$$\int_{x_1}^{x_2} \frac{a}{n} \, \sum_{m=0}^{n-1} \, \delta(x-x_j)  \, \psi(x) \, dx = \frac{a}{n} \sum_{m=m_1}^{m_2}  \,\psi_m \; \xrightarrow[n \to \infty]{} \; \int_{x_1}^{x_2} \, \psi(x) \, dx $$
 showing that integration (smoothing) of discrete sampled function
 reproduces the integral of the original function as the space between
 samples approaches zero.  We do expect this sampling to introduce
 high-frequency artifacts which must be considered, which we will
 discuss later.
 
-Calculating the fourier series coefficients with the sampled function we obtain:
-\begin{eqnarray*}
+Calculating the fourier series coefficients with the sampled function we obtain:\begin{eqnarray*}
   c_k &=& \braket{e_k | \psi} \\[5pt]
   &=& \sqrt{\frac{1}{a}} \int_{-\frac{a}{2}}^{\frac{a}{2}}
-  \exp\left(-i \frac{2\pi k x}{a}\right) \sum_{m=0}^{n-1} \delta(x-x_j) \lambda f(x) dx \\[7pt]
-  &=& \sqrt{\frac{\lambda}{n}} \sum_{m=0}^{n-1}
-  \exp\left(-i \frac{2\pi m k}{n}\right) \exp\left(-i \frac{2\pi k x_0}{a}\right) f_j dx \\[7pt]
+  \exp\left(-i \frac{2\pi k x}{a}\right) \, \frac{a}{n} \, \sum_{m=0}^{n-1} \delta(x-x_j) \, \psi(x) \, dx \\[7pt]
+  &=& \frac{\sqrt{a}}{n} \; \sum_{m=0}^{n-1}
+  \exp\left(-i \frac{2\pi m k}{n}\right) \exp\left(-i \frac{2\pi k x_0}{a}\right) \, \psi_j \, dx
 \end{eqnarray*}
 which we can reorganize as:
 \begin{equation}
-  \frac{c_k}{\sqrt{\lambda}} \exp\left(i \frac{2\pi k x_0}{a}\right)
+  \frac{c_k}{\sqrt{a/n}} \exp\left(i \frac{2\pi k x_0}{a}\right)
  = \frac{1}{\sqrt{n}} \sum_{m=0}^{n-1}
-  \exp\left(-i \frac{2\pi m k}{n}\right) f_m \equiv A_k  
+  \exp\left(-i \frac{2\pi m k}{n}\right) \psi_m \equiv A_k  
 \end{equation}
 where $A_k$ are the Fourier coefficients from {\tt numpy.fft.fft} if called with the normalization option {\tt norm=``ortho''}.  The complex exponential on the left hand side is a phase factor that accounts the location of the first data point $x_0$.  Notice that the right hand side depends only on indices, not the actual $x$ positions.
 
-Something very interesting has happened to our Fourier coefficients as a direct result of discretizing the data.  Notice that:
-$$c_{k+n} = c_{k}$$
-so evidently we have only $n$ unique Fourier coefficients.
+\begin{figure}[thb]
+\begin{center}
+{\includegraphics[width=0.60\textwidth]{plots/trouble.pdf}}
+\end{center}
+\caption{\label{fig:trouble} Trouble.}
+\end{figure}
 
-Blah Blah Blah... Nyquist... Blah Blah blah.
+Something very interesting has happened to our Fourier coefficients as
+a direct result of discrete sampling.  Notice that:
+$$A_{k+n} = A_{k}$$
+because the phase shift introducted in each term in the sum above is:
+$$exp(-i 2 \pi m) = 1$$
+So evidently we have only $n$ unique Fourier coefficients, at which point they repeat themselves.
 
+Something very interesting is going on here, and we can build an
+intuitive picture from Fig.~\ref{fig:trouble}.  We see that signal
+contributions for wavelengths:
+$$\lambda \leq 2\frac{a}{n}$$
+are potentially problematic, as they can be undetectable.
+In terms of the index $k$ in each $c_k$, this becomes:
+$$\frac{a}{|k|} = \lambda < 2\frac{a}{n}$$
+or
+$$|k| < 2/n$$
+For odd numbers of $n$ this is an unambiguous prescription to avoid trouble:
 \begin{eqnarray*}
-  \psi(x) &=& \sum_{j=j_a}^{j_b} c_j e_j (x) \\
-  &=& \frac{1}{\sqrt{a}}\sum_{j=j_a}^{j_b} c_j  \exp\left(i \frac{2\pi j x}{a}\right) \\
-  &=& \frac{1}{\sqrt{n}}\sum_{j=j_a}^{j_b} A_j  \exp\left(i \frac{2\pi j (x-x_0)}{a}\right) \\  
+  n=1 &\implies& k = 0 \\
+  n=3 &\implies& k = -1,0,1 \\
+  n=5 &\implies& k = -2,-1,0,1,2 \\
+\end{eqnarray*}
+We see that we have one unique coefficient available for each allowed
+wave number.  We simply set the remaining coefficients to zero.  If we
+know that our signal has no contributions from those shorter
+wavelengths then our Fourier series will be complete and accurate.
+
+For odd number of $n$ the situation is a bit more complicated.  If we stick to strictly less than for the allowed $k$ values, we have:
+\begin{eqnarray*}
+  n=2 &\implies& k = 0 \\
+  n=4 &\implies& k = -1,0,1 \\
+  n=6 &\implies& k = -2,-1,0,1,2 \\
+\end{eqnarray*}
+which does not use our unique Fourier coefficients.
+
+A completely reasonable and practical thing to do in the situation would be too say, find, throw out the shorter wavelength coefficients.  We'll just keep our sampling rate high enough that all of these coefficients are zero.  This is reasonable, and totally works.
+
+The only downside is that it makes the DFT a lossy operation.  We cannot get back the original sampled data back exactly from the transform.  So it's worth tyring to fix things up.  Look up what happens  if we loosen the requirements to on $k$ to less than or equal:
+\begin{eqnarray*}
+  n=2 &\implies& k = -1,0,1 \\
+  n=4 &\implies& k = -2,-1,0,1,2 \\
+  n=6 &\implies& k = -3,-2,-1,0,1,2,3 \\
+\end{eqnarray*}
+which would require one more Fourier coefficient than we have.  What's
+going on?
+
+\begin{figure}[thb]
+\begin{center}
+{\includegraphics[width=0.60\textwidth]{plots/notrouble.pdf}}
+\end{center}
+\caption{\label{fig:notrouble} No trouble.}
+\end{figure}
+
+As can be seen from Fig~\ref{fig:notrouble} some phases can be
+sampled, even at the limit, but not all.  So we need to know something
+about the the contribution at the limit: it's purely real and even,
+for example.  In practice, we make the assumption that makes the
+inverse discrete Fourier transform the easiest to write down (just
+drop the $c_{n/2}$ factor), and make the allowed $k$ values:
+\begin{eqnarray*}
+  n=2 &\implies& k = -1,0 \\
+  n=4 &\implies& k = -2,-1,0,1 \\  
+  n=6 &\implies& k = -3,-2,-1,0,1,2 \\
+\end{eqnarray*}
+This puts one term in the series for each unique coeefficent, and
+makes the DFT lossless.
+
+This book keeping is conveniently handled for you by python with the
+{\tt numpy.fft.fftfreq} function, which returns an array the same size
+as the Fourier coefficients that reports $a/k$.  For equation purposes we will note the set of allowed $k$ values as $K(n)$.
+
+We can reconstitute our original wave function (wihtout any artifacts from sampling) as:
+\begin{eqnarray*}
+  \psi(x) &=& \sum_{k \in K(n)} c_k e_k (x) \\
+  &=& \frac{1}{\sqrt{a}}\sum_{k \in K(n)}  c_k \exp\left(i \frac{2\pi k x}{a}\right) \\
+  &=& \frac{1}{\sqrt{n}}\sum_{j=j_a}^{j_b} A_k  \exp\left(i \frac{2\pi k (x-x_0)}{a}\right) \\  
 \end{eqnarray*}
 
+\section{Bonus Material}
+
+You might wonder what really happened to all those shorter wavelength
+coefficients that we just set to zero.  There's actually a really
+interesting story if we look closely at them.  I'll update these notes
+with the full story at some point during the quarter.  But meanwhile,
+you can have a look yourself if you are interested.  Take $n=1$ and
+assume your function is just a constant.  Use the recursion relation
+to set all the coefficients to the same value (instead of setting them
+to zero as we have done).  You'll be left with an infinite series.
+See if you can make any sense of it!
 
 \section{Homework Problems}
 
 \noindent
-{\bf Problem 1:} Use python {\tt fft.fft} to calculate FS for a sine and cosine.  Plot the magnitude and phase at each wave number and compare to what you expect.
-
-
-{\bf Problem 2:} Plot $f(x)$ by expanding using the Fourier coefficents from Problem 1.
-Do not use inverse discrete fourier transform!  We want a smooth function!
-
-
-{\bf Problem 3:} For square wave, plot coefficents, then plot f(x) obtained from expansion in fourier coefficents/
-
-...
-    
-
-
-    
-
-    
-
-    
-
-
-
+{\bf Problem 1:} Use the {\tt numpy.fft.fftfreq} (which produces an array with $k/n$ for $k$ with non-zero coefficients) to reproduce the progression we derived above:
+\begin{eqnarray*}
+n=1 &\implies& k=0 \\
+n=2 &\implies& k=-1,0 \\
+n=3 &\implies& k=-1,0,1 \\
+n=4 &\implies& k=-2,-1,0,1 \\
+n=5 &\implies& k=-2,-1,0,1,2 \\
+n=6 &\implies& k=-3,-2,-1,0,1,2 \\
+n=7 &\implies& k=-3,-2,-1,0,1,2,3 \\
+\end{eqnarray*}
+The {\tt fftfreq} function returns an array with the elements in a different order, so also use \\
+{\tt numpy.fft.fftshift} to put them into increasing order and scale as needed.\\[3pt]
 
 \noindent
-{\bf Problem 2:} Write a program to determine the coefficients of the Hermite polynomial $H_n(u)$ for any degree $n$ by using the generating function:
-$$\exp(-z^2+2zu) = \sum_{n=0}^{\infty} \frac{z_n}{n!}H_n(u)$$
-Print the non-zero coefficients for $n=0$ to $5$ and
-compare to e.g. Griffiths Table 2.1\\[5pt]
+{\bf Problem 2:}  Define:
+$$\psi(x) = A + B \sin(2\pi b x/a) + C \cos(2\pi c x/a)$$ and you can
+assume (to keep things simple) that $a \neq b$.  You should show final
+plots for $a=30$ and $n=10$ but make sure your code runs even if you
+change those values modestly.  Use {\tt numpy.fft.fft} to calculate
+the fft of $\psi(x)$ using the {\tt norm=`ortho'} normalization
+option.  Plot the magnitude, real part, and imaginary part of the
+coefficients (scaled as you feel appropriate) versus the wavenumber.
+Set the range appropriately.  Draw horizontal and vertical line for
+the $y$-values and $x$-values that you expect for the magnitude of the cosine curve (make sure these are caculated from constants used to define your $\psi(x)$.  (Hint:  attack this and the next problem in steps:  first get the constant function working alone, then sine alone, then cosine alone, then put it all together.)\\[3pt]
 
 \noindent
-{\bf Problem 3:} (A) Write a program to calculate the Hermite polynomial
-$H_n(u)$ for a particular value $u$ and for any degree
-$n$ by using the recursion formula:
-$$H_{n+1}(u) = 2 u H_n(u) - 2 n H_{n-1}(u)$$.\\
+{\bf Problem 3:}  Using the results from your previous problem, plot the the function $\psi(x)$ caculated from the Fourier coefficients and compare to the original function. Use much finer binning (200 bins) and a wider x range (say -40 to 40) to generate smooth curves (without changing the sampling rate used for the FFT in previous step).\\[3pt]
 
 \noindent
-(B) Test your function {\bf thoroughly} against the Python library results
-(scipy.special.hermite) using randomly chosen values.  That is, pick a
-random integer $n$ from $0$ to some reasonable maximum test value $N$, then
-pick a randomly chosen $u$ value from some reasonably range,
-and compare the results of your program with that of the python library.  You
-want to do this many many times, so you'll have to figure out a way to
-handle the fact the agreement will not be perfect and yet still say
-something definitive.\\[5pt]
+{\bf Problem 4:} Demonstrate that you can obtain Fourier coefficients and accurately reproduce a periodic square wave (sample for one period, but plot for several periods, and adjust parameters as needed for accurate results) \\[3pt]
 
 \noindent
-{\bf Problem 4:} Plot the wave function $\psi_n(x)$ and
-$|\psi_n(x)|^2$ for $n=0,1,2,3$.  You are aiming to reproduce Fig
-2.7(a) in Griffiths.  (Let me know if you don't have access to this textbook
-and I will include photocopies of the needed figures on the course
-site.)  Remember that $\psi_n(x)$ is not just the Hermite polynomical!
-You may use the python library for the Hermite polynomials.\\[5pt]
+{\bf Problem 5:} Demonstrate that you can obtain Fourier coefficients and accurately reproduce a narrow square well near $x=0$.\\[3pt]
 
 \noindent
-{\bf Problem 5:} Numerically verify that the $\psi_n(x)$ are
-orthonormal.  Keep to $n<10$.  (Depending on your approach, you won't
-get exactly 1 and 0 so you will need some way to handle this and still
-give a definitive answer...there are many valid approaches)\\[5pt]
+{\bf Problem 6:} Show with a simple example that if you introduce a contribution with too short of a wavelegnth, you reproduce the waveform incorrectly.\\[3pt]
 
-\end{document}
-\documentclass[12pt]{book}
-
-\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.5in]{geometry}
-\usepackage{cite}
-\usepackage{slashed}
-\usepackage{graphicx}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{braket}
-\begin{document}
-
-\title{The Discrete Fourier Transform \\} 
-\author{Michael Mulhearn}
-
-\maketitle
-
-\appendix
-\setcounter{chapter}{6}
-\chapter{The Discrete Fourier Transform}
-
-
-
-
-
+\noindent
+{\bf Problem 7:} Once available, please run and test the animation demonstration code posted on the website.  This will make sure your installation can handle animated plots in future assignments.
 
 \end{document}
 
