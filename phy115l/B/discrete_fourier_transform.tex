@@ -165,18 +165,6 @@ We can reconstitute our original wave function (wihtout any artifacts from sampl
   &=& \frac{1}{\sqrt{n}}\sum_{j=j_a}^{j_b} A_k  \exp\left(i \frac{2\pi k (x-x_0)}{a}\right) \\  
 \end{eqnarray*}
 
-\section{Bonus Material}
-
-You might wonder what really happened to all those shorter wavelength
-coefficients that we just set to zero.  There's actually a really
-interesting story if we look closely at them.  I'll update these notes
-with the full story at some point during the quarter.  But meanwhile,
-you can have a look yourself if you are interested.  Take $n=1$ and
-assume your function is just a constant.  Use the recursion relation
-to set all the coefficients to the same value (instead of setting them
-to zero as we have done).  You'll be left with an infinite series.
-See if you can make any sense of it!
-
 \section{Homework Problems}
 
 \noindent
@@ -212,10 +200,13 @@ the $y$-values and $x$-values that you expect for the magnitude of the cosine cu
 {\bf Problem 4:} Demonstrate that you can obtain Fourier coefficients and accurately reproduce a periodic square wave (sample for one period, but plot for several periods, and adjust parameters as needed for accurate results) \\[3pt]
 
 \noindent
-{\bf Problem 5:} Demonstrate that you can obtain Fourier coefficients and accurately reproduce a narrow square well near $x=0$.\\[3pt]
+{\bf Problem 5:} Demonstrate that you can obtain Fourier coefficients and accurately reproduce a narrow square well near $x=0$. (The square well width should be small compared to the period)\\[3pt]
 
 \noindent
-{\bf Problem 6:} Show with a simple example that if you introduce a contribution with too short of a wavelegnth, you reproduce the waveform incorrectly.\\[3pt]
+{\bf Problem 6:} Show that a sine wave with frequency larger than one
+half the sample frequency is misintrepreted as a lower frequency sine
+wave.  This is called aliasing.  Plot the signal and (incorrect)
+reconstructed wave form.  Include a simple calculation for the aliased wavenumber if you can discern a formula.\\[3pt]
 
 \noindent
 {\bf Problem 7:} Once available, please run and test the animation demonstration code posted on the website.  This will make sure your installation can handle animated plots in future assignments.
