@@ -541,14 +541,13 @@ In any other inertial frame $F'$, in which the light is
 emitted at time $t'_{\rm A}$ and position $(x'_{\rm A}, y'_{\rm A}, z'_{\rm A})$ and absorbed 
 at time $t'_{\rm B}$ and position $(x'_{\rm B}, y'_{\rm B}, z'_{\rm B})$,
 $$c^2(t'_{\rm B}-t'_{\rm A})^2 - (x'_{\rm B}-x'_{\rm A})^2 - (y'_{\rm B}-y'_{\rm A})^2 - (z'_{\rm B}-z'_{\rm A})^2  = 0$$
-
 Quantities that have the same value in every reference frame are
 precious.  So this result alone is enough motivation to define the space-time
 interval $\Delta S*2$ between any two events A and B as:
 \begin{equation}
 \Delta S^2 \coloneqq c (t_{\rm B}-t_{\rm A})^2 - (x_{\rm B}-x_{\rm A})^2 - (y_{\rm B}-y_{\rm A})^2 - (z_{\rm B}-z_{\rm A})^2
 \end{equation}
-The space-time interval thus defined has several properties: 
+The space-time interval thus defined has several properties that are immediately evident: 
 \begin{center}
 \begin{tabular}{ll}
  {\bf (A)} & If $\Delta S^2 = 0$ in one frame, then it is zero in every frame.\\
@@ -618,33 +617,26 @@ Thus we conclude with the main result of this section, {\bf the space-time inter
 
 \section{Four-Vectors and the Metric of Space-Time}
 
-Consider the vector space $R^4$, with each vector an ordered set of
-four real numbers, real numbers as scalars, and the usual addition and
-scalar multiplication of reals.  $R^n$ is the OG vector space, so we
-won't waste any time proving that it is a vector space.
-
-Consider a frame $F$, where we'll use the standard basis $\mathcal{B}=\{e_\mu\}$ with:
+In order to represent points in space-time, we use the space $\mathbb{R}^4$, which is a vector space with the standard basis $\mathcal{B}$ consisting of of the following vectors:
 \begin{eqnarray*}
   e_0 &=& (1,0,0,0) \\
   e_1 &=& (0,1,0,0) \\
   e_2 &=& (0,0,1,0) \\
   e_3 &=& (0,0,0,1) \\
 \end{eqnarray*}
-With this basis, we can write any $v \in V$ as:
-$$v = v^\mu e_\mu$$
-where we have used greek indices, as is conventional for the case that
-the indices run from 0 to 3.   We call $v$ a four-vector and $v^\mu$ are its components in basis $\mathcal{B}$.
-
-Now consider an event which in frame $F$ has components at time $t$
-and position $(x,y,z)$.  We will associate this with a vector $v \in
-V$ by the conventional assignment:
+We define a {\bf position-space four-vector} (v) as a vector from the
+vector space $\mathbb{R}^4$, which, under the standard basis $\mathcal{B}=\{e_\mu\}$, has contravariant components $v^\mu$ matched to space-time
+coordinates from frame $F$ as:
 \begin{equation}
-v^0 = ct, \hspace{1cm} v^1 = x, \hspace{1cm} v^2 = y, \hspace{1cm} v^3 = z, \hspace{1cm} 
-\end{equation}
-We call a vector with components so defined a position four-vector.
+  v^0 = ct, \hspace{1cm} v^1 = x, \hspace{1cm} v^2 = y, \hspace{1cm} v^3 = z.
+\end{equation}  
+
+It is conventional to use greek indices, which run from from 0 to 3, when referring to the components of four-vectors:
+$$v = v^\mu e_\mu$$
 
 We would like to add to our four-vector space a non-degenerate Hermitian form, and the preceding section suggests an excellent candidate.  We define:
 \begin{equation}
+\label{eqn:ndhf}
 (a|b) = a^0 b^0 - a^1 b^1 - a^2 b^2 - a^3 b^3
 \end{equation}
 
@@ -673,6 +665,11 @@ So now we can write:
 $$(a|b) = g(a,b) = g(a^\mu e_\mu, b^\nu e_\nu) =  a^\mu b^\nu g(e_\mu, e_\nu) = a^\mu b^\nu g_{\mu\nu} $$
 In the exercises you will show that
 \begin{equation}
+  \label{eqn:metric-components}
+  g_{00}=1, \hspace{1cm} g_{11} = g_{22} = g_{33} = -1 
+\end{equation}  
+and all other elements are zero.  Thus, the $g$ can be represented by a matrix as:
+\begin{equation}
 \label{eqn:metric-matrix}
 [g]_\mathcal{B} =
 \begin{pmatrix} 
@@ -684,44 +681,108 @@ In the exercises you will show that
 \end{equation}
 
 \exercise
-Verify equation \ref{eqn:metric-matrix} by calculating the matrix coodinates.
+Verify Equations \ref{eqn:metric-components} and \ref{eqn:metric-matrix} by calculating the matrix components.
 $\square$ \\[3pt]
 
-\exercise
-For position four-vectors $a$ and $b$ given by:
-$$\cdots \text{TODO} \cdots$$
-calculate $(a|b)$ using matrices via:
-$$(a|b) = a^\mu b^\nu g_{\mu \nu} = [a]^T_\mathcal{B} [g]_\mathcal{B} [b]_\mathcal{B}$$
-.$\square$ \\[3pt]
+\noindent
+Notice that $g$ is its own inverse, so defining:
+$$g^{\mu \nu} \coloneqq g_{\mu \nu}$$
+we have
+$$g^{\mu \alpha} g_{\alpha \nu}  = \delta^{\mu}_{\nu}$$
 
-
-With our Non-Degenerate Hermitian Form $(\cdot|\cdot)$ defined, as
-shown in Section~\ref{sec:metricdual}, to each vector $v \in V$ we can
-associate a metric dual
+\noindent
+With a Non-Degenerate Hermitian Form $(\cdot|\cdot)$ defined in Equation~\ref{eqn:ndhf}, then, as shown in Section~\ref{sec:metricdual}, to each vector $v \in V$ we can associate a metric dual
 $$\tilde{v} \coloneqq (v|\cdot)$$
 which is shorthand for defining its action on any vector $w \in V$
 $$\tilde{v}(w) = (v|w)$$
 We can also fully describe $\tilde{v}$ by its components with respect to the basis vectors $\mathcal{B} = \{{e_\mu}\}$, because:
 $$\tilde{v}(w) = \tilde{v}(w^\mu e_\mu) = w^\mu \tilde{v}(e_\mu) = w^\mu \tilde{v}_\mu$$
 where the components of $\tilde{v}$ are:
-$$\tilde{v}_\mu \coloneqq \tilde{v}(e_\mu) = (v|e_\mu) = (v^\nu e_\nu | e_\mu)
-= v^\nu (e_\nu | e_\mu) = v^\nu g(e_\mu, e_\nu)$$
-and using Equation~\ref{eqn:metrictensor} we have a very useful results:
+$$\tilde{v}_\mu \coloneqq \tilde{v}(e_\mu) = (v|e_\mu) = g(v,e_\mu) = g(v^\nu e_\nu , e_\mu)
+= v^\nu g(e_\nu , e_\mu)$$
+leading to the very useful result:
 \begin{equation}
-\tilde{v}_\mu = g_{\mu \nu} v^\nu 
+\tilde{v}_\mu = v^\nu g_{\nu \mu} = g_{\mu \nu} v^\nu 
 \end{equation}
-In matrices, this reads:
-$$[\tilde{v}]_\mathcal{B^*} = [g]_\mathcal{B} [v]_\mathcal{B}$$
+
+\exercise Show that:
+$$v^\mu = g^{\mu\nu} \tilde{v}_\nu$$
+Hint:$g^{\mu \alpha} g_{\alpha \nu}  = \delta^{\mu}_{\nu}$.\\[3pt]
+
+\noindent
+Notice how our tensor definition applies here.  The metric tensor is a
+mapping $g:V \times V \to F$.  With one vector given, the metric
+tensor thus provides a map from $V \to F$, which is a dual vector.  So
+we can interpret a (2,0) tensor has a linear operator from $V \to
+V^*$, exactly as seen here with $g_{\mu\nu}$.  Similary, $g^{\mu\nu}$
+can be seen as the components of a (0,2) tensor and as a linear operator from $V^* \to
+V$.\\[3pt]
 
 \exercise
+In matrices, the lowering of an index reads:
+$$[\tilde{v}]_\mathcal{B^*} = [g]_\mathcal{B} [v]_\mathcal{B}$$
 Consider the position four-vector with components in the standard basis $\mathcal{B}$:
 $$[v]_\mathcal{B} = \begin{pmatrix} ct \\ x \\ y \\ z\end{pmatrix}$$
 Using matrices, show that the components of its metric dual in the
 dual basis are
 $$[\tilde{v}]_{\mathcal{B}^*} = \begin{pmatrix} ct \\ -x \\ -y \\ -z\end{pmatrix}$$
 
+\section{Coordinate Transformations}
 
-\section{Linearity of Transformation between Inertial Frames}
+Suppose that the basis vectors of frame $F$ are related to $F'$ by a
+coordinate transformation:
+$$e_{\mu'} = \Lambda^{\nu}_{\mu'} e_{\nu}$$
+we showed before there is therefore an inverse transformation:
+$$e_{\mu} = \Lambda^{\nu'}_{\mu} e_{\nu'}$$
+with:
+$$\Lambda^{\beta'}_{\alpha} \Lambda^{\alpha}_{\beta'} = \delta^{\alpha}_{\beta}$$
+The contravariant components of a position-space four-vector $v$ transform as:
+$$v^\mu = \Lambda^{\mu}_{\nu'} v^{\nu'}$$
+Any vector in $R^4$ whose contravariant components transform in the same manner as a position-space four-vector is called a four-vector.  The covariant components of the dual of a four-vector transform as:
+$$\tilde{v}_\mu = \Lambda_{\mu}^{\nu'} \tilde{v}_{\nu'}$$
+
+{\bf Note on notation:}  Giffiths uses the notation:
+$$(v^\mu)' = \Lambda^\mu_\nu v^\nu$$
+so
+$$\Lambda^{\mu'}_\nu \longrightarrow  \Lambda^\mu_\nu \hspace{1cm}(\text{Griffiths})$$
+and
+$$\Lambda^{\mu}_{\nu'} \longrightarrow  ({\Lambda^{-1}})^\mu_\nu \hspace{1cm}(\text{Griffiths})$$
+
+\noindent
+The requirement that the space-time interval is invariant
+significantly constrains the valid coordinate transformations between
+inertial frames.  For any four-vector $v$ we have:
+$$(v|v) = v^{\mu} v^{\nu} g_{\mu\nu}$$
+as calculated in frame F.  But we also have:
+\begin{eqnarray*}
+  (v|v) &=& v^{\alpha'} v^{\beta'} g_{\alpha'\beta'}\\
+  &=& (v^{\mu}\Lambda^{\alpha'}_{\mu}) (v^{\nu}\Lambda^{\beta'}_\nu) g_{\alpha'\beta'}\\
+    &=& v^{\mu} v^{\nu} \Lambda^{\alpha'}_{\mu} g_{\alpha'\beta'} \Lambda^{\beta'}_\nu \\
+\end{eqnarray*}
+so, as $v$ is arbitrary, we must have:
+$$ \Lambda^{\alpha'}_{\mu} g_{\alpha'\beta'} \Lambda^{\beta'}_\nu =g_{\mu\nu}$$
+
+
+\section{Inverse Lorentz Transformation}
+Not sure this goes here but recording:
+\begin{eqnarray*}
+g_{\alpha\beta} &=& g_{uw} \Lambda^u_\alpha \Lambda^w_{\beta}\\
+g^{\alpha\gamma} g_{\alpha\beta} &=& g_{uw} \Lambda^u_{\alpha} g^{\alpha_\gamma}\Lambda^w_\beta\\
+\delta^\gamma_\beta &=& (g_{uw} \Lambda^u_{\alpha} g^{\alpha_\gamma}) \Lambda^w_\beta
+\end{eqnarray*}
+Recalling that the inverse of $\Lambda$ is $M$ so:
+$$\delta^\gamma_\beta = M^\gamma_w \Lambda^w_\beta$$
+we see that:
+$$M^\gamma_w = g_{uw} \Lambda^u_{\alpha} g^{\alpha_\gamma}$$
+
+
+
+
+
+
+
+
+\section{EXTRA:  Linearity of Transformation between Inertial Frames}
 
 Suppose we have frames $F$ and $\widetilde{F}$.  For simplicity, we will consider only the time and x position, for which there is a coordinate transformation:
 \begin{eqnarray*}
@@ -753,68 +814,6 @@ If we take the origin to coincide, we have:
 \end{eqnarray*}
 showing the linearity of the transformations between inertial frames.
 
-\section{Four Vectors and The Metric Tensor}
-
-We can calculate the invariant $\Delta S^2$ between an event at $(t,x,y,z)$ and the origin (0,0,0,0) as:
-$$
-\Delta S^2 = 
-\begin{pmatrix} 
-ct & x & y & z \\ 
-\end{pmatrix}
-\begin{pmatrix} 
--1 & 0 & 0 & 0 \\ 
- 0 & 1 & 0 & 0 \\ 
- 0 & 0 & 1 & 0 \\ 
- 0 & 0 & 0 & 1 \\ 
-\end{pmatrix}
-\begin{pmatrix} 
-ct \\ 
-x \\ 
-y \\ 
-z \\ 
-\end{pmatrix}
-=(ct)^2 - x^2 - y^2 - z^2
-$$
-We define the spacetime four-vector $x^u$ by it's four components:
-$$x^0=ct, \hspace{0.5cm} x^1=x, \hspace{0.5cm} x^2=y, \hspace{0.5cm} x^3=z$$
-And the metric tensor $g_{uw}$ by:
-$$g_{00}=-1, \hspace{0.5cm} g_{11}=g_{22}=g_{33}=1$$
-with all other elements zero.  So then in tensor notation:
-$$\Delta S^2 = x^u x^w g_{uw}$$
-
-We showed that the transformation of components between frames is linear, which we can write as:
-$$\widetilde{x}^u = \Lambda^u_w x^w$$
-here $\Lambda^u_w$ has 4x4=16 components, which together from a 4x4 matrix, just enough for defining a linear transformation of a four-component vector.  We also have an inverse transformation $M = \Lambda^-1$, so that:
-$$ x^w = M^w_u\widetilde{x}^u$$
-In case you noticed it, don't worry yet about why some indices are low and some are high, we'll get to that soon.
-
-\section{The Metric Tensor and Lorentz Transformations}
-
-There's a profound connection between coordinate transformations and the metric tensor.
-We know that $\Delta S^2$ is invariant, so:
-\begin{eqnarray*}
-g_{uw} x^u x^w &=& g_{uw} \widetilde{x}^u \widetilde{x}^w\\
-&=& g_{uw} (\Lambda^u_\alpha x^\alpha)(\Lambda^w_\beta x^\beta)\\
-g_{\alpha\beta} x^\alpha x^\beta &=& g_{uw} \Lambda^u_\alpha \Lambda^w_\beta x^\alpha x^\beta)\\
-\end{eqnarray*}
-We changed dummy variables on the LHS in the last step, for clarity.  It follows that:
-$$g_{\alpha\beta} = g_{uw} \Lambda^u_\alpha \Lambda^w_\beta$$
-This is the defining feature of the Lorentz Transformation, we will use it to derive the Lorenz Transformation.
-
-\section{Covariant and Contravariant Components}
-$$\ldots$$
-
-\section{Inverse Lorentz Transformation}
-Not sure this goes here but recording:
-\begin{eqnarray*}
-g_{\alpha\beta} &=& g_{uw} \Lambda^u_\alpha \Lambda^w_{\beta}\\
-g^{\alpha\gamma} g_{\alpha\beta} &=& g_{uw} \Lambda^u_{\alpha} g^{\alpha_\gamma}\Lambda^w_\beta\\
-\delta^\gamma_\beta &=& (g_{uw} \Lambda^u_{\alpha} g^{\alpha_\gamma}) \Lambda^w_\beta
-\end{eqnarray*}
-Recalling that the inverse of $\Lambda$ is $M$ so:
-$$\delta^\gamma_\beta = M^\gamma_w \Lambda^w_\beta$$
-we see that:
-$$M^\gamma_w = g_{uw} \Lambda^u_{\alpha} g^{\alpha_\gamma}$$
 
 
 
