@@ -30,6 +30,7 @@ Special Relativity and Relativistic Kinematics\\
 \chapter{Relativistic Kinematics}
 
 \section{Vectors and Change of Basis}
+\label{sec:vectors}
 
 One of the first concepts encountered in introductory physics is the
 vector as a geometric object with both a magnitude and a direction.
@@ -299,6 +300,7 @@ product idea.\\[3pt]
 
 
 \section{Introduction to Tensors}
+\label{sec:tensors}
 
 A traditional physics definition of a tensor is a generalization of
 scalars and vectors, to include quantities with muliple indices which
@@ -329,8 +331,9 @@ with $c \in F$.  Multilinearity means that:
   T(v+cw,f) &=& T(v,f) + c \, T(w,f) \\
   T(v,f+cg) &=& T(v,f) + c \, T(v,g) 
 \end{eqnarray*}
-for $w \in V$ and $g \in V^*$.
+for $w \in V$ and $g \in V^*$.\\[3pt]
 
+\noindent
 Under the traditional definition, we consider tensors to be a
 generalization of the concept of scalars and vectors, so that scalar
 and vectors are examples of tensors.  Is that the case under the new
@@ -338,8 +341,9 @@ definition?  The only immediately obvious connection is that a $(0,1)$
 tensor precisely reproduces the definition of a dual vector.  It is
 also convenient to consider (0,0) tensors as scalars.  That is, we can
 think of scalar as a scalar function with zero vector and zero dual
-vector arguments.
+vector arguments.\\[3pt]
 
+\noindent
 It is a bit more challenging to connect vectors to tensors under the new definition.
 Formally, we say that vectors are isomorphic to the
 (1,0) tensors by mapping each vector $v \in V$ to a (1,0) tensor $T_v$
@@ -357,8 +361,11 @@ me:
 $$(f+cg)(v) = f(v) + c g(v)$$
 which verfies that you have a linear function.  So you have now convinced
 me that you have a $(0,1)$ tensor, even though you really only had a vector.
+One more interpretation: a $(0,1)$ tensor is the dual of a dual
+vector, and so a vector.
 
-Next we'll consider a (2,0) tensor $T$.  By definition $T$ as an $F$-valued multilinear function of two vectors:
+Next we'll consider a (2,0) tensor $T$.  By definition $T$ as an
+$F$-valued multilinear function of two vectors:
 \begin{displaymath}
 T:V \times V \to F
 \end{displaymath}
@@ -408,7 +415,16 @@ $$T_{ij} = A_i^{k'} A_j^{l'} T_{k'l'} $$
 $\square$ \\[3pt]
 
 \exercise 
-For a vector space $V$ over scaler field $F$, show that the set of all (2,0) tensors is a vector space.
+For a vector space $V$ over scaler field $F$, show that the set of all (2,0) tensors is a vector space.\\[3pt]
+
+\noindent
+Suppose we have a (1,1) tensor $L$ so that $L:V \times V^* \to F$.  For any vector $v$ and basis $\mathcal{B}$, we can define a vector $w$ by its components:
+$$w^i = L(v,e^i) = L(v^j e_j, e^i) = L(e_j, e^i) v^j$$
+and so with components of $L$ defined as:
+$$L(e_j, e^i) \coloneqq L_j^i$$
+we have
+$$w^i = L^i_j v^j$$
+We can thus interpret as a (1,1) tensor as a linear operator that maps $V \to V$.
 
 \section{Non-degenerate Hermitian Forms and Metric Duals}
 \label{sec:metricdual}
@@ -465,7 +481,7 @@ Hint: $(L(c v_1 + v_2))(w) = (c \, v_1+v_2|w)$ $\square$ \\[3pt]
 
 \exercise Show that $L$ sends zero to zero. That is, show $L(0) = 0$. $\square$ \\[3pt]
 
-\exercise Show that $L$ is a one-to-one map of $V \to V^*$, that is, show that:
+\exercise (*) Show that $L$ is a one-to-one map of $V \to V^*$, that is, show that:
 $$L(w) = L(v) \implies w=v$$
 Hint: use non-degeneracy, i.e. if for all $x \in V$
 $$(v|x) = 0$$
@@ -473,7 +489,7 @@ then
 $$v=0$$
 $\square$ \\[3pt]
 
-\exercise Show that the only vector $L$ sends to zero is zero, that is:
+\exercise (*) Show that the only vector $L$ sends to zero is zero, that is:
 $$L(w)=0 \implies w=0$$
 $\square$ \\[3pt]
 
@@ -510,7 +526,7 @@ Dirac notation, a vector $\psi \in H$ is written as a ket
 $\ket{\psi}$. It's metric dual $L(\psi)$ is written as bra
 $\bra{\psi}$.\\[3pt]
 
-\exercise (*) For $\psi \in H$ and $c \in F$, show that
+\exercise For $\psi \in H$ and $c \in F$, show that
 $$\bra{c \psi} = \overline{c} \bra{\psi}$$
 $\square$ \\[3pt]
 
@@ -630,11 +646,10 @@ coordinates from frame $F$ as:
 \begin{equation}
   v^0 = ct, \hspace{1cm} v^1 = x, \hspace{1cm} v^2 = y, \hspace{1cm} v^3 = z.
 \end{equation}  
-
 It is conventional to use greek indices, which run from from 0 to 3, when referring to the components of four-vectors:
 $$v = v^\mu e_\mu$$
-
-We would like to add to our four-vector space a non-degenerate Hermitian form, and the preceding section suggests an excellent candidate.  We define:
+Associated with the four-vector space, we define a non-degenerate
+Hermitian form:
 \begin{equation}
 \label{eqn:ndhf}
 (a|b) = a^0 b^0 - a^1 b^1 - a^2 b^2 - a^3 b^3
@@ -653,7 +668,7 @@ Show that $(\cdot|\cdot)$ as defined above is {\bf not} an inner product.
 $\square$ \\[3pt]
 
 \noindent
-We can also interpret our non-degenerate Hermitian form as multilinear
+We can interpret our non-degenerate Hermitian form as multilinear
 map $g: V\times V \to R$.  That is, as a (2,0) tensor:
 $$g(a,b) \coloneqq (a | b)$$
 As always, we can work out the components of the tensor in the standard basis $\mathcal{B}$ with
@@ -663,6 +678,9 @@ g_{\mu\nu} \coloneqq g(e_\mu, e_\nu) = (e_\mu | e_\nu)
 \end{equation}
 So now we can write:
 $$(a|b) = g(a,b) = g(a^\mu e_\mu, b^\nu e_\nu) =  a^\mu b^\nu g(e_\mu, e_\nu) = a^\mu b^\nu g_{\mu\nu} $$
+For this reason, we call $g$ the {\bf metric tensor} (recall that the
+$(\cdot|\cdot)$ was defined based on the space-time interval.)
+
 In the exercises you will show that
 \begin{equation}
   \label{eqn:metric-components}
@@ -704,10 +722,12 @@ leading to the very useful result:
 \begin{equation}
 \tilde{v}_\mu = v^\nu g_{\nu \mu} = g_{\mu \nu} v^\nu 
 \end{equation}
+So we see that we can use the metric tensor $g$ to lower indices.\\[3pt]
 
-\exercise Show that:
-$$v^\mu = g^{\mu\nu} \tilde{v}_\nu$$
-Hint:$g^{\mu \alpha} g_{\alpha \nu}  = \delta^{\mu}_{\nu}$.\\[3pt]
+\exercise (*) Show that:
+$$v^\mu = g^{\mu\nu} \, \tilde{v}_\nu$$
+so that we can use the metric tensor to raise indices as well.
+Hint:  $g^{\mu \alpha} \, g_{\alpha \nu}  = \delta^{\mu}_{\nu}$.\\[3pt]
 
 \noindent
 Notice how our tensor definition applies here.  The metric tensor is a
@@ -715,8 +735,7 @@ mapping $g:V \times V \to F$.  With one vector given, the metric
 tensor thus provides a map from $V \to F$, which is a dual vector.  So
 we can interpret a (2,0) tensor has a linear operator from $V \to
 V^*$, exactly as seen here with $g_{\mu\nu}$.  Similary, $g^{\mu\nu}$
-can be seen as the components of a (0,2) tensor and as a linear operator from $V^* \to
-V$.\\[3pt]
+can be seen as the components of a (0,2) tensor and as a linear operator from $V^* \to V$.\\[3pt]
 
 \exercise
 In matrices, the lowering of an index reads:
@@ -729,20 +748,39 @@ $$[\tilde{v}]_{\mathcal{B}^*} = \begin{pmatrix} ct \\ -x \\ -y \\ -z\end{pmatrix
 
 \section{Coordinate Transformations}
 
-Suppose that the basis vectors of frame $F$ are related to $F'$ by a
+Suppose that the basis vectors of frame $F$ are related to those of $F'$ by a
 coordinate transformation:
-$$e_{\mu'} = \Lambda^{\nu}_{\mu'} e_{\nu}$$
+$$e_{\mu'} = \Lambda^{\nu}_{\mu'} \, e_{\nu}$$
 we showed before there is therefore an inverse transformation:
-$$e_{\mu} = \Lambda^{\nu'}_{\mu} e_{\nu'}$$
+$$e_{\mu} = \Lambda^{\nu'}_{\mu} \, e_{\nu'}$$
 with:
-$$\Lambda^{\beta'}_{\alpha} \Lambda^{\alpha}_{\beta'} = \delta^{\alpha}_{\beta}$$
-The contravariant components of a position-space four-vector $v$ transform as:
+$$\Lambda^{\eta'}_{\alpha} \Lambda^{\beta}_{\eta'} =
+\delta^{\beta}_{\alpha}$$ We can interpret $\Lambda^{\nu}_{\mu'}$ as
+the components of a (1,1) tensor $\Lambda$, but we must take care with
+the location of the primed indices.  So $\Lambda^{\nu'}_{\mu}$ are
+the components of the (1,1) tensor $\Lambda^{-1}$.  Recall from the Section~\ref{sec:tensors} that (1,1) tensors are equivalent to linear operators.\\[3pt]
+
+\noindent
+We can arrange the components of $\lambda$ in a matrix, but we have to choose which index refers to a row, and which a column.  Taking the upper index as the row:
+$$[\Lambda]_\mathcal{B} = \begin{pmatrix}
+  \Lambda^0_0 &\Lambda^0_1 &\Lambda^0_2 &\Lambda^0_3 \\[3pt]
+  \Lambda^1_0 &\Lambda^1_1 &\Lambda^1_2 &\Lambda^1_3 \\[3pt]
+  \Lambda^2_0 &\Lambda^2_1 &\Lambda^2_2 &\Lambda^2_3 \\[3pt]
+  \Lambda^3_0 &\Lambda^3_1 &\Lambda^3_2 &\Lambda^3_3 \\
+\end{pmatrix}$$
+
+\noindent
+As shown in Section~\ref{sec:vectors}, the contravariant components of a position-space four-vector $v$ transform as:
 $$v^\mu = \Lambda^{\mu}_{\nu'} v^{\nu'}$$
-Any vector in $R^4$ whose contravariant components transform in the same manner as a position-space four-vector is called a four-vector.  The covariant components of the dual of a four-vector transform as:
+Any vector in $\mathbb{R}^4$ whose contravariant components transform
+in the same manner as a position-space four-vector is called a {\bf
+  four-vector}.  The covariant components of the dual of a four-vector
+transform as:
 $$\tilde{v}_\mu = \Lambda_{\mu}^{\nu'} \tilde{v}_{\nu'}$$
 
-{\bf Note on notation:}  Giffiths uses the notation:
-$$(v^\mu)' = \Lambda^\mu_\nu v^\nu$$
+\noindent
+{\bf Notation:}  Giffiths uses the notation:
+$$(v^\mu)' = \Lambda^\mu_\nu \, v^\nu$$
 so
 $$\Lambda^{\mu'}_\nu \longrightarrow  \Lambda^\mu_\nu \hspace{1cm}(\text{Griffiths})$$
 and
@@ -760,10 +798,119 @@ as calculated in frame F.  But we also have:
     &=& v^{\mu} v^{\nu} \Lambda^{\alpha'}_{\mu} g_{\alpha'\beta'} \Lambda^{\beta'}_\nu \\
 \end{eqnarray*}
 so, as $v$ is arbitrary, we must have:
-$$ \Lambda^{\alpha'}_{\mu} g_{\alpha'\beta'} \Lambda^{\beta'}_\nu =g_{\mu\nu}$$
+\begin{equation}
+\label{eqn:lorentzgroup}
+\Lambda^{\alpha'}_{\mu} g_{\alpha'\beta'} \Lambda^{\beta'}_\nu =g_{\mu\nu}
+\end{equation}
+We can represent the linear operator $\Lambda$ as a matrix.  Taking the upper index as the row, we find:
+\begin{equation}
+\label{eqn:lorentzgroup}
+[\Lambda]_\mathcal{B}^T \; [g]_\mathcal{B} \; [\Lambda]_\mathcal{B}
+= [g]_\mathcal{B}
+\end{equation}
 
+\section{The Lorentz Group}
 
-\section{Inverse Lorentz Transformation}
+A {\bf group} $G$ is a set of elements and an operation $\cdot$ with the properties:
+\begin{center}
+\begin{tabular}{ll}
+  {\bf (A)} & closure:  if $a,b \in G$ then $a \cdot b \in G$ \\
+  {\bf (B)} & associative:  if $a,b,c \in G$ then $(ab)c = a(bc)$ \\
+  {\bf (C)} & identity:  there exists $e$ such that $ea = ae = a$ \\
+  {\bf (D)} & inverses:  for each $a \in G$ there exists $a^{-1}$ such that $a^{-1}a = a a^{-1} = e$ \\
+\end{tabular}
+\end{center}
+
+\exercise (*) For $a,b \in G$, show that if $a b = e$ then $b = a^{-1}$. $\square$ \\[3pt]
+
+\exercise For $a,b \in G$, show that if $a b = a$ then $b = e$. $\square$ \\[3pt]
+
+\exercise For $a \in G$ show that $(a^{-1})^{-1} = a.$ $\square$ \\[3pt]
+
+\noindent
+Let's simplify our notation in the previous section with:
+$$A \equiv [\Lambda]_\mathcal{B}$$
+and
+$$G \equiv [g]_\mathcal{B}$$
+so that Equation~\ref{eqn:lorentzgroup} now reads:
+\begin{equation}
+\label{eqn:lorentzmatrices}
+A^T \, G \, A = G
+\end{equation}
+with $A$ and $G$ unapologetically $4 \times 4$ matrices and
+$$ G \equiv \begin{pmatrix}
+  1 & 0 & 0 & 0 \\[3pt]
+  0 & -1 & 0 & 0 \\[3pt]
+  0 & 0 & -1 & 0 \\[3pt]
+  0 & 0 & 0 & -1 \\
+\end{pmatrix}$$
+
+The set of all matrices $A$ that satisfy Equation~\ref{eqn:lorentzmatrices} together with ordinary matrix multiplication defines the Lorentz group.
+
+Group property (B) follows directly from the associative property of matrix multiplication.  The identity matrix satisfies Equation~\ref{eqn:lorentzmatrices} so property (C) holds.
+
+\exercise (*) Show that property (A) holds for the Lorentz group.  That is, if
+$$A^T G A = G$$
+and 
+$$B^T G B = G$$
+then
+$$(AB)^T G (AB) = G$$.
+
+\exercise (*) Show that property (A) holds for the Lorentz group.  That is, if
+$$A^T G A = G$$
+and 
+$$B^T G B = G$$
+then
+$$(AB)^T G (AB) = G. \hspace{1cm} \square$$
+
+\exercise (*) Show that property (D) holds for the Lorentz group.  That is, if
+$$A^T G A = G$$
+and 
+$$(A^-1)^T G A^-1 = G$$
+then
+$$(AB)^T G (AB) = G. \hspace{1cm} \square$$
+
+\exercise (*) Show that a rotation by angle $\theta$ about the $z$-axis
+$$R = \begin{pmatrix}
+  1 & 0 & 0 & 0 \\[3pt]
+  0 & \cos\theta & -\sin\theta & 0 \\[3pt]
+  0 &\sin\theta & \cos\theta & 0 \\[3pt]
+  0 & 0 & 0 & 1 \\
+\end{pmatrix}$$
+is a member of the Lorentz Group.$\square$\\[3pt]
+
+\exercise (*) Show that a Lorentz boost along the $x$-axis:
+$$L = \begin{pmatrix}
+  \gamma & -\beta\gamma & 0 & 0 \\[3pt]
+  -\beta\gamma & \gamma & 0 & 0 \\[3pt]
+  0 &0 & 1 & 0 \\[3pt]
+  0 & 0 & 0 & 1 \\
+\end{pmatrix}$$
+with
+$$\gamma \coloneqq \frac{1}{\sqrt{1-\beta^2}}$$
+is a member of the Lorentz Group.$\square$\\[3pt]
+
+\exercise (*) Show that time reversal:
+$$T = \begin{pmatrix}
+  -1 & 0 & 0 & 0 \\[3pt]
+  0  & 1 & 0 & 0 \\[3pt]
+  0  & 0 & 1 & 0 \\[3pt]
+  0  & 0 & 0 & 1 \\
+\end{pmatrix}$$
+is a member of the Lorentz Group.$\square$\\[3pt]
+
+\exercise (*) Show that parity:
+$$P = \begin{pmatrix}
+  1 &  0 &  0 &  0 \\[3pt]
+  0 & -1 &  0 &  0 \\[3pt]
+  0 &  0 & -1 &  0 \\[3pt]
+  0 &  0 &  0 & -1 \\
+\end{pmatrix}$$
+is a member of the Lorentz Group.$\square$\\[3pt]
+
+\end{document}
+
+\section{EXTRA:  Inverse Lorentz Transformation}
 Not sure this goes here but recording:
 \begin{eqnarray*}
 g_{\alpha\beta} &=& g_{uw} \Lambda^u_\alpha \Lambda^w_{\beta}\\
@@ -774,11 +921,6 @@ Recalling that the inverse of $\Lambda$ is $M$ so:
 $$\delta^\gamma_\beta = M^\gamma_w \Lambda^w_\beta$$
 we see that:
 $$M^\gamma_w = g_{uw} \Lambda^u_{\alpha} g^{\alpha_\gamma}$$
-
-
-
-
-
 
 
 
