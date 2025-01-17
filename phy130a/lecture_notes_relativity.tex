@@ -854,14 +854,8 @@ $$A^T G A = G$$
 and 
 $$B^T G B = G$$
 then
-$$(AB)^T G (AB) = G$$.
-
-\exercise (*) Show that property (A) holds for the Lorentz group.  That is, if
-$$A^T G A = G$$
-and 
-$$B^T G B = G$$
-then
 $$(AB)^T G (AB) = G. \hspace{1cm} \square$$
+\\
 
 \exercise (*) Show that property (D) holds for the Lorentz group.  That is, if
 $$A^T G A = G$$
@@ -869,6 +863,7 @@ and
 $$(A^-1)^T G A^-1 = G$$
 then
 $$(AB)^T G (AB) = G. \hspace{1cm} \square$$
+\\
 
 \exercise (*) Show that a rotation by angle $\theta$ about the $z$-axis
 $$R = \begin{pmatrix}
@@ -907,6 +902,94 @@ $$P = \begin{pmatrix}
   0 &  0 &  0 & -1 \\
 \end{pmatrix}$$
 is a member of the Lorentz Group.$\square$\\[3pt]
+
+\section{Relativistic Kinematics}
+
+In classical 
+
+
+
+
+
+
+Consider two time-like events A and B, which (by definition) have a
+space-time interval $\Delta S^2 > 0$.  We define the proper-time
+($\tau$) between these two events as:
+$$\tau \coloneqq \frac{\sqrt{\Delta S^2}}{c}$$
+The proper-time $\tau$ is equivalent to the elapsed (postive) time in the {\bf
+  particular} frame where the events occur at the same location.  Such
+a frame exists because $\Delta S^2 > 0$, and calculating in that frame
+(call it $F'$) we have:
+$$ 0 < \Delta S^2 = c^2 (\Delta t')^2 - (\Delta x')^2 - (\Delta y')^2- (\Delta z')^2$$
+but in this paritcular frame we have:
+$$(\Delta x')^2 = (\Delta y')^2 = (\Delta z')^2 = 0$$
+so:
+$$\Delta S^2 = c^2 (\Delta t')^2$$
+and we see that
+$$\tau \equiv \Delta t'$$
+Let $\beta$ be the relative speed between frame $F$ and the frame $F'$ in
+which the events A and B occur at the same location.  Then we can
+calculate the elapsed time $t$ in frame F according to the lorentz
+transformation:
+$$\begin{pmatrix} ct \\ x \end{pmatrix} = 
+\begin{pmatrix} \gamma & -\gamma \beta \\ -\gamma \beta & \gamma \\ \end{pmatrix}
+\begin{pmatrix} c\tau \\ 0 \end{pmatrix}
+= \begin{pmatrix} c \gamma \tau \\ c \gamma \tau \beta \end{pmatrix}
+$$
+From which we see that:
+\begin{equation}
+\tau = t / \gamma
+\end{equation}
+but take care that $\gamma$ is for the particular frame where the
+events occur at the same location, as measured from the frame in which
+$t$ is measured.
+
+We use the proper-time $\tau$ to define the four-velocity $\eta$ (also
+called proper velocity in Griffiths) by its components:
+\begin{equation}
+\eta^\mu \coloneqq \frac{dx^\mu}{d\tau}
+\end{equation}
+Since $\tau$ and so $d\tau$ is an invariant, we see that the components $\eta^\mu$
+transform as for a four-vector, and so, by definition, the four-velocity is a four-vector.  Let's work out the coordinates in frame $F$ by using $d\tau = dt/\gamma$:
+$$\eta^\mu = \gamma \frac{dx^\mu}{dt}$$
+and so for the time component:
+$$\eta^0 = \gamma \frac{c dt}{dt} = c \gamma$$
+and for the $x$ component:
+$$\eta^1 = \gamma \frac{dx}{dt} = \gamma v_x$$
+and similar for the $y$ and $z$ components.  So writing $\eta$ 
+as a column vector in the standard basis $\mathcal{B}$:
+$$[\eta]_\mathcal{B} = \gamma \begin{pmatrix} c \\ v_x \\ v_y \\\ v_z \end{pmatrix}$$
+It is left as an exercise to show that the invariant associated with $\eta$ is
+\begin{equation}
+\label{eqn:fvsq}
+\eta^\mu \eta_\mu = \eta^\mu \eta^\nu g_{\mu \nu} = c^2
+\end{equation}
+
+\exercise Show by an explicit calculation that Equation~\ref{eqn:fvsq} is correct.$\square$\\[3pt]
+
+Next we define:
+\begin{equation}
+p^\mu \coloneq m \eta^\mu
+\end{equation}
+assuming that the mass of a particle is invariant, then $p^\mu$ transforms as 
+
+
+
+
+with
+$$[p]_\mathcal{B} = \begin{pmatrix} \gamma mc \\ \gamma m v_x \\ \gamma m v_y \\\ \gamma m v_z \end{pmatrix}$$
+In the non-relativistic limit, we can approximate $\gamma$ by it's Taylor series near $\beta=0$
+$$\gamma = \frac{1}{\sqrt{1-\beta^2}} = 1 + \frac{1}{2} \beta^2$$
+so we see that for the spatial part:
+$$ = m v_x$$
+
+
+
+
+$$[p]_\mathcal{B} = \begin{pmatrix} (mc^2 + \frac{1}{2}mv^2)/c \\ m v_x \\ m v_y \\\ m v_z \end{pmatrix}$$
+
+
+\noindent
 
 \end{document}
 
