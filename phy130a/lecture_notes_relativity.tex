@@ -534,6 +534,7 @@ That completes the math prelimineraries we will need for our
 invariance-based treatment of special relativity.
 
 \section{Invariance of the Space-Time Interval}
+\label{sec:space-time-interval}
 
 Special relativity, as formulated by Einstein, is based on two postulates:
 \begin{center}
@@ -686,10 +687,10 @@ In the exercises you will show that
   \label{eqn:metric-components}
   g_{00}=1, \hspace{1cm} g_{11} = g_{22} = g_{33} = -1 
 \end{equation}  
-and all other elements are zero.  Thus, the $g$ can be represented by a matrix as:
+and all other elements are zero.  Thus, the metrix tensor $g$ can be represented by a matrix $G$ as:
 \begin{equation}
 \label{eqn:metric-matrix}
-[g]_\mathcal{B} =
+[g]_\mathcal{B} = G \coloneqq 
 \begin{pmatrix} 
 1 &  0 &  0 &  0 \\ 
 0 & -1 &  0 &  0 \\ 
@@ -697,6 +698,14 @@ and all other elements are zero.  Thus, the $g$ can be represented by a matrix a
 0 &  0 &  0 & -1 \\ 
 \end{pmatrix}
 \end{equation}
+Now, there is nothing special about the frame $F$ and its basis
+$\mathcal{B}$.  Therefore, we must reach the same conclusion about the
+matrix represenation of $G$ in any other iniertial frame $\mathcal{B}'$.  Specifically, we must have:
+$$
+[g]_\mathcal{B} = [g]_\mathcal{B}' = G
+$$
+for all frames.  The components of the metric tensor are the same in
+all intertial frames.
 
 \exercise
 Verify Equations \ref{eqn:metric-components} and \ref{eqn:metric-matrix} by calculating the matrix components.
@@ -748,50 +757,107 @@ $$[\tilde{v}]_{\mathcal{B}^*} = \begin{pmatrix} ct \\ -x \\ -y \\ -z\end{pmatrix
 
 \section{Coordinate Transformations}
 
-Suppose that the basis vectors of frame $F$ are related to those of $F'$ by a
-coordinate transformation:
+Suppose that in the vector space $\mathbb{R}^4$ for position-space
+four-vectors, the standard basis vectors $\mathcal{B}$ of frame $F$
+are related to the standard basis vector $\mathcal{B}'$ of frame $F'$
+by a coordinate transformation:
 $$e_{\mu'} = \Lambda^{\nu}_{\mu'} \, e_{\nu}$$
 we showed before there is therefore an inverse transformation:
 $$e_{\mu} = \Lambda^{\nu'}_{\mu} \, e_{\nu'}$$
 with:
-$$\Lambda^{\eta'}_{\alpha} \Lambda^{\beta}_{\eta'} =
-\delta^{\beta}_{\alpha}$$ We can interpret $\Lambda^{\nu}_{\mu'}$ as
-the components of a (1,1) tensor $\Lambda$, but we must take care with
-the location of the primed indices.  So $\Lambda^{\nu'}_{\mu}$ are
-the components of the (1,1) tensor $\Lambda^{-1}$.  Recall from the Section~\ref{sec:tensors} that (1,1) tensors are equivalent to linear operators.\\[3pt]
+$$\Lambda^{\beta}_{\eta'} \Lambda^{\eta'}_{\alpha} = \delta^{\beta}_{\alpha}$$
+As shown in Section~\ref{sec:vectors}, the contravariant components of
+a position-space four-vector $v$ will therefore transform as:
+$$v^{\mu'} = \Lambda^{\mu'}_{\nu} v^{\nu}$$
+Any vector in $\mathbb{R}^4$ whose contravariant components transform
+in the same manner as a position-space four-vector is called a {\bf
+  four-vector}.\\[3pt]
 
 \noindent
-We can arrange the components of $\lambda$ in a matrix, but we have to choose which index refers to a row, and which a column.  Taking the upper index as the row:
-$$[\Lambda]_\mathcal{B} = \begin{pmatrix}
-  \Lambda^0_0 &\Lambda^0_1 &\Lambda^0_2 &\Lambda^0_3 \\[3pt]
-  \Lambda^1_0 &\Lambda^1_1 &\Lambda^1_2 &\Lambda^1_3 \\[3pt]
-  \Lambda^2_0 &\Lambda^2_1 &\Lambda^2_2 &\Lambda^2_3 \\[3pt]
-  \Lambda^3_0 &\Lambda^3_1 &\Lambda^3_2 &\Lambda^3_3 \\
+We might be tempted to consider the real numbers
+$\Lambda^{\nu'}_{\mu}$ as components of a (1,1) tensor.  However,
+notice that one set of indices refers to the $\mathcal{B}$ basis and
+another the $\mathcal{B'}$.  Therefore, it is best to leave tensors
+aside and interpret $\Lambda^{\mu'}_{\nu}$ as the components of a
+matrix, labeled by the two sets of basis vectors which it transforms:
+$$[\Lambda]_{ \mathcal{B'} \to \mathcal{B}}
+\coloneqq \begin{pmatrix}
+  \Lambda^{0'}_0 &\Lambda^{0'}_1 &\Lambda^{0'}_2 &\Lambda^{0'}_3 \\[3pt]
+  \Lambda^{1'}_0 &\Lambda^{1'}_1 &\Lambda^{1'}_2 &\Lambda^{1'}_3 \\[3pt]
+  \Lambda^{2'}_0 &\Lambda^{2'}_1 &\Lambda^{2'}_2 &\Lambda^{2'}_3 \\[3pt]
+  \Lambda^{3'}_0 &\Lambda^{3'}_1 &\Lambda^{3'}_2 &\Lambda^{3'}_3 \\
+\end{pmatrix}$$
+where we have left the primes in place as a reminder of our notation
+that attributes meaning to the location of the primed indice
+(i.e. $\Lambda^{1'}_{2}$ means $\Lambda^{\mu'}_{\nu}$ for $\mu'=1$ and
+$\nu=2$.)  Notice that we have choosen to associate the {\bf upper}
+index with the row of the matrix, which is simply a matter of choice,
+but one which we must apply consistently.  In matrix notation, we
+have:
+$$[v]_\mathcal{B'} \; = \; [\Lambda]_{\mathcal{B'}\to\mathcal{B}} \; [v]_\mathcal{B}$$
+which for for a position-space four vector is:
+$$\begin{pmatrix} ct' \\ x' \\ y' \\ z' \end{pmatrix} = 
+\begin{pmatrix}
+  \Lambda^{0'}_0 &\Lambda^{0'}_1 &\Lambda^{0'}_2 &\Lambda^{0'}_3 \\[3pt]
+  \Lambda^{1'}_0 &\Lambda^{1'}_1 &\Lambda^{1'}_2 &\Lambda^{1'}_3 \\[3pt]
+  \Lambda^{2'}_0 &\Lambda^{2'}_1 &\Lambda^{2'}_2 &\Lambda^{2'}_3 \\[3pt]
+  \Lambda^{3'}_0 &\Lambda^{3'}_1 &\Lambda^{3'}_2 &\Lambda^{3'}_3 \\
+\end{pmatrix}
+\begin{pmatrix} ct \\ x \\ y \\ z \end{pmatrix}$$
+
+\noindent
+In similar fashion, we can consider $\Lambda^{\nu}_{\mu'}$ as the
+components of a matrix, labeled by the two sets of basis vectors it
+connects:
+$$[\Lambda]_{ \mathcal{B}' \to \mathcal{B}}
+\coloneqq \begin{pmatrix}
+  \Lambda^{0}_{0'} &\Lambda^{0}_{1'} &\Lambda^{0}_{2'} &\Lambda^{0}_{3'} \\[3pt]
+  \Lambda^{1}_{0'} &\Lambda^{1}_{1'} &\Lambda^{1}_{2'} &\Lambda^{1}_{3'} \\[3pt]
+  \Lambda^{2}_{0'} &\Lambda^{2}_{1'} &\Lambda^{2}_{2'} &\Lambda^{2}_{3'} \\[3pt]
+  \Lambda^{3}_{0'} &\Lambda^{3}_{1'} &\Lambda^{3}_{2'} &\Lambda^{3}_{3'} \\
 \end{pmatrix}$$
 
 \noindent
-As shown in Section~\ref{sec:vectors}, the contravariant components of a position-space four-vector $v$ transform as:
-$$v^\mu = \Lambda^{\mu}_{\nu'} v^{\nu'}$$
-Any vector in $\mathbb{R}^4$ whose contravariant components transform
-in the same manner as a position-space four-vector is called a {\bf
-  four-vector}.  The covariant components of the dual of a four-vector
-transform as:
-$$\tilde{v}_\mu = \Lambda_{\mu}^{\nu'} \tilde{v}_{\nu'}$$
+These matrices are related by:
+$$\Lambda^{\beta}_{\eta'} \Lambda^{\eta'}_{\alpha} = \delta^{\beta}_{\alpha}$$
+which in terms of the above matrices reads:
+$$[\Lambda]_{\mathcal{B} \to \mathcal{B}'} \; [\Lambda]_{\mathcal{B}' \to \mathcal{B}} = I$$ 
+which is as one would hope.  Therefore, they are each others inverse and so:
+$$[\Lambda]_{\mathcal{B} \to \mathcal{B}'} \equiv [\Lambda]^{-1}_{\mathcal{B}' \to \mathcal{B}}$$ 
 
 \noindent
-{\bf Notation:}  Giffiths uses the notation:
+{\bf Comments on Notation:} When there is little chance of
+confusion, we can speak of the transformation $\Lambda$, with matrix
+representation
+$$[\Lambda] \coloneqq [\Lambda]_{\mathcal{B}' \to \mathcal{B}}$$
+which would implicitly refer to the
+transformation applicable to the contravariant components when moving
+from frame $F$ to $F'$ (or, equivalently, to the covariant components
+when moving from frame $F'$ to $F$).  The inverse transformation
+$\Lambda^{-1}$ refers to transformation applicable to the
+contravariant components when moving from frame $F'$ to $F$ (or,
+equivalently, to the covariant components when moving from frame $F$
+to $F'$).\\[3pt]
+
+\noindent
+Note that Giffiths uses the notation:
 $$(v^\mu)' = \Lambda^\mu_\nu \, v^\nu$$
 so
-$$\Lambda^{\mu'}_\nu \longrightarrow  \Lambda^\mu_\nu \hspace{1cm}(\text{Griffiths})$$
+$$\Lambda^{\mu'}_\nu \longrightarrow  \Lambda^\mu_\nu \hspace{0.5cm}(\text{Griffiths})$$
 and
-$$\Lambda^{\mu}_{\nu'} \longrightarrow  ({\Lambda^{-1}})^\mu_\nu \hspace{1cm}(\text{Griffiths})$$
+$$\Lambda^{\mu}_{\nu'} \longrightarrow  ({\Lambda^{-1}})^\mu_\nu \hspace{0.5cm}(\text{Griffiths})$$
+
+
+
+\section{The Lorentz Group}
 
 \noindent
-The requirement that the space-time interval is invariant
-significantly constrains the valid coordinate transformations between
-inertial frames.  For any four-vector $v$ we have:
+{\bf Valid Coorinate Transformations:} The requirement that the
+space-time interval is invariant significantly constrains the valid
+coordinate transformations between inertial frames.  For any
+four-vector $v$ we have:
 $$(v|v) = v^{\mu} v^{\nu} g_{\mu\nu}$$
-as calculated in frame F.  But we also have:
+but also
 \begin{eqnarray*}
   (v|v) &=& v^{\alpha'} v^{\beta'} g_{\alpha'\beta'}\\
   &=& (v^{\mu}\Lambda^{\alpha'}_{\mu}) (v^{\nu}\Lambda^{\beta'}_\nu) g_{\alpha'\beta'}\\
@@ -799,17 +865,26 @@ as calculated in frame F.  But we also have:
 \end{eqnarray*}
 so, as $v$ is arbitrary, we must have:
 \begin{equation}
-\label{eqn:lorentzgroup}
+\label{eqn:lorentzgrouptn}
 \Lambda^{\alpha'}_{\mu} g_{\alpha'\beta'} \Lambda^{\beta'}_\nu =g_{\mu\nu}
 \end{equation}
-We can represent the linear operator $\Lambda$ as a matrix.  Taking the upper index as the row, we find:
-\begin{equation}
-\label{eqn:lorentzgroup}
-[\Lambda]_\mathcal{B}^T \; [g]_\mathcal{B} \; [\Lambda]_\mathcal{B}
-= [g]_\mathcal{B}
-\end{equation}
+It follows that for vectors $a$ and $b$, not only are $(a|a)$ and
+$(b|b)$ invariant, but also $(a|b)$.  
 
-\section{The Lorentz Group}
+In the previous section, we saw that we can write
+$\Lambda^{\beta'}_\nu$ as the components of a matrix which transforms
+covariant basis vectors from $\mathcal{B}'$ basis to the
+$\mathcal{B}$.  Calling that transformation matrix $A$, we can write
+this in matrix notation as:
+\begin{equation}
+ \label{eqn:lorentzgroup}
+ A^T G A = G
+\end{equation}
+where $G$ is the frame invariant matrix representation of the metric
+tensor.  Notice that Equation~\ref{eqn:lorentgrouptn} is simply the
+transformation rule for any (2,0)-tensor.  It is only the fact that
+the metric tensor has the same components in any basis that leads to
+this rather important result.
 
 A {\bf group} $G$ is a set of elements and an operation $\cdot$ with the properties:
 \begin{center}
@@ -828,26 +903,14 @@ A {\bf group} $G$ is a set of elements and an operation $\cdot$ with the propert
 \exercise For $a \in G$ show that $(a^{-1})^{-1} = a.$ $\square$ \\[3pt]
 
 \noindent
-Let's simplify our notation in the previous section with:
-$$A \equiv [\Lambda]_\mathcal{B}$$
-and
-$$G \equiv [g]_\mathcal{B}$$
-so that Equation~\ref{eqn:lorentzgroup} now reads:
-\begin{equation}
-\label{eqn:lorentzmatrices}
-A^T \, G \, A = G
-\end{equation}
-with $A$ and $G$ unapologetically $4 \times 4$ matrices and
-$$ G \equiv \begin{pmatrix}
-  1 & 0 & 0 & 0 \\[3pt]
-  0 & -1 & 0 & 0 \\[3pt]
-  0 & 0 & -1 & 0 \\[3pt]
-  0 & 0 & 0 & -1 \\
-\end{pmatrix}$$
 
-The set of all matrices $A$ that satisfy Equation~\ref{eqn:lorentzmatrices} together with ordinary matrix multiplication defines the Lorentz group.
+The set of all matrices $A$ that satisfy
+Equation~\ref{eqn:lorentzmatrices} together with ordinary matrix
+multiplication defines the Lorentz group.
 
-Group property (B) follows directly from the associative property of matrix multiplication.  The identity matrix satisfies Equation~\ref{eqn:lorentzmatrices} so property (C) holds.
+Group property (B) follows directly from the associative property of
+matrix multiplication.  The identity matrix satisfies
+Equation~\ref{eqn:lorentzmatrices} so property (C) holds.
 
 \exercise (*) Show that property (A) holds for the Lorentz group.  That is, if
 $$A^T G A = G$$
@@ -903,15 +966,36 @@ $$P = \begin{pmatrix}
 \end{pmatrix}$$
 is a member of the Lorentz Group.$\square$\\[3pt]
 
+\exercise Show that:
+\begin{eqnarray*}
+  G \, R \, G &=& R^{-1} \\
+  G \, L \, G &=& L^{-1} \\
+  G \, P \, G &=& P^{-1} \\
+  G \, T \, G &=& T^{-1} \\
+\end{eqnarray*}
+Note that this follows from the group property:
+\begin{eqnarray*}
+  g_{\alpha\beta} &=& g_{u'w'} \Lambda^{u'}_\alpha \Lambda^{w'}_{\beta}\\
+  g^{\gamma\alpha} g_{\alpha\beta} &=& g^{\gamma\alpha} \Lambda^{u'}_{\alpha} g_{\mu'w'}\Lambda^{w'}_\beta\\
+\delta^\gamma_\beta &=& (g^{\gamma\alpha} \Lambda^{u'}_{\alpha} g_{\mu'w'}) \Lambda^{w'}_\beta
+\end{eqnarray*}
+Notice also how nicely our notation (with primed indices) works:
+$$g^{\gamma\alpha} \Lambda^{u'}_{\alpha} g_{\mu'w'} = \Lambda^{\gamma}_{w'} $$
+
 \section{Relativistic Kinematics}
 
 In lecture we saw that the principle of conservation of momentum,
 using the classical definition of momentum $\vec{p}=m\vec{v}$ is not
 consistent with special relativity.  Experimental evidence supports special relativity.  So we must abandon our classical notion of momentum.
 
-If we can find a four-vector quantity that is conserved, so e.g.:
+If we can find a four-vector quantity related to momentum, and likewise conserved, so e.g.:
 $$p^\mu_A + p^\mu_B = p^\mu_C + p^\mu_D$$
-then...
+then we can simply apply a Lorentz transformation to both sides:
+$$\Lambda^{\nu'}_\mu p^\mu_A + \Lambda^{\nu'}_\mu p^\mu_B = \Lambda^{\nu'}_\mu p^\mu_C + \Lambda^{\nu'}_\mu p^\mu_D$$
+and obtain:
+$$p^{\nu'}_A + p^{\nu'}_B = p^{\nu'}_C + p^{\nu'}_D$$
+which shows that the law will hold in any frame $F'$.  Finding this
+quantity is the goal of this section.
 
 Consider two time-like events A and B, which (by definition) have a
 space-time interval $\Delta S^2 > 0$.  We define the proper-time
@@ -968,44 +1052,77 @@ It is left as an exercise to show that the invariant associated with $\eta$ is
 
 \exercise Show by an explicit calculation that Equation~\ref{eqn:fvsq} is correct.$\square$\\[3pt]
 
-Next we define:
+Next we define the four vector $p$ by it's components:
 \begin{equation}
-p^\mu \coloneq m \eta^\mu
+p^\mu \coloneqq m \eta^\mu
 \end{equation}
-assuming that the mass of a particle is invariant, then $p^\mu$ transforms as 
-
-
-
-
-with
+assuming that the mass of a particle is invariant, then $p^\mu$ transforms as a four-vector, and so is itself a four-vector, with
 $$[p]_\mathcal{B} = \begin{pmatrix} \gamma mc \\ \gamma m v_x \\ \gamma m v_y \\\ \gamma m v_z \end{pmatrix}$$
+
 In the non-relativistic limit, we can approximate $\gamma$ by it's Taylor series near $\beta=0$
 $$\gamma = \frac{1}{\sqrt{1-\beta^2}} = 1 + \frac{1}{2} \beta^2$$
-so we see that for the spatial part:
-$$ = m v_x$$
+In this limit, we see that
+\begin{eqnarray*}
+  p^1 &\approx& m v_x \\
+  p^2 &\approx& m v_y \\
+  p^3 &\approx& m v_z \\
+\end{eqnarray*}  
+so that the spatial part of $p$ reproduces the non-relativistic
+momentum for small $\beta$.  For the spatial part, we see that:
+$$p^0 c \approx m c^2 + \frac{1}{2} m v^2 $$
+The second term is just the classical kinetic energy, which identifies
+$p^0$ as the relativistic energy of the particle deviced by a factor
+of $c$ (so that it has the same units as momentum).  The first term
+$mc^2$ is a new contribution to the energy, due to special relativity,
+called the rest energy.  We see that massive particles, even at rest,
+have a non-zero energy due to their mass.
 
+Thus we have identified exactly the quantity we sought, a four-vector $p$ which we can write as a column vector:
+$$[p]_{\mathcal B} = \begin{pmatrix} E/c \\ \vec{p} \end{pmatrix}$$
+where $E$ is relativistic energy:
+$$E = \gamma m c^2$$
+and $\vec{p}$ is the relativistic energy:
+$$\vec{p} = \gamma m \vec{v}$$
+A common mistake by students new to relativistic kinematics is to
+forget the new factor $\gamma$ when they encounter the familiar symbol
+$\vec{p}$.  We have taken that symbol over to refer to the
+relativistic momentum, which reproduces the classical momentum only
+for small $\beta$.
 
+Notice that the invariant associated with $p$ is:
+$$p^\mu p_\mu = m^2 \nu^\mu \nu_\mu = m^2 c^2$$
+and also:
+$$p^\mu p_\mu = (E/c)^2 - \vec{p}\cdot\vec{o}$$
+so we have:
+$$E^2 = (mc^2)^2 + |\vec{p}|^2 c^2$$
+Particle physicist know and love this equation as:
+$$E^2 = m^2 + p^2$$
+{\bf You must memorize this equation} (or its derivation).  It will
+not be given to you on exams, and you will need it.  I suggest to
+memorize it stripped of the factors of $c$ and then add them (if
+necessary) by dimensionally analysis.
 
+The experimental evidence confirms that $p$ is indeed conserved.  In
+classical mechanics, we had conservation of energy and momentum
+separately.  In relativistic kinematics, four-momentum is conserved
+which implies conservation of relativistic energy and relativistic
+momentum.
 
-$$[p]_\mathcal{B} = \begin{pmatrix} (mc^2 + \frac{1}{2}mv^2)/c \\ m v_x \\ m v_y \\\ m v_z \end{pmatrix}$$
+\section{Massless Particles}
 
-
-\noindent
+Special relativity provides a mechanism for massless particles to exist.  Notice that:
+$$\vec{p}=\frac{m\vec{v}}{\sqrt{1-(v/c)^2}}$$
+and
+$$E=\frac{mc^2}{\sqrt{1-(v/c)^2}}$$
+both go to zero for $m=0$ {\bf unless} $v=c$ in which case they are indeterminate.  We still have, however,
+$$E^2 = (mc^2)^2 + |\vec{p}|^2 c^2$$
+which yields:
+$$E = |p|c$$
+So special relativity allows for massless particles that travel
+exclusively at the speed of light.  Massive particles have their momentum and energy defined by their velocity, but that is not possible for massless particles which travel at the speed of light.  Special relativity has no prescription for how the energy of massless particle is determined, but quantum mechanics does.  We have photons with energy given by:
+$$E = \hbar \omega$$
 
 \end{document}
-
-\section{EXTRA:  Inverse Lorentz Transformation}
-Not sure this goes here but recording:
-\begin{eqnarray*}
-g_{\alpha\beta} &=& g_{uw} \Lambda^u_\alpha \Lambda^w_{\beta}\\
-g^{\alpha\gamma} g_{\alpha\beta} &=& g_{uw} \Lambda^u_{\alpha} g^{\alpha_\gamma}\Lambda^w_\beta\\
-\delta^\gamma_\beta &=& (g_{uw} \Lambda^u_{\alpha} g^{\alpha_\gamma}) \Lambda^w_\beta
-\end{eqnarray*}
-Recalling that the inverse of $\Lambda$ is $M$ so:
-$$\delta^\gamma_\beta = M^\gamma_w \Lambda^w_\beta$$
-we see that:
-$$M^\gamma_w = g_{uw} \Lambda^u_{\alpha} g^{\alpha_\gamma}$$
-
 
 
 \section{EXTRA:  Linearity of Transformation between Inertial Frames}
@@ -1040,39 +1157,5 @@ If we take the origin to coincide, we have:
 \end{eqnarray*}
 showing the linearity of the transformations between inertial frames.
 
-
-
-
-\section{EXTRA Linear Operators and Dual Vectors}
-
-In quantum mechanics, we made wide use of linear operators, which
-provided a vector return a (possibly) new vector.  Mathematically, we
-say that a linear operator $T$ on a vector space $V$ is a map from $V
-\to V$ with the defining property that:
-$$T(c v + w) = c T(v) = T(w)$$
-for all $v,w \in V$ and any scalar $c$.\\
-
-
-\noindent
-For any basis $\mathcal{B}=\{e_i\}$ for $V$, then we can write the vector $T(e_i)$ in terms of its components ${T_i}^j$ as:
-$$T(e_i) \coloneqq {T_i}^j e_j$$
-These components completely specify the action of $T$ on any vector:
-$$T(v) = T(v^i \, e_i) = v^i \, T(e_i) = v^i \, {T_i}^j \, e_j$$
-
-For the basis $\mathcal{B}$ we have the following column vectors:
-$$[v]_{\mathcal{B}} = \begin{pmatrix} v^1 \\ v^2 \\ \vdots \\ v^n \end{pmatrix}
-\hspace{2cm}
-[T(v)]_{\mathcal{B}} = \begin{pmatrix} v^i {T_i}^1 \\ v^i {T_i}^2 \\ \vdots \\ v^i {T_i}^n \end{pmatrix}
-$$
-Each row in $[T(v)]_{\mathcal{B}}$ has an implicit sum, which suggests vector multiplication.  If we define:
-$$
-[T]_{\mathcal{B}} \coloneqq \begin{pmatrix} 
-{T_1}^1 & {T_2}^1 & \cdots & {T_n}^1\\ 
-{T_1}^2 & {T_2}^2 & \cdots & {T_n}^2\\ 
-\vdots  & \vdots  & \ddots & \vdots \\
-{T_1}^n & {T_2}^n & \cdots & {T_n}^n \end{pmatrix}
-$$
-then we have:
-$$[T(v)]_{\mathcal{B}} = [T]_{\mathcal{B}} [v]_{\mathcal{B}}$$
 
 \end{document}
