@@ -8,6 +8,7 @@
 \usepackage{amssymb}
 \usepackage{braket}
 \usepackage{pythonhighlight}
+\usepackage{mathtools}
 \begin{document}
 
 \newcommand{\ihbar}{\ensuremath{i \hbar}}
@@ -31,64 +32,154 @@
 
 \section{TISE and System of Units}
 
+{\bf Notation Update: } In the previous assignment, I was trying to
+follow the notation used by the numpy fft documentation, which uses
+$k$ to refer to the index of the Fourier coefficients.  But I think we
+all found this way too confusing, because in physics $k$ is used as
+the wave number, which contains this integer.  So in this exercise we
+will take back our $k$ as the wavenumber, and refer to coefficients
+via the index $m$.  We'll consider our particle to have mass $M$, but this will be absorbed into our system of units anyway, so it shouldn't appear in your program.  So now the wave number $k$ is related to the Fourier index $m$ via:
+\begin{equation}
+k = \frac{2 \pi m}{a}
+\end{equation}
+where $a$ is (as before) the period.  Just take some care when reading
+the documenation (and perhaps your older code) that their $k$ is our $m$.
+If only they had consulted us first!
+
 We will use a variational approach to find the ground state $\Psi_0(x)$ of the Time-Independent Schr\"odinger Equation (TISE):
 $$\hat{H} \; \psi_0(x) = E_0 \; \psi_0(x)$$
 where the Hamiltonian operator is defined by:
 \begin{equation}
-\hat{H} = -\frac{\hbar^2}{2 m} \; \frac{d^2}{dx^2} \, + \, V(x)
+\hat{H} = -\frac{\hbar^2}{2 M} \; \frac{d^2}{dx^2} \, + \, V(x)
 \end{equation}
-We will consider periodic functions with period $a$, which defines the length scale for our problem, and so a characteristic energy is:
+We will consider potentials with a characteristic length scale $L$.  We will be considering {\bf non-periodic} wave function (e.g. solutions to the harmonic oscillator).  To use the Fourier series approach in this case, we take the period $a$ to be large compared to $L$, and use the fact that the wave function approaches zero to approximate a periodic function.
+
+Based on our characteristic length scale $L$, a characteristic energy is:
 \begin{equation}
-\epsilon \equiv \frac{\hbar^2}{2ma^2}
+\epsilon \equiv \frac{\hbar^2}{2 M L^2}
 \end{equation}
+Note well:  your program should not be calculating a numerical value for
+$\epsilon$: that is the unit of energy for your program!  For example
+$V(x) = 2$ in your program represents $V(x) = 2 \epsilon$
+physically.  Using a system of units like this ensures that the
+numbers we are calculating will be near $1$, which minimizes round-off
+error.
+
 With these units, we have:
 \begin{equation}
-\frac{\hat{H}}{\epsilon} = -a^2\frac{d^2}{dx^2} + \frac{V(x)}{\epsilon}
+\frac{\hat{H}}{\epsilon} = -L^2\frac{d^2}{dx^2} + \frac{V(x)}{\epsilon}
 \end{equation}
-You program should not be calculating a numerical value for $\epsilon$: that is the unit of energy for your program.  For example $V(x) = 1$ in your program represents $V(x) = \frac{\hbar^2}{2ma^2}$ physically.
 
 \section{The Variational Method of Finding the Ground State}
 
 Our technique is based on the observation that:
 $$\braket{\psi|\hat{H}|\psi} \geq E_0$$
 for all $\psi$.  Which you can see by expanding $\ket{\psi}$ in the complete set of energy eigenstates:
-$$\ket{\psi} = \sum c_n \ket{E_n}$$
+$$\ket{\psi} = \sum c_m \ket{E_m}$$
 so:
-$$\braket{\psi|\hat{H}|\psi} = \sum |c_n|^2 E_n = |c_0|^2 E_0 + \sum_{n>0} |c_n|^2 E_n$$
+$$\braket{\psi|\hat{H}|\psi} = \sum |c_m|^2 E_m = |c_0|^2 E_0 + \sum_{m>0} |c_m|^2 E_m$$
 but:
-$$\sum |c_n|^2 = 1 \;\; \implies \;\; |c_0|^2 = 1 - \sum_{n>0} |c_n|^2$$
+$$\sum |c_m|^2 = 1 \;\; \implies \;\; |c_0|^2 = 1 - \sum_{m>0} |c_m|^2$$
 so:
-$$\braket{\psi|\hat{H}|\psi} = E_0 + \sum_{n>0} |c_n|^2 (E_n - E_0)$$
-but as $E_n \geq E_0$ we have:
+$$\braket{\psi|\hat{H}|\psi} = E_0 + \sum_{m>0} |c_m|^2 (E_m - E_0)$$
+but as $E_m \geq E_0$ we have:
 $$\braket{\psi|\hat{H}|\psi} \geq E_0$$
 
-The variational technique starts with a first guess for the wave function $\psi$.  Then, during each iteration, we first calculate:
+The variational technique starts with a first guess for the wave function $\psi$, for which we calculate:
 $$E=\braket{\psi|\hat{H}|\psi}$$
-Next we vary the wave function randomly to obtain $\psi'$, and
-calculate:
+During each iteration, we vary the wave function randomly to
+obtain $\psi'$, and calculate:
 $$E'=\braket{\psi'|\hat{H}|\psi'}$$
-If $E' < E$, then we update $\psi$ to $\psi'$.  Otherwise, we leave
-$\psi$ as is.  Then we move on to the next iteration.
+If $E' < E$, then we update $\psi$ to $\psi'$ and $E$ to $E'$.
+Otherwise, we leave $\psi$ and $E$ as is.  Then we move on to the next
+iteration.
 
 \section{Fourier Series}
 
+One can apply the variational principle directly to the wave function.
+We approximate the continuous wave function as a set of y-values for
+each of $n$ x-values.  To estimate the kinetic energy we take a
+numerical second derivative.  However, to approximate a continuous
+function and its second derivative, we need to use lots of $x$-values
+(order 100).  And we have to vary each point, randomly, one by one.
+And so the convergence of the variational method with this approach is
+very slow, even for a relatively simple problem.
+
+We will instead use a Fourier series approach, taking advantage of the
+FFT library numpy.  The Fourier series in many cases converges
+remarkably fast.  We will only need $n=16$ to handle the harmonic
+oscillator potential with high accuracy, for example.  And calculating
+the expectation value of the kinetic energy is very easy in frequency
+space, much easier than numerically calculating a second derivative.
+
 We will be considering a Fourier series expansion of the wave function:
-$$\psi(x) = c_k \exp(i\frac{2\pi k x}{a})$$
+$$\psi(x) = \sqrt{\frac{1}{a}} \sum_m c_m \exp(i\frac{2\pi m x}{a})$$
 As we will be considering stationary states of a 1-D potential, we can take $\psi(x)$ to be real, and so:
 $$c_{-k} = c_k^*$$
-We will also fix:
-$$c_0 = 0$$
-
 During each iteration we will calculate the expectation value:
 $$\braket{\psi|\hat{H}|\psi} = \braket{\psi|K|\psi} + \braket{\psi|V(x)|\psi}$$
 where $K$ refers to the kinetic energy.
 
-From the Fourier series coefficients we can easily calculate the expectation value of the kinetic energy as:
-$$\braket{\psi|K|\psi} = \epsilon \sum_k (2\pi k)^2 |c_k|^2$$
 
+The Fourier series is an expansion in planes waves with momentum $p = \hbar k$ and wavenumbers:
+$$k = \frac{2 \pi m}{a}$$
+And so the kinetic energy $K(m)$ of a particle described by the plane wave for coefficient $c_m$ is:
+$$ K(m) = \frac{p^2}{2M} = \frac{(\hbar k)^2}{2M}
+= \frac{(2 \pi \hbar m)^2}{2Ma^2} = \frac{\hbar^2}{2ML^2} (2 \pi m)^2 \left( \frac{L}{a}\right)^2$$
+And so:
+$$\frac{K(m)}{\epsilon} = (2 \pi m)^2 \left( \frac{L}{a}\right)^2 $$
+From the Fourier series coefficients we can therefore easily calculate the expectation value of the kinetic energy as an average over the kinetic energy of each plane wave:
+$$\braket{\psi|K|\psi} = \epsilon \sum_m (2\pi m)^2 |c_m|^2 \left( \frac{L}{a}\right)^2 $$
 The inverse discrete Fourier series, acting on these $n$ coefficients, will likewise rapidly provide us with $\psi(x_m)$ for the $n$ $x$-values located at:
-$$x_m = x_0 + a * m / n$$.  We will use these to calculate:
-$$\braket{\psi|V(x)|\psi} = \sum_m V(x_m) |\psi(x_m)|^2 $$
+$$x_m = x_0 + \Delta a \, m$$
+with
+$$\Delta a \coloneqq \frac{a}{n}$$
+We will use these to calculate:
+$$\braket{\psi|V(x)|\psi} = \sum_m V(x_m) \, |\psi(x_m)|^2 \, \Delta a $$
+
+\section{Real FFT in Numpy}
+
+We can always take our stationary solutions to 1-D potentials as real-valued.  This implies that:
+$$c_{-m} = c_{m}^*$$
+And that $c_0$ is real valued.
+
+Since we will be randomly varying these coefficients, we want to take
+full advantage of these constraints.  Therefore, we will be using the
+{\bf real} fast Fourier transform (RFFT), which has some different behavior
+from the fast fourier transform for a complex valued function.
+
+Given $n$ data points, the RFFT provides coefficents $c_m$ for
+$$m = 0,1,2,\cdots,m_{\rm MAX}$$
+where:
+$$m_{\rm MAX} = n//2 + 1$$
+and the $//$ refers to integer divide, e.g.:
+$$5 // 2 = 2$$
+Notice that the same number of coefficients are provided for
+e.g. $n=4$ and $n=5$. {\bf Important:} because of this ambiguity, you
+must specify the number of original data points via the option ``n=n''
+when calling the IFFT routine.  Otherwise, the number of sample points
+and there implicit locations may not be consistent with what you started with!
+
+The fast fourier transform, as implemented in numpy, when using the "norm=ortho" option, is:
+$$A_m = \sqrt{\frac{1}{n}} \sum_{j=0}^{n-1} a_j \exp \left( -i \frac{2 \pi m j}{n}\right)$$
+where the $a_j$ are the sampled function values:
+$$a_m = \psi(x_m) \psi(x_0 + \Delta a m)$$
+with inverse:
+$$a_m = \sqrt{\frac{1}{n}} \sum_{j=0}^{n-1} A_j \exp \left( i \frac{2 \pi m j}{n}\right)$$
+This differs from our (physics) based normalization which puts:
+$$\sum_m |c_m|^2 = 1$$
+To normalize the Fourier coefficients $A_k$ provide by numpy ifft you must do:
+$$\left(|A_0|^2 + 2 \cdot \sum_{m=1}^{m_{\rm MAX}} |A_m|^2 \right) \Delta a = 1$$
+To calculate the continuous function from the coefficients:
+$$\psi(x) = A_0 + \sum_{m=1}^{m_{\rm MAX}}
+2 {\rm Re}(A_m) \cos\left( \frac{2 \pi m (x-x_0)}{a}\right)
+- 2 {\rm Im}(A_m) \sin\left( \frac{2 \pi m (x-x_0)}{a}\right)
+$$
+
+
+
+
+
 
 \section{Numerical Algorithm}
 
@@ -122,7 +213,7 @@ It is often helpful to use a process called simulated annealing, where we initia
 %We can restrict ourselves to an odd wave function by limiting the range to $[0,b]$ and fixing $\psi(0)=0$, as appropriate for an odd function.  Notice that (as long as we choose $b$ large enough) this will have $\psi(0) = \psi(b) = 0$ and $\psi''(0) = \psi''(b) = 0$ just as before.  This will allow us to find the lowest energy odd wave function.  In the (typical) case that the ground state is even, this will allow us to find the first excited state.
 
 %There is another approach that does not rely on the wave functions being even or odd.  Consider a state vector expanded in terms of the energy eigenstates:
-%$$\ket{\psi} = \sum c_n \ket{E_n}$$
+%$$\ket{\psi} = \sum c_m \ket{E_m}$$
 %Now suppose we arrange that:
 %$$c_0 = 0$$
 %In this case, the variational principle (you can work through it much the same as above) becomes:
