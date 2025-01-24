@@ -106,7 +106,7 @@ And so the convergence of the variational method with this approach is
 very slow, even for a relatively simple problem.
 
 We will instead use a Fourier series approach, taking advantage of the
-FFT library numpy.  The Fourier series in many cases converges
+FFT library in numpy.  The Fourier series in many cases converges
 remarkably fast.  We will only need $n=16$ to handle the harmonic
 oscillator potential with high accuracy, for example.  And calculating
 the expectation value of the kinetic energy is very easy in frequency
@@ -114,12 +114,13 @@ space, much easier than numerically calculating a second derivative.
 
 We will be considering a Fourier series expansion of the wave function:
 $$\psi(x) = \sqrt{\frac{1}{a}} \sum_m c_m \exp(i\frac{2\pi m x}{a})$$
+where our normalization here is such that:
+$$\sum_m |c_m|^2 = 1$$
 As we will be considering stationary states of a 1-D potential, we can take $\psi(x)$ to be real, and so:
 $$c_{-k} = c_k^*$$
 During each iteration we will calculate the expectation value:
 $$\braket{\psi|\hat{H}|\psi} = \braket{\psi|K|\psi} + \braket{\psi|V(x)|\psi}$$
 where $K$ refers to the kinetic energy.
-
 
 The Fourier series is an expansion in planes waves with momentum $p = \hbar k$ and wavenumbers:
 $$k = \frac{2 \pi m}{a}$$
@@ -130,13 +131,13 @@ And so:
 $$\frac{K(m)}{\epsilon} = (2 \pi m)^2 \left( \frac{L}{a}\right)^2 $$
 From the Fourier series coefficients we can therefore easily calculate the expectation value of the kinetic energy as an average over the kinetic energy of each plane wave:
 $$\braket{\psi|K|\psi} = \epsilon \sum_m (2\pi m)^2 |c_m|^2 \left( \frac{L}{a}\right)^2 $$
-The inverse discrete Fourier series, acting on these $n$ coefficients, will likewise rapidly provide us with $\psi(x_m)$ for the $n$ $x$-values located at:
-$$x_m = x_0 + \Delta a \, m$$
+The inverse discrete Fourier series, acting on these $n$ coefficients, will provide us with $\psi(x_m)$ for the $n$ $x$-values located at:
+$$x_m = x_0 + m \Delta a$$
 with
 $$\Delta a \coloneqq \frac{a}{n}$$
 We will use these to calculate:
 $$\braket{\psi|V(x)|\psi} = \sum_m V(x_m) \, |\psi(x_m)|^2 \, \Delta a $$
-
+It's important to understand that the values of $x_m$ and so $V(x_m)$ are fixed once you specify x
 \section{Real FFT in Numpy}
 
 We can always take our stationary solutions to 1-D potentials as real-valued.  This implies that:

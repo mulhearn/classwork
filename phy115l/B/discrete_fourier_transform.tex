@@ -21,64 +21,95 @@ Discrete Fourier Transform \\
 
 \maketitle
 
+\section{Notation}
+
+We'll reserve $k$ for the wave number of a particle.  We will use $m$
+and $n$ as dummy indices.  So we will use $M$ (capital) for the mass
+of a particle to avoid confusion with the index $m$.  We'll use $N$
+for the number of samples.  We'll use $a$ for the period of a
+function.  Note that the numpy FFT library uses different notation,
+taking $k$ as the index for Fourier coefficients (our $m$) and $n$ for
+the number of samples (our $N$).
 
 \section{Fourier Series for Complex-Valued Functions}
 
-We will treat the Fourier Series in the context of the inner product space of square-integrable periodic functions of period $a$,  with an inner product defined as:
+We will treat the Fourier Series in the context of the inner product
+space of square-integrable periodic functions of period $a$, with an
+inner product defined as:
 $$ \braket{f|g} \coloneqq \int_{-\frac{a}{2}}^{\frac{a}{2}} f^*(x) g(x) dx$$
 The complex exponential functions
-$$e_k(x) \coloneqq \sqrt{\frac{1}{a}} \exp\left(i \frac{2\pi k x}{a}\right)$$
+$$e_m(x) \coloneqq \sqrt{\frac{1}{a}} \exp\left(i \frac{2\pi k x}{a}\right)$$
 are orthonormal vectors.  To verify:
 \begin{eqnarray*}
-  \braket{e_j|e_k} &=& \frac{1}{a} \int_{-\frac{a}{2}}^{\frac{a}{2}}
-  \exp\left(i \frac{2\pi (k-j) x}{a}\right) dx \\[7pt]
-  &=& \frac{1}{\pi (k-j)} \cdot \frac{\exp\left(i \pi (k-j) \right)-\exp\left(-i \pi (k-j) \right)}{2i}\\[7pt]
-  &=& \sinc(\pi (k-j))
+  \braket{e_m|e_n} &=& \frac{1}{a} \int_{-\frac{a}{2}}^{\frac{a}{2}}
+  \exp\left(i \frac{2\pi (n-m) x}{a}\right) dx \\[7pt]
+  &=& \frac{1}{\pi (n-m)} \cdot \frac{\exp\left(i \pi (n-m) \right)-\exp\left(-i \pi (n-m) \right)}{2i}\\[7pt]
+  &=& \sinc(\pi (n-m))
 \end{eqnarray*}
-As $k$ and $j$ are integers, and $\sinc$ is zero for every integer multiple of $\pi$ except for $\sinc(0)=1$, we have shown:
+As $n$ and $m$ are integers, and $\sinc$ is zero for every integer multiple of $\pi$ except for $\sinc(0)=1$, we have shown:
 \begin{equation}
-  \braket{e_j|e_k} = \delta_{kj}
+  \braket{e_m|e_n} = \delta_{mn}
 \end{equation}
 We will not derive it here, but the complex functions are also a complete basis, so we can expand any function in terms of the basis of complex exponentials by:
 \begin{equation}
- \psi(x) = \sum_{j=-\infty}^{+\infty} c_j e_j (x)
+ \psi(x) = \sum_{m=-\infty}^{+\infty} c_m e_m (x)
 \end{equation}
 Because of othonormality, we can determine the Fourier coefficients by:
 \begin{equation}
-c_k = \braket{e_k | \psi}
+c_m = \braket{e_m | \psi}
 \end{equation}
 
 \section{Discrete Fourier Transform}
 
-Next we want to consider the case where we only know the value of $\psi(x)$ at $n$ discrete positions of $x$, specifically:
-$$x_j = x_0 + \frac{a}{n} j$$
-for $x_0=-a/2$ and $j=0,1,\ldots,n-1$.
-Notice that the sequence ends before $x=a/2$ because this point is redundant to $x=-a/2$ for the periodic functions that we are considering.
+Next we want to consider the case where we only know the value of $\psi(x)$ at $N$ discrete positions of $x$, specifically:
+$$x_m = x_0 + m \, \Delta a$$
+where
+$$\Delta a \coloneqq \frac{a}{N}$$
+for\footnote{You might wonder why not just put $x_0=0$, and indeed,
+that would work fine for perioidic functions.  However, choosing $x_0
+= -a/2$ will be much more convenenient later when we are dealing with
+potentials centered at zero.}
+$$x_0=-\frac{a}{2}$$
+and
+$$m=0,1,\ldots,N-1$$
+Notice that {\bf the sequence does not include} $\mathbf{a/2}$ because this point is redundant to $x_0=-a/2$ for the periodic functions that we are
+considering.
 
 We account for the discrete sampling by making the replacement:
-$$\psi(x) \to \frac{a}{n} \, \sum_{m=0}^{n-1} \, \delta(x-x_j)  \; \psi(x)$$
+$$\psi(x) \to \frac{a}{N} \, \sum_{m=0}^{N-1} \, \delta(x-x_m)  \; \psi(x)$$
 which is choosen because:
-$$\int_{x_1}^{x_2} \frac{a}{n} \, \sum_{m=0}^{n-1} \, \delta(x-x_j)  \, \psi(x) \, dx = \frac{a}{n} \sum_{m=m_1}^{m_2}  \,\psi_m \; \xrightarrow[n \to \infty]{} \; \int_{x_1}^{x_2} \, \psi(x) \, dx $$
+$$\int_{x_1}^{x_2} \frac{a}{N} \, \sum_{m=0}^{N-1} \, \delta(x-x_m)  \, \psi(x) \, dx = \frac{a}{N} \sum_{m=m_1}^{m_2}  \,\psi_m \; \xrightarrow[N \to \infty]{} \; \int_{x_1}^{x_2} \, \psi(x) \, dx $$
 showing that integration (smoothing) of discrete sampled function
 reproduces the integral of the original function as the space between
 samples approaches zero.  We do expect this sampling to introduce
 high-frequency artifacts which must be considered, which we will
 discuss later.
 
-Calculating the fourier series coefficients with the sampled function we obtain:\begin{eqnarray*}
-  c_k &=& \braket{e_k | \psi} \\[5pt]
+Calculating the Fourier series coefficients with the sampled function we obtain:\begin{eqnarray*}
+  c_m &=& \braket{e_m | \psi} \\[5pt]
   &=& \sqrt{\frac{1}{a}} \int_{-\frac{a}{2}}^{\frac{a}{2}}
-  \exp\left(-i \frac{2\pi k x}{a}\right) \, \frac{a}{n} \, \sum_{m=0}^{n-1} \delta(x-x_j) \, \psi(x) \, dx \\[7pt]
-  &=& \frac{\sqrt{a}}{n} \; \sum_{m=0}^{n-1}
-  \exp\left(-i \frac{2\pi m k}{n}\right) \exp\left(-i \frac{2\pi k x_0}{a}\right) \, \psi_j \, dx
+  \exp\left(-i \frac{2\pi m x}{a}\right) \, \frac{a}{N} \, \sum_{n=0}^{N-1} \delta(x-x_n) \, \psi(x) \, dx \\[7pt]
+  &=& \frac{\sqrt{a}}{N} \; \sum_{n=0}^{N-1}
+  \exp\left(-i \frac{2\pi m n}{N}\right) \exp\left(-i \frac{2\pi n x_0}{a}\right) \, \psi_n \, dx
 \end{eqnarray*}
 which we can reorganize as:
 \begin{equation}
-  \frac{c_k}{\sqrt{a/n}} \exp\left(i \frac{2\pi k x_0}{a}\right)
- = \frac{1}{\sqrt{n}} \sum_{m=0}^{n-1}
-  \exp\left(-i \frac{2\pi m k}{n}\right) \psi_m \equiv A_k  
+\label{eqn:cm}
+  \frac{c_m}{\sqrt{a/N}} \exp\left(i \frac{2\pi m x_0}{a}\right)
+ = \frac{1}{\sqrt{N}} \sum_{n=0}^{n-1}
+  \exp\left(-i \frac{2\pi m n}{N}\right) \psi_m 
 \end{equation}
-where $A_k$ are the Fourier coefficients from {\tt numpy.fft.fft} if called with the normalization option {\tt norm=``ortho''}.  The complex exponential on the left hand side is a phase factor that accounts the location of the first data point $x_0$.  Notice that the right hand side depends only on indices, not the actual $x$ positions.
+Notice that the right hand side depends only on indices, not the
+actual $x$ positions.  This is an important insight.  The FFT takes
+function values to coefficients, never knowing the actual $x$
+positions.  If you checkout the documentation for {\tt numpy.fft.fft},
+you can confirm that the right hand side of that equation is Fourier
+coefficient $A_m$ as provided by the tool with {\bf the normalization
+  option {\tt norm=``ortho''}} So when moving between the coefficients
+provided by the tool and our derivations, there are some extra factors
+involved:
+$$A_m \equiv \frac{c_m}{\sqrt{a/N}} \exp\left(i \frac{2\pi m x_0}{a}\right)$$
+The complex exponential is a phase factor that accounts the location of the first data point $x_0$, which we are taking as $-a/2$.  We can work with our $c_m$ coefficients, but we'll have to account for these additional factors once we are using the library tools.
 
 \begin{figure}[thb]
 \begin{center}
@@ -88,47 +119,52 @@ where $A_k$ are the Fourier coefficients from {\tt numpy.fft.fft} if called with
 \end{figure}
 
 Something very interesting has happened to our Fourier coefficients as
-a direct result of discrete sampling.  Notice that:
-$$A_{k+n} = A_{k}$$
-because the phase shift introducted in each term in the sum above is:
-$$exp(-i 2 \pi m) = 1$$
-So evidently we have only $n$ unique Fourier coefficients, at which point they repeat themselves.
+a direct result of discrete sampling.  Have a look at Equation~\ref{eqn:cm}
+and notice that:
+$$c_{m+N} = c_{m}$$
+because the phase shift introduced in each term in the sum above is:
+$$\exp(-i 2 \pi N) = 1$$
+So evidently we have only $N$ unique Fourier coefficients, at which point they repeat themselves.
 
-Something very interesting is going on here, and we can build an
-intuitive picture from Fig.~\ref{fig:trouble}.  We see that signal
+We can build an intuitive picture of what is going on from Fig.~\ref{fig:trouble}.  We see that signal
 contributions for wavelengths:
-$$\lambda \leq 2\frac{a}{n}$$
+$$\lambda \leq 2\frac{a}{N}$$
 are potentially problematic, as they can be undetectable.
-In terms of the index $k$ in each $c_k$, this becomes:
-$$\frac{a}{|k|} = \lambda < 2\frac{a}{n}$$
+In terms of the index $m$ in each $c_m$, this becomes:
+$$\frac{a}{|m|} = \lambda < 2\frac{a}{N}$$
 or
-$$|k| < 2/n$$
-For odd numbers of $n$ this is an unambiguous prescription to avoid trouble:
+$$|m| < 2/N$$
+For odd numbers of $N$ this is an unambiguous prescription to avoid trouble:
 \begin{eqnarray*}
-  n=1 &\implies& k = 0 \\
-  n=3 &\implies& k = -1,0,1 \\
-  n=5 &\implies& k = -2,-1,0,1,2 \\
+  N=1 &\implies& m = 0 \\
+  N=3 &\implies& m = -1,0,1 \\
+  N=5 &\implies& m = -2,-1,0,1,2 \\
 \end{eqnarray*}
 We see that we have one unique coefficient available for each allowed
 wave number.  We simply set the remaining coefficients to zero.  If we
 know that our signal has no contributions from those shorter
 wavelengths then our Fourier series will be complete and accurate.
 
-For odd number of $n$ the situation is a bit more complicated.  If we stick to strictly less than for the allowed $k$ values, we have:
+For even numbers of $N$ the situation is a bit more complicated.  If we stick to strictly less than for the allowed $m$ values, we have:
 \begin{eqnarray*}
-  n=2 &\implies& k = 0 \\
-  n=4 &\implies& k = -1,0,1 \\
-  n=6 &\implies& k = -2,-1,0,1,2 \\
+  N=2 &\implies& m = 0 \\
+  N=4 &\implies& m = -1,0,1 \\
+  N=6 &\implies& m = -2,-1,0,1,2 \\
 \end{eqnarray*}
-which does not use our unique Fourier coefficients.
+which does not use all of our unique Fourier coefficients.
 
-A completely reasonable and practical thing to do in the situation would be too say, find, throw out the shorter wavelength coefficients.  We'll just keep our sampling rate high enough that all of these coefficients are zero.  This is reasonable, and totally works.
-
-The only downside is that it makes the DFT a lossy operation.  We cannot get back the original sampled data back exactly from the transform.  So it's worth tyring to fix things up.  Look up what happens  if we loosen the requirements to on $k$ to less than or equal:
+A completely reasonable and practical thing to do in the situation
+would be too say ``Fine! Throw out the shorter wavelength coefficients.
+We'll just keep our sampling rate high enough that all of these
+coefficients are zero.''  This is reasonable, and totally works.
+The only downside is that it makes the DFT a lossy operation.  We
+cannot get back the original sampled data back exactly from the
+transform.  So it's worth tyring to fix things up.  Look at what
+happens if we loosen the requirements to on $m$ to less than or equal:
 \begin{eqnarray*}
-  n=2 &\implies& k = -1,0,1 \\
-  n=4 &\implies& k = -2,-1,0,1,2 \\
-  n=6 &\implies& k = -3,-2,-1,0,1,2,3 \\
+  N=2 &\implies& m = -1,0,1 \\
+  N=4 &\implies& m = -2,-1,0,1,2 \\
+  N=6 &\implies& m = -3,-2,-1,0,1,2,3 \\
 \end{eqnarray*}
 which would require one more Fourier coefficient than we have.  What's
 going on?
@@ -142,44 +178,45 @@ going on?
 
 As can be seen from Fig~\ref{fig:notrouble} some phases can be
 sampled, even at the limit, but not all.  So we need to know something
-about the the contribution at the limit: it's purely real and even,
+about the the contribution at the limit: if it's purely real and even,
 for example.  In practice, we make the assumption that makes the
 inverse discrete Fourier transform the easiest to write down (just
-drop the $c_{n/2}$ factor), and make the allowed $k$ values:
+drop the $c_{n/2}$ factor), and make the allowed $m$ values:
 \begin{eqnarray*}
-  n=2 &\implies& k = -1,0 \\
-  n=4 &\implies& k = -2,-1,0,1 \\  
-  n=6 &\implies& k = -3,-2,-1,0,1,2 \\
+  N=2 &\implies& m = -1,0 \\
+  N=4 &\implies& m = -2,-1,0,1 \\  
+  N=6 &\implies& m = -3,-2,-1,0,1,2 \\
 \end{eqnarray*}
-This puts one term in the series for each unique coeefficent, and
+This puts one term in the series for each unique coefficient, and
 makes the DFT lossless.
 
 This book keeping is conveniently handled for you by python with the
 {\tt numpy.fft.fftfreq} function, which returns an array the same size
-as the Fourier coefficients that reports $a/k$.  For equation purposes we will note the set of allowed $k$ values as $K(n)$.
+as the Fourier coefficients that reports $m/n$.  For equation purposes we will note the set of allowed $m$ values as $M(N)$.
 
 We can reconstitute our original wave function (wihtout any artifacts from sampling) as:
 \begin{eqnarray*}
-  \psi(x) &=& \sum_{k \in K(n)} c_k e_k (x) \\
-  &=& \frac{1}{\sqrt{a}}\sum_{k \in K(n)}  c_k \exp\left(i \frac{2\pi k x}{a}\right) \\
-  &=& \frac{1}{\sqrt{n}}\sum_{j=j_a}^{j_b} A_k  \exp\left(i \frac{2\pi k (x-x_0)}{a}\right) \\  
+  \psi(x) &=& \sum_{m \in M(N)} c_m e_m (x) \\
+  &=& \frac{1}{\sqrt{a}}\sum_{m \in M(N)}  c_m \exp\left(i \frac{2\pi k x}{a}\right) \\
+  &=& \frac{1}{\sqrt{n}}\sum_{m \in M(N)} A_m  \exp\left(i \frac{2\pi k (x-x_0)}{a}\right) \\  
 \end{eqnarray*}
 
 \section{Homework Problems}
 
 \noindent
-{\bf Problem 1:} Use the {\tt numpy.fft.fftfreq} (which produces an array with $k/n$ for $k$ with non-zero coefficients) to reproduce the progression we derived above:
+{\bf Problem 1:} Use the {\tt numpy.fft.fftfreq} (which produces an array with $m/N$ for $m$ with non-zero coefficients) to reproduce the progression we derived above:
 \begin{eqnarray*}
-n=1 &\implies& k=0 \\
-n=2 &\implies& k=-1,0 \\
-n=3 &\implies& k=-1,0,1 \\
-n=4 &\implies& k=-2,-1,0,1 \\
-n=5 &\implies& k=-2,-1,0,1,2 \\
-n=6 &\implies& k=-3,-2,-1,0,1,2 \\
-n=7 &\implies& k=-3,-2,-1,0,1,2,3 \\
+N=1 &\implies& m=0 \\
+N=2 &\implies& m=-1,0 \\
+N=3 &\implies& m=-1,0,1 \\
+N=4 &\implies& m=-2,-1,0,1 \\
+N=5 &\implies& m=-2,-1,0,1,2 \\
+N=6 &\implies& m=-3,-2,-1,0,1,2 \\
+N=7 &\implies& m=-3,-2,-1,0,1,2,3 \\
 \end{eqnarray*}
 The {\tt fftfreq} function returns an array with the elements in a different order, so also use \\
-{\tt numpy.fft.fftshift} to put them into increasing order and scale as needed.\\[3pt]
+{\tt numpy.fft.fftshift} to put them into increasing order and scale as needed.
+{\bf Important:} note that {\tt fftfreq} and {\tt fft} present results in the same order.  So if you reorder the wavenumbers with $\tt fftshift$ you should appply the same shift to your coefficients.\\[3pt]
 
 \noindent
 {\bf Problem 2:}  Define:
@@ -207,9 +244,6 @@ the $y$-values and $x$-values that you expect for the magnitude of the cosine cu
 half the sample frequency is misintrepreted as a lower frequency sine
 wave.  This is called aliasing.  Plot the signal and (incorrect)
 reconstructed wave form.  Include a simple calculation for the aliased wavenumber if you can discern a formula.\\[3pt]
-
-\noindent
-{\bf Problem 7:} Once available, please run and test the animation demonstration code posted on the website.  This will make sure your installation can handle animated plots in future assignments.
 
 \end{document}
 
