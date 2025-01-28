@@ -1,0 +1,229 @@
+\documentclass[12pt]{article}
+
+\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.5in]{geometry}
+\usepackage{cite}
+\usepackage{slashed}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{braket}
+\usepackage{accents}
+\newcommand*{\dt}[1]{%
+  \accentset{\mbox{\large\bfseries .}}{#1}}
+
+\begin{document}
+
+
+\title{PHY 130A \\ Lecture Notes: \\ 
+Fermi's Golden Rule }
+\author{Michael Mulhearn}
+
+\maketitle
+
+\section{The Interaction Picture}
+
+We consider a time-dependent Hamiltonian of the form:
+$$H = H^{(0)} + \delta H(t)$$
+where $H^{(0)}$ is time independent and so well understood, with energy eigenstates:
+$$H^{(0)} \ket{n} = E_n \ket{n}$$
+and the $\delta H(t)$ represents a new interaction.  The new
+interaction is time dependent and therefore has no energy eigenstates.
+
+The interaction picture factors out the simple and well-understood
+time dependence from $H^{(0)}$ from the to-be-determined time
+dependence of $\delta H(t)$ as:
+$$\Psi(x,t) = \sum_m c_m(t) \exp\left( -i \frac{E_m t}{\hbar} \right) \ket{m}$$
+The $\{\ket{m}\}$ are still a basis for the full Hamiltonian $H$, even
+though they are not eigenstates, so this is certainly a valid
+expansion, due to the time dependent coefficients $c_m(t)$.  This
+essentially just says that $\Psi(x,t)$ can be expressed at any time as
+a sum of basis vectors, which is certainly true.  We will know it is
+useful if it simplifies the problem.  Specifically, it the time
+dependence in the coefficients is due exclusively to $\delta H(t)$.
+
+Applying the SE:
+\begin{eqnarray*}
+i \hbar \frac{\partial}{\partial t} \ket{\psi} &=& H \ket{\psi} = H^{(0)} \ket{\psi} + \delta H(t) \ket{\psi} \\
+\left( i \hbar \frac{\partial}{\partial t} -  H^{(0)}\right) \ket{\psi} &=&  \delta H(t) \ket{\psi} 
+\end{eqnarray*}
+where we have arranged things in the hope of getting some cancellation on the left hand side:
+\begin{eqnarray*}
+\left( i \hbar \frac{\partial}{\partial t} -  H^{(0)}\right) \ket{\psi} &=&
+\sum_m \left\{ i \hbar \dt{c_m}(t) + E_m - E_m\right\} \exp\left( -i \frac{E_m t}{\hbar} \right) \ket{m} \\
+  &=&
+\sum_m \, i\hbar \dt{c_m}(t)  \, \exp\left( -i \frac{E_m t}{\hbar} \right) \ket{m}
+\end{eqnarray*}
+and indeed we do.  Meanwhile the RHS is:
+$$\delta H(t) \ket{\psi} = \sum_m \, c_m(t)  \, \exp\left( -i \frac{E_m t}{\hbar} \right)
+\left(\delta H(t) \ket{m}\right)$$
+and so we cannot match coefficients term by term in the expansion because:
+$$\ket{m} \; \neq \; \delta H(t) \, \ket{m} $$
+So changing dummy variables to prepare for what follows:
+$$\delta H(t) \ket{\psi} = \sum_n \, c_n(t)  \, \exp\left( -i \frac{E_n t}{\hbar} \right)
+\left(\delta H(t) \ket{n}\right)$$
+And inserting a complete set:
+\begin{eqnarray*}
+\left( \delta H(t) \, \ket{n} \right) &=& \left( \sum_m \ket{m}\bra{m} \right) \left( \delta H \ket{n} \right) \\
+&=& \sum_m  \braket{m | \delta H | n} \ket{m}
+\end{eqnarray*}
+And now putting back LHS equal to RHS
+$$
+\sum_m \, i \hbar \dt{c_m}(t)  \, \exp\left( -i \frac{E_m t}{\hbar} \right) \ket{m}
+= \sum_m \sum_n \, c_n(t)  \, \exp\left( -i \frac{E_n t}{\hbar} \right)
+\braket{m | \delta H | n} \ket{m}
+$$
+Where we can now match term by term to obtain:
+\begin{equation}
+\label{eqn:cmdot}
+\dt{c_m}(t)  = - \frac{i}{\hbar} \sum_n \, c_n(t)  \, \exp\left( i \frac{(E_m - E_n) t}{\hbar} \right)
+\braket{m | \delta H | n} \ket{m}  
+\end{equation}
+This is everything we hoped for!  Because of the time depedence of the
+total Hamiltonian, our expansion coefficients have to be time dependent
+as well (the vectors $\ket{n}$ are still a basis, but they are not
+stationary states of the tot al total Hamiltonian $H$).  But, in the
+interaction picture we factor out the time dependence due to
+$H^{(0)}$, and do not include it in $c_m(t)$.  Therefore, the time
+dependence of the $c_m(t)$ does not depend on $H^{(0)}$.
+
+As we shall see, this is much more than a convenience.  The
+well-understood Hamiltonian $H^{(0)}$ is, generally speaking, large.
+If the time-dependent part $\delta H(t)$ is relatively small, then we
+can use perturbation theory to good effect, and we will!
+
+\section{Time-Dependent Perturbation Theory}
+
+(Figure Drawn in Lecture)
+
+Assume $V$ is small, but specifically how small is TBD.   we have introduced a dimensionless time-independent factor $\lambda$ as a bookkeeping device.  When $\lambda=1$, the perturbation is at full strength (but $V$ is still small).  When $\lambda=0$ the perturbation is turned off (for all time... $\lambda$ is not time dependent!)  When we are finished with our bookkeeping, we will set $\lambda=1$.
+
+For $0 \leq t \leq T$ (that is, when the potential is on) we have:
+$$\braket{m | \delta H(t) | n} = \lambda \braket{m|V|n} = \lambda V_{mn}$$
+where we have defined:
+$$V_{mn} \equiv \braket{m|V|n}$$
+also defining:
+$$\omega_{mn} \equiv \frac{E_m - E_n}{\hbar}$$
+Equation~\ref{eqn:cmdot} becomes:
+$$\dt{c_m}(t) = - \frac{i \lambda}{\hbar} \, \sum_n \, c_n(t)  \, e^{i \omega_{mn} t } \, V_{mn}$$
+Notice that $\lambda$ only appears on the RHS, which will be essential in what follows.  Also, notice that for $\lambda=0$ (perturbation off) we have
+$$\dt{c_m}(t) = 0 \implies c_m(t) = {\rm const}$$
+as expected.  Writing $c_m(t)$ as a power series\footnote{Note that the power series is still decreasing, even when $\lambda=1$, because $\lambda V$ is small.} in $\lambda$, we have:
+$$c_m(t) \; = \; c_m^{(0)}(t) \; + \; \lambda \, c_m^{(1)}(t) \; + \; \lambda^2 \, c_m^{(2)}(t) \; + \; \ldots$$
+and thus:
+\begin{eqnarray*}
+\dt{c_m}^{(0)}(t) \; + \; \lambda \, \dt{c_m}^{(1)}(t) \; + \; \lambda^2 \, \dt{c_m}^{(2)}(t) \; &+& \; \ldots \\
+&=& \; - \frac{i}{\hbar} \, \sum_n \, \left\{ \lambda \, c_m^{(0)}(t) \; + \; \lambda^2 \, c_m^{(1)}(t) \; + \ldots  \right\} \; e^{i \omega_{mn} t } \; V_{mn}
+\end{eqnarray*}
+Matching terms of equal order in $\lambda$
+\begin{alignat*}{4}
+  \lambda &= 0     & & \; \to \; \dt{c_m}^{(0)}(t)      &{}={}& 0\\[4pt]
+  \lambda &= 1     & & \; \to \; \dt{c_m}^{(1)}(t)      &{}={}& - \frac{i}{\hbar} \, \sum_n \, c_m^{(0)}(t)  \; e^{i \omega_{mn} t } \; V_{mn} \\[4pt]
+  \lambda &= 2     & & \; \to \; \dt{c_m}^{(2)}(t)      &{}={}& - \frac{i}{\hbar} \, \sum_n \, c_m^{(1)}(t)  \; e^{i \omega_{mn} t } \; V_{mn}\\[4pt]    
+  \lambda &= N+1 \;& & \; \to \; \dt{c_m}^{(N+1)}(t)    &{}={}& - \frac{i}{\hbar} \, \sum_n \, c_m^{(N)}(t)  \; e^{i \omega_{mn} t } \; V_{mn}\\[4pt]
+\end{alignat*}
+The first equation shows that:
+$$c_m^{(0)}(t) = {\rm const}$$
+To start things off, note that with $\lambda=0$ (the perturbation turned off)
+$$c_m(t) = c_m^{(0)}(t) = {\rm const}$$
+which identifies $c_m^{(0)}(t)$ as the coefficients of the unperturbed system, which have no time dependence.  If we assume that the initial state is $\ket{i}$, then:
+$$c_m^{(0)} = \delta_{mi}(0)$$
+The first order coefficient is:
+\begin{eqnarray*}
+  \dt{c_m}^{(1)}(t)      &{}={}& - \frac{i}{\hbar} \, \sum_n \, c_m^{(0)}(t)  \; e^{i \omega_{mn} t } \; V_{mn} \\
+  \dt{c_m}^{(1)}(t)      &{}={}& - \frac{i}{\hbar} \, \sum_n \, \delta_{ni}  \; e^{i \omega_{mn} t } \; V_{mn} \\
+  \dt{c_m}^{(1)}(t)      &{}={}& - \frac{i}{\hbar} \, e^{i \omega_{mi} t } \; V_{mi} \\
+\end{eqnarray*}
+and integrating over the period when the constant potential $V$ is on:
+\begin{eqnarray*}
+   {c_m}^{(1)}(T)  &{}={}& - \frac{i}{\hbar} \, \int_0^T dt \; e^{i \omega_{mi} t } \; V_{mi}  \\
+                   &{}={}& - \frac{i}{\hbar} \, V_{mi} \, \int_0^T dt \; e^{i \omega_{mi} t } \\
+                   &{}={}& - \frac{1}{\hbar \omega_{mi}} \, V_{mi} \; \left( e^{i \omega_{mi} T } - 1 \right) \\
+   &{}={}& - \frac{2i}{\hbar \omega_{mi}} \, V_{mi} \; \exp\left(i \frac{\omega_{mi} T}{2}\right) \sin\left(\frac{\omega_{mi} T}{2}\right) \\
+\end{eqnarray*}
+The probability that the state $\ket{i}$ has transitioned into state
+$\ket{f}$ after the perturbation has been left on for time $T$ is, to first order:
+\begin{equation}
+P^{(1)}_{\rm f \leftarrow i} = \frac{|V_{fi}|^2}{\hbar^2} \; \frac{4 \, \sin^2\left(\omega_{mi} T/2\right)}{\omega_{fi}^2}
+\end{equation}
+As long as this probability is small, it should be a good approximation, and this is always possible for small enough $V$.
+
+(In lecture, we showed that transitions with $E_i \neq E_f$ are suppressed, and that the perturbation will fail (at this order) for large eenough T.)
+
+\section{Density of States}
+
+We cannot count continuum states, so we impose a fiction that a free particle is in fact constrained to a box with sides of length $L$ and so:
+$$V = L^3$$
+We normalize the plane wave functions as:
+$$\psi(x) = \frac{1}{\sqrt{V}}\; e^{i k_x x} \;e^{i k_y y} \;e^{i k_z z} $$
+so that:
+$$\int_V |\psi(x)|^2 d^3x = 1 $$
+assuming periodic boundary conditions:
+\begin{eqnarray*}
+  k_x L &=& 2 \pi n_x  \\
+  k_y L &=& 2 \pi n_y  \\
+  k_z L &=& 2 \pi n_z  
+\end{eqnarray*}
+so that
+$$dn = dn_x dn_y dn_z = \left( \frac{L}{2\pi} \right)^2 dk_x dk_y dk_z$$
+and we have:
+\begin{equation}
+\label{eqn:dndthreek}
+dn = \left( \frac{L}{2\pi} \right)^2 d^3k
+\end{equation}
+Notice that:
+$$ dn \propto V$$
+but:
+$$| \psi |^2 \propto \frac{1}{V}$$
+As we shall see, the results of our calculation will include both of
+these factors, and will be therefore independent of $V$.  We can
+therefore take formally take the limit $L \to \infty$.
+
+It is convenient to express Equation~\ref{eqn:dndthreek} as a differential in energy.  As our box size cannot possibly be Lorentz invariant, we'll use the non-relativistic energy of the free particle (for now):
+$$E=\frac{(\hbar k)^2}{2 m}$$
+so we have:
+\begin{eqnarray*}
+dk   &=& \frac{m}{\hbar^2 k} \\[4pt]
+d^3k &=& k^2 dk d\Omega = \frac{m k }{\hbar^2} d\Omega dE \\[4pt]
+dn   &=& \left( \frac{L}{2\pi} \right)^2 \left(\frac{m}{\hbar^2 k}\right) d\Omega \; dE
+\end{eqnarray*}
+where we have identified the (classical) density of states:
+\begin{equation}
+ \rho(E) \equiv \left| \frac{dn}{dE} \right| = \left( \frac{L}{2\pi} \right)^2 \left(\frac{m}{\hbar^2 k}\right) d\Omega 
+\end{equation}
+with:
+\begin{equation}
+ dn = \rho(E) \, dE 
+\end{equation}
+
+\section{Fermi's Golden Rule}
+
+We now want to consider not just a transition from one discrete state
+to another discrete state, but instead, a transition from one discre
+state (the initial state) into a continuum state.  We know that for
+the constant potential perturbation, final states with energy far from
+$E_i$ will not contribute.  So instead of couting discrete states will
+integrate over energy within $\Delta E$ of the initial state energy:
+$$\sum_n \to \int dn = \int_{E_i - \Delta E}^{E_i + \Delta E} \rho(E) dE \equiv \int_{\Delta E} \rho(E) dE$$
+where $\rho(E)$ is the density of states, for which we worked out an
+exmaple previously.
+
+So the total probability of a transition into one of these final states is:
+$$\sum_f P_{f \leftarrow i}^{(1)}(T) \to \frac{4}{\hbar^2} \int |V_{\rm fi}|^2 \, \rho(E_f) \frac{\sin^2 (\omega_{fi} T/2)}{\omega^2_{fi}} dE_f$$
+In lecture we showed that the function:
+$$f(\omega_{fi}) \equiv \frac{sin^2(\omega_{fi} T / 2)}{\omega_{fi}^2}$$
+gets more and more narrow for large eneough $T$.  Therefore, we can take $|V_{fi}|^2$ and $\rho(E_f)$ outside of the integral, by evaluating them at $E_f = E_i$, and we can extend the integral out to infinity:
+$$\sum_f P_{f \leftarrow i}^{(1)}(T) \to \frac{4}{\hbar^2} |V_{\rm fi}|^2 \, \rho(E_f) \int_{-\infty}^{\infty}  \frac{\sin^2 (\omega_{fi} T/2)}{\omega^2_{fi}} dE_f$$
+The integral can now be evaluated, leading to:
+$$\sum_f P_{f \leftarrow i}^{(1)}(T) \to \frac{2 \pi}{\hbar} |V_{fi}|^2 \rho(E_f) T$$
+This allows us to calculate the rate of transitions from a discrete
+state $\ket{i}$ into a continuum state $\ket{f}$ as:
+\begin{equation*}
+\Gamma_{fi} = \frac{\sum_f P_{f \leftarrow i}^{(1)}(T)}{T} = \frac{2 \pi}{\hbar} | V_{fi} |^2 \rho(E_F)
+\end{equation*}
+This Fermi's Golden Rule, the foundation of experimental particle of physics.
+
+\end{document}
+
+
+
+
