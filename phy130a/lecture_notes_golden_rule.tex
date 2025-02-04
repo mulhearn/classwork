@@ -97,16 +97,20 @@ can use perturbation theory to good effect, and we will!
 We'll consider a simple time-dependence that results from a constant potential that is simply turned on and then off:
 \begin{center}
   \begin{tikzpicture}[scale=1]
-    \draw[-, thick] (0.0,0.0) -- ++(2.0,0.0);    
-    \node at (0,0) {T};
+    \draw[-] (0.0,0.0) -- ++(4.0,0.0) -- ++(0.0,1.0) -- ++(4.0,0.0) -- ++(0.0,-1.0) -- ++(4.0,0.0);
+    \node at (4.0,-0.25) {0};
+    \node at (8.0,-0.25) {$T$};
+    \node at (12.5, 0.0) {$t$};
+    \node at (3.8, 1.0) {$V$};
+    \node at (-0.5, 0.5) {$V(t)$};
+    \node at (2,  -0.75) {$H = H^{(0)}$};
+    \node at (6,  -0.75)  {$H = H^{(0)} + V$};
+    \node at (10, -0.75) {$H = H^{(0)}$};    
 \end{tikzpicture}
 \end{center}
+When $t<0$ the potential is off, and the total Hamiltonian is $H=H^{(0)}$.  At $t=0$, the potential turns on and $H=H^(0) + V$ and remains constant until $t=T$.  For $t>T$, the potential is off, and $H=H^{0}$ again.
 
-
-
-
-
-Assume $V$ is small, but specifically how small is TBD.   we have introduced a dimensionless time-independent factor $\lambda$ as a bookkeeping device.  When $\lambda=1$, the perturbation is at full strength (but $V$ is still small).  When $\lambda=0$ the perturbation is turned off (for all time... $\lambda$ is not time dependent!)  When we are finished with our bookkeeping, we will set $\lambda=1$.
+Assume $V$ is small, but specifically how small is TBD.   we have introduced a dimensionless time-independent factor $\lambda$ as a bookkeeping device.  When $\lambda=1$, the perturbation is at full strength (but $V$ is still small).  When $\lambda=0$ the perturbation is turned off (for all time... $\lambda$ is not time dependent!)  When we are finished with our bookkeeping\footnote{if you prefer, you can take $\lambda$ to be always small, then the TBD constraints will be on $\lambda V$.  I prefer to set $\lambda$ to one once we are done with it.}
 
 For $0 \leq t \leq T$ (that is, when the potential is on) we have:
 $$\braket{m | \delta H(t) | n} = \lambda \braket{m|V|n} = \lambda V_{mn}$$
