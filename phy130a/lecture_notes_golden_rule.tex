@@ -8,6 +8,7 @@
 \usepackage{amssymb}
 \usepackage{braket}
 \usepackage{accents}
+\usepackage{tikz}
 \newcommand*{\dt}[1]{%
   \accentset{\mbox{\large\bfseries .}}{#1}}
 
@@ -79,9 +80,9 @@ Where we can now match term by term to obtain:
 \braket{m | \delta H | n} \ket{m}  
 \end{equation}
 This is everything we hoped for!  Because of the time depedence of the
-total Hamiltonian, our expansion coefficients have to be time dependent
-as well (the vectors $\ket{n}$ are still a basis, but they are not
-stationary states of the tot al total Hamiltonian $H$).  But, in the
+total Hamiltonian, our expansion coefficients have to be time
+dependent as well (the vectors $\ket{n}$ are still a basis, but they
+are not stationary states of the total Hamiltonian $H$).  But, in the
 interaction picture we factor out the time dependence due to
 $H^{(0)}$, and do not include it in $c_m(t)$.  Therefore, the time
 dependence of the $c_m(t)$ does not depend on $H^{(0)}$.
@@ -93,7 +94,17 @@ can use perturbation theory to good effect, and we will!
 
 \section{Time-Dependent Perturbation Theory}
 
-(Figure Drawn in Lecture)
+We'll consider a simple time-dependence that results from a constant potential that is simply turned on and then off:
+\begin{center}
+  \begin{tikzpicture}[scale=1]
+    \draw[-, thick] (0.0,0.0) -- ++(2.0,0.0);    
+    \node at (0,0) {T};
+\end{tikzpicture}
+\end{center}
+
+
+
+
 
 Assume $V$ is small, but specifically how small is TBD.   we have introduced a dimensionless time-independent factor $\lambda$ as a bookkeeping device.  When $\lambda=1$, the perturbation is at full strength (but $V$ is still small).  When $\lambda=0$ the perturbation is turned off (for all time... $\lambda$ is not time dependent!)  When we are finished with our bookkeeping, we will set $\lambda=1$.
 
