@@ -165,33 +165,29 @@ As long as this probability is small, it should be a good approximation, and thi
 (In lecture, we showed that transitions with $E_i \neq E_f$ are suppressed, and that the perturbation will fail (at this order) for large eenough T.)
 
 \section{Density of States}
-
+\label{sec:density}
 We cannot count continuum states, so we impose a fiction that a free particle is in fact constrained to a box with sides of length $L$ and so:
 $$V = L^3$$
-We normalize the plane wave functions as:
-$$\psi(x) = \frac{1}{\sqrt{V}}\; e^{i k_x x} \;e^{i k_y y} \;e^{i k_z z} $$
-so that:
+We hope that our final results will not depend on this fictitious
+volume $V$.  With this in mind, we consider the normalization of the energy eigenstates of the free particle (plane waves) as:
+$$\psi(x) = N e^{i k_x x} \;e^{i k_y y} \;e^{i k_z z} $$
+If we choose:
+$$N = \sqrt{\frac{1}{V}}$$
+then:
 $$\int_V |\psi(x)|^2 d^3x = 1 $$
-assuming periodic boundary conditions:
+Assuming periodic boundary conditions:
 \begin{eqnarray*}
   k_x L &=& 2 \pi n_x  \\
   k_y L &=& 2 \pi n_y  \\
   k_z L &=& 2 \pi n_z  
 \end{eqnarray*}
 so that
-$$dn = dn_x dn_y dn_z = \left( \frac{L}{2\pi} \right)^2 dk_x dk_y dk_z$$
+$$dn = dn_x dn_y dn_z = \left( \frac{L}{2\pi} \right)^3 dk_x dk_y dk_z$$
 and we have:
 \begin{equation}
 \label{eqn:dndthreek}
-dn = \left( \frac{L}{2\pi} \right)^2 d^3k
+dn = \left( \frac{L}{2\pi} \right)^3 d^3k
 \end{equation}
-Notice that:
-$$ dn \propto V$$
-but:
-$$| \psi |^2 \propto \frac{1}{V}$$
-As we shall see, the results of our calculation will include both of
-these factors, and will be therefore independent of $V$.  We can
-therefore take formally take the limit $L \to \infty$.
 
 It is convenient to express Equation~\ref{eqn:dndthreek} as a differential in energy.  As our box size cannot possibly be Lorentz invariant, we'll use the non-relativistic energy of the free particle (for now):
 $$E=\frac{(\hbar k)^2}{2 m}$$
@@ -220,22 +216,168 @@ $E_i$ will not contribute.  So instead of couting discrete states will
 integrate over energy within $\Delta E$ of the initial state energy:
 $$\sum_n \to \int dn = \int_{E_i - \Delta E}^{E_i + \Delta E} \rho(E) dE \equiv \int_{\Delta E} \rho(E) dE$$
 where $\rho(E)$ is the density of states, for which we worked out an
-exmaple previously.
+example previously.
 
 So the total probability of a transition into one of these final states is:
 $$\sum_f P_{f \leftarrow i}^{(1)}(T) \to \frac{4}{\hbar^2} \int |V_{\rm fi}|^2 \, \rho(E_f) \frac{\sin^2 (\omega_{fi} T/2)}{\omega^2_{fi}} dE_f$$
 In lecture we showed that the function:
 $$f(\omega_{fi}) \equiv \frac{sin^2(\omega_{fi} T / 2)}{\omega_{fi}^2}$$
 gets more and more narrow for large eneough $T$.  Therefore, we can take $|V_{fi}|^2$ and $\rho(E_f)$ outside of the integral, by evaluating them at $E_f = E_i$, and we can extend the integral out to infinity:
-$$\sum_f P_{f \leftarrow i}^{(1)}(T) \to \frac{4}{\hbar^2} |V_{\rm fi}|^2 \, \rho(E_f) \int_{-\infty}^{\infty}  \frac{\sin^2 (\omega_{fi} T/2)}{\omega^2_{fi}} dE_f$$
+$$\sum_f P_{f \leftarrow i}^{(1)}(T) \to \frac{4}{\hbar^2} |V_{\rm fi}|^2 \, \rho(E_i) \int_{-\infty}^{\infty}  \frac{\sin^2 (\omega_{fi} T/2)}{\omega^2_{fi}} dE_f$$
 The integral can now be evaluated, leading to:
-$$\sum_f P_{f \leftarrow i}^{(1)}(T) \to \frac{2 \pi}{\hbar} |V_{fi}|^2 \rho(E_f) T$$
+$$\sum_f P_{f \leftarrow i}^{(1)}(T) \to \frac{2 \pi}{\hbar} |V_{fi}|^2 \rho(E_i) T$$
 This allows us to calculate the rate of transitions from a discrete
 state $\ket{i}$ into a continuum state $\ket{f}$ as:
 \begin{equation*}
-\Gamma_{fi} = \frac{\sum_f P_{f \leftarrow i}^{(1)}(T)}{T} = \frac{2 \pi}{\hbar} | V_{fi} |^2 \rho(E_F)
+\Gamma_{fi}^{(0)} = \frac{\sum_f P_{f \leftarrow i}^{(1)}(T)}{T} = \frac{2 \pi}{\hbar} | V_{fi} |^2 \rho(E_i)
 \end{equation*}
-This Fermi's Golden Rule, the foundation of experimental particle of physics.
+This is Fermi's Golden Rule (to first order) the foundation of experimental particle of physics.
+
+
+When we include higher order terms from TDPT, Fermi's Golden Rule becomes:
+$$\Gamma_{fi} = \frac{2 \pi}{\hbar} | T_{fi} |^2 \rho(E_i)$$
+where
+$$T_{fi} = \braket{f|T|i} = \braket{f|V|i} + \sum_{k \neq i} \frac{\braket{f|V|k}\braket{k|V|i}}{E_i - E_k} + \ldots$$
+is called the transition matrix element.
+
+Recall that:
+$$\rho(E) \equiv \left| \frac{dn}{dE} \right|$$
+Fermi's Golden rule takes the simple form it does because energy is conserved, and so we took $\rho(E)$ to be a constant outside of the integral by putting $E_f=E_i$.  But we can put it back into the integral with delta function to impose energy conservation:
+$$\rho(E_i) = \left| \frac{dn}{dE} \right|_{E_i} = \int \left| \frac{dn}{dE_f} \right| \delta(E_i - E_f) dE_f = \int \delta(E_i - E_f) dn$$
+So we have an equivalent form of Fermi's Golden Rule:
+\begin{equation}
+\Gamma_{fi} = \frac{2 \pi}{\hbar} \int | T_{fi} |^2 \delta(E_i - E_f) dn
+\end{equation}
+This has a very nice interpretation.  We integrate over the entire
+phase space ($dn$) of the final state, subject to energy conservation,
+and weight each region of phase space by the transition matrix.  The
+phase space is just the kinematics (eventually relativistic
+kinematics) and the transition matrix contains all of the dynamics.
+
+\section{Lorentz Invariant Phase Space}
+
+We saw in Section~\ref{sec:density} that if we normalize our plane
+waves in the final state with the normalization factor:
+$$N = \sqrt{\frac{1}{V}}$$
+then we have:
+$$\int_V |\psi(x)|^2 d^3x = 1 $$
+and a phase space integral:
+$$dn = \frac{V}{(2 \pi)^3} d^3k = \frac{V}{(2 \pi \hbar)^3} d^3p$$
+Due to the normalization factor,
+$$\bra{f} \propto \sqrt{\frac{1}{V}}$$
+and so
+$$|T_{fi}|^2 \propto 1/V$$
+Therefore, $|T_{fi}|^2 dn$ is overall independent of our choice of $V$,
+which is very good news, since it was a fiction.  Let's put $V=1$, so that our initial state and final state wave functions are normalized the same way, and:
+$$dn = \frac{1}{(2 \pi \hbar)^3} d^3p$$
+Unfortunately, the phase space $dn$ as written is not Lorentz invariant.  We'll show that the 4-momentum volume:
+$$d^4 p \equiv dp^0 dp^1 dp^2 dp^3 $$
+is Lorentz invariant.  Consider a Lorentz transformation $\Lambda$ between frames so that (in matrix representation) we have:
+$$[p]_{\mathcal{B}'} = \Lambda [p]_\mathcal{B}$$
+Then the Jacobian (see next section if this is unfamiliar) for the coordinate transformation is:
+$$J \equiv \det \Lambda $$
+and the four-momentum volume as calculated in the frame $F'$ is:
+$$(d^4 p)' = \left| \det \Lambda \right| d^4 p$$
+However, the defining property of Lorentz transformations is:
+$$\Lambda^T G \Lambda = G$$
+so using properties of the determinant:
+\begin{eqnarray*}
+  \det \left( \Lambda^T G \Lambda \right) &=& \det G \\
+  \det (\Lambda) \det (G) \det(\Lambda) &=& \det G \\
+    \left| \det (\Lambda) \right| \det (G) &=& \det G \\
+\end{eqnarray*}
+from which it follows that:
+$$\det \Lambda = \pm 1$$
+Therefore we have:
+$$(d^4 p)' = \left| \det \Lambda \right| d^4 p = d^4 p$$
+and the four-momentum volume is Lorentz Invariant.
+
+So we first consider making the replacement:
+$$dn = \frac{d^3 p}{(2 \pi \hbar)^3} \longrightarrow \frac{d^4 p}{(2 \pi \hbar)^3}$$
+However, the integral over $d^4 p$ will include all values of:
+$$m = (p^0/c)^2 - (p^1/c)^2 - (p^2/c)^2 - (p^3/c)^2 $$
+but we only want to consider four momentum consistent with the mass $m$ of the particle under consideration.  
+We say that initial and final state particles are ``on mass shell''.So we put:
+$$dn \longrightarrow \delta(p^\mu p_\mu - m^2)\frac{d^4 p}{(2 \pi \hbar)^3}$$
+this is manifestly Lorentz invariant, because all of the quantities used have been shown to be Lorentz invariant.  Lastly, we do not want to include negative energies in our integral, so we put:
+$$dn \longrightarrow \theta(p^0) \delta(p^\mu p_\mu - m^2)\frac{d^4 p}{(2 \pi \hbar)^3}$$
+This makes our result no longer Lorentz invariant for the unrestricted Lorentz group, for that group includes time reversal under which $\theta(p^0)$ is not invariant.  However, it is invariant with respect to the restricted Lorentz group, which is the subset of the group with determinant 1, and therefore excludes time reversal (and parity).
+
+Next, we'd like to use the delta function to remove the integral of $dp^0$. We note that:
+$$\delta(p^\mu p_\mu - m^2) = \delta((p^0)^2 - (p^1)^2 - (p^2)^2 - (p^3)^2 - m^2)
+= \delta((p^0)^2 - E^2(m,\vec{p}))$$
+where:
+$$E^2(m,\vec{p})) \equiv m^2 + |\vec{p}|^2$$
+Using a $\delta$-function identity (see next section):
+$$\delta(p^\mu p_\mu - m^2) = \frac{\delta(p^0 - E(m,\vec{p}))}{2 E(m,\vec{p})}$$
+
+So at last, we have:
+$$dn = \frac{1}{2E(m,\vec{p})} \frac{d^3p}{(2\pi\hbar)^3}$$
+which we often just write as:
+$$dn = \frac{1}{2E} \frac{d^3p}{(2\pi\hbar)^3}$$
+but we must remember that $E$ is the energy of a particle of mass $m$
+with momentum given by the integration variable $d^3p$.  We say that
+the particle is on mass shell.  When computing an integral, we should
+also make sure that if any term is energy dependent, we use that same
+mass shell energy $E$.  Our $dn$ is no longer manifestly Lorentz
+invariant as written, but it is still the same Lorentz invariant
+quantity.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Math Tools}
+
+In the previous section, we used some math tools.  First, we need to know how to calculate the Jacobian of a coordinate transformation.  Suppose we are calculated an integral:
+$$I = \int f(u,w) \; du \, dw$$
+but suppose we have some other coordinates $r$ and $s$ with:
+\begin{eqnarray*}
+  u &=& u(r,s) \\
+  w &=& w(r,s) \\
+\end{eqnarray*}
+then we can calculate our integral in terms of coordinates $r$ and $s$ via:
+$$I = \int f( u(r,s), w(r,s) ) \left| \frac{\partial(u,w)}{\partial(r,s}\right| \; dr \, ds$$
+where
+\begin{equation*}
+\frac{\partial(u,w)}{\partial(r,s)} =
+\begin{vmatrix}
+  \frac{\partial u}{\partial r} & \frac{\partial u}{\partial s} \\[5pt]
+  \frac{\partial w}{\partial r} & \frac{\partial w}{\partial s} \\[5pt]
+\end{vmatrix}
+\end{equation*}
+is the Jacobian:  the determinant of the matrix of partial derivatives.  We can summarize this as:
+$$du\,dw = \left| \frac{\partial(u,w)}{\partial(r,s)} \right| \; dr \, ds $$
+The result easily extends to more coordinates, e.g.:
+$$du\,dv\,dw = \left| \frac{\partial(u,v,w)}{\partial(r,s,t)} \right| \; dr \, ds \, dt$$
+where now the Jacobian will be the determinant of 3x3 matrix.
+
+Second, we needed:
+$$\delta(x^2 - a^2) = \frac{1}{2|a|} \left( \delta(x-a) + \delta(x+a) \right)$$
 
 \end{document}
 
