@@ -164,7 +164,7 @@ As long as this probability is small, it should be a good approximation, and thi
 
 (In lecture, we showed that transitions with $E_i \neq E_f$ are suppressed, and that the perturbation will fail (at this order) for large eenough T.)
 
-\section{Density of States}
+\section{Density of Final States}
 \label{sec:density}
 We cannot count continuum states, so we impose a fiction that a free particle is in fact constrained to a box with sides of length $L$ and so:
 $$V = L^3$$
@@ -256,23 +256,14 @@ kinematics) and the transition matrix contains all of the dynamics.
 
 \section{Lorentz Invariant Phase Space}
 
-We saw in Section~\ref{sec:density} that if we normalize our plane
-waves in the final state with the normalization factor:
-$$N = \sqrt{\frac{1}{V}}$$
-then we have:
-$$\int_V |\psi(x)|^2 d^3x = 1 $$
-and a phase space integral:
-$$dn = \frac{V}{(2 \pi)^3} d^3k = \frac{V}{(2 \pi \hbar)^3} d^3p$$
-Due to the normalization factor,
-$$\bra{f} \propto \sqrt{\frac{1}{V}}$$
-and so
-$$|T_{fi}|^2 \propto 1/V$$
-Therefore, $|T_{fi}|^2 dn$ is overall independent of our choice of $V$,
-which is very good news, since it was a fiction.  Let's put $V=1$, so that our initial state and final state wave functions are normalized the same way, and:
-$$dn = \frac{1}{(2 \pi \hbar)^3} d^3p$$
-Unfortunately, the phase space $dn$ as written is not Lorentz invariant.  We'll show that the 4-momentum volume:
-$$d^4 p \equiv dp^0 dp^1 dp^2 dp^3 $$
-is Lorentz invariant.  Consider a Lorentz transformation $\Lambda$ between frames so that (in matrix representation) we have:
+We density of final states that we calculated in
+Section~\ref{sec:density} is not Lorentz Invariant.  We'll first show
+that the four-momentum volume integral:
+$$ d^4p = dp^0 dp^1 dp^2 dp^3 = \frac{1}{c} dE dp_x dp_y dp_z $$
+is Lorentz Invariant.
+
+Consider a Lorentz transformation $\Lambda$ between frames so that (in
+matrix representation) we have:
 $$[p]_{\mathcal{B}'} = \Lambda [p]_\mathcal{B}$$
 Then the Jacobian (see next section if this is unfamiliar) for the coordinate transformation is:
 $$J \equiv \det \Lambda $$
@@ -291,6 +282,65 @@ $$\det \Lambda = \pm 1$$
 Therefore we have:
 $$(d^4 p)' = \left| \det \Lambda \right| d^4 p = d^4 p$$
 and the four-momentum volume is Lorentz Invariant.
+
+But an integral over $d^4p$ will included many different particle masses via:
+$$mc = p^\mu p_\mu(p^0)^2 - (p^1)^2 - (p^2)^2 - (p^3)^2$$
+but we want the phase space of a final state particle with a certain mass.  So we consider a phase-space integral:
+$$dPS = \delta(p^\mu p_\mu - m^2c^2) \; d^4p$$
+But this still allows $E = p^0 c$ to run over negative values, so we include:
+$$dPS = \theta(p^0) \; \delta(p^\mu p_\mu - m^2c^2) \; d^4p$$
+This means $dPS$ is not invariant wrt time reversal, but it is still
+invariant with respect to the {\bf restricted} Lorentz Group which
+does not include Parity (P) and Time-Reversal (T).  Lastly, we'll put the factors of $2\pi$, consistent with what we calculated in Section~\ref{sec:density}:
+$$dPS = \theta(p^0) (2\pi) \delta(p^\mu p_\mu - m^2c^2) \; \frac{d^4p}{(2\pi)^4}$$
+This form of $dPS$ makes is Lorentz Invariance manifest.  However, there is another way to write it, by noting:
+$$\delta(p^\mu p_\mu - m^2c^2)
+= \delta((p^0)^2 - |\vec{p}|^2 - m^2c^2)
+= \delta((p^0)^2 - (E/c)^2)$$
+and using this to complete the integral over $dp^0$.  Note the delta function identity (proven below) that:
+$$\delta(x^2 - a^2) = \frac{1}{2|a|} \left( \delta(x-a) + \delta(x+a) \right)$$
+In this case, we have $p^0 > 0$ so only the first $\delta$ function matters, and we have:
+$$dPS = \frac{d^3p}{(2E/c) \; (2\pi)^3}$$
+When working with integrals of phase space, we have to be somewhat careful, and recall that $E$ is an integration variable that has been set (via the delta function) to the value
+$E = \sqrt{m^2c^4 + |\vec{p}|^2c^2}$ which depends on the other integration values!
+
+This differs from the density of final states calculated earlier via
+only constants and one dynamical quantity $2E$.
+
+\section{Lorentz Invariant Normalization of the wave functions}
+
+Suppose we normalize our wave functions so that:
+$$\frac{1}{V} \int_V |\psi(x)|^2 d^3x = 1$$
+This is not Lorentz invariant, for in a moving frame, due to length contraction, they will see a higher particle density:
+$$\frac{1}{V} \int_V|\psi(x)|^2 d^3x = \gamma$$
+If instead, we normalize the wave functions to $2E$ particles (factor from previous section), then in the rest frame of the particle we have:
+$$\frac{1}{V} \int_V |\psi(x)|^2 d^3x = 2E = 2mc^2$$
+and in another frame we have:
+$$\frac{1}{V} \int_V |\psi(x)|^2 d^3x = \gamma 2mc^2 = 2E'$$
+So normalizing to 2E particles per unit volume is Lorentz invariant.
+
+
+\section{Details on Reworking Fermi's Golden Rule for Lorentz Invariance}
+
+that if we normalize our plane
+
+We saw in Section~\ref{sec:density} that if we normalize our plane
+waves in the final state with the normalization factor:
+$$N = \sqrt{\frac{1}{V}}$$
+then we have:
+$$\int_V |\psi(x)|^2 d^3x = 1 $$
+and a phase space integral:
+$$dn = \frac{V}{(2 \pi)^3} d^3k = \frac{V}{(2 \pi \hbar)^3} d^3p$$
+Due to the normalization factor,
+$$\bra{f} \propto \sqrt{\frac{1}{V}}$$
+and so
+$$|T_{fi}|^2 \propto 1/V$$
+Therefore, $|T_{fi}|^2 dn$ is overall independent of our choice of $V$,
+which is very good news, since it was a fiction.  Let's put $V=1$, so that our initial state and final state wave functions are normalized the same way, and:
+$$dn = \frac{1}{(2 \pi \hbar)^3} d^3p$$
+Unfortunately, the phase space $dn$ as written is not Lorentz invariant.  We'll show that the 4-momentum volume:
+$$d^4 p \equiv dp^0 dp^1 dp^2 dp^3 $$
+is Lorentz invariant.
 
 So we first consider making the replacement:
 $$dn = \frac{d^3 p}{(2 \pi \hbar)^3} \longrightarrow \frac{d^4 p}{(2 \pi \hbar)^3}$$
@@ -378,6 +428,27 @@ where now the Jacobian will be the determinant of 3x3 matrix.
 
 Second, we needed:
 $$\delta(x^2 - a^2) = \frac{1}{2|a|} \left( \delta(x-a) + \delta(x+a) \right)$$
+There's a trick for finding indentities like this, using the Heaviside step function:
+$$\theta(x) = \begin{cases} 1 & x > 0 \\ 0 & x < 0 \end{cases}$$
+and noting that
+$$\int_{-infty}^x \delta(y) dy = \theta(x)$$
+so we can consider the delta function to be the derivative of the Heaviside step function:
+$$\delta(x) = \theta'(x)$$
+To find our identity, we work out that:
+$$\theta(x^2-a^2) = \theta(x-|a|) + (1 - \theta(x + |a|))$$
+Take the derivative of both sides:
+\begin{eqnarray*}
+  \theta'(x^2-a^2) 2x &=& \theta'(x-|a|) - \theta'(x + |a|)\\
+  \theta'(x^2-a^2)    &=& \frac{\theta'(x-|a|)}{2x} - \frac{\theta'(x + |a|)}{2x}\\
+\end{eqnarray*}
+Now identify $\delta(x)$ with $\theta'(x)$ and simplifying:
+\begin{eqnarray*}
+  \delta(x^2-a^2)    &=& \frac{\delta(x-|a|)}{2x} - \frac{\delta(x + |a|)}{2x}\\
+                     &=& \frac{\delta(x-|a|)}{2|a|} - \frac{\delta(x + |a|)}{-2|a|}\\
+                     &=& \frac{\delta(x-|a|)+\delta(x + |a|)}{2|a|}\\
+                     &=& \frac{\delta(x-a)+\delta(x + a)}{2|a|}\\
+\end{eqnarray*}
+
 
 \end{document}
 
