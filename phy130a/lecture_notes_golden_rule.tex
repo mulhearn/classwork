@@ -195,11 +195,11 @@ so we have:
 \begin{eqnarray*}
 dk   &=& \frac{m}{\hbar^2 k} \\[4pt]
 d^3k &=& k^2 dk d\Omega = \frac{m k }{\hbar^2} d\Omega dE \\[4pt]
-dn   &=& \left( \frac{L}{2\pi} \right)^2 \left(\frac{m}{\hbar^2 k}\right) d\Omega \; dE
+dn   &=& \left( \frac{L}{2\pi} \right)^3 \left(\frac{m}{\hbar^2 k}\right) d\Omega \; dE
 \end{eqnarray*}
 where we have identified the (classical) density of states:
 \begin{equation}
- \rho(E) \equiv \left| \frac{dn}{dE} \right| = \left( \frac{L}{2\pi} \right)^2 \left(\frac{m}{\hbar^2 k}\right) d\Omega 
+ \rho(E) \equiv \left| \frac{dn}{dE} \right| = \left( \frac{L}{2\pi} \right)^3 \left(\frac{m}{\hbar^2 k}\right) d\Omega 
 \end{equation}
 with:
 \begin{equation}
@@ -309,96 +309,91 @@ only constants and one dynamical quantity $2E$.
 
 \section{Lorentz Invariant Normalization of the wave functions}
 
-Suppose we normalize our wave functions so that:
-$$\frac{1}{V} \int_V |\psi(x)|^2 d^3x = 1$$
-This is not Lorentz invariant, for in a moving frame, due to length contraction, they will see a higher particle density:
-$$\frac{1}{V} \int_V|\psi(x)|^2 d^3x = \gamma$$
-If instead, we normalize the wave functions to $2E$ particles (factor from previous section), then in the rest frame of the particle we have:
-$$\frac{1}{V} \int_V |\psi(x)|^2 d^3x = 2E = 2mc^2$$
-and in another frame we have:
-$$\frac{1}{V} \int_V |\psi(x)|^2 d^3x = \gamma 2mc^2 = 2E'$$
-So normalizing to 2E particles per unit volume is Lorentz invariant.
+Suppose that a particle of mass $m$ is contained in a container $C$.  The rest
+frame of the container is frame $F$, in which the container has volume
+$V_0$.  The probability of finding the particle in container $C$ is one, so:
+$$\int_C |\psi(x)|^2 d^3x = 1$$
+The number of particles per unit volume is therefore:
+$$\frac{1}{V_0} \int_C |\psi(x)|^2 d^3x = \frac{1}{V_0}$$
+In frame $F'$, moving with resepct to the container, the volume of the container is contracted by:
+$$V' = V_0/\gamma$$
+But the probabililty of the particle being in the container is still
+one, so the number of particle per unit volume as caculated in frame
+$F'$ is therefore:
+$$\frac{1}{V'} \int_A |\psi(x)|^2 d^3x = \frac{1}{V'}= \frac{\gamma}{V_0}$$
+Clearly, than, normalizing to the number of particle per unit volume
+is not Lorentz Invariant.
 
+We found in the previous section that our phase-space term was missing
+a factor of $2E$.  Let's look at what happens if we normalize an
+energy eigenstate to $2E$ particles per unit volume.  For
+illustration, let's assume that the volume $V$ is large enough that
+the particle can be taken to be at rest in frame $F$ (without
+violating the uncertainty principle).  Then we will have, in frame
+$F$:
+$$\frac{1}{V_0} \int_C |\psi(x)|^2 d^3x = 2E = 2 m c^2$$
+Meanwhile, in frame $F$, we must find:
+$$\frac{\gamma}{V_0} \int_C |\psi(x)|^2 d^3x = 2 \gamma m c^2 = 2 E'$$
+Thus, we will now adopt the convention of normalizing energy
+eigenstates to $2E$ particles per unit volume, which is a Lorentz
+invariant convention.
 
-\section{Details on Reworking Fermi's Golden Rule for Lorentz Invariance}
+Just to be clear: this means that a wave
+function normalized to $2E$ particles per unit volume in frame $F$
+will also be normalized to $2E'$ particles in frame $F'$, even though
+these will, generally, be different values.
 
-that if we normalize our plane
+\section{Lorentz Invariant Form of Fermi's Golden Rule}
 
-We saw in Section~\ref{sec:density} that if we normalize our plane
-waves in the final state with the normalization factor:
-$$N = \sqrt{\frac{1}{V}}$$
-then we have:
-$$\int_V |\psi(x)|^2 d^3x = 1 $$
-and a phase space integral:
-$$dn = \frac{V}{(2 \pi)^3} d^3k = \frac{V}{(2 \pi \hbar)^3} d^3p$$
-Due to the normalization factor,
-$$\bra{f} \propto \sqrt{\frac{1}{V}}$$
-and so
-$$|T_{fi}|^2 \propto 1/V$$
-Therefore, $|T_{fi}|^2 dn$ is overall independent of our choice of $V$,
-which is very good news, since it was a fiction.  Let's put $V=1$, so that our initial state and final state wave functions are normalized the same way, and:
-$$dn = \frac{1}{(2 \pi \hbar)^3} d^3p$$
-Unfortunately, the phase space $dn$ as written is not Lorentz invariant.  We'll show that the 4-momentum volume:
-$$d^4 p \equiv dp^0 dp^1 dp^2 dp^3 $$
-is Lorentz invariant.
+We derived the non-relativistic form of Fermi's Golden Rule as:
+$$\Gamma_{fi} = \frac{2 \pi}{\hbar} \int | T_{fi} |^2 \delta(E_i - E_f) dn $$
+We'll now look at how to adapt Fermi's Golden Rule for Lorentz Invariance and muliple initial state particles, which we will write as:
+$$a + b + c + \ldots \; \to \; 1 + 2 + 3 + \ldots + n$$
+So in:
+$T_{fi} = \braket{f|T|i}$
+we now have:
+$$\ket{i} = \ket{\Phi_a \Phi_b \Phi_c \ldots}$$
+and 
+$$\bra{f} = \bra{\Phi_1 \Phi_2 \Phi_3 \ldots \Phi_n}$$
+where each initial state wave function (e.g. $\Phi_a$) and each final
+state wave function (e.g. $\Phi_1$) are normalized in the
+non-relativistic fashion: one particle per unit volume.  We have
+therefore:
+$$T_{fi} = \braket{\Phi_1 \Phi_2 \Phi_3 \ldots \Phi_n|T|\Phi_a \Phi_b \Phi_c \ldots}$$
+Now, instead of $T_{fi}$, let us instead consider a Lorentz invariant matrix element $\mathcal{M}_{fi}$ calculated using basis vectors noramlized in the Lorentz invariant fasion, e.g.:
+$$\Psi_a = \sqrt{2E_a} \Phi_a$$
+and so on.  So:
+\begin{eqnarray*}
+  c^{n-1} \mathcal{M}_{fi} &\equiv& \braket{\Psi_1 \Psi_2 \Psi_3 \ldots \Psi_n |T| \Psi_a \Psi_b \Psi_c \ldots } \\
+  &=& \sqrt{2E_1\;2E_2\;2E_3\;\ldots}
+  \braket{\Phi_1 \Phi_2 \Phi_3 \ldots |T| \Phi_a \Phi_b \Phi_c \ldots } 
+  \sqrt{2E_a\;2E_b\;2E_c\;\ldots}\\ 
+  &=& \sqrt{2E_1\;2E_2\;2E_3\;\ldots}
+  T_{fi} 
+  \sqrt{2E_a\;2E_b\;2E_c\;\ldots}\\ 
+\end{eqnarray*}
+we have included a factor of $c^{n-1}$ (for $n$ final state particles) in our definition for convenience later.  And so:
+$$|T_{fi}|^2 = \frac{|\mathcal{M}_{fi}|^2}
+{(2E_a\;2E_b\;2E_c\;\ldots)} \frac{c^n}{(2E_1\;2E_2\;2E_3\;\ldots2E_n)}$$
+Notice that the new normalization has led to exactly the factors of $1/2E$ needed to make each phase space factor Lorentz Invariant.
 
-So we first consider making the replacement:
-$$dn = \frac{d^3 p}{(2 \pi \hbar)^3} \longrightarrow \frac{d^4 p}{(2 \pi \hbar)^3}$$
-However, the integral over $d^4 p$ will include all values of:
-$$m = (p^0/c)^2 - (p^1/c)^2 - (p^2/c)^2 - (p^3/c)^2 $$
-but we only want to consider four momentum consistent with the mass $m$ of the particle under consideration.  
-We say that initial and final state particles are ``on mass shell''.So we put:
-$$dn \longrightarrow \delta(p^\mu p_\mu - m^2)\frac{d^4 p}{(2 \pi \hbar)^3}$$
-this is manifestly Lorentz invariant, because all of the quantities used have been shown to be Lorentz invariant.  Lastly, we do not want to include negative energies in our integral, so we put:
-$$dn \longrightarrow \theta(p^0) \delta(p^\mu p_\mu - m^2)\frac{d^4 p}{(2 \pi \hbar)^3}$$
-This makes our result no longer Lorentz invariant for the unrestricted Lorentz group, for that group includes time reversal under which $\theta(p^0)$ is not invariant.  However, it is invariant with respect to the restricted Lorentz group, which is the subset of the group with determinant 1, and therefore excludes time reversal (and parity).
+Thus, to construct a Lorentz Invariant form of Fermi's Golden Rule appropriate, we make the following replacements
+\begin{equation}
+|T_{fi}|^2 \longrightarrow \frac{|\mathcal{M}_{fi}|^2}
+{(2E_a\;2E_b\;2E_c\;\ldots)} 
+\end{equation}
+and
+\begin{equation}
+  (2\pi) \; \delta(E_i - E_f) \; dn \\[3pt]
+  \longrightarrow
+  (2\pi)^4 \delta^4(p_a + p_b + \cdots - p_1 - p_2 - \ldots)
+  \times \Pi_i \; \frac{c \; d^3 p_i}{2\;E_i (2\pi)^3}
+\end{equation}
+Remember that each:
+$$E_i \equiv \sqrt{m_i^2 c^4 + p_i^2 c^2}$$
+which is a function of the integration variable.  These are not factors that can be simply pulled out of the integral!
 
-Next, we'd like to use the delta function to remove the integral of $dp^0$. We note that:
-$$\delta(p^\mu p_\mu - m^2) = \delta((p^0)^2 - (p^1)^2 - (p^2)^2 - (p^3)^2 - m^2)
-= \delta((p^0)^2 - E^2(m,\vec{p}))$$
-where:
-$$E^2(m,\vec{p})) \equiv m^2 + |\vec{p}|^2$$
-Using a $\delta$-function identity (see next section):
-$$\delta(p^\mu p_\mu - m^2) = \frac{\delta(p^0 - E(m,\vec{p}))}{2 E(m,\vec{p})}$$
-
-So at last, we have:
-$$dn = \frac{1}{2E(m,\vec{p})} \frac{d^3p}{(2\pi\hbar)^3}$$
-which we often just write as:
-$$dn = \frac{1}{2E} \frac{d^3p}{(2\pi\hbar)^3}$$
-but we must remember that $E$ is the energy of a particle of mass $m$
-with momentum given by the integration variable $d^3p$.  We say that
-the particle is on mass shell.  When computing an integral, we should
-also make sure that if any term is energy dependent, we use that same
-mass shell energy $E$.  Our $dn$ is no longer manifestly Lorentz
-invariant as written, but it is still the same Lorentz invariant
-quantity.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+The phase space for $n$ final state particles is completely covered by integrating over the first $n-1$ particles, because it's momentum is completely defined by the first $n-1$ particles due to momentum conservation.  However, we have opted to integrate over all $n$ final state particles, and include a $delta$ function imposing momentum conservation, which is equivalent.
 
 
 \section{Math Tools}
