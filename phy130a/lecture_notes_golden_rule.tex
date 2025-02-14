@@ -108,9 +108,17 @@ We'll consider a simple time-dependence that results from a constant potential t
     \node at (10, -0.75) {$H = H^{(0)}$};    
 \end{tikzpicture}
 \end{center}
-When $t<0$ the potential is off, and the total Hamiltonian is $H=H^{(0)}$.  At $t=0$, the potential turns on and $H=H^(0) + V$ and remains constant until $t=T$.  For $t>T$, the potential is off, and $H=H^{0}$ again.
+When $t<0$ the potential is off, and the total Hamiltonian is $H=H^{(0)}$.  At $t=0$, the potential turns on and $H=H^{(0)} + V$ and remains constant until $t=T$.  For $t>T$, the potential is off, and $H=H^{0}$ again.
 
-Assume $V$ is small, but specifically how small is TBD.   we have introduced a dimensionless time-independent factor $\lambda$ as a bookkeeping device.  When $\lambda=1$, the perturbation is at full strength (but $V$ is still small).  When $\lambda=0$ the perturbation is turned off (for all time... $\lambda$ is not time dependent!)  When we are finished with our bookkeeping\footnote{if you prefer, you can take $\lambda$ to be always small, then the TBD constraints will be on $\lambda V$.  I prefer to set $\lambda$ to one once we are done with it.}
+Assume $V$ is small, but specifically how small is TBD.   we have introduced a dimensionless time-independent factor $\lambda$ as a bookkeeping device.  When $\lambda=1$, the perturbation is at full strength (but $V$ is still small).  When $\lambda=0$ the perturbation is turned off (for all time... $\lambda$ is not time dependent!)  When we are finished with our bookkeeping\footnote{If you prefer, you can take $\lambda$ to be always small, by pulling out a small dimensionless paramter from $V$, then the TBD constraints will be on $\lambda V$.  I prefer to set $\lambda$ to one once we are done using it for bookkeeping.}
+
+\begin{figure}[thb]
+\begin{center}
+{\includegraphics[width=0.60\textwidth]{figs/pfi_quad.pdf}}
+\end{center}
+\caption{\label{fig:pfi_quad} For $E_f=E_i$ the perturbation will fail (probality too large) for large enough $T$.}
+\end{figure}
+
 
 For $0 \leq t \leq T$ (that is, when the potential is on) we have:
 $$\braket{m | \delta H(t) | n} = \lambda \braket{m|V|n} = \lambda V_{mn}$$
@@ -122,7 +130,7 @@ Equation~\ref{eqn:cmdot} becomes:
 $$\dt{c_m}(t) = - \frac{i \lambda}{\hbar} \, \sum_n \, c_n(t)  \, e^{i \omega_{mn} t } \, V_{mn}$$
 Notice that $\lambda$ only appears on the RHS, which will be essential in what follows.  Also, notice that for $\lambda=0$ (perturbation off) we have
 $$\dt{c_m}(t) = 0 \implies c_m(t) = {\rm const}$$
-as expected.  Writing $c_m(t)$ as a power series\footnote{Note that the power series is still decreasing, even when $\lambda=1$, because $\lambda V$ is small.} in $\lambda$, we have:
+as expected.  Writing $c_m(t)$ as a power series in $\lambda$, we have:
 $$c_m(t) \; = \; c_m^{(0)}(t) \; + \; \lambda \, c_m^{(1)}(t) \; + \; \lambda^2 \, c_m^{(2)}(t) \; + \; \ldots$$
 and thus:
 \begin{eqnarray*}
@@ -141,12 +149,16 @@ $$c_m^{(0)}(t) = {\rm const}$$
 To start things off, note that with $\lambda=0$ (the perturbation turned off)
 $$c_m(t) = c_m^{(0)}(t) = {\rm const}$$
 which identifies $c_m^{(0)}(t)$ as the coefficients of the unperturbed system, which have no time dependence.  If we assume that the initial state is $\ket{i}$, then:
-$$c_m^{(0)} = \delta_{mi}(0)$$
-The first order coefficient is:
+$$c_m^{(0)} = \delta_{mi}$$
+This has an immediate implication for our pertubrations.  If we assume $c_i^{(1)}(t) = \epsilon$ for some small value $\epsilon$ then:
+$$c_i(t) \approx c_i^{(0)}(t) +  c_i^{(1)}(t) = 1 + \epsilon \approx 1$$
+but for $m \neq i$, if we assume $c_m^{(1)}(t) = \epsilon$ for some small value $\epsilon$ then:
+$$c_m(t) \approx c_m^{0}(t) + c_m^{(1)}(t) = 0 + \epsilon = \epsilon$$
+So we will only consider higher order perturbations for $m \neq i$.  In this case, the first order coefficient is:
 \begin{eqnarray*}
-  \dt{c_m}^{(1)}(t)      &{}={}& - \frac{i}{\hbar} \, \sum_n \, c_m^{(0)}(t)  \; e^{i \omega_{mn} t } \; V_{mn} \\
-  \dt{c_m}^{(1)}(t)      &{}={}& - \frac{i}{\hbar} \, \sum_n \, \delta_{ni}  \; e^{i \omega_{mn} t } \; V_{mn} \\
-  \dt{c_m}^{(1)}(t)      &{}={}& - \frac{i}{\hbar} \, e^{i \omega_{mi} t } \; V_{mi} \\
+  \dt{c_m}^{(1)}(t)      &{}={}& - \frac{i}{\hbar} \, \sum_n \, c_n^{(0)}(t)  \; e^{i \omega_{mn} t } \; V_{mn} \\
+       &{}={}& - \frac{i}{\hbar} \, \sum_n \, \delta_{ni}  \; e^{i \omega_{mn} t } \; V_{mn} \\
+       &{}={}& - \frac{i}{\hbar} \, e^{i \omega_{mi} t } \; V_{mi} \\
 \end{eqnarray*}
 and integrating over the period when the constant potential $V$ is on:
 \begin{eqnarray*}
@@ -158,11 +170,25 @@ and integrating over the period when the constant potential $V$ is on:
 The probability that the state $\ket{i}$ has transitioned into state
 $\ket{f}$ after the perturbation has been left on for time $T$ is, to first order:
 \begin{equation}
-P^{(1)}_{\rm f \leftarrow i} = \frac{|V_{fi}|^2}{\hbar^2} \; \frac{4 \, \sin^2\left(\omega_{mi} T/2\right)}{\omega_{fi}^2}
+P^{(1)}_{\rm f \leftarrow i} = |c_m^{(1)}(T)|^2 = \frac{|V_{fi}|^2}{\hbar^2} \; \frac{4 \, \sin^2\left(\omega_{fi} T/2\right)}{\omega_{fi}^2}
 \end{equation}
 As long as this probability is small, it should be a good approximation, and this is always possible for small enough $V$.
 
-(In lecture, we showed that transitions with $E_i \neq E_f$ are suppressed, and that the perturbation will fail (at this order) for large eenough T.)
+\begin{figure}[thb]
+\begin{center}
+{\includegraphics[width=0.60\textwidth]{figs/pfi_osc.pdf}}
+\end{center}
+\caption{\label{fig:pfi_osc} For $E_f \neq E_i$, the probability oscillates with an amplitude that goes as $1/(E_f-E_i)^2$}
+\end{figure}
+
+In the case that $E_f  = E_i$ then we have $\omega_{fi} \to 0$, and:
+$$P^{(1)}_{\rm f \leftarrow i} = \frac{|V_{fi}|^2 T^2}{4 \hbar^2} {\rm sinc^2}(\omega_{fi}T/2) \to \frac{|V_{fi}|^2 T^2}{4 \hbar^2}$$
+since
+$${\rm sinc}(x) \equiv \frac{\sin(x)}{x} \to 1$$
+when $x \to 0$.  As shown in Fig.~\ref{fig:pfi_quad}, the probability grows quadratically with $T$, and so the perturbation will fail for larege enough $T$.  So there is a limit to how large we can take $T$, but it can still get very large for small enough $V$.  In the case that $E_f \neq E_i$, then
+we have the oscillatory behavior shown in Fig.~\ref{fig:pfi_osc}.  The
+oscillations have an amplitude:
+$$\frac{4 |V_{fi}|^2}{(E_f-E_i)^2}$$ which suppresses the probability of transitions that do not conserve energy.  Evidently, turning on and off a constant potential does not change the energy much.
 
 \section{Density of Final States}
 \label{sec:density}
@@ -212,17 +238,28 @@ We now want to consider not just a transition from one discrete state
 to another discrete state, but instead, a transition from one discre
 state (the initial state) into a continuum state.  We know that for
 the constant potential perturbation, final states with energy far from
-$E_i$ will not contribute.  So instead of couting discrete states will
+$E_i$ will not contribute.  So instead of counting discrete states will
 integrate over energy within $\Delta E$ of the initial state energy:
 $$\sum_n \to \int dn = \int_{E_i - \Delta E}^{E_i + \Delta E} \rho(E) dE \equiv \int_{\Delta E} \rho(E) dE$$
 where $\rho(E)$ is the density of states, for which we worked out an
 example previously.
 
+\begin{figure}[thb]
+\begin{center}
+{\includegraphics[width=0.60\textwidth]{figs/fgr_delta.pdf}}
+\end{center}
+\caption{\label{fig:fgr_delta} For large enough $T$, $f(\omega_{fi})$ becomes a delta function and the area under the curve is $\propto T$}
+\end{figure}
+
 So the total probability of a transition into one of these final states is:
 $$\sum_f P_{f \leftarrow i}^{(1)}(T) \to \frac{4}{\hbar^2} \int |V_{\rm fi}|^2 \, \rho(E_f) \frac{\sin^2 (\omega_{fi} T/2)}{\omega^2_{fi}} dE_f$$
-In lecture we showed that the function:
+The function
 $$f(\omega_{fi}) \equiv \frac{sin^2(\omega_{fi} T / 2)}{\omega_{fi}^2}$$
-gets more and more narrow for large eneough $T$.  Therefore, we can take $|V_{fi}|^2$ and $\rho(E_f)$ outside of the integral, by evaluating them at $E_f = E_i$, and we can extend the integral out to infinity:
+is plotted in Fig~\ref{fig:fgr_delta}.  Notice that it's integral will be approximately:
+$$4|V_{fi}^2 T^2 \times 4\pi / T \propto T$$
+And also that it approaches a delta function for large enough $T$.
+
+Therefore, we can take $|V_{fi}|^2$ and $\rho(E_f)$ outside of the integral, by evaluating them at $E_f = E_i$, and we can extend the integral out to infinity:
 $$\sum_f P_{f \leftarrow i}^{(1)}(T) \to \frac{4}{\hbar^2} |V_{\rm fi}|^2 \, \rho(E_i) \int_{-\infty}^{\infty}  \frac{\sin^2 (\omega_{fi} T/2)}{\omega^2_{fi}} dE_f$$
 The integral can now be evaluated, leading to:
 $$\sum_f P_{f \leftarrow i}^{(1)}(T) \to \frac{2 \pi}{\hbar} |V_{fi}|^2 \rho(E_i) T$$
@@ -256,7 +293,7 @@ kinematics) and the transition matrix contains all of the dynamics.
 
 \section{Lorentz Invariant Phase Space}
 
-We density of final states that we calculated in
+The density of final states that we calculated in
 Section~\ref{sec:density} is not Lorentz Invariant.  We'll first show
 that the four-momentum volume integral:
 $$ d^4p = dp^0 dp^1 dp^2 dp^3 = \frac{1}{c} dE dp_x dp_y dp_z $$
@@ -275,7 +312,7 @@ so using properties of the determinant:
 \begin{eqnarray*}
   \det \left( \Lambda^T G \Lambda \right) &=& \det G \\
   \det (\Lambda) \det (G) \det(\Lambda) &=& \det G \\
-    \left| \det (\Lambda) \right| \det (G) &=& \det G \\
+    \left( \det (\Lambda) \right)^2 \det (G) &=& \det G \\
 \end{eqnarray*}
 from which it follows that:
 $$\det \Lambda = \pm 1$$
@@ -284,8 +321,8 @@ $$(d^4 p)' = \left| \det \Lambda \right| d^4 p = d^4 p$$
 and the four-momentum volume is Lorentz Invariant.
 
 But an integral over $d^4p$ will included many different particle masses via:
-$$mc = p^\mu p_\mu(p^0)^2 - (p^1)^2 - (p^2)^2 - (p^3)^2$$
-but we want the phase space of a final state particle with a certain mass.  So we consider a phase-space integral:
+$$m^2c^2 = p^\mu p_\mu = (p^0)^2 - (p^1)^2 - (p^2)^2 - (p^3)^2$$
+and we want the phase space of a final state particle with a certain mass.  So we consider a phase-space integral:
 $$dPS = \delta(p^\mu p_\mu - m^2c^2) \; d^4p$$
 But this still allows $E = p^0 c$ to run over negative values, so we include:
 $$dPS = \theta(p^0) \; \delta(p^\mu p_\mu - m^2c^2) \; d^4p$$
@@ -315,7 +352,7 @@ $V_0$.  The probability of finding the particle in container $C$ is one, so:
 $$\int_C |\psi(x)|^2 d^3x = 1$$
 The number of particles per unit volume is therefore:
 $$\frac{1}{V_0} \int_C |\psi(x)|^2 d^3x = \frac{1}{V_0}$$
-In frame $F'$, moving with resepct to the container, the volume of the container is contracted by:
+In frame $F'$, moving with respect to the container, the volume of the container is contracted by:
 $$V' = V_0/\gamma$$
 But the probabililty of the particle being in the container is still
 one, so the number of particle per unit volume as caculated in frame
@@ -332,7 +369,7 @@ the particle can be taken to be at rest in frame $F$ (without
 violating the uncertainty principle).  Then we will have, in frame
 $F$:
 $$\frac{1}{V_0} \int_C |\psi(x)|^2 d^3x = 2E = 2 m c^2$$
-Meanwhile, in frame $F$, we must find:
+Meanwhile, in frame $F'$, we must find:
 $$\frac{\gamma}{V_0} \int_C |\psi(x)|^2 d^3x = 2 \gamma m c^2 = 2 E'$$
 Thus, we will now adopt the convention of normalizing energy
 eigenstates to $2E$ particles per unit volume, which is a Lorentz
@@ -393,7 +430,7 @@ Remember that each:
 $$E_i \equiv \sqrt{m_i^2 c^4 + p_i^2 c^2}$$
 which is a function of the integration variable.  These are not factors that can be simply pulled out of the integral!
 
-The phase space for $n$ final state particles is completely covered by integrating over the first $n-1$ particles, because it's momentum is completely defined by the first $n-1$ particles due to momentum conservation.  However, we have opted to integrate over all $n$ final state particles, and include a $delta$ function imposing momentum conservation, which is equivalent.
+The phase space for $n$ final state particles is completely covered by integrating over the first $n-1$ particles, because it's momentum is completely defined by the first $n-1$ particles due to momentum conservation.  However, we have opted to integrate over all $n$ final state particles, and include a $\delta$ function imposing momentum conservation, which is equivalent.
 
 
 \section{Math Tools}
@@ -426,7 +463,7 @@ $$\delta(x^2 - a^2) = \frac{1}{2|a|} \left( \delta(x-a) + \delta(x+a) \right)$$
 There's a trick for finding indentities like this, using the Heaviside step function:
 $$\theta(x) = \begin{cases} 1 & x > 0 \\ 0 & x < 0 \end{cases}$$
 and noting that
-$$\int_{-infty}^x \delta(y) dy = \theta(x)$$
+$$\int_{-\infty}^x \delta(y) dy = \theta(x)$$
 so we can consider the delta function to be the derivative of the Heaviside step function:
 $$\delta(x) = \theta'(x)$$
 To find our identity, we work out that:
