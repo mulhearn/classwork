@@ -1,4 +1,4 @@
-\documentclass[12pt]{book}
+\documentclass[12pt]{article}
 
 \usepackage[dvips,letterpaper,margin=0.75in,bottom=0.5in]{geometry}
 \usepackage{cite}
@@ -7,7 +7,18 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{braket}
+\usepackage{feynman}
 \begin{document}
+
+\newcounter{exercise}[section]
+\setcounter{exercise}{0}
+
+\newcommand{\exercise}{
+\stepcounter{exercise}
+\noindent
+{\bf Exercise \theexercise:}
+}
+
 
 
 \title{PHY 130A \\ Lecture Notes: \\ 
@@ -16,34 +27,35 @@ The Dirac Equation }
 
 \maketitle
 
-\setcounter{chapter}{6}
-\chapter{The Dirac Equation}
-
-\section{The Four Gradiant}
+\section{The Four Gradiant and Four-Momentum Operator}
 
 In vector calculus, we define the gradient of a scalar-valued function $\phi(x,y,z)$ by:
 $$\nabla \phi \;\equiv\; i \frac{\partial \phi}{\partial x} + j \frac{\partial \phi}{\partial y} + k \frac{\partial \phi}{\partial z} \;\equiv\; e_1 \frac{\partial \phi}{\partial x^1} + e_2 \frac{\partial \phi}{\partial x^2} + e_3 \frac{\partial \phi}{\partial x^3}$$
 which we have written in two notations, so that you can see the components are simply:
 $$\frac{\partial \phi}{\partial x^i}$$
-Similarly, for a scalar valued function $f$
-of a four-vector with components $x^\mu$ we define the {\bf four-gradient} by its components:
-$$\frac{\partial f}{\partial x^\mu}$$
-But are these the components of a four vector?  We know that the components of the four-vector $x^\mu$ transform as:
+Similarly, for a scalar valued function $f(x)$ of a four-vector $x$ with components $x^\mu$ we define the {\bf four-gradient} by its components:
+$$\partial_\mu f \equiv \frac{\partial f}{\partial x^\mu}$$
+In the exercise, you will show that $\partial_\mu f$ transforms like
+the covariant components of a four vector, justifying our notation
+(using lowered index) and establishing the four-gradient of a scalar
+function as a four-vector.
+
+Just as we write $\nabla$ as an operator without reference to a
+specific funcion (as in $\nabla \phi$), we can likewise write:
+$$\partial_\mu \equiv \frac{\partial}{\partial x^\mu}$$
+
+\exercise The components $x^\mu$ of the four-vector $x$  transform as:
 $$ x^{\mu'} = \Lambda^{\mu '}_{\nu} x^{\nu}$$
 and
 $$ x^{\nu} = \Lambda^{\nu}_{\mu'} x^{\mu'}$$
-Notice that:
-$$\frac{\partial x^\nu}{\partial x^{\mu'}} = \Lambda^{\nu}_{\mu'}$$
-From the chain rule, we have:
-$$\frac{\partial f}{\partial x^{\mu'}} = \frac{\partial x^\nu}{\partial x^{\mu'}}\frac{\partial f}{\partial x^{\nu}} = \Lambda^{\nu}_{\mu'} \frac{\partial f}{\partial x^{\nu}}$$
-This shows that whereas the components $x^\mu$ transform as contravariant components, the components:
-$$\frac{\partial f}{\partial x^\mu}$$ 
-transform in the opposite manner (look closely at which side of the equation the prime frame is on) as covariant components.  So we define:
-$$\partial_\mu f \equiv \frac{\partial f}{\partial x^\mu}$$
-with lowered index as appropriate for a covariant component.  Just as we write $\nabla$ as an operator distinct from $\nabla \phi$, we can likewise write:
-$$\partial_\mu \equiv \frac{\partial}{\partial x^\mu}$$
-Written as column matrix in the standard basis $\mathcal{B}$, we have:
-$$[\partial_\mu]_{\mathcal{B}} = 
+For any scalar function $f(x)$, show that the components $\delta_\mu f$ of the four-gradient of $f$ transform as:
+$$\partial_\mu f =  \Lambda_{\mu}^{\nu'} \partial_{\nu'} f$$
+Hint:  Use the chain rule, and note that:
+$$\frac{\partial x^\mu}{\partial x^{\nu'}} = \Lambda^{\mu}_{\nu'}$$
+$\square$\\[5pt]
+
+\exercise The covariant components $\partial_\mu$ of the four-gradient, when written as a column vector in the standard basis $\mathcal{B}$ are 
+$$[\partial]_{\mathcal B} =
 \begin{pmatrix} \frac{1}{c} \, \frac{\partial}{\partial t} \\[5pt]
 \frac{\partial}{\partial x} \\[5pt]
 \frac{\partial}{\partial y} \\[5pt]
@@ -54,32 +66,26 @@ $$[\partial_\mu]_{\mathcal{B}} =
 \nabla \\[5pt]
 \end{pmatrix}
 $$
-Applying the metric tensor as a raising operator:
-$$\partial^\mu = g^{\mu \nu} \partial_\nu$$
-we see that:
-$$[\partial^\mu]_{\mathcal{B}} = 
-=
+Show that the contravariant components $\partial^\mu$ of the four-gradient, when written as a column vector in the standard basis $\mathcal{B}$ are:
+$$
+[\tilde{\partial}]_{\mathcal B} =
 \begin{pmatrix} \frac{1}{c} \, \frac{\partial}{\partial t} \\[5pt]
--\nabla \\[5pt]
+\nabla \\[5pt]
 \end{pmatrix}
 $$
+Hint: use the matrix representation of the metric tensor $G$.$\square$\\[5pt]
 
-\section{QM Operators revisited}
-In Non-Relativistic Quantum Mechanics we replace the classical quantities total energy and momentum with operators:
-$$E \to i\hbar \frac{\partial}{\partial t}, \hspace{2cm}
-\vec{p} \to -i\hbar \nabla
+\exercise In Non-Relativistic Quantum Mechanics we replace the classical quantities total energy and momentum with operators:
+$$E \to \hat{E} = i\hbar \frac{\partial}{\partial t}, \hspace{2cm}
+\vec{p} \to \hat{\vec{p}} -i\hbar \nabla
 $$
-But we now recognize these as components of the four-momentum $p^\mu$ with:
-$$p^0 = \frac{E}{c} = \frac{i\hbar}{c} \frac{\partial}{\partial t}$$
-and:
-$$p^i = -i \hbar \frac{\partial}{\partial x^i}$$
-Using the four-gradient, we can write this compactly as:
-$$p^\mu = i \hbar \partial^\mu$$
-or equivalently:
-$$p_\mu = i \hbar \partial_\mu$$
+Following this same prescription, show that the four-momentum operator is:
+$$\hat{p}^\mu = i\hbar \partial^\mu$$
+and
+$$\hat{p}_\mu = i\hbar \partial_\mu$$
 
 \section{Klein-Gordan Equation}
-One approach to developing a relativistic quantum mechanics would 
+One approach to developing a relativistic quantum mechanics is
 to start with the relativistic energy equation:
 $$E^2 = p^2c^2 + m^2c^4$$
 which can be written in terms of a four-vector squared as:
@@ -90,29 +96,77 @@ The result is the Klein-Gordan equation:
 $$-\hbar^2 \partial_u \partial^u \psi - m^2c^2 \psi = 0$$
 or equivalently:
 $$-\frac{1}{c^2} \frac{\partial^2 \psi}{\partial t^2} + \nabla^2 \psi = \left(\frac{mc}{\hbar}\right)^2 \psi$$
-This equation has several issues which can be seen from the fact that there are solutions of the form:
-$$\psi = A \sin\left(-\frac{E t}{\hbar}\right) $$
-This is a solution as long as:
-$$E^2 = (mc^2)^2 \implies E = \pm mc^2$$
-The existence of negative energy solutions is not a fatal problem (as we shall see).  The fatal flaw (for our present purposes at least) is that $\psi$ vanishes everywhere whenever
-$$\frac{E t}{\hbar} = n\pi$$
-but is non-zero at other times.  This means that $|\psi|^2$ cannot possibly represent a probability.  It is in fact possible to construct other quantities which are conserved for this equation (as probability is conserved in NRQM) but the conserved quantity is not strictly positive.
 
-Despite these shortcomings, this was the equation that Schr\"odinger started with (he was well aware of relativity!) but he discarded it when it failed to reproduce the spectrum of the hydrogen atom, and retreated to Non-Relativistic Quantum Mechanics.  The K-G equation fails here because it is not a valid description for spin 1/2 particles like the electron in a Hydrogen atom.
+\exercise Show that
+$$\psi = A \sin\left(\frac{E t}{\hbar}\right) $$
+is a solution to KG equation, provided $E = \pm mc^2$.
+
+\exercise Show that $|\psi|^2$ for the previous exercise cannot
+possibly represent a probability density, by sketching it as function of time.
+
+The existence of negative energy solutions (as shown in the exercises)
+is not a fatal problem (as we shall see).  The problem is that
+$|\psi|^2$ integrated over all space is not conserved.
+
+\exercise Show that
+$$\partial_mu(\psi^* \partial^mu \psi - \psi \partial^mu \psi^*) = 0$$
+$\square$\\[5pt]
+
+\exercise When
+$$\partial_mu j^\mu = 0$$
+we say that $j^\mu$ is a {\bf conserved-current}.  Show that for a conserved current $j^\mu$
+then:
+$$\frac{d}{dt} \int j^0 d^3 x = 0$$
+or equivalently:
+$$Q \equiv \int j^0 d^3 x$$
+is a constant, which we call the conserved charge.  (Hint: assume the conserved current vanishes at infinity.)$\square$\\[5pt]
+
+
+\exercise Show that:
+$$\psi = A \exp(-i E t / hbar)$$
+is a solution to the KG equation if $E = \pm m$, and in this case:
+$\rho = 2E |\psi|^2$
+which is less than zero for $E = -m$.$\square$\\[5pt]
+
+The excises show that for:
+$$\rho \equiv i (\psi^* d^mu \psi - \psi d^mu \psi^*)$$
+we could normalize the wave function such that
+$$\int \rho d^3x = 1$$
+always.  However, we cannot interpret $\rho$ as a probability density
+because it is not positive definite.
+
+This renders the K-G equation unsuitable for our current purposes of
+finding a single particle wave function consistent with special
+relativity.  However, in Quantum Field Theory, the notion of a single
+particle with positive definite probability density is abandoned, and
+the K-G equation emerges again as a perfectly valid equation for
+describing spin-0 particles.
+
+Historically, Schrodinger first derived the K-G equation, but
+abandoned it when it failed to accurately predict the spectrum of the
+Hydrogen atom.  This is because the electron in the Hydrogen atom is a
+spin-1/2 particle, and is not described by the KG.  The (perceived)
+shortcomings of the K-G equation arise from the fact that it is
+quadratic in energy, which leads to a second order derivative in time.
+And this led Dirac to seek an alternative approach.
 
 \section{Dirac's Inspiration}
 
-For what is coming next I think it best to think about the brave mathematicians who boldly asserted that one could take the square root of negative number:
-$$\sqrt{-1} = i$$
-and carefully followed that assertion through to all of its logical consequences.  They discovered the complex numbers, complex algebra, and brought us an indispensable new tool.  Imagine trying to do Quantum Mechanics without complex numbers!  The complex numbers also gave us profound new insights.  Something very similar is about to happen here!
+For what is coming next let's first consider the brave mathematicians who boldly asserted that one could take the square root of negative number, by assuming the existence of the imaginary unit $i$ with the defining property:
+$$i^2 = -1$$
+and carefully following that assertion through to all of its logical consequences.  They discovered the complex numbers, complex algebra, and brought us an indispensable new tool.  Imagine trying to do Quantum Mechanics without complex numbers!  The complex numbers also gave us profound new insights.  Something very similar is about to happen here!
 
-The shortcomings of the Klein-Gordan equation result from the square of the energy in the relativistic energy equation:
+The shortcomings of the Klein-Gordan equation result from the square
+of the energy in the relativistic energy equation:
 $$E^2 = p^2c^2 + m^2c^4$$
 Non-relativistic Quantum Mechanics has no such difficulties because the energy equation is:
 $$E = \frac{p^2}{2m}$$
+
 Dirac considered the equation:
 $$E = \sqrt{p^2c^2 + m^2c^4}$$
-and thought that we must be able to take that square root.  When he followed that through to its logical conclusions, he discovered field theory.  Our approach, in the next section, will be based on factoring the quadratic relativistic energy equation.  So if Dirac's square root is $\alpha$, we will be factoring:
+and thought that we must be able to replace $p$ with an operator and still take that square root.
+When he followed that through to its logical conclusions, he discovered field theory.  Our approach, in the next section, will be based on factoring the quadratic relativistic energy equation:
+So if Dirac's square root is $\alpha$, we will be factoring:
 $$0 = E^2 - \alpha^2 = (E-\alpha)(E+\alpha)$$
 
 \section{Dirac Equation}
@@ -213,7 +267,7 @@ i\hbar\gamma^u\partial_u \psi - mc \psi = 0
 \end{equation}
 Notice that $\psi$ can not be a scalar function, for that would have us adding a scalar to a 4x4 matrix.  The simplest solution is for $\psi$ to be a four element column matrix:
 $$\psi = \begin{pmatrix} \psi_1 \\ \psi_2 \\ \psi_3 \\ \psi_4 \\ \end{pmatrix}$$
-Despite having four components, $\psi$ is {\bf not} a four-vector.  Four-vectors are defined by their transformation under a Lorentz boost, and $\psi$ does not transform like a four-vector.
+Despite having four components, $\psi$ is {\bf not} a four-vector because (as we will show later) it does not transform like a four-vector.
 
 \section{Solutions to the Dirac Equation}
 
@@ -223,7 +277,7 @@ Let's first consider solutions with $\vec{p}=0$, so:
 $$\frac{\partial\psi}{\partial x} = \frac{\partial\psi}{\partial y} = \frac{\partial\psi}{\partial z} = 0$$
 and the Dirac equation becomes:
 $$\gamma^0 \frac{\partial \psi}{\partial t} = -i \frac{mc^2}{\hbar} \psi $$
-if we wrote this out the long way, it looks like:
+Writing this out the long way:
 $$
 \begin{pmatrix} 
 1 & 0 & 0 & 0\\
@@ -247,50 +301,27 @@ $$
 \psi_4\\
 \end{pmatrix}
 $$
-But as the gamma matrices are 2x2 block matrices, it is convenient to define two spinors:
-$$\psi_A \equiv \begin{pmatrix} \psi_1\\ \psi_2\\ \end{pmatrix}, \hspace{1cm}
-\psi_B \equiv \begin{pmatrix} \psi_3\\ \psi_4\\ \end{pmatrix}
+or
 $$
-So that the Dirac equation can be written:
-$$
-\begin{pmatrix} 
-I &  0\\
-0 & -I\\
-\end{pmatrix}
 \frac{\partial}{\partial t}
 \begin{pmatrix} 
-\psi_A\\
-\psi_B\\
+\psi_1\\
+\psi_2\\
+-\psi_3\\
+-\psi_4\\
 \end{pmatrix}
 =
 -i \frac{mc^2}{\hbar}
 \begin{pmatrix} 
-\psi_A\\
-\psi_B\\
+\psi_1\\
+\psi_2\\
+\psi_3\\
+\psi_4\\
 \end{pmatrix}
 $$
-Or:
+There are four independent solutions:
 $$
-\begin{pmatrix} 
-\displaystyle \frac{\partial \psi_A}{\partial t}\\[10pt]
-\displaystyle -\frac{\partial \psi_B}{\partial t}\\[10pt]
-\end{pmatrix}
-=
--i \frac{mc^2}{\hbar}
-\begin{pmatrix} 
-\psi_A\\
-\psi_B\\
-\end{pmatrix}
-$$
-with solutions:
-$$\psi_A(t) = \exp\left( -i\frac{mc^2t}{\hbar}\right) \psi_A(0)$$
-and 
-$$\psi_B(t) = \exp\left( +i\frac{mc^2t}{\hbar}\right) \psi_B(0)$$
-Recalling the time dependence of non-relativistic wave equations, we see that $\psi_A$ corresponds to a positive energy solution, whereas $\Psi_B$ appears to have a negative energy.  We interpret $\psi_B$ as a positive energy anti-particle with time dependence that has opposite sign to that of a particle.  It is rather fascinating that despite our successful endeavor to find an equation linear in $E$, the negative energy solutions (corresponding to anti-particles) persists.
-
-Recalling that $\psi_A$ and $\psi_B$ each have two components, there are four independent solutions:
-$$
-\psi^{(1)} = \exp\left(- i \frac{mc^2}{\hbar} t\right)
+\psi^{(1)} = N \exp\left(- i \frac{mc^2}{\hbar} t\right)
 \begin{pmatrix} 
 1\\
 0\\
@@ -298,7 +329,7 @@ $$
 0\\
 \end{pmatrix},
 \hspace{1cm}
-\psi^{(2)} = \exp\left(- i \frac{mc^2}{\hbar} t\right)
+\psi^{(2)} = N \exp\left(- i \frac{mc^2}{\hbar} t\right)
 \begin{pmatrix} 
 0\\
 1\\
@@ -308,7 +339,7 @@ $$
 $$
 and
 $$
-\psi^{(3)} = \exp\left(+ i \frac{mc^2}{\hbar} t\right)
+\psi^{(3)} = N \exp\left(+ i \frac{mc^2}{\hbar} t\right)
 \begin{pmatrix} 
 0\\
 0\\
@@ -316,7 +347,7 @@ $$
 0\\
 \end{pmatrix},
 \hspace{1cm}
-\psi^{(4)} = \exp\left(+ i \frac{mc^2}{\hbar} t\right)
+\psi^{(4)} = N \exp\left(+ i \frac{mc^2}{\hbar} t\right)
 \begin{pmatrix} 
 0\\
 0\\
@@ -324,48 +355,124 @@ $$
 1\\
 \end{pmatrix},
 $$
-Notice that $\psi_1$ and $\psi_2$ have the usual quantum mechanical time dependence for $E=mc^2$.  But $\psi_3$ and $\psi_4$ appear to have $E=-mc^2$.  We interpret these as anti-particles with {\bf positive} energy.
+where $N$ is a normalization factor.
 
-But why do we have two particle solutions and two anti-particle solutions?  The gamma matrices feature the Pauli matrices, with we can define the $z$ component of spin operations as:
-$$S_z \equiv \frac{\hbar}{2} \sigma_3 = \frac{\hbar}{2} \begin{pmatrix}
-1 & 0 \\
-0 & -1 \\
-\end{pmatrix}
-$$
-The eigenstates are spinors of spin up and down:
-$$\ket{\uparrow} = \begin{pmatrix} 1 \\ 0 \\ \end{pmatrix},
-\hspace{2cm}
-\ket{\downarrow} = \begin{pmatrix} 0 \\ 1 \\ \end{pmatrix}
-$$
-So we strongly suspect that what we have is a particle spinor (two components) and an anti-particle spinor (two components) which leads to the four component bi-spinor solution the Dirac equation.  But to make sense of things, we need to know what the $S_z$ operator is for the bi-spinor space.
+Recalling that the energy operator is:
+$$E = i\hbar \frac{\partial}{\partial t}$$
+We see that:
+$$ i\hbar \frac{\partial \Psi_1}{\partial t} = m \Psi_1, \hspace{1cm}
+i\hbar \frac{\partial \Psi_2}{\partial t} = m \Psi_2$$ 
+and:
+$$ i\hbar \frac{\partial \Psi_3}{\partial t} = -m \Psi_3, \hspace{1cm}
+i\hbar \frac{\partial \Psi_4}{\partial t} = -m \Psi_4$$ 
+So evidently $\Psi_1$ and $\Psi_2$ have energy $E=m$ while $\Psi_3$
+and $\Psi_4$ have energy $E=-m$.
 
-Suppose we have a group $G$ with $a,b,c \in G$ and $ab = c$.  We can always build a new group by taking putting each element of $G$ along the diagonal of a 2x2 matrix, for example:
-$$a \to \begin{pmatrix} a & 0 \\ 0 & a \\ \end{pmatrix}, \hspace{1cm}
-b \to \begin{pmatrix} b & 0 \\ 0 & b \\ \end{pmatrix}, \hspace{1cm}
-c \to \begin{pmatrix} c & 0 \\ 0 & c \\ \end{pmatrix}, \hspace{1cm}
-$$
-the new group will preserve all the features of the old group because:
-$$\begin{pmatrix} a & 0 \\ 0 & a \\ \end{pmatrix}
-\begin{pmatrix} b & 0 \\ 0 & b \\ \end{pmatrix}
-= \begin{pmatrix} ab & 0 \\ 0 & ab \\ \end{pmatrix} = 
-\begin{pmatrix} c & 0 \\ 0 & c \\ \end{pmatrix}$$
-We can therefore construct the $S_z$ operator appropriate for a bi-spinor by recycling the definition appropriate for a spinor:
-$$S_z = \frac{h}{2} \begin{pmatrix} \sigma_3 & 0 \\ 0 & \sigma_3 \end{pmatrix}
-= \begin{pmatrix} 
-1 & 0 & 0 & 0 \\ 
-0 &-1 & 0 & 0 \\ 
-0 & 0 & 1 & 0 \\ 
-0 & 0 & 0 &-1 \\ 
-\end{pmatrix}
-$$
-With this operator in hand, we see that $\psi^{(1)}$ and $\psi^{(3)}$ have spin up, and 
-$\psi^{(2)}$ and $\psi^{(4)}$ have spin down.
+I like to imagine Dirac laughing to himself at this point.  For
+despite the great lengths he went through to develop a wave function
+that is first order in Energy, we still arrive at negative energy
+solutions.  And we cannot simply throw these solutions out on the
+grounds that they are non-physical, because we would no longer have a
+complete basis for our Hilbert space of bispinors.  As we'll see soon,
+these negative energy solutions imply the existence antiparticles.
+However, even setting aside the negative energy solutions for now,
+that still leaves two solutions.  As we'll see later, this implies
+that the Dirac equation applies to spin one-half particles (like the
+electron), and the two postive energy solutions that we obtained are
+for spin up and spin down states.
+
+We should note that these solutions do not have the problem we
+so readily encountered with solutions to the K-G equation. Specifically, for our solutions to a particle of mass $m$ at rest we see that:
+$|\Psi|^2 = |N|^2 > 0$
+independent of time for all four of these solutions.  More generally, it can be shown that
+$$\frac{d}{dt}\int |\Psi(x,t)|^2 d^3x = 0$$
+for all solutions to the Dirac equation, just as for the non-relativistic Schrodinger equation, and 
+$|\Psi(x,t)|^2 \geq 0$.
+
+\section{Antiparticles}
+
+Dirac postulated that the negative energy solutions represented actual
+physic states.  To reconcile the existence of these states with
+physical reality, he further postulated an infinite sea of
+negative-energy particles occupying these states.  This prevents (via
+the exclusion principle) ordinary particles with postive energy from
+tumbling further and further down the negative energy states, releasing unlimited
+amounts of energy.
+
+In this scenario, adding sufficient energy to a particle in a negative
+energy state, will raise it to a positive energy state, and so create
+an ordinary particle.  In so doing, it will leave behind a vacancy in
+the Dirac sea.  The vacancy would behave as if a particle with
+opposite charge to the ordinary particle had been created ($0 = q +
+(-q)$).  This is a very workable (if implausible) description for the
+creation of particle anti-particle pairs, and indeed it was sufficient
+to predict the existence and properties of the positron, which was
+later discovered by Anderson.
+
+\begin{figure}[htbp]
+\begin{center}
+\begin{feynman}
+    \fermion{0.5, 0.5}{0.0, 0.0}
+    \fermion{0.0, 1.0}{0.5, 0.5}
+    \electroweak{0.5, 0.5}{1.2, 0.5}
+    \node at (-0.4,0.0) {$e^-(E<0)$};
+    \node at (-0.4,1.0) {$e^-(E>0)$};
+    \node at (1.3,0.5) {$\gamma$};
+    
+    \fermion{2.0, 0.0}{2.5, 0.5}
+    \fermion{2.0, 1.0}{2.5, 0.5}
+    \electroweak{2.5, 0.5}{3.2, 0.5}
+    \node at (1.6,0.0) {$e^+(E>0)$};
+    \node at (1.6,1.0) {$e^-(E>0)$};
+    \node at (3.3,0.5) {$\gamma$};
+
+    \node at (0.8,0.3) {$E_\gamma = 2E$};
+    \node at (2.8,0.3) {$E_\gamma = 2E$};
+ \end{feynman}
+\caption{\label{fig:fsint} An electron of energy $E>0$ emits a photon
+  of energy $2E$.  To conserve energy, the outgoing electron has
+  energy $-E$.  Because it has negative energy, it travels backwards
+  in time.  Feynman-St\"{u}ckelberg interpration: an electron and a
+  positron, both of energy $E>0$ propogating forward in time,
+  annihilating to produce a photon of energy $2E$.  Both
+  interpretations are mathematically equivalent.}
+\end{center}
+\end{figure}
+
+
+The energy eigenstates of particles with $E > 0$ have time-dependence:
+$$\exp(-iEt/\hbar) = \exp(-i|E|t/\hbar) $$
+where as particles with $E < 0$ have time-dependence:
+$$\exp(-iEt/\hbar) = \exp(+i|E|t/\hbar) $$
+This suggests that particles with negative energy propogate backwards
+in time.  Our modern interpretation of the negative energy solutions was
+provided by Stuckelberg and Feynman.
+
+A negative-energy solution describes a particle that propogates backwards in time, but this corresponds to a physical postive energy {\bf anti-particle} of opposite charge that propagates forward in time.  These two interpretations are equivalent because the time dependence $\exp(-Et/\hbar)$ is unchanged by $E \to -E$ and $t \to -t$, that is:
+$$\exp(-iEt) = \exp(-i(-E)(-t))$$
+This interpretation is illustrated in Fig.~\ref{fig:fsint}.  Note that
+the physical momentum of the anti-particle is also in the opposite
+direction of the momentum of the equivalent (negative energy) particle.
+
+Once our heads stop spinning, we can return to practical matters.
+Particles wave functions have time-dependence:
+$$\exp(-iEt/\hbar)$$
+and anti-particles wave functions have time dependence:
+$$\exp(iEt/\hbar)$$
+where $E>0$ in both cases is the physical energy of the particle.  The four-momentum operator for a particle is:
+$$\hat{p}_\mu = i \hbar \partial_\mu$$
+whereas for an antiparticle it is:
+$$\hat{p}_\mu = -i \hbar \partial_\mu$$
 
 \section{Notation}
 
-There is some new notation to help us navigate the strange new world Dirac revealed by taking his square-root.  Because the three Pauli matrices ($\sigma_1, \sigma_2, \sigma_3$) are often associated with the three spatial coordinates ($x, y, z$) we can consider them as a forming three-vector:
-$$\vec{\sigma} = \begin{pmatrix} \sigma_1, \sigma_2, \sigma_3 \end{pmatrix}$$
-whose components are matrices.  This three-vector can be dotted with other three vectors, e.g.:
+There is some new notation to help us navigate the strange new world
+Dirac revealed by taking his square-root.  Because the three Pauli
+matrices ($\sigma_1, \sigma_2, \sigma_3$) are often associated with
+the three spatial coordinates ($x, y, z$) we can consider them as a
+forming a sort of three-vector:
+$$\vec{\sigma} \; \equiv \; \sigma_1 \, \hat{x} + \sigma_2 \, \hat{y} + \sigma_3 \,\hat{z}$$
+whose components are matrices instead of scalars.  This three-vector can be dotted with other three vectors, e.g.:
 $$\vec{a} \cdot \vec{\sigma} = a_x \sigma_1 + a_y \sigma_2 + a_z \sigma_3
 = \begin{pmatrix} a_z & a_x - i a_y \\ a_x + i a_y & -a_z \end{pmatrix}
 $$
@@ -384,7 +491,7 @@ $$(\vec{a}\cdot\vec{\sigma})^2 = |\vec{a}|^2$$
 We encounter gamma matrices contracted with four vectors so often the combinations gets it's own notation, the Feynman slash notation:
 \begin{eqnarray*}
 \slashed{a} &\equiv& \gamma^u a_u = a^o \begin{pmatrix} I & 0 \\ 0 & -I \end{pmatrix}
-- \vec{a} \cdot \begin{pmatrix} 0 & \vec{\sigma} \\ 0 & -\vec{\sigma} \end{pmatrix}\\
+- \vec{a} \cdot \begin{pmatrix} 0 & \vec{\sigma} \\ -\vec{\sigma} & 0 \end{pmatrix}\\
 &=& \begin{pmatrix} a^0 I & - \vec{a}\cdot\vec{\sigma} \\ \vec{a}\cdot\vec{\sigma} & -a^0 I \end{pmatrix}
 \end{eqnarray*}
 While we are discussing notation, we won't be writing out $I$ explicitly much longer, when it can be inferred from context.  The above, for example, would usually be written as:
@@ -394,7 +501,7 @@ While we are discussing notation, we won't be writing out $I$ explicitly much lo
 &=& \begin{pmatrix} a^0 & - \vec{a}\cdot\vec{\sigma} \\ \vec{a}\cdot\vec{\sigma} & -a^0 \end{pmatrix}
 \end{eqnarray*}
 
-\section{Plane Wave Solutions}
+\section{Plane Wave Solutions for Particles}
 
 We are now ready to tackle the plane wave solutions.  You may recall
 from NRQM that these are all we will need for describing scattering
@@ -403,7 +510,7 @@ from the interaction potentials, at infinity effectively, where they
 are free particles well described by plane waves (or a wave packet
 from the superposition of plane waves).
 
-We will therefore attempt to find solutions of the form:
+We will therefore attempt to find particle solutions of the form:
 $$\psi = a \, e^{-ikx} \, u(k)$$
 where $a$ is a normalization factor, and the exponential contains a factor
 $$kx = k^u x_u$$
@@ -411,7 +518,9 @@ which is the only space and time dependence.  The $u(k)$ is the bi-spinor part w
 $$u(k) \equiv \begin{pmatrix} u_A \\ u_B \\ \end{pmatrix} \equiv 
 \begin{pmatrix} u_1 \\ u_2\\ u_3 \\ u_4 \end{pmatrix}
 $$
-The components are still dependent on $k$ but we have dropped the explicit dependence for brevity.  Our rather humble notation hides quite a bit!  Note that:
+The components are still dependent on $k$ but we have dropped the explicit dependence for brevity.
+
+Note that:
 $$\partial_u \psi = \frac{\partial \psi}{\partial x^u} = a \left( \frac{\partial}{\partial x^u} \exp(-ik_u x^u)\right) u(k) = -ik_u \psi$$
 The Dirac equation:
 $$i\hbar \gamma^u \partial_u \psi - mc \psi = 0$$
@@ -419,7 +528,7 @@ when applied to the plane wave yields:
 \begin{eqnarray*}
 (\hbar \gamma^u k_u - mc) \; \psi &=& 0 \\[5pt]
 (\hbar \gamma^u k_u - mc) \; a \, e^{-ikx} \, u(k) &=& 0 \\[5pt]
-(\slashed{k} - mc/\hbar) \; u(k) &=& 0 \\[5pt]
+(\hbar \slashed{k} - mc) \; u(k) &=& 0 \\[5pt]
 \begin{pmatrix}
 \hbar k^0-mc & - \hbar \vec{k}\cdot\vec{\sigma} \\
 \hbar \vec{k}\cdot\vec{\sigma} & -\hbar k^0-mc \\
@@ -443,16 +552,10 @@ u_A &=& \frac{(\hbar\vec{k}\cdot\vec{\sigma})^2}{(\hbar k^0)^2-(mc)^2} u_A \\
 \end{eqnarray*}
 But we already know a four-vector who's square is $mc^2$, the four-momentum:
 $$p^2 = (mc)^2$$
-We are left with:
-$$p^u = \pm \hbar k^u$$
-which, as we shall see, provides solutions for both particles (positive sign) and anti-particles (negative sign).\\[5pt]
-
-\noindent
-{\bf Particle Solutions:  } First taking:
-$$p^u = +\hbar k^u$$
-we find:
+We conclude that $p^\mu = \pm \hbar k^\mu$.  However, only $p^\mu = \hbar k^\mu$
+leads to the correct time-dependence 
 $$\psi = a \, e^{-ikx} \, u(k) = a \, \exp(- iEt/\hbar) \exp(i\vec{p}\cdot\vec{x}) u(k)$$
-this is the familiar time dependence from non-relativistic quantum mechanics, and we associate it with a particle of energy $E$ and momentum $\vec{p}$.  We may rewrite Equation~\ref{eqn:ub} as:
+for a particle of energy $E$ and momentum $\vec{p}$.  We may rewrite Equation~\ref{eqn:ub} as:
 $$u_B = \frac{\vec{p}\cdot\vec{\sigma}}{p^0+mc} u_A = \frac{c}{E+mc^2} \; \vec{p}\cdot\vec{\sigma} \; u_A$$
 and writing out $\vec{p}\cdot\vec{\sigma}$ as a matrix:
 $$u_B = \frac{c}{E+mc^2} \; \begin{pmatrix} p_z & p_x - i p_y \\ p_x + i p_y & -p_z \\ \end{pmatrix} u_A
@@ -467,39 +570,68 @@ u_B = \frac{c}{E+mc^2} \begin{pmatrix} p_x - i p_y \\ -p_z \\ \end{pmatrix}\\
 For particles, we can go no further.  If we attempt to make a choice for $u_B$, then we would be obliged to use Equation~\ref{eqn:ua}, which will blow up when $E=mc^2$ due to the negative sign in the denominator.
 
 We assemble $u_A$ and $u_B$ to form the entire bi-spinor for the particle solutions:
-$$u^{(1)} = N \frac{c}{E+mc^2} \begin{pmatrix} 1 \\ 0 \\ p_z \\ p_x + i p_y \end{pmatrix}, 
+$$
+u^{(1)} = N \begin{pmatrix} 1 \\ 0 \\ \frac{c p_z}{E+mc^2} \\[5pt] \frac{c p_x + i c p_y}{E + mc^2} \end{pmatrix}, 
 \hspace{1cm}
-u^{(2)} = -N \frac{c}{E+mc^2} \begin{pmatrix} 0 \\ 1 \\ p_x - i p_y \\ -p_z \end{pmatrix}.
+u^{(2)} = N \begin{pmatrix} 0 \\ 1 \\ \frac{c p_x - i c p_y}{E+mc^2} \\ \frac{-c p_z}{E+mc^2} \end{pmatrix}.
 $$
-where $N$ is a not-yet-determined normalization factor. 
+where $N$ is a not-yet-determined normalization factor. \\[5pt]
 
-\noindent
-{\bf Anti-Particle Solutions:  } Next taking:
-$$p^u = -\hbar k^u \implies k^u = -p^u / \hbar$$
-we find:
-$$\psi = a \, e^{-ikx} \, u(k) = a \, \exp( iEt/\hbar) \exp(-i\vec{p}\cdot\vec{x}) u(k)$$
-this is opposite the time dependence from non-relativistic quantum mechanics, and we associate it with an anti-particle of energy $E$ and momentum $\vec{p}$.  We rewrite Equation~\ref{eqn:ua} (watch closely what happens to signs): 
-$$u_A = \frac{\vec{-p}\cdot\vec{\sigma}}{-p^0-mc} u_B = 
-\frac{\vec{p}\cdot\vec{\sigma}}{p^0+mc} u_B = \frac{c}{E+mc^2} \; \vec{p}\cdot\vec{\sigma} \; u_B$$
-and writing out $\vec{p}\cdot\vec{\sigma}$ as a matrix:
-$$u_B = \frac{c}{E+mc^2} \; \begin{pmatrix} p_z & p_x - i p_y \\ p_x + i p_y & -p_z \\ \end{pmatrix} u_A
+
+\section{Plane Wave Solutions for Anti-Particles}
+
+Next we attempt to find anti-particle solutions of the form:
+$$\psi = a \, e^{ikx} \, v(k)$$
+where $a$ is a normalization factor, and the exponential contains a factor
+$$kx = k^u x_u$$
+which is the only space and time dependence.  The $v(k)$ is the bi-spinor part which we can write as either two spinors or four components:
+$$v(k) \equiv \begin{pmatrix} v_A \\ v_B \\ \end{pmatrix} \equiv 
+\begin{pmatrix} v_1 \\ v_2\\ v_3 \\ v_4 \end{pmatrix}
 $$
-And next we find two solutions by applying this result to a starting choice for $u_A$:
+In this case the Dirac equation
+$$i\hbar \gamma^u \partial_u \psi - mc \psi = 0$$
+when applied to the plane wave yields:
 \begin{eqnarray*}
-u_B = \begin{pmatrix} 1 \\ 0 \\ \end{pmatrix} &\implies& 
-u_A = \frac{c}{E+mc^2} \begin{pmatrix} p_z \\ p_x + i p_y \\ \end{pmatrix}\\
-u_B = \begin{pmatrix} 0 \\ 1 \\ \end{pmatrix} &\implies& 
-u_A = \frac{c}{E+mc^2} \begin{pmatrix} p_x - i p_y \\ -p_z \\ \end{pmatrix}\\
+(-\hbar \gamma^u k_u - mc) \; a \, e^{ikx} \, v(k) &=& 0 \\[5pt]
+(\hbar \slashed{k} + mc) \; v(k) &=& 0 \\[5pt]
+\begin{pmatrix}
+\hbar k^0+mc & - \hbar \vec{k}\cdot\vec{\sigma} \\
+\hbar \vec{k}\cdot\vec{\sigma} & -\hbar k^0+mc \\
+\end{pmatrix}
+\begin{pmatrix} 
+v_A\\
+v_B\\
+\end{pmatrix}&=&0\\
 \end{eqnarray*}
-And once again, we can go no further.  If we attempt to make a choice for $u_A$, then we would be obliged to use Equation~\ref{eqn:ub}, which will blow up when $E=mc^2$ due to the positive sign in the denominator.
-
-We assemble $u_A$ and $u_B$ to form the entire bi-spinor for the anti-particle solutions:
-$$v^{(1)} = -N \frac{c}{E+mc^2} \begin{pmatrix} p_x - i p_y \\ -p_z \\ 0 \\ 1 \end{pmatrix}, 
-\hspace{1cm}
-v^{(2)} = N \frac{c}{E+mc^2} \begin{pmatrix} p_z \\ p_x + i p_y \\ 1 \\ 0 \end{pmatrix}, 
+Solving the first fow of matrix equation we obtain:
+\begin{eqnarray}
+v_A &=& \frac{\hbar\vec{k}\cdot\vec{\sigma}}{\hbar k^0+mc} v_B \label{eqn:va} \\
+%v_B &=& \frac{\hbar\vec{k}\cdot\vec{\sigma}}{\hbar k^0-mc} v_A \label{eqn:vb} \\
+\notag
+\end{eqnarray}
+By a similar calculation as in the previous section we conclude that:
+$p^\mu = \pm \hbar k^\mu$.  However, only $p^\mu = \hbar k^\mu$
+leads to the correct time-dependence 
+$$\psi = a \, e^{ikx} \, v(k) = a \, \exp(iEt/\hbar) \exp(-i\vec{p}\cdot\vec{x}) v(k)$$
+for an anti-particle of energy $E$ and momentum $\vec{p}$.  We may rewrite Equation~\ref{eqn:va} as:
+$$v_A = \frac{\vec{p}\cdot\vec{\sigma}}{p^0+mc} v_B = \frac{c}{E+mc^2} \; \vec{p}\cdot\vec{\sigma} \; v_B$$
+and writing out $\vec{p}\cdot\vec{\sigma}$ as a matrix:
+$$v_A = \frac{c}{E+mc^2} \; \begin{pmatrix} p_z & p_x - i p_y \\ p_x + i p_y & -p_z \\ \end{pmatrix} v_B
 $$
-where $N$ is a not-yet-determined normalization factor.
-The rationale for ordering the solutions this way, and the reason for the overall negative sign in front of $v^{(2)}$ will need to wait.
+And next we find two solutions by applying this result to a starting choice for $v_V$:
+\begin{eqnarray*}
+v_B = \begin{pmatrix} 1 \\ 0 \\ \end{pmatrix} &\implies& 
+v_A = \frac{c}{E+mc^2} \begin{pmatrix} p_z \\ p_x + i p_y \\ \end{pmatrix}\\
+v_B = \begin{pmatrix} 0 \\ 1 \\ \end{pmatrix} &\implies& 
+v_A = \frac{c}{E+mc^2} \begin{pmatrix} p_x - i p_y \\ -p_z \\ \end{pmatrix}\\
+\end{eqnarray*}
+We assemble $v_A$ and $v_B$ to form the entire bi-spinor for the anti-particle solutions:
+$$
+v^{(1)} = N \begin{pmatrix} \frac{c p_x - i c p_y}{E+mc^2} \\ \frac{-c p_z}{E+mc^2} \\ 0 \\ 1\end{pmatrix}.
+\hspace{1cm}
+v^{(2)} = -N \begin{pmatrix} \frac{c p_z}{E+mc^2} \\[5pt] \frac{c p_x + i c p_y}{E + mc^2} \\ 1 \\ 0\end{pmatrix},
+$$
+The rationale for ordering the solutions this way, and the reason for the overall negative sign in front of $v^{(2)}$ will become clear in the exercises (e.g. Griffiths P7.9).
 
 We will use $u$ for particles and $v$ for antiparticles.  The Dirac equation for particles in terms of the momentum now reads:
 $$(\slashed{p}-mc) u = 0$$
@@ -516,6 +648,249 @@ $$S_z = \frac{h}{2} \begin{pmatrix} \sigma_3 & 0 \\ 0 & \sigma_3 \end{pmatrix}
 \end{pmatrix}
 $$
 However, in the case $p_x=p_y=0$ they are eigenstates.
+
+
+\section{Angular Momentum in Quantum Mechanics}
+
+This section follows Griffith's Introduction to Quantum Mechanics,
+Section 4.3, so you should refer to that if you get stuck on any of
+the exercises.
+
+The classical angular momentum is:
+$$\vec{L} = \vec{r} \times \vec{p}$$
+from which we determine the corresponding angular momentum operators using the position and momentum operators:
+$$L_x \equiv y p_z - z p_y, \hspace{1cm} L_y \equiv z p_x - x p_z, \hspace{1cm} L_z \equiv x p_y - y p_x$$
+and the total momentum squared:
+$$L^2 = L_x^2 + L_y^2 +L_z^2$$
+In the exercies, you will very that:
+\begin{equation}
+\label{eqn:lcom}
+      [L_x,L_y] = i\hbar Lz, \hspace{1cm} [L_y,L_z] = i\hbar Lx, \hspace{1cm} [L_z,L_x] = i\hbar Ly
+\end{equation}      
+and
+\begin{equation}
+\label{eqn:lsqcom}
+      [L^2,L_x] = [L^2,L_y] = [L^2,L_z] = 0
+\end{equation}      
+This shows that while $Lx$, $Ly$, and $Lz$ are incompatible observables, $L^2$ commutes with any single component.  So we can therefore find eigenstates of both $L^2$ and $L_z$.
+
+We will use an algebraic approach based on the ladder operators:
+$$L_{\pm} \equiv L_x + i L_y$$
+for which you will show:
+\begin{equation}
+\label{eqn:lsqlpmcom}  
+     [L^2,L_{\pm}] = 0
+\end{equation}
+and:
+\begin{equation}
+\label{eqn:lzlpmcom}  
+     [L^2,L_{\pm}] = \pm \hbar L_{\pm}
+\end{equation}
+and:
+\begin{equation}
+\label{eqn:ltop}  
+     L^2 = L_{\pm} L_{\mp} - L_z^2 \mp \hbar L_z
+\end{equation}
+
+
+
+\exercise Prove Equations~\ref{eqn:lcom}.  You need only prove it for one, then the rest follow from the cyclic rotation $xyz \to yzx$ which leaves the definitions unchanged.\\[5pt]
+
+\exercise Prove Equations~\ref{eqn:lsqcom} You need only prove it for one, then the rest follow from the cyclic rotation $xyz \to yzx$.\\[5pt]
+
+\exercise Prove Equations~\ref{eqn:lsqlpmcom}\\[5pt]
+
+\exercise Prove Equation~\ref{eqn:lzlpmcom}\\[5pt]
+
+\exercise Prove Equation~\ref{eqn:ltop}\\[5pt]
+
+With the heavy lifting behind us, we can consider a simultaneous eigenstate of both $L^2$ and $L_z$ so that:
+$$L^2 f = \alpha f$$
+and 
+$$L_z f = \mu f$$
+Consider the state $L_+ f$. Using Equation~\ref{eqn:lsqlpmcom} we see that:
+$$L^2 (L_+ f) = L_+ (L^2 f) = L_+ (\lambda f) = \lambda (L_+ f) $$
+and using Equation~\ref{eqn:lzlpmcom} we see that:
+$$L_z (L_+ f) = (L_+ L_z + \hbar L_+) f = (\mu + \hbar) (L_+ f) $$
+This shows that $L_+ f$ remains an eigenstate of $L^2$ with the same eigenvalue as $f$, and also remains an eigenstate of $L_z$ but with new eigenvalue $\mu + \hbar$.  We say that $L_+$ is a raising operator.
+
+We cannot keep applying the raising operator indefinitely, for eventually the square of the $z$ component of angular momentum would be larger than the $L^2$.  Therefore, after some number of applications of $L^+$ we must eventually reach a state $g$ for which:
+$$L_+ g = 0$$
+For convenience in what follows, let's define a dimensionless quantity $\ell$ by the eigenvalue of this ``top-rung'' state $g$:
+$$L+ g \equiv \ell \hbar g$$
+In the exercises, you will show that:
+$$L^2 g = \hbar^2 \ell (\ell+1) g$$
+which relates the eigenvalue of $L^2$ (which we do not change via the raising operator) to the maximum eigenvalue of the $L_z$.
+
+In a similar fashion, we see that the operator $L_-$ is a lowering
+operator, so that $L_-f$ remains an eigenstate of $L^2$ with same
+eigenvalue, and also remains an eigenstate of $L_z$ but with new
+eigenvalue $\mu - \hbar$.  Also similarly, we cannot endlessly apply
+$L_-$.  After some number of applications of $L_-$ we must reach a
+state $h$ for which:
+$$L_- h = 0$$
+Again for convenience, we define a dimensionless quantity $\bar{\ell}$ by the eigenvalue of the ``bottom-rung'' state $h$:
+$$L_z h \equiv \bar{\ell} \hbar h$$
+In the exercises you will show that
+$$L^2 h = \hbar^2 \bar{\ell} (\bar{\ell}-1) h$$
+\exercise Using equation ~\ref{eqn:ltop} show that:
+$$L^2 g = \hbar^2 \ell (\ell+1) g$$
+and
+$$L^2 h = \hbar^2 \bar{\ell} (\bar{\ell}-1) h$$
+$\square$\\[5pt]
+
+Comparing these results for the lower-rung with those of the upper rung, and noting that the raising operator leaves the the eigenvalue of $L^2$ unchanged, we conclude that 
+$\ell(\ell+1) = \bar{\ell}(\bar{\ell}-1)$
+So either
+$$\bar{\ell} = \ell+1$$
+which is impossible, since we must have the lower bound below the upper bound:
+$$\bar{\ell}\hbar < \ell \hbar$$
+or
+$$\bar{\ell} = -\ell$$
+This implies that $\ell$ is non-negative.  Furthermore, we move from $-\ell$ to $\ell$ in an integer number of applications of $N$, so:
+$$-\ell + N = \ell$$
+which implies that $\ell$ is integer or half-integer:
+$$\ell = \frac{N}{2}$$
+
+To summarize, the eigenstates $\ket{lm}$ of $L^2$ are $L_z$ are characterized by two quantum numbers:
+$$\ell = 0, \frac{1}{2}, 1, \frac{3}{2}, 2, \ldots$$
+and
+$$m = -\ell, -\ell+1, \dots \ell$$
+with:
+$$L^2 \ket{lm} = \hbar^2 \ell (\ell+1) \ket{lm}$$
+and
+$$L_z \ket{lm} = \hbar m \ket{lm}$$
+
+In the last exercise of this section, you will show that:
+$$L_+ \ket{l\,m} = \hbar \sqrt{(l-m)(l+m+1)} \ket{l\,(m+1)}$$
+Similarly:
+$$L_- \ket{l\,m} = \hbar \sqrt{(l+m)(l-m+1)} \ket{l\,(m-1)}$$
+
+\exercise Show that:
+$$L_+ \ket{l\,m} = \hbar \sqrt{(l-m)(l+m+1)} \ket{l\,(m+1)}$$
+Hint:  First put:
+$$L_+ \ket{l\,m} = \alpha \ket{l\,m}$$
+where $\alpha$ is the quantity we seek to calculate.  Notice that $L_+^\dagger = L_-$ and so:
+$$\braket{l\,m|L_-L_+|l\,m} = \braket{l\,m|L_+^\dagger L_+|l\,m} = |\alpha|^2$$
+Then use Equation~\ref{eqn:ltop}.$\square$\\
+
+Although we will not do so in this class, if you find the Energy
+eigenstates for a central potential, such as the Hydrogen atom, using
+separation of variables for the non-relativistic Schrodinger equation,
+you only find integer values of $\ell$:
+$$\ell = 0, 1, 2, \ldots$$
+And yet your find a complete set of energy eigenstates.  Evidently
+orbital angular momentum from the motion of particles in 3-dimensional
+space only admits integer values of $\ell$.
+
+However, as the Dirac equation will eventually reveal to us, nature
+does make use of the half-odd integer values for angular momentum as
+well.  Fundamental particles have an intrinsic angular momentum called
+spin.  The electron, for example, has spin one-half.  For spin, we'll use quantum number:
+$$s = 0, \frac{1}{2}, 1, \frac{3}{2}, 2, \ldots$$
+and
+$$m = -s, (-s+1), \ldots, s$$
+
+\section{Spin}
+
+Suppose a particle is spin 1/2, then the spin states:
+$m = \frac{1}{2}$
+which we call spin up, and
+$m = -\frac{1}{2}$
+which we call spin down, form a complete basis.
+
+(Blah Blah Blah)
+
+
+How can we extend our spin-1/2 operator to our four-component
+bispinors?  Suppose we have a group $G$ with $a,b,c \in G$ and $ab =
+c$.  We can always build a new group by taking putting each element of
+$G$ along the diagonal of a 2x2 matrix, for example:
+$$a \to \begin{pmatrix} a & 0 \\ 0 & a \\ \end{pmatrix}, \hspace{1cm}
+b \to \begin{pmatrix} b & 0 \\ 0 & b \\ \end{pmatrix}, \hspace{1cm}
+c \to \begin{pmatrix} c & 0 \\ 0 & c \\ \end{pmatrix}, \hspace{1cm}
+$$
+the new group will preserve all the features of the old group because:
+$$\begin{pmatrix} a & 0 \\ 0 & a \\ \end{pmatrix}
+\begin{pmatrix} b & 0 \\ 0 & b \\ \end{pmatrix}
+= \begin{pmatrix} ab & 0 \\ 0 & ab \\ \end{pmatrix} = 
+\begin{pmatrix} c & 0 \\ 0 & c \\ \end{pmatrix}$$
+We can therefore construct the $S_z$ operator appropriate for a
+bi-spinor by recycling the definition appropriate for a spinor:
+$$S_z = \frac{h}{2} \begin{pmatrix} \sigma_z & 0 \\ 0 & \sigma_z \end{pmatrix}
+= \begin{pmatrix} 
+1 & 0 & 0 & 0 \\ 
+0 &-1 & 0 & 0 \\ 
+0 & 0 & 1 & 0 \\ 
+0 & 0 & 0 &-1 \\ 
+\end{pmatrix}
+$$
+With this operator in hand, we see that $\psi^{(1)}$ has spin up, and $\psi^{(2)}$ has spin down.
+For the antiparticle solutions, it turns out the appropriate operator is $-\hat{S}_z$, and so $\psi^{(3)}$ has spin down, and $\psi^{(4)}$ has spin up.
+
+
+\section{Conservtaion of Total Angular Momentum in the Dirac Equation}
+
+In this section we'll show conclusively that the Dirac equation
+applies to spin one half particles.  We'll proceed as follows. First,
+we'll find the Hamiltonian operator corresponding to the Dirac
+equation.  Then we'll show that orbital angular momentum $L$ does not
+commute with $H$, and so it is not a compatible observable.  Last,
+we'll show that $L+S$, the orbital angular momentum plus an intrinsic
+angular momentum of spin 1/2 does commute with $H$.
+
+The Hamiltonian operator is the total energy, so we'll simply
+rearrange the Dirac equation to put $c p_0$ on the LHS.  Everthing
+else, on the RHS, will be the Hamiltonian operator.  Starting from:
+$$i\hbar\gamma^u\partial_u \psi - mc \psi = 0$$
+we find:
+$$H = \begin{pmatrix}
+mc^2 & \vec{\sigma}\cdot\vec{p}c \\
+\vec{\sigma}\cdot\vec{p}c & mc^2\\
+\end{pmatrix}$$
+Using:
+$$L_z = x p_y - y p_x$$
+First finding the commutator with each component of $H$ we have:
+$$[mc^2, L_z] = 0$$
+then
+\begin{eqnarray*}
+[\vec{\sigma}\cdot\vec{p}c, L_z] &=& c [\sigma_x p_x + \sigma_y p_y, x p_y - y p_x] \\
+&=&  -i \hbar c \sigma_x p_y - \sigma_y p_x \\
+&=&  -i \hbar c [\vec{\sigma} \times \vec{p}]_z \\
+\end{eqnarray*}
+So then:
+$$
+[H, L_z] = -i \hbar c \begin{pmatrix}
+0 & [\vec{\sigma} \times \vec{p}]_z\\
+[\vec{\sigma} \times \vec{p}]_z  & 0\\
+\end{pmatrix}
+$$
+Now using:
+$$S_z = \frac{\hbar}{2} \begin{pmatrix}
+\sigma_z & 0 \\
+0  & \sigma_z\\
+\end{pmatrix}
+$$
+and finding the component-wise commutators first:
+\begin{eqnarray*}
+[\vec{\sigma}\cdot\vec{p}c, \sigma_z] &=& c [\sigma_x p_x + \sigma_y p_y, \sigma_z] \\
+&=&  2 i c (-\sigma_y p_x + \sigma_x p_y \\
+&=&  2 i c [\vec{\sigma} \times \vec{p}]_z 
+\end{eqnarray*}
+where we have used cyclic rotations of:
+$$[\sigma_x \sigma_y] = 2i \sigma_z$$
+and so:
+$$
+[H, S_z] = i \hbar c \begin{pmatrix}
+0 & [\vec{\sigma} \times \vec{p}]_z\\
+[\vec{\sigma} \times \vec{p}]_z  & 0\\
+\end{pmatrix}
+$$
+At last we conclude:
+$$[H, L_z + S_z] = 0$$
+Similarly:
+$$[H, L_x + S_x] = [H, L_y + S_y] = 0$$
+
 
 \section{A Remarkable Matrix}
 Let's start by defining a matrix $S$ and exploring its properties:
@@ -917,3 +1292,9 @@ $$\sum_i w^{(i)} \overline{w}^{(i)} = \slashed{p} - mc$$
 
 
 
+% Exercise Ideas:
+% G 7.9
+% Get by boosting momentum via S
+% Get by S raising operator
+% Rotations of bispinors?
+% Normalization
