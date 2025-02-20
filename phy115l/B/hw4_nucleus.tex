@@ -1,0 +1,166 @@
+\documentclass[12pt]{article}
+
+\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.5in]{geometry}
+\usepackage{cite}
+\usepackage{slashed}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{braket}
+\usepackage{pythonhighlight}
+\usepackage{mathtools}
+\begin{document}
+
+\newcommand{\ihbar}{\ensuremath{i \hbar}}
+\newcommand{\Pss}{\ensuremath{\Psi^*}}
+\newcommand{\dPsidt}{\ensuremath{ \frac{\partial \Psi}{\partial t} }}
+\newcommand{\dPsidx}{\ensuremath{ \frac{\partial \Psi}{\partial x} }}
+\newcommand{\ddPsidx}{\ensuremath{ \frac{\partial^2 \Psi}{\partial x^2} }}
+\newcommand{\dPssdt}{\ensuremath{ \frac{\partial \Psi^*}{\partial t} }}
+\newcommand{\dPssdx}{\ensuremath{ \frac{\partial \Psi^*}{\partial x} }}
+\newcommand{\ddPssdx}{\ensuremath{ \frac{\partial^2 \Psi^*}{\partial x^2} }}
+
+\newcommand{\dphidt}{\ensuremath{ \frac{d \phi}{dt} }}
+\newcommand{\dpsidx}{\ensuremath{ \frac{d \psi}{dx} }}
+\newcommand{\ddpsidx}{\ensuremath{ \frac{d^2 \psi}{dx^2} }}
+
+
+\title{PHY 115L \\ Woods-Saxon Model for the Nucleus \\ using Variational Methods }
+\author{Michael Mulhearn}
+
+\maketitle
+
+\section{Introduction}
+
+In this assignment we will develop a numerical model for the atomic
+nucleus, based on the Woods-Saxon potential, an effective potential
+for the nuclear strong force which binds the nucleus together.  A good
+reference for our approach is here: https://arxiv.org/pdf/0709.3525.
+
+\section{System of Units}
+
+We will be looking at neutrons and protons (each with a different
+mass) and using their reduced mass (context dependent).  Our system of
+units from previous assignments includes the mass of the particle in
+the definition of the energy scale, which is now quite unworkable for
+us.
+
+We will base our new system of units around two quantities:
+$$ \hbar c   = 197.326~\rm MeV \; fm$$
+and the fine structure constant:
+$$\alpha = \frac{e^2}{4\pi\epsilon_0 \hbar c} = \frac{1}{137.035}$$
+Atomic nuclei range in size from $1.6~\rm fm$ to $15~\rm fm$.  Therefore,
+we will set our length scale to:
+$$L \equiv 1~\rm fm$$
+We will set our energy scale to:
+$$\epsilon = \frac{\hbar c}{L} = 197.326~\rm MeV$$
+
+The Hamiltonian operator:
+\begin{equation}
+\hat{H} = -\frac{\hbar^2}{2 M} \; \frac{d^2}{dx^2} \, + \, V(x)
+\end{equation}
+becomes:
+\begin{equation}
+\frac{\hat{H}}{\epsilon} = -\frac{L^2}{2 \mu} \; \frac{d^2}{dx^2} \, + \, \frac{V(x)}{\epsilon}
+\end{equation}
+where $\mu$ is dimensionless quantity related to the mass $M$ by:
+$$\mu = \frac{Mc^2}{\epsilon}$$
+
+The masses of the nucleons (neutrons and protons) are:
+\begin{eqnarray*}
+m_{\rm p} &=& 938.272~\rm MeV/c^2\\
+m_{\rm n} &=& 939.565~\rm MeV/c^2\\
+\end{eqnarray*}
+so in our units:
+\begin{eqnarray*}
+\mu_{\rm p} &=& 4.75493\\
+\mu_{\rm n} &=& 4.76148\\
+\end{eqnarray*}
+
+As before, we will be considering {\bf non-periodic} wave functions.
+To use the Fourier series approach in this case, we take the period
+$a$ to be large compared to $L$, and use the fact that the wave
+function approaches zero to approximate a periodic function.
+
+
+The Fourier series is an expansion in planes waves with momentum $p = \hbar k$ and wavenumbers:
+$$k = \frac{2 \pi m}{a}$$
+And so the kinetic energy $K(m)$ of a particle described by the plane wave for coefficient $c_m$ is:
+$$ K = \frac{p^2}{2M} = \frac{(\hbar k)^2}{2M}$$
+and so in our units:
+$$ \frac{K}{\epsilon} = \frac{1}{2 \mu} k^2 L^2 = \left(\frac{1}{2\mu}\right) \; (2 \pi m)^2 \; \left( \frac{L}{a}\right)^2$$
+This differs from our previous exercises by the factor:
+$$\left(\frac{1}{2\mu}\right)$$
+which you will have to add to your code.
+
+Using the method of separation of variables (e.g. Griffiths Chapter 4) we write the total wave function as:
+$$\Psi_{nlm}(r,\theta,\phi) = \frac{u_{nl}(r)}{r} Y_{lm}(\theta,\phi)$$
+for quantum numbers $n,l,m$.  The radial part satisfies 
+\begin{equation*}
+  \frac{\hat{E}}{\epsilon} u(r) = -\frac{L}{2\mu}^2\frac{d^2 u}{dr^2} + \left(V(r)+ \frac{1}{2\mu}l(l+1) \frac{L^2}{r^2}\right)
+\end{equation*}
+Notice that this looks exactly like a 1-D particle, but with an effective potential:
+$$\frac{V_{\rm eff}(r)}{\epsilon} = V(r) + \frac{1}{2\mu}l(l+1) \frac{L^2}{r^2}$$
+The term proportional to $l(l+1)$ is called the centrifugal term, and
+it accounts for the additional kinetic energy in the non-radial
+direction, due to the angular momentum of the particle.  Not suprisingly (since it is due to kinetic energy) it differs from our previous exercise by the same factor
+$$\left(\frac{1}{2\mu}\right)$$
+which you will have to add to your code as well.
+
+\section{Woods-Saxon Potential}
+
+We'll use the Woods-Saxon potential:
+\begin{equation}
+V(r) = -\frac{V_0}{1 + \exp\left( \frac{r-R}{a} \right)}
+\end{equation}
+where:
+\begin{equation}
+R = r_0 A^{1/3} 
+\end{equation}
+and $A$ is the mass number.  Typical values for the parameters are:
+\begin{eqnarray*}
+V_0 &=& 50 ~ {\rm MeV} \\
+r_0 &=& 1.25 ~ {\rm fm}\\
+a   &=& 0.5 ~ {\rm fm}\\
+\end{eqnarray*}
+In our system of units, this becomes:
+\begin{equation}
+\frac{V(r/L)}{\epsilon} = -\frac{V_0/\epsilon}{1 + \exp\left( \frac{r/L-R/L}{a/L} \right)}
+\end{equation}
+where
+$$R/L = (r_0/L) A^{1/3} $$
+and
+\begin{eqnarray*}
+V_0/\epsilon &=& 0.25 \\
+r_0/L &=& 1.25 \\
+a/L   &=& 0.5 \\
+\end{eqnarray*}
+
+\section{Coulomb Potential}
+We will model the charge distribution in the nucleus as a uniform sphere of radius $R$ (with $R$ as above).  So this adds an additional term to the potential:
+$$V(r) = Z\frac{e^2}{4\pi\epsilon_0} \frac{F(r/R)}{R}$$
+with dimensionless function:
+$$F(x) \equiv  \begin{cases}
+\frac{3-x^2}{2} & r \leq 1 \\
+  1/x & r > 1 \\
+\end{cases}
+$$
+In our system of units this becomes:
+$$V(r) = Z \; \alpha \; \left( \frac{L}{R} \right) \; F(r/R)$$
+
+
+
+\section{Homework Problems}
+
+\noindent
+{\bf Please submit one PDF file (including output) and one python
+  notebook file (.ipynb) of your completed assignment.}  If using
+C/C++, submit text or PDF of your output and the source code.\\[3pt]
+
+
+\noindent
+{\bf Problem 1:} Building on your results from HW2, find the second
+and third excited state of the Harmonic oscillator potential, and compare
+the energy your determine for each with the expected value.\\[5pt]
+
+\end{document}
