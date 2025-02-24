@@ -34,8 +34,52 @@
 
 In this assignment we will develop a numerical model for the atomic
 nucleus, based on the Woods-Saxon potential, an effective potential
-for the nuclear strong force which binds the nucleus together.  A good
-reference for our approach is here: https://arxiv.org/pdf/0709.3525.
+for the nuclear strong force which binds the nucleus together.  A good reference for our approach is here: https://arxiv.org/pdf/0709.3525.
+
+We'll use the Woods-Saxon potential:
+\begin{equation}
+V(r) = -\frac{V_0}{1 + \exp\left( \frac{r-R}{a} \right)}
+\end{equation}
+where:
+\begin{equation}
+R = r_0 A^{1/3} 
+\end{equation}
+and $A$ is the mass number.  Typical values for the parameters are:
+\begin{eqnarray*}
+V_0 &=& 50 ~ {\rm MeV} \\
+r_0 &=& 1.25 ~ {\rm fm}\\
+a   &=& 0.5 ~ {\rm fm}\\
+\end{eqnarray*}
+
+\begin{figure}[thb]
+\begin{center}
+{\includegraphics[width=0.60\textwidth]{plots/woodssaxon.pdf}}
+\end{center}
+\caption{\label{fig:woodssaxon} The Woods-Saxon potential for $a/R=0.1$.}
+\end{figure}
+
+An example of this potential is plotted in Fig.~\ref{fig:woodssaxon}.
+It is an effective potential for the nucleus which represents the
+nucleus as a whole (minus the one single nucleon under consideration).
+It is appropriate for the nuclear strong force, which is strong but only at short distances.
+
+We will also need to account for the Coloumb repulsion experienced by
+proton.  We will model the charge distribution in the nucleus as a
+uniform sphere of radius $R$ (with $R$ as above).  So this adds an
+additional term to the potential (for protons only!):
+$$V(r) = Z\frac{e^2}{4\pi\epsilon_0} \frac{F(r/R)}{R}$$
+with dimensionless function:
+$$F(x) \equiv  \begin{cases}
+\frac{3-x^2}{2} & r \leq 1 \\
+  1/x & r > 1 \\
+\end{cases}
+$$
+which accounts for the fraction of the total change $Ze$ enclosed in a sphere at or radius $r$.
+
+
+\section{The Shell Model and Binding Energy}
+
+
 
 \section{System of Units}
 
@@ -107,23 +151,8 @@ direction, due to the angular momentum of the particle.  Not suprisingly (since 
 $$\left(\frac{1}{2\mu}\right)$$
 which you will have to add to your code as well.
 
-\section{Woods-Saxon Potential}
 
-We'll use the Woods-Saxon potential:
-\begin{equation}
-V(r) = -\frac{V_0}{1 + \exp\left( \frac{r-R}{a} \right)}
-\end{equation}
-where:
-\begin{equation}
-R = r_0 A^{1/3} 
-\end{equation}
-and $A$ is the mass number.  Typical values for the parameters are:
-\begin{eqnarray*}
-V_0 &=& 50 ~ {\rm MeV} \\
-r_0 &=& 1.25 ~ {\rm fm}\\
-a   &=& 0.5 ~ {\rm fm}\\
-\end{eqnarray*}
-In our system of units, this becomes:
+In our system of units, the Woods-Saxon potential becomes:
 \begin{equation}
 \frac{V(r/L)}{\epsilon} = -\frac{V_0/\epsilon}{1 + \exp\left( \frac{r/L-R/L}{a/L} \right)}
 \end{equation}
@@ -136,16 +165,7 @@ r_0/L &=& 1.25 \\
 a/L   &=& 0.5 \\
 \end{eqnarray*}
 
-\section{Coulomb Potential}
-We will model the charge distribution in the nucleus as a uniform sphere of radius $R$ (with $R$ as above).  So this adds an additional term to the potential:
-$$V(r) = Z\frac{e^2}{4\pi\epsilon_0} \frac{F(r/R)}{R}$$
-with dimensionless function:
-$$F(x) \equiv  \begin{cases}
-\frac{3-x^2}{2} & r \leq 1 \\
-  1/x & r > 1 \\
-\end{cases}
-$$
-In our system of units this becomes:
+In our system of units, the Coulomb potential becomes:
 $$V(r) = Z \; \alpha \; \left( \frac{L}{R} \right) \; F(r/R)$$
 
 
@@ -159,8 +179,7 @@ C/C++, submit text or PDF of your output and the source code.\\[3pt]
 
 
 \noindent
-{\bf Problem 1:} Building on your results from HW2, find the second
-and third excited state of the Harmonic oscillator potential, and compare
-the energy your determine for each with the expected value.\\[5pt]
+{\bf Problem 1:} TBD.\\[5pt]
+    
 
 \end{document}
