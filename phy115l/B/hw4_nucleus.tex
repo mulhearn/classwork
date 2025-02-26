@@ -32,9 +32,14 @@
 
 \section{Introduction}
 
+%A good reference for our approach is here: https://arxiv.org/pdf/0709.3525.
+
+%Another good reference:  https://phys.libretexts.org/Bookshelves/Nuclear_and_Particle_Physics/Introduction_to_Applied_Nuclear_Physics_(Cappellaro)/05%3A_Nuclear_Structure/5.03%3A_Nuclear_Models
+
+
 In this assignment we will develop a numerical model for the atomic
 nucleus, based on the Woods-Saxon potential, an effective potential
-for the nuclear strong force which binds the nucleus together.  A good reference for our approach is here: https://arxiv.org/pdf/0709.3525.
+for the nuclear strong force which binds the nucleus together:
 
 We'll use the Woods-Saxon potential:
 \begin{equation}
@@ -50,6 +55,7 @@ V_0 &=& 50 ~ {\rm MeV} \\
 r_0 &=& 1.25 ~ {\rm fm}\\
 a   &=& 0.5 ~ {\rm fm}\\
 \end{eqnarray*}
+Note that we will use different values of $r_0$ for protons and neutrons in some of the  exercises.
 
 \begin{figure}[thb]
 \begin{center}
@@ -67,18 +73,14 @@ We will also need to account for the Coloumb repulsion experienced by
 proton.  We will model the charge distribution in the nucleus as a
 uniform sphere of radius $R$ (with $R$ as above).  So this adds an
 additional term to the potential (for protons only!):
-$$V(r) = Z\frac{e^2}{4\pi\epsilon_0} \frac{F(r/R)}{R}$$
+$$V(r) = (Z-1)\frac{e^2}{4\pi\epsilon_0} \frac{F(r/R)}{R}$$
 with dimensionless function:
 $$F(x) \equiv  \begin{cases}
 \frac{3-x^2}{2} & r \leq 1 \\
   1/x & r > 1 \\
 \end{cases}
 $$
-which accounts for the fraction of the total change $Ze$ enclosed in a sphere at or radius $r$.
-
-
-\section{The Shell Model and Binding Energy}
-
+which accounts for the fraction of the total change $(Z-1)e$ enclosed in a sphere at or radius $r$.
 
 
 \section{System of Units}
@@ -158,7 +160,7 @@ In our system of units, the Woods-Saxon potential becomes:
 \end{equation}
 where
 $$R/L = (r_0/L) A^{1/3} $$
-and
+and typical (dimensionless) parameter values are
 \begin{eqnarray*}
 V_0/\epsilon &=& 0.25 \\
 r_0/L &=& 1.25 \\
@@ -166,8 +168,7 @@ a/L   &=& 0.5 \\
 \end{eqnarray*}
 
 In our system of units, the Coulomb potential becomes:
-$$V(r) = Z \; \alpha \; \left( \frac{L}{R} \right) \; F(r/R)$$
-
+$$V(r) = (Z-1) \; \alpha \; \left( \frac{L}{R} \right) \; F(r/R)$$
 
 
 \section{Homework Problems}
@@ -177,9 +178,31 @@ $$V(r) = Z \; \alpha \; \left( \frac{L}{R} \right) \; F(r/R)$$
   notebook file (.ipynb) of your completed assignment.}  If using
 C/C++, submit text or PDF of your output and the source code.\\[3pt]
 
+\noindent
+{\bf Problem 1:} Plot the total effective potential (Woods-Saxon, Centrifugal Barrier, and Coulomb potential) for neutrons and protons with $l=0$ on the same graph.  Plot the same quantities on a second graph for $l=1$.  Use the typical parameters from the writeup for both neutrons and protons.\\[5pt]
+
 
 \noindent
-{\bf Problem 1:} TBD.\\[5pt]
+{\bf Problem 2:} We'll reproduce the results in https://arxiv.org/pdf/1910.03808 for the 1S and 2S neutron oribitals of $^{56}\rm Fe$.  Set the parameters to
+\begin{eqnarray*}
+V_0/\epsilon &=& 47.78 {\rm MeV} / 197.3~{\rm MeV} \\
+r_0/L &=& 1.285 \\
+a/L   &=& 0.65 \\
+\end{eqnarray*}
+For $l=0$ (no centrifugal barrier) and no Coulomb term, the ground
+state energy should be $-38.3~\rm MeV$ (this is the 1S orbital).  The next state with $l=0$ should be $-18.2~\rm MeV$ (this is the 2S orbital).\\[5pt]
+
+\noindent
+{\bf Problem 3:} Using the same parameters as in the previous problem
+(for both neutrons and protons) calculate the energies for neutron and
+proton orbitals 1S,1P,1D,1F,2S and 2P of $^{56}\rm Fe$,
+Produce an energy level diagram, with neutrons on the left and protons on the right.  Draw a line at each energy level and label it with the orbital and occupancey (e.g. ``1P (6)'').  You plot should make it clear where the magic numbers 2,8,20,and 40 come from.  Isotopes with a number or protons or neutrons equal to a magic number are particularly stable.  
+
+
+
+
+
+
     
 
 \end{document}
