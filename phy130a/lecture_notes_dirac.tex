@@ -10,7 +10,7 @@
 \usepackage{feynman}
 \begin{document}
 
-\newcounter{exercise}[section]
+\newcounter{exercise}
 \setcounter{exercise}{0}
 
 \newcommand{\exercise}{
@@ -44,7 +44,7 @@ Just as we write $\nabla$ as an operator without reference to a
 specific funcion (as in $\nabla \phi$), we can likewise write:
 $$\partial_\mu \equiv \frac{\partial}{\partial x^\mu}$$
 
-\exercise The components $x^\mu$ of the four-vector $x$  transform as:
+\exercise (*) The components $x^\mu$ of the four-vector $x$  transform as:
 $$ x^{\mu'} = \Lambda^{\mu '}_{\nu} x^{\nu}$$
 and
 $$ x^{\nu} = \Lambda^{\nu}_{\mu'} x^{\mu'}$$
@@ -99,21 +99,22 @@ $$-\frac{1}{c^2} \frac{\partial^2 \psi}{\partial t^2} + \nabla^2 \psi = \left(\f
 
 \exercise Show that
 $$\psi = A \sin\left(\frac{E t}{\hbar}\right) $$
-is a solution to KG equation, provided $E = \pm mc^2$.
+is a solution to KG equation, provided $E = \pm mc^2$.$\square$\\[5pt]
 
 \exercise Show that $|\psi|^2$ for the previous exercise cannot
 possibly represent a probability density, by sketching it as function of time.
+$\square$\\[5pt]
 
 The existence of negative energy solutions (as shown in the exercises)
 is not a fatal problem (as we shall see).  The problem is that
-$|\psi|^2$ integrated over all space is not conserved.
+$|\psi|^2$ integrated over all space is not conserved.\\[5pt]
 
-\exercise Show that
-$$\partial_mu(\psi^* \partial^mu \psi - \psi \partial^mu \psi^*) = 0$$
+\exercise (*) Show that
+$$\partial_\mu(\psi^* \partial^\mu \psi - \psi \partial^\mu \psi^*) = 0$$
 $\square$\\[5pt]
 
-\exercise When
-$$\partial_mu j^\mu = 0$$
+\exercise (*) When
+$$\partial_\mu j^\mu = 0$$
 we say that $j^\mu$ is a {\bf conserved-current}.  Show that for a conserved current $j^\mu$
 then:
 $$\frac{d}{dt} \int j^0 d^3 x = 0$$
@@ -121,19 +122,18 @@ or equivalently:
 $$Q \equiv \int j^0 d^3 x$$
 is a constant, which we call the conserved charge.  (Hint: assume the conserved current vanishes at infinity.)$\square$\\[5pt]
 
-
-\exercise Show that:
-$$\psi = A \exp(-i E t / hbar)$$
-is a solution to the KG equation if $E = \pm m$, and in this case:
-$\rho = 2E |\psi|^2$
-which is less than zero for $E = -m$.$\square$\\[5pt]
-
-The excises show that for:
+The exercises show that for:
 $$\rho \equiv i (\psi^* d^mu \psi - \psi d^mu \psi^*)$$
 we could normalize the wave function such that
 $$\int \rho d^3x = 1$$
 always.  However, we cannot interpret $\rho$ as a probability density
-because it is not positive definite.
+because it is not positive definite, as the next exercise will show.\\[5pt]
+
+\exercise (*) Show that:
+$$\psi = A \exp(-i E t / \hbar)$$
+is a solution to the KG equation if $E = \pm m$, and in this case:
+$\rho = 2E |\psi|^2$
+which is less than zero for $E = -m$.$\square$\\[5pt]
 
 This renders the K-G equation unsuitable for our current purposes of
 finding a single particle wave function consistent with special
@@ -799,8 +799,7 @@ which we call spin up, and
 $m = -\frac{1}{2}$
 which we call spin down, form a complete basis.
 
-(Blah Blah Blah)
-
+(Sorry, this part not written in LaTex yet, but it was straight out of Griffith's Quantum Mechanics!)
 
 How can we extend our spin-1/2 operator to our four-component
 bispinors?  Suppose we have a group $G$ with $a,b,c \in G$ and $ab =
@@ -828,8 +827,7 @@ $$
 With this operator in hand, we see that $\psi^{(1)}$ has spin up, and $\psi^{(2)}$ has spin down.
 For the antiparticle solutions, it turns out the appropriate operator is $-\hat{S}_z$, and so $\psi^{(3)}$ has spin down, and $\psi^{(4)}$ has spin up.
 
-
-\section{Conservtaion of Total Angular Momentum in the Dirac Equation}
+\section{Conservation of Total Angular Momentum in the Dirac Equation}
 
 In this section we'll show conclusively that the Dirac equation
 applies to spin one half particles.  We'll proceed as follows. First,
@@ -891,6 +889,249 @@ $$[H, L_z + S_z] = 0$$
 Similarly:
 $$[H, L_x + S_x] = [H, L_y + S_y] = 0$$
 
+\exercise (*) Show explicitly that the particle solutions $u^{(1)}$ and $u^{(2)}$ are eigenvectors of the matrix representation for the Hamiltonian.$\square$\\[5pt]
+
+\subsection{Relativistic Transformation of Bi-Spinors}
+
+Suppose that two frames are related by a Lorentz transformation:
+$$x^{\mu'} = \Lambda^{\mu'}_\nu x^\nu$$
+In this section, we are going determine the properties of the transformation $S$ which relates the bispinors appropriate to each frame:
+$$\psi' = S \psi$$
+and $S$ must be invertible so that we have:
+$$\psi = S^{-1} \psi'$$
+The Dirac equation, which we derived to be consistent with special
+relativity, must be equivalent in all reference frames:
+$$i\hbar \gamma^\mu \partial_\mu \psi = mc \psi \;\; \Leftrightarrow \;\; 
+i\hbar \gamma^{\beta'} \partial_{\beta'} \psi' = mc \psi'$$
+Notice that we cannot use our primed indices notation on $\psi$, because $\psi$ does not have any indices, but yet it is not a scalar.  It is a bispinor, with four components, but it is not a four vector.  Hence we use $\psi'$ to refer to the bispinor with components appropriate to the frame $F'$.
+
+Since the $\gamma$ and $\delta$ tensors are invariant, we have:
+$$\gamma^{\beta'} =  \delta^{\beta'}_\alpha \gamma^\alpha$$
+and also:
+\begin{eqnarray*}
+\partial_{\beta'} &=& \Lambda^\mu_{\beta'} \partial_\mu \\
+\psi' &=& S \psi
+\end{eqnarray*}
+So inserting these transformations into the Dirac equation in the primed frame:
+\begin{eqnarray*}
+  i\hbar \gamma^{\beta'} \partial_{\beta'} \psi' &=& mc \psi'\\
+  i\hbar \delta^{\beta'}_\alpha \gamma^\alpha  \Lambda^\mu_{\beta'} \partial_\mu S \psi
+  &=& mc S \psi \\
+  S^{-1} i\hbar \delta^{\beta'}_\alpha \gamma^\alpha  \Lambda^\mu_{\beta'} \partial_\mu S \psi
+  &=& mc \psi \\
+  i\hbar \delta^{\beta'}_\alpha \Lambda^\mu_{\beta'} S^{-1} \gamma^\alpha S  \partial_\mu \psi
+  &=&  i\hbar \gamma^\mu \partial_\mu \psi \\  
+\end{eqnarray*}
+where we have taken care in the last line to maintain the order of matrices but have moved numbers around.  We see that it is sufficient that:
+$$\delta^{\beta'}_\alpha \Lambda^\mu_{\beta'} S^{-1} \gamma^\alpha S = \gamma^\mu$$
+Multiplying each side by $\Lambda^{\omega'}_\mu$:
+\begin{eqnarray*}
+(\delta^{\beta'}_\alpha \Lambda^\mu_{\beta'} \Lambda^{\omega'}_\mu) S^{-1} \gamma^\alpha S = \Lambda^{\omega'}_\mu \gamma^\mu \\
+\delta^{\omega'}_{\alpha} S^{-1} \gamma^\alpha S = \Lambda^{\omega'}_\mu \gamma^\mu \\
+\end{eqnarray*}
+The $\delta$ tensor on the LHS is an artifact of our notation which primes indices.
+
+
+In the exercises, you will work with an explicit transformation matrix $S$ defined as:
+$$S \equiv a_+ \; + \; a_- \, \gamma^0 \, \gamma^1$$
+where:
+$$a_\pm = \pm \sqrt{\frac{\gamma \pm 1}{2}}$$
+with $\gamma$ the usual factor for a Lorentz transformation.
+Remembering to insert identity matrices as needed, we can write $S$
+as:
+$$S = \begin{pmatrix} 
+a_+ & a_- \, \sigma_1 \\ 
+a_- \, \sigma_1 & a_+ \\
+\end{pmatrix}
+= \begin{pmatrix} 
+a_+ & 0 & 0   & a_- \\
+0 & a_+ & a_- & 0 \\
+0 & a_- & a_+ & 0 \\
+a_- & 0 & 0 & a_+ \\
+\end{pmatrix}
+$$
+which is rather strikingly beautiful, if nothing else!  
+
+Since $\sigma_1$ and $I$ commute, we can calculate the determinant of $S$ as if it were a 2x2 matrix.  First calculate:
+\begin{eqnarray*}
+  \det(S) &=& \det((a_+ I)^2 - (a_-\sigma_1)^2)\\
+  &=& \det((a_+) (I)^2 - (a_-)^2(\sigma_1)^2)\\
+  &=& \det((a_+^2 - a_-^2) I)\\
+  &=& (a_+^2 - a_-^2) \det(I)\\
+  &=& 1\\  
+\end{eqnarray*}
+and so (again working as if S were a 2x2 matrix) we have:
+$$S^{-1} = \begin{pmatrix} 
+a_+ I & -a_- \, \sigma_1 \\ 
+-a_- \, \sigma_1 & a_+ I \\
+\end{pmatrix}
+$$
+We can write this as:
+$$S^{-1} = a_+ - a_- \gamma_0 \gamma_1$$
+
+\exercise (*) Show that:
+\begin{eqnarray*}
+a_{+}^2 - a_{-}^2 &=& 1 \\
+a_{+}^2 + a_{-}^2 &=& \gamma \\
+2 a_{+} a_{-} &=& -|\beta| \gamma \\
+\end{eqnarray*}
+from which we can see that we can construct every element of the a Lorentz Boost from $a_+$ and $a_-$.
+
+\exercise (*) Verify that $S S^{-1} = 1$:
+
+\exercise (*) Show that (more help soon...)
+$$\delta^{\omega'}_{\mu} S^{-1} \gamma^\alpha S = \Lambda_{\mu}^{\omega'} \gamma^{\mu}$$
+
+\exercise (*) Show that:
+$$S^{-1} \gamma^0 S = \gamma^0$$
+
+\end{document}
+
+We are now well prepared to calculate the main result from this section, which is to calculate:
+$$S^{-1} \gamma^u S$$
+This is called a ``similarity transformation'' and appears frequently in linear algebra and group theory.  We can work this out as:
+\begin{eqnarray*}
+S^{-1} \gamma^u S &=& (a_+ - a_- \gamma^0 \gamma^1) \gamma^u (a_+ - a_- \gamma^0 \gamma^1)\\
+&=& a_+^2 \, \gamma^u - a_-^2 \, \gamma^0 \gamma^1 \gamma^u \gamma^0 \gamma^1
++ a_+ a_- (\gamma^u \gamma^0 \gamma^1 - \gamma^0 \gamma^1 \gamma^u)\\
+\end{eqnarray*}
+The fundamental property of the gamma matrices is written as the anticommutator:
+$$\{\gamma^u, \gamma^w\} = 2 g^{uw}$$
+which more practically means that:
+$$(\gamma^0)^2 = 1, (\gamma^1)^2 = -1, (\gamma^2)^2 = -1, (\gamma^3)^2 = -1$$
+and:
+$$\gamma^u \gamma^w = -\gamma^w \gamma^u \hspace{2cm} (u \neq w)$$
+where we see that anti-commuting is almost as good as commuting, you just have to keep track of the minus signs. Using these properties alone, you can work out that:
+$$\gamma^0\gamma^1\gamma^u\gamma^0\gamma^1 = \begin{cases}
+- \gamma^u & u=0,1 \\
+\gamma^u & u=2,3 \\
+\end{cases}$$
+and:
+$$\gamma^u \gamma^0 \gamma^1 - \gamma^0 \gamma^1 \gamma^u 
+= \begin{cases}
+2\gamma^1 & u=0 \\
+2\gamma^0 & u=1 \\
+0 & u=2,3 \\ 
+\end{cases}$$
+by just working through each case explicitly.  So we can calculate:
+$$S^{-1} \gamma^u S = 
+\begin{cases}
+(a_+^2 + a_-^2) \gamma^0 + 2 a_+ a_- \gamma^1 & u=0 \\
+(a_+^2 + a_-^2) \gamma^1 + 2 a_+ a_- \gamma^0 & u=1 \\
+(a_+^2 - a_-^2) \gamma^2                      & u=2 \\
+(a_+^2 - a_-^2) \gamma^3                      & u=3 \\
+\end{cases}$$
+When we apply the identities above something magical occurs:
+$$S^{-1} \gamma^u S = 
+\begin{cases}
+\gamma \gamma^0 - \gamma |\beta| \gamma^1 & u=0 \\
+\gamma \gamma^1 - \gamma |\beta| \gamma^0 & u=1 \\
+\gamma^2                      & u=2 \\
+\gamma^3                      & u=3 \\
+\end{cases}$$
+which is just a Lorentz transformation as if $\gamma^u$ were a four vector.  Now of course $\gamma^u$ is {\bf not} a four vector, so there is more to this story, but for now we can write our most important result as:
+$$S^{-1} \gamma^u S = \Lambda^u_w \gamma^w$$
+Technically, we have only shown this for the particular Lorentz transformation $\Lambda^u_w$ with $\beta$ in the positive $x$-direction, but we can always change coordinates to arrange that this is so.
+
+
+
+
+
+\section{Bilinear Covariants}
+
+Suppose we want to construct a scalar (relativistic invariant) from the bi-spinor $\psi$. It would be quite reasonable to consider:
+$$\psi^\dagger \psi = 
+\begin{pmatrix}
+\psi_1^* & \psi_2^* & \psi_3^* & \psi_4^* \\
+\end{pmatrix}
+\begin{pmatrix}
+\psi_1 \\ \psi_2 \\ \psi_3 \\ \psi_4 \\
+\end{pmatrix}
+= |\psi_1|^2 + |\psi_2|^2+ |\psi_3|^2 + |\psi_4|^2
+$$
+We can check:
+$$\widetilde{\psi}^\dagger \widetilde{\psi} = 
+(S \psi)^\dagger (S \psi) = \psi^\dagger S^\dagger S \psi$$ 
+this would be an invariant (scalar) if only $S^\dagger S = 1$ (i.e. if $S$ is unitary).  But alas, $S$ is not unitary.  A quick inspection shows $S^\dagger = S$ so:
+$$S^\dagger S = S^2 = 
+\begin{pmatrix}
+a_+ & a_- \sigma_1 \\
+a_- \sigma_1 & a_+ \\
+\end{pmatrix}
+\begin{pmatrix}
+a_+ & a_- \sigma_1 \\
+a_- \sigma_1 & a_+ \\
+\end{pmatrix}
+=
+\begin{pmatrix}
+a_+^2+a_-^2        & 2 a_+ a_- \sigma_1 \\
+2 a_+ a_- \sigma_1 & a_+^2+a_-^2 \\
+\end{pmatrix}
+=
+\begin{pmatrix}
+\gamma        & -\gamma \beta \sigma_1 \\
+-\gamma \beta \sigma_1 & \gamma \\
+\end{pmatrix}
+$$
+which is not the identity matrix for $\beta > 0$.
+
+However, it turns out that:
+\begin{eqnarray*}
+S^\dagger \gamma^0 S &=& 
+\begin{pmatrix}
+a_+^2+a_-^2        & 2 a_+ a_- \sigma_1 \\
+2 a_+ a_- \sigma_1 & a_+^2+a_-^2 \\
+\end{pmatrix}
+\begin{pmatrix}
+1        & 0 \\
+0        & -1 \\
+\end{pmatrix}
+\begin{pmatrix}
+a_+^2+a_-^2        & 2 a_+ a_- \sigma_1 \\
+2 a_+ a_- \sigma_1 & a_+^2+a_-^2 \\
+\end{pmatrix}\\[3pt]
+&=& \begin{pmatrix}
+a_+^2-a_-^2        & 0 \\
+0                  & a_-^2-a_+^2 \\
+\end{pmatrix}
+= \begin{pmatrix}
+1        & 0 \\
+0        & -1 \\
+\end{pmatrix}
+\end{eqnarray*}
+That is:
+$$S^\dagger \gamma^0 S = \gamma^0$$
+So now consider the quantity:
+$\psi^\dagger \gamma^0 \psi$
+we have:
+$$\widetilde{\psi}^\dagger \gamma^0 \widetilde{\psi}
+= (S \psi)^\dagger \gamma^0 (S \psi) 
+= \psi^\dagger (S^\dagger \gamma^0 S) \psi
+= \psi^\dagger \gamma^0 \psi
+$$
+which shows that this is indeed a relativistic invariant (scalar).  To clean up our notation, let's define the Dirac adjoint of a bi-spinor as:
+$$\overline{\psi} \equiv \psi^\dagger \gamma^0 $$
+We've just seen that $\overline{\psi} \psi$ is a scalar.  Next let's see how $\overline{\psi} \gamma^u \psi$ transforms.  We have:
+\begin{eqnarray*}
+\widetilde{\overline{\psi} \gamma^u \psi} &=& 
+\widetilde{\psi}^\dagger \gamma^0 \gamma^u \widetilde{\psi} \\
+&=& \psi^\dagger S^\dagger \gamma^0 \gamma^u S \psi \\
+\end{eqnarray*}
+Now by inserting a factor of $1 = S S^{-1}$ we see that:
+$$S^\dagger \gamma^0 \gamma^u S = (S^\dagger \gamma^0 S) (S^{-1}\gamma^u S)
+= (\gamma^0) (\Lambda^u_w \gamma^w)$$
+where we have used:
+$$S^\dagger \gamma^0 S = \gamma^0$$
+and
+$$S^{-1} \gamma^u S = \Lambda^u_w \gamma^w$$
+Notice the different roles that $S^\dagger$ and $S^{-1}$ play here.  Returning to our original calculation we have now:
+$$\widetilde{\overline{\psi} \gamma^u \psi} = \Lambda^u_w \overline{\psi} \gamma^w \psi$$
+which shows that $\overline{\psi} \gamma^u \psi$ is a four-vector.
+
+
+
+
+\end{document}
 
 \section{A Remarkable Matrix}
 Let's start by defining a matrix $S$ and exploring its properties:
@@ -1047,129 +1288,6 @@ which is just a Lorentz transformation as if $\gamma^u$ were a four vector.  Now
 $$S^{-1} \gamma^u S = \Lambda^u_w \gamma^w$$
 Technically, we have only shown this for the particular Lorentz transformation $\Lambda^u_w$ with $\beta$ in the positive $x$-direction, but we can always change coordinates to arrange that this is so.
 
-\subsection{Relativistic Transformation of Bi-Spinors}
-The Dirac equation, which we derived to be consistent with special relativity, must therefore be equivalent in all reference frames:
-$$i\hbar \gamma^\mu \partial_\mu \psi = mc \psi \;\; \Leftrightarrow \;\; 
-i\hbar \gamma^{\mu'} \partial_{\mu'} \psi' = mc \psi'$$
-where $\psi$ and $\psi'$ are the bi-spinor in two frames related by a Lorentz transformation:
-$$x^{\mu'} = \Lambda^{\mu'}_\nu x^\nu$$
-Notice that we cannot use our primed indices notation on $\psi$, because $\psi$ does not have any indices, but yet it is not a scalar.  It is a bispinor, with four components, but it is not a four vector.  Hence we use $\psi'$ to refer to the bispinor with components appropriate to the frame $F'$.
-
-We have:
-$$\partial_{\mu'} = \Lambda_{\mu'}^\nu \partial_\nu$$
-Now suppose that the transformation from $\psi$ to $\psi'$ is given by a matrix $S$, so that:
-$$\psi' = S \psi$$
-then let's work out the properties of $S$ that would ensure the Dirac equation is frame invariant.  In this case:
-\begin{eqnarray*}
-i\hbar \gamma^{\nu'} {\delta}_{\nu'} \psi' &=& mc \, \psi' \\[3pt]
-i\hbar \Lambda^{\nu'}_{\mu}\gamma^{\mu} {\delta}_{\nu'}(S \psi) &=& mc \, S \psi \\[3pt]
-i\hbar S^{-1} \gamma^\mu S \Lambda^{\nu'}_{\mu} \delta_{\nu'} \psi &=& mc \, \psi \\
-\end{eqnarray*}
-where we have taken care in the last line to maintain the order of matrices but have moved numbers like $M^w_u$ around at will.  Comparing to the Dirac equation:
-$$i\hbar \gamma^w \delta_w \psi = mc \psi$$
-we see that it is sufficient that:
-$$S^{-1} \gamma^u S M^w_u = \gamma^w$$
-or, since $M = \Lambda^{-1}$, equivalently:
-$$S^{-1} \gamma^u S = \Lambda_w^u \gamma^w$$
-In the previous section, we showed that the remarkable matrix 
-$$S = a_+ + a_- \gamma^0 \gamma^1 = \begin{pmatrix} 
-a_+ & a_- \, \sigma_1 \\ 
-a_- \, \sigma_1 & a_+ \\
-\end{pmatrix}
-$$
-has exactly this property.  So $S$ is the transformation matrix for the bi-spinor:
-$$\widetilde{\psi} = S \psi$$
-
-\section{Bilinear Covariants}
-
-Suppose we want to construct a scalar (relativistic invariant) from the bi-spinor $\psi$. It would be quite reasonable to consider:
-$$\psi^\dagger \psi = 
-\begin{pmatrix}
-\psi_1^* & \psi_2^* & \psi_3^* & \psi_4^* \\
-\end{pmatrix}
-\begin{pmatrix}
-\psi_1 \\ \psi_2 \\ \psi_3 \\ \psi_4 \\
-\end{pmatrix}
-= |\psi_1|^2 + |\psi_2|^2+ |\psi_3|^2 + |\psi_4|^2
-$$
-We can check:
-$$\widetilde{\psi}^\dagger \widetilde{\psi} = 
-(S \psi)^\dagger (S \psi) = \psi^\dagger S^\dagger S \psi$$ 
-this would be an invariant (scalar) if only $S^\dagger S = 1$ (i.e. if $S$ is unitary).  But alas, $S$ is not unitary.  A quick inspection shows $S^\dagger = S$ so:
-$$S^\dagger S = S^2 = 
-\begin{pmatrix}
-a_+ & a_- \sigma_1 \\
-a_- \sigma_1 & a_+ \\
-\end{pmatrix}
-\begin{pmatrix}
-a_+ & a_- \sigma_1 \\
-a_- \sigma_1 & a_+ \\
-\end{pmatrix}
-=
-\begin{pmatrix}
-a_+^2+a_-^2        & 2 a_+ a_- \sigma_1 \\
-2 a_+ a_- \sigma_1 & a_+^2+a_-^2 \\
-\end{pmatrix}
-=
-\begin{pmatrix}
-\gamma        & -\gamma \beta \sigma_1 \\
--\gamma \beta \sigma_1 & \gamma \\
-\end{pmatrix}
-$$
-which is not the identity matrix for $\beta > 0$.
-
-However, it turns out that:
-\begin{eqnarray*}
-S^\dagger \gamma^0 S &=& 
-\begin{pmatrix}
-a_+^2+a_-^2        & 2 a_+ a_- \sigma_1 \\
-2 a_+ a_- \sigma_1 & a_+^2+a_-^2 \\
-\end{pmatrix}
-\begin{pmatrix}
-1        & 0 \\
-0        & -1 \\
-\end{pmatrix}
-\begin{pmatrix}
-a_+^2+a_-^2        & 2 a_+ a_- \sigma_1 \\
-2 a_+ a_- \sigma_1 & a_+^2+a_-^2 \\
-\end{pmatrix}\\[3pt]
-&=& \begin{pmatrix}
-a_+^2-a_-^2        & 0 \\
-0                  & a_-^2-a_+^2 \\
-\end{pmatrix}
-= \begin{pmatrix}
-1        & 0 \\
-0        & -1 \\
-\end{pmatrix}
-\end{eqnarray*}
-That is:
-$$S^\dagger \gamma^0 S = \gamma^0$$
-So now consider the quantity:
-$\psi^\dagger \gamma^0 \psi$
-we have:
-$$\widetilde{\psi}^\dagger \gamma^0 \widetilde{\psi}
-= (S \psi)^\dagger \gamma^0 (S \psi) 
-= \psi^\dagger (S^\dagger \gamma^0 S) \psi
-= \psi^\dagger \gamma^0 \psi
-$$
-which shows that this is indeed a relativistic invariant (scalar).  To clean up our notation, let's define the Dirac adjoint of a bi-spinor as:
-$$\overline{\psi} \equiv \psi^\dagger \gamma^0 $$
-We've just seen that $\overline{\psi} \psi$ is a scalar.  Next let's see how $\overline{\psi} \gamma^u \psi$ transforms.  We have:
-\begin{eqnarray*}
-\widetilde{\overline{\psi} \gamma^u \psi} &=& 
-\widetilde{\psi}^\dagger \gamma^0 \gamma^u \widetilde{\psi} \\
-&=& \psi^\dagger S^\dagger \gamma^0 \gamma^u S \psi \\
-\end{eqnarray*}
-Now by inserting a factor of $1 = S S^{-1}$ we see that:
-$$S^\dagger \gamma^0 \gamma^u S = (S^\dagger \gamma^0 S) (S^{-1}\gamma^u S)
-= (\gamma^0) (\Lambda^u_w \gamma^w)$$
-where we have used:
-$$S^\dagger \gamma^0 S = \gamma^0$$
-and
-$$S^{-1} \gamma^u S = \Lambda^u_w \gamma^w$$
-Notice the different roles that $S^\dagger$ and $S^{-1}$ play here.  Returning to our original calculation we have now:
-$$\widetilde{\overline{\psi} \gamma^u \psi} = \Lambda^u_w \overline{\psi} \gamma^w \psi$$
-which shows that $\overline{\psi} \gamma^u \psi$ is a four-vector.
 
 \section{Hermicity of the Gamma Matrices}
 
