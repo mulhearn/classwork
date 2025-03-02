@@ -962,8 +962,8 @@ Since $\sigma_1$ and $I$ commute, we can calculate the determinant of $S$ as if 
 \end{eqnarray*}
 and so (again working as if S were a 2x2 matrix) we have:
 $$S^{-1} = \begin{pmatrix} 
-a_+ I & -a_- \, \sigma_1 \\ 
--a_- \, \sigma_1 & a_+ I \\
+a_+ & -a_- \, \sigma_1 \\ 
+-a_- \, \sigma_1 & a_+ \\
 \end{pmatrix}
 $$
 We can write this as:
@@ -975,15 +975,52 @@ a_{+}^2 - a_{-}^2 &=& 1 \\
 a_{+}^2 + a_{-}^2 &=& \gamma \\
 2 a_{+} a_{-} &=& -|\beta| \gamma \\
 \end{eqnarray*}
-from which we can see that we can construct every element of the a Lorentz Boost from $a_+$ and $a_-$.
+from which we can see that we can construct every element of the a Lorentz Boost from $a_+$ and $a_-$.$\square$\\[5pt]
 
-\exercise (*) Verify that $S S^{-1} = 1$:
+\exercise (*) Verify that $S S^{-1} = 1$. $\square$\\[5pt]
 
-\exercise (*) Show that (more help soon...)
-$$\delta^{\omega'}_{\mu} S^{-1} \gamma^\alpha S = \Lambda_{\mu}^{\omega'} \gamma^{\mu}$$
-
+\exercise (*)  Show that:
+$$\delta^{\omega'}_{\alpha} S^{-1} \gamma^\alpha S = \Lambda_{\mu}^{\omega'} \gamma^{\mu}$$
+Note that the $\delta$ function is just an artifact from our primed indices notation: it is an identity matrix whenever we calculate anything.  So, for example, you will have to show that:
+$$S^{-1} \gamma^0 S = \gamma \gamma^{0} - \gamma |\beta| \gamma^3$$
+which you will do showing:
+$$
+\begin{pmatrix} 
+a_+ & -a_- \, \sigma_1 \\ 
+-a_- \, \sigma_1 & a_+ \\
+\end{pmatrix}
+\begin{pmatrix} 
+1 & 0  \\ 
+0 & -1\\
+\end{pmatrix}
+\begin{pmatrix} 
+a_+ & a_- \, \sigma_1 \\ 
+a_- \, \sigma_1 & a_+ \\
+\end{pmatrix}
+=
+\gamma \begin{pmatrix} 
+1 & 0  \\ 
+0 & -1\\
+\end{pmatrix}
+- \gamma |\beta|
+\begin{pmatrix} 
+0 & \sigma_1  \\ 
+-\sigma_1 & 0\\
+\end{pmatrix}
+$$
+You'll have related calculations for $\gamma^1$, $\gamma^2$, $\gamma^3$ as well.  Tip:  remember when grinding through algebra to simplify your notation.  I suggest:
+$$a_+ \to a, \hspace{2cm} a_- \to b, \hspace{2cm} \sigma_1 \to \sigma$$
+$\square$\\[5pt]
 \exercise (*) Show that:
 $$S^{-1} \gamma^0 S = \gamma^0$$
+$\square$\\[5pt]
+
+\exercise Notice that our original solutions to the Dirac equations are simply plane wave solutions with $\vec{p}=0$ and 
+$$u^{(1)} \equiv \begin{pmatrix}1 \\ 0 \\ 0 \\ 0 \end{pmatrix},
+\hspace{1cm}
+u^{(2)} \equiv \begin{pmatrix}1 \\ 0 \\ 0 \\ 0 \end{pmatrix}
+$$
+calculate $S u^{(1)}$ and $ S u^{(2)}$.  Compare to our results for $u^{(1)}$ and $u^{(2)}$ from the previous solution.  Hint: Don't get confused by an unexpected minus sign in your answer... if you boost to a frame with speed $\beta > 0$ in the $x$ direction, then a particle at rest in the original frame will appear to have momentum $-\gamma\beta m c$ in the new frame! $\square$\\[5pt]
 
 \end{document}
 
