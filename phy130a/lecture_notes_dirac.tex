@@ -950,7 +950,15 @@ a_+ & 0 & 0   & a_- \\
 a_- & 0 & 0 & a_+ \\
 \end{pmatrix}
 $$
-which is rather strikingly beautiful, if nothing else!  
+which is rather strikingly beautiful, if nothing else!  \\[5pt]
+
+\exercise (*) Show that:
+\begin{eqnarray*}
+a_{+}^2 - a_{-}^2 &=& 1 \\
+a_{+}^2 + a_{-}^2 &=& \gamma \\
+2 a_{+} a_{-} &=& -|\beta| \gamma \\
+\end{eqnarray*}
+from which we can see that we can construct every element of the a Lorentz Boost from $a_+$ and $a_-$.$\square$\\[5pt]
 
 Since $\sigma_1$ and $I$ commute, we can calculate the determinant of $S$ as if it were a 2x2 matrix.  First calculate:
 \begin{eqnarray*}
@@ -969,13 +977,6 @@ $$
 We can write this as:
 $$S^{-1} = a_+ - a_- \gamma_0 \gamma_1$$
 
-\exercise (*) Show that:
-\begin{eqnarray*}
-a_{+}^2 - a_{-}^2 &=& 1 \\
-a_{+}^2 + a_{-}^2 &=& \gamma \\
-2 a_{+} a_{-} &=& -|\beta| \gamma \\
-\end{eqnarray*}
-from which we can see that we can construct every element of the a Lorentz Boost from $a_+$ and $a_-$.$\square$\\[5pt]
 
 \exercise (*) Verify that $S S^{-1} = 1$. $\square$\\[5pt]
 
@@ -1012,7 +1013,7 @@ You'll have related calculations for $\gamma^1$, $\gamma^2$, $\gamma^3$ as well.
 $$a_+ \to a, \hspace{2cm} a_- \to b, \hspace{2cm} \sigma_1 \to \sigma$$
 $\square$\\[5pt]
 \exercise (*) Show that:
-$$S^{-1} \gamma^0 S = \gamma^0$$
+$$S^{\dagger} \gamma^0 S = \gamma^0$$
 $\square$\\[5pt]
 
 \exercise Notice that our original solutions to the Dirac equations are simply plane wave solutions with $\vec{p}=0$ and 
@@ -1021,6 +1022,70 @@ $$u^{(1)} \equiv \begin{pmatrix}1 \\ 0 \\ 0 \\ 0 \end{pmatrix},
 u^{(2)} \equiv \begin{pmatrix}1 \\ 0 \\ 0 \\ 0 \end{pmatrix}
 $$
 calculate $S u^{(1)}$ and $ S u^{(2)}$.  Compare to our results for $u^{(1)}$ and $u^{(2)}$ from the previous solution.  Hint: Don't get confused by an unexpected minus sign in your answer... if you boost to a frame with speed $\beta > 0$ in the $x$ direction, then a particle at rest in the original frame will appear to have momentum $-\gamma\beta m c$ in the new frame! $\square$\\[5pt]
+
+
+\section{Bilinear Covariants}
+
+Suppose we want to construct a Lorentz invariant scalar from
+the bi-spinor $\psi$. It would be quite reasonable to first consider:
+$$\psi^\dagger \psi = 
+\begin{pmatrix}
+\psi_1^* & \psi_2^* & \psi_3^* & \psi_4^* \\
+\end{pmatrix}
+\begin{pmatrix}
+\psi_1 \\ \psi_2 \\ \psi_3 \\ \psi_4 \\
+\end{pmatrix}
+= |\psi_1|^2 + |\psi_2|^2+ |\psi_3|^2 + |\psi_4|^2
+$$
+which is certainly a scalar, but is it Lorentz invariant?  We can check:
+$$\left( {\psi}^\dagger \psi \right)' =
+\left( {\psi}^\dagger\right)' \left( \psi \right)'
+= (S \psi)^\dagger (S \psi) = \psi^\dagger S^\dagger S \psi$$ 
+which would be Lorentz invariant if $S^\dagger S = 1$ (i.e. if $S$ is
+unitary).  But alas, $S$ is not unitary, as you will show in an
+exercise.\\[5pt]
+
+\exercise
+Show that $S$ is not unitary for $\beta > 0$.  First note that
+$S^\dagger = S$ and then calculate $S^\dagger S = S^2$.$\square$\\[5pt]
+
+So instead consider the quantity:
+$\psi^\dagger \gamma^0 \psi$
+we have:
+$$\left( {\psi}^\dagger \gamma^0 \psi \right)' =
+\left( {\psi}^\dagger\right)' \gamma^0 \left( \psi \right)'
+= (S \psi)^\dagger \gamma^0 (S \psi) = \psi^\dagger S^\dagger \gamma^0 S \psi$$
+However, you showed in a previous exercise that:
+$$S^\dagger \gamma^0 S = \gamma^0$$
+which leads to:
+$$\left( {\psi}^\dagger \gamma^0 \psi \right)' = {\psi}^\dagger \gamma^0 \psi$$
+which shows that this is indeed a Lorentz invariant scalar.  To clean up our notation, let's define the Dirac adjoint of a bi-spinor as:
+$$\overline{\psi} \equiv \psi^\dagger \gamma^0 $$
+We've just seen that $\overline{\psi} \psi$ is a Lorentz invariant scalar.
+
+Next let's see how
+$$\overline{\psi} \gamma^u \psi$$
+transforms.  In the prime frame, using primed indices, we have the quantity:
+$$\overline{\psi}' \gamma^{\omega'} \psi'$$
+but the gamma matrices are the same in every frame, so we have:
+\begin{eqnarray*}
+  \left( \overline{\psi} \right)' \gamma^{\omega'} \left( \psi \right)'
+  &=& \delta^{\omega'}_\mu \left( \psi^\dagger \right)' \gamma^0  \gamma^{\mu} \psi' \\
+  &=& \delta^{\omega'}_\mu \psi^\dagger S^\dagger \gamma^0  \gamma^{\mu} S \psi \\
+  &=& \delta^{\omega'}_\mu \psi^\dagger S^\dagger \gamma^0  S S^{-1} \gamma^{\mu} S \psi \\
+  &=& \delta^{\omega'}_\mu \psi^\dagger \gamma^0  S^{-1} \gamma^{\mu} S \psi \\
+  &=&  \overline{\psi}  \delta^{\omega'}_\mu S^{-1} \gamma^{\mu} S \psi \\
+\end{eqnarray*}
+In a previous exercise, you showed that:
+$$\delta^{\omega'}_{\mu} S^{-1} \gamma^\alpha S = \Lambda_{\mu}^{\omega'} \gamma^{\mu}$$
+which leads to:
+\begin{equation}
+  \left( \overline{\psi} \right)' \gamma^{\omega'} \left( \psi \right)'
+  = \Lambda^{\omega'}_{\mu} \overline{\psi} \gamma^{\mu} \psi \\
+\end{equation}
+which shows that:
+$$\overline{\psi} \gamma^{\mu} \psi$$
+transforms as a four-vector.
 
 \end{document}
 
@@ -1072,98 +1137,6 @@ Technically, we have only shown this for the particular Lorentz transformation $
 
 
 
-
-
-\section{Bilinear Covariants}
-
-Suppose we want to construct a scalar (relativistic invariant) from the bi-spinor $\psi$. It would be quite reasonable to consider:
-$$\psi^\dagger \psi = 
-\begin{pmatrix}
-\psi_1^* & \psi_2^* & \psi_3^* & \psi_4^* \\
-\end{pmatrix}
-\begin{pmatrix}
-\psi_1 \\ \psi_2 \\ \psi_3 \\ \psi_4 \\
-\end{pmatrix}
-= |\psi_1|^2 + |\psi_2|^2+ |\psi_3|^2 + |\psi_4|^2
-$$
-We can check:
-$$\widetilde{\psi}^\dagger \widetilde{\psi} = 
-(S \psi)^\dagger (S \psi) = \psi^\dagger S^\dagger S \psi$$ 
-this would be an invariant (scalar) if only $S^\dagger S = 1$ (i.e. if $S$ is unitary).  But alas, $S$ is not unitary.  A quick inspection shows $S^\dagger = S$ so:
-$$S^\dagger S = S^2 = 
-\begin{pmatrix}
-a_+ & a_- \sigma_1 \\
-a_- \sigma_1 & a_+ \\
-\end{pmatrix}
-\begin{pmatrix}
-a_+ & a_- \sigma_1 \\
-a_- \sigma_1 & a_+ \\
-\end{pmatrix}
-=
-\begin{pmatrix}
-a_+^2+a_-^2        & 2 a_+ a_- \sigma_1 \\
-2 a_+ a_- \sigma_1 & a_+^2+a_-^2 \\
-\end{pmatrix}
-=
-\begin{pmatrix}
-\gamma        & -\gamma \beta \sigma_1 \\
--\gamma \beta \sigma_1 & \gamma \\
-\end{pmatrix}
-$$
-which is not the identity matrix for $\beta > 0$.
-
-However, it turns out that:
-\begin{eqnarray*}
-S^\dagger \gamma^0 S &=& 
-\begin{pmatrix}
-a_+^2+a_-^2        & 2 a_+ a_- \sigma_1 \\
-2 a_+ a_- \sigma_1 & a_+^2+a_-^2 \\
-\end{pmatrix}
-\begin{pmatrix}
-1        & 0 \\
-0        & -1 \\
-\end{pmatrix}
-\begin{pmatrix}
-a_+^2+a_-^2        & 2 a_+ a_- \sigma_1 \\
-2 a_+ a_- \sigma_1 & a_+^2+a_-^2 \\
-\end{pmatrix}\\[3pt]
-&=& \begin{pmatrix}
-a_+^2-a_-^2        & 0 \\
-0                  & a_-^2-a_+^2 \\
-\end{pmatrix}
-= \begin{pmatrix}
-1        & 0 \\
-0        & -1 \\
-\end{pmatrix}
-\end{eqnarray*}
-That is:
-$$S^\dagger \gamma^0 S = \gamma^0$$
-So now consider the quantity:
-$\psi^\dagger \gamma^0 \psi$
-we have:
-$$\widetilde{\psi}^\dagger \gamma^0 \widetilde{\psi}
-= (S \psi)^\dagger \gamma^0 (S \psi) 
-= \psi^\dagger (S^\dagger \gamma^0 S) \psi
-= \psi^\dagger \gamma^0 \psi
-$$
-which shows that this is indeed a relativistic invariant (scalar).  To clean up our notation, let's define the Dirac adjoint of a bi-spinor as:
-$$\overline{\psi} \equiv \psi^\dagger \gamma^0 $$
-We've just seen that $\overline{\psi} \psi$ is a scalar.  Next let's see how $\overline{\psi} \gamma^u \psi$ transforms.  We have:
-\begin{eqnarray*}
-\widetilde{\overline{\psi} \gamma^u \psi} &=& 
-\widetilde{\psi}^\dagger \gamma^0 \gamma^u \widetilde{\psi} \\
-&=& \psi^\dagger S^\dagger \gamma^0 \gamma^u S \psi \\
-\end{eqnarray*}
-Now by inserting a factor of $1 = S S^{-1}$ we see that:
-$$S^\dagger \gamma^0 \gamma^u S = (S^\dagger \gamma^0 S) (S^{-1}\gamma^u S)
-= (\gamma^0) (\Lambda^u_w \gamma^w)$$
-where we have used:
-$$S^\dagger \gamma^0 S = \gamma^0$$
-and
-$$S^{-1} \gamma^u S = \Lambda^u_w \gamma^w$$
-Notice the different roles that $S^\dagger$ and $S^{-1}$ play here.  Returning to our original calculation we have now:
-$$\widetilde{\overline{\psi} \gamma^u \psi} = \Lambda^u_w \overline{\psi} \gamma^w \psi$$
-which shows that $\overline{\psi} \gamma^u \psi$ is a four-vector.
 
 
 
