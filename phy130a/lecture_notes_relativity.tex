@@ -8,6 +8,8 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{braket}
+%\usepackage[american,fulldiode]{circuitikz}
+\usepackage{tikz}
 \begin{document}
 
 \title{PHY 130A \\ Lecture Notes: \\ 
@@ -63,7 +65,7 @@ As you will show in the exercise below, additional basic properties are deducibl
 Note that we use the same symbol ($0$) for both the scalar zero and the zero vector; you must infer which one it refers to from context.\\
 
 \exercise (*) Deduce properties (9)-(12) from axioms (1)-(8) and known
-properties of the scalar field $F$. $\square$ \\[3pt]
+properties of the scalar field $F$.  $\square$ \\[3pt]
 
 \noindent
 The vector space ${\mathbb R}^n$ was the inspiration for the abstract
@@ -74,25 +76,25 @@ and scalar multiplication, real-valued periodic functions $f(x)$ of a
 real variable with period $T$ over the scalar field of real numbers
 with ordinary addition and mulitiplication. 
 
-\exercise The set $V$ is the rational numbers $\mathbb{R}$ and the field $F$ is the real numbers, with ordinary addition and multiplication.  Show that $V$ is not a vector space.
+\exercise The set $V$ is the rational numbers $\mathbb{R}$ and the field $F$ is the real numbers, with ordinary addition and multiplication.  Show that $V$ is not a vector space. $\square$ \\[3pt]
 
-\exercise The set $V$ is the empty set.  Is $V$ a vector space?$\square$ \\[3pt]
+\exercise The set $V$ is the empty set.  Is $V$ a vector space? $\square$ \\[3pt]
 
 \exercise (*)
 For a vector space $V$ scalar multiplication is a null
 operation, that is $a v = v$ for all $a \in F$ and $v \in V$.  Deduce
-all of the vectors in the vector space $V$. \\[3pt]
+all of the vectors in the vector space $V$.  $\square$ \\[3pt]
 
 \exercise (*) The set $V$ is the positive reals, with all reals as the scalar field $F$.  For clarity in what follows, we'll use $\oplus$ for vector addition and $\odot$ for scalar multiplication.  Vector addition is defined as multiplication of the real numbers, which we write as:
 $$v \oplus w = v \, w  \hspace{1cm} v,w \in V$$
 for $w,v \in V$.  Scalar multiplication is exponentiation, which we write as:
 $$c \odot v = v^c  \hspace{1cm} v \in V, c \in F$$
 Show that $V$ is a vector space.  What is the real number corresponding to the vector $0$?
-$\square$ \\[3pt]
+ $\square$ \\[3pt]
 
 \exercise (*)
 For the previous exercise, verify explicitly that derived properties (10) and (12) hold for this vector space.
-$\square$ \\[3pt]
+ $\square$ \\[3pt]
 
 \noindent
 A basis $\mathcal{B}$ for a vector space $V$ is an ordered set of vectors $\mathcal{B} = {e_1, e_2, \cdots, e_m}$ with the following properties:
@@ -108,28 +110,28 @@ The scalar quantities $v^i$ are called the components of the vector, and they de
 \exercise
 Show that the components $v^i$ of a vector $v$ for
 basis $\mathcal{B}$ are unique. (This is essential for many of the
-results that follow.) $\square$ \\[3pt]
+results that follow.)  $\square$ \\[3pt]
 
 \noindent
 Throughout this course, we will use the Einstein summation convention, whereby there is an implicit sum over repeated dummy indices with one a superscript and the other a subscript, e.g.:
-$$v = v^i e_i \coloneqq \sum_i v^i e_i$$
+$$v = v^i e_i \equiv \sum_i v^i e_i$$
 Only {\bf after} a basis $\mathcal{B}$ is chosen, it is possible to represent a vector as a column vector:
 $$[v]_{\mathcal{B}} = \begin{pmatrix} v^1 \\ v^2 \\ \vdots \\ v^n \end{pmatrix}$$
 or a row vector:
 $$[v]_{\mathcal{B}}^T = \begin{pmatrix} v^1 & v^2 & \cdots & v^n \end{pmatrix}$$.
 
 \exercise
-We can think of the complex numbers as 2-D vector space with the real numbers as scalars.  Show that $e_1 = 1$ and $e_2 = i$ are a basis $\mathcal{B}$ for this vector space.  For $v = a + b i$, write the column vector $[v]_\mathcal{B}$.  This is why we are able to visualize the complex plane as a 2-D space. $\square$ \\[3pt]
+We can think of the complex numbers as 2-D vector space with the real numbers as scalars.  Show that $e_1 = 1$ and $e_2 = i$ are a basis $\mathcal{B}$ for this vector space.  For $v = a + b i$, write the column vector $[v]_\mathcal{B}$.  This is why we are able to visualize the complex plane as a 2-D space.  $\square$ \\[3pt]
 
 \exercise (*)
 The Pauli matrices:
-$$\sigma_x = \begin{pmatrix}
+$$\sigma_1 = \begin{pmatrix}
   0 &  1 \\ 1  & 0 \\
 \end{pmatrix},\hspace{1cm}
-\sigma_y = \begin{pmatrix}
+\sigma_2 = \begin{pmatrix}
   0 &  -i \\ i  & 0 \\
 \end{pmatrix},\hspace{1cm}
-\sigma_z = \begin{pmatrix}
+\sigma_3 = \begin{pmatrix}
   1 &  0 \\ 0  & -1 \\
 \end{pmatrix},
 $$
@@ -138,7 +140,7 @@ $$v =
 \begin{pmatrix}
   z &  x-iy \\ x+iy  & -z \\
 \end{pmatrix}$$
-as a column vector $[v]_\mathcal{B}$ with basis $\mathcal{B}=\{\sigma_x, \sigma_y, \sigma_z \}$ $\square$ \\[3pt]
+as a column vector $[v]_\mathcal{B}$ with basis $\mathcal{B}=\{\sigma_1, \sigma_2, \sigma_3 \}$  $\square$ \\[3pt]
 
 \noindent
 Suppose we have two bases $\mathcal{B}$ and $\mathcal{B}'$.  We have:
@@ -188,12 +190,12 @@ scalar $s$, to obtain a new basis.  We must scale the components from
 the original basis by some scalar value in order to obtain new
 components for the new basis which preserve the magnitude of the
 vector.  What is that scalar value?  Does the ``contra'' in
-contravariant components make sense in this context? $\square$ \\[3pt]
+contravariant components make sense in this context?  $\square$ \\[3pt]
 
 \exercise Consider the previous exercise, but instead of scaling, we
 rotate the original basis vectors by an angle $\theta$ about some axis
 $w$ to obtain a new basis.  Now we must rotate the components from the original basis about the axis $w$ by some angle, in order to obtain new components for the new basis which preserve the direction of the vector.  What is that angle?  Does the ``contra'' in contravariant components make sense in this context?
-$\square$ \\[3pt]
+ $\square$ \\[3pt]
 
 \section{Dual Vectors}
 
@@ -213,13 +215,13 @@ For a vector space $V$ over scaler field $F$, show that its dual space
 ($V^*$) is itself a vector space.  Vector addition (addition of dual
 vectors) and scalar multiplication are defined such that:
 $$(f+cg)(v) = f(v) + c g(v) \hspace{2cm} f,g \in V^*,\; v \in V,\; c \in F $$
-$\square$ \\[3pt]
+ $\square$ \\[3pt]
 
 \noindent
 Assume that $\mathcal{B} = \{ e_i\}$ is a basis for the vector space $V$.
 The action of any dual vector $f \in V^*$ on any vector $v \in V$ is completely determined by
 its action of $f$ on the basis vectors $e_i$.  For each i, we define a scalar quantity
-$$f_i \coloneqq f(e_i)$$
+$$f_i \equiv f(e_i)$$
 and we see that:
 \begin{equation}
 \label{eqn:dualout}
@@ -235,7 +237,7 @@ $$e^i(e_j) = \delta^i_j$$
 where
 $$\delta^i_j = \begin{cases} 1 & i=j \\ 0 & \text{otherwise}\end{cases}$$
 because $e_j$ is a vector in $V$ whose components are all 0, except for the $j$th component, which is 1.  You will show in the exercises below that the set of dual vectors $\{e^i\}$ are a basis for $V^*$, which we call the {\bf dual basis} and denote as $\mathcal{B}^*$.
-You will also show that the scalar quanties $f_i$ are in fact the components of $f$ in the $\mathcal{B}$, so we have:
+You will also show that the scalar quanties $f_i$ are in fact the components of $f$ in the basis $\mathcal{B}$, so we have:
 $$f = f_i e^i$$.
 which shows a dual vector $f$ expanded in terms of its components $f_i$ and basis vectors $e^i$.
 
@@ -245,7 +247,7 @@ $\mathcal{B}$, we see that {\bf if $V$ is finite dimensional, then it's
 dual space $V^*$ has the same dimension.}\\[3pt]
 
 \exercise (*)
-Verify that $e^i(v + c w) = e^i(v) + c e^i(w)$ so that $e^i$ is indeed a dual vector.$\square$ \\[3pt]
+Verify that $e^i(v + c w) = e^i(v) + c e^i(w)$ so that $e^i$ is indeed a dual vector. $\square$ \\[3pt]
 
 
 
@@ -253,7 +255,7 @@ Verify that $e^i(v + c w) = e^i(v) + c e^i(w)$ so that $e^i$ is indeed a dual ve
 $$f = f_i e^i$$
 is a valid expansion for $f$, by verifying that
 $$f(v) = v^i f_i$$
-as required by Equation~\ref{eqn:dualout}. This shows that $\{e^i\}$ spans the dual space.$\square$ \\[3pt]
+as required by Equation~\ref{eqn:dualout}. This shows that $\{e^i\}$ spans the dual space. $\square$ \\[3pt]
 
 \exercise 
 Show that if:
@@ -263,10 +265,10 @@ $a_i = 0$
 This shows that $\{e^i\}$ is linearly independent.
 Hint: define the dual vector
 $a = a_i e^i$
-and evaluate $a(e_i)$ for each $i$. $\square$ \\[3pt]
+and evaluate $a(e_i)$ for each $i$.  $\square$ \\[3pt]
 
 \exercise:(*)
-Consider the vector space $V=\mathbb{R}^3$ with the basis $e_1=i, e_2=j, e_3=k$.  For a vector $\vec{v} \in V$, write out the dual basis components $e^i(\vec{v})$ explicitly in terms of dot products.  For a dual vector $f \in V^*$, write out it's components $f_i$.  Write $f(\vec{v})$ expanded in terms of these components and basis vectors. $\square$ \\[3pt]
+Consider the vector space $V=\mathbb{R}^3$ with the basis $e_1=i, e_2=j, e_3=k$.  For a vector $\vec{v} \in V$, calculate the action of each dual basis vector on $v$ (i.e. $e^1(\vec{v})$, $e^2(\vec{v})$, $e^3(\vec{v})$) in terms of the components of $v$ (i.e. the $v^i)$.  Then write $f(\vec{v})$ in terms of these components and the components of $f$ (i.e. the $f_i$).  (NOTE: this example changed since assigned) $\square$ \\[3pt]
 
 We showed previously that the components of a vector $v$ tranform in a
 covariant fashion, so we call the $v^i$ the covariant components.
@@ -285,7 +287,7 @@ $\mathcal{B}=\{e_i\}$ and its scalar components $v^i \in F$:
 $$v = v^i e_i.$$
 We can likewise expand a dual vector $f \in V^*$ in terms of the dual
 basis $\mathcal{B}^*$ and its scalar components $f_i \in F$:
-$$f = f^i e^i$$
+$$f = f_i e^i$$
 Notice that the location of the indices in dual vectors is opposite that of vectors, reflecting that dual vectors have covariant components and vectors have contravariant components.  We can think of the scalar components $v^i$ and $f_i$ in two complementary ways.  First, $v^i$ and $f_i$ are the unique set of scalars which scale the basis vectors of $\mathcal{B}$ and $\mathcal{B}^*$ to the vectors $v$ and $f$.  Secondly, the components can both be obtained by evaluating a dual vector:
 $$v^i = e^i(v)$$
 and
@@ -316,8 +318,12 @@ Let $V$ be vector space and $V^*$ its dual space.  We define an $(r,s)$ tensor a
 \end{displaymath}
 The scalar value returned by a tensor is written as:
 $$T(v_1,v_2,\cdots,v_n,f_1,f_2,\cdots,f_s)$$
-where $v_1,v_2,\cdots,v_n \in V$ and $f_1,f_2,\cdots,f_n \in V^*$ are {\bf not} components of vectors or dual vectors, despite the indices.  We define addition and scalar multiplication in the obvious manner, as clarified by example below.
-This makes the set of all $(r,s)$ tensors a vector space, which we call $\mathcal{T}^r_s(V)$.
+where $v_1,v_2,\cdots,v_r \in V$ and $f_1,f_2,\cdots,f_n \in V^*$ are
+{\bf not} components of vectors or dual vectors but $r$, despite the
+indices, but $r$ entire vectors and $s$ entire dual vectors.  We
+define addition and scalar multiplication in the obvious manner, as
+clarified by example below.  This makes the set of all $(r,s)$ tensors
+a vector space, which we call $\mathcal{T}^r_s(V)$.
 
 The proliferation of indices makes talking about general tensors
 cumbersome, so let's work things out explicitly for a (1,1) tensor
@@ -325,7 +331,7 @@ even though our conclusions apply to all tensors.  We define tensor
 addition of two (1,1) tensors $T$ and $S$ by:
 $$(T+S)(v,f) = T(v,f) + S(v,f)$$
 with $v \in V$ and $f \in V^*$.  We define scalar multiplication by:
-$$(cT)(v,f) = c T(v,f)$$
+$$(cT)(v,f) = c \; (T(v,f))$$
 with $c \in F$.  Multilinearity means that:
 \begin{eqnarray*}
   T(v+cw,f) &=& T(v,f) + c \, T(w,f) \\
@@ -340,7 +346,7 @@ and vectors are examples of tensors.  Is that the case under the new
 definition?  The only immediately obvious connection is that a $(0,1)$
 tensor precisely reproduces the definition of a dual vector.  It is
 also convenient to consider (0,0) tensors as scalars.  That is, we can
-think of scalar as a scalar function with zero vector and zero dual
+think of scalar as a scalar-valued function with zero vector and zero dual
 vector arguments.\\[3pt]
 
 \noindent
@@ -349,7 +355,7 @@ Formally, we say that vectors are isomorphic to the
 (1,0) tensors by mapping each vector $v \in V$ to a (1,0) tensor $T_v$
 $$v \mapsto T_v$$
 defined by:
-$$ T_v(f) \coloneqq f(v).$$
+$$ T_v(f) \equiv f(v).$$
 Less formally, we are going to play a little game, you and I.  You
 only have an ordinary vector $v$, but you are going to convince me
 that you have a (0,1) tensor.  So I give you $f \in V^*$ and, quite
@@ -373,13 +379,13 @@ and the scalar value returned for $v, w \in V$ is written as
 $$T(v, w).$$
 A tensor is completely described by its action on any set of basis
 vectors.  The components of $T$ are defined as
-$$T_{ij} \coloneqq T(e_i, e_j)$$
+$$T_{ij} \equiv T(e_i, e_j)$$
 we can calculate 
 $$T(v,w) = T(v^i \, e_i, w^j \, e_j) = v^i T_{ij} w^j,$$
 which shows we can calculate $T(v,w)$ from only the components $T_{ij}$.\\[3pt]
 
 \noindent
-We can clearly see the difference between a tensor and matrix.
+We can clearly see the difference between a tensor and a matrix.
 Remember that vectors are geometric objects that exist independently
 of any particular basis.  Only after a basis has been selected, we can
 refer to them by their components, and arrange their components into
@@ -412,7 +418,7 @@ Use multilinearity to show that:
 $$T_{i'j'} = A_{i'}^k A_{j'}^l T_{kl}$$
 and:
 $$T_{ij} = A_i^{k'} A_j^{l'} T_{k'l'} $$
-$\square$ \\[3pt]
+ $\square$ \\[3pt]
 
 \exercise 
 For a vector space $V$ over scaler field $F$, show that the set of all (2,0) tensors is a vector space.\\[3pt]
@@ -421,7 +427,7 @@ For a vector space $V$ over scaler field $F$, show that the set of all (2,0) ten
 Suppose we have a (1,1) tensor $L$ so that $L:V \times V^* \to F$.  For any vector $v$ and basis $\mathcal{B}$, we can define a vector $w$ by its components:
 $$w^i = L(v,e^i) = L(v^j e_j, e^i) = L(e_j, e^i) v^j$$
 and so with components of $L$ defined as:
-$$L(e_j, e^i) \coloneqq L_j^i$$
+$$L(e_j, e^i) \equiv L_j^i$$
 we have
 $$w^i = L^i_j v^j$$
 We can thus interpret as a (1,1) tensor as a linear operator that maps $V \to V$.
@@ -463,7 +469,7 @@ is loosened to property (3) instead.\\[3pt]
 \exercise 
 Show that for any non-degenerate Hermitian form $(\cdot|\cdot)$:
 $$(v_1+c \, v_2| w) = (v_1| w) + \bar{c} (v_2| w)$$
-for all $v_1,v_2,w \in V$ and $c \in F$ $\square$ \\[3pt]
+for all $v_1,v_2,w \in V$ and $c \in F$  $\square$ \\[3pt]
 
 \noindent
 Given a vector $v \in V$ with non-degenerate Hermitian form
@@ -473,13 +479,13 @@ for all $w \in V$.  We call the dual vector $\tilde{v}$ the metric dual of $v$. 
 $$\widetilde{v} = (v|\cdot)$$.
 
 Now consider the map $L: V \to V^*$ that sends a vector to it's metric dual:
-$$L(v) \coloneqq \tilde{v}$$
+$$L(v) \equiv \tilde{v}$$
 
 \exercise Show that $L$ is conjugate linear, that is for $v_1,v_2 \in V$ and $c \in F$ then
 $$L(c v_1 + v_2) = c^* L(v_1) + L(v_2)$$
-Hint: $(L(c v_1 + v_2))(w) = (c \, v_1+v_2|w)$ $\square$ \\[3pt]
+Hint: $(L(c v_1 + v_2))(w) = (c \, v_1+v_2|w)$  $\square$ \\[3pt]
 
-\exercise Show that $L$ sends zero to zero. That is, show $L(0) = 0$. $\square$ \\[3pt]
+\exercise Show that $L$ sends zero to zero. That is, show $L(0) = 0$.  $\square$ \\[3pt]
 
 \exercise (*) Show that $L$ is a one-to-one map of $V \to V^*$, that is, show that:
 $$L(w) = L(v) \implies w=v$$
@@ -487,11 +493,11 @@ Hint: use non-degeneracy, i.e. if for all $x \in V$
 $$(v|x) = 0$$
 then
 $$v=0$$
-$\square$ \\[3pt]
+ $\square$ \\[3pt]
 
 \exercise (*) Show that the only vector $L$ sends to zero is zero, that is:
 $$L(w)=0 \implies w=0$$
-$\square$ \\[3pt]
+ $\square$ \\[3pt]
 
 \noindent
 For a finite-dimensional vector space $V$ recall that the dual space
@@ -505,7 +511,7 @@ they will span $V^*$, because $V$ and $V^*$ have the same dimension.
 To prove that $\{L(e_i)\}$ is linearly independent, assume there is some set of scalars $a^i$ such that:
 $$a^i L(e_i) = 0$$
 Then define a vector $v \in V$ by
-$$v \coloneqq a^i e_i $$
+$$v \equiv a^i e_i $$
 We have:
 $$L(v) = L(a^i e_i) = a^i L(e_i) = 0$$
 This implies (see previous exercises) that $v=0$, and so:
@@ -515,11 +521,11 @@ Therefore $\{L(e_i)\}$ is a basis for $V^*$\\[3pt]
 
 \exercise Given that $\{L(e_i)\}$ is a basis for $V^*$, show that the mapping $L$ from $V$ to $V^*$ is onto.  That is, show that for any $b \in V^*$, there is an $a \in V$ such that
 $$L(a) = b$$.
-$\square$ \\[3pt]
+ $\square$ \\[3pt]
 
 By now we have shown that the mapping $L$ is both one-to-one and onto,
-which means that it is an invertible mapping.  We can move freely from
-a vector to its metric dual and back again with no ambiguity.
+which means that it is an invertible mapping.  {\bf We can move freely from
+a vector to its metric dual and back again with no ambiguity.}
 
 For a Hilbert space $H$ with inner product $\braket{\cdot|\cdot}$.  In
 Dirac notation, a vector $\psi \in H$ is written as a ket
@@ -528,7 +534,7 @@ $\bra{\psi}$.\\[3pt]
 
 \exercise For $\psi \in H$ and $c \in F$, show that
 $$\bra{c \psi} = \overline{c} \bra{\psi}$$
-$\square$ \\[3pt]
+ $\square$ \\[3pt]
 
 That completes the math prelimineraries we will need for our
 invariance-based treatment of special relativity.
@@ -544,7 +550,11 @@ Special relativity, as formulated by Einstein, is based on two postulates:
 \end{tabular}
 \end{center}
 In what follows, we will only consider inertial frames, so we will
-drop the word ``inertial''.
+drop the word ``inertial''.  We will also only consider inertial
+frames with a relative velocity less than the speed of light.  In the
+exercises, you will explore the paradoxes that follow if inertial
+frames exist with a relative velocity equal to or greater than the
+speed of light.
 
 Suppose that in some frame $F$, light is emitted at time $t_{\rm A}$
 and position $(x_{\rm A}, y_{\rm A}, z_{\rm A})$.  The light travels
@@ -560,9 +570,9 @@ at time $t'_{\rm B}$ and position $(x'_{\rm B}, y'_{\rm B}, z'_{\rm B})$,
 $$c^2(t'_{\rm B}-t'_{\rm A})^2 - (x'_{\rm B}-x'_{\rm A})^2 - (y'_{\rm B}-y'_{\rm A})^2 - (z'_{\rm B}-z'_{\rm A})^2  = 0$$
 Quantities that have the same value in every reference frame are
 precious.  So this result alone is enough motivation to define the space-time
-interval $\Delta S*2$ between any two events A and B as:
+interval $\Delta S^2$ between any two events A and B as:
 \begin{equation}
-\Delta S^2 \coloneqq c (t_{\rm B}-t_{\rm A})^2 - (x_{\rm B}-x_{\rm A})^2 - (y_{\rm B}-y_{\rm A})^2 - (z_{\rm B}-z_{\rm A})^2
+\Delta S^2 \equiv c^2 (t_{\rm B}-t_{\rm A})^2 - (x_{\rm B}-x_{\rm A})^2 - (y_{\rm B}-y_{\rm A})^2 - (z_{\rm B}-z_{\rm A})^2
 \end{equation}
 The space-time interval thus defined has several properties that are immediately evident: 
 \begin{center}
@@ -575,7 +585,7 @@ The space-time interval thus defined has several properties that are immediately
 Property (A) is evident from the calculation that motivated the
 definition.  Property (B) follows because $\Delta S^2$ only involves
 the spatial components via the usual Euclidean metric:
-$$\Delta D^2 \coloneqq (x_{\rm B}-x_{\rm A})^2 + (y_{\rm B}-y_{\rm A})^2 + (z_{\rm B}-z_{\rm A})^2$$
+$$\Delta D^2 \equiv (x_{\rm B}-x_{\rm A})^2 + (y_{\rm B}-y_{\rm A})^2 + (z_{\rm B}-z_{\rm A})^2$$
 which is invariant under rotations.
 Property (C) follows because $\Delta S^2$ only involves differences in time and spatial components, e.g. $t_{\rm B} - t_{\rm A}$.
 
@@ -599,16 +609,66 @@ If we can exclude $b=-1$ always then $dS^2$ is invariant, and (by integration) $
 \end{tabular}
 \end{center}
 
-Suppose there are two events, labeled A and C, and some frame
-$F$ where $\Delta S^2<0$. In frame $F$, we emit a light pulse at Event
+\begin{figure}[htbp]
+\begin{center}
+\begin{tikzpicture}[scale=1]
+
+  % Frame F picture
+  \node at (3,-1) {$F$};
+  \node at (-0.3,2) {$ct$};
+  \draw[->, thick] (0,0.5) -- ++(0,5.0);
+
+  \node at (2,-0.3) {$x$};
+  \draw[->, thick] (0.5,0) -- ++(5.0,0.0);
+
+  \node[shape=circle,draw,thick] at (0,0) {A};
+
+  \draw[->, thick] (0.4,0.4) -- ++(1.25,1.25);
+  
+  \node[shape=circle,draw,thick] at (2,2) {B};
+
+  \draw[->, thick] (2,2.5) -- ++(0,1.0);
+  
+  \node[shape=circle,draw,thick] at (2,4) {C};
+
+  \draw[-, thick, dashed] (2.3,2.3) -- (5.0,5.0);
+
+  % Frame F' picture
+  \node at (10,-1) {$F'$};
+  
+  \node at (6.7,2) {$ct'$};
+  \draw[->, thick] (7,0.5) -- ++(0,5.0);
+
+  \node at (9,-0.3) {$x'$};
+  \draw[->, thick] (7.5,0) -- ++(5.0,0.0);
+
+  \node[shape=circle,draw,thick] at (7,0) {A};
+
+  \draw[->, thick] (7.4,0.4) -- ++(1.25,1.25);
+  
+  \node[shape=circle,draw,thick] at (9,2) {B};
+
+  \draw[->, thick] (9.15,2.5) -- ++(0.2,1.0);
+  
+  \node[shape=circle,draw,thick] at (9.5,4) {C};
+
+  \draw[-, thick, dashed] (9.3,2.3) -- (12.0,5.0);
+\end{tikzpicture}
+\end{center}
+\caption{\label{fig:abctex} A light pulse is emitted at event A and absorbed and recorded at event B, as seen in two frames $F$ and $F'$.  The record of the event remains at rest in frame $F$.}
+\end{figure}
+Suppose (as shown in Fig.~\ref{fig:abctex}) there are two events, labeled A and C, and some frame
+$F$ where $\Delta S^2>0$. In frame $F$, we emit a light pulse at Event
 A.  The light pulse travels through vacuum until it reaches the
-location of Event C, where it is aborbed and recorded, at event we
-label B.  The record remains at rest until event C.  Next consider how
-this looks in some other frame $F'$ traveling at velocity $v<c$ wrt
-frame $F$.  The light is emitted at Event A, and absorbed and recorded
-at Event B, but now the record travels at speed $v<c$ until Event C.
-Since $v < c$, the distance between Event A and Event C must therefore
-be less than $c(t'_{\rm B}-t'_{\rm A})$ so $\Delta S^2 < 0$.
+location of Event C, where it is absorbed and recorded, at an event we
+label B.  The record remains at rest until event C.
+
+Next consider how this looks in some other frame $F'$ traveling at
+velocity $v<c$ wrt frame $F$.  The light is emitted at Event A, and
+absorbed and recorded at Event B, but now the record travels at speed
+$v<c$ until Event C.  Since $v < c$, the distance between Event A and
+Event C must therefore be less than $c(t'_{\rm B}-t'_{\rm A})$ so
+$\Delta S^2 < 0$.
 
 We categorize space time intervals by the sign of the space-time interval as follows:
 \begin{center}
@@ -628,13 +688,26 @@ would have a contradiction of one of the previous two results).  Which demonstra
 
 Thus we conclude with the main result of this section, {\bf the space-time interval defined as:}
 \begin{equation}
-  \Delta S^2 = c \Delta t^2 - \Delta x^2 - \Delta y^2 - \Delta z^2
+  \Delta S^2 = c^2 \Delta t^2 - \Delta x^2 - \Delta y^2 - \Delta z^2
 \end{equation}
-{\bf is frame invariant.}
+{\bf is frame invariant.}\\[5pt]
+
+\noindent
+{\bf Exercise} Consider Fig.~\ref{fig:abctex} and suppose there is a
+frame $F''$ in which events A and B occuring at the spatial origin.  What is
+the speed of of frame $F''$ in frame F?  Show that events $A$ and $B$
+must occur simultaneously in frame $F$.  Note that as a result, the
+spatial origin of frame $F''$ at $t''=0$ is located at both events $A$ and $B$
+in the frame $F$.  So therefore there is no invertable map of space-time points
+between frame $F$ and $F''$.  We conclude that it is not possible for
+an inertial frame to travel at the speed of light as viewed from any
+other inertial frame.
 
 \section{Four-Vectors and the Metric of Space-Time}
 
-In order to represent points in space-time, we use the space $\mathbb{R}^4$, which is a vector space with the standard basis $\mathcal{B}$ consisting of of the following vectors:
+In order to represent points in space-time, we use the space
+$\mathbb{R}^4$, which is a vector space with the standard basis
+$\mathcal{B}$ consisting of of the following vectors:
 \begin{eqnarray*}
   e_0 &=& (1,0,0,0) \\
   e_1 &=& (0,1,0,0) \\
@@ -657,25 +730,25 @@ Hermitian form:
 \end{equation}
 
 \exercise
-Show that $(\cdot|\cdot)$ as defined above is a non-degenerate Hermitian form, by demonstrating that it has the three definining properties. $\square$ \\[3pt]
+Show that $(\cdot|\cdot)$ as defined above is a non-degenerate Hermitian form, by demonstrating that it has the three definining properties.  $\square$ \\[3pt]
 
 \exercise
 For position four-vectors $a,b \in V$ with space time interval is $\Delta S^2$, show that:
 $$(b-a|b-a) = \Delta S^2$$
-$\square$ \\[3pt]
+ $\square$ \\[3pt]
 
 \exercise
 Show that $(\cdot|\cdot)$ as defined above is {\bf not} an inner product.
-$\square$ \\[3pt]
+ $\square$ \\[3pt]
 
 \noindent
 We can interpret our non-degenerate Hermitian form as multilinear
 map $g: V\times V \to R$.  That is, as a (2,0) tensor:
-$$g(a,b) \coloneqq (a | b)$$
+$$g(a,b) \equiv (a | b)$$
 As always, we can work out the components of the tensor in the standard basis $\mathcal{B}$ with
 \begin{equation}
 \label{eqn:metrictensor}
-g_{\mu\nu} \coloneqq g(e_\mu, e_\nu) = (e_\mu | e_\nu)
+g_{\mu\nu} \equiv g(e_\mu, e_\nu) = (e_\mu | e_\nu)
 \end{equation}
 So now we can write:
 $$(a|b) = g(a,b) = g(a^\mu e_\mu, b^\nu e_\nu) =  a^\mu b^\nu g(e_\mu, e_\nu) = a^\mu b^\nu g_{\mu\nu} $$
@@ -690,7 +763,7 @@ In the exercises you will show that
 and all other elements are zero.  Thus, the metrix tensor $g$ can be represented by a matrix $G$ as:
 \begin{equation}
 \label{eqn:metric-matrix}
-[g]_\mathcal{B} = G \coloneqq 
+[g]_\mathcal{B} = G \equiv 
 \begin{pmatrix} 
 1 &  0 &  0 &  0 \\ 
 0 & -1 &  0 &  0 \\ 
@@ -698,34 +771,35 @@ and all other elements are zero.  Thus, the metrix tensor $g$ can be represented
 0 &  0 &  0 & -1 \\ 
 \end{pmatrix}
 \end{equation}
-Now, there is nothing special about the frame $F$ and its basis
-$\mathcal{B}$.  Therefore, we must reach the same conclusion about the
-matrix represenation of $G$ in any other iniertial frame $\mathcal{B}'$.  Specifically, we must have:
+Now, there is nothing special about the frame $F$ and its standard
+basis $\mathcal{B}$.  Therefore, we must reach the same conclusion
+about the matrix represenation of $G$ in any other iniertial frame
+$F'$ with standard basis $\mathcal{B}'$.  Specifically, we must have:
 $$
 [g]_\mathcal{B} = [g]_\mathcal{B}' = G
 $$
 for all frames.  The components of the metric tensor are the same in
-all intertial frames.
+all intertial frames.\\[5pt]
 
 \exercise
 Verify Equations \ref{eqn:metric-components} and \ref{eqn:metric-matrix} by calculating the matrix components.
-$\square$ \\[3pt]
+ $\square$ \\[3pt]
 
 \noindent
 Notice that $g$ is its own inverse, so defining:
-$$g^{\mu \nu} \coloneqq g_{\mu \nu}$$
+$$g^{\mu \nu} \equiv g_{\mu \nu}$$
 we have
 $$g^{\mu \alpha} g_{\alpha \nu}  = \delta^{\mu}_{\nu}$$
 
 \noindent
 With a Non-Degenerate Hermitian Form $(\cdot|\cdot)$ defined in Equation~\ref{eqn:ndhf}, then, as shown in Section~\ref{sec:metricdual}, to each vector $v \in V$ we can associate a metric dual
-$$\tilde{v} \coloneqq (v|\cdot)$$
+$$\tilde{v} \equiv (v|\cdot)$$
 which is shorthand for defining its action on any vector $w \in V$
 $$\tilde{v}(w) = (v|w)$$
 We can also fully describe $\tilde{v}$ by its components with respect to the basis vectors $\mathcal{B} = \{{e_\mu}\}$, because:
 $$\tilde{v}(w) = \tilde{v}(w^\mu e_\mu) = w^\mu \tilde{v}(e_\mu) = w^\mu \tilde{v}_\mu$$
 where the components of $\tilde{v}$ are:
-$$\tilde{v}_\mu \coloneqq \tilde{v}(e_\mu) = (v|e_\mu) = g(v,e_\mu) = g(v^\nu e_\nu , e_\mu)
+$$\tilde{v}_\mu \equiv \tilde{v}(e_\mu) = (v|e_\mu) = g(v,e_\mu) = g(v^\nu e_\nu , e_\mu)
 = v^\nu g(e_\nu , e_\mu)$$
 leading to the very useful result:
 \begin{equation}
@@ -738,6 +812,12 @@ $$v^\mu = g^{\mu\nu} \, \tilde{v}_\nu$$
 so that we can use the metric tensor to raise indices as well.
 Hint:  $g^{\mu \alpha} \, g_{\alpha \nu}  = \delta^{\mu}_{\nu}$.\\[3pt]
 
+\noindent
+{\bf Notation: } It is common practice to ommit the tilde from the
+dual of a four-vector $\tilde{v}_\mu$ as it can be inferred from the
+lowered index:
+$${v}_\mu \equiv \tilde{v}_\mu = g_{\mu\nu} \, v^\nu$$
+  
 \noindent
 Notice how our tensor definition applies here.  The metric tensor is a
 mapping $g:V \times V \to F$.  With one vector given, the metric
@@ -781,7 +861,7 @@ another the $\mathcal{B'}$.  Therefore, it is best to leave tensors
 aside and interpret $\Lambda^{\mu'}_{\nu}$ as the components of a
 matrix, labeled by the two sets of basis vectors which it transforms:
 $$[\Lambda]_{ \mathcal{B'} \to \mathcal{B}}
-\coloneqq \begin{pmatrix}
+\equiv \begin{pmatrix}
   \Lambda^{0'}_0 &\Lambda^{0'}_1 &\Lambda^{0'}_2 &\Lambda^{0'}_3 \\[3pt]
   \Lambda^{1'}_0 &\Lambda^{1'}_1 &\Lambda^{1'}_2 &\Lambda^{1'}_3 \\[3pt]
   \Lambda^{2'}_0 &\Lambda^{2'}_1 &\Lambda^{2'}_2 &\Lambda^{2'}_3 \\[3pt]
@@ -810,7 +890,7 @@ In similar fashion, we can consider $\Lambda^{\nu}_{\mu'}$ as the
 components of a matrix, labeled by the two sets of basis vectors it
 connects:
 $$[\Lambda]_{ \mathcal{B}' \to \mathcal{B}}
-\coloneqq \begin{pmatrix}
+\equiv \begin{pmatrix}
   \Lambda^{0}_{0'} &\Lambda^{0}_{1'} &\Lambda^{0}_{2'} &\Lambda^{0}_{3'} \\[3pt]
   \Lambda^{1}_{0'} &\Lambda^{1}_{1'} &\Lambda^{1}_{2'} &\Lambda^{1}_{3'} \\[3pt]
   \Lambda^{2}_{0'} &\Lambda^{2}_{1'} &\Lambda^{2}_{2'} &\Lambda^{2}_{3'} \\[3pt]
@@ -829,7 +909,7 @@ $$[\Lambda]_{\mathcal{B} \to \mathcal{B}'} \equiv [\Lambda]^{-1}_{\mathcal{B}' \
 {\bf Comments on Notation:} When there is little chance of
 confusion, we can speak of the transformation $\Lambda$, with matrix
 representation
-$$[\Lambda] \coloneqq [\Lambda]_{\mathcal{B}' \to \mathcal{B}}$$
+$$[\Lambda] \equiv [\Lambda]_{\mathcal{B}' \to \mathcal{B}}$$
 which would implicitly refer to the
 transformation applicable to the contravariant components when moving
 from frame $F$ to $F'$ (or, equivalently, to the covariant components
@@ -871,6 +951,13 @@ so, as $v$ is arbitrary, we must have:
 It follows that for vectors $a$ and $b$, not only are $(a|a)$ and
 $(b|b)$ invariant, but also $(a|b)$.  
 
+The metric tensor is an invariant tensor, which we can write in our notation as:
+$$g_{\alpha'\beta'} = \delta^{\alpha'}_\alpha \delta^{\beta'}_\beta g_{\alpha\beta}$$
+so we have:
+\begin{equation}
+\delta^{\alpha'}_\alpha \delta^{\beta'}_\beta \Lambda^{\alpha'}_{\mu} g_{\alpha\beta} \Lambda^{\beta'}_\nu =g_{\mu\nu}
+\end{equation}
+
 In the previous section, we saw that we can write
 $\Lambda^{\beta'}_\nu$ as the components of a matrix which transforms
 covariant basis vectors from $\mathcal{B}'$ basis to the
@@ -881,10 +968,10 @@ this in matrix notation as:
  A^T G A = G
 \end{equation}
 where $G$ is the frame invariant matrix representation of the metric
-tensor.  Notice that Equation~\ref{eqn:lorentgrouptn} is simply the
+tensor.  Notice that Equation~\ref{eqn:lorentzgrouptn} is simply the
 transformation rule for any (2,0)-tensor.  It is only the fact that
 the metric tensor has the same components in any basis that leads to
-this rather important result.
+this important result.
 
 A {\bf group} $G$ is a set of elements and an operation $\cdot$ with the properties:
 \begin{center}
@@ -896,21 +983,20 @@ A {\bf group} $G$ is a set of elements and an operation $\cdot$ with the propert
 \end{tabular}
 \end{center}
 
-\exercise (*) For $a,b \in G$, show that if $a b = e$ then $b = a^{-1}$. $\square$ \\[3pt]
+\exercise (*) For $a,b \in G$, show that if $a b = e$ then $b = a^{-1}$.  $\square$ \\[3pt]
 
-\exercise For $a,b \in G$, show that if $a b = a$ then $b = e$. $\square$ \\[3pt]
+\exercise For $a,b \in G$, show that if $a b = a$ then $b = e$.  $\square$ \\[3pt]
 
-\exercise For $a \in G$ show that $(a^{-1})^{-1} = a.$ $\square$ \\[3pt]
+\exercise For $a \in G$ show that $(a^{-1})^{-1} = a.$  $\square$ \\[3pt]
 
 \noindent
 
 The set of all matrices $A$ that satisfy
-Equation~\ref{eqn:lorentzmatrices} together with ordinary matrix
-multiplication defines the Lorentz group.
-
-Group property (B) follows directly from the associative property of
-matrix multiplication.  The identity matrix satisfies
-Equation~\ref{eqn:lorentzmatrices} so property (C) holds.
+Equation~\ref{eqn:lorentzgroup} together with ordinary matrix
+multiplication defines the Lorentz group.  Group property (B) follows
+directly from the associative property of matrix multiplication.  The
+identity matrix satisfies Equation~\ref{eqn:lorentzgroup} so property
+(C) holds.\\[5pt]
 
 \exercise (*) Show that property (A) holds for the Lorentz group.  That is, if
 $$A^T G A = G$$
@@ -935,7 +1021,7 @@ $$R = \begin{pmatrix}
   0 &\sin\theta & \cos\theta & 0 \\[3pt]
   0 & 0 & 0 & 1 \\
 \end{pmatrix}$$
-is a member of the Lorentz Group.$\square$\\[3pt]
+is a member of the Lorentz Group. $\square$\\[3pt]
 
 \exercise (*) Show that a Lorentz boost along the $x$-axis:
 $$L = \begin{pmatrix}
@@ -945,8 +1031,8 @@ $$L = \begin{pmatrix}
   0 & 0 & 0 & 1 \\
 \end{pmatrix}$$
 with
-$$\gamma \coloneqq \frac{1}{\sqrt{1-\beta^2}}$$
-is a member of the Lorentz Group.$\square$\\[3pt]
+$$\gamma \equiv \frac{1}{\sqrt{1-\beta^2}}$$
+is a member of the Lorentz Group. $\square$\\[3pt]
 
 \exercise (*) Show that time reversal:
 $$T = \begin{pmatrix}
@@ -955,7 +1041,7 @@ $$T = \begin{pmatrix}
   0  & 0 & 1 & 0 \\[3pt]
   0  & 0 & 0 & 1 \\
 \end{pmatrix}$$
-is a member of the Lorentz Group.$\square$\\[3pt]
+is a member of the Lorentz Group. $\square$\\[3pt]
 
 \exercise (*) Show that parity:
 $$P = \begin{pmatrix}
@@ -964,7 +1050,7 @@ $$P = \begin{pmatrix}
   0 &  0 & -1 &  0 \\[3pt]
   0 &  0 &  0 & -1 \\
 \end{pmatrix}$$
-is a member of the Lorentz Group.$\square$\\[3pt]
+is a member of the Lorentz Group. $\square$\\[3pt]
 
 \exercise Show that:
 \begin{eqnarray*}
@@ -1000,7 +1086,7 @@ quantity is the goal of this section.
 Consider two time-like events A and B, which (by definition) have a
 space-time interval $\Delta S^2 > 0$.  We define the proper-time
 ($\tau$) between these two events as:
-$$\tau \coloneqq \frac{\sqrt{\Delta S^2}}{c}$$
+$$\tau \equiv \frac{\sqrt{\Delta S^2}}{c}$$
 The proper-time $\tau$ is equivalent to the elapsed (postive) time in the {\bf
   particular} frame where the events occur at the same location.  Such
 a frame exists because $\Delta S^2 > 0$, and calculating in that frame
@@ -1032,7 +1118,7 @@ $t$ is measured.
 We use the proper-time $\tau$ to define the four-velocity $\eta$ (also
 called proper velocity in Griffiths) by its components:
 \begin{equation}
-\eta^\mu \coloneqq \frac{dx^\mu}{d\tau}
+\eta^\mu \equiv \frac{dx^\mu}{d\tau}
 \end{equation}
 Since $\tau$ and so $d\tau$ is an invariant, we see that the components $\eta^\mu$
 transform as for a four-vector, and so, by definition, the four-velocity is a four-vector.  Let's work out the coordinates in frame $F$ by using $d\tau = dt/\gamma$:
@@ -1050,16 +1136,16 @@ It is left as an exercise to show that the invariant associated with $\eta$ is
 \eta^\mu \eta_\mu = \eta^\mu \eta^\nu g_{\mu \nu} = c^2
 \end{equation}
 
-\exercise Show by an explicit calculation that Equation~\ref{eqn:fvsq} is correct.$\square$\\[3pt]
+\exercise Show by an explicit calculation that Equation~\ref{eqn:fvsq} is correct. $\square$\\[3pt]
 
-Next we define the four vector $p$ by it's components:
+Next we define the four vector $p$ by its components:
 \begin{equation}
-p^\mu \coloneqq m \eta^\mu
+p^\mu \equiv m \eta^\mu
 \end{equation}
 assuming that the mass of a particle is invariant, then $p^\mu$ transforms as a four-vector, and so is itself a four-vector, with
 $$[p]_\mathcal{B} = \begin{pmatrix} \gamma mc \\ \gamma m v_x \\ \gamma m v_y \\\ \gamma m v_z \end{pmatrix}$$
 
-In the non-relativistic limit, we can approximate $\gamma$ by it's Taylor series near $\beta=0$
+In the non-relativistic limit, we can approximate $\gamma$ by its Taylor series near $\beta=0$
 $$\gamma = \frac{1}{\sqrt{1-\beta^2}} = 1 + \frac{1}{2} \beta^2$$
 In this limit, we see that
 \begin{eqnarray*}
@@ -1068,7 +1154,7 @@ In this limit, we see that
   p^3 &\approx& m v_z \\
 \end{eqnarray*}  
 so that the spatial part of $p$ reproduces the non-relativistic
-momentum for small $\beta$.  For the spatial part, we see that:
+momentum for small $\beta$.  For the temporal component, we see that:
 $$p^0 c \approx m c^2 + \frac{1}{2} m v^2 $$
 The second term is just the classical kinetic energy, which identifies
 $p^0$ as the relativistic energy of the particle deviced by a factor
@@ -1092,7 +1178,7 @@ for small $\beta$.
 Notice that the invariant associated with $p$ is:
 $$p^\mu p_\mu = m^2 \nu^\mu \nu_\mu = m^2 c^2$$
 and also:
-$$p^\mu p_\mu = (E/c)^2 - \vec{p}\cdot\vec{o}$$
+$$p^\mu p_\mu = (E/c)^2 - \vec{p}\cdot\vec{p}$$
 so we have:
 $$E^2 = (mc^2)^2 + |\vec{p}|^2 c^2$$
 Particle physicist know and love this equation as:
@@ -1100,13 +1186,23 @@ $$E^2 = m^2 + p^2$$
 {\bf You must memorize this equation} (or its derivation).  It will
 not be given to you on exams, and you will need it.  I suggest to
 memorize it stripped of the factors of $c$ and then add them (if
-necessary) by dimensionally analysis.
+necessary) by dimensional analysis.
 
 The experimental evidence confirms that $p$ is indeed conserved.  In
 classical mechanics, we had conservation of energy and momentum
 separately.  In relativistic kinematics, four-momentum is conserved
 which implies conservation of relativistic energy and relativistic
-momentum.
+momentum.\\[5pt]
+
+
+\noindent
+{\bf Exercise:} Suppose a particle of mass $m>0$ has total energy $E$.
+Show that the speed of the particle is less than $c$.  Because of
+convervation of energy, this shows that a massive particle cannot be
+accelerated to the speed of light by consuming a finite amount of
+energy.  Assuming any observers would have $m>0$, this is one
+explanation for why no inertial frames have a speed that meets
+
 
 \section{Massless Particles}
 
@@ -1117,7 +1213,7 @@ $$E=\frac{mc^2}{\sqrt{1-(v/c)^2}}$$
 both go to zero for $m=0$ {\bf unless} $v=c$ in which case they are indeterminate.  We still have, however,
 $$E^2 = (mc^2)^2 + |\vec{p}|^2 c^2$$
 which yields:
-$$E = |p|c$$
+$$E = |\vec{p}|c$$
 So special relativity allows for massless particles that travel
 exclusively at the speed of light.  Massive particles have their momentum and energy defined by their velocity, but that is not possible for massless particles which travel at the speed of light.  Special relativity has no prescription for how the energy of massless particle is determined, but quantum mechanics does.  We have photons with energy given by:
 $$E = \hbar \omega$$
