@@ -1,0 +1,402 @@
+\documentclass[12pt]{article}
+
+\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.5in]{geometry}
+\usepackage{cite}
+\usepackage{slashed}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{braket}
+\usepackage{pythonhighlight}
+\usepackage{mathtools}
+\usepackage{tikz}
+\begin{document}
+
+
+\title{PHY 112L \\ A 2-D Ideal-Gas Atmosphere}
+\author{Michael Mulhearn}
+
+\maketitle
+
+\section{Introduction}
+
+In this assignment, we will model an atmosphere as an ideal gas in two
+dimensions.  We will measure the heat exchanged during the approach to
+thermal equilibrium, numerically determine the heat capacity of an ideal gas, and compare with our theoretical expectaion.  Next, we will add gravity to our model and measure how this impacts the molecular density and heat capacity of the atmosphere.
+
+\section{Heat Capacity of an Ideal Gas}
+
+For an ideal gas (without gravity) the total energy $U$ is purely
+kinetic, and the equipartition theorem implies that:
+\begin{equation}
+U = \frac{f}{2}NkT
+\end{equation}
+where $f$ is the number of quadratic degrees of freedom: 3 for an
+ideal-gas in 3-D, and 2 for an ideal-gas in 2-D.
+
+The heat capacity $C$ describes quantitatively how the temperature of the gas changes as heat is added or removed:
+\begin{equation}
+C \equiv \frac{Q}{\Delta T}
+\end{equation}
+\noindent
+Under constant volume, no work is done on the gas, and so:
+$$\Delta U = Q + W = Q$$
+Therefore, we can calculate the heat capacity under constant volume as:
+$$C_V \equiv \left( \frac{Q}{\Delta T}\right)_V = \left( \frac{\Delta U}{\Delta T}\right)_V
+$$
+and taking $\Delta T$ small, we have:
+\begin{equation}
+C_V = \left( \frac{\partial U}{\partial T} \right)_V
+\end{equation}
+Applying this to an ideal gas we find that:
+\begin{equation}
+\label{eqn:cv}
+C_V = \frac{f}{2} N k
+\end{equation}
+
+When two systems, $A$ and $B$, initally at temperatures $T_A$ and $T_B$ are brought into thermal contact, they reach an equilibrium temperature $T$ by exchanging heat.  The conservation of energy implies that:
+$$C_A T_A + C_B T_B = C_A T + C_B T$$
+where $C_A$ and $C_B$ are the heat capacities of the two sytems.  Equivalently:
+\begin{equation}
+T = \frac{C_A}{C_A + C_B} \cdot T_A + \frac{C_B}{C_A + C_B} \cdot T_B
+\end{equation}
+Notice that for an infinite reservoir $R$ with $C_R = \infty$ this reduces to:
+$$T = T_R$$
+Also, in the case that $C_A = C_B$, we have:
+$$T = \frac{T_A + T_B}{2}$$
+that is, the temperatue is just the average of the two system.
+
+\section{Ideal Gas with Gravity}
+
+Suppose now that our ideal gas is in a constant gravitation field with acceleration $g$.
+Then each particle has gravitational potential energy:
+\begin{equation}
+E_{\rm grav} = m g y
+\end{equation}
+where we have set $y=0$ as the zero potential.  We expect the position
+of the particles to follow a Boltzmann distribution, so that:
+\begin{equation*}
+p(y) \propto \exp\left( -\frac{E_{\rm grav}(y)}{kT} \right) = \exp\left( -\frac{m g y}{kT} \right)
+\end{equation*}
+The normalization condition:
+$$\int_0^\infty p(y) dy = 1$$
+gives us the normalization constant, and so:
+\begin{equation}
+p(y) = \frac{mg}{kT} \exp\left( -\frac{m g y}{kT} \right) 
+\end{equation}
+This is a decaying exponential, so that the atmosphere gets thinner as you go higher, exactly as we expect.  The average height of the gas molecules is:
+\begin{equation}
+\label{eqn:yexp}
+\braket{y} = \frac{k T }{m g}
+\end{equation}
+The total gravitation potential energy for the entire gas is:
+$$U_{\rm grav} = \sum_i m g y_i = N m g \braket{y}$$
+and using Equation~\ref{eqn:yexp} we have:
+$$U_{\rm grav} = N kT$$
+The total energy $U$ of the system includes the kinetic energy part, so:
+\begin{equation}
+U = \frac{f}{2} N k T + NkT = \frac{f+2}{2} N k T
+\end{equation}
+thus the heat capacity of our atmosphere is:
+\begin{equation}
+\label{eqn:cvg}  
+C_V = \left( \frac{\partial U}{\partial T} \right)_V = \frac{f+2}{2} N k 
+\end{equation}
+Notice the system is still at constant V (just V is now infinite) or,
+more importantly, no external work is done to the atmosphere, so our
+previous result for the kinetic part still apply.  The influence of
+gravity increases the heat capacity by $Nk$.  This additional heat
+capacity comes from the systems ability to stash additional energy as
+gravitation potential energy.  This situation is quite analogous to a
+gas under constant pressure, for which the same addtional factor for the heat capacity is obtained.
+
+\section{System of Units}
+
+We will use our same system of units as in the previous assignment
+with one additional constraint.  Interesting, the ideal gas model of
+HW 1 had no specific length scale defined, we simply took it to be
+some scale of interest which we called $a$.  Our results apply equally
+well to the air in child's balloon or the vast extremely low-density
+plasmas of the interstellar medium.  Once we turn on gravity, however,
+there is a relevant length scale given by Equation~\ref{eqn:yexp}.  So
+we set:
+\begin{equation}
+ \label{eqn:newa}
+a \equiv \frac{k T_0}{m g}
+\end{equation}
+so that:
+\begin{equation}
+  \label{eqn:expy}
+  \braket{y/a} = \frac{T}{T_0}
+\end{equation}
+There is no need to change any of our results from the previous
+homework.  {\bf The quantity $a$ will still be set to $1$ in your
+  code.}  It's only in interpreting our results that we would be
+forced to apply Equation~\ref{eqn:newa}.  
+
+The other units that we defined in the previous homework continue to
+apply, so let's recall them here.  Motivated by the Maxwell-Boltzmann
+distribution, the velocity unit
+$v_0$ is defined by:
+$$ v_0^2 \equiv \frac{k T_0}{m}$$
+and the unit for time is:
+$$ \tau \equiv a / v_0$$
+Notice that our units of acceleration are now:
+$$\frac{a}{\tau^2} \equiv g$$
+Motivated by the ideal gas law, we can set the unit of pressure to:
+$$O_0 \equiv \frac{NkT_0}{a^2}$$
+and the unit of total energy:
+$$U_0 = N k T_0$$
+Remember that for analytic work, we keep these factors in place.  But when using an
+analytic result within our computer programs, we set all of these quantities to 1:
+$$m = a = g = T_0 = v_0 = \tau = O_0 = U_0 = 1$$
+However, if you would like, you can turn off gravity in a specific
+context by setting $g=0$. Just take care that you turn gravity on with $g=1$.
+As before, the temperature of an ideal gas is still calculated through
+the average kinetic energy, which in our system of units becomes:
+\begin{equation}
+ \label{eqn:expv}
+  \frac{T}{T_0} = \frac{\braket{v_x^2/v_0^2} + \braket{v_y^2/v_0^2}}{2}
+\end{equation}
+This is also the total kinetic energy of the gas, in units of total energy.
+The total energy of the gas has a new term from the gravitation potentail energy, so that:
+\begin{equation}
+  \frac{U}{U_0} = \frac{\braket{v_x^2/v_0^2} + \braket{v_y^2/v_0^2}}{2} + \braket{y/a} 
+\end{equation}  
+Using Equations \ref{eqn:expy} and \ref{eqn:expv} we can write this rather elegantly as:
+\begin{equation}
+  \frac{U}{U_0} = 2 \cdot \frac{T}{T_0}
+\end{equation}  
+Recalling that:
+$$C_V = \left( \frac{\partial U}{\partial T}\right)_V$$
+we see that in our units, the heat capacity of our gas under the influence of gravity is:
+\begin{equation}
+\frac{C_V}{U_0 / T_0} = 2
+\end{equation}
+If we turn off gravity, we lose the gravitational potential term in the total energy and have:
+\begin{equation}
+  \frac{U}{U_0} = \frac{T}{T_0}
+\end{equation}  
+and:
+\begin{equation}
+\frac{C_V}{U_0 / T_0} = 1
+\end{equation}
+Notice that you can also get these results for $C_V$ from Equations~\ref{eqn:cv} and
+\ref{eqn:cvg} if you simply divide by
+$$U_0/T_0 = N k$$
+and set $f=2$.
+
+\section{Bouncing under Gravity}
+
+When simulating our atmosphere under the influence of gravity, we'll
+have to adjust our algorithm for circulating the gas and bouncing off
+the ground.  We'll no longer need a top for our cylinder of gas, we'll
+allow particles to reach as high as they can under the influence of
+gravity.
+
+Our numerical model includes the $y$-position of each molecules.
+While inside the container, the molecules position can be updated for
+a time step $\Delta t$ as:
+\begin{equation}
+y \to y + v_y \; \Delta t - \frac{1}{2} \; g \; (\Delta t)^2
+\end{equation}
+and the velocity by:
+\begin{equation}
+v_y \to v_y \; - g \Delta t
+\end{equation}
+
+
+
+
+\begin{figure}[htbp]
+  \begin{center}
+    
+    \begin{tikzpicture}[scale=0.30]
+      % Parameters
+      \def\xa{5}    % x-intercept a
+      \def\xb{35}   % x-intercept b
+      \def\yv{5}     % vertex y-position
+
+      % Compute k from x1, x2, yv: k = -4*yv / (x2-x1)^2
+      \pgfmathsetmacro{\k}{-4*\yv/((\xb-\xa)^2)}
+
+      % Parabola domain
+      \def\xstart{10}
+      \def\xend{45}
+
+      % Reference line y=0
+      \draw[dashed, thick] (0,0) -- (50,0);
+
+      % Draw blue parabola:
+      \draw[blue, line width=1.5pt, domain=\xstart:\xb, smooth, variable=\x, samples=200]
+      plot ({\x},{\k*(\x-\xa)*(\x-\xb)});
+
+      % Draw dashed blue parabola:
+      \draw[blue, dashed, line width=1.5pt, domain=\xb:\xend, smooth, variable=\x, samples=200]
+      plot ({\x},{\k*(\x-\xa)*(\x-\xb)});
+      
+      % Red parabola (bounced), translated in x by (x2 - x1)
+      \pgfmathsetmacro{\xc}{\xb + (\xb-\xa)}      %
+      \draw[red, line width=1.5pt, domain=\xb:\xend, smooth, variable=\x, samples=200]
+      plot ({\x},{\k*(\x-\xb)*(\x-\xc)});
+      
+
+      % labels:
+      \node[black, below] at (2, 0) {$y=0$};
+      \node[black, right] at (\xend-1, 3) {$y=y_b, v_y=v_b$};
+      \node[black, right] at (\xend-1,-7) {$y=y_a, v_y=v_a$};
+      \node[black, below] at (\xb-2,0) {$v_y=\pm v_0$};
+
+      \node[black, below] at (20,0) {$t \rightarrow$};
+      
+    \end{tikzpicture}
+\caption{After a timestep $\Delta t$ shown in blue, some molecule
+  trajectories pass through $y=0$, as if the ground was not there,
+  ending at $y = y_a < 0$ and $v_y = v_a < 0$.  The bouncing algorithm finds $y_b$ and $v_b$, following the bounced red trajectory instead, and ending at the same time. }
+\label{fig:bounce}
+\end{center}
+\end{figure}
+
+
+There is no longer any need to bounce at the top of the cylinder, as
+the last term will inevitably pull molecules back toward $y=0$.  We
+will, however, have to handle particles bouncing off the bottom of the
+container at $y = 0$, as illustrated in Fig.~\ref{fig:bounce}.
+Suppose that after a time step $\Delta t$, we have a particle that
+passed through the bottom of the container, with $v_y = v_a$ and $y =
+y_a$.  We will certainly have:
+$$y_a < 0$$
+and
+$$v_a < 0.$$ Bouncing is not so simple in this case, due to the
+acceleration due to gravity.  Our approach will be to find position
+$y_b$ and velocity $v_b$ if the particle had bounced, instead of
+simply passing through $y=0$.  Our first step is to find the time $t$
+since we passed though $y=0$, with $y = y_0 = 0$ and $v_y = v_0$.  We
+do not yet know either $v_0$ or $t$, but they are easy to calculate from 1-D kinematics:
+$$v_a = v_0 - gt$$
+so that:
+$$t = \frac{v_0 - v_a}{g}$$
+and also:
+$$v_a^2 = v_0^2 - 2 g y_a$$
+so:
+$$v_0 = - \sqrt{v_a^2 + 2 g y_a}$$
+notice that we have kept the negative square root corresponding to the most
+recent crossing of $y=0$ with $v_0 < 0$.  (The other root corresponds
+to an earlier time with the molecule passing upwards through $y=0$.)
+And so:
+$$t = \frac{-v_a-\sqrt{v_a^2 + 2 g y_a}}{g}$$
+That result for $t$ is completely valid, except it is numerically
+unstable (...) so instead we use the equivalent form:
+\begin{equation}
+t = \frac{- 2 y_a}{\sqrt{v_a^2 + 2 g y_a} - v_a}
+\end{equation}
+which is numerically stable for $v_a < 0$.
+
+With $v_0$ and $t$ in hand, we can calculate the position $y_b$ and the
+$y$-component of veloctiy $v_b$ had the particle bounced at $y=0$, which is to say that $v_0 \to -v_0$.  So:
+\begin{eqnarray*}
+y_b &=& (-v_0 t) - \frac{1}{2}\; g t^2 \\
+\end{eqnarray*}
+and:
+\begin{equation}
+v_b = (-v_0 t) + gt \\
+\end{equation}
+Take care that $-v_0$ is positive!
+
+Note that if $t$ is large enough, the particle may have fallen below
+$y=0$, so that $y_b<0$.  You will have to keep bouncing molecules
+until all of them have $y > 0$ at the end of the time step.
+
+
+\begin{equation}
+v_b = -v_a - 2 g (y_b - y_a)
+\end{equation}
+
+\section{Homework Problems}
+
+{\bf Zero credit if you do not use our system of units consistently!}
+When I ask you to calculate a quantity, e.g. temperature, I want the
+answer in our units, e.g. $T_0$.  Do not first calculate in SI units
+and then convert!\\[3pt]
+
+\noindent
+The starting point for this assigment is Problem 4 from the previous
+homework.  You will want to initialize a numerical model for an ideal
+gas tracking variables $v_x$, $v_y$, and $y$ for $N=10000$ molecules,
+with height $H=4a$.  If you haven't already, define a function that
+brings your gas into thermal contact with a reservoir of temperature
+$T_R$, with an input parameter for the number of collisions.  Call it
+what you want, but we will refer to it as {\tt collide\_reservoir}
+below.  Use {\tt collide\_reservoir} to bring your gas into
+equilibrium with a reservoir with $T_r = 1 T_0$.\\[3pt]
+
+\noindent
+{\bf Problem 0:} If you did not finish the last problem of HW 1, submit it with this assignment instead.  If you completed it already in HW 1, leave a comment to that effect in your notebook.\\[3pt]
+
+\noindent
+{\bf Problem 1:} Modify your {\tt collide\_reservoir} function to
+measure the kinetic energy of the reservoir before and after the
+collisions, and return the heat $Q$ transferred to the gas as the
+return value for the function.  Start with the gas at $T=1~\rm T_0$.
+Call {\tt collide\_reservoir} to perform $n_{\rm coll} = N = 10000$
+collisions with a reservoir at $T=2~\rm T_0$.  Record the gas
+temperature and the heat exchanged at this step.  Call the {\tt
+  collide\_reservoir} function a total of 10 times in this manner,
+recording the gas temperature and heat exchanged each time.  Plot $Q$
+versus iteration (from 1 to 10) and $T$ versus iteration (from 1 to
+10).  You should see the $Q$ values are large for the first few
+iterations and then oscillate near zero.  You should see the
+temperature rising steadily until it reaches $T=2 T_0$.  This exercise
+should convince you that it takes about ten times as many collisions
+as gas molecules to reliably bring your gas into thermal equilibrium.\\[3pt]
+
+\noindent
+{\bf Problem 2:} Return your gas to $T=1~\rm T_0$.  Then call {\tt
+  collide\_reservoir} with $T_r = 2\;T_0$ for $n_{\rm coll} = 10 N =
+100,000$ collisions, and record the temperature of your gas and the
+heat exchanged.  Next, bring your gas into thermal contact with a
+reservoir at $T=3\;T_0$, and record the heat exchanged.  Repeat this
+process until your reach $T=5\;T_0$.  Plot the total heat exchanged as
+a function of each temperature point. For example, the total heat
+exchanged at temperature $T=3\;T_0$ would be the sum of the $Q$
+exchanged with the reservoirs at $T_r = 2\;T_0$ and at $T_r = 3\;
+T_0$. Read off the heat capacity of your gas from the plot, and
+compare it to expecation in the comments.\\[3pt]
+
+\noindent
+{\bf Problem 3:} Call your current gas model ``gas A''.  Create a
+second gas model ``gas B'' with the same parameters.  Intialize gas A
+to $T=1 T_0$ and gas B to $T=2 T_0$.  Bring gas A and gas B into
+thermal contact with each other for $n_{\rm coll} = 10 N = 100,000$
+collisions.  Measure the temperature of both after the collisions and
+compare with your expectations in the comments.\\[3pt]
+
+\noindent
+{\bf Problem 4:} Define a function that updates your gas for a time
+step $\Delta t$ accounting for a non-zero gravity, and handling
+bouncing at $y=0$, as described in the text.  Use this to turn gas A
+into a model for the atmosphere with gravity and $T = 1\rm T_0$.  To
+do so use\footnote{Other combinations work, but I found this to be a reliable and reasonably efficient setting.} a total of $n_{\rm coll} = 20 N = 200,000$
+collisions and $n_{\rm step} = 2000$ time steps of size $\Delta t =
+0.01\tau$.  During each time step, account for gravity and then
+simulate thermal contact with a reservoir at $T_r = 1 T_0$ for $n_{\rm
+  coll}/n_{\rm step}$ collisions.  Measure the temperature of the gas
+and the total energy (kinetic and gravitational) and compare with your
+expectation.\\[3pt]
+
+\noindent
+{\bf Problem 5:} Make a histogram of the $y$-position of the
+molecules, and compare to the theoretical prediction in the text.\\[3pt]
+
+\noindent
+{\bf Problem 6:} Bring your atmosphere (gas A) at temperature $T=1~\rm
+T_0$ into thermal contact with (gas B) at temperature $T=4~\rm T_0$.
+Apply gravity to gas A but not to gas B.  Use a total of $n_{\rm coll}
+= 20 N = 200,000$ collisions, spread across $n_{\rm step} = 2000$ time
+steps of size $\Delta t = 0.01\tau$, as in the previous problem.
+Measure the equilibrium temperature and compare to your expectation,
+based on the heat capacities of the two gases.  (Make sure you do not
+use {\tt collide\_reservoir} while bring the two gases into
+equilibrium.)\\[3pt]
+
+\end{document}

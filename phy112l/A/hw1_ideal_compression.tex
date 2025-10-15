@@ -128,10 +128,10 @@ The PDF for the $x$ component of velocity becomes:
 f(v_x/v_0) \; dv_x/v_0 = \left( \frac{T_0}{2\pi T} \right)^{1/2} \; \exp \left(-\frac{v_x^2}{2v_0^2} \cdot \frac{T_0}{T}\right) \; dv_x. 
 \end{equation}
 For analytic work we would say that the sigma of the Gaussian is:
-$$\sigma = v_0 \sqrt{T_0 / T}$$
+$$\sigma = v_0 \sqrt{T / T_0}$$
 but in our program we would simply have:
 \begin{python}
-  sig = 1 / T**0.5
+  sig = T**0.5
 \end{python}
 The temperature of an ideal gas is still calculated through the average kinetic energy:
 $$kT = \braket{K}$$
@@ -642,11 +642,24 @@ Apply your collision model to a radomly choosen gas molecule and a randomly draw
 {\bf Problem 5:}
 Simulate pressure with the gas at $T = 1 T_0$ and the plunger {\bf
   stationary} at $h=4a$.  Update the $y$ position of each molecule for
-a time interval $\Delta t = 10 \tau$.  Handle bouncing at both $y=h$ and $y=0$.
-Keep track of the total $\Delta v_y$ for particles bounced at the piston.
-In our system of units, the presure can be calculated as:
+a time interval $\Delta t = 10 \tau$.  Handle bouncing at both $y=h$
+and $y=0$.  Keep track of the total $\Delta v_y$ for particles bounced
+at the piston.  In our system of units, the presure can be calculated
+as:
 $$\frac{O}{O_0} = \frac{1}{N}\frac{\Delta v_y}{v_0} \frac{\tau}{\Delta t}$$.
-Compare yours simulated pressure with your expectation from Equation~\ref{eqn:iglaw}.\\[3pt]
+Compare yours simulated pressure with your expectation from
+Equation~\ref{eqn:iglaw}.
+
+\noindent
+{\bf Hint}: the time interval of $10\tau$ was choosen to give you
+plenty of collisions for an accurate estimate of the pressure.
+However, it means that some particles will travel more that twice the
+length of the cylinder during this time.  In order to get accurate
+results, you will have to keep bouncing {\bf multiple times} until
+every particle is located within the volume.  If your answer is close
+to the correct one but slightly low, this is almost certainly your
+bug.  You have a small leak in your canister and therefore lower
+pressure!\\[3pt]
 
 \noindent
 {\bf Problem 6:}
@@ -663,7 +676,7 @@ Equation~\ref{eqn:oiso} Integrate your curve to get the work done, and
 compare to your expectation from Equation~\ref{eqn:wiso}\\[3pt]
 
 \noindent
-{\bf Problem 7:}
+{\bf Problem 7: (Not due until HW 2).}
 Simulate adiabatic compression of the gas from $h=4a$ to $h=2a$ in 80
 timesteps of size $\Delta t = 10 \tau$.  Set the speed of the piston
 appropriately.  Repeat the pressure calculation as in the previous
@@ -674,8 +687,5 @@ by colliding pairs of particles as in Problem 2.  Plot your measured
 $O$ versus $A$ and compare to your expectation from
 Equation~\ref{eqn:oadi} Integrate your curve to get the work done, and
 compare to your expectation from Equation~\ref{eqn:wadi}.\\[3pt]
-
-
-
 
 \end{document}
