@@ -1,0 +1,208 @@
+\documentclass[12pt]{article}
+
+\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.5in]{geometry}
+\usepackage{cite}
+\usepackage{slashed}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{braket}
+\usepackage{pythonhighlight}
+\usepackage{mathtools}
+\usepackage{tikz}
+\begin{document}
+
+\title{PHY 112L \\ Entropy of a 2-D Ideal-Gas}
+\author{Michael Mulhearn}
+
+\maketitle
+
+\section{Introduction}
+
+In this assignment, will will introduce the Gibbs Entropy as a
+convenient way to measure changes in entropy for a numerical
+simulation.  We will apply it to measure the change of entropy of an
+ideal gas due to heating and free expansion in a molecular simluation,
+and compare it to our expecation.  Last we will examine a gas
+expanding into a region at a higher potential energy.
+
+\section{Gibb's Entropy}
+
+The entropy of a macrostate is defined as:
+\begin{equation}
+S = k \ln \Omega
+\end{equation}
+where $k$ is Boltzmann's constant and $\Omega$ is the multiplicity of
+microstates corresponding to the macrostate.
+
+To compute the Gibbs Entropy, we divide the total phase space into $M$
+cells.  The macrostate is specfied by the number of particles in each
+cell $n_i$.  To count these microstates, start by assuming the we have
+only two cells, with the first containing $a$ particles.  The binomial
+theorem gives us the multiplicity of states:
+$$\Omega_{(2)} = \frac{N!}{a! (N-a)!}$$
+If we divide the second cell into two cells containing $b$ and $c$ particles respectively, with:
+$$N-a = b+c$$
+then the binomial theorem implies that the multiplicity of states is:
+$$\Omega_{(3)} = \frac{N!}{a! (N-a)!} \cdot \frac{(N-a)!}{b! c!} = \frac{N!}{a! b! c!}$$
+If we continue in this way for $M$ cells, we arrive at the multinomial constant:
+\begin{equation}
+\Omega = \frac{N!}{\prod_{i=1}^M n_i!}
+\end{equation}
+Calculating
+$$\ln \Omega = \ln N! - \sum_i \ln n_i!$$
+and applying Stirling's approximation:
+$$\ln \Omega = N \ln N - N - \sum_i (n_i \ln n_i - n_i)$$
+Noting that:
+$$N = \sum_i n_i$$
+we have:
+\begin{eqnarray*}
+  \ln \Omega &=& -\sum_i n_i (\ln n_i - \ln N)\\
+  &=& \- \sum_i n_i \ln \left( \frac{n_i}{N} \right)\\
+\end{eqnarray*}
+and so:
+$$\frac{S}{kN} = \- \sum_i \frac{n_i}{N} \ln \left( \frac{n_i}{N} \right) $$
+and defining:
+$$p_i = \frac{n_i}{N}$$
+we have at last:
+\begin{equation}
+\frac{S}{kN} = \- \sum_i p_i \ln ( p_i )
+\end{equation}
+which is known as the Gibbs Entropy (or Shanon Entropy for $k$=1).
+
+As is always the case for classical entropy, the entropy is only
+determined to within an overall constant, which depends on the cells
+that we have choosen.  However, as long as we keep our choice of bins
+constant, we can reliably calculate a change in entropy between
+initial and final states using this formula.  To compute $p_i$, we
+need only count the number of particles present in each cell and
+divide by the total number of particles.
+
+To determine the values of $p_i$ more reliably (with more statistics)
+we can simulate many time steps, and count the number of visits of
+particles to each cell.  Dividing the result by the total number of
+visits (the number of particles times the number of time steps) we
+determine $p_i$ in each cell with more statitics.  This only works
+once the system has reached equilibrium (or else the Gibbs Entropy
+will be changing).
+
+\section{Entropy Changes for an Ideal Gas}
+
+If no work is done on our gas, then:
+$$dU = Q$$
+and so
+$$dS \equiv \frac{Q}{T} = \frac{NkdT}{T}$$
+Thus the change in entropy for a gas that is heated at constant volume is given by:
+$$\Delta S = \int_{T_I}^{T_f} \frac{NkdT}{T}$$
+and so:
+\begin{equation}
+\Delta S = Nk \ln \left( \frac{T_f}{T_i}\right)
+\end{equation}
+Next, suppose that instead that we expand the gas from $V_1$ to $V_2$
+at constant temperature.  The velocity profile remains unchanged, due
+to the constant temperature, and so the phase-space only changes by
+the volume, with:
+$$\Omega \propto V^N$$
+and so:
+\begin{eqnarray*}
+  \Delta S &=& k \, \ln(\Omega_2) - k \, ln(\Omega_1) \\
+           &=& k \ln\left(\frac{\Omega_2}{\Omega_1}\right) \\
+\end{eqnarray*}
+and so:
+\begin{equation}
+  \Delta S = N \,k \, \ln \,\left( \frac{V_2}{V_1} \right)
+\end{equation}
+
+\section{Ideal Gas with a Step Potential}
+
+Consider an ideal gas contained within $0 \leq y \leq 4 a$ subject to a potential energy:
+\begin{equation}
+  V(y) = \begin{cases}
+    V_{\rm S} & y > 2 a \\
+    0 & {\rm otherwise} \\
+    \end{cases}
+\end{equation}
+The relative occupancy of the upper and lower regions (which are the same area) will be:
+$$\frac{p_{\rm up}}{p_{\rm dn}} = \exp \left( - \frac{V_{\rm S}}{kT} \right) \equiv \alpha $$
+and so:
+\begin{equation}
+p_{\rm up} = \frac{\alpha}{1 + \alpha}
+\end{equation}
+and
+\begin{equation}
+p_{\rm dn} = \frac{1}{1 + \alpha}
+\end{equation}
+If we consider this like a two state system going from the ground state ($S=0$) to a state at equilibrium with occupancies $p_{\rm up}$ and $p_{\rm dn}$, we expect the change in entropy to be:
+$$\Delta S = p_{\rm up} \ln p_{\rm up} + p_{\rm dn} \ln p_{\rm dn}$$
+
+\section{System of Units}
+
+We will use the same system of units as the one we use for the first
+assignment (as there is no longer any need to add a constraint for
+gravity, which we will not consider in this assignment).  We assume
+there is some relevant length scale $a$ which we set to $1$ and a
+relevant temperature $T_0$ which we set to $1$ as well.
+
+The other units that we defined in the previous homework continue to
+apply, so let's recall them here.  Motivated by the Maxwell-Boltzmann
+distribution, the velocity unit $v_0$ is defined by:
+$$ v_0^2 \equiv \frac{k T_0}{m}$$
+and the unit for time is:
+$$ \tau \equiv a / v_0$$
+Motivated by the ideal gas law, we can set the unit of pressure to:
+$$O_0 \equiv \frac{NkT_0}{a^2}$$
+and the unit of total energy:
+$$U_0 = N k T_0$$
+For this assignment, will measure potential energy (of a single particle) using units of
+$$V_0 - k T_0$$
+Remember that for analytic work, we keep these factors in place.  But when using an
+analytic result within our computer programs, we set all of these quantities to 1:
+$$m = a = g = T_0 = v_0 = \tau = O_0 = U_0 = V_0 = 1$$
+As before, the temperature of an ideal gas is still calculated through
+the average kinetic energy, which in our system of units becomes:
+\begin{equation}
+ \label{eqn:expv}
+  \frac{T}{T_0} = \frac{\braket{v_x^2/v_0^2} + \braket{v_y^2/v_0^2}}{2}
+\end{equation}
+This is also the total kinetic energy of the gas, in units of total energy.
+
+\section{Homework Problems}
+
+{\bf Zero credit if you do not use our system of units consistently!}
+When I ask you to calculate a quantity, e.g. temperature, I want the
+answer in our units, e.g. $T_0$.  Do not first calculate in SI units
+and then convert!\\[3pt]
+
+\noindent
+The starting point for this assigment is Problem 4 from the previous
+homework.  You will want to initialize a numerical model for an ideal
+gas tracking variables $v_x$, $v_y$, and $y$ for $N=10000$ molecules,
+with height $H=4a$.  If you haven't already, define a function that
+brings your gas into thermal contact with a reservoir of temperature
+$T_R$, with an input parameter for the number of collisions.  Call it
+what you want, but we will refer to it as {\tt collide\_reservoir}
+below.  Use {\tt collide\_reservoir} to bring your gas into
+equilibrium with a reservoir with $T_r = 1 T_0$.\\[3pt]
+
+\noindent
+
+{\bf Problem 1:} Write the function {\tt gibbs\_entropy} that
+computes the Gibbs Entropy for a gas using the specified bins.
+Validate your function on an initial distribution that is uniformly
+distributed in $v_x$, $v_y$ and $h$.
+
+{\bf Problem 2:} Calculate the the change in entropy when your gas is
+heated from $T_I = 1$ to $T_I =2$ and compare to expectation.
+
+{\bf Problem 3:} Simulate the free expansion of a gas from $h=2a$ to $h=4a$ at a contant temperature $T_I = 1$.  Compare your measured change in entorpy to expectation.
+
+{\bf Problem 4:} Simulate the expansion of a gas from $h=2a$ to $h=4a$
+at a contant temperature $T_I = 1$ when the upper region from $h=2a$
+to $h=4a$ is at a higher potential energy $V_0$ compared to lower
+region which you can take as $0$.  Show that the occupancy of the
+upper region matches your expectation.
+
+{\bf Problem 5:} Calculate the change in entropy from Problem 4 and
+compare to expectation.
+
+\end{document}

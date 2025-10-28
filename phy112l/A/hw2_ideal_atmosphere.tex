@@ -82,7 +82,7 @@ The normalization condition:
 $$\int_0^\infty p(y) dy = 1$$
 gives us the normalization constant, and so:
 \begin{equation}
-p(y) = \frac{mg}{kT} \exp\left( -\frac{m g y}{kT} \right) 
+p(y) = \frac{mg}{kT} \exp\left( -\frac{m g y}{kT} \right)
 \end{equation}
 This is a decaying exponential, so that the atmosphere gets thinner as you go higher, exactly as we expect.  The average height of the gas molecules is:
 \begin{equation}
@@ -99,8 +99,8 @@ U = \frac{f}{2} N k T + NkT = \frac{f+2}{2} N k T
 \end{equation}
 thus the heat capacity of our atmosphere is:
 \begin{equation}
-\label{eqn:cvg}  
-C_V = \left( \frac{\partial U}{\partial T} \right)_V = \frac{f+2}{2} N k 
+\label{eqn:cvg}
+C_V = \left( \frac{\partial U}{\partial T} \right)_V = \frac{f+2}{2} N k
 \end{equation}
 Notice the system is still at constant V (just V is now infinite) or,
 more importantly, no external work is done to the atmosphere, so our
@@ -132,7 +132,7 @@ so that:
 There is no need to change any of our results from the previous
 homework.  {\bf The quantity $a$ will still be set to $1$ in your
   code.}  It's only in interpreting our results that we would be
-forced to apply Equation~\ref{eqn:newa}.  
+forced to apply Equation~\ref{eqn:newa}.
 
 The other units that we defined in the previous homework continue to
 apply, so let's recall them here.  Motivated by the Maxwell-Boltzmann
@@ -161,12 +161,12 @@ the average kinetic energy, which in our system of units becomes:
 This is also the total kinetic energy of the gas, in units of total energy.
 The total energy of the gas has a new term from the gravitation potentail energy, so that:
 \begin{equation}
-  \frac{U}{U_0} = \frac{\braket{v_x^2/v_0^2} + \braket{v_y^2/v_0^2}}{2} + \braket{y/a} 
-\end{equation}  
+  \frac{U}{U_0} = \frac{\braket{v_x^2/v_0^2} + \braket{v_y^2/v_0^2}}{2} + \braket{y/a}
+\end{equation}
 Using Equations \ref{eqn:expy} and \ref{eqn:expv} we can write this rather elegantly as:
 \begin{equation}
   \frac{U}{U_0} = 2 \cdot \frac{T}{T_0}
-\end{equation}  
+\end{equation}
 Recalling that:
 $$C_V = \left( \frac{\partial U}{\partial T}\right)_V$$
 we see that in our units, the heat capacity of our gas under the influence of gravity is:
@@ -176,7 +176,7 @@ we see that in our units, the heat capacity of our gas under the influence of gr
 If we turn off gravity, we lose the gravitational potential term in the total energy and have:
 \begin{equation}
   \frac{U}{U_0} = \frac{T}{T_0}
-\end{equation}  
+\end{equation}
 and:
 \begin{equation}
 \frac{C_V}{U_0 / T_0} = 1
@@ -210,7 +210,7 @@ v_y \to v_y \; - g \Delta t
 
 \begin{figure}[htbp]
   \begin{center}
-    
+
     \begin{tikzpicture}[scale=0.30]
       % Parameters
       \def\xa{5}    % x-intercept a
@@ -234,12 +234,12 @@ v_y \to v_y \; - g \Delta t
       % Draw dashed blue parabola:
       \draw[blue, dashed, line width=1.5pt, domain=\xb:\xend, smooth, variable=\x, samples=200]
       plot ({\x},{\k*(\x-\xa)*(\x-\xb)});
-      
+
       % Red parabola (bounced), translated in x by (x2 - x1)
       \pgfmathsetmacro{\xc}{\xb + (\xb-\xa)}      %
       \draw[red, line width=1.5pt, domain=\xb:\xend, smooth, variable=\x, samples=200]
       plot ({\x},{\k*(\x-\xb)*(\x-\xc)});
-      
+
 
       % labels:
       \node[black, below] at (2, 0) {$y=0$};
@@ -248,7 +248,7 @@ v_y \to v_y \; - g \Delta t
       \node[black, below] at (\xb-2,0) {$v_y=\pm v_0$};
 
       \node[black, below] at (20,0) {$t \rightarrow$};
-      
+
     \end{tikzpicture}
 \caption{After a timestep $\Delta t$ shown in blue, some molecule
   trajectories pass through $y=0$, as if the ground was not there,
@@ -285,32 +285,29 @@ recent crossing of $y=0$ with $v_0 < 0$.  (The other root corresponds
 to an earlier time with the molecule passing upwards through $y=0$.)
 And so:
 $$t = \frac{-v_a-\sqrt{v_a^2 + 2 g y_a}}{g}$$
+
 That result for $t$ is completely valid, except it is numerically
-unstable (...) so instead we use the equivalent form:
+unstable.  In the vicinity of $y_a=0$, which is where we are located, the $2 g y_a$ will be overcome by numerical roundoff errors from calcuating:
+$$-v_a-\sqrt{v_a^2} = |v_a| - |v_a| = 0$$
+Instead we use the algebraic equivalent but numerically stable form:
 \begin{equation}
 t = \frac{- 2 y_a}{\sqrt{v_a^2 + 2 g y_a} - v_a}
 \end{equation}
-which is numerically stable for $v_a < 0$.
+which we obtain by multiplying the top and bottom by the conjugate.
 
-With $v_0$ and $t$ in hand, we can calculate the position $y_b$ and the
-$y$-component of veloctiy $v_b$ had the particle bounced at $y=0$, which is to say that $v_0 \to -v_0$.  So:
-\begin{eqnarray*}
-y_b &=& (-v_0 t) - \frac{1}{2}\; g t^2 \\
-\end{eqnarray*}
+With $v_0$ and $t$ now in hand, we can calculate the position $y_b$ and the
+$y$-component of veloctiy $v_b$ had the particle bounced at $y=0$, which is to say $v_0 \to -v_0$.  So:
+\begin{equation}
+y_b = (-v_0 t) - \frac{1}{2}\; g t^2
+\end{equation}
 and:
 \begin{equation}
-v_b = (-v_0 t) + gt \\
+v_b = (-v_0) - g\,t
 \end{equation}
-Take care that $-v_0$ is positive!
-
-Note that if $t$ is large enough, the particle may have fallen below
-$y=0$, so that $y_b<0$.  You will have to keep bouncing molecules
-until all of them have $y > 0$ at the end of the time step.
-
-
-\begin{equation}
-v_b = -v_a - 2 g (y_b - y_a)
-\end{equation}
+Take care that $-v_0$ is positive!  Also notice that if $t$ is large
+enough, the particle may have fallen below $y=0$, so that $y_b<0$.
+You will have to keep bouncing molecules until all of them have $y >
+0$ at the end of the time step.
 
 \section{Homework Problems}
 
