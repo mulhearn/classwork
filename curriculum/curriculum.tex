@@ -405,12 +405,12 @@ PHY & 117 & 4 &  F & 80(C-)                     & Phys. Instr. with A\&D Elec.  
     &     &   &    & 45/ECS 36B/32C(C-)     & \\
 \hline
     & & & & or & \\
-PHY & 122A/B & 4 & WS & 80(C-), 110B(C-)         & Advanced Physics Lab \\  
+PHY & 122A/B$\dagger$ & 4 & WS & 80(C-), 110B(C-)         & Advanced Physics Lab \\  
     &        &   &    & $\parallel$112, 115A(C-) &  \\  
 \hline
 \end{tabular}\\ 
 \noindent
-*: recommended, $\parallel$: concurrently.\\[5pt]
+*: recommended, $\parallel$: concurrently, $\dagger$: either 122A or 122B.\\[5pt]
 \noindent
 {\bf Electives:} Additional electives to bring the total number of 3
 or more unit upper division courses to 14, including at least three
@@ -1277,19 +1277,19 @@ Units (minimum):  16 units.\\
 \hline
 Course & & Units & Prereqs & Name \\
 \hline
-ECS & 20            & 4 & MAT 21A(C-)  & Discrete Math for CS\\
+ECS & 20            & 4 & MAT 21A  & Discrete Math for CS\\
 \hline
 \hline
  & & & Either: & \\
 ECS & 32A$\dagger$ & 4 &          & Intro to Programming (Python)\\
-    & 32B  & 4 & ECS 32A/36A(C-)  & Intro to Data Structures (Python)\\
-    & 32C  & 4 & ECS 32B(C-)      & Impl of Data Structures (Unix/C)\\
-    & 34*  & 4 & ECS 34C(C-)      & Software Dev. in Unix \& C++ \\
+    & 32B  & 4 & ECS 32A/36A  & Intro to Data Structures (Python)\\
+    & 32C  & 4 & ECS 32B      & Impl of Data Structures (Unix/C)\\
+    & 34*  & 4 & ECS 32C      & Software Dev. in Unix \& C++ \\
 \hline
     & & & or: & \\
 ECS & 36A  & 4 &                     & Programming and Problem Solving\\
-    & 36B  & 4 & ECS 36A(C-)         & Software Dev. and OOP in C++\\
-    & 36C  & 4 & ECS 20(C-), 36B(C-) & Data Structs, Algs, and Programming\\
+    & 36B  & 4 & ECS 36A         & Software Dev. and OOP in C++\\
+    & 36C  & 4 & ECS 20, 36B & Data Structs, Algs, and Programming\\
 \hline
 \end{tabular}\\
 *: recommended, $\dagger$: ECS 32AV can replace ECS 32A when the
@@ -1319,12 +1319,10 @@ ECS & 117  & 4 & ECS 20,32B/36C & Alg. for Data Science\\
     & 120  & 4 & ECS 20,32B/36C & Theory of Computation \\
     & 122A & 4 & ECS 20,32B/36C & Algorithm Design \& Analysis \\
     & 122B & 4 & ECS 122A, 36C& Algorithm Design \& Analysis\\
-    & 127  & 4 & ECS 20,32A/32AV & Cryptography \\
-    & 130  & 4 & ECS 32A/32AV, & Scientific Computation \\
-    &      &   & MAT 22A &  \\
+    & 127  & 4 & ECS 20,32A/36A & Cryptography \\
+    & 130  & 4 & ECS 32A/36A & Scientific Computation \\
     & 132  & 4 & ECS 34/36B,  & Probability \& Stat Modeling \\
     & 171  & 4 & ECS 32B/36C, ECS 132, & Machine Learning \\
-    &      &   & MAT 22A &  \\
 \hline
     & & & and including: & \\
 PHY & 122A/B & 4 & & \\
@@ -1412,7 +1410,7 @@ CHE & 2A+2B     & 5+5 & & General Chemistry\\
     & or        &     & & \\
 CHE & 4A        & 5   & & Gen. Chem. for Phys. Sci.\\
 \hline
-ENG & 45     & 4 & CHE 2B/4A(C-) & Properties of Materials \\
+ENG & 45     & 4 & CHE 2B/4A & Properties of Materials \\
 \hline
 \end{tabular}
 \vskip 0.25cm
@@ -1472,14 +1470,15 @@ Units (minimum): 9 units.\\
 Course & & Units & Prereqs & Name \\
 \hline
 G$\to$EPS & 50   & 3 & & Physical Geology \\
-            & 50L  & 2 & & Physical Geology Laboratory\\
+          & 50L  & 2 & G$\to$EPS 50$\parallel$ & Physical Geology Laboratory\\
+\hline
 \hline
 & & & Either: & \\
 ATM & 60       & 4 &           & Intro. to Atmospheric Sci. \\
 \hline
 & & & or: & \\
 CHE & 4A$\dagger$ & 5 &            & Gen. Chem. for Phys. Sci. \\
-    & 4B$\dagger$ & 5 & CHE 4A(C-) & Gen. Chem. for Phys. Sci. \\
+    & 4B$\dagger$ & 5 & CHE 4A & Gen. Chem. for Phys. Sci. \\
 G$\to$EPS & 60$\to$101          & 4$\to$3 & CHE 4B, G$\to$EPS 50+L & Earth Materials\\
 \hline
 \end{tabular}\\
@@ -1494,9 +1493,9 @@ Course & & Units & Prereqs & Name \\
 \hline
     & & & Choose one$\dagger$ of: &  \\
 
-G$\to$EPS & 101$\to$102\# & 3 & GEL/EPS 50L & Structural Geology \\
-          & 162\#         & 3$\to$4 & GEL/EPS 50    & Geophysics of the Solid Earth \\
-          & 163\#         & 3 & GEL/EPS 50    & Planetary Geology \& Geophysics \\
+G$\to$EPS & 101$\to$102\# & 3 & G$\to$EPS 50+L & Structural Geology \\
+          & 162\#         & 3$\to$4 & & Geodynamics \\
+          & 163\#         & 3 & G$\to$EPS 50    & Planetary Geology \& Geophysics \\
 EPS       & 164\#         & 3 &               & Seismology \\
 \hline
 \hline
@@ -1511,7 +1510,7 @@ PHY       & 122A/B & 4 & & \\
           & 117    & 4 & & \\
           & 118    & 4 & & \\
 EPS       & 101L   & 2 & EPS 101$\parallel$ & Earth Materials Lab\\
-G$\to$EPS & 101L$\to$102L   & 2 & G$\to$EPS 50L,101$\to$102 & Structural Geology Lab\\
+G$\to$EPS & 101L$\to$102L   & 2 & G$\to$EPS 50+L,101$\to$102$\parallel$ & Structural Geology Lab\\
 \hline
 \end{tabular}\\
 \noindent
@@ -1520,14 +1519,14 @@ alternative upper division coursework from PHY, GEL, EPS, or ATM can be
 substituted, with consent of department, in case none of these courses
 are available.\\[4pt]
 \noindent
-    {\bf Electives:} Four additional upper division course offerings in ATM, GEL, or PHY of four or more units, or three units with consent of the department, or from the following list of pre-approved three-unit courses:  EPS 101,102,109,116,132,137,
-
-
-    150B,161,162,163.  Theoretical minimum is 12 units, but due to course scheduling, this is generally not possible to achieve, so the minimum units for this major will be capped at 108.\\[4pt]
+    {\bf Electives:} Four additional upper division course offerings in ATM, GEL, or PHY of four or more units, or three units with consent of the department, or from the following list of pre-approved three-unit courses:  EPS 101,102,109,116,132,137,150B,161,162,163.\\[4pt]
 \noindent
 {\bf Total Units (minimum):} 108
 (Tables \ref{tbl:prep}, \ref{tbl:depth-applied}, and \ref{tbl:geophysics} $\implies 52+24+9+11+12$)\\
 
+%Theoretical minimum for electives is 12 units, but due to course
+%scheduling, this is generally not possible to achieve, so the minimum
+%units for this major will be capped at 108.
 
 %%%%%%%%%%%%%%%%%  Atmospheric Physics %%%%%%%%%%%%%%%%%%%%%
 
@@ -1575,9 +1574,9 @@ PHY & 117   & 4 & & \\
     & & & Choose two of: & \\
 PHY & 105B   & 4 & & \\
     & 105C$\#$  & 4 &           & Continuum Mechanics\\
-G$\to$EPS & 116N$\to$116   & 3 & GEL 50       & Oceanography\\
-    & 150A$\#$  & 4 & EPS 116, & Physical and Chemical Oceanography\\
-    & 150B      & 3 & GEL 50       & Geological Oceanography\\
+G$\to$EPS & 116N$\to$116   & 3 & G$\to$EPS 50       & Oceanography\\
+    & 150A$\#$  & 4 & EPS 116,CHE 4C & Physical and Chemical Oceanography\\
+    & 150B      & 3$\to$4 & G$\to$EPS 50       & Geological Oceanography\\
 ATM & 124       & 3 & ATM 60       & Meteorological Instruments \& Observations \\
     & 128       & 4 & ATM 60       & Radiation and Satellite Meteorology \\
     & 158       & 4 & ATM 121A     & Boundary-Layer Meteorology \\
@@ -1603,8 +1602,8 @@ Units (minimum):  18 units.\\
 Course & & Units & Prereqs & Name \\
 \hline
 CHE & 4A$\dagger$ & 5 &        & Gen. Chem. for Phys. Sci.\\
-    & 4B$\dagger$ & 5 & 4A(C-) & Gen. Chem. for Phys. Sci.\\
-    & 4C$\dagger$ & 5 & 4B(C-) & Gen. Chem. for Phys. Sci.\\
+    & 4B$\dagger$ & 5 & 4A & Gen. Chem. for Phys. Sci.\\
+    & 4C$\dagger$ & 5 & 4B & Gen. Chem. for Phys. Sci.\\
 G$\to$EPS & 50          & 3 & & Physical Geology \\
 ATM & 60*         & 4 & & Intro. to Atmospheric Sci. \\
 \hline
@@ -1620,7 +1619,7 @@ Units (minimum):  16 units.\\
 Course & & Units & Prereqs & Name \\
 \hline
 G$\to$EPS & 116N$\to$116     & 3 & G$\to$EPS 50      & Oceanography\\
-    & 150A$\dagger$ & 4 & GEL 116N,   & Phys. \& Chem. Oceanography\\
+    & 150A$\dagger$ & 4 & G$\to$EPS 116N$\to$116,   & Phys. \& Chem. Oceanography\\
     &          &   & CHE 2C/4C   & \\
 \hline
     & & & Choose two of & \\
@@ -1643,10 +1642,9 @@ PHY & 105B      & 4 &        & \\
     & 105C$\#$  & 4 &        & Continuum Mechanics \\
 ATM & 115       & 3 & ATM 60 & Hydroclimatology \\
     & 120       & 4 & ATM 60$\parallel$ & Atmos. Thermo. and Cloud Physics \\
-G$\to$EPS & 108       & 3 & GEL 50 & Earth History: Paleoclimates\\
-    &           &   & CHE 2A/4A   & \\
-    & 109       & 3 & GEL 50 & Earth History: Sediments \& Strata\\
-    & 150B      & 3 & GEL 50 & Geological Oceanography\\
+G$\to$EPS & 108       & 3 & G$\to$EPS 50 & Paleoclimatology\\
+    & 109       & 3 & G$\to$EPS 50 & Earth History: Sediments \& Strata\\
+    & 150B      & 3 & G$\to$EPS 50 & Geological Oceanography\\
 \hline
 \end{tabular}\\
 \noindent
@@ -1670,8 +1668,8 @@ Units (minimum):  15 units.\\
 Course & & Units & Prereqs & Name \\
 \hline
 CHE & 4A$\dagger$ & 5 &        & Gen. Chem. for Phys. Sci.\\
-CHE & 4B$\dagger$ & 5 & 4A(C-) & Gen. Chem. for Phys. Sci.\\
-CHE & 4C$\dagger$ & 5 & 4B(C-) & Gen. Chem. for Phys. Sci.\\
+CHE & 4B$\dagger$ & 5 & 4A & Gen. Chem. for Phys. Sci.\\
+CHE & 4C$\dagger$ & 5 & 4B & Gen. Chem. for Phys. Sci.\\
 \hline
 \end{tabular}\\
 \noindent
