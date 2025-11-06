@@ -23,10 +23,10 @@ In this assignment, will will introduce the Gibbs Entropy as a
 convenient way to measure changes in entropy for a numerical
 simulation.  We will apply it to measure the change of entropy of an
 ideal gas due to heating and free expansion in a molecular simluation,
-and compare it to our expecation.  Last we will examine a gas
+and compare it to our expecation.  We will also examine a gas
 expanding into a region at a higher potential energy.
 
-\section{Gibb's Entropy}
+\section{Gibbs Entropy}
 
 The entropy of a macrostate is defined as:
 \begin{equation}
@@ -62,7 +62,7 @@ we have:
 \end{eqnarray*}
 and so:
 $$\frac{S}{kN} = \- \sum_i \frac{n_i}{N} \ln \left( \frac{n_i}{N} \right) $$
-and defining:
+and defining probability per bin as:
 $$p_i = \frac{n_i}{N}$$
 we have at last:
 \begin{equation}
@@ -70,21 +70,30 @@ we have at last:
 \end{equation}
 which is known as the Gibbs Entropy (or Shanon Entropy for $k$=1).
 
-As is always the case for classical entropy, the entropy is only
-determined to within an overall constant, which depends on the cells
-that we have choosen.  However, as long as we keep our choice of bins
-constant, we can reliably calculate a change in entropy between
-initial and final states using this formula.  To compute $p_i$, we
-need only count the number of particles present in each cell and
-divide by the total number of particles.
+For a uniform distribution in $M$ cells, the probabibility of visiting each cell is identical, with:
+$$p_i = 1/M$$
+and so in this case:
+\begin{equation}
+\frac{S}{kN} = \ln ( M )
+\end{equation}
+Notice that even in this simple case, the Gibbs Energy is dedpendent
+on the choice of bins.
+
+As is always the case for classical entropy, the Gibbs entropy is only
+determined to within an overall constant, which in this case depends
+on the cells that we have choose.  However, as long as we keep our
+choice of bins constant, we can reliably calculate a change in entropy
+between initial and final states using this formula.  To compute
+$p_i$, we need only count the number of particles present in each cell
+and divide by the total number of particles.
 
 To determine the values of $p_i$ more reliably (with more statistics)
 we can simulate many time steps, and count the number of visits of
 particles to each cell.  Dividing the result by the total number of
 visits (the number of particles times the number of time steps) we
-determine $p_i$ in each cell with more statitics.  This only works
-once the system has reached equilibrium (or else the Gibbs Entropy
-will be changing).
+determine $p_i$ in each cell with less statitical uncertainty.  This
+only works once the system has reached equilibrium (or else the Gibbs
+Entropy will be changing).
 
 \section{Entropy Changes for an Ideal Gas}
 
@@ -154,7 +163,7 @@ $$O_0 \equiv \frac{NkT_0}{a^2}$$
 and the unit of total energy:
 $$U_0 = N k T_0$$
 For this assignment, will measure potential energy (of a single particle) using units of
-$$V_0 - k T_0$$
+$$V_0 = k T_0$$
 Remember that for analytic work, we keep these factors in place.  But when using an
 analytic result within our computer programs, we set all of these quantities to 1:
 $$m = a = g = T_0 = v_0 = \tau = O_0 = U_0 = V_0 = 1$$
@@ -166,43 +175,129 @@ the average kinetic energy, which in our system of units becomes:
 \end{equation}
 This is also the total kinetic energy of the gas, in units of total energy.
 
+
+\section{Required Functions}
+
+You must implement the following functions as part of your solution.
+You may substitute similar signatures if using a language other than
+Python, but you must use exactly these signatures if using Python. You
+do not need to include the docstrings.  You are encouraged to define
+additional functions as part of your solution, but these functions are
+the most significant.
+
+\begin{python}
+def gibbs_entropy(*, vx, vy, y, hbins, vmax, vbins):
+    """Compute dimensionless Gibbs entropy S/(kN).
+
+    Parameters:
+        vx    : np.ndarray  x-velocity components.
+        vy    : np.ndarray  y-velocity components.
+        y     : np.ndarray  Vertical positions.
+        hbins : int         Number of y bins.
+        vmax  : float       Max |v| for velocity range (-vmax, vmax).
+        vbins : int         Number of velocity bins per component.
+    Returns:    
+        float The dimensionless Gibbbs entroy S/(kN)        
+    """
+    pass
+\end{python}
+
+\begin{python}
+def collide_reservoir(*, vx, vy, Tr, ncoll):
+    """Perform collisions of selected particles with a gas reservoir.
+
+    Parameters:
+        vx    : np.ndarray  Particle x-velocities (updated in place).
+        vy    : np.ndarray  Particle y-velocities (updated in place).
+        Tr    : float       Gas reservoir temperature.
+        ncoll : int         Number of collisions to perform.
+    """
+    pass
+\end{python}
+
+\begin{python}
+def step(*, vy, y, dt):
+    """Advance particle positions for one timestep.
+
+    Parameters:
+        vy : np.ndarray  Vertical velocity components.
+        y  : np.ndarray  Vertical positions (updated in place).
+        dt : float       Time step.
+    """
+    pass
+\end{python}
+
+\begin{python}
+def bounce(*, vy, y, h):
+    """Reflect particles elastically at y=0 and y=h boundaries.
+
+    Parameters:
+        vy : np.ndarray  Vertical velocity components (updated in place).
+        y  : np.ndarray  Vertical positions (updated in place).
+        h  : float       Container height.
+    """
+    pass
+\end{python}
+
+\begin{python}
+def reflect(*, vy, y_old, y, h_step, V_step):
+    """Handle reflection and transmission at a potential step.
+
+    Parameters:
+        vy     : np.ndarray  Vertical velocities (updated in place).
+        y_old  : np.ndarray  Positions before the time step.
+        y      : np.ndarray  Positions after the time step (updated in place).
+        h_step : float       The y-position of the potential step.
+        V_step : float       Potential of the upper region
+    """
+    pass
+\end{python}
+These functions use the Keyword-only arguments feature of python.  The
+arguments following the asterix (*) must be assigned by name, like {\tt
+  vx=vx\_a} or {\tt vx=vx}.  This is a good practice when you have
+arguments of identical types and no obvious order.
+
 \section{Homework Problems}
 
 {\bf Zero credit if you do not use our system of units consistently!}
 When I ask you to calculate a quantity, e.g. temperature, I want the
 answer in our units, e.g. $T_0$.  Do not first calculate in SI units
-and then convert!\\[3pt]
+and then convert!\\[4pt]
 
 \noindent
-The starting point for this assigment is Problem 4 from the previous
-homework.  You will want to initialize a numerical model for an ideal
-gas tracking variables $v_x$, $v_y$, and $y$ for $N=10000$ molecules,
-with height $H=4a$.  If you haven't already, define a function that
-brings your gas into thermal contact with a reservoir of temperature
-$T_R$, with an input parameter for the number of collisions.  Call it
-what you want, but we will refer to it as {\tt collide\_reservoir}
-below.  Use {\tt collide\_reservoir} to bring your gas into
-equilibrium with a reservoir with $T_r = 1 T_0$.\\[3pt]
+As a starting point, as in previous assignments, you will want to
+initialize a numerical model for an ideal gas tracking variables
+$v_x$, $v_y$, and $y$ for $N=10000$ molecules, with height $H=4a$.\\[4pt]
 
 \noindent
+{\bf Problem 1:} Implement the function {\tt gibbs\_entropy}, with the
+required signature, that computes the Gibbs Entropy for a gas using
+the specified bins.  Validate your function on an initial distribution
+that is uniformly distributed in $v_x$, $v_y$ and $h$.\\[4pt]
 
-{\bf Problem 1:} Write the function {\tt gibbs\_entropy} that
-computes the Gibbs Entropy for a gas using the specified bins.
-Validate your function on an initial distribution that is uniformly
-distributed in $v_x$, $v_y$ and $h$.
+\noindent
+{\bf Problem 2:} Implement the function {\tt collide\_reservoir}, with
+the required signature, that simulates collisions of your gas with a
+thermal reservoir.  Calculate the the change in entropy when your gas
+is heated from $T_I = 1$ to $T_I =2$ and compare to your
+expectation.\\[4pt]
 
-{\bf Problem 2:} Calculate the the change in entropy when your gas is
-heated from $T_I = 1$ to $T_I =2$ and compare to expectation.
+\noindent
+{\bf Problem 3:} Implement the functions {\tt step} and {\tt bounce}.
+Use them to simulate the free expansion of a gas from $h=2a$ to $h=4a$
+at a contant temperature $T_I = 1$.  Compare your measured change in
+entropy to your expectation.\\[4pt]
 
-{\bf Problem 3:} Simulate the free expansion of a gas from $h=2a$ to $h=4a$ at a contant temperature $T_I = 1$.  Compare your measured change in entorpy to expectation.
+\noindent
+{\bf Problem 4:} Implement the function {\tt reflect}.  Use it to
+simulate the expansion of a gas from $h=2a$ to $h=4a$ at a contant
+temperature $T_I = 1$ when the upper region from $h=2a$ to $h=4a$ is
+at a higher potential energy $V_0$ compared to lower region, which you
+should take as the zero of potentail.  Show that the occupancy of the
+upper region matches your expectation.\\[4pt]
 
-{\bf Problem 4:} Simulate the expansion of a gas from $h=2a$ to $h=4a$
-at a contant temperature $T_I = 1$ when the upper region from $h=2a$
-to $h=4a$ is at a higher potential energy $V_0$ compared to lower
-region which you can take as $0$.  Show that the occupancy of the
-upper region matches your expectation.
-
+\noindent
 {\bf Problem 5:} Calculate the change in entropy from Problem 4 and
-compare to expectation.
+compare to your expectation.\\[4pt]
 
 \end{document}
