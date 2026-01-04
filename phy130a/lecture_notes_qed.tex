@@ -200,7 +200,7 @@ Let's first consider solutions with $\vec{p}=0$, so:
 $$\frac{\partial\psi}{\partial x} = \frac{\partial\psi}{\partial y} = \frac{\partial\psi}{\partial z} = 0$$
 and the Dirac equation becomes:
 $$\gamma^0 \frac{\partial \psi}{\partial t} = -i \frac{mc^2}{\hbar} \psi $$
-if we wrote this out the long way, it looks like:
+Writing this out the long way:
 $$
 \begin{pmatrix} 
 1 & 0 & 0 & 0\\
@@ -224,48 +224,25 @@ $$
 \psi_4\\
 \end{pmatrix}
 $$
-But as the gamma matrices are 2x2 block matrices, it is convenient to define two spinors:
-$$\psi_A \equiv \begin{pmatrix} \psi_1\\ \psi_2\\ \end{pmatrix}, \hspace{1cm}
-\psi_B \equiv \begin{pmatrix} \psi_3\\ \psi_4\\ \end{pmatrix}
+or
 $$
-So that the Dirac equation can be written:
-$$
-\begin{pmatrix} 
-I &  0\\
-0 & -I\\
-\end{pmatrix}
 \frac{\partial}{\partial t}
 \begin{pmatrix} 
-\psi_A\\
-\psi_B\\
+\psi_1\\
+\psi_2\\
+-\psi_3\\
+-\psi_4\\
 \end{pmatrix}
 =
 -i \frac{mc^2}{\hbar}
 \begin{pmatrix} 
-\psi_A\\
-\psi_B\\
+\psi_1\\
+\psi_2\\
+\psi_3\\
+\psi_4\\
 \end{pmatrix}
 $$
-Or:
-$$
-\begin{pmatrix} 
-\displaystyle \frac{\partial \psi_A}{\partial t}\\[10pt]
-\displaystyle -\frac{\partial \psi_B}{\partial t}\\[10pt]
-\end{pmatrix}
-=
--i \frac{mc^2}{\hbar}
-\begin{pmatrix} 
-\psi_A\\
-\psi_B\\
-\end{pmatrix}
-$$
-with solutions:
-$$\psi_A(t) = \exp\left( -i\frac{mc^2t}{\hbar}\right) \psi_A(0)$$
-and 
-$$\psi_B(t) = \exp\left( +i\frac{mc^2t}{\hbar}\right) \psi_A(0)$$
-Recalling the time dependence of non-relativistic wave equations, we see that $\psi_A$ corresponds to a positive energy solution, whereas $\Psi_B$ appears to have a negative energy.  We interpret $\psi_B$ as a positive energy anti-particle with time dependence that has opposite sign to that of a particle.  It is rather fascinating that despite our successful endeavor to find an equation linear in $E$, the negative energy solutions (corresponding to anti-particles) persists.
-
-Recalling that $\psi_A$ and $\psi_B$ each have two components, there are four independent solutions:
+There are four independent solutions:
 $$
 \psi^{(1)} = \exp\left(- i \frac{mc^2}{\hbar} t\right)
 \begin{pmatrix} 

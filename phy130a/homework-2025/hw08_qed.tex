@@ -1,0 +1,111 @@
+\documentclass[12pt]{article}
+
+
+\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.5in]{geometry}
+\usepackage{cite}
+\usepackage{slashed}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{braket}
+\usepackage{feynman}
+
+\DeclareMathOperator{\Tr}{Tr}
+\newcommand{\gv} {\ensuremath{g_{\mathrm v}}}
+\newcommand{\ga} {\ensuremath{g_{\mathrm a}}}
+\newcommand{\Ps} {\ensuremath{\slashed{P}}}
+\newcommand{\Qs} {\ensuremath{\slashed{Q}}}
+\newcommand{\Rs} {\ensuremath{\slashed{R}}}
+\newcommand{\Ss} {\ensuremath{\slashed{S}}}
+\newcommand{\ps}{\ensuremath{\slashed{p}}}
+\newcommand{\GeV} {\ensuremath{\mathrm{Ge\kern -0.08em V}}}
+
+\begin{document}
+
+\title{Homework Assignment 8 \\ QED }
+
+\maketitle
+
+\noindent
+All problems are graded on effort only.\\
+
+\noindent
+{\bf Problem 1:}  In lecture we defined the fifth gamma matrix as:
+$$\gamma^5 = i \gamma^0 \gamma^1 \gamma^2 \gamma^3$$
+Using our representation of the Dirac matrices, show that:
+$$\gamma^5 = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$$
+
+
+\noindent
+{\bf Problem 2:}  Show the following properties of $\gamma^5$:
+$$(\gamma^5)^2 = 1$$
+and
+$$(\gamma^5)^\dagger = \gamma^5$$
+and
+$$\gamma^5 \gamma^\mu = -\gamma^\mu \gamma^5$$
+You can show this for our specific representation, or by using properties of the gamma matrices:
+$$\{ \gamma^\mu, \gamma^\nu \} = 2 g^{\mu \nu}$$
+and
+$$\gamma^0 \gamma^\mu \gamma^0 = (\gamma^\mu)^\dagger$$
+
+\noindent
+{\bf Problem 3:}  We defined the right-handed and left-handed chiral projection operators:
+$$P_R = \frac{1+\gamma^5}{2}, \hspace{2cm} P_L = \frac{1-\gamma^5}{2}$$
+Show that:
+$$P_R + P_L = 1$$
+and
+$$P_R P_R = P_R$$
+and
+$$P_L P_L = P_L$$
+and
+$$P_R P_L = 0$$
+
+\noindent
+{\bf Problem 4:}  Consider the following particle bispinors:
+$$\def\arraystretch{1.7}
+u_R = N \begin{pmatrix} C  \\ S e^{i\phi} \\ C \\ S e^{i\phi} \end{pmatrix}, \hspace{1cm}
+u_L = N \begin{pmatrix} -S \\ C e^{i\phi} \\ S \\ -C e^{i\phi} \end{pmatrix},
+$$
+and anti-particle bispinors:
+$$\def\arraystretch{1.7}
+v_R = N \begin{pmatrix} S \\ -C e^{i\phi} \\ -S \\ C e^{i\phi} \end{pmatrix}, \hspace{1cm}
+v_L = N \begin{pmatrix} C \\  S e^{i\phi} \\  C \\ S e^{i\phi} \end{pmatrix},
+$$
+with
+$$C \equiv \cos \left( \frac{\theta}{2} \right), \hspace{1cm } S \equiv \sin \left( \frac{\theta}{2} \right)$$
+Show that these are eigenvectors of the $\gamma^5$ matrix and identify the eigenvalue for each bispinor.\\[5pt]
+
+\noindent
+{\bf Problem 5:}  Consider two body scattering $a + b \to 1 + 2$ in the CMS, where $a$ is a particle and $b$ is an antiparticle.  Assume that particle $a$ has $\theta=0$ and $\phi=0$ and anti-particle $b$ has $\theta=\pi$ and $\phi=\pi$.  Show that in this case, the eigenstates of chirality are:
+$$\def\arraystretch{1.7}
+u_R(a) = N \begin{pmatrix} 1 \\ 0 \\ 1 \\ 0  \end{pmatrix}, \hspace{1cm}
+u_L(a) = N \begin{pmatrix} 0 \\ 1 \\ 0 \\ -1 \end{pmatrix},
+$$
+and anti-particle bispinors:
+$$\def\arraystretch{1.7}
+v_R(b) = N \begin{pmatrix} 1 \\ 0 \\ -1 \\ 0  \end{pmatrix}, \hspace{1cm}
+v_L(b) = N \begin{pmatrix} 0 \\ -1 \\ 0 \\ -1 \end{pmatrix},
+$$
+
+\newpage
+
+
+\noindent
+{\bf Problem 6:} Show that in the limit $m_e << E$, the cross-section for $e^+ + e^- \to \mu^+ + \mu^-$ is zero if both incident particles have positive helicity. Hint, in this limit, the helicity eigenstates are the same as the eigenstates, so we can assume the initial particles are in the states $u_R(a)$ and $v_R(b)$ from the previous problem.  In the previous homework, you already worked out the amplitude for this process as:
+\begin{eqnarray*}
+\mathcal{M}  &=&  -\frac{g_e^2}{(p_a+p_b)^2} \; \overline{v}(b) \, \gamma^\mu
+  \, u(a)  \; \bar{u}(1) \, \gamma_\mu \, v(2) \; 
+\end{eqnarray*}
+You need only show that:
+$$\overline{v}(b) \, \gamma^\mu \, u(a) = 0$$
+in this case.\\[5pt]
+
+\noindent
+{\bf Problem 7:}
+In lecture we showed that we can take the parity operator as:
+$$\hat{P} = \gamma^0$$
+Show that particles and antiparticles at rest are eigenstates of
+parity.  Show that by this convention, particles (at rest) have
+positive parity and anti-particles (at rest) have negative parity.
+
+\end{document}
+

@@ -1,0 +1,164 @@
+\documentclass[12pt]{article}
+
+
+\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.5in]{geometry}
+\usepackage{cite}
+\usepackage{slashed}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{braket}
+\usepackage{feynman}
+
+\DeclareMathOperator{\Tr}{Tr}
+\newcommand{\gv} {\ensuremath{g_{\mathrm v}}}
+\newcommand{\ga} {\ensuremath{g_{\mathrm a}}}
+\newcommand{\Ps} {\ensuremath{\slashed{P}}}
+\newcommand{\Qs} {\ensuremath{\slashed{Q}}}
+\newcommand{\Rs} {\ensuremath{\slashed{R}}}
+\newcommand{\Ss} {\ensuremath{\slashed{S}}}
+\newcommand{\ps}{\ensuremath{\slashed{p}}}
+\newcommand{\GeV} {\ensuremath{\mathrm{Ge\kern -0.08em V}}}
+
+\begin{document}
+
+\title{Take-Home Problem for Final Exam}
+
+\maketitle
+
+\noindent
+
+This assignment is open book and open notes.  The TAs may not provide
+any help.  You will be graded subjectively on the strength, accuracy,
+and readibility (including neatness) of your argument.  Aim for a
+terse but complete exposition, and use the techniques and conventions
+as developed in the course.  To discourage throwing everything at the
+wall and hoping for partial credit, I will deduct points for pointless
+diversions.
+
+{\bf Warning:} do not attempt to use internet solutions for this
+problem.  It was choosen in part because several solutions to similar
+problems online have subtle mistakes that do not impact the final
+result, and which I will be alert for.  ChatGPT's attempt at it was
+simply adorable.  If you are caught cheating in this course, you will
+fail the entire course.
+
+
+
+\begin{figure}[htbp]
+\begin{center}
+\begin{feynman}
+    \fermion{1.00, 1.00}{0.0, 0.2}
+    \fermion{0.0, 1.8}{1.00, 1.00}
+    \electroweak{1.00, 1.00}{2.00, 1.00}
+    \fermion{3.00, 0.2}{2.00, 1.00}
+    \fermion{2.00, 1.00}{3.00, 1.8}
+    \node at (0,0) {$\bar{v}(b)$};
+    \node at (0,2) {$u(a)$};
+    \node at (3,2) {$\bar{u}(1)$};
+    \node at (3,0) {$v(2)$};
+    \node at (1.5,1.2) {$\gamma$};
+    \node at (0,0.4) {$e$};
+    \node at (0,1.6) {$e$};
+    \node at (3.0,0.4) {$\mu$};
+    \node at (3.0,1.6) {$\mu$};
+\end{feynman}
+\caption{\label{fig:feyn} Leading order Feynman diagram for the process $e^- + e^+ \to \gamma \to \mu^- + \mu^+$.  The particle plane-wave bi-spinor is $u$ and the anti-particle plane-wave bi-spinor is $v$.}
+\end{center}
+\end{figure}
+~\\[5pt]
+
+We will consider the process $e^- + e^+ \to \mu^- + \mu^+$ at leading
+order, as shown in Fig.~\ref{fig:feyn}.  In Homework 7 you found the
+amplitude for this process to be:
+\begin{eqnarray*}
+\mathcal{M}  &=&  -\frac{g_e^2}{(p_a+p_b)^2} \; \overline{v}(b) \, \gamma^\mu
+  \, u(a)  \; \bar{u}(1) \, \gamma_\mu \, v(2) \; 
+\end{eqnarray*}
+where:
+$$\gamma_\mu \equiv g_{\mu\nu} \gamma^\nu$$
+In this problem, we will consider an experiment that is capable of
+supplying polarized beams, so that the incident electrons and positrons
+can be prepared with a known helicity.  We will consider the limit
+that $m_e,m_\mu \ll E$.  In this limit the helicity eigenstates are
+identical to the chirality eigenstates, which for particles are:
+$$\def\arraystretch{1.7}
+u_R = N \begin{pmatrix} C  \\ S e^{i\phi} \\ C \\ S e^{i\phi} \end{pmatrix}, \hspace{1cm}
+u_L = N \begin{pmatrix} -S \\ C e^{i\phi} \\ S \\ -C e^{i\phi} \end{pmatrix},
+$$
+and for anti-particles are:
+$$\def\arraystretch{1.7}
+v_R = N \begin{pmatrix} S \\ -C e^{i\phi} \\ -S \\ C e^{i\phi} \end{pmatrix}, \hspace{1cm}
+v_L = N \begin{pmatrix} C \\  S e^{i\phi} \\  C \\ S e^{i\phi} \end{pmatrix},
+$$
+with
+$$C \equiv \cos \left( \frac{\theta}{2} \right), \hspace{1cm } S \equiv \sin \left( \frac{\theta}{2} \right)$$
+and $N = \sqrt{E}$.\\[5pt]
+
+\noindent
+{\bf Part 1:}  For particle (a) take $\theta=0$ and $\phi=0$ and for anti-particle (b) take $\theta=\pi$ and $\phi=\pi$.  Work out the chirality eigenstates for the particle (a) as:
+$$\def\arraystretch{1.7}
+u_R(a) = \sqrt{E} \begin{pmatrix} 1 \\ 0 \\ 1 \\ 0 \end{pmatrix}, \hspace{1cm}
+u_L(a) = \sqrt{E} \begin{pmatrix} 0 \\ 1 \\ 0 \\ -1 \end{pmatrix},
+$$
+and for the anti-particle (b) as:
+$$\def\arraystretch{1.7}
+v_R(a) = \sqrt{E} \begin{pmatrix} 1 \\ 0 \\ -1 \\ 0 \end{pmatrix}, \hspace{1cm}
+v_L(a) = \sqrt{E} \begin{pmatrix} 0 \\ -1 \\ 0 \\ -1 \end{pmatrix},
+$$
+~\\[5pt]
+
+\newpage
+
+\noindent
+{\bf Part 2:}  For particle (1) take $\phi=0$ and work out the chirality eigenstates as:
+$$\def\arraystretch{1.7}
+u_R(1) = \sqrt{E} \begin{pmatrix}  C \\ S \\ C \\  S \end{pmatrix}, \hspace{1cm}
+u_L(1) = \sqrt{E} \begin{pmatrix} -S \\ C \\ S \\ -C \end{pmatrix}
+$$
+~\\[5pt]
+
+\noindent
+{\bf Part 3:}  For anti-particle (2) take $\phi=\pi$ and replace $\theta \to \pi - \theta$ to work out the chirality eigenstates:
+$$\def\arraystretch{1.7}
+v_R(2) = \sqrt{E} \begin{pmatrix}  C \\  S \\ -C \\  -S \end{pmatrix}, \hspace{1cm}
+v_L(2) = \sqrt{E} \begin{pmatrix}  S \\ -C \\  S \\  -C \end{pmatrix}
+$$
+~\\[5pt]
+
+In the amplitude, we encounter vector currents of the form:
+\begin{eqnarray*}
+  J^\mu \; &=& \; \bar{v}_L(b) \; \gamma^\mu \; u_R(a) \\
+  P^\mu \; &=& \; \bar{u}_R(1) \; \gamma^\mu \; v_L(2) \\
+  Q^\mu \; &=& \; \bar{u}_L(1) \; \gamma^\mu \; v_R(2) \\
+\end{eqnarray*}
+\noindent
+{\bf Part 4:} Calculate the currents $J^\mu$, $P^\mu$ and $Q^\mu$.  Partial answer:
+\begin{eqnarray*}
+  (J^0,J^1,J^2,J^3) \; &=& \; 2E(0,-1,-i,0) \\
+  (P^0,P^1,P^2,P^3) \; &=& \; 2E(0,-\cos\theta,i,\sin\theta) \\
+  (Q^0,Q^1,Q^2,Q^3) \; &=& \; ??? \\
+\end{eqnarray*}
+(To be clear:  You must still provide the calculation even for the currents with an answer provided!)\\[5pt]    
+
+\noindent
+{\bf Part 5:} Consider the process with the specific chiralities $e^-(R) + e^+(L) \to \mu^-(R) + \mu^+(L)$ which has amplitude:
+$$\mathcal{M}_{RL \to RL} = -\frac{g_e^2}{(p_a+p_b)^2} \; J^\mu P^\nu g_{\mu\nu}$$
+Show that:
+$$\mathcal{M}_{RL \to RL} = g_e^2 (1 + \cos \theta)$$
+
+\noindent
+{\bf Part 6:} 
+Consider the process with the specific chiralities $e^-(R) + e^+(L) \to \mu^-(L) + \mu^+(R)$ which has amplitude:
+$$\mathcal{M}_{RL \to LR} = -\frac{g_e^2}{(p_a+p_b)^2} \; J^\mu Q^\nu g_{\mu\nu}$$
+Calculate $\mathcal{M}_{RL \to LR}$ as in the previous part.\\[5pt]
+
+\noindent
+{\bf Part 7:} 
+Calculate the amplitude for the process $e^-(R) + e^+(L) \to \mu^- + \mu^+$, where the spins of the outgoing particles are not specified.  In lecture, we showed that the only nonzero contributions will be:
+$$|\mathcal{M}_{RL \to XX}|^2 = |\mathcal{M}_{RL \to RL}|^2 + |\mathcal{M}_{RL \to LR}|^2$$
+Compare your result to what we obtained in Homework 7:
+$$\braket{|\mathcal{M}|^2} = g_e^4 (1 + \cos^2 \theta)$$
+Explain why your result makes sense physically.
+
+\end{document}
+

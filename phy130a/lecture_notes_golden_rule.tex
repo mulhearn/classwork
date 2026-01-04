@@ -39,7 +39,7 @@ though they are not eigenstates, so this is certainly a valid
 expansion, due to the time dependent coefficients $c_m(t)$.  This
 essentially just says that $\Psi(x,t)$ can be expressed at any time as
 a sum of basis vectors, which is certainly true.  We will know it is
-useful if it simplifies the problem.  Specifically, it the time
+useful if it simplifies the problem.  Specifically, if the time
 dependence in the coefficients is due exclusively to $\delta H(t)$.
 
 Applying the SE:
@@ -411,7 +411,7 @@ Now, instead of $T_{fi}$, let us instead consider a Lorentz invariant matrix ele
 $$\Psi_a = \sqrt{2E_a} \Phi_a$$
 and so on.  So:
 \begin{eqnarray*}
-  \sqrt{c^{n-1}} \mathcal{M}_{fi} &\equiv& \braket{\Psi_1 \Psi_2 \Psi_3 \ldots \Psi_n |T| \Psi_a \Psi_b \Psi_c \ldots } \\
+  \sqrt{c^{n-1} \hbar^{3(m-1)}}\mathcal{M}_{fi} &\equiv& \braket{\Psi_1 \Psi_2 \Psi_3 \ldots \Psi_n |T| \Psi_a \Psi_b \Psi_c \ldots } \\
   &=& \sqrt{2E_1\;2E_2\;2E_3\;\ldots}
   \braket{\Phi_1 \Phi_2 \Phi_3 \ldots |T| \Phi_a \Phi_b \Phi_c \ldots } 
   \sqrt{2E_a\;2E_b\;2E_c\;\ldots}\\ 
@@ -419,8 +419,8 @@ and so on.  So:
   T_{fi} 
   \sqrt{2E_a\;2E_b\;2E_c\;\ldots}\\ 
 \end{eqnarray*}
-where we have included a factor of $\sqrt{c^{n-1}}$ (for $n$ final state particles) in our definition for convenience later.  And so:
-$$|T_{fi}|^2 = \frac{1}{c} \; \frac{|\mathcal{M}_{fi}|^2}
+we have included a factor of $\sqrt{c^{n-1}}$ (for $n$ final state particles) and $\sqrt{\hbar^{3(m-1)}}$ (for $m$ initial state particles) to match the conventions for the Feynman Rules that which we will be applying to determine $\mathcal{M}$.  And so:
+$$|T_{fi}|^2 = \frac{|\mathcal{M}_{fi}|^2}
 {(2E_a\;2E_b\;2E_c\;\ldots)} \frac{c^n}{(2E_1\;2E_2\;2E_3\;\ldots2E_n)}$$
 Notice that the new normalization has led to exactly the factors of $1/2E$ needed to make each phase space factor Lorentz Invariant.
 
