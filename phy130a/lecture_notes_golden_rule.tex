@@ -110,7 +110,15 @@ We'll consider a simple time-dependence that results from a constant potential t
 \end{center}
 When $t<0$ the potential is off, and the total Hamiltonian is $H=H^{(0)}$.  At $t=0$, the potential turns on and $H=H^{(0)} + V$ and remains constant until $t=T$.  For $t>T$, the potential is off, and $H=H^{0}$ again.
 
-Assume $V$ is small, but specifically how small is TBD.   we have introduced a dimensionless time-independent factor $\lambda$ as a bookkeeping device.  When $\lambda=1$, the perturbation is at full strength (but $V$ is still small).  When $\lambda=0$ the perturbation is turned off (for all time... $\lambda$ is not time dependent!)  When we are finished with our bookkeeping\footnote{If you prefer, you can take $\lambda$ to be always small, by pulling out a small dimensionless paramter from $V$, then the TBD constraints will be on $\lambda V$.  I prefer to set $\lambda$ to one once we are done using it for bookkeeping.}
+Assume $V$ is small, but specifically how small is TBD.  We introduce
+a dimensionless time-independent factor $\lambda$ as a bookkeeping
+device.  When $\lambda=1$, the perturbation is at full strength (but
+$V$ is still small).  When $\lambda=0$ the perturbation is turned off.
+When we are finished with our bookkeeping\footnote{If you prefer, you
+  can take $\lambda$ to be always small, by pulling out a small
+  dimensionless parameter from $V$, then the TBD constraints will be
+  on $\lambda V$.  I prefer to set $\lambda$ to one once we are done
+  using it for bookkeeping.} we will set $\lambda=1$.
 
 \begin{figure}[thb]
 \begin{center}
@@ -344,7 +352,7 @@ $E = \sqrt{m^2c^4 + |\vec{p}|^2c^2}$ which depends on the other integration valu
 This differs from the density of final states calculated earlier via
 only constants and one dynamical quantity $2E$.
 
-\section{Lorentz Invariant Normalization of the wave functions}
+\section{Lorentz Covariant Normalization of the wave functions}
 
 Suppose that a particle of mass $m$ is contained in a container $C$.  The rest
 frame of the container is frame $F$, in which the container has volume
@@ -359,7 +367,7 @@ one, so the number of particle per unit volume as caculated in frame
 $F'$ is therefore:
 $$\frac{1}{V'} \int_A |\psi(x)|^2 d^3x = \frac{1}{V'}= \frac{\gamma}{V_0}$$
 Clearly, than, normalizing to the number of particle per unit volume
-is not Lorentz Invariant.
+is not Lorentz invariant.
 
 We found in the previous section that our phase-space term was missing
 a factor of $2E$.  Let's look at what happens if we normalize an
@@ -380,11 +388,13 @@ function normalized to $2E$ particles per unit volume in frame $F$
 will also be normalized to $2E'$ particles in frame $F'$, even though
 these will, generally, be different values.
 
-\section{Lorentz Invariant Form of Fermi's Golden Rule}
+\section{Lorentz Covariant Form of Fermi's Golden Rule}
 
 We derived the non-relativistic form of Fermi's Golden Rule as:
 $$\Gamma_{fi} = \frac{2 \pi}{\hbar} \int | T_{fi} |^2 \delta(E_i - E_f) dn $$
-We'll now look at how to adapt Fermi's Golden Rule for Lorentz Invariance and muliple initial state particles, which we will write as:
+We'll now look at how to adapt Fermi's Golden Rule for Lorentz
+covariance and muliple initial state particles, which we will write
+as:
 $$a + b + c + \ldots \; \to \; 1 + 2 + 3 + \ldots + n$$
 So in:
 $T_{fi} = \braket{f|T|i}$
@@ -401,7 +411,7 @@ Now, instead of $T_{fi}$, let us instead consider a Lorentz invariant matrix ele
 $$\Psi_a = \sqrt{2E_a} \Phi_a$$
 and so on.  So:
 \begin{eqnarray*}
-  c^{n-1} \mathcal{M}_{fi} &\equiv& \braket{\Psi_1 \Psi_2 \Psi_3 \ldots \Psi_n |T| \Psi_a \Psi_b \Psi_c \ldots } \\
+  \sqrt{c^{n-1}} \mathcal{M}_{fi} &\equiv& \braket{\Psi_1 \Psi_2 \Psi_3 \ldots \Psi_n |T| \Psi_a \Psi_b \Psi_c \ldots } \\
   &=& \sqrt{2E_1\;2E_2\;2E_3\;\ldots}
   \braket{\Phi_1 \Phi_2 \Phi_3 \ldots |T| \Phi_a \Phi_b \Phi_c \ldots } 
   \sqrt{2E_a\;2E_b\;2E_c\;\ldots}\\ 
@@ -409,15 +419,15 @@ and so on.  So:
   T_{fi} 
   \sqrt{2E_a\;2E_b\;2E_c\;\ldots}\\ 
 \end{eqnarray*}
-we have included a factor of $c^{n-1}$ (for $n$ final state particles) in our definition for convenience later.  And so:
-$$|T_{fi}|^2 = \frac{|\mathcal{M}_{fi}|^2}
+where we have included a factor of $\sqrt{c^{n-1}}$ (for $n$ final state particles) in our definition for convenience later.  And so:
+$$|T_{fi}|^2 = \frac{1}{c} \; \frac{|\mathcal{M}_{fi}|^2}
 {(2E_a\;2E_b\;2E_c\;\ldots)} \frac{c^n}{(2E_1\;2E_2\;2E_3\;\ldots2E_n)}$$
 Notice that the new normalization has led to exactly the factors of $1/2E$ needed to make each phase space factor Lorentz Invariant.
 
-Thus, to construct a Lorentz Invariant form of Fermi's Golden Rule appropriate, we make the following replacements
+Thus, to construct a Lorentz Covariant form of Fermi's Golden Rule appropriate to a process with multiple intitial and final state particles, we make the following replacements
 \begin{equation}
 |T_{fi}|^2 \longrightarrow \frac{|\mathcal{M}_{fi}|^2}
-{(2E_a\;2E_b\;2E_c\;\ldots)} 
+{c \; (2E_a\;2E_b\;2E_c\;\ldots)} 
 \end{equation}
 and
 \begin{equation}
@@ -482,8 +492,23 @@ Now identify $\delta(x)$ with $\theta'(x)$ and simplifying:
 \end{eqnarray*}
 
 
-\end{document}
+\section{Fermi's Golden Rule for Two-Body Decays}
 
+For a decay process $a \to 1 + 2$, the Lorentz invariant form of FGR is:
+$$\Gamma_{fi} = \frac{1}{\hbar \, c \; (2E_a)} \int \left| \mathcal M_{fi} \right|^2
+(2\pi)^4 \delta^4(p_a - p_1 - p_2) \frac{c \, d^3 p_1}{2E_1(2\pi)^3} \frac{c \, d^3 p_2}{2E_2(2\pi)^3}$$
+where we must as always remember that $E_1 = \sqrt{p_1^2 c^2 + m_i^2 c^4}$.  Notice that
+$$\Gamma_{fi} \propto \frac{1}{2E_a} \propto \frac{1}{\gamma}$$
+where $\gamma$ is the expected time dilation factor from special relativity.
+
+
+\section{Fermi's Golden Rule for Two-Body Scattering}
+
+
+
+
+
+\end{document}
 
 
 

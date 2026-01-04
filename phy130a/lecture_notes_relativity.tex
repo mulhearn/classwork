@@ -1,4 +1,4 @@
-\documentclass[12pt]{book}
+\documentclass[12pt]{article}
 
 \usepackage[dvips,letterpaper,margin=0.75in,bottom=0.75in]{geometry}
 \usepackage{cite}
@@ -12,24 +12,20 @@
 \usepackage{tikz}
 \begin{document}
 
-\title{PHY 130A \\ Lecture Notes: \\ 
-Special Relativity and Relativistic Kinematics\\
-(Griffith's Chapter 3)}
+\title{PHY 130A \\ Lecture Notes R: \\
+Special Relativity and Relativistic Kinematics\\}
 \author{Michael Mulhearn}
 
 \maketitle
 
-\setcounter{chapter}{2}
-\newcounter{exercise}[chapter]
+\newcounter{exercise}
 \setcounter{exercise}{0}
 
 \newcommand{\exercise}{
 \stepcounter{exercise}
 \noindent
-{\bf Exercise \thechapter.\theexercise:}
+{\bf Exercise R.\theexercise:}
 }
-
-\chapter{Relativistic Kinematics}
 
 \section{Vectors and Change of Basis}
 \label{sec:vectors}
@@ -62,9 +58,10 @@ As you will show in the exercise below, additional basic properties are deducibl
 {\bf (12)} & $(-1)v = -v$ for all $v \in V$ & (Use $1+(-1)=0$ for scalars)\\
 \end{tabular}
 \end{center}
-Note that we use the same symbol ($0$) for both the scalar zero and the zero vector; you must infer which one it refers to from context.\\
+Note that we use the same symbol ($0$) for both the scalar zero and
+the zero vector; you must infer which one it refers to from context.\\
 
-\exercise (*) Deduce properties (9)-(12) from axioms (1)-(8) and known
+\exercise Deduce properties (9)-(12) from axioms (1)-(8) and known
 properties of the scalar field $F$.  $\square$ \\[3pt]
 
 \noindent
@@ -74,30 +71,39 @@ vectors over the field of complex numbers, $n \times m$ real matrices
 over the scalar field of real numbers with ordinary matrix addition
 and scalar multiplication, real-valued periodic functions $f(x)$ of a
 real variable with period $T$ over the scalar field of real numbers
-with ordinary addition and mulitiplication. 
+with ordinary addition and mulitiplication.
 
-\exercise The set $V$ is the rational numbers $\mathbb{R}$ and the field $F$ is the real numbers, with ordinary addition and multiplication.  Show that $V$ is not a vector space. $\square$ \\[3pt]
+\exercise The set $V$ is the rational numbers $\mathbb{R}$ and the
+field $F$ is the real numbers, with ordinary addition and
+multiplication.  Show that $V$ is not a vector space. $\square$
+\\[3pt]
 
-\exercise The set $V$ is the empty set.  Is $V$ a vector space? $\square$ \\[3pt]
+\exercise The set $V$ is the empty set.  Is $V$ a vector space?
+$\square$ \\[3pt]
 
-\exercise (*)
-For a vector space $V$ scalar multiplication is a null
+\exercise (*) For a vector space $V$ scalar multiplication is a null
 operation, that is $a v = v$ for all $a \in F$ and $v \in V$.  Deduce
 all of the vectors in the vector space $V$.  $\square$ \\[3pt]
 
-\exercise (*) The set $V$ is the positive reals, with all reals as the scalar field $F$.  For clarity in what follows, we'll use $\oplus$ for vector addition and $\odot$ for scalar multiplication.  Vector addition is defined as multiplication of the real numbers, which we write as:
+\exercise (*) The set $V$ is the positive reals, with all reals as the
+scalar field $F$.  For clarity in what follows, we'll use $\oplus$ for
+vector addition and $\odot$ for scalar multiplication.  Vector
+addition is defined as multiplication of the real numbers, which we
+write as:
 $$v \oplus w = v \, w  \hspace{1cm} v,w \in V$$
 for $w,v \in V$.  Scalar multiplication is exponentiation, which we write as:
 $$c \odot v = v^c  \hspace{1cm} v \in V, c \in F$$
 Show that $V$ is a vector space.  What is the real number corresponding to the vector $0$?
  $\square$ \\[3pt]
 
-\exercise (*)
-For the previous exercise, verify explicitly that derived properties (10) and (12) hold for this vector space.
- $\square$ \\[3pt]
+\exercise (*) For the previous exercise, verify explicitly that
+derived properties (10) and (12) hold for this vector space.
+$\square$ \\[3pt]
 
 \noindent
-A basis $\mathcal{B}$ for a vector space $V$ is an ordered set of vectors $\mathcal{B} = {e_1, e_2, \cdots, e_m}$ with the following properties:
+A basis $\mathcal{B}$ for a vector space $V$ is an ordered set of
+vectors $\mathcal{B} = {e_1, e_2, \cdots, e_m}$ with the following
+properties:
 \begin{itemize}
 \item They are linearly independent, that is:
 $$c^1 e_1 + c^2 e_2 + \cdots + c^n e_n = 0$$
@@ -105,26 +111,33 @@ only if $c^i=0$ for all $i$.
 \item They span the space, that is for every $v \in V$ there exists a set of scalars $\{v^i \in F\}$ such that:
 $$v = \sum_i v^i e_i$$.
 \end{itemize}
-The scalar quantities $v^i$ are called the components of the vector, and they depend on the basis $\mathcal{B}$ chosen.  This is crucial point to understand, so it bears repeating: {\bf a vector $v$ exists independently of any basis, but its components $v^i$ depend on the basis chosen $\mathcal{B} = \{e_i\}$.}\\  
+The scalar quantities $v^i$ are called the components of the vector,
+and they depend on the basis $\mathcal{B}$ chosen.  This is crucial
+point to understand, so it bears repeating: {\bf a vector $v$ exists
+  independently of any basis, but its components $v^i$ depend on the
+  basis chosen $\mathcal{B} = \{e_i\}$.}\\
 
-\exercise
-Show that the components $v^i$ of a vector $v$ for
-basis $\mathcal{B}$ are unique. (This is essential for many of the
-results that follow.)  $\square$ \\[3pt]
+\exercise Show that the components $v^i$ of a vector $v$ for basis
+$\mathcal{B}$ are unique. (This is essential for many of the results
+that follow.)  $\square$ \\[3pt]
 
 \noindent
-Throughout this course, we will use the Einstein summation convention, whereby there is an implicit sum over repeated dummy indices with one a superscript and the other a subscript, e.g.:
+Throughout this course, we will use the {\bf Einstein summation
+  convention}, whereby there is an implicit sum over repeated dummy
+indices with one a superscript and the other a subscript, e.g.:
 $$v = v^i e_i \equiv \sum_i v^i e_i$$
 Only {\bf after} a basis $\mathcal{B}$ is chosen, it is possible to represent a vector as a column vector:
 $$[v]_{\mathcal{B}} = \begin{pmatrix} v^1 \\ v^2 \\ \vdots \\ v^n \end{pmatrix}$$
 or a row vector:
 $$[v]_{\mathcal{B}}^T = \begin{pmatrix} v^1 & v^2 & \cdots & v^n \end{pmatrix}$$.
 
-\exercise
-We can think of the complex numbers as 2-D vector space with the real numbers as scalars.  Show that $e_1 = 1$ and $e_2 = i$ are a basis $\mathcal{B}$ for this vector space.  For $v = a + b i$, write the column vector $[v]_\mathcal{B}$.  This is why we are able to visualize the complex plane as a 2-D space.  $\square$ \\[3pt]
+\exercise We can think of the complex numbers as 2-D vector space with
+the real numbers as scalars.  Show that $e_1 = 1$ and $e_2 = i$ are a
+basis $\mathcal{B}$ for this vector space.  For $v = a + b i$, write
+the column vector $[v]_\mathcal{B}$.  This is why we are able to
+visualize the complex plane as a 2-D space.  $\square$ \\[3pt]
 
-\exercise (*)
-The Pauli matrices:
+\exercise (**) The Pauli matrices:
 $$\sigma_1 = \begin{pmatrix}
   0 &  1 \\ 1  & 0 \\
 \end{pmatrix},\hspace{1cm}
@@ -149,9 +162,13 @@ as before, but for the primed basis we will write:
 $$\mathcal{B}' = \{e_{i'}\}.$$
 Notice that the index $i$ is primed to indicate it is an index in the $\mathcal{B}'$ basis, and not the quantity $e$ itself.  We'll justify this convention shortly.
 
-Since each $e_i$ is a vector in $V$, and $\{e_{i'}\}$ is a basis, there must (by definition of basis, as above) exist scalar values $A^i_{j'}$ such that:
+Since each $e_i$ is a vector in $V$, and $\{e_{i'}\}$ is a basis,
+there must (by definition of basis, as above) exist scalar values
+$A^i_{j'}$ such that:
 $$e_i = A^{j'}_i e_{j'}$$
-(Remember there is an implicit sum across $j'$ here.)  Similarly, since each $e_{i'}$ is a vector in $V$, and $\{e_i\}$ is a basis, there must be some scalar values $A^{j}_{i'}$ such that:
+(Remember there is an implicit sum across $j'$ here.)  Similarly,
+since each $e_{i'}$ is a vector in $V$, and $\{e_i\}$ is a basis,
+there must be some scalar values $A^{j}_{i'}$ such that:
 $$e_{i'} = A^{j}_{i'} e_j$$
 Remember, the location of the prime matters, so $A^{i}_{j'}$ refers to something altogether different from $A^{j}_{i'}$.  But they are related:
 $$e_i = A^{j'}_{i} e_{j'} = A^{j'}_i A^{k}_{j'}e_{k}$$
@@ -159,8 +176,11 @@ which requires (recall that the components of a basis are unique) that:
 $$A^{j'}_i A^{k}_{j'} = \delta^k_i$$
 and similarly:
 $$A^i_{j'} A^{j'}_k = \delta^i_k$$
+where
+$$\delta^i_j = \begin{cases} 1 & i=j \\ 0 & \text{otherwise}\end{cases}$$
 
-Any vector $v$ can be expressed in terms of either basis $\mathcal{B}$ or basis $\mathcal{B}'$, which we write as:
+Any vector $v$ can be expressed in terms of either basis $\mathcal{B}$
+or basis $\mathcal{B}'$, which we write as:
 $$v = v^{i}e_{i} = v^{j'}e_{j'}$$
 but we also have:
 \begin{equation}
@@ -173,7 +193,7 @@ In a previous exercise you showed that the components of a vector within a basis
 $$v^{i} = A^{i}_{j'} \, v^{j'}$$
 In a similar fashion, we can find that:
 $$v^{j'} = A^{j'}_{i} \, v^{i}$$
-Compare this transformation rule to Equation~\ref{eqn:tfbasis}, we see that the components $v^i$ transform via $A^{j'}_i$, whereas the basis vectors $e_i$ transform via $A^{i}_{j'}$.  That is, they transform in a contary fashion.  We call the vector components $v^i$ contravariant, and we indicate this with an upper index.  We call the basis vector $e_i$ covariant, and we indicate this with the lower index.
+Compare this transformation rule to Equation~\ref{eqn:tfbasis}, we see that the components $v^i$ transform via $A^{j'}_i$, whereas the basis vectors $e_i$ transform via $A^{i}_{j'}$.  That is, they transform in a contary fashion.  {\bf We call the vector components $v^i$ contravariant, and we indicate this with an upper index.  We call the basis vector $e_i$ covariant, and we indicate this with the lower index.}
 \begin{center}
 \begin{tabular}{lllll}
  & index location & quantity & transformation & inverse transformation \\
@@ -184,18 +204,22 @@ $e_i$ & lower index & covariant basis vector & $e_{i'} = A^{j}_{i'} e_{j}$ & $e_
 \end{center}
 
 
-\exercise Our first definition of a vector is a geometric object with a
-magnitude and direction.  Suppose we scale each basis vector by a
+\exercise Our first definition of a vector is a geometric object with
+a magnitude and direction.  Suppose we scale each basis vector by a
 scalar $s$, to obtain a new basis.  We must scale the components from
 the original basis by some scalar value in order to obtain new
 components for the new basis which preserve the magnitude of the
 vector.  What is that scalar value?  Does the ``contra'' in
-contravariant components make sense in this context?  $\square$ \\[3pt]
+contravariant components make sense in this context?  $\square$
+\\[3pt]
 
 \exercise Consider the previous exercise, but instead of scaling, we
 rotate the original basis vectors by an angle $\theta$ about some axis
-$w$ to obtain a new basis.  Now we must rotate the components from the original basis about the axis $w$ by some angle, in order to obtain new components for the new basis which preserve the direction of the vector.  What is that angle?  Does the ``contra'' in contravariant components make sense in this context?
- $\square$ \\[3pt]
+$w$ to obtain a new basis.  Now we must rotate the components from the
+original basis about the axis $w$ by some angle, in order to obtain
+new components for the new basis which preserve the direction of the
+vector.  What is that angle?  Does the ``contra'' in contravariant
+components make sense in this context?  $\square$ \\[3pt]
 
 \section{Dual Vectors}
 
@@ -210,7 +234,7 @@ The set of all dual vectors to a vector space $V$ is called the {\bf
   dual space of $V$}, and it is denoted as $V^*$.  As you will verify in the
 exercise below, the dual space is itself a vector space.\\[3pt]
 
-\exercise 
+\exercise
 For a vector space $V$ over scaler field $F$, show that its dual space
 ($V^*$) is itself a vector space.  Vector addition (addition of dual
 vectors) and scalar multiplication are defined such that:
@@ -220,7 +244,7 @@ $$(f+cg)(v) = f(v) + c g(v) \hspace{2cm} f,g \in V^*,\; v \in V,\; c \in F $$
 \noindent
 Assume that $\mathcal{B} = \{ e_i\}$ is a basis for the vector space $V$.
 The action of any dual vector $f \in V^*$ on any vector $v \in V$ is completely determined by
-its action of $f$ on the basis vectors $e_i$.  For each i, we define a scalar quantity
+the action of $f$ on the basis vectors $e_i$.  For each i, we define a scalar quantity
 $$f_i \equiv f(e_i)$$
 and we see that:
 \begin{equation}
@@ -234,8 +258,6 @@ $$e^i(v) = v^i$$
 We say that $e^i$ picks off the $i$th component of $v$.
 If follows that
 $$e^i(e_j) = \delta^i_j$$
-where
-$$\delta^i_j = \begin{cases} 1 & i=j \\ 0 & \text{otherwise}\end{cases}$$
 because $e_j$ is a vector in $V$ whose components are all 0, except for the $j$th component, which is 1.  You will show in the exercises below that the set of dual vectors $\{e^i\}$ are a basis for $V^*$, which we call the {\bf dual basis} and denote as $\mathcal{B}^*$.
 You will also show that the scalar quanties $f_i$ are in fact the components of $f$ in the basis $\mathcal{B}$, so we have:
 $$f = f_i e^i$$.
@@ -249,15 +271,13 @@ dual space $V^*$ has the same dimension.}\\[3pt]
 \exercise (*)
 Verify that $e^i(v + c w) = e^i(v) + c e^i(w)$ so that $e^i$ is indeed a dual vector. $\square$ \\[3pt]
 
-
-
 \exercise Show that
 $$f = f_i e^i$$
 is a valid expansion for $f$, by verifying that
 $$f(v) = v^i f_i$$
 as required by Equation~\ref{eqn:dualout}. This shows that $\{e^i\}$ spans the dual space. $\square$ \\[3pt]
 
-\exercise 
+\exercise
 Show that if:
 $a_i e^i = 0$
 then, for all $i$
@@ -266,9 +286,6 @@ This shows that $\{e^i\}$ is linearly independent.
 Hint: define the dual vector
 $a = a_i e^i$
 and evaluate $a(e_i)$ for each $i$.  $\square$ \\[3pt]
-
-\exercise:(*)
-Consider the vector space $V=\mathbb{R}^3$ with the basis $e_1=i, e_2=j, e_3=k$.  For a vector $\vec{v} \in V$, calculate the action of each dual basis vector on $v$ (i.e. $e^1(\vec{v})$, $e^2(\vec{v})$, $e^3(\vec{v})$) in terms of the components of $v$ (i.e. the $v^i)$.  Then write $f(\vec{v})$ in terms of these components and the components of $f$ (i.e. the $f_i$).  (NOTE: this example changed since assigned) $\square$ \\[3pt]
 
 We showed previously that the components of a vector $v$ tranform in a
 covariant fashion, so we call the $v^i$ the covariant components.
@@ -298,7 +315,7 @@ do so with an inner product.  But here, we have not defined an inner
 product.  We see that dual vectors are a generalization of the dot
 product idea.\\[3pt]
 
-\exercise Using the definition, show that $e^i$ transforms contravariantly, as expected for a quantity with upper indices.
+\exercise Using the definition, show that $e^i$ transforms contravariantly, as expected for a quantity with upper indices.\\[3pt]
 
 
 \section{Introduction to Tensors}
@@ -335,7 +352,7 @@ $$(cT)(v,f) = c \; (T(v,f))$$
 with $c \in F$.  Multilinearity means that:
 \begin{eqnarray*}
   T(v+cw,f) &=& T(v,f) + c \, T(w,f) \\
-  T(v,f+cg) &=& T(v,f) + c \, T(v,g) 
+  T(v,f+cg) &=& T(v,f) + c \, T(v,g)
 \end{eqnarray*}
 for $w \in V$ and $g \in V^*$.\\[3pt]
 
@@ -380,7 +397,7 @@ $$T(v, w).$$
 A tensor is completely described by its action on any set of basis
 vectors.  The components of $T$ are defined as
 $$T_{ij} \equiv T(e_i, e_j)$$
-we can calculate 
+we can calculate
 $$T(v,w) = T(v^i \, e_i, w^j \, e_j) = v^i T_{ij} w^j,$$
 which shows we can calculate $T(v,w)$ from only the components $T_{ij}$.\\[3pt]
 
@@ -403,7 +420,7 @@ T(v,w) = v^i \, T_{ij} \, w^j = [v]_\mathcal{B}^T \, [T]_\mathcal{B} \, [v]_\mat
 \begin{pmatrix}
   T_{11} & T_{12} & \cdots & T_{1n} \\
   T_{21} & T_{22} & \cdots & T_{2n} \\
-  \vdots & \vdots & \ddots &        \\ 
+  \vdots & \vdots & \ddots &        \\
   T_{n1} & T_{n2} &        & T_{nn} \\ \end{pmatrix}
 \begin{pmatrix} w^1 \\ w^2 \\ \vdots \\ w^n \end{pmatrix}
 \end{displaymath}
@@ -420,7 +437,7 @@ and:
 $$T_{ij} = A_i^{k'} A_j^{l'} T_{k'l'} $$
  $\square$ \\[3pt]
 
-\exercise 
+\exercise
 For a vector space $V$ over scaler field $F$, show that the set of all (2,0) tensors is a vector space.\\[3pt]
 
 \noindent
@@ -466,7 +483,7 @@ positive definiteness.  So conceptually, a non-degenerate form is an
 inner product but for the requirement of positive definiteness, which
 is loosened to property (3) instead.\\[3pt]
 
-\exercise 
+\exercise
 Show that for any non-degenerate Hermitian form $(\cdot|\cdot)$:
 $$(v_1+c \, v_2| w) = (v_1| w) + \bar{c} (v_2| w)$$
 for all $v_1,v_2,w \in V$ and $c \in F$  $\square$ \\[3pt]
@@ -519,9 +536,10 @@ $$a^i = 0$$
 which shows that $\{L(e_i)\}$ are linearly independent.
 Therefore $\{L(e_i)\}$ is a basis for $V^*$\\[3pt]
 
-\exercise Given that $\{L(e_i)\}$ is a basis for $V^*$, show that the mapping $L$ from $V$ to $V^*$ is onto.  That is, show that for any $b \in V^*$, there is an $a \in V$ such that
-$$L(a) = b$$.
- $\square$ \\[3pt]
+\exercise Given that $\{L(e_i)\}$ is a basis for $V^*$, show that the
+mapping $L$ from $V$ to $V^*$ is onto.  That is, show that for any $b
+\in V^*$, there is an $a \in V $ such that
+$$L(a) = b$$. $\square$ \\[3pt]
 
 By now we have shown that the mapping $L$ is both one-to-one and onto,
 which means that it is an invertible mapping.  {\bf We can move freely from
@@ -565,7 +583,7 @@ $$c = \frac{\sqrt{(x_{\rm B}-x_{\rm A})^2 + (y_{\rm B}-y_{\rm A})^2 + (z_{\rm B}
 or equivalently:
 $$c^2(t_{\rm B}-t_{\rm A})^2 - (x_{\rm B}-x_{\rm A})^2 - (y_{\rm B}-y_{\rm A})^2 - (z_{\rm B}-z_{\rm A})^2  = 0$$
 In any other inertial frame $F'$, in which the light is
-emitted at time $t'_{\rm A}$ and position $(x'_{\rm A}, y'_{\rm A}, z'_{\rm A})$ and absorbed 
+emitted at time $t'_{\rm A}$ and position $(x'_{\rm A}, y'_{\rm A}, z'_{\rm A})$ and absorbed
 at time $t'_{\rm B}$ and position $(x'_{\rm B}, y'_{\rm B}, z'_{\rm B})$,
 $$c^2(t'_{\rm B}-t'_{\rm A})^2 - (x'_{\rm B}-x'_{\rm A})^2 - (y'_{\rm B}-y'_{\rm A})^2 - (z'_{\rm B}-z'_{\rm A})^2  = 0$$
 Quantities that have the same value in every reference frame are
@@ -574,7 +592,7 @@ interval $\Delta S^2$ between any two events A and B as:
 \begin{equation}
 \Delta S^2 \equiv c^2 (t_{\rm B}-t_{\rm A})^2 - (x_{\rm B}-x_{\rm A})^2 - (y_{\rm B}-y_{\rm A})^2 - (z_{\rm B}-z_{\rm A})^2
 \end{equation}
-The space-time interval thus defined has several properties that are immediately evident: 
+The space-time interval thus defined has several properties that are immediately evident:
 \begin{center}
 \begin{tabular}{ll}
  {\bf (A)} & If $\Delta S^2 = 0$ in one frame, then it is zero in every frame.\\
@@ -591,18 +609,28 @@ Property (C) follows because $\Delta S^2$ only involves differences in time and 
 
 Next consider an infinitesimal $\Delta S^2$ calculated in frame $F$,
 which we will write as $dS^2$, and the same quantity cacluated in
-frame $F'$, which we will call $d{S^2}'$.  We can write $d{S^2}'$ as a
+frame $F'$, which we will call $(d{S^2})'$.  We can write $(d{S^2})'$ as a
 power series in $dS^2$:
 $$d{S^2}' = a + b dS^2 + c (dS^2)^2 + \cdots $$
-with coefficients $a,b,c,\cdots$ to be determined.  From property (A) we see that $a=0$.  And because $dS^2$ is small we can neglect higher order terms. This leads to:
+with coefficients $a,b,c,\cdots$ to be determined.  From property (A)
+we see that $a=0$.  And because $dS^2$ is small we can neglect higher
+order terms. This leads to:
 $$d{S^2}' = b dS^2$$
-with $b$ still an unknown coefficient.  But $b$ cannot depedent on the absolute position in space and time, because of property (C).  It can depend on the relative motion between the $F$ and $F'$ frames, but not the direction, because of property (B).  So it can only dependent on the relative speed of $F$ and $F'$.  But this is the same in both frames, so we must also have:
+with $b$ still an unknown coefficient.  But $b$ cannot depedent on the
+absolute position in space and time, because of property (C).  It can
+depend on the relative motion between the $F$ and $F'$ frames, but not
+the direction, because of property (B).  So it can only dependent on
+the relative speed of $F$ and $F'$.  But this is the same in both
+frames, so we must also have:
 $$d{S^2} = b d{S^2}'$$
 and so:
 $$d{S^2} = b^2 d{S^2}$$
 from which we conclude $b=\pm1$ and so:
 $$d{S^2}' = \pm dS^2$$
-If we can exclude $b=-1$ always then $dS^2$ is invariant, and (by integration) $\Delta S^2$ is invariant as well.  Indeed that is the case, but to show it we will need to demonstrate one more property of $\Delta S^2$:
+If we can exclude $b=-1$ always then $dS^2$ is invariant, and (by
+integration) $\Delta S^2$ is invariant as well.  Indeed that is the
+case, but to show it we will need to demonstrate one more property of
+$\Delta S^2$:
 \begin{center}
 \begin{tabular}{ll}
 {\bf (D)} & The sign of $\Delta S^2$ is invariant \\
@@ -624,18 +652,18 @@ If we can exclude $b=-1$ always then $dS^2$ is invariant, and (by integration) $
   \node[shape=circle,draw,thick] at (0,0) {A};
 
   \draw[->, thick] (0.4,0.4) -- ++(1.25,1.25);
-  
+
   \node[shape=circle,draw,thick] at (2,2) {B};
 
   \draw[->, thick] (2,2.5) -- ++(0,1.0);
-  
+
   \node[shape=circle,draw,thick] at (2,4) {C};
 
   \draw[-, thick, dashed] (2.3,2.3) -- (5.0,5.0);
 
   % Frame F' picture
   \node at (10,-1) {$F'$};
-  
+
   \node at (6.7,2) {$ct'$};
   \draw[->, thick] (7,0.5) -- ++(0,5.0);
 
@@ -645,11 +673,11 @@ If we can exclude $b=-1$ always then $dS^2$ is invariant, and (by integration) $
   \node[shape=circle,draw,thick] at (7,0) {A};
 
   \draw[->, thick] (7.4,0.4) -- ++(1.25,1.25);
-  
+
   \node[shape=circle,draw,thick] at (9,2) {B};
 
   \draw[->, thick] (9.15,2.5) -- ++(0.2,1.0);
-  
+
   \node[shape=circle,draw,thick] at (9.5,4) {C};
 
   \draw[-, thick, dashed] (9.3,2.3) -- (12.0,5.0);
@@ -688,20 +716,21 @@ would have a contradiction of one of the previous two results).  Which demonstra
 
 Thus we conclude with the main result of this section, {\bf the space-time interval defined as:}
 \begin{equation}
-  \Delta S^2 = c^2 \Delta t^2 - \Delta x^2 - \Delta y^2 - \Delta z^2
+ \label{eqn:invariance}
+  \Delta S^2 = \Delta t^2 - \Delta x^2 - \Delta y^2 - \Delta z^2
 \end{equation}
-{\bf is frame invariant.}\\[5pt]
+{\bf is frame invariant.}  Note that we have set $c=1$ in writing
+Equation~\ref{eqn:invariance}, as will be our convention from here on.\\[4pt]
 
-\noindent
-{\bf Exercise} Consider Fig.~\ref{fig:abctex} and suppose there is a
-frame $F''$ in which events A and B occuring at the spatial origin.  What is
+\exercise Consider Fig.~\ref{fig:abctex} and suppose there is a frame
+$F''$ in which events A and B occur at the spatial origin.  What is
 the speed of of frame $F''$ in frame F?  Show that events $A$ and $B$
 must occur simultaneously in frame $F$.  Note that as a result, the
-spatial origin of frame $F''$ at $t''=0$ is located at both events $A$ and $B$
-in the frame $F$.  So therefore there is no invertable map of space-time points
-between frame $F$ and $F''$.  We conclude that it is not possible for
-an inertial frame to travel at the speed of light as viewed from any
-other inertial frame.
+spatial origin of frame $F''$ at $t''=0$ is located at both events $A$
+and $B$ in the frame $F$.  So therefore there is no invertable map of
+space-time points between frame $F$ and $F''$.  We conclude that it is
+not possible for an inertial frame to travel at the speed of light as
+viewed from any other inertial frame.
 
 \section{Four-Vectors and the Metric of Space-Time}
 
@@ -718,8 +747,8 @@ We define a {\bf position-space four-vector} (v) as a vector from the
 vector space $\mathbb{R}^4$, which, under the standard basis $\mathcal{B}=\{e_\mu\}$, has contravariant components $v^\mu$ matched to space-time
 coordinates from frame $F$ as:
 \begin{equation}
-  v^0 = ct, \hspace{1cm} v^1 = x, \hspace{1cm} v^2 = y, \hspace{1cm} v^3 = z.
-\end{equation}  
+  v^0 = t, \hspace{1cm} v^1 = x, \hspace{1cm} v^2 = y, \hspace{1cm} v^3 = z.
+\end{equation}
 It is conventional to use greek indices, which run from from 0 to 3, when referring to the components of four-vectors:
 $$v = v^\mu e_\mu$$
 Associated with the four-vector space, we define a non-degenerate
@@ -758,17 +787,17 @@ $(\cdot|\cdot)$ was defined based on the space-time interval.)
 In the exercises you will show that
 \begin{equation}
   \label{eqn:metric-components}
-  g_{00}=1, \hspace{1cm} g_{11} = g_{22} = g_{33} = -1 
-\end{equation}  
+  g_{00}=1, \hspace{1cm} g_{11} = g_{22} = g_{33} = -1
+\end{equation}
 and all other elements are zero.  Thus, the metrix tensor $g$ can be represented by a matrix $G$ as:
 \begin{equation}
 \label{eqn:metric-matrix}
-[g]_\mathcal{B} = G \equiv 
-\begin{pmatrix} 
-1 &  0 &  0 &  0 \\ 
-0 & -1 &  0 &  0 \\ 
-0 &  0 & -1 &  0 \\ 
-0 &  0 &  0 & -1 \\ 
+[g]_\mathcal{B} = G \equiv
+\begin{pmatrix}
+1 &  0 &  0 &  0 \\
+0 & -1 &  0 &  0 \\
+0 &  0 & -1 &  0 \\
+0 &  0 &  0 & -1 \\
 \end{pmatrix}
 \end{equation}
 Now, there is nothing special about the frame $F$ and its standard
@@ -803,7 +832,7 @@ $$\tilde{v}_\mu \equiv \tilde{v}(e_\mu) = (v|e_\mu) = g(v,e_\mu) = g(v^\nu e_\nu
 = v^\nu g(e_\nu , e_\mu)$$
 leading to the very useful result:
 \begin{equation}
-\tilde{v}_\mu = v^\nu g_{\nu \mu} = g_{\mu \nu} v^\nu 
+\tilde{v}_\mu = v^\nu g_{\nu \mu} = g_{\mu \nu} v^\nu
 \end{equation}
 So we see that we can use the metric tensor $g$ to lower indices.\\[3pt]
 
@@ -817,7 +846,7 @@ Hint:  $g^{\mu \alpha} \, g_{\alpha \nu}  = \delta^{\mu}_{\nu}$.\\[3pt]
 dual of a four-vector $\tilde{v}_\mu$ as it can be inferred from the
 lowered index:
 $${v}_\mu \equiv \tilde{v}_\mu = g_{\mu\nu} \, v^\nu$$
-  
+
 \noindent
 Notice how our tensor definition applies here.  The metric tensor is a
 mapping $g:V \times V \to F$.  With one vector given, the metric
@@ -830,10 +859,10 @@ can be seen as the components of a (0,2) tensor and as a linear operator from $V
 In matrices, the lowering of an index reads:
 $$[\tilde{v}]_\mathcal{B^*} = [g]_\mathcal{B} [v]_\mathcal{B}$$
 Consider the position four-vector with components in the standard basis $\mathcal{B}$:
-$$[v]_\mathcal{B} = \begin{pmatrix} ct \\ x \\ y \\ z\end{pmatrix}$$
+$$[v]_\mathcal{B} = \begin{pmatrix} t \\ x \\ y \\ z\end{pmatrix}$$
 Using matrices, show that the components of its metric dual in the
 dual basis are
-$$[\tilde{v}]_{\mathcal{B}^*} = \begin{pmatrix} ct \\ -x \\ -y \\ -z\end{pmatrix}$$
+$$[\tilde{v}]_{\mathcal{B}^*} = \begin{pmatrix} t \\ -x \\ -y \\ -z\end{pmatrix}$$
 
 \section{Coordinate Transformations}
 
@@ -876,14 +905,14 @@ but one which we must apply consistently.  In matrix notation, we
 have:
 $$[v]_\mathcal{B'} \; = \; [\Lambda]_{\mathcal{B'}\to\mathcal{B}} \; [v]_\mathcal{B}$$
 which for for a position-space four vector is:
-$$\begin{pmatrix} ct' \\ x' \\ y' \\ z' \end{pmatrix} = 
+$$\begin{pmatrix} t' \\ x' \\ y' \\ z' \end{pmatrix} =
 \begin{pmatrix}
   \Lambda^{0'}_0 &\Lambda^{0'}_1 &\Lambda^{0'}_2 &\Lambda^{0'}_3 \\[3pt]
   \Lambda^{1'}_0 &\Lambda^{1'}_1 &\Lambda^{1'}_2 &\Lambda^{1'}_3 \\[3pt]
   \Lambda^{2'}_0 &\Lambda^{2'}_1 &\Lambda^{2'}_2 &\Lambda^{2'}_3 \\[3pt]
   \Lambda^{3'}_0 &\Lambda^{3'}_1 &\Lambda^{3'}_2 &\Lambda^{3'}_3 \\
 \end{pmatrix}
-\begin{pmatrix} ct \\ x \\ y \\ z \end{pmatrix}$$
+\begin{pmatrix} t \\ x \\ y \\ z \end{pmatrix}$$
 
 \noindent
 In similar fashion, we can consider $\Lambda^{\nu}_{\mu'}$ as the
@@ -901,9 +930,9 @@ $$[\Lambda]_{ \mathcal{B}' \to \mathcal{B}}
 These matrices are related by:
 $$\Lambda^{\beta}_{\eta'} \Lambda^{\eta'}_{\alpha} = \delta^{\beta}_{\alpha}$$
 which in terms of the above matrices reads:
-$$[\Lambda]_{\mathcal{B} \to \mathcal{B}'} \; [\Lambda]_{\mathcal{B}' \to \mathcal{B}} = I$$ 
+$$[\Lambda]_{\mathcal{B} \to \mathcal{B}'} \; [\Lambda]_{\mathcal{B}' \to \mathcal{B}} = I$$
 which is as one would hope.  Therefore, they are each others inverse and so:
-$$[\Lambda]_{\mathcal{B} \to \mathcal{B}'} \equiv [\Lambda]^{-1}_{\mathcal{B}' \to \mathcal{B}}$$ 
+$$[\Lambda]_{\mathcal{B} \to \mathcal{B}'} \equiv [\Lambda]^{-1}_{\mathcal{B}' \to \mathcal{B}}$$
 
 \noindent
 {\bf Comments on Notation:} When there is little chance of
@@ -949,7 +978,7 @@ so, as $v$ is arbitrary, we must have:
 \Lambda^{\alpha'}_{\mu} g_{\alpha'\beta'} \Lambda^{\beta'}_\nu =g_{\mu\nu}
 \end{equation}
 It follows that for vectors $a$ and $b$, not only are $(a|a)$ and
-$(b|b)$ invariant, but also $(a|b)$.  
+$(b|b)$ invariant, but also $(a|b)$.
 
 The metric tensor is an invariant tensor, which we can write in our notation as:
 $$g_{\alpha'\beta'} = \delta^{\alpha'}_\alpha \delta^{\beta'}_\beta g_{\alpha\beta}$$
@@ -1000,7 +1029,7 @@ identity matrix satisfies Equation~\ref{eqn:lorentzgroup} so property
 
 \exercise (*) Show that property (A) holds for the Lorentz group.  That is, if
 $$A^T G A = G$$
-and 
+and
 $$B^T G B = G$$
 then
 $$(AB)^T G (AB) = G. \hspace{1cm} \square$$
@@ -1008,7 +1037,7 @@ $$(AB)^T G (AB) = G. \hspace{1cm} \square$$
 
 \exercise (*) Show that property (D) holds for the Lorentz group.  That is, if
 $$A^T G A = G$$
-and 
+and
 $$(A^-1)^T G A^-1 = G$$
 then
 $$(AB)^T G (AB) = G. \hspace{1cm} \square$$
@@ -1072,7 +1101,9 @@ $$g^{\gamma\alpha} \Lambda^{u'}_{\alpha} g_{\mu'w'} = \Lambda^{\gamma}_{w'} $$
 
 In lecture we saw that the principle of conservation of momentum,
 using the classical definition of momentum $\vec{p}=m\vec{v}$ is not
-consistent with special relativity.  Experimental evidence supports special relativity.  So we must abandon our classical notion of momentum.
+consistent with special relativity.  Experimental evidence supports
+special relativity.  So we must abandon our classical notion of
+momentum.
 
 If we can find a four-vector quantity related to momentum, and likewise conserved, so e.g.:
 $$p^\mu_A + p^\mu_B = p^\mu_C + p^\mu_D$$
@@ -1086,26 +1117,26 @@ quantity is the goal of this section.
 Consider two time-like events A and B, which (by definition) have a
 space-time interval $\Delta S^2 > 0$.  We define the proper-time
 ($\tau$) between these two events as:
-$$\tau \equiv \frac{\sqrt{\Delta S^2}}{c}$$
-The proper-time $\tau$ is equivalent to the elapsed (postive) time in the {\bf
+$$\tau \equiv \sqrt{\Delta S^2}$$
+The proper-time $\tau$ is equivalent to the elapsed (positive) time in the {\bf
   particular} frame where the events occur at the same location.  Such
 a frame exists because $\Delta S^2 > 0$, and calculating in that frame
 (call it $F'$) we have:
-$$ 0 < \Delta S^2 = c^2 (\Delta t')^2 - (\Delta x')^2 - (\Delta y')^2- (\Delta z')^2$$
+$$ 0 < \Delta S^2 = (\Delta t')^2 - (\Delta x')^2 - (\Delta y')^2- (\Delta z')^2$$
 but in this paritcular frame we have:
 $$(\Delta x')^2 = (\Delta y')^2 = (\Delta z')^2 = 0$$
 so:
-$$\Delta S^2 = c^2 (\Delta t')^2$$
+$$\Delta S^2 = (\Delta t')^2$$
 and we see that
 $$\tau \equiv \Delta t'$$
 Let $\beta$ be the relative speed between frame $F$ and the frame $F'$ in
 which the events A and B occur at the same location.  Then we can
 calculate the elapsed time $t$ in frame F according to the lorentz
 transformation:
-$$\begin{pmatrix} ct \\ x \end{pmatrix} = 
+$$\begin{pmatrix} t \\ x \end{pmatrix} =
 \begin{pmatrix} \gamma & -\gamma \beta \\ -\gamma \beta & \gamma \\ \end{pmatrix}
-\begin{pmatrix} c\tau \\ 0 \end{pmatrix}
-= \begin{pmatrix} c \gamma \tau \\ c \gamma \tau \beta \end{pmatrix}
+\begin{pmatrix} \tau \\ 0 \end{pmatrix}
+= \begin{pmatrix}  \gamma \tau \\ \gamma \tau \beta \end{pmatrix}
 $$
 From which we see that:
 \begin{equation}
@@ -1124,16 +1155,16 @@ Since $\tau$ and so $d\tau$ is an invariant, we see that the components $\eta^\m
 transform as for a four-vector, and so, by definition, the four-velocity is a four-vector.  Let's work out the coordinates in frame $F$ by using $d\tau = dt/\gamma$:
 $$\eta^\mu = \gamma \frac{dx^\mu}{dt}$$
 and so for the time component:
-$$\eta^0 = \gamma \frac{c dt}{dt} = c \gamma$$
+$$\eta^0 = \gamma \frac{dt}{dt} = \gamma$$
 and for the $x$ component:
-$$\eta^1 = \gamma \frac{dx}{dt} = \gamma v_x$$
-and similar for the $y$ and $z$ components.  So writing $\eta$ 
+$$\eta^1 = \gamma \frac{dx}{dt} = \gamma \beta_x$$
+and similar for the $y$ and $z$ components.  So writing $\eta$
 as a column vector in the standard basis $\mathcal{B}$:
-$$[\eta]_\mathcal{B} = \gamma \begin{pmatrix} c \\ v_x \\ v_y \\\ v_z \end{pmatrix}$$
+$$[\eta]_\mathcal{B} = \gamma \begin{pmatrix} 1 \\ \beta_x \\ \beta_y \\\ \beta_z \end{pmatrix}$$
 It is left as an exercise to show that the invariant associated with $\eta$ is
 \begin{equation}
 \label{eqn:fvsq}
-\eta^\mu \eta_\mu = \eta^\mu \eta^\nu g_{\mu \nu} = c^2
+\eta^\mu \eta_\mu = \eta^\mu \eta^\nu g_{\mu \nu} = 1 = (c^2)
 \end{equation}
 
 \exercise Show by an explicit calculation that Equation~\ref{eqn:fvsq} is correct. $\square$\\[3pt]
@@ -1143,31 +1174,31 @@ Next we define the four vector $p$ by its components:
 p^\mu \equiv m \eta^\mu
 \end{equation}
 assuming that the mass of a particle is invariant, then $p^\mu$ transforms as a four-vector, and so is itself a four-vector, with
-$$[p]_\mathcal{B} = \begin{pmatrix} \gamma mc \\ \gamma m v_x \\ \gamma m v_y \\\ \gamma m v_z \end{pmatrix}$$
+$$[p]_\mathcal{B} = \begin{pmatrix} \gamma m \\ \gamma m \beta_x \\ \gamma m \beta_y \\\ \gamma m \beta_z \end{pmatrix}$$
 
 In the non-relativistic limit, we can approximate $\gamma$ by its Taylor series near $\beta=0$
 $$\gamma = \frac{1}{\sqrt{1-\beta^2}} = 1 + \frac{1}{2} \beta^2$$
 In this limit, we see that
 \begin{eqnarray*}
-  p^1 &\approx& m v_x \\
-  p^2 &\approx& m v_y \\
-  p^3 &\approx& m v_z \\
-\end{eqnarray*}  
+  p^1 &\approx& m \beta_x \\
+  p^2 &\approx& m \beta_y \\
+  p^3 &\approx& m \beta_z \\
+\end{eqnarray*}
 so that the spatial part of $p$ reproduces the non-relativistic
 momentum for small $\beta$.  For the temporal component, we see that:
-$$p^0 c \approx m c^2 + \frac{1}{2} m v^2 $$
+$$p^0  \approx m + \frac{1}{2} m \beta^2$$
 The second term is just the classical kinetic energy, which identifies
-$p^0$ as the relativistic energy of the particle deviced by a factor
-of $c$ (so that it has the same units as momentum).  The first term
-$mc^2$ is a new contribution to the energy, due to special relativity,
+$p^0$ as the relativistic energy of the particle.  The first term
+$m$ is a new contribution to the energy, due to special relativity,
 called the rest energy.  We see that massive particles, even at rest,
 have a non-zero energy due to their mass.
 
-Thus we have identified exactly the quantity we sought, a four-vector $p$ which we can write as a column vector:
-$$[p]_{\mathcal B} = \begin{pmatrix} E/c \\ \vec{p} \end{pmatrix}$$
+Thus we have identified exactly the quantity we sought, a four-vector
+$p$ which we can write as a column vector:
+$$[p]_{\mathcal B} = \begin{pmatrix} E \\ \vec{p} \end{pmatrix}$$
 where $E$ is relativistic energy:
-$$E = \gamma m c^2$$
-and $\vec{p}$ is the relativistic energy:
+$$E = \gamma m $$
+and $\vec{p}$ is the relativistic momentum:
 $$\vec{p} = \gamma m \vec{v}$$
 A common mistake by students new to relativistic kinematics is to
 forget the new factor $\gamma$ when they encounter the familiar symbol
@@ -1176,17 +1207,15 @@ relativistic momentum, which reproduces the classical momentum only
 for small $\beta$.
 
 Notice that the invariant associated with $p$ is:
-$$p^\mu p_\mu = m^2 \nu^\mu \nu_\mu = m^2 c^2$$
+$$p^\mu p_\mu = m^2 \nu^\mu \nu_\mu = m^2 $$
 and also:
-$$p^\mu p_\mu = (E/c)^2 - \vec{p}\cdot\vec{p}$$
+$$p^\mu p_\mu = E^2 - \vec{p}\cdot\vec{p}$$
 so we have:
-$$E^2 = (mc^2)^2 + |\vec{p}|^2 c^2$$
-Particle physicist know and love this equation as:
-$$E^2 = m^2 + p^2$$
+\begin{equation}
+E^2 = m^2 + p^2
+\end{equation}
 {\bf You must memorize this equation} (or its derivation).  It will
-not be given to you on exams, and you will need it.  I suggest to
-memorize it stripped of the factors of $c$ and then add them (if
-necessary) by dimensional analysis.
+not be given to you on exams, and you will need it.
 
 The experimental evidence confirms that $p$ is indeed conserved.  In
 classical mechanics, we had conservation of energy and momentum
@@ -1194,15 +1223,86 @@ separately.  In relativistic kinematics, four-momentum is conserved
 which implies conservation of relativistic energy and relativistic
 momentum.\\[5pt]
 
-
-\noindent
-{\bf Exercise:} Suppose a particle of mass $m>0$ has total energy $E$.
-Show that the speed of the particle is less than $c$.  Because of
+\exercise Suppose a particle of mass $m>0$ has total energy $E$.  Show
+that the speed of the particle is less than $c$.  Because of
 convervation of energy, this shows that a massive particle cannot be
 accelerated to the speed of light by consuming a finite amount of
 energy.  Assuming any observers would have $m>0$, this is one
-explanation for why no inertial frames have a speed that meets
+explanation for why no inertial frames have a speed that exceeds the
+speed of light.
 
+
+\exercise
+Particle A of mass $M$ decays into particles B and C, each of mass
+$m$, with $m < M/2$.  Particle A has momentum $p$, and the momentum of
+particles B and C are at the same angle with respect to the momentum
+of Particle A.  What is the magnitude of the momentum of particle B
+($q$)?  What is the angle ($theta$) between the momentum of Particle A
+and the momentum of Particle B?
+
+\begin{center}
+\begin{tikzpicture}[scale=1]
+  \node[shape=circle,draw,thick] at (0,0) {A};
+  \draw[->, thick] (0.5,0) -- ++(3.0,0);
+  \draw[dashed, thick] (1.3,0) -- ++(7,0);
+  \node at (0.5,-0.5) {$M$};
+  \node at (2.0,0.3) {$p$};
+
+  \node at (0.7,-1.2) {Initial};
+
+  \draw[->, thick] (4,0) -- ++(3.0, 1.0);
+  \draw[->, thick] (4,0) -- ++(3.0,-1.0);
+  \node at (6.5,-0.4) {$\theta$};
+  \node at (6.5, 0.4) {$\theta$};
+
+  
+  \node[shape=circle,draw,thick] at (7.6, 1.2) {B};
+  \node at (8.1,0.7) {$m$};
+  
+  \node[shape=circle,draw,thick] at (7.6,-1.2) {C};
+  \node at (8.1,-1.7) {$m$};
+  
+  \node at (5.5, 0.75) {$q$};
+  
+  \node at (5.0,-1.2) {Final};
+\end{tikzpicture}
+\end{center}
+
+
+\exercise
+Particles A and B each of mass $M$ collide to produce particles $1$
+and $2$ each of mass $m$.  In the center of mass frame, particles A
+and B have magnitude of momentum $p$.  What is the magnitude of the
+momentum of particle 1 ($q$)?
+
+\begin{center}
+\begin{tikzpicture}[scale=1]
+  \node[shape=circle,draw,thick] at (0,0) {A};
+  \draw[->, thick] (0.5,0) -- ++(1.4,0);
+  \node at (0.5,-0.5) {$M$};
+  \node at (1.0,0.3) {$p$};
+
+  \node[shape=circle,draw,thick] at (4,0) {B};
+  \draw[->, thick] (3.5,0) -- ++(-1.4,0);
+  \node at (4.5,-0.5) {$M$};
+  \node at (3.0,0.3) {$p$};
+
+  \node at (2.0,-1.2) {Initial};
+
+
+  \node[shape=circle,draw,thick] at (6,-2) {2};
+  \draw[<-, thick] (6.3,-1.7) -- (7.8,-0.2);
+  \node at (6.5,-2.5) {$m$};
+
+
+  \node[shape=circle,draw,thick] at (10,2) {1};
+  \draw[<-, thick] (9.7,1.7) -- (8.2,0.2);
+  \node at (10.5,1.5) {$m$};
+  \node at (8.7,1.2) {$q$};
+  
+  \node at (9.0,-1.2) {Final};
+\end{tikzpicture}
+\end{center}
 
 \section{Massless Particles}
 
@@ -1217,6 +1317,51 @@ $$E = |\vec{p}|c$$
 So special relativity allows for massless particles that travel
 exclusively at the speed of light.  Massive particles have their momentum and energy defined by their velocity, but that is not possible for massless particles which travel at the speed of light.  Special relativity has no prescription for how the energy of massless particle is determined, but quantum mechanics does.  We have photons with energy given by:
 $$E = \hbar \omega$$
+
+\exercise (*)
+Show that a massless photon ($\gamma$) cannot decay to two massive
+particles (e.g. $\gamma \to e^- e^+$) in a vacuum.\\[3pt]
+
+\section{Additional Exercises}
+
+\exercise
+Suppose a particle of mass $M$ has momentum $p$ and
+energy $E$ in the lab frame.  It decays to three particles, A, B, and
+C, each with mass $M/3$.  What is $\beta$ of particle A in the lab
+frame?\\[3pt]
+
+\exercise
+The anti-proton was discovered via the process:
+$$p + p \to p + p + p + \bar{p}$$ Calculate the beam energy at which
+this process is first kinematically allowed (A) for two colliding
+beams of protons with equal energy, and (B) for one beam of protons
+striking stationary protons.  Your calculation might lead you to
+conclude that the antiproton discovery was made using colliding beams
+(as in A), but in fact, the discover was made here in California,
+using the bevatron in a fixed target experiment (as in B).  We did not
+yet have the ability to focus beams which is necessary to collide two
+beams at a high rate of collisions.\\[3pt]
+
+\exercise
+For the decay $a \to 1 + 2$ show that in the CMS the magnitude of the momentum of particle 1 is:
+$$p^* = \frac{c}{2m_a}\sqrt{\left(m_a^2-(m_1 + m_2)^2\right)\left(m_a^2-(m_1 - m_2)^2\right)}$$
+Hint:  When duing serious algebra, don't move around numbers like $m_1$.  Instead, do something like:
+$$m_a \to a, \hspace{0.5cm} m_1 \to b, \hspace{0.5cm} m_2 \to c$$
+Treat yourself right!\\[5pt]
+
+\exercise
+For two-body scattering $a + b \to 1 + 2$, show that the Lorentz invariant flux term:
+$$F \equiv 4 E_a E_b (v_a + v_b)$$
+is equivalent to:
+$$F = 4 c^3 \sqrt{ (p_a \cdot p_b)^2 - m_a^2 m_b^2 c^4 } $$
+Hint: Calculate $F^2$ and then calculate $(p_a \cdot p_b)^2$.\\[5pt]
+
+\exercise
+Show that in the lab frame where $b$ is at rest, the Lorentz invariant flux term is:
+$$F = 4 c^4 m_b p_a$$\\[5pt]
+
+
+
 
 \end{document}
 
@@ -1235,13 +1380,22 @@ d\widetilde{t} &=& \frac{\partial g}{\partial x}dx + \frac{\partial g}{\partial 
 \end{eqnarray*}
 and:
 \begin{eqnarray*}
-\frac{d\widetilde{x}}{d\widetilde{t}} &=& 
+\frac{d\widetilde{x}}{d\widetilde{t}} &=&
 \frac{\displaystyle \frac{\partial f}{\partial x}\frac{dx}{dt} + \frac{\partial f}{\partial t}}
 {\displaystyle \frac{\partial g}{\partial x}\frac{dx}{dt} + \frac{\partial g}{\partial t}}\\
 \end{eqnarray*}
-Now suppose $x$ and $t$ refer to an object in frame $F$ moving at a constant velocity $dx/dt$.  Then, as the laws of physics are frame invariant, the object must be moving at constant speed $d\widetilde{x}/d\widetilde{t}$.  This implies that the partial derivatives $$\frac{\partial f}{\partial x}, \hspace{0.5cm}\frac{\partial f}{\partial t},  \hspace{0.5cm}\frac{\partial g}{\partial x},  \hspace{0.5cm}\frac{\partial g}{\partial t}$$
-must all be constant along the trajectory of a constant moving particle.  But you can connect any two points in space-time using two particles at rest and one particle moving at a constant speed, so in fact they must be constant everywhere. 
-Therefore:
+Now suppose $x$ and $t$ refer to an object in frame $F$ moving at a
+constant velocity $dx/dt$.  Then, as the laws of physics are frame
+invariant, the object must be moving at constant speed
+$d\widetilde{x}/d\widetilde{t}$.  This implies that the partial
+derivatives $$\frac{\partial f}{\partial
+  x}, \hspace{0.5cm}\frac{\partial f}{\partial
+  t}, \hspace{0.5cm}\frac{\partial g}{\partial
+  x}, \hspace{0.5cm}\frac{\partial g}{\partial t}$$ must all be
+constant along the trajectory of a constant moving particle.  But you
+can connect any two points in space-time using two particles at rest
+and one particle moving at a constant speed, so in fact they must be
+constant everywhere.  Therefore:
 \begin{eqnarray*}
 \widetilde{x} &=& A x + B t + C \\
 \widetilde{t} &=& D x + E t + F \\
