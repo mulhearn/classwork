@@ -45,8 +45,8 @@ defining properties:
 {\bf (4)} & For all $v \in V$ there exists $-v$ such that $v + (-v) = 0$.\\
 {\bf (5)} & $c(v+w) = cv + cw$ for all $v,w \in V$ and $c \in F$.\\
 {\bf (6)} & $1v = v$ for all $v \in V$ (note: $1 \in F$).\\
-{\bf (7)} & $(c_1+c_2)v = c_1 v + c_2 v$ for all $v \in V$ and $c_1,c_2 \in F$).\\
-{\bf (8)} & $c_1(c+2 v) = (c_1 c_2 ) v$ for all $v \in V$ and $c_1,c_2 \in F$).\\
+{\bf (7)} & $(c_1+c_2)v = c_1 v + c_2 v$ for all $v \in V$ and $c_1,c_2 \in F$.\\
+{\bf (8)} & $c_1(c+2 v) = (c_1 c_2 ) v$ for all $v \in V$ and $c_1,c_2 \in F$.\\
 \end{tabular}
 \end{center}
 As you will show in the exercise below, additional basic properties are deducible from these axioms:
@@ -81,7 +81,7 @@ multiplication.  Show that $V$ is not a vector space. $\square$
 \exercise The set $V$ is the empty set.  Is $V$ a vector space?
 $\square$ \\[3pt]
 
-\exercise (*) For a vector space $V$ scalar multiplication is a null
+\exercise For a vector space $V$ scalar multiplication is a null
 operation, that is $a v = v$ for all $a \in F$ and $v \in V$.  Deduce
 all of the vectors in the vector space $V$.  $\square$ \\[3pt]
 
@@ -117,7 +117,7 @@ point to understand, so it bears repeating: {\bf a vector $v$ exists
   independently of any basis, but its components $v^i$ depend on the
   basis chosen $\mathcal{B} = \{e_i\}$.}\\
 
-\exercise Show that the components $v^i$ of a vector $v$ for basis
+\exercise (**) Show that the components $v^i$ of a vector $v$ for basis
 $\mathcal{B}$ are unique. (This is essential for many of the results
 that follow.)  $\square$ \\[3pt]
 
@@ -137,7 +137,7 @@ basis $\mathcal{B}$ for this vector space.  For $v = a + b i$, write
 the column vector $[v]_\mathcal{B}$.  This is why we are able to
 visualize the complex plane as a 2-D space.  $\square$ \\[3pt]
 
-\exercise (**) The Pauli matrices:
+\exercise (*) The Pauli matrices:
 $$\sigma_1 = \begin{pmatrix}
   0 &  1 \\ 1  & 0 \\
 \end{pmatrix},\hspace{1cm}
@@ -160,7 +160,9 @@ Suppose we have two bases $\mathcal{B}$ and $\mathcal{B}'$.  We have:
 $$\mathcal{B} = \{e_i\}$$
 as before, but for the primed basis we will write:
 $$\mathcal{B}' = \{e_{i'}\}.$$
-Notice that the index $i$ is primed to indicate it is an index in the $\mathcal{B}'$ basis, and not the quantity $e$ itself.  We'll justify this convention shortly.
+Notice that it is the index $i$ that is primed in order to indicate
+that it is an index in the $\mathcal{B}'$ basis.  The quantity $e$ is
+not primed.  We'll justify this convention shortly.
 
 Since each $e_i$ is a vector in $V$, and $\{e_{i'}\}$ is a basis,
 there must (by definition of basis, as above) exist scalar values
