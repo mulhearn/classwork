@@ -1,0 +1,287 @@
+\documentclass[12pt]{article}
+
+\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.5in]{geometry}
+\usepackage{cite}
+\usepackage{slashed}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{braket}
+\usepackage{pythonhighlight}
+\usepackage{mathtools}
+\begin{document}
+
+\newcommand{\ihbar}{\ensuremath{i \hbar}}
+\newcommand{\Pss}{\ensuremath{\Psi^*}}
+\newcommand{\dPsidt}{\ensuremath{ \frac{\partial \Psi}{\partial t} }}
+\newcommand{\dPsidx}{\ensuremath{ \frac{\partial \Psi}{\partial x} }}
+\newcommand{\ddPsidx}{\ensuremath{ \frac{\partial^2 \Psi}{\partial x^2} }}
+\newcommand{\dPssdt}{\ensuremath{ \frac{\partial \Psi^*}{\partial t} }}
+\newcommand{\dPssdx}{\ensuremath{ \frac{\partial \Psi^*}{\partial x} }}
+\newcommand{\ddPssdx}{\ensuremath{ \frac{\partial^2 \Psi^*}{\partial x^2} }}
+
+\newcommand{\dphidt}{\ensuremath{ \frac{d \phi}{dt} }}
+\newcommand{\dpsidx}{\ensuremath{ \frac{d \psi}{dx} }}
+\newcommand{\ddpsidx}{\ensuremath{ \frac{d^2 \psi}{dx^2} }}
+
+
+\title{PHY 115L \\ Woods-Saxon Model for the Nucleus \\ using Variational Methods }
+\author{Michael Mulhearn}
+
+\maketitle
+
+\section{TISE and System of Units}
+
+Noting a good reference:  https://arxiv.org/pdf/0709.3525
+
+\noindent
+We'll adapt a system of units appropriate for modeling the atomic nucleus
+with the Time-Independent
+Schr\"odinger Equation (TISE):
+$$\hat{H} \; \psi_n(x) = E_n \; \psi_n(x)$$
+where the Hamiltonian operator is defined by:
+\begin{equation}
+\hat{H} = -\frac{\hbar^2}{2 M} \; \frac{d^2}{dx^2} \, + \, V(x)
+\end{equation}
+We set the characteristic length scale $L$ to $1~\rm fm$.
+We will be considering {\bf non-periodic} wave function
+(e.g. solutions to the harmonic oscillator).  To use the Fourier
+series approach in this case, we take the period $a$ to be large
+compared to $L$, and use the fact that the wave function approaches
+zero to approximate a periodic function.
+
+Based on our characteristic length scale $L$, a characteristic energy is:
+\begin{equation}
+\epsilon \equiv \frac{\hbar^2}{2 M L^2}
+\end{equation}
+where $M = m_p$ is the mass of the proton.  When doing nuclear and particle physics, it's helpful to use energy units, with:
+\begin{eqnarray*}
+\hbar c   &=& 197.3~\rm MeV fm \\
+m_{\rm p} &=& 938.272~\rm MeV/c^2\\
+m_{\rm n} &=& 939.565~\rm MeV/c^2\\
+\end{eqnarray*}
+So then:
+\begin{equation}
+\epsilon \equiv \frac{\hbar^2 c^2}{2 Mc^2 L^2} = 41.49~\rm MeV
+\end{equation}
+With these units, we have:
+\begin{equation}
+\frac{\hat{H}}{\epsilon} = -L^2\frac{d^2}{dx^2} + \frac{V(x)}{\epsilon}
+\end{equation}
+
+\section{Woods-Saxon Potential}
+
+We'll use the Woods-Saxon potential:
+\begin{equation}
+V(r) = -\frac{V_0}{1 + \exp\left( \frac{r-R}{a} \right)}
+\end{equation}
+where:
+\begin{equation}
+R = r_0 A^{1/3} 
+\end{equation}
+and $A$ is the mass number.  Typical values for the parameters are:
+\begin{eqnarray*}
+V_0 &=& 50 ~ {\rm MeV} \\
+r_0 &=& 1.25 ~ {\rm fm}\\
+a   &=& 0.5 ~ {\rm fm}\\
+\end{eqnarray*}
+In our system of units, this becomes:
+\begin{equation}
+\frac{V(r/L)}{\epsilon} = -\frac{V_0/\epsilon}{1 + \exp\left( \frac{r/L-R/L}{a/L} \right)}
+\end{equation}
+where
+$$R/L = (r_0/L) A^{1/3} $$
+and
+\begin{eqnarray*}
+V_0/\epsilon &=& 1.205 \\
+r_0/L &=& 1.25 \\
+a/L   &=& 0.5 \\
+\end{eqnarray*}
+
+
+\section{Coulomb Potential}
+When dealing with the electric charge in particle physics, it is useful to connect it to energy units via the fine structure constant:
+$$\alpha = \frac{e^2}{4\pi\epsilon_0 \hbar c} = \frac{1}{137.035}$$
+and
+$$V(r) = Z\frac{e^2}{4\pi\epsilon_0} \frac{F(r)}{L}$$
+
+
+$$F(r) \equiv  \begin{cases}
+\frac{3R^2-r^2}{2R^3} & r \leq R \\
+  1/r & r > R \\
+\end{cases}
+$$
+
+
+\section{The Variational Method for Higher Energy States}
+
+In the previous homework we found the ground state via:
+$$\braket{\psi|\hat{H}|\psi} \geq E_0$$
+for all $\psi$.  With knowledge that the ground state was even and the next excited state is odd, we can also determined the first excited state via:
+$$\braket{\psi|\hat{H}|\psi} \geq E_1$$
+for odd $\psi$.
+
+We can generalize this to the following.  If we know that:
+$$\braket{\Psi|m} = 0$$
+for {\bf all} of the following:
+$$m=0,1,\ldots,n$$
+then we also have:  
+$$\braket{\psi|\hat{H}|\psi} \geq E_{n+1}$$
+
+We can, in principle at least, always arrange that our trial wave function is orthogonal to the previous discovered lower energy wave functions.  We use the projection operator:
+$$P_m = \ket{m}\bra{m}$$
+to remove any component of the trial wave function that that is not orthogonal to the (previously discovered) ground state $\ket{\Psi_0}$ to obatin:
+$$\ket{\Psi} \; \longrightarrow \; (1-P_m) \ket{\Psi} =
+\ket{\Psi} - \braket{0|\Psi} \; \ket{0}$$
+The inner product $\braket{0|\Psi}$ is easy to calculate in momentum space.  Suppose we have discovered $d_m$ so that:
+$$\ket{0} = \sum_m d_m |p_m>$$
+and have:
+$$\ket{\Psi} = \sum_m c_m |p_m>$$
+Then:
+$$\braket{0|m} = \sum_m d_m^* c_m$$
+And, for the case of real solutions with negative Fourier coefficients equal to the complex conjugate of the postive Fourier coefficients, we have:
+$$\braket{0|m} = d_0^* c_0 + 2 \cdot {\rm Re} \left( \sum_{m>0} d_m^* c_m \right) $$
+Recall, that the python IRFFT library provides the Fourier coefficents with slightly different normalization:
+\begin{equation}
+A_m \equiv \frac{c_m}{\sqrt{a/N}} \exp\left(i \frac{2\pi m x_0}{a}\right)
+\end{equation}
+and
+\begin{equation}
+B_m \equiv \frac{d_m}{\sqrt{a/N}} \exp\left(i \frac{2\pi m x_0}{a}\right)
+\end{equation}
+so the dot product using the coefficients from IRFFT becomes:
+$$\braket{0|m} = \Delta a \left\{ B_0^* A_0 + 2 \cdot {\rm Re} \left( \sum_{m>0} B_m^* A_m \right) \right\}$$
+where, as before,
+$$\Delta a = \frac{a}{N}$$.
+In principle, we can substract any number of lower energy states to
+find the next highest energy states, but round off errors will
+eventually dominate.  Note that when subtracting multiple lower energy
+states, you only need to normalize after subtracting the last
+component.  One can combine the even versus odd trick to make this even more
+efficient (e.g. subtracting the ground state from an even trial
+function would lead to the 2nd excited state, if the energy
+eigenstates alternate between even and odd.)
+
+The numerical algorithm proceeds much the same way as in the previous
+assignment, with one important modification: after {\bf each} random
+variation of the wave function, you remove the lower energy
+components, renormalize, and {\bf then} test for a decrease an energy.
+
+\section{The Hydrogen Atom}
+
+We can apply our numerical technique to find the radial wave functions of
+the Hydrogen Atom.  In this case, we'll take our characteristic length scale $L$ to be the Bohr radius:
+$$L \equiv \frac{4 \pi \epsilon_0 \hbar^2}{m e^2}$$
+As always, this quantity should not be computed in your computer program, it will simply be set to one in every equation where it appears.
+We continue to have our energy scale defined by:
+$$\epsilon = \frac{\hbar^2}{2mL^2}$$
+but with $L$ now defined we have an alternative form:
+$$\epsilon = \frac{m}{2\hbar^2} \left( \frac{e^2}{4\pi\epsilon_0}\right)^2$$
+Another useful quantity is:
+$$\frac{e^2}{4\pi\epsilon_0} = 2 \epsilon L$$
+Using this system of units, the protential for the Hydrogen atom becomes:
+$$\frac{V(r)}{\epsilon} = - \frac{2L}{r}$$
+The allowed energy levels are:
+$$E_n =  \epsilon / n^2$$
+where $n=1,2,3,\ldots$ is the principle quantum number.  The additional quantum numbers $l$ and $m$ refer to the angular momentum of the state.
+
+\section{Radial Solutions}
+
+Using the method of separation of variables (e.g. Griffiths Chapter 4) we write the total wave function as:
+$$\Psi_{nlm}(r,\theta,\phi) = \frac{u_{nl}(r)}{r} Y_{lm}(\theta,\phi)$$
+for quantum numbers $n,l,m$.  The radial part satisfies 
+\begin{equation*}
+  \frac{\hat{E}}{\epsilon} u(r) = -L^2\frac{d^2 u}{dr^2} + \left(-\frac{2L}{r}+ l(l+1) \frac{L^2}{r^2}\right)
+\end{equation*}
+Notice that this looks exactly like a 1-D particle, but with an effective potential:
+$$\frac{V_{\rm eff}(r)}{\epsilon} = -\frac{2L}{r}+ l(l+1) \frac{L^2}{r^2}$$
+The term proportional to $l(l+1)$ is called the centrifugal term, and
+it accounts for the additional kinetic energy in the non-radial
+direction, due to the angular momentum of the particle.
+
+The first few radial solutions are:
+$$u_{10} = 2 \cdot \frac{1
+}{\sqrt{L}} \; \left( \frac{r}{L} \right) \; \exp\left(-\frac{r}{L}\right)$$
+and:
+$$u_{20} = \sqrt{2} \cdot \frac{1}{\sqrt{L}} \; \left( \frac{r}{2L} \right) \; \left(1 - \frac{r}{2L} \right)\; \exp\left(-\frac{r}{2L}\right)$$
+and
+$$u_{21} = \sqrt{\frac{2}{3}} \cdot {\sqrt{L}} \; \left( \frac{r}{2L} \right)^2 \; \exp\left(-\frac{r}{2L}\right)$$
+Notice that none of these solutions are even or odd, but they do all vanish at $r=0$.
+
+We can find these solutions using just a few modifications to our algorithm from the previous homework, via the replacement:
+$$x \longrightarrow r$$
+First, we must impose the boundary condition
+$u(0)=0$
+This is easy to implement in our Fourier expansion.  Because the sine vanishes at $x=0$, we will meet this condition provided:
+$$c_0 = - 2 \cdot \sum_{m>0} {{\rm Re}\;{c_m}}$$
+Recall also that for a real function $c_0$ is real.  So we only need to
+modify our algorithm to not include $c_0$ in our random variations.
+We fix the imaginary part of $c_0$ to zero, but after each variation,
+we modify the real part of $c_0$ by the equation above.
+
+In terms of the coefficients as provided by the IFFT, these only
+differ by a constant real factor at $x=0$, so we have equivalently:
+$$A_0 = - 2 \cdot \sum_{m>0} {{\rm Re}\;{A_m}}$$
+
+We'll also need to change $x_0$ from $-a/2$ to $0$, appropriate for the radius $r$.
+
+
+\section{Homework Problems}
+
+\noindent
+{\bf Please submit one PDF file (including output) and one python
+  notebook file (.ipynb) of your completed assignment.}  If using
+C/C++, submit text or PDF of your output and the source code.\\[3pt]
+
+
+\noindent
+{\bf Problem 1:} Building on your results from HW2, find the second
+and third excited state of the Harmonic oscillator potential, and compare
+the energy your determine for each with the expected value.\\[5pt]
+
+\noindent
+{\bf Problem 2:} For the hydrogen atom, using the known solutions,
+plot $V(x)$, $|u_{10}(r)|^2$ and $|u_{20}(r)|^2$ in the same plot.
+For better visiblity, offset the $y$-values by the energy of each
+state.  So e.g. plot $u_{10}(x)=0$ at $V(x)/\epsilon=-1$.\\[5pt]
+
+\noindent
+{\bf Problem 3:} Find the Fourier coefficients of $u_{10}$ and
+$u_{20}$, calculate their total energy from the Fourier coefficients,
+and compare to the expected values.  Use this to validate the same
+calculation you will be using in the variational method.\\[5pt]
+
+\noindent
+{\bf Problem 4:} Use the variational method to calculate the ground
+state of the hydrogen atom.  Compare both the energy and the radial
+wave function that you obtain to the known solution.  (I used $N=64$,
+$A=20$ and a variation size of $0.1$ to achieve $10\%$ accuracy very
+quickly.)\\[5pt]
+
+\noindent
+{\bf Problem 5:} Using the known solution, plot the effective radial potential
+$V(x)$ for $l=1$ (including the centrifugal term!) and $|u_{21}(r)|^2$ in the same plot.\\[5pt]
+
+\noindent
+{\bf Problem 6:} Find the expectation value for the total energy for
+$u_{20}$ and $u_{21}$ in the effective radial potential for $l=1$.
+(Notice that this is not the correct effective potential for $u_{20}$
+but calculate the expecation value anyway, it is instructive!)  You
+should see that expectation value for $u_{20}$ in this potential is
+higher than for $u_{21}$.  Do you understand why?  You should be able
+to conclude now that $u_{21}(r)$ is the {\bf ground state} of the
+effective radial potential for $l=1$.\\[5pt]
+
+\noindent
+{\bf Problem 7:} By varying the centrifugal term proportional, find
+the energy for the excited states corresponding to $u_{21}$ and
+$u_{32}$.  You {\bf do not} need to subtract out lower energy
+components to do so!  Each of these excited states is in fact the
+ground state of their effective potential.\\[5pt]
+
+\noindent
+{\bf Extra Challenge (No Credit):} If you had an easy time with the
+above, see if you can also determine $u_{20}$.\\[5pt]
+
+
+\end{document}
