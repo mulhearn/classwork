@@ -71,7 +71,7 @@ vectors over the field of complex numbers, $n \times m$ real matrices
 over the scalar field of real numbers with ordinary matrix addition
 and scalar multiplication, real-valued periodic functions $f(x)$ of a
 real variable with period $T$ over the scalar field of real numbers
-with ordinary addition and mulitiplication.
+with ordinary addition and multiplication.
 
 \exercise The set $V$ is the rational numbers $\mathbb{R}$ and the
 field $F$ is the real numbers, with ordinary addition and
@@ -234,7 +234,7 @@ the components of a vector $v$ are:
 $$[v]_\mathcal{B} = \begin{pmatrix} a \\ b \end{pmatrix}$$
 For the alternative basis:
 $$\mathcal{B}' = \{(1,1), (1,-1)\}$$
-write the components of vector $v$ as a column matric:
+write the components of vector $v$ as a column matrix:
 $$[v]_{\mathcal{B}'} = \begin{pmatrix} ? \\ ? \end{pmatrix}$$\\[3pt]
 
 
@@ -254,7 +254,7 @@ The set of all dual vectors to a vector space $V$ is called the {\bf
 exercise below, the dual space is itself a vector space.\\[3pt]
 
 \exercise (**)
-For a vector space $V$ over scaler field $F$, show that its dual space
+For a vector space $V$ over scalar field $F$, show that its dual space
 ($V^*$) is itself a vector space.  Vector addition (addition of dual
 vectors) and scalar multiplication are defined such that:
 $$(f+cg)(v) = f(v) + c g(v) \hspace{2cm} f,g \in V^*,\; v \in V,\; c \in F $$
@@ -278,7 +278,7 @@ We say that $e^i$ picks off the $i$th component of $v$.
 If follows that
 $$e^i(e_j) = \delta^i_j$$
 because $e_j$ is a vector in $V$ whose components are all 0, except for the $j$th component, which is 1.  You will show in the exercises below that the set of dual vectors $\{e^i\}$ are a basis for $V^*$, which we call the {\bf dual basis} and denote as $\mathcal{B}^*$
-You will also show that the scalar quanties $f_i$ are in fact the components of $f$ in the basis $\mathcal{B}$, so we have:
+You will also show that the scalar quantities $f_i$ are in fact the components of $f$ in the basis $\mathcal{B}$, so we have:
 $$f = f_i e^i$$
 which shows a dual vector $f$ expanded in terms of its components $f_i$ and basis vectors $e^i$.
 
@@ -306,7 +306,7 @@ Hint: define the dual vector
 $a = a_i e^i$
 and evaluate $a(e_i)$ for each $i$.  $\square$ \\[3pt]
 
-We showed previously that the components of a vector $v$ tranform in a
+We showed previously that the components of a vector $v$ transform in a
 covariant fashion, so we call the $v^i$ the covariant components.
 Suppose that our basis transforms according to:
 $$e_{i'} = A^{j}_{i'} e_{j}$$
@@ -349,7 +349,7 @@ contravariantly, as expected for a quantity with upper indices.\\[3pt]
 \label{sec:tensors}
 
 A traditional physics definition of a tensor is a generalization of
-scalars and vectors, to include quantities with muliple indices which
+scalars and vectors, to include quantities with multiple indices which
 transform in a specific way when changing the basis.  This definition
 is perfectly reasonable, but it is not particularly insightful, and
 things (like the transformation rules) seem to come from nowhere.  We
@@ -438,7 +438,7 @@ independently of any basis.  But once we define a basis $\mathcal{B}$
 we can refer to a vector by it's components.  We can arrange the
 components of a vector into a row vector (denoted $[v]_\mathcal{B}$)
 or a column vector (denoted $[v]^T_{\mathcal{B}}$).  Likewise, we can
-arrange the compments of a (2,0) tensor into a matrix, denoted
+arrange the components of a (2,0) tensor into a matrix, denoted
 $[T]_{\mathcal{B}}$.  We can calculate the action of $T$ on vectors
 $v$ and $w$ via matrix multiplication:
 
@@ -465,7 +465,7 @@ $$T_{ij} = A_i^{k'} A_j^{l'} T_{k'l'} $$
  $\square$ \\[3pt]
 
 \exercise
-For a vector space $V$ over scaler field $F$, show that the set of all (2,0) tensors is a vector space.\\[3pt]
+For a vector space $V$ over scalar field $F$, show that the set of all (2,0) tensors is a vector space.\\[3pt]
 
 \noindent
 Suppose we have a (1,1) tensor $L$ so that $L:V \times V^* \to F$.  For any vector $v$ and basis $\mathcal{B}$, we can define a vector $w$ by its components:
@@ -533,7 +533,7 @@ In what follows, we will show that $L$ establishes a conjugate-linear bijection 
  \item $L$ is onto.
 \end{itemize}
 This established a conjugate-linear isomorphism sending each vector to
-it's metric dual.  In laymen's terms, this shows that the dual space
+it's metric dual.  In layman's terms, this shows that the dual space
 is essentially a copy of the vector space, where each vector
 corresponds uniquely to a dual vector, and the structure of vector
 addition and scalar multiplication is preserved (with complex scalars
@@ -620,7 +620,7 @@ $\mathcal{L}=\{L(\hat{x}), L(\hat{y})\}$?
 $$[\tilde{v}]_{\mathcal{L}} = \begin{pmatrix} ? \\ ? \end{pmatrix}$$
 
 \noindent
-That completes the math prelimineraries we will need for our
+That completes the math preliminaries we will need for our
 invariance-based treatment of special relativity.\\[6pt]
 
 
@@ -644,7 +644,7 @@ speed of light.
 Suppose that in some frame $F$, light is emitted at time $t_{\rm A}$
 and position $(x_{\rm A}, y_{\rm A}, z_{\rm A})$.  The light travels
 through free space until some later time $t_{\rm B}$, when the light
-is aborbed at position $(x_{\rm B}, y_{\rm B}, z_{\rm B})$.  Because
+is absorbed at position $(x_{\rm B}, y_{\rm B}, z_{\rm B})$.  Because
 the speed of light in vacuum is the universal constant $c$ we have:
 $$c = \frac{\sqrt{(x_{\rm B}-x_{\rm A})^2 + (y_{\rm B}-y_{\rm A})^2 + (z_{\rm B}-z_{\rm A})^2}}{t_{\rm B}-t_{\rm A}}$$
 or equivalently:
@@ -758,11 +758,11 @@ time-like in one frame, it is time-like in all frames (or else we
 would have a contradiction of one of the previous two results).  Which demonstrates property (D).
 
 Finally, we will show that $\Delta S^2$ is invariant.  Consider an
-infinitesimal space-time inverval calculated in frame $F$:
+infinitesimal space-time interval calculated in frame $F$:
 \begin{equation}
 dS^2 = dt^2 - dx^2 - dy^2 - dz^2
 \end{equation}
-and the corresponding quantiry in frame $F'$:
+and the corresponding quantity in frame $F'$:
 \begin{equation}
 (dS^2)' = (dt')^2 - (dx')^2 - (dy')^2 - (dz')^2
 \end{equation}
@@ -778,7 +778,7 @@ But $(dS^2)^2$ is quartic (power 4) in differentials of the
 coordinates, while $(dS^2)'$ is quadratic, and so higher order terms
 ($c$ and beyond) vanish.  This leads to:
 $$d{S^2}' = b dS^2$$
-with $b$ still unknown.  But $b$ cannot depedent on the
+with $b$ still unknown.  But $b$ cannot dependent on the
 absolute position in space and time, because of property (C).  It can
 depend on the relative motion between the $F$ and $F'$ frames, but not
 the direction, because of property (B).  So it can only dependent on
@@ -839,7 +839,7 @@ Hermitian form:
 \exercise
 Show that $(\cdot|\cdot)$ as defined above is a
 non-degenerate Hermitian form, by demonstrating that it has the three
-definining properties.  $\square$ \\[3pt]
+defining properties.  $\square$ \\[3pt]
 
 \exercise
 For position four-vectors $a,b \in V$ with space time interval $\Delta S^2(a,b)$ between them, show that:
@@ -869,7 +869,7 @@ In the exercises you will show that
   \label{eqn:metric-components}
   g_{00}=1, \hspace{1cm} g_{11} = g_{22} = g_{33} = -1
 \end{equation}
-and all other elements are zero.  Thus, the metrix tensor $g$ can be represented by a matrix $G$ as:
+and all other elements are zero.  Thus, the metric tensor $g$ can be represented by a matrix $G$ as:
 \begin{equation}
 \label{eqn:metric-matrix}
 [g]_\mathcal{B} = G \equiv
@@ -882,13 +882,13 @@ and all other elements are zero.  Thus, the metrix tensor $g$ can be represented
 \end{equation}
 Now, there is nothing special about the frame $F$ and its standard
 basis $\mathcal{B}$.  Therefore, we must reach the same conclusion
-about the matrix represenation of $G$ in any other iniertial frame
+about the matrix representation of $G$ in any other inertial frame
 $F'$ with standard basis $\mathcal{B}'$.  Specifically, we must have:
 $$
 [g]_\mathcal{B} = [g]_{\mathcal{B}'} = G
 $$
 for all frames.  The components of the metric tensor are the same in
-all intertial frames.  Here, our primed index notation becomes just a
+all inertial frames.  Here, our primed index notation becomes just a
 little bit cumbersome, but we can write this as:
 \begin{equation}
 \label{eqn:invariant-tensor}
@@ -936,7 +936,7 @@ so that we can use the metric tensor to raise indices as well.
 Hint:  $g^{\mu \alpha} \, g_{\alpha \nu}  = \delta^{\mu}_{\nu}$.\\[3pt]
 
 \noindent
-{\bf Notation: } It is common practice to ommit the tilde from the
+{\bf Notation: } It is common practice to omit the tilde from the
 dual of a four-vector $\tilde{v}_\mu$ as it can be inferred from the
 lowered index:
 $${v}_\mu \equiv \tilde{v}_\mu = g_{\mu\nu} \, v^\nu$$
@@ -946,7 +946,7 @@ Notice how our tensor definition applies here.  The metric tensor is a
 mapping $g:V \times V \to F$.  With one vector given, the metric
 tensor thus provides a map from $V \to F$, which is a dual vector.  So
 we can interpret a (2,0) tensor has a linear operator from $V \to
-V^*$, exactly as seen here with $g_{\mu\nu}$.  Similary, $g^{\mu\nu}$
+V^*$, exactly as seen here with $g_{\mu\nu}$.  Similarly, $g^{\mu\nu}$
 can be seen as the components of a (0,2) tensor and as a linear operator from $V^* \to V$.\\[3pt]
 
 \exercise
@@ -992,9 +992,9 @@ $$[\Lambda]^{ \mathcal{B}'}_\mathcal{B}
   \Lambda^{3'}_0 &\Lambda^{3'}_1 &\Lambda^{3'}_2 &\Lambda^{3'}_3 \\
 \end{pmatrix}$$
 where we have left the primes in place, even on numerical values,
-because in our notation the location of the primed indice
+because in our notation the location of the primed index
 (i.e. $\Lambda^{1'}_{2}$ means $\Lambda^{\mu'}_{\nu}$ for $\mu'=1$ and
-$\nu=2$.)  Notice that we have choosen to associate the {\bf upper}
+$\nu=2$.)  Notice that we have chosen to associate the {\bf upper}
 index with the row of the matrix, which is simply a matter of choice,
 but one which we must apply consistently.  In matrix notation, we
 have:
@@ -1074,7 +1074,7 @@ group.\\[4pt]
 \exercise For $a \in G$ show that $(a^{-1})^{-1} = a.$  $\square$ \\[3pt]
 
 \noindent
-{\bf Valid Coorinate Transformations:} The requirement that the
+{\bf Valid Coordinate Transformations:} The requirement that the
 space-time interval is invariant significantly constrains the valid
 coordinate transformations between inertial frames.  For any
 four-vector $v$ we have:
@@ -1221,7 +1221,7 @@ The proper-time $\tau$ is equivalent to the elapsed (positive) time in the {\bf
 a frame exists because $\Delta S^2 > 0$, and calculating in that frame
 (call it $F'$) we have:
 $$ 0 < \Delta S^2 = (\Delta t')^2 - (\Delta x')^2 - (\Delta y')^2- (\Delta z')^2$$
-but in this paritcular frame we have:
+but in this particular frame we have:
 $$(\Delta x')^2 = (\Delta y')^2 = (\Delta z')^2 = 0$$
 so:
 $$\Delta S^2 = (\Delta t')^2$$
@@ -1268,7 +1268,7 @@ It is left as an exercise to show that the invariant associated with $\eta$ is
 
 \exercise Show by an explicit calculation that Equation~\ref{eqn:fvsq} is correct. $\square$\\[3pt]
 
-Next we define the momenum four-vector $p$ by its components:
+Next we define the momentum four-vector $p$ by its components:
 \begin{equation}
 p^\mu \equiv m \eta^\mu
 \end{equation}
@@ -1328,7 +1328,7 @@ energy and relativistic momentum.\\[5pt]
 
 \exercise Suppose a particle of mass $m>0$ has total energy $E$.  Show
 that the speed of the particle is less than $c$.  Because of
-convervation of energy, this shows that a massive particle cannot be
+conservation of energy, this shows that a massive particle cannot be
 accelerated to the speed of light by consuming a finite amount of
 energy.  Assuming any observers would have $m>0$, this is one
 explanation for why no inertial frames have a speed that exceeds the
@@ -1436,7 +1436,7 @@ frame?\\[3pt]
 \exercise(*)
 For the decay $a \to 1 + 2$ show that in the CMS the magnitude of the momentum of particle 1 is:
 $$p^* = \frac{1}{2m_a} \, \sqrt{\left(m_a^2-(m_1 + m_2)^2\right)\left(m_a^2-(m_1 - m_2)^2\right)}$$
-Hint:  When duing serious algebra, don't move around numbers like $m_1$.  Instead, do something like:
+Hint:  When doing serious algebra, don't move around numbers like $m_1$.  Instead, do something like:
 $$m_a \to a, \hspace{0.5cm} m_1 \to b, \hspace{0.5cm} m_2 \to c$$
 Treat yourself right!\\[5pt]
 
@@ -1508,7 +1508,7 @@ $$
   t}, \hspace{0.5cm}\frac{\partial g}{\partial
   x}, \hspace{0.5cm}\frac{\partial g}{\partial t}
 $$
-are constant along the particle'strajectory.
+are constant along the particle's trajectory.
 
 Because any two events in space-time can be connected using a
 combination of particles at rest and particles moving at constant
@@ -1523,7 +1523,7 @@ If we take the origin to coincide, we have:
 x' &=& A x + B t\\
 t' &=& D x + E t\\
 \end{eqnarray*}
-demonstrating that the transformations between inertial framese are linear. 
+demonstrating that the transformations between inertial frames are linear. 
 
 
 \end{document}
