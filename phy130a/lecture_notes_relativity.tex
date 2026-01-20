@@ -624,15 +624,6 @@ That completes the math prelimineraries we will need for our
 invariance-based treatment of special relativity.\\[6pt]
 
 
-
-
-\begin{center}
-{\bf MORE SECTIONS WILL BE ADDED LATER...}
-\end{center}
-
-\end{document}
-
-
 \section{Invariance of the Space-Time Interval}
 \label{sec:space-time-interval}
 
@@ -672,8 +663,8 @@ The space-time interval thus defined has several properties that are immediately
 \begin{center}
 \begin{tabular}{ll}
  {\bf (A)} & If $\Delta S^2 = 0$ in one frame, then it is zero in every frame.\\
-  {\bf (B)} & $\Delta S^2$ is invariant with respect to rotations in space.\\
-  {\bf (C)} & $\Delta S^2$ is invariant with respect to translations in space and time.\\
+ {\bf (B)} & $\Delta S^2$ is invariant with respect to rotations in space.\\
+ {\bf (C)} & $\Delta S^2$ is invariant with respect to translations in space and time.\\
 \end{tabular}
 \end{center}
 Property (A) is evident from the calculation that motivated the
@@ -683,35 +674,6 @@ $$\Delta D^2 \equiv (x_{\rm B}-x_{\rm A})^2 + (y_{\rm B}-y_{\rm A})^2 + (z_{\rm 
 which is invariant under rotations.
 Property (C) follows because $\Delta S^2$ only involves differences in time and spatial components, e.g. $t_{\rm B} - t_{\rm A}$.
 
-Next consider an infinitesimal $\Delta S^2$ calculated in frame $F$,
-which we will write as $dS^2$, and the same quantity cacluated in
-frame $F'$, which we will call $(d{S^2})'$.  We can write $(d{S^2})'$ as a
-power series in $dS^2$:
-$$d{S^2}' = a + b dS^2 + c (dS^2)^2 + \cdots $$
-with coefficients $a,b,c,\cdots$ to be determined.  From property (A)
-we see that $a=0$.  And because $dS^2$ is small we can neglect higher
-order terms. This leads to:
-$$d{S^2}' = b dS^2$$
-with $b$ still an unknown coefficient.  But $b$ cannot depedent on the
-absolute position in space and time, because of property (C).  It can
-depend on the relative motion between the $F$ and $F'$ frames, but not
-the direction, because of property (B).  So it can only dependent on
-the relative speed of $F$ and $F'$.  But this is the same in both
-frames, so we must also have:
-$$d{S^2} = b d{S^2}'$$
-and so:
-$$d{S^2} = b^2 d{S^2}$$
-from which we conclude $b=\pm1$ and so:
-$$d{S^2}' = \pm dS^2$$
-If we can exclude $b=-1$ always then $dS^2$ is invariant, and (by
-integration) $\Delta S^2$ is invariant as well.  Indeed that is the
-case, but to show it we will need to demonstrate one more property of
-$\Delta S^2$:
-\begin{center}
-\begin{tabular}{ll}
-{\bf (D)} & The sign of $\Delta S^2$ is invariant \\
-\end{tabular}
-\end{center}
 
 \begin{figure}[htbp]
 \begin{center}
@@ -761,18 +723,24 @@ $\Delta S^2$:
 \end{center}
 \caption{\label{fig:abctex} A light pulse is emitted at event A and absorbed and recorded at event B, as seen in two frames $F$ and $F'$.  The record of the event remains at rest in frame $F$.}
 \end{figure}
-Suppose (as shown in Fig.~\ref{fig:abctex}) there are two events, labeled A and C, and some frame
-$F$ where $\Delta S^2>0$. In frame $F$, we emit a light pulse at Event
-A.  The light pulse travels through vacuum until it reaches the
-location of Event C, where it is absorbed and recorded, at an event we
-label B.  The record remains at rest until event C.
 
-Next consider how this looks in some other frame $F'$ traveling at
-velocity $v<c$ wrt frame $F$.  The light is emitted at Event A, and
-absorbed and recorded at Event B, but now the record travels at speed
-$v<c$ until Event C.  Since $v < c$, the distance between Event A and
-Event C must therefore be less than $c(t'_{\rm B}-t'_{\rm A})$ so
-$\Delta S^2 < 0$.
+Next we'll show that the following additional property holds:
+\begin{center}
+\begin{tabular}{ll}
+{\bf (D)} & The sign of $\Delta S^2$ is invariant \\
+\end{tabular}
+\end{center}
+Suppose (as shown in Fig.~\ref{fig:abctex}) there are two events,
+labeled A and C, and some frame $F$ where $\Delta S^2>0$. In frame
+$F$, we emit a light pulse at Event A.  The light pulse travels
+through vacuum until it reaches the location of Event C, where it is
+absorbed and recorded, at an event we label B.  The record remains at
+rest until event C.  Now consider how this looks in some other frame
+$F'$ traveling at velocity $v<c$ wrt frame $F$.  The light is emitted
+at Event A, and absorbed and recorded at Event B, but now the record
+travels at speed $v<c$ until Event C.  Since $v < c$, the distance
+between Event A and Event C must therefore be less than $c(t'_{\rm
+  B}-t'_{\rm A})$ so $\Delta S^2 < 0$.
 
 We categorize space time intervals by the sign of the space-time interval as follows:
 \begin{center}
@@ -782,7 +750,6 @@ We categorize space time intervals by the sign of the space-time interval as fol
   $\Delta S^2 > 0$ & $\iff$ & time-like \\
 \end{tabular}
 \end{center}
-
 From property (A) we see that if the space-time interval between two
 events in one frame is light-like, it is light-like in all frames.  We
 have also just shown that if the interval is space-like in one frame, it is
@@ -790,7 +757,42 @@ space-like in all frames.  It follows that if the interval is
 time-like in one frame, it is time-like in all frames (or else we
 would have a contradiction of one of the previous two results).  Which demonstrates property (D).
 
-Thus we conclude with the main result of this section, {\bf the space-time interval defined as:}
+Finally, we will show that $\Delta S^2$ is invariant.  Consider an
+infinitesimal space-time inverval calculated in frame $F$:
+\begin{equation}
+dS^2 = dt^2 - dx^2 - dy^2 - dz^2
+\end{equation}
+and the corresponding quantiry in frame $F'$:
+\begin{equation}
+(dS^2)' = (dt')^2 - (dx')^2 - (dy')^2 - (dz')^2
+\end{equation}
+Now $(dS^2)'$, which is quadratic in differentials of the primed
+coordinates, must also be quadratic in differentials of the unprimed
+coordinates, because, as shown in the appendix, coordinate
+transformations are linear.
+
+We can formally expand $(d{S^2})'$ as a power series in $dS^2$:
+$$d{S^2}' = a + b dS^2 + c (dS^2)^2 + \cdots $$ with coefficients
+$a,b,c,\cdots$ to be determined.  From property (A) we see that $a=0$.
+But $(dS^2)^2$ is quartic (power 4) in differentials of the
+coordinates, while $(dS^2)'$ is quadratic, and so higher order terms
+($c$ and beyond) vanish.  This leads to:
+$$d{S^2}' = b dS^2$$
+with $b$ still unknown.  But $b$ cannot depedent on the
+absolute position in space and time, because of property (C).  It can
+depend on the relative motion between the $F$ and $F'$ frames, but not
+the direction, because of property (B).  So it can only dependent on
+the relative speed of $F$ and $F'$.  But this is the same in both
+frames, so we must also have:
+$$d{S^2} = b d{S^2}'$$
+and so:
+$$d{S^2} = b^2 d{S^2}$$
+from which we conclude $b=\pm1$.  But $b=-1$ would violate property (D).  So:
+$$(d{S^2})' = d{S^2}$$
+and (by integration) $\Delta S^2$ is invariant as well.
+
+Thus we conclude with the main result of this section, {\bf the
+  space-time interval defined as:}
 \begin{equation}
  \label{eqn:invariance}
   \Delta S^2 = \Delta t^2 - \Delta x^2 - \Delta y^2 - \Delta z^2
@@ -835,11 +837,13 @@ Hermitian form:
 \end{equation}
 
 \exercise
-Show that $(\cdot|\cdot)$ as defined above is a non-degenerate Hermitian form, by demonstrating that it has the three definining properties.  $\square$ \\[3pt]
+Show that $(\cdot|\cdot)$ as defined above is a
+non-degenerate Hermitian form, by demonstrating that it has the three
+definining properties.  $\square$ \\[3pt]
 
 \exercise
-For position four-vectors $a,b \in V$ with space time interval is $\Delta S^2$, show that:
-$$(b-a|b-a) = \Delta S^2$$
+For position four-vectors $a,b \in V$ with space time interval $\Delta S^2(a,b)$ between them, show that:
+$$(b-a|b-a) = \Delta S^2(a,b)$$
  $\square$ \\[3pt]
 
 \exercise
@@ -881,14 +885,28 @@ basis $\mathcal{B}$.  Therefore, we must reach the same conclusion
 about the matrix represenation of $G$ in any other iniertial frame
 $F'$ with standard basis $\mathcal{B}'$.  Specifically, we must have:
 $$
-[g]_\mathcal{B} = [g]_\mathcal{B}' = G
+[g]_\mathcal{B} = [g]_{\mathcal{B}'} = G
 $$
 for all frames.  The components of the metric tensor are the same in
-all intertial frames.\\[5pt]
+all intertial frames.  Here, our primed index notation becomes just a
+little bit cumbersome, but we can write this as:
+\begin{equation}
+\label{eqn:invariant-tensor}
+g_{\alpha'\beta'} = \delta_{\alpha'}^\alpha \delta_{\beta'}^\beta
+g_{\alpha\beta}
+\end{equation}
+where the $\delta$ factors are just an artifact of our notation.  In matrix notation, this reads:
+$$G' = I \, G \, I = G$$
+\\[5pt]
 
 \exercise
 Verify Equations \ref{eqn:metric-components} and \ref{eqn:metric-matrix} by calculating the matrix components.
  $\square$ \\[3pt]
+
+\exercise
+Use Equation \ref{eqn:invariant-tensor} to show that for any two position-space four vectors $a$ and $b$, the quantity
+$$(a|b) = a^\mu b_\mu$$
+is frame invariant. $\square$ \\[3pt]
 
 \noindent
 Notice that $g$ is its own inverse, so defining:
@@ -933,7 +951,7 @@ can be seen as the components of a (0,2) tensor and as a linear operator from $V
 
 \exercise
 In matrices, the lowering of an index reads:
-$$[\tilde{v}]_\mathcal{B^*} = [g]_\mathcal{B} [v]_\mathcal{B}$$
+$$[\tilde{v}]_\mathcal{B^*} = G \, [v]_\mathcal{B}$$
 Consider the position four-vector with components in the standard basis $\mathcal{B}$:
 $$[v]_\mathcal{B} = \begin{pmatrix} t \\ x \\ y \\ z\end{pmatrix}$$
 Using matrices, show that the components of its metric dual in the
@@ -946,8 +964,8 @@ Suppose that in the vector space $\mathbb{R}^4$ for position-space
 four-vectors, the standard basis vectors $\mathcal{B}$ of frame $F$
 are related to the standard basis vector $\mathcal{B}'$ of frame $F'$
 by a coordinate transformation:
-$$e_{\mu'} = \Lambda^{\nu}_{\mu'} \, e_{\nu}$$
-we showed before there is therefore an inverse transformation:
+$$e_{\mu'} = \Lambda^{\nu}_{\mu'} \, e_{\nu}.$$
+We showed before that there is an inverse transformation:
 $$e_{\mu} = \Lambda^{\nu'}_{\mu} \, e_{\nu'}$$
 with:
 $$\Lambda^{\beta}_{\eta'} \Lambda^{\eta'}_{\alpha} = \delta^{\beta}_{\alpha}$$
@@ -964,22 +982,23 @@ $\Lambda^{\nu'}_{\mu}$ as components of a (1,1) tensor.  However,
 notice that one set of indices refers to the $\mathcal{B}$ basis and
 another the $\mathcal{B'}$.  Therefore, it is best to leave tensors
 aside and interpret $\Lambda^{\mu'}_{\nu}$ as the components of a
-matrix, labeled by the two sets of basis vectors which it transforms:
-$$[\Lambda]_{ \mathcal{B'} \to \mathcal{B}}
+matrix, labeled by the two sets of basis vectors which it transforms
+between:
+$$[\Lambda]^{ \mathcal{B}'}_\mathcal{B}
 \equiv \begin{pmatrix}
   \Lambda^{0'}_0 &\Lambda^{0'}_1 &\Lambda^{0'}_2 &\Lambda^{0'}_3 \\[3pt]
   \Lambda^{1'}_0 &\Lambda^{1'}_1 &\Lambda^{1'}_2 &\Lambda^{1'}_3 \\[3pt]
   \Lambda^{2'}_0 &\Lambda^{2'}_1 &\Lambda^{2'}_2 &\Lambda^{2'}_3 \\[3pt]
   \Lambda^{3'}_0 &\Lambda^{3'}_1 &\Lambda^{3'}_2 &\Lambda^{3'}_3 \\
 \end{pmatrix}$$
-where we have left the primes in place as a reminder of our notation
-that attributes meaning to the location of the primed indice
+where we have left the primes in place, even on numerical values,
+because in our notation the location of the primed indice
 (i.e. $\Lambda^{1'}_{2}$ means $\Lambda^{\mu'}_{\nu}$ for $\mu'=1$ and
 $\nu=2$.)  Notice that we have choosen to associate the {\bf upper}
 index with the row of the matrix, which is simply a matter of choice,
 but one which we must apply consistently.  In matrix notation, we
 have:
-$$[v]_\mathcal{B'} \; = \; [\Lambda]_{\mathcal{B'}\to\mathcal{B}} \; [v]_\mathcal{B}$$
+$$[v]_\mathcal{B'} \; = \; [\Lambda]^{\mathcal{B}'}_\mathcal{B} \; [v]_\mathcal{B}$$
 which for for a position-space four vector is:
 $$\begin{pmatrix} t' \\ x' \\ y' \\ z' \end{pmatrix} =
 \begin{pmatrix}
@@ -994,7 +1013,7 @@ $$\begin{pmatrix} t' \\ x' \\ y' \\ z' \end{pmatrix} =
 In similar fashion, we can consider $\Lambda^{\nu}_{\mu'}$ as the
 components of a matrix, labeled by the two sets of basis vectors it
 connects:
-$$[\Lambda]_{ \mathcal{B}' \to \mathcal{B}}
+$$[\Lambda]^\mathcal{B}_{\mathcal{B}'}
 \equiv \begin{pmatrix}
   \Lambda^{0}_{0'} &\Lambda^{0}_{1'} &\Lambda^{0}_{2'} &\Lambda^{0}_{3'} \\[3pt]
   \Lambda^{1}_{0'} &\Lambda^{1}_{1'} &\Lambda^{1}_{2'} &\Lambda^{1}_{3'} \\[3pt]
@@ -1006,20 +1025,20 @@ $$[\Lambda]_{ \mathcal{B}' \to \mathcal{B}}
 These matrices are related by:
 $$\Lambda^{\beta}_{\eta'} \Lambda^{\eta'}_{\alpha} = \delta^{\beta}_{\alpha}$$
 which in terms of the above matrices reads:
-$$[\Lambda]_{\mathcal{B} \to \mathcal{B}'} \; [\Lambda]_{\mathcal{B}' \to \mathcal{B}} = I$$
-which is as one would hope.  Therefore, they are each others inverse and so:
-$$[\Lambda]_{\mathcal{B} \to \mathcal{B}'} \equiv [\Lambda]^{-1}_{\mathcal{B}' \to \mathcal{B}}$$
+$$[\Lambda]^\mathcal{B}_{\mathcal{B}'} \;  [\Lambda]^{\mathcal{B}'}_\mathcal{B} = I $$
+which is as one would hope.\\[4pt]
 
 \noindent
-{\bf Comments on Notation:} When there is little chance of
-confusion, we can speak of the transformation $\Lambda$, with matrix
-representation
-$$[\Lambda] \equiv [\Lambda]_{\mathcal{B}' \to \mathcal{B}}$$
+{\bf Notation:} When there is little chance of confusion,
+we drop the explicit labeling by basis vectors, and speak
+of the transformation $\Lambda$, with matrix representation
+$$\Lambda \equiv [\Lambda]^{\mathcal{B}'}_\mathcal{B}$$
 which would implicitly refer to the
 transformation applicable to the contravariant components when moving
 from frame $F$ to $F'$ (or, equivalently, to the covariant components
-when moving from frame $F'$ to $F$).  The inverse transformation
-$\Lambda^{-1}$ refers to transformation applicable to the
+when moving from frame $F'$ to $F$).  The inverse transformation is:
+$$\Lambda^{-1} = [\Lambda]^\mathcal{B}_{\mathcal{B}'}$$
+which is the transformation applicable to the
 contravariant components when moving from frame $F'$ to $F$ (or,
 equivalently, to the covariant components when moving from frame $F$
 to $F'$).\\[3pt]
@@ -1032,9 +1051,27 @@ $$\Lambda^{\mu'}_\nu \longrightarrow  \Lambda^\mu_\nu \hspace{0.5cm}(\text{Griff
 and
 $$\Lambda^{\mu}_{\nu'} \longrightarrow  ({\Lambda^{-1}})^\mu_\nu \hspace{0.5cm}(\text{Griffiths})$$
 
-
-
 \section{The Lorentz Group}
+
+\noindent
+A group $G$ is a set of elements and an operation $\cdot$ with the properties:
+\begin{center}
+\begin{tabular}{ll}
+  {\bf (A)} & closure:  if $a,b \in G$ then $a \cdot b \in G$ \\
+  {\bf (B)} & associative:  if $a,b,c \in G$ then $(ab)c = a(bc)$ \\
+  {\bf (C)} & identity:  there exists $e$ such that $ea = ae = a$ \\
+  {\bf (D)} & inverses:  for each $a \in G$ there exists $a^{-1}$ such that $a^{-1}a = a a^{-1} = e$ \\
+\end{tabular}
+\end{center}
+In this section, we'll show that the set of transformations between
+inertial references frames in special relativity form a group, which we call the Lorentz
+group.\\[4pt]
+
+\exercise (*) For $a,b \in G$, show that if $a b = e$ then $b = a^{-1}$.  $\square$ \\[3pt]
+
+\exercise For $a,b \in G$, show that if $a b = a$ then $b = e$.  $\square$ \\[3pt]
+
+\exercise For $a \in G$ show that $(a^{-1})^{-1} = a.$  $\square$ \\[3pt]
 
 \noindent
 {\bf Valid Coorinate Transformations:} The requirement that the
@@ -1053,51 +1090,34 @@ so, as $v$ is arbitrary, we must have:
 \label{eqn:lorentzgrouptn}
 \Lambda^{\alpha'}_{\mu} g_{\alpha'\beta'} \Lambda^{\beta'}_\nu =g_{\mu\nu}
 \end{equation}
-It follows that for vectors $a$ and $b$, not only are $(a|a)$ and
-$(b|b)$ invariant, but also $(a|b)$.
-
-The metric tensor is an invariant tensor, which we can write in our notation as:
-$$g_{\alpha'\beta'} = \delta^{\alpha'}_\alpha \delta^{\beta'}_\beta g_{\alpha\beta}$$
-so we have:
+This is simply the transformation rule for any (2,0)-tensor.  However, the components of the metric tensor are frame invariant, which led us to Equation~\ref{eqn:invariant-tensor}:
+$$g_{\alpha'\beta'} = \delta_{\alpha'}^\alpha \delta_{\beta'}^\beta
+g_{\alpha\beta}$$
+We have therefore:
 \begin{equation}
-\delta^{\alpha'}_\alpha \delta^{\beta'}_\beta \Lambda^{\alpha'}_{\mu} g_{\alpha\beta} \Lambda^{\beta'}_\nu =g_{\mu\nu}
+ \label{eqn:lorentztensor}
+  \delta^{\alpha'}_\alpha \delta^{\beta'}_\beta \Lambda^{\alpha'}_{\mu} g_{\alpha\beta} \Lambda^{\beta'}_\nu =g_{\mu\nu}
 \end{equation}
-
 In the previous section, we saw that we can write
-$\Lambda^{\beta'}_\nu$ as the components of a matrix which transforms
-covariant basis vectors from $\mathcal{B}'$ basis to the
-$\mathcal{B}$.  Calling that transformation matrix $A$, we can write
-this in matrix notation as:
+$\Lambda^{\beta'}_\nu$ as the components of a matrix $\Lambda$.
+We can write this result in matrix notation as:
 \begin{equation}
  \label{eqn:lorentzgroup}
- A^T G A = G
+ \Lambda^T G \Lambda = G
 \end{equation}
 where $G$ is the frame invariant matrix representation of the metric
-tensor.  Notice that Equation~\ref{eqn:lorentzgrouptn} is simply the
-transformation rule for any (2,0)-tensor.  It is only the fact that
-the metric tensor has the same components in any basis that leads to
-this important result.
+tensor.  The need to transpose (via the symbol $T$) in the first
+factor follows from the convention we choose for $\Lambda$, that the
+upper index refers to the row of the matrix, in order to match the
+calculation in Equation~\ref{eqn:lorentztensor}.  The $\delta$ factors
+are just identity matrices, which have been omitted.  It is only the
+fact that the metric tensor has the same components in any basis that
+leads to this important result.\\[3pt]
 
-A {\bf group} $G$ is a set of elements and an operation $\cdot$ with the properties:
-\begin{center}
-\begin{tabular}{ll}
-  {\bf (A)} & closure:  if $a,b \in G$ then $a \cdot b \in G$ \\
-  {\bf (B)} & associative:  if $a,b,c \in G$ then $(ab)c = a(bc)$ \\
-  {\bf (C)} & identity:  there exists $e$ such that $ea = ae = a$ \\
-  {\bf (D)} & inverses:  for each $a \in G$ there exists $a^{-1}$ such that $a^{-1}a = a a^{-1} = e$ \\
-\end{tabular}
-\end{center}
-
-\exercise (*) For $a,b \in G$, show that if $a b = e$ then $b = a^{-1}$.  $\square$ \\[3pt]
-
-\exercise For $a,b \in G$, show that if $a b = a$ then $b = e$.  $\square$ \\[3pt]
-
-\exercise For $a \in G$ show that $(a^{-1})^{-1} = a.$  $\square$ \\[3pt]
 
 \noindent
-
-The set of all matrices $A$ that satisfy
-Equation~\ref{eqn:lorentzgroup} together with ordinary matrix
+The set of all matrices $\Lambda$ that satisfy
+Equation~\ref{eqn:lorentzgroup}, with ordinary matrix
 multiplication defines the Lorentz group.  Group property (B) follows
 directly from the associative property of matrix multiplication.  The
 identity matrix satisfies Equation~\ref{eqn:lorentzgroup} so property
@@ -1175,13 +1195,15 @@ $$g^{\gamma\alpha} \Lambda^{u'}_{\alpha} g_{\mu'w'} = \Lambda^{\gamma}_{w'} $$
 
 \section{Relativistic Kinematics}
 
-In lecture we saw that the principle of conservation of momentum,
-using the classical definition of momentum $\vec{p}=m\vec{v}$ is not
-consistent with special relativity.  Experimental evidence supports
-special relativity.  So we must abandon our classical notion of
-momentum.
+The principle of conservation of momentum, using the classical
+definition of momentum $\vec{p}=m\vec{v}$, is not consistent with
+special relativity.  Experimental evidence supports special
+relativity.  So we must abandon our classical notion of momentum.
 
-If we can find a four-vector quantity related to momentum, and likewise conserved, so e.g.:
+%\exercise Example showing it fails...
+
+If we can find a four-vector quantity related to momentum, and
+likewise conserved, so e.g.:
 $$p^\mu_A + p^\mu_B = p^\mu_C + p^\mu_D$$
 then we can simply apply a Lorentz transformation to both sides:
 $$\Lambda^{\nu'}_\mu p^\mu_A + \Lambda^{\nu'}_\mu p^\mu_B = \Lambda^{\nu'}_\mu p^\mu_C + \Lambda^{\nu'}_\mu p^\mu_D$$
@@ -1207,14 +1229,15 @@ and we see that
 $$\tau \equiv \Delta t'$$
 Let $\beta$ be the relative speed between frame $F$ and the frame $F'$ in
 which the events A and B occur at the same location.  Then we can
-calculate the elapsed time $t$ in frame F according to the lorentz
-transformation:
-$$\begin{pmatrix} t \\ x \end{pmatrix} =
-\begin{pmatrix} \gamma & -\gamma \beta \\ -\gamma \beta & \gamma \\ \end{pmatrix}
+calculate the elapsed time $t$ in frame F according to the inverse Lorentz
+transformation:\\
+\begin{equation*}
+\begin{pmatrix} t \\ x \end{pmatrix} =
+\begin{pmatrix} \gamma & \gamma \beta \\ \gamma \beta & \gamma \\ \end{pmatrix}
 \begin{pmatrix} \tau \\ 0 \end{pmatrix}
 = \begin{pmatrix}  \gamma \tau \\ \gamma \tau \beta \end{pmatrix}
-$$
-From which we see that:
+\end{equation*}
+From which we see that:\\
 \begin{equation}
 \tau = t / \gamma
 \end{equation}
@@ -1245,13 +1268,12 @@ It is left as an exercise to show that the invariant associated with $\eta$ is
 
 \exercise Show by an explicit calculation that Equation~\ref{eqn:fvsq} is correct. $\square$\\[3pt]
 
-Next we define the four vector $p$ by its components:
+Next we define the momenum four-vector $p$ by its components:
 \begin{equation}
 p^\mu \equiv m \eta^\mu
 \end{equation}
 assuming that the mass of a particle is invariant, then $p^\mu$ transforms as a four-vector, and so is itself a four-vector, with
 $$[p]_\mathcal{B} = \begin{pmatrix} \gamma m \\ \gamma m \beta_x \\ \gamma m \beta_y \\\ \gamma m \beta_z \end{pmatrix}$$
-
 In the non-relativistic limit, we can approximate $\gamma$ by its Taylor series near $\beta=0$
 $$\gamma = \frac{1}{\sqrt{1-\beta^2}} = 1 + \frac{1}{2} \beta^2$$
 In this limit, we see that
@@ -1288,16 +1310,21 @@ and also:
 $$p^\mu p_\mu = E^2 - \vec{p}\cdot\vec{p}$$
 so we have:
 \begin{equation}
+E^2 = m^2 + |\vec{p}|^2
+\end{equation}
+We often write this simply as:
+\begin{equation}
 E^2 = m^2 + p^2
 \end{equation}
+where $p$ is implicitly $|\vec{p}|$ and not the four-vector $p$.
 {\bf You must memorize this equation} (or its derivation).  It will
 not be given to you on exams, and you will need it.
 
-The experimental evidence confirms that $p$ is indeed conserved.  In
-classical mechanics, we had conservation of energy and momentum
-separately.  In relativistic kinematics, four-momentum is conserved
-which implies conservation of relativistic energy and relativistic
-momentum.\\[5pt]
+The experimental evidence confirms that the momentum four vector $p$
+is indeed conserved.  In classical mechanics, we had conservation of
+energy and momentum separately.  In relativistic kinematics,
+four-momentum is conserved which implies conservation of relativistic
+energy and relativistic momentum.\\[5pt]
 
 \exercise Suppose a particle of mass $m>0$ has total energy $E$.  Show
 that the speed of the particle is less than $c$.  Because of
@@ -1305,7 +1332,7 @@ convervation of energy, this shows that a massive particle cannot be
 accelerated to the speed of light by consuming a finite amount of
 energy.  Assuming any observers would have $m>0$, this is one
 explanation for why no inertial frames have a speed that exceeds the
-speed of light.
+speed of light. $\square$ \\[3pt]
 
 
 \exercise
@@ -1314,7 +1341,7 @@ $m$, with $m < M/2$.  Particle A has momentum $p$, and the momentum of
 particles B and C are at the same angle with respect to the momentum
 of Particle A.  What is the magnitude of the momentum of particle B
 ($q$)?  What is the angle ($theta$) between the momentum of Particle A
-and the momentum of Particle B?
+and the momentum of Particle B? $\square$ \\[3pt]
 
 \begin{center}
 \begin{tikzpicture}[scale=1]
@@ -1383,20 +1410,20 @@ momentum of particle 1 ($q$)?
 \section{Massless Particles}
 
 Special relativity provides a mechanism for massless particles to exist.  Notice that:
-$$\vec{p}=\frac{m\vec{v}}{\sqrt{1-(v/c)^2}}$$
+$$\vec{p}=\frac{m\vec{v}}{\sqrt{1-\beta^2}}$$
 and
-$$E=\frac{mc^2}{\sqrt{1-(v/c)^2}}$$
+$$E=\frac{m}{\sqrt{1-\beta^2}}$$
 both go to zero for $m=0$ {\bf unless} $v=c$ in which case they are indeterminate.  We still have, however,
-$$E^2 = (mc^2)^2 + |\vec{p}|^2 c^2$$
+$$E^2 = m^2 + |\vec{p}|^2$$
 which yields:
-$$E = |\vec{p}|c$$
+$$E = |\vec{p}|$$
 So special relativity allows for massless particles that travel
 exclusively at the speed of light.  Massive particles have their momentum and energy defined by their velocity, but that is not possible for massless particles which travel at the speed of light.  Special relativity has no prescription for how the energy of massless particle is determined, but quantum mechanics does.  We have photons with energy given by:
 $$E = \hbar \omega$$
 
 \exercise (*)
 Show that a massless photon ($\gamma$) cannot decay to two massive
-particles (e.g. $\gamma \to e^- e^+$) in a vacuum.\\[3pt]
+particles (e.g. $\gamma \to e^- e^+$) in a vacuum. $\square$ \\[3pt]
 
 \section{Additional Exercises}
 
@@ -1449,50 +1476,56 @@ $$F = 4 c^4 m_b p_a$$\\[5pt]
 
 
 
+\appendix
 
-\end{document}
+\section{Linearity of Transformation between Inertial Frames}
 
-
-\section{EXTRA:  Linearity of Transformation between Inertial Frames}
-
-Suppose we have frames $F$ and $\widetilde{F}$.  For simplicity, we will consider only the time and x position, for which there is a coordinate transformation:
+Suppose we have frames $F$ and $F'$.  For simplicity, we
+will consider only the time and x position, for which there is a
+coordinate transformation:
 \begin{eqnarray*}
-\widetilde{x} &=& f(x,t)\\
-\widetilde{t} &=& g(x,t)\\
+x' &=& f(x,t)\\
+t' &=& g(x,t)\\
 \end{eqnarray*}
 So then:
 \begin{eqnarray*}
-d\widetilde{x} &=& \frac{\partial f}{\partial x}dx + \frac{\partial f}{\partial t}dt \\
-d\widetilde{t} &=& \frac{\partial g}{\partial x}dx + \frac{\partial g}{\partial t}dt \\
+dx' &=& \frac{\partial f}{\partial x}dx + \frac{\partial f}{\partial t}dt \\
+dt' &=& \frac{\partial g}{\partial x}dx + \frac{\partial g}{\partial t}dt \\
 \end{eqnarray*}
 and:
 \begin{eqnarray*}
-\frac{d\widetilde{x}}{d\widetilde{t}} &=&
+\frac{dx'}{dt'} &=&
 \frac{\displaystyle \frac{\partial f}{\partial x}\frac{dx}{dt} + \frac{\partial f}{\partial t}}
 {\displaystyle \frac{\partial g}{\partial x}\frac{dx}{dt} + \frac{\partial g}{\partial t}}\\
 \end{eqnarray*}
-Now suppose $x$ and $t$ refer to an object in frame $F$ moving at a
-constant velocity $dx/dt$.  Then, as the laws of physics are frame
-invariant, the object must be moving at constant speed
-$d\widetilde{x}/d\widetilde{t}$.  This implies that the partial
-derivatives $$\frac{\partial f}{\partial
+Now consider a particle moving at constant velocity $dx/dt$ in frame
+$F$.  By the invariance of the laws of physics, this particle must
+also move at constant velocity $dx'/dt'$ in frame $F'$.  This
+requirement implies that the partial derivatives
+$$
+\frac{\partial f}{\partial
   x}, \hspace{0.5cm}\frac{\partial f}{\partial
   t}, \hspace{0.5cm}\frac{\partial g}{\partial
-  x}, \hspace{0.5cm}\frac{\partial g}{\partial t}$$ must all be
-constant along the trajectory of a constant moving particle.  But you
-can connect any two points in space-time using two particles at rest
-and one particle moving at a constant speed, so in fact they must be
-constant everywhere.  Therefore:
+  x}, \hspace{0.5cm}\frac{\partial g}{\partial t}
+$$
+are constant along the particle'strajectory.
+
+Because any two events in space-time can be connected using a
+combination of particles at rest and particles moving at constant
+velocities, these partial derivatives must in fact be constant
+throughout space-time.  Therefore, the most general form of the transformation is:
 \begin{eqnarray*}
-\widetilde{x} &=& A x + B t + C \\
-\widetilde{t} &=& D x + E t + F \\
+x' &=& A x + B t + C \\
+t' &=& D x + E t + F \\
 \end{eqnarray*}
 If we take the origin to coincide, we have:
 \begin{eqnarray*}
-\widetilde{x} &=& A x + B t\\
-\widetilde{t} &=& D x + E t\\
+x' &=& A x + B t\\
+t' &=& D x + E t\\
 \end{eqnarray*}
-showing the linearity of the transformations between inertial frames.
+demonstrating that the transformations between inertial framese are linear. 
 
 
 \end{document}
+
+
