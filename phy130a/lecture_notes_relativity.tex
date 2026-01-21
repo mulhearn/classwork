@@ -740,7 +740,7 @@ $F'$ traveling at velocity $v<c$ wrt frame $F$.  The light is emitted
 at Event A, and absorbed and recorded at Event B, but now the record
 travels at speed $v<c$ until Event C.  Since $v < c$, the distance
 between Event A and Event C must therefore be less than $c(t'_{\rm
-  B}-t'_{\rm A})$ so $\Delta S^2 < 0$.
+  B}-t'_{\rm A})$ so $\Delta S^2 > 0$.
 
 We categorize space time intervals by the sign of the space-time interval as follows:
 \begin{center}
@@ -1131,12 +1131,12 @@ then
 $$(AB)^T G (AB) = G. \hspace{1cm} \square$$
 \\
 
-\exercise (*) Show that property (D) holds for the Lorentz group.  That is, if
+\exercise (A) Show that property (D) holds for the Lorentz group.  If 
 $$A^T G A = G$$
-and
-$$(A^-1)^T G A^-1 = G$$
-then
-$$(AB)^T G (AB) = G. \hspace{1cm} \square$$
+first show that:
+$$A^{-1} = G A^T G$$
+then 
+$$(A^{-1})^T G A^{-1} = G. \hspace{1cm} \square$$ 
 \\
 
 \exercise (*) Show that a rotation by angle $\theta$ about the $z$-axis
@@ -1148,7 +1148,7 @@ $$R = \begin{pmatrix}
 \end{pmatrix}$$
 is a member of the Lorentz Group. $\square$\\[3pt]
 
-\exercise (*) Show that a Lorentz boost along the $x$-axis:
+\exercise (**) Show that a Lorentz boost along the $x$-axis:
 $$L = \begin{pmatrix}
   \gamma & -\beta\gamma & 0 & 0 \\[3pt]
   -\beta\gamma & \gamma & 0 & 0 \\[3pt]
@@ -1179,10 +1179,10 @@ is a member of the Lorentz Group. $\square$\\[3pt]
 
 \exercise Show that:
 \begin{eqnarray*}
-  G \, R \, G &=& R^{-1} \\
-  G \, L \, G &=& L^{-1} \\
-  G \, P \, G &=& P^{-1} \\
-  G \, T \, G &=& T^{-1} \\
+  G \, R^T \, G &=& R^{-1} \\
+  G \, L^T \, G &=& L^{-1} \\
+  G \, P^T \, G &=& P^{-1} \\
+  G \, T ^T\, G &=& T^{-1} \\
 \end{eqnarray*}
 Note that this follows from the group property:
 \begin{eqnarray*}
@@ -1305,7 +1305,7 @@ relativistic momentum, which reproduces the classical momentum only
 for small $\beta$.
 
 Notice that the invariant associated with $p$ is:
-$$p^\mu p_\mu = m^2 \nu^\mu \nu_\mu = m^2 $$
+$$p^\mu p_\mu = m^2 \eta^\mu \eta_\mu = m^2 $$
 and also:
 $$p^\mu p_\mu = E^2 - \vec{p}\cdot\vec{p}$$
 so we have:
@@ -1335,7 +1335,7 @@ explanation for why no inertial frames have a speed that exceeds the
 speed of light. $\square$ \\[3pt]
 
 
-\exercise
+\exercise (*)
 Particle A of mass $M$ decays into particles B and C, each of mass
 $m$, with $m < M/2$.  Particle A has momentum $p$, and the momentum of
 particles B and C are at the same angle with respect to the momentum
@@ -1372,7 +1372,7 @@ and the momentum of Particle B? $\square$ \\[3pt]
 \end{center}
 
 
-\exercise
+\exercise (*)
 Particles A and B each of mass $M$ collide to produce particles $1$
 and $2$ each of mass $m$.  In the center of mass frame, particles A
 and B have magnitude of momentum $p$.  What is the magnitude of the
@@ -1427,18 +1427,18 @@ particles (e.g. $\gamma \to e^- e^+$) in a vacuum. $\square$ \\[3pt]
 
 \section{Additional Exercises}
 
-\exercise (*)
+\exercise 
 Suppose a particle of mass $M$ has momentum $p$ and
 energy $E$ in the lab frame.  It decays to three particles, A, B, and
 C, each with mass $M/3$.  What is $\beta$ of particle A in the lab
-frame?\\[3pt]
+frame? $\square$ \\[3pt]
 
 \exercise(*)
 For the decay $a \to 1 + 2$ show that in the CMS the magnitude of the momentum of particle 1 is:
 $$p^* = \frac{1}{2m_a} \, \sqrt{\left(m_a^2-(m_1 + m_2)^2\right)\left(m_a^2-(m_1 - m_2)^2\right)}$$
 Hint:  When doing serious algebra, don't move around numbers like $m_1$.  Instead, do something like:
 $$m_a \to a, \hspace{0.5cm} m_1 \to b, \hspace{0.5cm} m_2 \to c$$
-Treat yourself right!\\[5pt]
+Treat yourself right! $\square$ \\[3pt]
 
 
 \exercise (*)
@@ -1451,7 +1451,7 @@ conclude that the antiproton discovery was made using colliding beams
 (as in A), but in fact, the discover was made here in California,
 using the bevatron in a fixed target experiment (as in B).  We did not
 yet have the ability to focus beams which is necessary to collide two
-beams at a high rate of collisions.\\[3pt]
+beams at a high rate of collisions. $\square$ \\[3pt]
 
 \exercise (*)
 The neutrino was discovered by studying the kinetic energy of the
@@ -1462,17 +1462,20 @@ If the neutrino is neglected from the process, this becomes a two body decay.  C
 $$K = \sqrt{p^2+m^2} - m$$
 of the electron in the rest frame of the $$^3_1H$$ nucleus.  Use $m(3^H)=2808.921~\rm MeV$, 
 $m(3^He)=2808.391~\rm MeV$, and $m(e) = 0.511~\rm MeV$. Compare your single value to Fig. 1.5 in Griffiths.
+$\square$ \\[3pt]
 
 \exercise
 For two-body scattering $a + b \to 1 + 2$, show that the Lorentz invariant flux term:
 $$F \equiv 4 E_a E_b (v_a + v_b)$$
 is equivalent to:
 $$F = 4 c^3 \sqrt{ (p_a \cdot p_b)^2 - m_a^2 m_b^2 c^4 } $$
-Hint: Calculate $F^2$ and then calculate $(p_a \cdot p_b)^2$.\\[5pt]
+Hint: Calculate $F^2$ and then calculate $(p_a \cdot p_b)^2$.
+ $\square$ \\[3pt]
+
 
 \exercise
 Show that in the lab frame where $b$ is at rest, the Lorentz invariant flux term is:
-$$F = 4 c^4 m_b p_a$$\\[5pt]
+$$F = 4 c^4 m_b p_a$$ $\square$ \\[3pt]
 
 
 
