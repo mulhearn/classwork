@@ -39,7 +39,7 @@ vector addition and scalar multiplication, and has the following
 defining properties:
 \begin{center}
 \begin{tabular}{ll}
-{\bf (1)} & $v+w = v+w$ for all $v,w \in V$.\\
+{\bf (1)} & $v+w = w+v$ for all $v,w \in V$.\\
 {\bf (2)} & $v+(w+x) = (v+w)+x$ for all $v,w,x \in V$. \\
 {\bf (3)} & There exists $0 \in V$ such that $v+0=v$ for all $v \in V$.\\
 {\bf (4)} & For all $v \in V$ there exists $-v \in V$ such that $v + (-v) = 0$.\\
@@ -1195,10 +1195,12 @@ $$g^{\gamma\alpha} \Lambda^{u'}_{\alpha} g_{\mu'w'} = \Lambda^{\gamma}_{w'} $$
 
 \section{Relativistic Kinematics}
 
+
 The principle of conservation of momentum, using the classical
 definition of momentum $\vec{p}=m\vec{v}$, is not consistent with
-special relativity.  Experimental evidence supports special
-relativity.  So we must abandon our classical notion of momentum.
+special relativity.  See the exercises below for a concrete example.
+Experimental evidence supports special relativity.  So we must abandon
+our classical notion of momentum.
 
 %\exercise Example showing it fails...
 
@@ -1325,6 +1327,66 @@ is indeed conserved.  In classical mechanics, we had conservation of
 energy and momentum separately.  In relativistic kinematics,
 four-momentum is conserved which implies conservation of relativistic
 energy and relativistic momentum.\\[5pt]
+
+\noindent
+{\bf Exercise:} Consider a particle moving with velocity $\alpha$ so
+that $x = \alpha t$ in frame $F$.  Consider frame $F'$ moving at
+velocity $\beta$ in the negative $x$ direction.  Under the Gallilean
+(non-relativistic) transormation, the velocity of the particle is
+$\alpha + \beta$ in frame $F'$.  Derive the velocity addition formula:
+\begin{equation*}
+v = \frac{\alpha + \beta}{1 + \alpha \, \beta}
+\end{equation*}
+by apply the Lorentz transformation:
+\begin{equation*}
+  L = \begin{pmatrix}
+  \gamma & -\beta\gamma \\[3pt]
+  -\beta\gamma & \gamma \\[3pt]
+  \end{pmatrix}
+\end{equation*}
+to the position space four-vector in frame $F$:
+\begin{equation*}
+  x = \begin{pmatrix}
+  t \\[3pt]
+  \alpha t \\[3pt]
+  \end{pmatrix}
+\end{equation*}
+
+\noindent
+{\bf Exercise:}
+As measured in frame F, particles $A$ and $B$, each of mass $m$, have velocity $\alpha$ in the negative and positive 
+$y$-direction, respectively.  After an elastic collision, they have velocity $\alpha$ in the negative and positive 
+$y$-direction, respectively.
+\begin{center}
+\begin{tikzpicture}[scale=1]
+  \node[shape=circle,draw,thick] at (0,2) {A};
+  \draw[->, thick] (0,1.5) -- ++(0,-1.4);
+  \node at (0.5, 0.75) {$\alpha$};
+
+  \node[shape=circle,draw,thick] at (0,-2) {B};
+  \draw[->, thick] (0,-1.5) -- ++(0, 1.4);
+  \node at (0.5, -0.75) {$\alpha$};
+  \node at (-1.5,-1.0) {Initial};
+
+  \node[shape=circle,draw,thick] at (2, 0) {A};
+  \draw[<-, thick] (2.5,0) -- ++(1.4,0);
+  \node at (3.2, 0.3) {$\alpha$};
+  \node[shape=circle,draw,thick] at (6,0) {B};
+  \draw[<-, thick] (5.5,0) -- ++(-1.4, 0);
+  \node at (4.8, 0.3) {$\alpha$};
+  \node at (4,-1.0) {Final};  
+\end{tikzpicture}
+\end{center}
+Now consider frame $F'$, in the rest frame of particle $A$ in the
+final state.  (A) Show that under the Gallilean (non-relativistic)
+transformation, the total classical momentum in the $y$ direction is
+$2m\alpha$ in both the initial and final state. (B) Using the velocity
+addition formula from the previous exercise, show that under special relativy,
+the total classical momentum in the $y$ direction is 
+$2 m \alpha$ in the initial state, but
+$$\frac{2 m \alpha}{1 + \alpha^2}$$
+in the final state.  The conservation of classical momentum is not
+consistent with special relativity.
 
 \exercise Suppose a particle of mass $m>0$ has total energy $E$.  Show
 that the speed of the particle is less than $c$.  Because of
