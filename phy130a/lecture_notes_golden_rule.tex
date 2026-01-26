@@ -78,16 +78,15 @@ Where we can now match term by term to obtain:
 \begin{equation}
 \label{eqn:cmdot}
 \dt{c_m}(t)  = - \frac{i}{\hbar} \sum_n \, c_n(t)  \, \exp\left( i \frac{(E_m - E_n) t}{\hbar} \right)
-\braket{m | \delta H(t) | n} \ket{m}  
+\braket{m | \delta H(t) | n}  
 \end{equation}
-This is everything we hoped for!  Because of the time depedence of the
+This is everything we hoped for!  Because of the time dependence of the
 total Hamiltonian, our expansion coefficients have to be time
 dependent as well (the vectors $\ket{n}$ are still a basis, but they
 are not stationary states of the total Hamiltonian $H$).  But, in the
 interaction picture
 \footnote{Formally, in the interaction picture the operators evolve as
-$$O(t) = {\rm exp}(iH^{(0)}t) \; O \; {\rm exp}(-iH^{(0)}t)$$
-%$O(t) = \exp(iH^{0}t} O \exp(-iH^{0}t}$
+$$O(t) = {\rm exp}(iH^{(0)}t/\hbar) \; O \; {\rm exp}(-iH^{(0)}t/\hbar)$$
 while the states carry the remaining time dependence.  Our derivation
 here achieves exactly the same separation of time dependence without
 invoking time evolution of the operators.}
@@ -105,7 +104,7 @@ dependence of the $c_m(t)$ does not depend on $H^{(0)}$.
     \node at (8.0,-0.25) {$T$};
     \node at (12.5, 0.0) {$t$};
     \node at (3.8, 1.0) {$V$};
-    \node at (-0.5, 0.5) {$V(t)$};
+    \node at (-0.5, 0.5) {$\delta H(t)$};
     \node at (2,  -0.75) {$H = H^{(0)}$};
     \node at (6,  -0.75)  {$H = H^{(0)} + V$};
     \node at (10, -0.75) {$H = H^{(0)}$};    
@@ -116,50 +115,50 @@ dependence of the $c_m(t)$ does not depend on $H^{(0)}$.
   $t=T$, making the total Hamiltonian time-dependent.}
 \end{figure}
 
-For our purposes, it suffices to consider the relatively simple
-time-dependent interaction $\delta H(t)$ shown in
-Fig.~\ref{fig:simple-perturbation}.  Here the interaction potential $V$
-has no explicit time dependence, but it is turned on at t=0 and then
-off at $t=T$.  We will also assume that the initial state is an energy
-eigenstate $\ket{i}$ with
+For our purposes, it suffices to consider the simple time-dependent
+interaction $\delta H(t)$ shown in Fig.~\ref{fig:simple-perturbation}.
+The interaction potential $V$ has no explicit time dependence, but is
+turned on at t=0 and off again at $t=T$, making the total Hamiltonian
+time dependent.  We will also assume that the initial state is an
+energy eigenstate $\ket{i}$ with
 $$H^{(0)} \ket{i} = E_i \ket{i}$$
-Before $t \leq 0$, this is a stationary state of total Hamiltonian,
-because the interaction potential is off, and we have the familiear
-time dependence:
-$$\ket{\Psi(t)} = \exp\left( -i \frac{E_m t}{\hbar}\right) \;
-\ket{i} \hspace{2cm} (t \leq 0)$$ This implies that:
+For $t \leq 0$, the interaction is absent, and $\ket{i}$ is a stationary state of total Hamiltonian,
+leading to the familiar time dependence:
+$$\ket{\Psi(t)} = \exp\left( -i \frac{E_i t}{\hbar}\right) \;
+\ket{i} \hspace{2cm} (t \leq 0)$$
+This implies that:
 \begin{equation*}
-c_m(0) =
-\delta_{mi}
+c_m(0) = \delta_{mi}
 \end{equation*}
 However, starting at $t=0$, the interaction turns on and $\ket{i}$ is
 no longer a stationary state.  The probability $p$ of observing the
 state $\ket{m}$ is given by:
-$$p(t) = |c_m(t)|^2 \hspace{2cm} (0 \leq t \leq T)$$
-which we can no longer assume is zero for $m \neq i$, and is time
-dependent.  At $t=T$, the interaction turns off.  The states $\ket{m}$
-are again Eigenstates, but the state is no longer $\ket{i}$.  We now
-have a probability
-$$P_{fi} = |c_f(T)|^2 \hspace{2cm} (t \geq T)$$ of observing the
+$$p(t) = |c_m(t)|^2 \hspace{2cm} (0 \leq t \leq T)$$ which we can no
+longer assume is zero for $m \neq i$, and is time dependent.  At
+$t=T$, the interaction turns off.  The states $\ket{m}$ return to
+being stationary states of the total Hamiltonian, but the state is no
+longer $\ket{i}$.  We now have a probability
+$$P_{fi}(T) = |c_f(T)|^2 \hspace{2cm} (t \geq T)$$ of observing the
 system in state $\ket{f}$.  We call this, the transition probability
 from state $\ket{i}$ to state $\ket{f}$. Notice that is is constant in
-time.  The interaction potential shakes things up, mixing up the
-energy eigenstates, but once it turns off, things stop moving and stay
-in place.
+time, but it does depend on how long the interaction is left on ($T$).
+The interaction potential shakes things up, mixing up the energy
+eigenstates, but once it turns off, things stop moving and stay in
+place.
 
-Let's further assume that the interaction potenial $V$ is small
+Let's further assume that the interaction potential $V$ is small
 compared to the time-independent Hamiltonian $H^{(0)}$.
 
 This scenario lends itself to perturbation
-theory, where the new interaction $\delta H(t)$ is refered to as the
-perturbration.
+theory, where the new interaction $\delta H(t)$ is referred to as the
+perturbation.
 
 In the interaction picture, the well-understood Hamiltonian $H^{(0)}$
 is generally large compared to the time-dependent additional
 interaction $\delta H(t)$.  Starting from the state with no additional
 interaction (the unperturbed state) we calculate the effect of the
 perturbation as a series of corrections.  Because our perturbation is
-ftime-dependent, we will need time-dependent pertubration theory.  This
+time-dependent, we will need time-dependent perturbation theory.  This
 topic is covered in PHY 115B, so we will not go into the topic too
 deeply.  Fortunately, we can obtain the first-order results in a
 simple, intuitive manner.  In the RHS of Equation~\ref{eqn:cmdot}, we make the
@@ -169,10 +168,10 @@ to obtain a first-order estimate:
 \begin{equation}
 \label{eqn:cmdot-first-order}
 \dt{c_m}(t)  = - \frac{i}{\hbar}  \, \exp\left( i \frac{(E_m - E_i) t}{\hbar} \right)
-\braket{m | \delta H(t) | n}   
+\braket{m | \delta H(t) | i}   
 \end{equation}
-For any final state $\ket{f}$, we can can estimate the corresponding coeffient for $t \geq T$ by an integral:
-$$c_f(T) = - \frac{i}{\hbar}  \; V_{fi} \; \int_o^T \exp\left( i \omega_{fi} t \right) \, dt$$
+For any final state $\ket{f}$, we can can estimate the corresponding coefficient for $t \geq T$ by an integral:
+$$c_f(T) = - \frac{i}{\hbar}  \; V_{fi} \; \int_0^T \exp\left( i \omega_{fi} t \right) \, dt$$
 where we define the interaction potential matrix element:
 \begin{equation}
 V_{mn} = \braket{m|V|n}
@@ -181,126 +180,112 @@ and the angular frequency:
 \begin{equation}
 \omega_{mn} = \frac{E_m - E_n}{\hbar}
 \end{equation}
-There is one subtlety, however. This prescription is only valid for $f
-\neq i$.  At first order, we have
+There is one subtlety, however.  This prescription is only valid for $f
+\neq i$.  At first order
 $$c_i(t) = 1.$$
-In principle, $c_i(t)$ must diminish to account for the other
-coefficients becoming non-zero following
-Equation~\ref{eqn:cmdot-first-order} as probablity goes as the square
-of the coefficients, this is a second order effect, zero at first
-order.
+Although probability must flow out of the initial state as other
+coefficients become nonzero, probabilities are quadratic in the
+amplitudes, and $c_i(t)$ only changes at second order.
+
 Noting that:
-$$\int_0^T e^ikx = e^{ikx} \frac{sin(kx/2)}{k/2}$$
+$$\int_0^T e^{i\omega t} \, dt = e^{i\omega T/2} \frac{\sin(\omega T/2)}{\omega/2}$$
 we determine the first-order transition probability (for $f \neq i$) as:
 \begin{equation}
 \label{eqn:pfi-first-order}
-P_{fi} = |c_f(T)|^2 = \frac{|V_{fi}|^2}{\hbar^2} \; \left( \frac{\sin(\omega_{fi} T / 2)}{\omega_{fi} / 2} \right)^2
+P_{fi}(T) = |c_f(T)|^2 = \frac{|V_{fi}|^2}{\hbar^2} \; \left( \frac{\sin(\omega_{fi} T / 2)}{\omega_{fi} / 2} \right)^2
 \end{equation}
-Notice that $T$ appears in the numerator, but not the denominator.  In the next section, we'll be looking closely at the factor:
+Notice that $T$ appears in the numerator, but not the denominator, of the factor:
 \begin{equation}
 F_T(\omega_{fi}) = \left( \frac{\sin(\omega_{fi} T / 2)}{\omega_{fi} / 2} \right)^2
 \end{equation}
-which we shall see saves the day for us, twice.  
+In the next section, we shall see that this factor saves the day for us, twice.  
+
+
+\section{Fermi's Golden Rule}
+
+In the previous section, we calculated the first-order transition
+probability $P_{fi}(T)$, for the probability of a transition from state
+$\ket{i}$ to $\ket{f}$, when an interaction was left on for time $T$.
+In this section, we will calculate the {\bf rate} at which transitions
+occur from the initial state $\ket{i}$ to a collection of final states
+in the vicinity of $\ket{f}$ which we shall denote as $\Delta f$.
+Conceptually, that rate is:
+$$\Gamma_{fi} = \frac{\sum_{\Delta f} P_{fi}(T)}{T}$$
+We have no knowledge about the correct value of $T$.
+If our result is going to have any utility, $\Gamma_{fi}$ must be
+independent of $T$, which can only happen if our first wish is
+granted:
+\begin{equation}
+\sum_{\Delta f} P_{fi}(T) \; \propto \; T
+\end{equation}
+We shall see if we are so lucky!
+
+For a first step, we'll move to the continuum by the replacement:
+$$\sum_{\Delta f} \to \int_{\Delta f} \, dn = \int_{\Delta f} \, \rho(E_f) \, dE_f$$
+where the integral is now over a continuous range of final states in
+the vicinity of $\ket{f}$, and
+\begin{equation}
+\rho(E_f) = \left| \frac{dn}{dE_f} \right|
+\end{equation}
+is the Jacobian of the transformation from $dn$ to $dE$.  More
+intuitively, $\rho(E_f)$ is the number of states $dn$ per energy range
+$dE$.  We refer to $\rho(E_f)$ as the density of states.  An example
+calculation for the non-relativistic case, using box regulation, is in
+the Appendix.
+
+Using the main result from the previous section
+(Equation~\ref{eqn:pfi-first-order}) we now have:
+$$\sum_{\Delta f} P_{fi}(T) = \frac{1}{\hbar^2} \int_{\Delta f} \;
+\rho(E_f) \; |V_{fi}|^2 \; \left( \frac{\sin(\omega_{fi} T /
+  2)}{\omega_{fi} / 2} \right)^2 \; dE_f$$ At this point, a reasonable
+human being would consider giving up.  We don't know anything specific
+about the $\rho(E_f)$ and $|V_{fi}|^2$ that appear in the integral,
+nor do we know much about the range of integration, which we've
+labeled as $\Delta f$, to indicate a continuum in the vicinity of
+$\ket{f}$. The only way we can hope to proceed is if there is a delta
+function lurking in the integrand, which we shall take as our second
+wish.
+
+\begin{figure}[thb]
+\begin{center}
+{\includegraphics[width=0.60\textwidth]{figs/fgr_delta.pdf}}
+\end{center}
+\caption{\label{fig:fgr_delta} For large enough $T$, $f(\omega_{fi})$ becomes a delta function and the area under the curve is $\propto T$}
+\end{figure}
+
+There is precisely one factor in the integrand which we know
+explicitly:
+$$F_T(\omega_{fi}) = \left( \frac{\sin(\omega_{fi} T / 2)}{\omega_{fi}
+  / 2} \right)^2$$ and it is plotted in Fig.~\ref{fig:fgr_delta}.
+Remarkably, it grants both of our wishes.  It has amplitude $T^2$ and
+width $\propto 1/T$, so the area is portional to $T$, exactly as we
+hoped.  Furthermore, as $T$ increases, the amplitude becomes larger
+and the width narrower, so that it approaches a $\delta$-function,
+exactly as we hoped.  The delta function sets $\omega_{fi}$ to zero,
+which requires $E_f = E_i$.
+
+In light of these developments, we are justified to rewrite our
+integral as:
+$$\sum_{\Delta f} P_{fi} = \frac{1}{\hbar^2} \rho(E_i) \; |V_{fi}|^2 \;
+\int_{-\infty}^{+\infty} \; 
+\left( \frac{\sin(\omega_{fi} T / 2)}{\omega_{fi} / 2} \right)^2 \; dE_f$$
+where we have taken $E_f = E_i$ and pulled out the constant factors
+$\rho(E_f)=\rho(E_i)$ and $|V_{fi}|^2$..  We have also extended the
+range of integration of $E_f$ to $(-\infty, +\infty)$, which is
+justified because the integral is zero outside of a very narrow range.
+The remaining integral is calculable, and yields:
+$$\sum_{\Delta f} P_{fi} = \frac{2 \pi}{\hbar} \rho(E_i) \; |V_{fi}|^2 \; T $$
+and recalling:
+$$\Gamma_{fi} = \frac{\sum_{\Delta f} P_{fi}}{T}$$
+we have:
+\begin{equation}
+\label{eqn:fgr}
+\Gamma_{fi} \; = \; \frac{2 \pi}{\hbar} \; \rho(E_i) \; |V_{fi}|^2
+\end{equation}
+This result is known as Fermi's Golden Rule, and it is the foundation of
+particle physics.
 
 \appendix
-
-\section{Time-Dependent Perturbation Theory}
-
-Here we consider the simple time-dependence from
-Fig.~\ref{fig:simple-perturbation}.  The new interaction is a
-time-independent interaction potential $V$ which turns on a $t=0$ and
-then off at $t=T$.  When $t<0$ the potential is off, and the total
-Hamiltonian is $H=H^{(0)}$.  At $t=0$, the potential turns on and
-$H=H^{(0)} + V$, and remains constant until $t=T$.  For $t>T$, the
-potential is off, and $H=H^{0}$ again.
-
-We assume that $V$ is small, but specifically how small is TBD.  We
-introduce a dimensionless time-independent factor $\lambda$ as a
-bookkeeping device.  When $\lambda=1$, the perturbation is at full
-strength (but $V$ is still small).  When $\lambda=0$ the perturbation
-is turned off.  When we are finished with our bookkeeping\footnote{If
-you prefer, you can take $\lambda$ to be always small, by pulling out
-a small dimensionless parameter from $V$, then the TBD constraints
-will be on $\lambda V$.  I prefer to set $\lambda$ to one once we are
-done using it for bookkeeping.} we will set $\lambda=1$.
-
-\begin{figure}[thb]
-\begin{center}
-{\includegraphics[width=0.60\textwidth]{figs/pfi_quad.pdf}}
-\end{center}
-\caption{\label{fig:pfi_quad} For $E_f=E_i$ the perturbation will fail (probality too large) for large enough $T$.}
-\end{figure}
-
-
-For $0 \leq t \leq T$ (that is, when the potential is on) we have:
-$$\braket{m | \delta H(t) | n} = \lambda \braket{m|V|n} = \lambda V_{mn}$$
-where we have defined:
-$$V_{mn} \equiv \braket{m|V|n}$$
-also defining:
-$$\omega_{mn} \equiv \frac{E_m - E_n}{\hbar}$$
-Equation~\ref{eqn:cmdot} becomes:
-$$\dt{c_m}(t) = - \frac{i \lambda}{\hbar} \, \sum_n \, c_n(t)  \, e^{i \omega_{mn} t } \, V_{mn}$$
-Notice that $\lambda$ only appears on the RHS, which will be essential in what follows.  Also, notice that for $\lambda=0$ (perturbation off) we have
-$$\dt{c_m}(t) = 0 \implies c_m(t) = {\rm const}$$
-as expected.  Writing $c_m(t)$ as a power series in $\lambda$, we have:
-$$c_m(t) \; = \; c_m^{(0)}(t) \; + \; \lambda \, c_m^{(1)}(t) \; + \; \lambda^2 \, c_m^{(2)}(t) \; + \; \ldots$$
-and thus:
-\begin{eqnarray*}
-\dt{c_m}^{(0)}(t) \; + \; \lambda \, \dt{c_m}^{(1)}(t) \; + \; \lambda^2 \, \dt{c_m}^{(2)}(t) \; &+& \; \ldots \\
-&=& \; - \frac{i}{\hbar} \, \sum_n \, \left\{ \lambda \, c_m^{(0)}(t) \; + \; \lambda^2 \, c_m^{(1)}(t) \; + \ldots  \right\} \; e^{i \omega_{mn} t } \; V_{mn}
-\end{eqnarray*}
-Matching terms of equal order in $\lambda$
-\begin{alignat*}{4}
-  \lambda &= 0     & & \; \to \; \dt{c_m}^{(0)}(t)      &{}={}& 0\\[4pt]
-  \lambda &= 1     & & \; \to \; \dt{c_m}^{(1)}(t)      &{}={}& - \frac{i}{\hbar} \, \sum_n \, c_m^{(0)}(t)  \; e^{i \omega_{mn} t } \; V_{mn} \\[4pt]
-  \lambda &= 2     & & \; \to \; \dt{c_m}^{(2)}(t)      &{}={}& - \frac{i}{\hbar} \, \sum_n \, c_m^{(1)}(t)  \; e^{i \omega_{mn} t } \; V_{mn}\\[4pt]    
-  \lambda &= N+1 \;& & \; \to \; \dt{c_m}^{(N+1)}(t)    &{}={}& - \frac{i}{\hbar} \, \sum_n \, c_m^{(N)}(t)  \; e^{i \omega_{mn} t } \; V_{mn}\\[4pt]
-\end{alignat*}
-The first equation shows that:
-$$c_m^{(0)}(t) = {\rm const}$$
-To start things off, note that with $\lambda=0$ (the perturbation turned off)
-$$c_m(t) = c_m^{(0)}(t) = {\rm const}$$
-which identifies $c_m^{(0)}(t)$ as the coefficients of the unperturbed system, which have no time dependence.  If we assume that the initial state is $\ket{i}$, then:
-$$c_m^{(0)} = \delta_{mi}$$
-This has an immediate implication for our pertubrations.  If we assume $c_i^{(1)}(t) = \epsilon$ for some small value $\epsilon$ then:
-$$c_i(t) \approx c_i^{(0)}(t) +  c_i^{(1)}(t) = 1 + \epsilon \approx 1$$
-but for $m \neq i$, if we assume $c_m^{(1)}(t) = \epsilon$ for some small value $\epsilon$ then:
-$$c_m(t) \approx c_m^{0}(t) + c_m^{(1)}(t) = 0 + \epsilon = \epsilon$$
-So we will only consider higher order perturbations for $m \neq i$.  In this case, the first order coefficient is:
-\begin{eqnarray*}
-  \dt{c_m}^{(1)}(t)      &{}={}& - \frac{i}{\hbar} \, \sum_n \, c_n^{(0)}(t)  \; e^{i \omega_{mn} t } \; V_{mn} \\
-       &{}={}& - \frac{i}{\hbar} \, \sum_n \, \delta_{ni}  \; e^{i \omega_{mn} t } \; V_{mn} \\
-       &{}={}& - \frac{i}{\hbar} \, e^{i \omega_{mi} t } \; V_{mi} \\
-\end{eqnarray*}
-and integrating over the period when the constant potential $V$ is on:
-\begin{eqnarray*}
-   {c_m}^{(1)}(T)  &{}={}& - \frac{i}{\hbar} \, \int_0^T dt \; e^{i \omega_{mi} t } \; V_{mi}  \\
-                   &{}={}& - \frac{i}{\hbar} \, V_{mi} \, \int_0^T dt \; e^{i \omega_{mi} t } \\
-                   &{}={}& - \frac{1}{\hbar \omega_{mi}} \, V_{mi} \; \left( e^{i \omega_{mi} T } - 1 \right) \\
-   &{}={}& - \frac{2i}{\hbar \omega_{mi}} \, V_{mi} \; \exp\left(i \frac{\omega_{mi} T}{2}\right) \sin\left(\frac{\omega_{mi} T}{2}\right) \\
-\end{eqnarray*}
-The probability that the state $\ket{i}$ has transitioned into state
-$\ket{f}$ after the perturbation has been left on for time $T$ is, to first order:
-\begin{equation}
-P^{(1)}_{\rm f \leftarrow i} = |c_m^{(1)}(T)|^2 = \frac{|V_{fi}|^2}{\hbar^2} \; \frac{4 \, \sin^2\left(\omega_{fi} T/2\right)}{\omega_{fi}^2}
-\end{equation}
-As long as this probability is small, it should be a good approximation, and this is always possible for small enough $V$.
-
-\begin{figure}[thb]
-\begin{center}
-{\includegraphics[width=0.60\textwidth]{figs/pfi_osc.pdf}}
-\end{center}
-\caption{\label{fig:pfi_osc} For $E_f \neq E_i$, the probability oscillates with an amplitude that goes as $1/(E_f-E_i)^2$}
-\end{figure}
-
-In the case that $E_f  = E_i$ then we have $\omega_{fi} \to 0$, and:
-$$P^{(1)}_{\rm f \leftarrow i} = \frac{|V_{fi}|^2 T^2}{4 \hbar^2} {\rm sinc^2}(\omega_{fi}T/2) \to \frac{|V_{fi}|^2 T^2}{4 \hbar^2}$$
-since
-$${\rm sinc}(x) \equiv \frac{\sin(x)}{x} \to 1$$
-when $x \to 0$.  As shown in Fig.~\ref{fig:pfi_quad}, the probability grows quadratically with $T$, and so the perturbation will fail for larege enough $T$.  So there is a limit to how large we can take $T$, but it can still get very large for small enough $V$.  In the case that $E_f \neq E_i$, then
-we have the oscillatory behavior shown in Fig.~\ref{fig:pfi_osc}.  The
-oscillations have an amplitude:
-$$\frac{4 |V_{fi}|^2}{(E_f-E_i)^2}$$ which suppresses the probability of transitions that do not conserve energy.  Evidently, turning on and off a constant potential does not change the energy much.
 
 \section{Density of Final States}
 \label{sec:density}
@@ -344,10 +329,113 @@ with:
  dn = \rho(E) \, dE 
 \end{equation}
 
+
+
+
+
+\section{Time-Dependent Perturbation Theory}
+
+Here we consider the simple time-dependence from
+Fig.~\ref{fig:simple-perturbation}.  The new interaction is a
+time-independent interaction potential $V$ which turns on a $t=0$ and
+then off at $t=T$.  When $t<0$ the potential is off, and the total
+Hamiltonian is $H=H^{(0)}$.  At $t=0$, the potential turns on and
+$H=H^{(0)} + V$, and remains constant until $t=T$.  For $t>T$, the
+potential is off, and $H=H^{0}$ again.
+
+We assume that $V$ is small, but specifically how small is TBD.  We
+introduce a dimensionless time-independent factor $\lambda$ as a
+bookkeeping device.  When $\lambda=1$, the perturbation is at full
+strength (but $V$ is still small).  When $\lambda=0$ the perturbation
+is turned off.  When we are finished with our bookkeeping\footnote{If
+you prefer, you can take $\lambda$ to be always small, by pulling out
+a small dimensionless parameter from $V$, then the TBD constraints
+will be on $\lambda V$.  I prefer to set $\lambda$ to one once we are
+done using it for bookkeeping.} we will set $\lambda=1$.
+
+\begin{figure}[thb]
+\begin{center}
+{\includegraphics[width=0.60\textwidth]{figs/pfi_quad.pdf}}
+\end{center}
+\caption{\label{fig:pfi_quad} For $E_f=E_i$ the perturbation will fail (probability too large) for large enough $T$.}
+\end{figure}
+
+
+For $0 \leq t \leq T$ (that is, when the potential is on) we have:
+$$\braket{m | \delta H(t) | n} = \lambda \braket{m|V|n} = \lambda V_{mn}$$
+where we have defined:
+$$V_{mn} \equiv \braket{m|V|n}$$
+also defining:
+$$\omega_{mn} \equiv \frac{E_m - E_n}{\hbar}$$
+Equation~\ref{eqn:cmdot} becomes:
+$$\dt{c_m}(t) = - \frac{i \lambda}{\hbar} \, \sum_n \, c_n(t)  \, e^{i \omega_{mn} t } \, V_{mn}$$
+Notice that $\lambda$ only appears on the RHS, which will be essential in what follows.  Also, notice that for $\lambda=0$ (perturbation off) we have
+$$\dt{c_m}(t) = 0 \implies c_m(t) = {\rm const}$$
+as expected.  Writing $c_m(t)$ as a power series in $\lambda$, we have:
+$$c_m(t) \; = \; c_m^{(0)}(t) \; + \; \lambda \, c_m^{(1)}(t) \; + \; \lambda^2 \, c_m^{(2)}(t) \; + \; \ldots$$
+and thus:
+\begin{eqnarray*}
+\dt{c_m}^{(0)}(t) \; + \; \lambda \, \dt{c_m}^{(1)}(t) \; + \; \lambda^2 \, \dt{c_m}^{(2)}(t) \; &+& \; \ldots \\
+&=& \; - \frac{i}{\hbar} \, \sum_n \, \left\{ \lambda \, c_m^{(0)}(t) \; + \; \lambda^2 \, c_m^{(1)}(t) \; + \ldots  \right\} \; e^{i \omega_{mn} t } \; V_{mn}
+\end{eqnarray*}
+Matching terms of equal order in $\lambda$
+\begin{alignat*}{4}
+  \lambda &= 0     & & \; \to \; \dt{c_m}^{(0)}(t)      &{}={}& 0\\[4pt]
+  \lambda &= 1     & & \; \to \; \dt{c_m}^{(1)}(t)      &{}={}& - \frac{i}{\hbar} \, \sum_n \, c_m^{(0)}(t)  \; e^{i \omega_{mn} t } \; V_{mn} \\[4pt]
+  \lambda &= 2     & & \; \to \; \dt{c_m}^{(2)}(t)      &{}={}& - \frac{i}{\hbar} \, \sum_n \, c_m^{(1)}(t)  \; e^{i \omega_{mn} t } \; V_{mn}\\[4pt]    
+  \lambda &= N+1 \;& & \; \to \; \dt{c_m}^{(N+1)}(t)    &{}={}& - \frac{i}{\hbar} \, \sum_n \, c_m^{(N)}(t)  \; e^{i \omega_{mn} t } \; V_{mn}\\[4pt]
+\end{alignat*}
+The first equation shows that:
+$$c_m^{(0)}(t) = {\rm const}$$
+To start things off, note that with $\lambda=0$ (the perturbation turned off)
+$$c_m(t) = c_m^{(0)}(t) = {\rm const}$$
+which identifies $c_m^{(0)}(t)$ as the coefficients of the unperturbed system, which have no time dependence.  If we assume that the initial state is $\ket{i}$, then:
+$$c_m^{(0)} = \delta_{mi}$$
+This has an immediate implication for our perturbations.  If we assume $c_i^{(1)}(t) = \epsilon$ for some small value $\epsilon$ then:
+$$c_i(t) \approx c_i^{(0)}(t) +  c_i^{(1)}(t) = 1 + \epsilon \approx 1$$
+but for $m \neq i$, if we assume $c_m^{(1)}(t) = \epsilon$ for some small value $\epsilon$ then:
+$$c_m(t) \approx c_m^{0}(t) + c_m^{(1)}(t) = 0 + \epsilon = \epsilon$$
+So we will only consider higher order perturbations for $m \neq i$.  In this case, the first order coefficient is:
+\begin{eqnarray*}
+  \dt{c_m}^{(1)}(t)      &{}={}& - \frac{i}{\hbar} \, \sum_n \, c_n^{(0)}(t)  \; e^{i \omega_{mn} t } \; V_{mn} \\
+       &{}={}& - \frac{i}{\hbar} \, \sum_n \, \delta_{ni}  \; e^{i \omega_{mn} t } \; V_{mn} \\
+       &{}={}& - \frac{i}{\hbar} \, e^{i \omega_{mi} t } \; V_{mi} \\
+\end{eqnarray*}
+and integrating over the period when the constant potential $V$ is on:
+\begin{eqnarray*}
+   {c_m}^{(1)}(T)  &{}={}& - \frac{i}{\hbar} \, \int_0^T dt \; e^{i \omega_{mi} t } \; V_{mi}  \\
+                   &{}={}& - \frac{i}{\hbar} \, V_{mi} \, \int_0^T dt \; e^{i \omega_{mi} t } \\
+                   &{}={}& - \frac{1}{\hbar \omega_{mi}} \, V_{mi} \; \left( e^{i \omega_{mi} T } - 1 \right) \\
+   &{}={}& - \frac{2i}{\hbar \omega_{mi}} \, V_{mi} \; \exp\left(i \frac{\omega_{mi} T}{2}\right) \sin\left(\frac{\omega_{mi} T}{2}\right) \\
+\end{eqnarray*}
+The probability that the state $\ket{i}$ has transitioned into state
+$\ket{f}$ after the perturbation has been left on for time $T$ is, to first order:
+\begin{equation}
+P^{(1)}_{\rm f \leftarrow i} = |c_m^{(1)}(T)|^2 = \frac{|V_{fi}|^2}{\hbar^2} \; \frac{4 \, \sin^2\left(\omega_{fi} T/2\right)}{\omega_{fi}^2}
+\end{equation}
+As long as this probability is small, it should be a good approximation, and this is always possible for small enough $V$.
+
+\begin{figure}[thb]
+\begin{center}
+{\includegraphics[width=0.60\textwidth]{figs/pfi_osc.pdf}}
+\end{center}
+\caption{\label{fig:pfi_osc} For $E_f \neq E_i$, the probability oscillates with an amplitude that goes as $1/(E_f-E_i)^2$}
+\end{figure}
+
+In the case that $E_f  = E_i$ then we have $\omega_{fi} \to 0$, and:
+$$P^{(1)}_{\rm f \leftarrow i} = \frac{|V_{fi}|^2 T^2}{4 \hbar^2} {\rm sinc^2}(\omega_{fi}T/2) \to \frac{|V_{fi}|^2 T^2}{4 \hbar^2}$$
+since
+$${\rm sinc}(x) \equiv \frac{\sin(x)}{x} \to 1$$
+when $x \to 0$.  As shown in Fig.~\ref{fig:pfi_quad}, the probability grows quadratically with $T$, and so the perturbation will fail for large enough $T$.  So there is a limit to how large we can take $T$, but it can still get very large for small enough $V$.  In the case that $E_f \neq E_i$, then
+we have the oscillatory behavior shown in Fig.~\ref{fig:pfi_osc}.  The
+oscillations have an amplitude:
+$$\frac{4 |V_{fi}|^2}{(E_f-E_i)^2}$$ which suppresses the probability of transitions that do not conserve energy.  Evidently, turning on and off a constant potential does not change the energy much.
+
+
 \section{Fermi's Golden Rule}
 
 We now want to consider not just a transition from one discrete state
-to another discrete state, but instead, a transition from one discre
+to another discrete state, but instead, a transition from one discrete
 state (the initial state) into a continuum state.  We know that for
 the constant potential perturbation, final states with energy far from
 $E_i$ will not contribute.  So instead of counting discrete states will
@@ -364,7 +452,7 @@ example previously.
 \end{figure}
 
 So the total probability of a transition into one of these final states is:
-$$\sum_f P_{f \leftarrow i}^{(1)}(T) \to \frac{4}{\hbar^2} \int |V_{\rm fi}|^2 \, \rho(E_f) \frac{\sin^2 (\omega_{fi} T/2)}{\omega^2_{fi}} dE_f$$
+$$\sum_{\Delta f} P_{f \leftarrow i}^{(1)}(T) \to \frac{4}{\hbar^2} \int |V_{\rm fi}|^2 \, \rho(E_f) \frac{\sin^2 (\omega_{fi} T/2)}{\omega^2_{fi}} dE_f$$
 The function
 $$f(\omega_{fi}) \equiv \frac{sin^2(\omega_{fi} T / 2)}{\omega_{fi}^2}$$
 is plotted in Fig~\ref{fig:fgr_delta}.  Notice that it's integral will be approximately:
@@ -372,13 +460,13 @@ $$4|V_{fi}^2 T^2 \times 4\pi / T \propto T$$
 And also that it approaches a delta function for large enough $T$.
 
 Therefore, we can take $|V_{fi}|^2$ and $\rho(E_f)$ outside of the integral, by evaluating them at $E_f = E_i$, and we can extend the integral out to infinity:
-$$\sum_f P_{f \leftarrow i}^{(1)}(T) \to \frac{4}{\hbar^2} |V_{\rm fi}|^2 \, \rho(E_i) \int_{-\infty}^{\infty}  \frac{\sin^2 (\omega_{fi} T/2)}{\omega^2_{fi}} dE_f$$
+$$\sum_{\Delta f} P_{f \leftarrow i}^{(1)}(T) \to \frac{4}{\hbar^2} |V_{\rm fi}|^2 \, \rho(E_i) \int_{-\infty}^{\infty}  \frac{\sin^2 (\omega_{fi} T/2)}{\omega^2_{fi}} dE_f$$
 The integral can now be evaluated, leading to:
-$$\sum_f P_{f \leftarrow i}^{(1)}(T) \to \frac{2 \pi}{\hbar} |V_{fi}|^2 \rho(E_i) T$$
+$$\sum_{\Delta f} P_{f \leftarrow i}^{(1)}(T) \to \frac{2 \pi}{\hbar} |V_{fi}|^2 \rho(E_i) T$$
 This allows us to calculate the rate of transitions from a discrete
 state $\ket{i}$ into a continuum state $\ket{f}$ as:
 \begin{equation*}
-\Gamma_{fi}^{(0)} = \frac{\sum_f P_{f \leftarrow i}^{(1)}(T)}{T} = \frac{2 \pi}{\hbar} | V_{fi} |^2 \rho(E_i)
+\Gamma_{fi}^{(0)} = \frac{\sum_{\Delta f} P_{f \leftarrow i}^{(1)}(T)}{T} = \frac{2 \pi}{\hbar} | V_{fi} |^2 \rho(E_i)
 \end{equation*}
 This is Fermi's Golden Rule (to first order) the foundation of experimental particle of physics.
 
@@ -466,8 +554,8 @@ The number of particles per unit volume is therefore:
 $$\frac{1}{V_0} \int_C |\psi(x)|^2 d^3x = \frac{1}{V_0}$$
 In frame $F'$, moving with respect to the container, the volume of the container is contracted by:
 $$V' = V_0/\gamma$$
-But the probabililty of the particle being in the container is still
-one, so the number of particle per unit volume as caculated in frame
+But the probability of the particle being in the container is still
+one, so the number of particle per unit volume as calculated in frame
 $F'$ is therefore:
 $$\frac{1}{V'} \int_A |\psi(x)|^2 d^3x = \frac{1}{V'}= \frac{\gamma}{V_0}$$
 Clearly, than, normalizing to the number of particle per unit volume
@@ -497,7 +585,7 @@ these will, generally, be different values.
 We derived the non-relativistic form of Fermi's Golden Rule as:
 $$\Gamma_{fi} = \frac{2 \pi}{\hbar} \int | T_{fi} |^2 \delta(E_i - E_f) dn $$
 We'll now look at how to adapt Fermi's Golden Rule for Lorentz
-covariance and muliple initial state particles, which we will write
+covariance and multiple initial state particles, which we will write
 as:
 $$a + b + c + \ldots \; \to \; 1 + 2 + 3 + \ldots + n$$
 So in:
@@ -511,7 +599,7 @@ state wave function (e.g. $\Phi_1$) are normalized in the
 non-relativistic fashion: one particle per unit volume.  We have
 therefore:
 $$T_{fi} = \braket{\Phi_1 \Phi_2 \Phi_3 \ldots \Phi_n|T|\Phi_a \Phi_b \Phi_c \ldots}$$
-Now, instead of $T_{fi}$, let us instead consider a Lorentz invariant matrix element $\mathcal{M}_{fi}$ calculated using basis vectors noramlized in the Lorentz invariant fasion, e.g.:
+Now, instead of $T_{fi}$, let us instead consider a Lorentz invariant matrix element $\mathcal{M}_{fi}$ calculated using basis vectors normalized in the Lorentz invariant fashion, e.g.:
 $$\Psi_a = \sqrt{2E_a} \Phi_a$$
 and so on.  So:
 \begin{eqnarray*}
@@ -528,7 +616,7 @@ $$|T_{fi}|^2 = \frac{|\mathcal{M}_{fi}|^2}
 {(2E_a\;2E_b\;2E_c\;\ldots)} \frac{c^n}{(2E_1\;2E_2\;2E_3\;\ldots2E_n)}$$
 Notice that the new normalization has led to exactly the factors of $1/2E$ needed to make each phase space factor Lorentz Invariant.
 
-Thus, to construct a Lorentz Covariant form of Fermi's Golden Rule appropriate to a process with multiple intitial and final state particles, we make the following replacements
+Thus, to construct a Lorentz Covariant form of Fermi's Golden Rule appropriate to a process with multiple initial and final state particles, we make the following replacements
 \begin{equation}
 |T_{fi}|^2 \longrightarrow \frac{|\mathcal{M}_{fi}|^2}
 {c \; (2E_a\;2E_b\;2E_c\;\ldots)} 
@@ -574,7 +662,7 @@ where now the Jacobian will be the determinant of 3x3 matrix.
 
 Second, we needed:
 $$\delta(x^2 - a^2) = \frac{1}{2|a|} \left( \delta(x-a) + \delta(x+a) \right)$$
-There's a trick for finding indentities like this, using the Heaviside step function:
+There's a trick for finding identities like this, using the Heaviside step function:
 $$\theta(x) = \begin{cases} 1 & x > 0 \\ 0 & x < 0 \end{cases}$$
 and noting that
 $$\int_{-\infty}^x \delta(y) dy = \theta(x)$$
