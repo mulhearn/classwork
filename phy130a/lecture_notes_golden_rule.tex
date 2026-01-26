@@ -33,68 +33,71 @@ interaction is time dependent and therefore has no energy eigenstates.
 The interaction picture factors out the simple and well-understood
 time dependence from $H^{(0)}$ from the to-be-determined time
 dependence of $\delta H(t)$ as:
-$$\Psi(x,t) = \sum_m c_m(t) \exp\left( -i \frac{E_m t}{\hbar} \right) \ket{m}$$
+$$\ket{ \Psi(t) } = \sum_m c_m(t) \exp\left( -i \frac{E_m t}{\hbar} \right) \ket{m}$$
 The $\{\ket{m}\}$ are still a basis for the full Hamiltonian $H$, even
 though they are not eigenstates, so this is certainly a valid
 expansion, due to the time dependent coefficients $c_m(t)$.  This
-essentially just says that $\Psi(x,t)$ can be expressed at any time as
+just says that $\ket{\Psi(t)}$ can be expressed at any time as
 a sum of basis vectors, which is certainly true.  We will know it is
 useful if it simplifies the problem.  Specifically, if the time
 dependence in the coefficients is due exclusively to $\delta H(t)$.
 
 Applying the SE:
 \begin{eqnarray*}
-i \hbar \frac{\partial}{\partial t} \ket{\psi} &=& H \ket{\psi} = H^{(0)} \ket{\psi} + \delta H(t) \ket{\psi} \\
-\left( i \hbar \frac{\partial}{\partial t} -  H^{(0)}\right) \ket{\psi} &=&  \delta H(t) \ket{\psi} 
+  i \hbar \frac{\partial}{\partial t} \, \ket{\psi(t)} \; &=& \; H \, \ket{\psi(t)} \\[5pt]
+  &=& H^{(0)} \, \ket{\psi(t)} + \delta H(t) \, \ket{\psi(t)} \\[5pt]
+\left( i \hbar \frac{\partial}{\partial t} -  H^{(0)}\right) \ket{\psi(t)} \; &=& \; \delta H(t) \ket{\psi(t)} \\[5pt]
 \end{eqnarray*}
 where we have arranged things in the hope of getting some cancellation on the left hand side:
 \begin{eqnarray*}
-\left( i \hbar \frac{\partial}{\partial t} -  H^{(0)}\right) \ket{\psi} &=&
-\sum_m \left\{ i \hbar \dt{c_m}(t) + E_m - E_m\right\} \exp\left( -i \frac{E_m t}{\hbar} \right) \ket{m} \\
+\left( i \hbar \frac{\partial}{\partial t} -  H^{(0)}\right) \ket{\psi(t)} \; &=& \;
+\sum_m \left\{ i \hbar \dt{c_m}(t) + E_m c_m(t) - E_m c_m(t) \right\} \exp\left( -i \frac{E_m t}{\hbar} \right) \ket{m} \\
   &=&
 \sum_m \, i\hbar \dt{c_m}(t)  \, \exp\left( -i \frac{E_m t}{\hbar} \right) \ket{m}
 \end{eqnarray*}
 and indeed we do.  Meanwhile the RHS is:
-$$\delta H(t) \ket{\psi} = \sum_m \, c_m(t)  \, \exp\left( -i \frac{E_m t}{\hbar} \right)
+$$\delta H(t) \ket{\psi(t)} = \sum_m \, c_m(t)  \, \exp\left( -i \frac{E_m t}{\hbar} \right)
 \left(\delta H(t) \ket{m}\right)$$
 and so we cannot match coefficients term by term in the expansion because:
 $$\ket{m} \; \neq \; \delta H(t) \, \ket{m} $$
 So changing dummy variables to prepare for what follows:
-$$\delta H(t) \ket{\psi} = \sum_n \, c_n(t)  \, \exp\left( -i \frac{E_n t}{\hbar} \right)
+$$\delta H(t) \ket{\psi(t)} = \sum_n \, c_n(t)  \, \exp\left( -i \frac{E_n t}{\hbar} \right)
 \left(\delta H(t) \ket{n}\right)$$
 And inserting a complete set:
 \begin{eqnarray*}
-\left( \delta H(t) \, \ket{n} \right) &=& \left( \sum_m \ket{m}\bra{m} \right) \left( \delta H \ket{n} \right) \\
-&=& \sum_m  \braket{m | \delta H | n} \ket{m}
+\left( \delta H(t) \, \ket{n} \right) &=& \left( \sum_m \ket{m}\bra{m} \right) \left( \delta H(t) \ket{n} \right) \\
+&=& \sum_m  \braket{m | \delta H(t) | n} \ket{m}
 \end{eqnarray*}
 And now putting back LHS equal to RHS
 $$
 \sum_m \, i \hbar \dt{c_m}(t)  \, \exp\left( -i \frac{E_m t}{\hbar} \right) \ket{m}
 = \sum_m \sum_n \, c_n(t)  \, \exp\left( -i \frac{E_n t}{\hbar} \right)
-\braket{m | \delta H | n} \ket{m}
+\braket{m | \delta H(t) | n} 
 $$
 Where we can now match term by term to obtain:
 \begin{equation}
 \label{eqn:cmdot}
 \dt{c_m}(t)  = - \frac{i}{\hbar} \sum_n \, c_n(t)  \, \exp\left( i \frac{(E_m - E_n) t}{\hbar} \right)
-\braket{m | \delta H | n} \ket{m}  
+\braket{m | \delta H(t) | n} \ket{m}  
 \end{equation}
 This is everything we hoped for!  Because of the time depedence of the
 total Hamiltonian, our expansion coefficients have to be time
 dependent as well (the vectors $\ket{n}$ are still a basis, but they
 are not stationary states of the total Hamiltonian $H$).  But, in the
-interaction picture we factor out the time dependence due to
+interaction picture
+\footnote{Formally, in the interaction picture the operators evolve as
+$$O(t) = {\rm exp}(iH^{(0)}t) \; O \; {\rm exp}(-iH^{(0)}t)$$
+%$O(t) = \exp(iH^{0}t} O \exp(-iH^{0}t}$
+while the states carry the remaining time dependence.  Our derivation
+here achieves exactly the same separation of time dependence without
+invoking time evolution of the operators.}
+we factor out the time dependence due to
 $H^{(0)}$, and do not include it in $c_m(t)$.  Therefore, the time
-dependence of the $c_m(t)$ does not depend on $H^{(0)}$.
+dependence of the $c_m(t)$ does not depend on $H^{(0)}$. 
 
-As we shall see, this is much more than a convenience.  The
-well-understood Hamiltonian $H^{(0)}$ is, generally speaking, large.
-If the time-dependent part $\delta H(t)$ is relatively small, then we
-can use perturbation theory to good effect, and we will!
+\section{First-Order Time-Dependent Perturbation Theory}
 
-\section{Time-Dependent Perturbation Theory}
-
-We'll consider a simple time-dependence that results from a constant potential that is simply turned on and then off:
+\begin{figure}[thb]
 \begin{center}
   \begin{tikzpicture}[scale=1]
     \draw[-] (0.0,0.0) -- ++(4.0,0.0) -- ++(0.0,1.0) -- ++(4.0,0.0) -- ++(0.0,-1.0) -- ++(4.0,0.0);
@@ -108,17 +111,118 @@ We'll consider a simple time-dependence that results from a constant potential t
     \node at (10, -0.75) {$H = H^{(0)}$};    
 \end{tikzpicture}
 \end{center}
-When $t<0$ the potential is off, and the total Hamiltonian is $H=H^{(0)}$.  At $t=0$, the potential turns on and $H=H^{(0)} + V$ and remains constant until $t=T$.  For $t>T$, the potential is off, and $H=H^{0}$ again.
+\caption{\label{fig:simple-perturbation} The interaction potential $V$
+  is time-independent, however, it turns on at $t=0$ and then off at
+  $t=T$, making the total Hamiltonian time-dependent.}
+\end{figure}
 
-Assume $V$ is small, but specifically how small is TBD.  We introduce
-a dimensionless time-independent factor $\lambda$ as a bookkeeping
-device.  When $\lambda=1$, the perturbation is at full strength (but
-$V$ is still small).  When $\lambda=0$ the perturbation is turned off.
-When we are finished with our bookkeeping\footnote{If you prefer, you
-  can take $\lambda$ to be always small, by pulling out a small
-  dimensionless parameter from $V$, then the TBD constraints will be
-  on $\lambda V$.  I prefer to set $\lambda$ to one once we are done
-  using it for bookkeeping.} we will set $\lambda=1$.
+For our purposes, it suffices to consider the relatively simple
+time-dependent interaction $\delta H(t)$ shown in
+Fig.~\ref{fig:simple-perturbation}.  Here the interaction potential $V$
+has no explicit time dependence, but it is turned on at t=0 and then
+off at $t=T$.  We will also assume that the initial state is an energy
+eigenstate $\ket{i}$ with
+$$H^{(0)} \ket{i} = E_i \ket{i}$$
+Before $t \leq 0$, this is a stationary state of total Hamiltonian,
+because the interaction potential is off, and we have the familiear
+time dependence:
+$$\ket{\Psi(t)} = \exp\left( -i \frac{E_m t}{\hbar}\right) \;
+\ket{i} \hspace{2cm} (t \leq 0)$$ This implies that:
+\begin{equation*}
+c_m(0) =
+\delta_{mi}
+\end{equation*}
+However, starting at $t=0$, the interaction turns on and $\ket{i}$ is
+no longer a stationary state.  The probability $p$ of observing the
+state $\ket{m}$ is given by:
+$$p(t) = |c_m(t)|^2 \hspace{2cm} (0 \leq t \leq T)$$
+which we can no longer assume is zero for $m \neq i$, and is time
+dependent.  At $t=T$, the interaction turns off.  The states $\ket{m}$
+are again Eigenstates, but the state is no longer $\ket{i}$.  We now
+have a probability
+$$P_{fi} = |c_f(T)|^2 \hspace{2cm} (t \geq T)$$ of observing the
+system in state $\ket{f}$.  We call this, the transition probability
+from state $\ket{i}$ to state $\ket{f}$. Notice that is is constant in
+time.  The interaction potential shakes things up, mixing up the
+energy eigenstates, but once it turns off, things stop moving and stay
+in place.
+
+Let's further assume that the interaction potenial $V$ is small
+compared to the time-independent Hamiltonian $H^{(0)}$.
+
+This scenario lends itself to perturbation
+theory, where the new interaction $\delta H(t)$ is refered to as the
+perturbration.
+
+In the interaction picture, the well-understood Hamiltonian $H^{(0)}$
+is generally large compared to the time-dependent additional
+interaction $\delta H(t)$.  Starting from the state with no additional
+interaction (the unperturbed state) we calculate the effect of the
+perturbation as a series of corrections.  Because our perturbation is
+ftime-dependent, we will need time-dependent pertubration theory.  This
+topic is covered in PHY 115B, so we will not go into the topic too
+deeply.  Fortunately, we can obtain the first-order results in a
+simple, intuitive manner.  In the RHS of Equation~\ref{eqn:cmdot}, we make the
+approximation:
+$$c_n(t) \sim c_n(0) = \delta_{ni}$$
+to obtain a first-order estimate:
+\begin{equation}
+\label{eqn:cmdot-first-order}
+\dt{c_m}(t)  = - \frac{i}{\hbar}  \, \exp\left( i \frac{(E_m - E_i) t}{\hbar} \right)
+\braket{m | \delta H(t) | n}   
+\end{equation}
+For any final state $\ket{f}$, we can can estimate the corresponding coeffient for $t \geq T$ by an integral:
+$$c_f(T) = - \frac{i}{\hbar}  \; V_{fi} \; \int_o^T \exp\left( i \omega_{fi} t \right) \, dt$$
+where we define the interaction potential matrix element:
+\begin{equation}
+V_{mn} = \braket{m|V|n}
+\end{equation}
+and the angular frequency:
+\begin{equation}
+\omega_{mn} = \frac{E_m - E_n}{\hbar}
+\end{equation}
+There is one subtlety, however. This prescription is only valid for $f
+\neq i$.  At first order, we have
+$$c_i(t) = 1.$$
+In principle, $c_i(t)$ must diminish to account for the other
+coefficients becoming non-zero following
+Equation~\ref{eqn:cmdot-first-order} as probablity goes as the square
+of the coefficients, this is a second order effect, zero at first
+order.
+Noting that:
+$$\int_0^T e^ikx = e^{ikx} \frac{sin(kx/2)}{k/2}$$
+we determine the first-order transition probability (for $f \neq i$) as:
+\begin{equation}
+\label{eqn:pfi-first-order}
+P_{fi} = |c_f(T)|^2 = \frac{|V_{fi}|^2}{\hbar^2} \; \left( \frac{\sin(\omega_{fi} T / 2)}{\omega_{fi} / 2} \right)^2
+\end{equation}
+Notice that $T$ appears in the numerator, but not the denominator.  In the next section, we'll be looking closely at the factor:
+\begin{equation}
+F_T(\omega_{fi}) = \left( \frac{\sin(\omega_{fi} T / 2)}{\omega_{fi} / 2} \right)^2
+\end{equation}
+which we shall see saves the day for us, twice.  
+
+\appendix
+
+\section{Time-Dependent Perturbation Theory}
+
+Here we consider the simple time-dependence from
+Fig.~\ref{fig:simple-perturbation}.  The new interaction is a
+time-independent interaction potential $V$ which turns on a $t=0$ and
+then off at $t=T$.  When $t<0$ the potential is off, and the total
+Hamiltonian is $H=H^{(0)}$.  At $t=0$, the potential turns on and
+$H=H^{(0)} + V$, and remains constant until $t=T$.  For $t>T$, the
+potential is off, and $H=H^{0}$ again.
+
+We assume that $V$ is small, but specifically how small is TBD.  We
+introduce a dimensionless time-independent factor $\lambda$ as a
+bookkeeping device.  When $\lambda=1$, the perturbation is at full
+strength (but $V$ is still small).  When $\lambda=0$ the perturbation
+is turned off.  When we are finished with our bookkeeping\footnote{If
+you prefer, you can take $\lambda$ to be always small, by pulling out
+a small dimensionless parameter from $V$, then the TBD constraints
+will be on $\lambda V$.  I prefer to set $\lambda$ to one once we are
+done using it for bookkeeping.} we will set $\lambda=1$.
 
 \begin{figure}[thb]
 \begin{center}
