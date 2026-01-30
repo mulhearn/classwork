@@ -282,8 +282,132 @@ we have:
 \label{eqn:fgr}
 \Gamma_{fi} \; = \; \frac{2 \pi}{\hbar} \; \rho(E_i) \; |V_{fi}|^2
 \end{equation}
-This result is known as Fermi's Golden Rule, and it is the foundation of
+This result is known as Fermi's Golden Rule (FGR), and it is the foundation of
 particle physics.
+
+We calculated this result with first-order time-dependent perturbation
+theory, so $V_{fi}$ is just the first term in a series that turns out
+to be:
+\begin{equation}
+T_{fi} = \braket{f|V|i} + \sum_{j \neq i} \frac{\braket{f|V|j}\braket{j|V|i}}{E_i-E_j} + \ldots
+\end{equation}
+Further noting that
+$$\rho(E_i) = \left. \left| \frac{dn}{dE_f} \right| \right|_{E_i} = \int \left| \frac{dn}{dE_f} \right| \delta(E_f-E_i) dE_f
+= \int \delta(E_f-E_i) dn$$
+we can write FGR as:
+\begin{equation}
+\label{eqn:fgr}
+\Gamma_{fi} \; = \; \frac{2 \pi}{\hbar} \; \int |T_{fi}|^2 \; \delta(E_f - E_i) \; dn
+\end{equation}
+The rate of a process is dependent on the transition matrix element squared
+($|T_{fi}|^2$) which describes the dynamics of the interaction.  It
+also depends on the phase space available, consistent with
+conservation of energy: $\delta(E_f - E_i) \; dn$.  In the next
+section, will clarify the phase space integral.
+
+\section{Lorentz Invariant Phase Space}
+
+We quantify the phase-space available to a single particle by
+integrating over it's available four-momentum:
+$$ d^4p \; = \; dp^0 \, dp^1 \, dp^2 \, dp^3 \; = \; dE \, dp_x \, dp_y \, dp_z $$
+First, we'll show that this is Lorentz invariant, using our knowledge
+of the Lorentz Group.  Recall that the momentum transforms as
+$$p^{\mu'} = \Lambda^{\mu'}_\nu p^\nu$$
+where the matrix $\Lambda$ with components $\Lambda^{\mu'}_\nu$ is a
+member of the Lorentz group.  The Jacobian of a linear
+transformation is just the norm of the determinant of the matrix
+representing the linear transformation.  So:
+$$d^4p' \; = \; |\det \Lambda| \; d^4p$$
+Now, the defining property of Lorentz transformations is:
+$$\Lambda^T G \Lambda = G$$
+where $G$ is the metric tensor.  Using properties of the determinant:
+\begin{eqnarray*}
+  \det \left( \Lambda^T G \Lambda \right) &=& \det G \\
+  \det (\Lambda) \det (G) \det(\Lambda) &=& \det G \\
+    \left( \det (\Lambda) \right)^2 \det (G) &=& \det G \\
+\end{eqnarray*}
+from which it follows that:
+$$\det \Lambda = \pm 1$$
+Therefore we have:
+$$(d^4 p)' = \left| \det \Lambda \right| d^4 p = d^4 p$$
+and the four-momentum volume is Lorentz Invariant.
+
+An integral over $d^4p$ will included many different particle masses
+via:
+$$m^2 = p^\mu p_\mu = (p^0)^2 - (p^1)^2 - (p^2)^2 - (p^3)^2$$
+We can restrict our integration to include the particle mass by including a delta function:
+$$\delta(p^\mu p_\mu - m^2)$$
+since $p^\mu p_\mu$ is Lorentz invariant.  Howerver, this still allows $E = p^0 c$ to run over negative values, so we
+also include a $\theta$-function as well:
+$$\theta(p^0)$$
+Note that $\theta(p^0)$ is not invariant with respect to time
+reversal, but it is invariant wrt to rotations (which preserve time)
+and boosts (which are linear).  Thus we define the single particle phase-space integral:
+$$d\Phi \; \equiv \; \theta(p^0) \; (2 \pi) \, \delta(p^\mu p_\mu - m^2) \; \frac{d^4p}{(2\pi)^4} $$
+where we have included factors of $2\pi$ consistent with our
+convention for the Fourier transform.  Thus defined $d\Phi$ is
+invariant with respect to the {\bf orthochronous} Lorentz Group which
+does not include time-reversal (T).  This form of $d\Phi$ makes it's
+Lorentz Invariance manifest.  However, there is another way to write
+it, more convenient for calculations, by noting:
+$$\delta(p^\mu p_\mu - m^2)
+= \delta((p^0)^2 - |\vec{p}|^2 - m^2)
+= \delta((p^0)^2 - (E)^2)$$
+and using this to complete the integral over $dp^0$.  Note the delta function identity (proven below) that:
+$$\delta(x^2 - a^2) = \frac{1}{2|a|} \left( \delta(x-a) + \delta(x+a) \right)$$
+In this case, we have $p^0 > 0$ so only the first $\delta$ function matters, and we have:
+$$d\Phi = \frac{d^3p}{(2E) \; (2\pi)^3}$$
+When working with integrals of phase space, we have to be somewhat careful, and recall that $E$ is an integration variable that has been set (via the delta function) to the value
+$E = \sqrt{m^2 + |\vec{p}|^2}$ which depends on the other integration values!
+
+\section{Normalization of Momentum Continuum States}
+
+With our single particle Lorentz invariant phase space $d\Phi$
+defined, we next want to find a normalization for the momentum
+continuum states:
+$$\braket{p|p'} \; = \; N(p) \; \delta^3(p-p')$$
+consistent with the completeness relation written in Lorentz invariant
+form:
+\begin{equation}
+1 \; = \; \int d\Phi \, \ket{p}\bra{p}
+\end{equation}
+To do so, we calculate:
+\begin{eqnarray*}
+\ket{p'} \; &=& \; \int d\Phi \, \ket{p} \braket{p|p'}\\
+ &=& \; \int \frac{d^3p}{(2E) (2\pi)^3} \, N(p) \delta(p-p') \, \ket{p} \\
+ &=& \; \frac{N(p')}{(2E') (2\pi)^3} \, \ket{p'} \\
+\end{eqnarray*}
+from which we conclude:
+$$N(p) = (2E) \, (2 \pi)^3$$
+and  so
+\begin{equation}
+\braket{p|p'} \; = \; (2E) \, (2 \pi)^3 \; \delta^3(p-p')
+\end{equation}
+
+\section{Lorentz Covariant Form of Fermi's Golden Rule}
+
+Considering:
+$$a + b + \dots \to 1 + 2 + \ldots$$
+Use notation:
+$$\sum E_a = E_a + E_b + \ldots$$
+and
+$$\sum E_1 = E_1 + E_2 + \ldots$$
+and so on.  Put
+\begin{equation}
+|T_{fi}|^2 \to \frac{|M_{fi}|^2}{(\prod 2 E_a) (\prod 2 E_i) }  
+\end{equation}
+and
+\begin{equation}
+(2\pi) \delta(E_f - E_i) dn \to (2 \pi)^4 \delta^4(\sum p_i - \sum p_a) \prod_i \frac{d^3 p_i}{(2\pi)^3}
+\end{equation}
+To obtain:
+\begin{equation}
+\label{eqn:covfgr}
+\Gamma_{fi} \; = \; \frac{1}{\hbar \prod (2 E_a)} \; \int |\mathcal{M}_{fi}|^2 \; (2\pi)^4 \delta^4(\sum p_a - \sum p_b) 
+\prod_i \frac{d^3p_i}{(2 E_i) \, (2\pi)^3 }
+\end{equation}
+
+
 
 \appendix
 
@@ -491,58 +615,6 @@ and weight each region of phase space by the transition matrix.  The
 phase space is just the kinematics (eventually relativistic
 kinematics) and the transition matrix contains all of the dynamics.
 
-\section{Lorentz Invariant Phase Space}
-
-The density of final states that we calculated in
-Section~\ref{sec:density} is not Lorentz Invariant.  We'll first show
-that the four-momentum volume integral:
-$$ d^4p = dp^0 dp^1 dp^2 dp^3 = \frac{1}{c} dE dp_x dp_y dp_z $$
-is Lorentz Invariant.
-
-Consider a Lorentz transformation $\Lambda$ between frames so that (in
-matrix representation) we have:
-$$[p]_{\mathcal{B}'} = \Lambda [p]_\mathcal{B}$$
-Then the Jacobian (see next section if this is unfamiliar) for the coordinate transformation is:
-$$J \equiv \det \Lambda $$
-and the four-momentum volume as calculated in the frame $F'$ is:
-$$(d^4 p)' = \left| \det \Lambda \right| d^4 p$$
-However, the defining property of Lorentz transformations is:
-$$\Lambda^T G \Lambda = G$$
-so using properties of the determinant:
-\begin{eqnarray*}
-  \det \left( \Lambda^T G \Lambda \right) &=& \det G \\
-  \det (\Lambda) \det (G) \det(\Lambda) &=& \det G \\
-    \left( \det (\Lambda) \right)^2 \det (G) &=& \det G \\
-\end{eqnarray*}
-from which it follows that:
-$$\det \Lambda = \pm 1$$
-Therefore we have:
-$$(d^4 p)' = \left| \det \Lambda \right| d^4 p = d^4 p$$
-and the four-momentum volume is Lorentz Invariant.
-
-But an integral over $d^4p$ will included many different particle masses via:
-$$m^2c^2 = p^\mu p_\mu = (p^0)^2 - (p^1)^2 - (p^2)^2 - (p^3)^2$$
-and we want the phase space of a final state particle with a certain mass.  So we consider a phase-space integral:
-$$dPS = \delta(p^\mu p_\mu - m^2c^2) \; d^4p$$
-But this still allows $E = p^0 c$ to run over negative values, so we include:
-$$dPS = \theta(p^0) \; \delta(p^\mu p_\mu - m^2c^2) \; d^4p$$
-This means $dPS$ is not invariant wrt time reversal, but it is still
-invariant with respect to the {\bf restricted} Lorentz Group which
-does not include Parity (P) and Time-Reversal (T).  Lastly, we'll put the factors of $2\pi$, consistent with what we calculated in Section~\ref{sec:density}:
-$$dPS = \theta(p^0) (2\pi) \delta(p^\mu p_\mu - m^2c^2) \; \frac{d^4p}{(2\pi)^4}$$
-This form of $dPS$ makes is Lorentz Invariance manifest.  However, there is another way to write it, by noting:
-$$\delta(p^\mu p_\mu - m^2c^2)
-= \delta((p^0)^2 - |\vec{p}|^2 - m^2c^2)
-= \delta((p^0)^2 - (E/c)^2)$$
-and using this to complete the integral over $dp^0$.  Note the delta function identity (proven below) that:
-$$\delta(x^2 - a^2) = \frac{1}{2|a|} \left( \delta(x-a) + \delta(x+a) \right)$$
-In this case, we have $p^0 > 0$ so only the first $\delta$ function matters, and we have:
-$$dPS = \frac{d^3p}{(2E/c) \; (2\pi)^3}$$
-When working with integrals of phase space, we have to be somewhat careful, and recall that $E$ is an integration variable that has been set (via the delta function) to the value
-$E = \sqrt{m^2c^4 + |\vec{p}|^2c^2}$ which depends on the other integration values!
-
-This differs from the density of final states calculated earlier via
-only constants and one dynamical quantity $2E$.
 
 \section{Lorentz Covariant Normalization of the wave functions}
 
