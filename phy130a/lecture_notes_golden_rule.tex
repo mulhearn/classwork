@@ -187,6 +187,13 @@ Although probability must flow out of the initial state as other
 coefficients become nonzero, probabilities are quadratic in the
 amplitudes, and $c_i(t)$ only changes at second order.
 
+\begin{figure}[thb]
+\begin{center}
+{\includegraphics[width=0.60\textwidth]{figs/pfi_osc.pdf}}
+\end{center}
+\caption{\label{fig:pfi-osc} For $E_f \neq E_i$, the probability $P_{fi}$ oscillates with an amplitude that goes as $1/(E_f-E_i)^2$.}
+\end{figure}
+
 Noting that:
 $$\int_0^T e^{i\omega t} \, dt = e^{i\omega T/2} \frac{\sin(\omega T/2)}{\omega/2}$$
 we determine the first-order transition probability (for $f \neq i$) as:
@@ -194,7 +201,7 @@ we determine the first-order transition probability (for $f \neq i$) as:
 \label{eqn:pfi-first-order}
 P_{fi}(T) = |c_f(T)|^2 = \frac{|V_{fi}|^2}{\hbar^2} \; \left( \frac{\sin(\omega_{fi} T / 2)}{\omega_{fi} / 2} \right)^2
 \end{equation}
-Notice that $T$ appears in the numerator, but not the denominator, of the factor:
+which is plotted in Fig.~\ref{fig:pfi-osc}.  Notice that $T$ appears in the numerator, but not the denominator, of the factor:
 \begin{equation}
 F_T(\omega_{fi}) = \left( \frac{\sin(\omega_{fi} T / 2)}{\omega_{fi} / 2} \right)^2
 \end{equation}
@@ -296,7 +303,7 @@ $$\rho(E_i) = \left. \left| \frac{dn}{dE_f} \right| \right|_{E_i} = \int \left| 
 = \int \delta(E_f-E_i) dn$$
 we can write FGR as:
 \begin{equation}
-\label{eqn:fgr}
+\label{eqn:nrfgr}
 \Gamma_{fi} \; = \; \frac{2 \pi}{\hbar} \; \int |T_{fi}|^2 \; \delta(E_f - E_i) \; dn
 \end{equation}
 The rate of a process is dependent on the transition matrix element squared
@@ -360,6 +367,19 @@ $$d\Phi = \frac{d^3p}{(2E) \; (2\pi)^3}$$
 When working with integrals of phase space, we have to be somewhat careful, and recall that $E$ is an integration variable that has been set (via the delta function) to the value
 $E = \sqrt{m^2 + |\vec{p}|^2}$ which depends on the other integration values!
 
+In the exercises, you will show that:
+\begin{equation}
+\label{eqn:invdeltafour}
+\delta^4(\Lambda p) = \delta^4(p)
+\end{equation}
+where $\Lambda$ is a Lorentz transformation.  
+That is, the four-dimensional $\delta$-function is Lorentz invariant.\\[4pt]
+
+\noindent
+{\bf Exercise:} Verify Equation~\ref{eqn:invdeltafour} using the invariance of $d^4 p$.  Hint: show that:
+$$\int \delta (\Lambda p) f(p) d^4 p = \int \delta(p) f(p) d^4 p $$
+for an arbitrary function $f(p)$, taking care to note that $p$ is a dummy variable.
+
 \section{Normalization of Momentum Continuum States}
 
 With our single particle Lorentz invariant phase space $d\Phi$
@@ -384,30 +404,307 @@ and  so
 \braket{p|p'} \; = \; (2E) \, (2 \pi)^3 \; \delta^3(p-p')
 \end{equation}
 
+In the exercises, you will show that these results are consistent with
+making the substitution:
+\begin{equation}
+\label{eqn:covsub}
+  \ket{p} \to \frac{\ket{p}}{\sqrt{2E}}
+\end{equation}
+into the corresponding non-relativistic equations.\\[4pt]
+
+\noindent
+{\bf Exercise:} Starting from the completeness equation from NR QM:
+$$1 = \int \frac{d^3p}{(2\pi)^3} \ket{p} \bra{p},$$
+apply the substitution of Equation~\ref{eqn:covsub}, 
+read off the phase space integral consistent with the new normalization, and compare to Lorentz Invariant Phase Space.  $\square$\\
+
 \section{Lorentz Covariant Form of Fermi's Golden Rule}
 
-Considering:
+In this section, we'll apply Fermi's Golden Rule to the process
 $$a + b + \dots \to 1 + 2 + \ldots$$
-Use notation:
+so that the initial state is:
+$$\ket{i} = \ket{p_a \, p_b \, \ldots} = \ket{p_a} \times \ket{p_b} \times \ldots$$
+and the final states is:
+$$\ket{f} = \ket{p_1 \, p_1 \, \ldots} = \ket{p_1} \times \ket{p_1} \times \ldots$$
+We'll use a simple notation where
 $$\sum E_a = E_a + E_b + \ldots$$
 and
-$$\sum E_1 = E_1 + E_2 + \ldots$$
-and so on.  Put
+$$\sum E_i = E_1 + E_2 + \ldots$$
+and similarly for products.  In this context the phase-space integral in Fermi's Golden rule becomes:
 \begin{equation}
-|T_{fi}|^2 \to \frac{|M_{fi}|^2}{(\prod 2 E_a) (\prod 2 E_i) }  
+\label{eqn:nrphin}
+(2\pi) \delta(E_f - E_i) dn \to (2 \pi)^4 \delta^4(\sum p_i - \sum p_a) \prod_i \frac{d^3 p_i}{(2\pi)^3}
+\end{equation}
+where we have included all particles in the final state, but added a
+delta function to ensure that three-momentum is conserved.  Note that
+no factors of $2 E$ appear, because this is so far a non-relativistic
+formulation.
+
+We derived Fermi's Golden Rule by considering a time interval $T$ in
+some particular frame.  Fermi's Golden Rule calculates rates.  We do
+not expect rates to be invariant under special relativity, and they
+are not.  However, we do insist that our results are consistent with
+special relativity.  Equations need not be relativistically invariant
+in order to be consistent with special relativity.  For example,
+four-momentum conservation, e.g.:
+$$p_a^\mu + p_b^\mu = p_1^\mu + p_2^\mu$$
+is consistent with special relativity because it can be transformed
+consistently (e.g. by multiplying both sides by $\Lambda^{\nu'}_\mu$
+to obtain:
+$$p_a^{\nu'} + p_b^{\nu'} = p_1^{\nu'} + p_2^{\nu'}$$
+
+The values of the four-vectors are frame dependent, but the
+relationship between them is not.  The equation
+$$p^0 = m$$
+is not a covariant equation.  While it might be true in some
+particular frame, as $m$ is a scalar and $p^0$ transform as the
+temporal part of a four vector, it cannot be true in every frame.
+
+As we derived it, Fermi's Golden Rule is not covariant, but we can
+make it so.  Noting that:
+$$T_{fi} = \braket{p_a \, p_b \, \ldots | T | p_1 \, p_2 \, \ldots}$$
+we can apply the substitution of Equation~\ref{eqn:covsub} to obtain the combined substitution:
+\begin{equation}
+ \label{eqn:subm}  
+ |T_{fi}|^2 \to \frac{|M_{fi}|^2}{\left( \prod 2\,E_a \right) \left( \prod 2\,E_i \right)}
+\end{equation}
+where $M_{fi}$ is the new Lorentz-invariant matrix element that will replace $T_{fi}$ in our calculations.  Applying Equations~\ref{eqn:nrphin} and \ref{eqn:subm} to Fermi's Golden Rule as written in Equation~\ref{eqn:nrfgr}, to obtain:
+\begin{equation}
+\label{eqn:covfgr}
+\Gamma_{fi} \; = \; \frac{1}{\hbar \prod (2 E_a)} \; \int |\mathcal{M}_{fi}|^2 \; (2\pi)^4 \delta^4(\sum p_a - \sum p_1) 
+\prod_i \frac{d^3p_i}{(2 E_i) \, (2\pi)^3 }
+\end{equation}
+The integral is manifestly Lorentz invariant (recall that the four-dimensional $\delta$-function is invariant as in Equation~\ref{eqn:invdeltafour}) so this form of FGR is covariant if $\Gamma_{fi}$ transforms as:
+$$\frac{1}{\prod E_a}$$
+which, we shall see, is precisely the case.
+
+\section{Two-Body Decays}
+
+We now consider the case of a particle decaying to two-particles:
+$$a \to 1 + 2$$
+in which FGR becomes:
+\begin{equation}
+\label{eqn:fgr-two-body-decay}
+\Gamma_{fi} \; = \; \frac{1}{\hbar 2 E_a} \; \int |\mathcal{M}_{fi}|^2 \; (2\pi)^4 \delta^4(p_1 + p_2 - p_a)
+\, \frac{d^3p_1}{(2 E_1) \, (2\pi)^3 } \frac{d^3p_2}{(2 E_2) \, (2\pi)^3 }
+\end{equation}
+where, as always, we take care that $E_1$ and $E_2$ are functions of
+the integration variables.  The integral remains Lorentz invariant, so
+the equation is covariant as long as$\Gamma_{fi}$ transforms as
+$1/E_a$.  But $\Gamma_{fi}$ is a rate, so transforms as one over the
+time-component of a four vector, exactly as $1/E_a$.  Indeed, for this
+case as least, we see that FGR is a Lorentz-covariant equation.
+
+Thus convinced of its covariance, we proceed to calculate $\Gamma_fi$ in the rest frame of the particle, where:
+$$ E_a = m_a,  \quad \text{and} \quad \vec p_a = 0, $$
+so that:
+$$\delta^4(p_1 + p_2 - p_a) = \delta(E_1+E_2 - m_a) \, \delta^3(\vec{p}_1+\vec{p}_2).$$
+The three-dimensional delta functions kills the integral over $d^3 p_2$, setting:
+$$\vec{p}_2 = -\vec{p}_1$$
+so that:
+$$\Gamma_{fi} \; = \; \frac{1}{32 \pi^2 m_a \hbar} \; \int |\mathcal{M}_{fi}|^2 \; \delta^4(E_1 + E_2 - m_a)
+\, \frac{d^3p_1}{E_1 E_2}$$
+Defining:
+$$p \equiv |\vec{p}_1|$$
+and changing to spherical coordinates:
+$$d^3 p_1 = p^2 dp d\Omega$$
+we have
+$$\Gamma_{fi} \; = \; \frac{1}{32 \pi^2 m_a \hbar} \; \int |\mathcal{M}_{fi}|^2 \; \delta^4(u - m_a)
+\, \frac{p^2 dp d\Omega}{E_1 E_2}$$
+where $d\Omega = d\phi d\cos\theta$ is the solid angle and:
+$$u \equiv E_1 + E_2$$
+Noting that:
+$$\frac{du}{dp} = frac{E_1 + E_2}{E_1 E_2} \, p = \frac{up}{E_1 E_2}$$
+and so:
+$$\frac{du}{u} = \frac{p\, dp}{E_1 E_2}$$
+We now have:
+$$\Gamma_{fi} \; = \; \frac{1}{32 \pi^2 m_a \hbar} \; \int |\mathcal{M}_{fi}|^2 \; \delta^4(u - m_a) \, \frac{p}{u}\, du d\Omega$$
+The last delta function kills the integral over u setting:
+$$u = E_1 + E_2 = m_a$$
+and so:
+$$
+\Gamma_{fi} \; = \; \frac{p^*}{32 \pi^2 m_a^2 \hbar} \; \int |\mathcal{M}_{fi}|^2  d\Omega$$
+where:
+$$p^* = |\vec{p}_1|$$
+calculated for
+$$E_1 + E_2 = m_a \quad \text{and} \quad \vec{p}_2 = -\vec{p}_1.$$
+Notice that the $\delta$-functions simply impose four-momentum
+conservation.  It is left as an exercise to show that:
+\begin{equation}
+\label{eqn:pstar}
+p^* = \frac{\sqrt{m_a^4 + m_1^4 + m_2^4- 2 (m_a^2 m_1^2 + m_1^2 m_2^2 + m_2^2 m_a^2)}}{2 m_a}
+\end{equation}
+
+\noindent
+{\bf Exercise:} Verify Equation~\ref{eqn:pstar}.
+
+The decay rate $\Gamma_{fi}$ that we have calculated is independent of
+time, as it must be, to be logically conistent with indentical
+indistinguishable particles, which cannot, therefore, have any
+``age''.  As a result, we have:
+$$\frac{dN}{dt} = - \Gamma N$$
+with solution:
+$$N(t) = N(0) \exp(-\Gamma t) = N(0) \exp(-t /\tau)  $$
+where
+$$\tau = \frac{1}{\Gamma}$$
+is the lifetime of the particle.  The particle lifetime is easily
+observable in experients, for example, by looking at the distance
+particles with a known energy travel inside a particle detector before
+decaying (accounting for time dilation).
+
+When a particle has multiple decay modes, the total rate is the sum of
+all of them:
+$$\Gamma_{\rm tot} = \sum \Gamma_i $$
+and the particle lifetime is:
+$$\tau = \frac{1}{\Gamma_{\rm tot}}$$
+Experiments can also measure the branching fraction of a particular
+decay: the ratio of the number of observed decays to a particular channel to the total number of decays:
+$$Br(a \to x+y) = \frac{N(a \to x+y)}{N(a \to {\rm anything})} = \frac{\Gamma(a \to x+y)}{\Gamma_{\rm tot}}$$
+
+\section{Volume Normalization}
+
+Before proceeding, we will need to face an uncomfortable reality.  If
+we are going to consider interacting particles, we'll need to consider
+the volume that our particles occupy, because the rate at which they
+interact will clearly depend on this.  But volume is not Lorentz
+invariant.  It turns out, one can just set the volume $V=1$ and
+everything works out just fine, and that's the approach that Thomson
+takes.  Griffith's evades the topic entirely by just giving FGR for
+decays and cross-sections separately without any attempt at a
+derivation.  We are going to show how $V$ cancels beautifully when
+explicitly accounted for, thus justifying taking Thomson's approach
+and simply setting $V=1$ for calculations.
+
+To normalize to one particle per volume $V$ we put:
+$$\ket{\Psi} \to \ket{\Psi}/\sqrt{V}$$
+Then we need:
+$$d\Phi \to V d\Phi$$  
+which is no longer Lorentz Invariant.  However:
+\begin{equation*}
+ \int d\Phi \, \ket{p}\bra{p}
+ \to \int V d\Phi \, (\ket{p}/\sqrt{V})(\bra{p}/\sqrt{V})
+  \; = \; \int d\Phi \, \ket{p}\bra{p} = 1
+\end{equation*}
+so when combined with the normalized wave function, the calculations
+(at least in this example) are still Lorentz Invariant.
+
+Our calculation of FGR is also modified, with the density of states
+taking on a factor of volume (see the Appendix for a concrete
+example):
+$$\sum_{\Delta f} \to \int_{\Delta f} \, dn = V \int_{\Delta f} \,
+\rho(E_f) \, dE_f$$
+So our presciption for modifying the NR FGR becomes:
+\begin{equation}
+\label{eqn:voltfi}
+|T_{fi}|^2 \to \frac{V |M_{fi}|^2}{(\prod 2 V E_a) (\prod 2 V E_i) }  
 \end{equation}
 and
 \begin{equation}
-(2\pi) \delta(E_f - E_i) dn \to (2 \pi)^4 \delta^4(\sum p_i - \sum p_a) \prod_i \frac{d^3 p_i}{(2\pi)^3}
+\label{eqn:volps}
+(2\pi) \delta(E_f - E_i) dn \to (2 \pi)^4 \delta^4(\sum p_i - \sum p_a) \prod_i \frac{V d^3 p_i}{(2\pi)^3}
 \end{equation}
-To obtain:
+It is left as exercise to show that the volume normalization, when
+applied consistently, has no impact on the decay rate calculation.  In
+the next section, we will show that for scattering, an additional
+volume factor in FGR cancels a volume factor in the flux.\\[4pt]
+
+\noindent
+{\bf Exercise:} Show that Equation \ref{eqn:fgr-two-body-decay} is unchanged when using the substitutions in Equations~\ref{eqn:voltfi} and \ref{eqn:volps}, which explictly including the volume factors,instead of Equations~\ref{eqn:nrphin} and \ref{eqn:subm}.
+
+\section{Interaction Cross-Section}
+
+Next we will consider a scattering process:
+$$a + b \to 1 + 2 + 3 + \ldots$$
+Eventually, we will arrive at Lorentz Invariant results, but we'll orient ourselves first in a frame where the relative velocities of $a$ and $b$ are collinear, as in:
+\begin{center}
+\begin{tikzpicture}[scale=1]
+  \node[shape=circle,draw,thick] at (0,0) {a};
+  \draw[->, thick] (0.5,0) -- ++(1.4,0);
+  \node at (1.0,0.3) {$v_a$};
+
+  \node[shape=circle,draw,thick] at (4,0) {b};
+  \draw[->, thick] (3.5,0) -- ++(-1.4,0);
+  \node at (3.0,0.3) {$v_b$};
+\end{tikzpicture}
+\end{center}
+Suppose that in a volume $V$, we have $N_a$ particles of type $a$,
+each with velocity $v_a$, and $N_b$ particles of type $b$, each with
+velocity $v_b$ located in a volume $V$, with velocities all collinear
+as in the diagram.  We would expect the rate to scale as:
+$$\Gamma \propto (N_a/V)\,(N_b/V)\,V = N_a N_b / V$$ Now suppose
+further that the {\it dynamics} of the interaction causing $a$ and $b$
+to scatter does not depend on their relative velocity.  The rate of
+scattering will scale linear with the relative velocity
+$$\Gamma \propto v_a + v_b$$
+because $a$ and $b$ particles will encounter one another more frequently.
+Putting these effects together we have:
+$$\Gamma \propto N_a N_b \frac{(v_a + v_b)}{V} = \frac{(v_a + v_b)}{V}$$
+where in the last step we have set $N_a=1$ and $N_b=1$ to consider a single pair of interacting particles.  We define the luminosity
 \begin{equation}
-\label{eqn:covfgr}
-\Gamma_{fi} \; = \; \frac{1}{\hbar \prod (2 E_a)} \; \int |\mathcal{M}_{fi}|^2 \; (2\pi)^4 \delta^4(\sum p_a - \sum p_b) 
-\prod_i \frac{d^3p_i}{(2 E_i) \, (2\pi)^3 }
+\label{eqn:lumi}
+L = \frac{v_a + v_b}{V}.
 \end{equation}
+which contains the factors that influence the rate independently of the dynamics of the interaction.  We define the interaction cross section ($\sigma$) as the proportionality constant between the luminosity ($L$) and the rate ($\Gamma$):
+\begin{equation}
+\label{eqn:rate-sigma}  
+\Gamma = L \, \sigma
+\end{equation}
+Note that $\sigma$ must have units of area because
+$$\Gamma[1/t] = L[1/At] \; \sigma[A]$$
+In the exercises, you will show that for elastic scattering of a point
+particle on a solid object, the interaction cross-section is quite
+literally the cross-sectional area of the solid object.  More
+generally, the cross-section is an accounting trick: the rate of a
+scattering process is precisely the rate at which particles of type
+$a$ and $b$ are brought to within a transverse area $\sigma$ of one
+another.
 
+Fermi's Golden Rule determines the rate gamma for the scattering process
+$$a + b \to 1 + 2 + 3 + \ldots$$
+as:
+$$\Gamma_{fi} \; = \; \frac{1}{V} \, \frac{1}{\hbar 2 E_a 2 E_b} \;
+\int |\mathcal{M}_{fi}|^2 \; (2\pi)^4 \delta^4(\sum p_a - \sum p_1)
+\prod_i \frac{d^3p_i}{(2 E_i) \, (2\pi)^3 }$$ where we are (for now)
+keeping the volume factors ($V$) explicit, by using the substitutions
+in Equations~\ref{eqn:voltfi} and \ref{eqn:volps}.  Unlike the case
+for the two-body decay of Equation~\ref{eqn:fgr-two-body-decay}, the
+volume factors $V$ do not all cancel at this stage.  The additional
+initial state particle brings in one more factor of $V$ which is not
+cancelled.  However, using Equations~\ref{eqn:lumi} and \ref{eqn:rate-sigma} we have:
+$$\sigma \; = \; \frac{1}{4 E_a E_b (v_a + v_b)} \, \frac{1}{\hbar}\;
+\int |\mathcal{M}_{fi}|^2 \; (2\pi)^4 \delta^4(\sum p_a - \sum p_1)
+\prod_i \frac{d^3p_i}{(2 E_i) \, (2\pi)^3 }$$
+As before, the integral is manifestly Lorentz invariant, so $\sigma$ will transform as $1/F$ where:
+$$F = 4 E_a E_b (v_a + v_b)$$
+In the exercise below, you will show that $F$ can be written in the
+equivalent form (for this particular frame):
+\begin{equation}
+\label{eqn:lorentz-invariant-flux}
+F = 4 \sqrt{(p_a\cdot p_b)^2 - (m_a m_b)^2}  
+\end{equation}
+which is manifestly Lorentz invariant.\\[4pt]
 
+\noindent
+{\bf Exercise:} Calculate the Lorentz invariant phase-space:
+$$ F = 4 \sqrt{(p_a\cdot p_b)^2 - (m_a m_b)^2}$$
+in a frame where the velocities of $a$ and $b$ are collinear, and show that:
+$$F = 4 E_a E_b (v_a + v_b) = 4(E_a p_b + E_b p_a) \quad \square$$
+
+We can therefore write the cross-section as:
+$$\sigma \; = \; \frac{1}{4 \sqrt{(p_a\cdot p_b)^2 - (m_a m_b)^2}} \, \frac{1}{\hbar}\;
+\int |\mathcal{M}_{fi}|^2 \; (2\pi)^4 \delta^4(\sum p_a - \sum p_1)
+\prod_i \frac{d^3p_i}{(2 E_i) \, (2\pi)^3 }$$
+which is manifestly Lorentz Invariant.  This is excellent news, as the
+interaction cross-section encodes the dynamics of the interactions
+between particles $a$ and $b$, and therefore must be Lorentz invariant
+as the laws of physics must be the same in all inertial frames.
+
+The interaction cross-sections is bread-and-butter experimental and
+theoretical particle physics.  It is an excellent experimental handle,
+applicable to the center of a star to the surface of our ocean.  In
+the simplist form, we aim particles of type $a$ at particles of type
+$b$ and count the number that scatter during the course of our
+experiment.
 
 \appendix
 
@@ -435,6 +732,16 @@ and we have:
 \label{eqn:dndthreek}
 dn = \left( \frac{L}{2\pi} \right)^3 d^3k
 \end{equation}
+in terms of the momentum $p = \hbar k$, we have:
+\begin{equation}
+\label{eqn:dndthreek}
+dn = \frac{V}{(2\pi\hbar)^3} \; d^3p
+\end{equation}
+which reproduces the single-particle phase-space factors in
+Equation~\ref{eqn:volps}, but for a factor of $\hbar$, a matter of
+convention.  Note that in the convention here, $dn$ is dimensionless,
+consistent with our framing of the problem as counting discrete states
+of a particle constrained to a finite volume $V$.
 
 It is convenient to express Equation~\ref{eqn:dndthreek} as a differential in energy.  As our box size cannot possibly be Lorentz invariant, we'll use the non-relativistic energy of the free particle (for now):
 $$E=\frac{(\hbar k)^2}{2 m}$$
@@ -452,260 +759,6 @@ with:
 \begin{equation}
  dn = \rho(E) \, dE 
 \end{equation}
-
-
-
-
-
-\section{Time-Dependent Perturbation Theory}
-
-Here we consider the simple time-dependence from
-Fig.~\ref{fig:simple-perturbation}.  The new interaction is a
-time-independent interaction potential $V$ which turns on a $t=0$ and
-then off at $t=T$.  When $t<0$ the potential is off, and the total
-Hamiltonian is $H=H^{(0)}$.  At $t=0$, the potential turns on and
-$H=H^{(0)} + V$, and remains constant until $t=T$.  For $t>T$, the
-potential is off, and $H=H^{0}$ again.
-
-We assume that $V$ is small, but specifically how small is TBD.  We
-introduce a dimensionless time-independent factor $\lambda$ as a
-bookkeeping device.  When $\lambda=1$, the perturbation is at full
-strength (but $V$ is still small).  When $\lambda=0$ the perturbation
-is turned off.  When we are finished with our bookkeeping\footnote{If
-you prefer, you can take $\lambda$ to be always small, by pulling out
-a small dimensionless parameter from $V$, then the TBD constraints
-will be on $\lambda V$.  I prefer to set $\lambda$ to one once we are
-done using it for bookkeeping.} we will set $\lambda=1$.
-
-\begin{figure}[thb]
-\begin{center}
-{\includegraphics[width=0.60\textwidth]{figs/pfi_quad.pdf}}
-\end{center}
-\caption{\label{fig:pfi_quad} For $E_f=E_i$ the perturbation will fail (probability too large) for large enough $T$.}
-\end{figure}
-
-
-For $0 \leq t \leq T$ (that is, when the potential is on) we have:
-$$\braket{m | \delta H(t) | n} = \lambda \braket{m|V|n} = \lambda V_{mn}$$
-where we have defined:
-$$V_{mn} \equiv \braket{m|V|n}$$
-also defining:
-$$\omega_{mn} \equiv \frac{E_m - E_n}{\hbar}$$
-Equation~\ref{eqn:cmdot} becomes:
-$$\dt{c_m}(t) = - \frac{i \lambda}{\hbar} \, \sum_n \, c_n(t)  \, e^{i \omega_{mn} t } \, V_{mn}$$
-Notice that $\lambda$ only appears on the RHS, which will be essential in what follows.  Also, notice that for $\lambda=0$ (perturbation off) we have
-$$\dt{c_m}(t) = 0 \implies c_m(t) = {\rm const}$$
-as expected.  Writing $c_m(t)$ as a power series in $\lambda$, we have:
-$$c_m(t) \; = \; c_m^{(0)}(t) \; + \; \lambda \, c_m^{(1)}(t) \; + \; \lambda^2 \, c_m^{(2)}(t) \; + \; \ldots$$
-and thus:
-\begin{eqnarray*}
-\dt{c_m}^{(0)}(t) \; + \; \lambda \, \dt{c_m}^{(1)}(t) \; + \; \lambda^2 \, \dt{c_m}^{(2)}(t) \; &+& \; \ldots \\
-&=& \; - \frac{i}{\hbar} \, \sum_n \, \left\{ \lambda \, c_m^{(0)}(t) \; + \; \lambda^2 \, c_m^{(1)}(t) \; + \ldots  \right\} \; e^{i \omega_{mn} t } \; V_{mn}
-\end{eqnarray*}
-Matching terms of equal order in $\lambda$
-\begin{alignat*}{4}
-  \lambda &= 0     & & \; \to \; \dt{c_m}^{(0)}(t)      &{}={}& 0\\[4pt]
-  \lambda &= 1     & & \; \to \; \dt{c_m}^{(1)}(t)      &{}={}& - \frac{i}{\hbar} \, \sum_n \, c_m^{(0)}(t)  \; e^{i \omega_{mn} t } \; V_{mn} \\[4pt]
-  \lambda &= 2     & & \; \to \; \dt{c_m}^{(2)}(t)      &{}={}& - \frac{i}{\hbar} \, \sum_n \, c_m^{(1)}(t)  \; e^{i \omega_{mn} t } \; V_{mn}\\[4pt]    
-  \lambda &= N+1 \;& & \; \to \; \dt{c_m}^{(N+1)}(t)    &{}={}& - \frac{i}{\hbar} \, \sum_n \, c_m^{(N)}(t)  \; e^{i \omega_{mn} t } \; V_{mn}\\[4pt]
-\end{alignat*}
-The first equation shows that:
-$$c_m^{(0)}(t) = {\rm const}$$
-To start things off, note that with $\lambda=0$ (the perturbation turned off)
-$$c_m(t) = c_m^{(0)}(t) = {\rm const}$$
-which identifies $c_m^{(0)}(t)$ as the coefficients of the unperturbed system, which have no time dependence.  If we assume that the initial state is $\ket{i}$, then:
-$$c_m^{(0)} = \delta_{mi}$$
-This has an immediate implication for our perturbations.  If we assume $c_i^{(1)}(t) = \epsilon$ for some small value $\epsilon$ then:
-$$c_i(t) \approx c_i^{(0)}(t) +  c_i^{(1)}(t) = 1 + \epsilon \approx 1$$
-but for $m \neq i$, if we assume $c_m^{(1)}(t) = \epsilon$ for some small value $\epsilon$ then:
-$$c_m(t) \approx c_m^{0}(t) + c_m^{(1)}(t) = 0 + \epsilon = \epsilon$$
-So we will only consider higher order perturbations for $m \neq i$.  In this case, the first order coefficient is:
-\begin{eqnarray*}
-  \dt{c_m}^{(1)}(t)      &{}={}& - \frac{i}{\hbar} \, \sum_n \, c_n^{(0)}(t)  \; e^{i \omega_{mn} t } \; V_{mn} \\
-       &{}={}& - \frac{i}{\hbar} \, \sum_n \, \delta_{ni}  \; e^{i \omega_{mn} t } \; V_{mn} \\
-       &{}={}& - \frac{i}{\hbar} \, e^{i \omega_{mi} t } \; V_{mi} \\
-\end{eqnarray*}
-and integrating over the period when the constant potential $V$ is on:
-\begin{eqnarray*}
-   {c_m}^{(1)}(T)  &{}={}& - \frac{i}{\hbar} \, \int_0^T dt \; e^{i \omega_{mi} t } \; V_{mi}  \\
-                   &{}={}& - \frac{i}{\hbar} \, V_{mi} \, \int_0^T dt \; e^{i \omega_{mi} t } \\
-                   &{}={}& - \frac{1}{\hbar \omega_{mi}} \, V_{mi} \; \left( e^{i \omega_{mi} T } - 1 \right) \\
-   &{}={}& - \frac{2i}{\hbar \omega_{mi}} \, V_{mi} \; \exp\left(i \frac{\omega_{mi} T}{2}\right) \sin\left(\frac{\omega_{mi} T}{2}\right) \\
-\end{eqnarray*}
-The probability that the state $\ket{i}$ has transitioned into state
-$\ket{f}$ after the perturbation has been left on for time $T$ is, to first order:
-\begin{equation}
-P^{(1)}_{\rm f \leftarrow i} = |c_m^{(1)}(T)|^2 = \frac{|V_{fi}|^2}{\hbar^2} \; \frac{4 \, \sin^2\left(\omega_{fi} T/2\right)}{\omega_{fi}^2}
-\end{equation}
-As long as this probability is small, it should be a good approximation, and this is always possible for small enough $V$.
-
-\begin{figure}[thb]
-\begin{center}
-{\includegraphics[width=0.60\textwidth]{figs/pfi_osc.pdf}}
-\end{center}
-\caption{\label{fig:pfi_osc} For $E_f \neq E_i$, the probability oscillates with an amplitude that goes as $1/(E_f-E_i)^2$}
-\end{figure}
-
-In the case that $E_f  = E_i$ then we have $\omega_{fi} \to 0$, and:
-$$P^{(1)}_{\rm f \leftarrow i} = \frac{|V_{fi}|^2 T^2}{4 \hbar^2} {\rm sinc^2}(\omega_{fi}T/2) \to \frac{|V_{fi}|^2 T^2}{4 \hbar^2}$$
-since
-$${\rm sinc}(x) \equiv \frac{\sin(x)}{x} \to 1$$
-when $x \to 0$.  As shown in Fig.~\ref{fig:pfi_quad}, the probability grows quadratically with $T$, and so the perturbation will fail for large enough $T$.  So there is a limit to how large we can take $T$, but it can still get very large for small enough $V$.  In the case that $E_f \neq E_i$, then
-we have the oscillatory behavior shown in Fig.~\ref{fig:pfi_osc}.  The
-oscillations have an amplitude:
-$$\frac{4 |V_{fi}|^2}{(E_f-E_i)^2}$$ which suppresses the probability of transitions that do not conserve energy.  Evidently, turning on and off a constant potential does not change the energy much.
-
-
-\section{Fermi's Golden Rule}
-
-We now want to consider not just a transition from one discrete state
-to another discrete state, but instead, a transition from one discrete
-state (the initial state) into a continuum state.  We know that for
-the constant potential perturbation, final states with energy far from
-$E_i$ will not contribute.  So instead of counting discrete states will
-integrate over energy within $\Delta E$ of the initial state energy:
-$$\sum_n \to \int dn = \int_{E_i - \Delta E}^{E_i + \Delta E} \rho(E) dE \equiv \int_{\Delta E} \rho(E) dE$$
-where $\rho(E)$ is the density of states, for which we worked out an
-example previously.
-
-\begin{figure}[thb]
-\begin{center}
-{\includegraphics[width=0.60\textwidth]{figs/fgr_delta.pdf}}
-\end{center}
-\caption{\label{fig:fgr_delta} For large enough $T$, $f(\omega_{fi})$ becomes a delta function and the area under the curve is $\propto T$}
-\end{figure}
-
-So the total probability of a transition into one of these final states is:
-$$\sum_{\Delta f} P_{f \leftarrow i}^{(1)}(T) \to \frac{4}{\hbar^2} \int |V_{\rm fi}|^2 \, \rho(E_f) \frac{\sin^2 (\omega_{fi} T/2)}{\omega^2_{fi}} dE_f$$
-The function
-$$f(\omega_{fi}) \equiv \frac{sin^2(\omega_{fi} T / 2)}{\omega_{fi}^2}$$
-is plotted in Fig~\ref{fig:fgr_delta}.  Notice that it's integral will be approximately:
-$$4|V_{fi}^2 T^2 \times 4\pi / T \propto T$$
-And also that it approaches a delta function for large enough $T$.
-
-Therefore, we can take $|V_{fi}|^2$ and $\rho(E_f)$ outside of the integral, by evaluating them at $E_f = E_i$, and we can extend the integral out to infinity:
-$$\sum_{\Delta f} P_{f \leftarrow i}^{(1)}(T) \to \frac{4}{\hbar^2} |V_{\rm fi}|^2 \, \rho(E_i) \int_{-\infty}^{\infty}  \frac{\sin^2 (\omega_{fi} T/2)}{\omega^2_{fi}} dE_f$$
-The integral can now be evaluated, leading to:
-$$\sum_{\Delta f} P_{f \leftarrow i}^{(1)}(T) \to \frac{2 \pi}{\hbar} |V_{fi}|^2 \rho(E_i) T$$
-This allows us to calculate the rate of transitions from a discrete
-state $\ket{i}$ into a continuum state $\ket{f}$ as:
-\begin{equation*}
-\Gamma_{fi}^{(0)} = \frac{\sum_{\Delta f} P_{f \leftarrow i}^{(1)}(T)}{T} = \frac{2 \pi}{\hbar} | V_{fi} |^2 \rho(E_i)
-\end{equation*}
-This is Fermi's Golden Rule (to first order) the foundation of experimental particle of physics.
-
-
-When we include higher order terms from TDPT, Fermi's Golden Rule becomes:
-$$\Gamma_{fi} = \frac{2 \pi}{\hbar} | T_{fi} |^2 \rho(E_i)$$
-where
-$$T_{fi} = \braket{f|T|i} = \braket{f|V|i} + \sum_{k \neq i} \frac{\braket{f|V|k}\braket{k|V|i}}{E_i - E_k} + \ldots$$
-is called the transition matrix element.
-
-Recall that:
-$$\rho(E) \equiv \left| \frac{dn}{dE} \right|$$
-Fermi's Golden rule takes the simple form it does because energy is conserved, and so we took $\rho(E)$ to be a constant outside of the integral by putting $E_f=E_i$.  But we can put it back into the integral with delta function to impose energy conservation:
-$$\rho(E_i) = \left| \frac{dn}{dE} \right|_{E_i} = \int \left| \frac{dn}{dE_f} \right| \delta(E_i - E_f) dE_f = \int \delta(E_i - E_f) dn$$
-So we have an equivalent form of Fermi's Golden Rule:
-\begin{equation}
-\Gamma_{fi} = \frac{2 \pi}{\hbar} \int | T_{fi} |^2 \delta(E_i - E_f) dn
-\end{equation}
-This has a very nice interpretation.  We integrate over the entire
-phase space ($dn$) of the final state, subject to energy conservation,
-and weight each region of phase space by the transition matrix.  The
-phase space is just the kinematics (eventually relativistic
-kinematics) and the transition matrix contains all of the dynamics.
-
-
-\section{Lorentz Covariant Normalization of the wave functions}
-
-Suppose that a particle of mass $m$ is contained in a container $C$.  The rest
-frame of the container is frame $F$, in which the container has volume
-$V_0$.  The probability of finding the particle in container $C$ is one, so:
-$$\int_C |\psi(x)|^2 d^3x = 1$$
-The number of particles per unit volume is therefore:
-$$\frac{1}{V_0} \int_C |\psi(x)|^2 d^3x = \frac{1}{V_0}$$
-In frame $F'$, moving with respect to the container, the volume of the container is contracted by:
-$$V' = V_0/\gamma$$
-But the probability of the particle being in the container is still
-one, so the number of particle per unit volume as calculated in frame
-$F'$ is therefore:
-$$\frac{1}{V'} \int_A |\psi(x)|^2 d^3x = \frac{1}{V'}= \frac{\gamma}{V_0}$$
-Clearly, than, normalizing to the number of particle per unit volume
-is not Lorentz invariant.
-
-We found in the previous section that our phase-space term was missing
-a factor of $2E$.  Let's look at what happens if we normalize an
-energy eigenstate to $2E$ particles per unit volume.  For
-illustration, let's assume that the volume $V$ is large enough that
-the particle can be taken to be at rest in frame $F$ (without
-violating the uncertainty principle).  Then we will have, in frame
-$F$:
-$$\frac{1}{V_0} \int_C |\psi(x)|^2 d^3x = 2E = 2 m c^2$$
-Meanwhile, in frame $F'$, we must find:
-$$\frac{\gamma}{V_0} \int_C |\psi(x)|^2 d^3x = 2 \gamma m c^2 = 2 E'$$
-Thus, we will now adopt the convention of normalizing energy
-eigenstates to $2E$ particles per unit volume, which is a Lorentz
-invariant convention.
-
-Just to be clear: this means that a wave
-function normalized to $2E$ particles per unit volume in frame $F$
-will also be normalized to $2E'$ particles in frame $F'$, even though
-these will, generally, be different values.
-
-\section{Lorentz Covariant Form of Fermi's Golden Rule}
-
-We derived the non-relativistic form of Fermi's Golden Rule as:
-$$\Gamma_{fi} = \frac{2 \pi}{\hbar} \int | T_{fi} |^2 \delta(E_i - E_f) dn $$
-We'll now look at how to adapt Fermi's Golden Rule for Lorentz
-covariance and multiple initial state particles, which we will write
-as:
-$$a + b + c + \ldots \; \to \; 1 + 2 + 3 + \ldots + n$$
-So in:
-$T_{fi} = \braket{f|T|i}$
-we now have:
-$$\ket{i} = \ket{\Phi_a \Phi_b \Phi_c \ldots}$$
-and 
-$$\bra{f} = \bra{\Phi_1 \Phi_2 \Phi_3 \ldots \Phi_n}$$
-where each initial state wave function (e.g. $\Phi_a$) and each final
-state wave function (e.g. $\Phi_1$) are normalized in the
-non-relativistic fashion: one particle per unit volume.  We have
-therefore:
-$$T_{fi} = \braket{\Phi_1 \Phi_2 \Phi_3 \ldots \Phi_n|T|\Phi_a \Phi_b \Phi_c \ldots}$$
-Now, instead of $T_{fi}$, let us instead consider a Lorentz invariant matrix element $\mathcal{M}_{fi}$ calculated using basis vectors normalized in the Lorentz invariant fashion, e.g.:
-$$\Psi_a = \sqrt{2E_a} \Phi_a$$
-and so on.  So:
-\begin{eqnarray*}
-  \sqrt{c^{n-1} \hbar^{3(m-1)}}\mathcal{M}_{fi} &\equiv& \braket{\Psi_1 \Psi_2 \Psi_3 \ldots \Psi_n |T| \Psi_a \Psi_b \Psi_c \ldots } \\
-  &=& \sqrt{2E_1\;2E_2\;2E_3\;\ldots}
-  \braket{\Phi_1 \Phi_2 \Phi_3 \ldots |T| \Phi_a \Phi_b \Phi_c \ldots } 
-  \sqrt{2E_a\;2E_b\;2E_c\;\ldots}\\ 
-  &=& \sqrt{2E_1\;2E_2\;2E_3\;\ldots}
-  T_{fi} 
-  \sqrt{2E_a\;2E_b\;2E_c\;\ldots}\\ 
-\end{eqnarray*}
-we have included a factor of $\sqrt{c^{n-1}}$ (for $n$ final state particles) and $\sqrt{\hbar^{3(m-1)}}$ (for $m$ initial state particles) to match the conventions for the Feynman Rules that which we will be applying to determine $\mathcal{M}$.  And so:
-$$|T_{fi}|^2 = \frac{|\mathcal{M}_{fi}|^2}
-{(2E_a\;2E_b\;2E_c\;\ldots)} \frac{c^n}{(2E_1\;2E_2\;2E_3\;\ldots2E_n)}$$
-Notice that the new normalization has led to exactly the factors of $1/2E$ needed to make each phase space factor Lorentz Invariant.
-
-Thus, to construct a Lorentz Covariant form of Fermi's Golden Rule appropriate to a process with multiple initial and final state particles, we make the following replacements
-\begin{equation}
-|T_{fi}|^2 \longrightarrow \frac{|\mathcal{M}_{fi}|^2}
-{c \; (2E_a\;2E_b\;2E_c\;\ldots)} 
-\end{equation}
-and
-\begin{equation}
-  (2\pi) \; \delta(E_i - E_f) \; dn \\[3pt]
-  \longrightarrow
-  (2\pi)^4 \delta^4(p_a + p_b + \cdots - p_1 - p_2 - \ldots)
-  \times \Pi_i \; \frac{c \; d^3 p_i}{2\;E_i (2\pi)^3}
-\end{equation}
-Remember that each:
-$$E_i \equiv \sqrt{m_i^2 c^4 + p_i^2 c^2}$$
-which is a function of the integration variable.  These are not factors that can be simply pulled out of the integral!
-
-The phase space for $n$ final state particles is completely covered by integrating over the first $n-1$ particles, because it's momentum is completely defined by the first $n-1$ particles due to momentum conservation.  However, we have opted to integrate over all $n$ final state particles, and include a $\delta$ function imposing momentum conservation, which is equivalent.
-
 
 \section{Math Tools}
 
@@ -754,19 +807,6 @@ Now identify $\delta(x)$ with $\theta'(x)$ and simplifying:
                      &=& \frac{\delta(x-|a|)+\delta(x + |a|)}{2|a|}\\
                      &=& \frac{\delta(x-a)+\delta(x + a)}{2|a|}\\
 \end{eqnarray*}
-
-
-\section{Fermi's Golden Rule for Two-Body Decays}
-
-For a decay process $a \to 1 + 2$, the Lorentz invariant form of FGR is:
-$$\Gamma_{fi} = \frac{1}{\hbar \, c \; (2E_a)} \int \left| \mathcal M_{fi} \right|^2
-(2\pi)^4 \delta^4(p_a - p_1 - p_2) \frac{c \, d^3 p_1}{2E_1(2\pi)^3} \frac{c \, d^3 p_2}{2E_2(2\pi)^3}$$
-where we must as always remember that $E_1 = \sqrt{p_1^2 c^2 + m_i^2 c^4}$.  Notice that
-$$\Gamma_{fi} \propto \frac{1}{2E_a} \propto \frac{1}{\gamma}$$
-where $\gamma$ is the expected time dilation factor from special relativity.
-
-
-\section{Fermi's Golden Rule for Two-Body Scattering}
 
 
 
