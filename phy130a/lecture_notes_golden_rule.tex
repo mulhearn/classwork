@@ -80,19 +80,19 @@ Where we can now match term by term to obtain:
 \dt{c_m}(t)  = - \frac{i}{\hbar} \sum_n \, c_n(t)  \, \exp\left( i \frac{(E_m - E_n) t}{\hbar} \right)
 \braket{m | \delta H(t) | n}  
 \end{equation}
-This is everything we hoped for!  Because of the time dependence of the
-total Hamiltonian, our expansion coefficients have to be time
-dependent as well (the vectors $\ket{n}$ are still a basis, but they
-are not stationary states of the total Hamiltonian $H$).  But, in the
-interaction picture
+This is everything we hoped for!  Notice that $H^{(0)}$ operator does
+not appear explicitly in Equation~\ref{eqn:cmdot}.  The unperturbed
+Hamiltonian determines the eigenstates $\bar{m}$ and the energies
+$E_m$, but its impact on the time-dependence of the coefficients
+$c_m(t)$ is solely through the phase factor:
+$$\exp\left( i \frac{(E_m - E_n) t}{\hbar} \right)$$
+The interaction picture
 \footnote{Formally, in the interaction picture the operators evolve as
 $$O(t) = {\rm exp}(iH^{(0)}t/\hbar) \; O \; {\rm exp}(-iH^{(0)}t/\hbar)$$
 while the states carry the remaining time dependence.  Our derivation
 here achieves exactly the same separation of time dependence without
-invoking time evolution of the operators.}
-we factor out the time dependence due to
-$H^{(0)}$, and do not include it in $c_m(t)$.  Therefore, the time
-dependence of the $c_m(t)$ does not depend on $H^{(0)}$. 
+invoking time evolution of the operators.}  has factored out the time
+  dependence from the unperturbed Hamiltonian.
 
 \section{First-Order Time-Dependent Perturbation Theory}
 
@@ -170,7 +170,7 @@ to obtain a first-order estimate:
 \dt{c_m}(t)  = - \frac{i}{\hbar}  \, \exp\left( i \frac{(E_m - E_i) t}{\hbar} \right)
 \braket{m | \delta H(t) | i}   
 \end{equation}
-For any final state $\ket{f}$, we can can estimate the corresponding coefficient for $t \geq T$ by an integral:
+For any final state $\ket{f}$, we can estimate the corresponding coefficient for $t \geq T$ by an integral:
 $$c_f(T) = - \frac{i}{\hbar}  \; V_{fi} \; \int_0^T \exp\left( i \omega_{fi} t \right) \, dt$$
 where we define the interaction potential matrix element:
 \begin{equation}
@@ -466,12 +466,12 @@ $$T_{fi} = \braket{p_a \, p_b \, \ldots | T | p_1 \, p_2 \, \ldots}$$
 we can apply the substitution of Equation~\ref{eqn:covsub} to obtain the combined substitution:
 \begin{equation}
  \label{eqn:subm}  
- |T_{fi}|^2 \to \frac{|M_{fi}|^2}{\left( \prod 2\,E_a \right) \left( \prod 2\,E_i \right)}
+ |T_{fi}|^2 \to \frac{|M_{fi}|^2/\hbar^3}{\left( \prod 2\,E_a /\hbar^3 \right) \left( \prod 2\,E_i \right)}
 \end{equation}
-where $M_{fi}$ is the new Lorentz-invariant matrix element that will replace $T_{fi}$ in our calculations.  Applying Equations~\ref{eqn:nrphin} and \ref{eqn:subm} to Fermi's Golden Rule as written in Equation~\ref{eqn:nrfgr}, to obtain:
+where $M_{fi}$ is the new Lorentz-invariant matrix element that will replace $T_{fi}$ in our calculations, and the factors of $\hbar$ are worked out in the exercises of Section~\ref{sec:volume-normalization}.  Applying Equations~\ref{eqn:nrphin} and \ref{eqn:subm} to Fermi's Golden Rule as written in Equation~\ref{eqn:nrfgr}, to obtain:
 \begin{equation}
 \label{eqn:covfgr}
-\Gamma_{fi} \; = \; \frac{1}{\hbar \prod (2 E_a)} \; \int |\mathcal{M}_{fi}|^2 \; (2\pi)^4 \delta^4(\sum p_a - \sum p_1) 
+\Gamma_{fi} \; = \; \frac{1}{\hbar^4 \prod (2 E_a/\hbar^3)} \; \int |\mathcal{M}_{fi}|^2 \; (2\pi)^4 \delta^4(\sum p_a - \sum p_1) 
 \prod_i \frac{d^3p_i}{(2 E_i) \, (2\pi)^3 }
 \end{equation}
 The integral is manifestly Lorentz invariant (recall that the four-dimensional $\delta$-function is invariant as in Equation~\ref{eqn:invdeltafour}) so this form of FGR is covariant if $\Gamma_{fi}$ transforms as:
@@ -480,7 +480,7 @@ which, we shall see, is precisely the case.
 
 \section{Two-Body Decays}
 
-We now consider the case of a particle decaying to two-particles:
+We now consider the case of a particle decaying to two particles:
 $$a \to 1 + 2$$
 in which FGR becomes:
 \begin{equation}
@@ -490,10 +490,10 @@ in which FGR becomes:
 \end{equation}
 where, as always, we take care that $E_1$ and $E_2$ are functions of
 the integration variables.  The integral remains Lorentz invariant, so
-the equation is covariant as long as$\Gamma_{fi}$ transforms as
+the equation is covariant as long as $\Gamma_{fi}$ transforms as
 $1/E_a$.  But $\Gamma_{fi}$ is a rate, so transforms as one over the
 time-component of a four vector, exactly as $1/E_a$.  Indeed, for this
-case as least, we see that FGR is a Lorentz-covariant equation.
+case at least, we see that FGR is a Lorentz-covariant equation.
 
 Thus convinced of its covariance, we proceed to calculate $\Gamma_fi$ in the rest frame of the particle, where:
 $$ E_a = m_a,  \quad \text{and} \quad \vec p_a = 0, $$
@@ -502,23 +502,23 @@ $$\delta^4(p_1 + p_2 - p_a) = \delta(E_1+E_2 - m_a) \, \delta^3(\vec{p}_1+\vec{p
 The three-dimensional delta functions kills the integral over $d^3 p_2$, setting:
 $$\vec{p}_2 = -\vec{p}_1$$
 so that:
-$$\Gamma_{fi} \; = \; \frac{1}{32 \pi^2 m_a \hbar} \; \int |\mathcal{M}_{fi}|^2 \; \delta^4(E_1 + E_2 - m_a)
+$$\Gamma_{fi} \; = \; \frac{1}{32 \pi^2 m_a \hbar} \; \int |\mathcal{M}_{fi}|^2 \; \delta(E_1 + E_2 - m_a)
 \, \frac{d^3p_1}{E_1 E_2}$$
 Defining:
 $$p \equiv |\vec{p}_1|$$
 and changing to spherical coordinates:
 $$d^3 p_1 = p^2 dp d\Omega$$
 we have
-$$\Gamma_{fi} \; = \; \frac{1}{32 \pi^2 m_a \hbar} \; \int |\mathcal{M}_{fi}|^2 \; \delta^4(u - m_a)
+$$\Gamma_{fi} \; = \; \frac{1}{32 \pi^2 m_a \hbar} \; \int |\mathcal{M}_{fi}|^2 \; \delta(u - m_a)
 \, \frac{p^2 dp d\Omega}{E_1 E_2}$$
 where $d\Omega = d\phi d\cos\theta$ is the solid angle and:
 $$u \equiv E_1 + E_2$$
 Noting that:
-$$\frac{du}{dp} = frac{E_1 + E_2}{E_1 E_2} \, p = \frac{up}{E_1 E_2}$$
+$$\frac{du}{dp} = \frac{E_1 + E_2}{E_1 E_2} \, p = \frac{up}{E_1 E_2}$$
 and so:
 $$\frac{du}{u} = \frac{p\, dp}{E_1 E_2}$$
 We now have:
-$$\Gamma_{fi} \; = \; \frac{1}{32 \pi^2 m_a \hbar} \; \int |\mathcal{M}_{fi}|^2 \; \delta^4(u - m_a) \, \frac{p}{u}\, du d\Omega$$
+$$\Gamma_{fi} \; = \; \frac{1}{32 \pi^2 m_a \hbar} \; \int |\mathcal{M}_{fi}|^2 \; \delta(u - m_a) \, \frac{p}{u}\, du d\Omega$$
 The last delta function kills the integral over u setting:
 $$u = E_1 + E_2 = m_a$$
 and so:
@@ -539,7 +539,7 @@ p^* = \frac{\sqrt{m_a^4 + m_1^4 + m_2^4- 2 (m_a^2 m_1^2 + m_1^2 m_2^2 + m_2^2 m_
 {\bf Exercise:} Verify Equation~\ref{eqn:pstar}.
 
 The decay rate $\Gamma_{fi}$ that we have calculated is independent of
-time, as it must be, to be logically conistent with indentical
+time, as it must be, to be logically consistent with indentical
 indistinguishable particles, which cannot, therefore, have any
 ``age''.  As a result, we have:
 $$\frac{dN}{dt} = - \Gamma N$$
@@ -548,7 +548,7 @@ $$N(t) = N(0) \exp(-\Gamma t) = N(0) \exp(-t /\tau)  $$
 where
 $$\tau = \frac{1}{\Gamma}$$
 is the lifetime of the particle.  The particle lifetime is easily
-observable in experients, for example, by looking at the distance
+observable in experiments, for example, by looking at the distance
 particles with a known energy travel inside a particle detector before
 decaying (accounting for time dilation).
 
@@ -562,6 +562,7 @@ decay: the ratio of the number of observed decays to a particular channel to the
 $$Br(a \to x+y) = \frac{N(a \to x+y)}{N(a \to {\rm anything})} = \frac{\Gamma(a \to x+y)}{\Gamma_{\rm tot}}$$
 
 \section{Volume Normalization}
+\label{sec:volume-normalization}
 
 Before proceeding, we will need to face an uncomfortable reality.  If
 we are going to consider interacting particles, we'll need to consider
@@ -569,7 +570,7 @@ the volume that our particles occupy, because the rate at which they
 interact will clearly depend on this.  But volume is not Lorentz
 invariant.  It turns out, one can just set the volume $V=1$ and
 everything works out just fine, and that's the approach that Thomson
-takes.  Griffith's evades the topic entirely by just giving FGR for
+takes.  Griffiths evades the topic entirely by just giving FGR for
 decays and cross-sections separately without any attempt at a
 derivation.  We are going to show how $V$ cancels beautifully when
 explicitly accounted for, thus justifying taking Thomson's approach
@@ -588,20 +589,19 @@ which is no longer Lorentz Invariant.  However:
 so when combined with the normalized wave function, the calculations
 (at least in this example) are still Lorentz Invariant.
 
-Our calculation of FGR is also modified, with the density of states
-taking on a factor of volume (see the Appendix for a concrete
-example):
+Our calculation of FGR is also modified.  As shown in the Appendix,
+the appropriate factor is $V/\hbar^3$, and so:
 $$\sum_{\Delta f} \to \int_{\Delta f} \, dn = V \int_{\Delta f} \,
 \rho(E_f) \, dE_f$$
-So our presciption for modifying the NR FGR becomes:
+So our prescription for modifying the NR FGR becomes:
 \begin{equation}
 \label{eqn:voltfi}
-|T_{fi}|^2 \to \frac{V |M_{fi}|^2}{(\prod 2 V E_a) (\prod 2 V E_i) }  
+|T_{fi}|^2 \to \frac{(V/\hbar^3) |M_{fi}|^2}{(\prod 2 (V/\hbar^3) E_a) (\prod 2 (V/\hbar^3) E_i) }  
 \end{equation}
 and
 \begin{equation}
 \label{eqn:volps}
-(2\pi) \delta(E_f - E_i) dn \to (2 \pi)^4 \delta^4(\sum p_i - \sum p_a) \prod_i \frac{V d^3 p_i}{(2\pi)^3}
+(2\pi) \delta(E_f - E_i) dn \to (2 \pi)^4 \delta^4(\sum p_i - \sum p_a) \prod_i \frac{(V/\hbar^3) d^3 p_i}{(2\pi)^3}
 \end{equation}
 It is left as exercise to show that the volume normalization, when
 applied consistently, has no impact on the decay rate calculation.  In
@@ -609,7 +609,11 @@ the next section, we will show that for scattering, an additional
 volume factor in FGR cancels a volume factor in the flux.\\[4pt]
 
 \noindent
-{\bf Exercise:} Show that Equation \ref{eqn:fgr-two-body-decay} is unchanged when using the substitutions in Equations~\ref{eqn:voltfi} and \ref{eqn:volps}, which explictly including the volume factors,instead of Equations~\ref{eqn:nrphin} and \ref{eqn:subm}.
+{\bf Exercise:} Set $V=1$ in Equations~\ref{eqn:voltfi} and \ref{eqn:volps}
+and apply the substitution to Fermi's Golden Rule as written in Equation~\ref{eqn:nrfgr}.  Show that you obtain Equation~\ref{eqn:covfgr} including the factors of $\hbar$.\\[5pt]
+
+\noindent
+{\bf Exercise:} Show that Equation \ref{eqn:fgr-two-body-decay} is unchanged when using the substitutions in Equations~\ref{eqn:voltfi} and \ref{eqn:volps}, which explicitly including the volume factors,instead of Equations~\ref{eqn:nrphin} and \ref{eqn:subm}.\\[5pt]
 
 \section{Interaction Cross-Section}
 
@@ -662,7 +666,7 @@ another.
 Fermi's Golden Rule determines the rate gamma for the scattering process
 $$a + b \to 1 + 2 + 3 + \ldots$$
 as:
-$$\Gamma_{fi} \; = \; \frac{1}{V} \, \frac{1}{\hbar 2 E_a 2 E_b} \;
+$$\Gamma_{fi} \; = \; \frac{1}{V} \, \frac{\hbar^2}{ 2 E_a 2 E_b} \;
 \int |\mathcal{M}_{fi}|^2 \; (2\pi)^4 \delta^4(\sum p_a - \sum p_1)
 \prod_i \frac{d^3p_i}{(2 E_i) \, (2\pi)^3 }$$ where we are (for now)
 keeping the volume factors ($V$) explicit, by using the substitutions
@@ -671,7 +675,7 @@ for the two-body decay of Equation~\ref{eqn:fgr-two-body-decay}, the
 volume factors $V$ do not all cancel at this stage.  The additional
 initial state particle brings in one more factor of $V$ which is not
 cancelled.  However, using Equations~\ref{eqn:lumi} and \ref{eqn:rate-sigma} we have:
-$$\sigma \; = \; \frac{1}{4 E_a E_b (v_a + v_b)} \, \frac{1}{\hbar}\;
+$$\sigma \; = \; \frac{\hbar^2}{4 E_a E_b (v_a + v_b)} \;
 \int |\mathcal{M}_{fi}|^2 \; (2\pi)^4 \delta^4(\sum p_a - \sum p_1)
 \prod_i \frac{d^3p_i}{(2 E_i) \, (2\pi)^3 }$$
 As before, the integral is manifestly Lorentz invariant, so $\sigma$ will transform as $1/F$ where:
@@ -691,7 +695,7 @@ in a frame where the velocities of $a$ and $b$ are collinear, and show that:
 $$F = 4 E_a E_b (v_a + v_b) = 4(E_a p_b + E_b p_a) \quad \square$$
 
 We can therefore write the cross-section as:
-$$\sigma \; = \; \frac{1}{4 \sqrt{(p_a\cdot p_b)^2 - (m_a m_b)^2}} \, \frac{1}{\hbar}\;
+$$\sigma \; = \; \frac{\hbar^2}{4 \sqrt{(p_a\cdot p_b)^2 - (m_a m_b)^2}} \;
 \int |\mathcal{M}_{fi}|^2 \; (2\pi)^4 \delta^4(\sum p_a - \sum p_1)
 \prod_i \frac{d^3p_i}{(2 E_i) \, (2\pi)^3 }$$
 which is manifestly Lorentz Invariant.  This is excellent news, as the
@@ -699,12 +703,24 @@ interaction cross-section encodes the dynamics of the interactions
 between particles $a$ and $b$, and therefore must be Lorentz invariant
 as the laws of physics must be the same in all inertial frames.
 
-The interaction cross-sections is bread-and-butter experimental and
+The interaction cross-section is bread-and-butter experimental and
 theoretical particle physics.  It is an excellent experimental handle,
 applicable to the center of a star to the surface of our ocean.  In
 the simplist form, we aim particles of type $a$ at particles of type
 $b$ and count the number that scatter during the course of our
-experiment.
+experiment.\\[5pt]
+
+
+In the exercise below, you will show that in the CMS, the golden rule for the two-body scattering  cross-section is:
+\begin{equation}
+\label{eqn:fgr-sigma-two-body}
+\sigma = \frac{\hbar^2 p_f^*}{64 \pi^2 s p_i^*} \int |\mathcal{M}_{fi}|^2 d\Omega
+\end{equation}
+where $s = (p_a + p_b)^2$ is the total energy in the CMS.  Hint: show that the 
+
+\noindent
+{\bf Exercise: } Show that in the CMS, the Lorentz invariant flux is
+$$F = 4 \, \sqrt{s} \, p_i^*$$
 
 \appendix
 
@@ -734,14 +750,14 @@ dn = \left( \frac{L}{2\pi} \right)^3 d^3k
 \end{equation}
 in terms of the momentum $p = \hbar k$, we have:
 \begin{equation}
-\label{eqn:dndthreek}
-dn = \frac{V}{(2\pi\hbar)^3} \; d^3p
+\label{eqn:dndthreep}
+dn = \frac{V/\hbar^3}{(2\pi)^3} \; d^3p
 \end{equation}
 which reproduces the single-particle phase-space factors in
-Equation~\ref{eqn:volps}, but for a factor of $\hbar$, a matter of
-convention.  Note that in the convention here, $dn$ is dimensionless,
-consistent with our framing of the problem as counting discrete states
-of a particle constrained to a finite volume $V$.
+Equation~\ref{eqn:volps}, including the factors of $\hbar$.  Note that
+in the convention here, $dn$ is dimensionless, consistent with our
+framing of the problem as counting discrete states of a particle
+constrained to a finite volume $V$.
 
 It is convenient to express Equation~\ref{eqn:dndthreek} as a differential in energy.  As our box size cannot possibly be Lorentz invariant, we'll use the non-relativistic energy of the free particle (for now):
 $$E=\frac{(\hbar k)^2}{2 m}$$
@@ -770,7 +786,7 @@ but suppose we have some other coordinates $r$ and $s$ with:
   w &=& w(r,s) \\
 \end{eqnarray*}
 then we can calculate our integral in terms of coordinates $r$ and $s$ via:
-$$I = \int f( u(r,s), w(r,s) ) \left| \frac{\partial(u,w)}{\partial(r,s}\right| \; dr \, ds$$
+$$I = \int f( u(r,s), w(r,s) ) \left| \frac{\partial(u,w)}{\partial(r,s)}\right| \; dr \, ds$$
 where
 \begin{equation*}
 \frac{\partial(u,w)}{\partial(r,s)} =
