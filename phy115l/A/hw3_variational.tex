@@ -29,40 +29,16 @@
 
 \maketitle
 
-\section{TISE and System of Units}
+\section{Introduction}
 
-We will use a variational approach to find the ground state $\Psi_0(x)$ of the Time-Independent Schr\"odinger Equation (TISE):
+We will use a variational approach to find the ground state
+$\Psi_0(x)$ of the Time-Independent Schr\"odinger Equation (TISE):
 $$\hat{H} \; \psi_0(x) = E_0 \; \psi_0(x)$$
 where the Hamiltonian operator is defined by:
 \begin{equation}
 \hat{H} = -\frac{\hbar^2}{2 m} \; \frac{d^2}{dx^2} \, + \, V(x)
 \end{equation}
-As before, we will use a system of units based on a characteristic length scale $a$ and an energy:
-\begin{equation}
-\epsilon \equiv \frac{\hbar^2}{2ma^2}
-\end{equation}
-(In previous homeworks we called this quantity $E_0$ but this could too easily be confused with the ground state!)  With these units, we have:
-\begin{equation}
-\frac{\hat{H}}{\epsilon} = -a^2\frac{d^2}{dx^2} + \frac{V(x)}{\epsilon}
-\end{equation}
-
-\section{Numerical Method for Finding the Second Derivative}
-
-We will calculate second derivatives using a second-order approximation:
-$$f''(x) = \frac{f(x+h)-2f(x)+f(x-h)}{h^2}$$
-We'll assume that we calculate our function with a constant spacing so that:
-$$x_j = x_0 + h * j$$
-and given $y$ values:
-$$y_j = f(x_j)$$
-we can calculate the second derivative as:
-$$f(x_j) = \frac{y_{j + 1} - 2 y_j + y_{j-1}}{h^2}$$
-One challenge with this technique is how to handle the edges.  For these exercises, it turns out that simplest solution is just to arrange things so that the second derivative is always zero.  This is the case if the edges are at $x=\pm\infty$ (effectively) or if we are considering an {\em odd} function from $x=0$ to $x=+\infty$.  In lecture, I mentioned that we could use periodic boundary conditions, but I have found the method proposed here is a simpler solution that works in every exercise below.
-
-There are many ways to implement this calculation with numpy array y, but I found the easiest was to use the {\tt np.roll} function, followed by setting the edges to zero by hand.
-
-\section{The Variational Method of Finding the Ground State}
-
-Our technique is based on the observation that:
+The variational approach is based on the observation that:
 $$\braket{\psi|\hat{H}|\psi} \geq E_0$$
 for all $\psi$.  Which you can see by expanding $\ket{\psi}$ in the complete set of energy eigenstates:
 $$\ket{\psi} = \sum c_n \ket{E_n}$$
@@ -74,74 +50,137 @@ so:
 $$\braket{\psi|\hat{H}|\psi} = E_0 + \sum_{n>0} |c_n|^2 (E_n - E_0)$$
 but as $E_n \geq E_0$ we have:
 $$\braket{\psi|\hat{H}|\psi} \geq E_0$$
+We'll explain the numerical algorithm later, but conceptually then, if
+we search the Hilbert space for the lowest energy wave function, we
+will find the ground state.
+
+As before, we will use a system of units based on a characteristic length scale $a$ and an energy:
+\begin{equation}
+\epsilon \equiv \frac{\hbar^2}{2ma^2}
+\end{equation}
+With these units, we have:
+\begin{equation}
+\frac{\hat{H}}{\epsilon} = -a^2\frac{d^2}{dx^2} + \frac{V(x)}{\epsilon}
+\end{equation}
+
+\section{Numerical Method for Finding the Second Derivative}
+
+Our numerical approach will rely on applying the Hamiltonian operator,
+which includes a second derivative, to a trial wave function.  We will
+calculate second derivatives using a second-order approximation:
+$$f''(x) = \frac{f(x+h)-2f(x)+f(x-h)}{h^2}$$
+We'll assume that we calculate our function with a constant spacing so that:
+$$x_j = x_0 + h * j$$
+and given $y$ values:
+$$y_j = f(x_j)$$
+we can calculate the second derivative as:
+$$f''(x_j) = \frac{y_{j + 1} - 2 y_j + y_{j-1}}{h^2}$$
+
+One challenge with this technique is how to handle the edges.  For
+these exercises, it turns out that simplest solution is just to
+arrange things so that the second derivative is always zero at the
+boundaries.  This is the case if the edges are at $x=\pm\infty$
+(effectively) or if we are considering an {\em odd} function from
+$x=0$ to $x=+\infty$.  One can use periodic boundary conditions as
+well, but I have found the method proposed here is a simpler solution
+that works well for our exercises.
+
+There are many ways to implement this calculation on a given numpy
+array y.  A convenient and coceptually simple approach is to use the
+{\tt np.roll} function, followed by setting the edges to zero by hand.
+(For practice, I would prefer that you implement your own second
+derivative calculation, instead of relying on a library.)
+
+\section{The Variational Method of Finding the Ground State}
+
+We showed in the introduction that:
+$$\braket{\psi|\hat{H}|\psi} \geq E_0$$ for all $\psi$.
+Our numerical algorithm will exploit this to find the ground state
+through random variations of a trial wave function.
 
 \begin{itemize}
-\item Choose the range $[a,b]$ of $x$ wide enough so that the wave-function can 
-be considered to be zero outside of this range, with the second derivative 0 at $x=a$ and $x=b$.
-\item Divide $[a,b]$ into $n$ equal intervals ($n+1$ discrete points) with
+\item Choose the range $[a,b]$ of $x$ wide enough so that the
+  wave-function can be considered to be zero outside of this range,
+  with the second derivative 0 at $x=a$ and $x=b$.
+\item Divide $[a,b]$ into $n$ equal intervals ($n+1$ discrete points)
+  with
 $$x_j = a + h\,j$$ for $0 \leq j \leq n$ and step size $h = (b-a)/n$.  (This is a good case for {\tt np.linspace})
 \item Choose a starting wave function $\psi_I(x)$ (an initial guess).
 \item Construct an array of $y$ values from:
   $y_j = \psi_I(x_j)$
-\item Set $y_0 = y_{n} = 0$
-\item Normalize the function represented by $y_i$, by finding the appropriate scale factor such that:
+\item Set $y_0 = y_{n} = 0.$  
+\item Normalize the $y$ values as described below.  The set of $y$
+  values represent the initial wave function.
+\end{itemize}
+At each step, we normalize the wave function as follows:
+\begin{itemize}  
+\item Scale the $y$-values such that:
 $$h \, \sum_j y_j^2 = 1$$
 \end{itemize}
-Next we iterate as needed, doing the following at each iteration:
+Starting with our initial wave function (which is automatically
+accepted) we proceed iteratively, by apply a random variation to
+construct a trial wave function.  We measure the energy of the trial
+wave function, and accept the change if it has lower energy.
+Specifically, we do the following:
 \begin{itemize}
 \item Choose a random integer n from $1$ to $n-1$ inclusive (notice this avoids the end points, which we are fixing to zero).
 \item Choose a random (uniform) value $\delta y$ from $-\Delta y$ to $\Delta y$, where $\Delta y$ is a parameter indicating the maximum amount of change in each iteration.
 \item Put $y_i \to y_i + \delta y$
 \item Normalize the $y$ values as above
-\item Calculate the expectation value for the energy $\braket{y|\hat{H}|y}$.
-\item If the expectation value for the energy has decreased, keep the changes to wave function.  If not, discard the change from this iteration, and revert back to $y$ values at the start of this iteration.
-\end{itemize}  
-It is often helpful to use a process called simulated annealing, where we initial use a large value of $\Delta y$, so that the wave function changes rapidly, then reduce the value of $\Delta y$ for fine tuning.
+\item Calculate the expectation value for the energy
+  $\braket{y|\hat{H}|y}$.
+\item If the expectation value for the energy has decreased, accept the trial wave function as the new wave function.  If not, revert back to $y$ values before the variation from this iteration was applied.
+\item Proceed to the next iteration.
+\end{itemize}
+We continue this process for a fixed number of iterations or until
+some other criteria is established.
 
-%\section{Using the Variational Method for Finding Excited States}
+\section{Simulated Annealing}
 
-%It is possible to find excited states using the variational method as well.
+A major challenge for numerical analysis is the possibility of being
+stuck in a local minimum.  If the variations are too small, the
+algorithm might never find the global minium (the ground state) but
+instead find a local minimum that is higher than the ground state.  On
+the other hand, if the variations are too large, the numerical
+algorithm becomes highly inefficient, requiring a huge number of steps
+to find a small variation as you become close to the maximum.
 
-%We can restrict ourselves to an odd wave function by limiting the range to $[0,b]$ and fixing $\psi(0)=0$, as appropriate for an odd function.  Notice that (as long as we choose $b$ large enough) this will have $\psi(0) = \psi(b) = 0$ and $\psi''(0) = \psi''(b) = 0$ just as before.  This will allow us to find the lowest energy odd wave function.  In the (typical) case that the ground state is even, this will allow us to find the first excited state.
-
-%There is another approach that does not rely on the wave functions being even or odd.  Consider a state vector expanded in terms of the energy eigenstates:
-%$$\ket{\psi} = \sum c_n \ket{E_n}$$
-%Now suppose we arrange that:
-%$$c_0 = 0$$
-%In this case, the variational principle (you can work through it much the same as above) becomes:
-%$$\braket{\psi|\hat{H}|\psi} \geq E_1$$
-%Therefore, we can use our same algorithm above to find excited states with a few changes:
-%\begin{itemize}
-%\item First find the ground state $\ket{\psi_0}$
-%\item After making each small variation, set the wave function to:
-%$$\ket{\psi} \to \ket{\psi} - \braket{\psi|\psi_0} \ket{\psi_0}$$
-%\item Make certain to renormalize the wave function after the subtraction.
-%\end{itemize}
-%Our wave function $\psi(x)$ is represented by an array of discrete values $y_j$.  Let's denote the ground state as $y^{(0)}_{j}$.  In this case, to perform the subtraction described above we would calculate the overlap:
-%$$o = \braket{\psi|\psi_0} = h \sum_j y_j \, y^{(0)}_j$$
-%then set:
-%$$y_i \to y_i - o \, y_{i}^{(0)}$$
+The performance of the variational method can be improved via a
+process called simulated annealing.  Initially, we use a large value
+of $\Delta y$, so the wave function changes rapidly, and hopefully
+samples a region near the global minimum, even if we start very far
+away from it.  As time goes on, we reduce the size of the $\Delta y$,
+so that the wave function moves more efficiently toward the nearest
+minimum.
 
 \section{Homework Problems}
 
 \noindent
-{\bf Problem 1:}  Implement a function that, when provided with an array of y values, calculates the second derivative using a second-order numerical technique as described above.  Validate your function for $f(x) = \sin(x)$ in the range $[0,2\pi]$ by plotting $f(x)$ and $f''(x)$ as calculated with your code.\\[5pt]
+{\bf Problem 1:} Implement a function that, when provided with an
+array of $y$ values, and a step size $h$, returns an equal sized array
+of values containing the second derivative at each point.  Use the
+second-order numerical technique as described above and set the end
+points to zero.  Validate your function for $f(x) = \sin(x)$ in the
+range $[0,2\pi]$ by plotting $f(x)$ and $f''(x)$ as calculated with
+your code.\\[5pt]
 
 \noindent
-{\bf Problem 2:}  Implement a function {\tt norm(x,y)} that takes two arrays $x$ and $y$ of the same size, and normalizes $y$ as described in the write-up.  Check your function with code like this:
+{\bf Problem 2:} Implement a function {\tt norm(y,h)} that takes an
+array $y$ and a step size $h$, and returns an array the same size as $y$ containeing the normalized $y$ values as described
+in the write-up.  Check your function with code like this:
 \begin{python}
 # normalization check:
-x = np.linspace(-10,10,100)
-y = np.random.uniform(np.size(x))
-y=norm(x,y)
-print(np.sum(y*y) * (x[1]-x[0]))
+h = 0.1
+y = np.random.uniform(100)
+y=norm(y,h)
+print(np.sum(y*y) * h)
 \end{python}
 which should print a number close to 1.\\[5pt]
 
 \noindent
 {\bf Problem 3:}  Implement a function {\tt energy(x,y,V)} that returns the expectation value of the energy:
 $$\braket{\psi|\hat{H}|\psi}$$
-The parameters $x$ and $y$ are arrays containing the discrete $x$-values ($x_j$) and the discrete $y$-values ($\psi(x_j))$ for the normalized wave function.  The parameter V is a function V(x) that defines the potential. You'll want to use your second derivative function from Problem 1 for the kinetic energy term in the hamiltonian.  Test your energy function with code like like this:
+The parameters $x$ and $y$ are arrays containing the discrete $x$-values ($x_j$) and the discrete $y$-values ($\psi(x_j))$ for the normalized wave function.  The parameter V is a function V(x) that defines the potential. You'll want to use your second derivative function from Problem 1 for the kinetic energy term in the Hamiltonian.  Test your energy function with code like like this:
 \begin{python}
 # free particle energy check:
 OFFSET = 10
@@ -182,7 +221,7 @@ as my starting wave function.
 \end{itemize}
 
 \noindent
-{\bf Problem 5:}  Using the variational method of Problem 2, find the ground state of a (nearly) infinite square well potential with a curved bottom:
+{\bf Problem 5:}  Use the variational method to find the ground state of a (nearly) infinite square well potential with a curved bottom:
 $$\frac{V(x)}{\epsilon} = \begin{cases}
 V_p(x) & -a \leq x \leq a \\
 B     & {\rm otherwise} \\
@@ -199,7 +238,7 @@ $$\Delta E = \frac{\epsilon}{a} \int_{-a}^{a} \cos^3\left(\frac{\pi x}{2 a}\righ
 Compare your measured energy level shift to the value expected from perturbation theory.\\
 
 \noindent
-{\bf Problem 6:}  Using the variational method of Problem 2, find the ground state of a harmonic oscillator:
+{\bf Problem 6:}  Use the variational method to find the ground state of a harmonic oscillator:
 $$V(x) = \epsilon x^2$$
 Plot your initial wave function, your final wave function, and at least one intermediate wave function in the same plot. Estimate your numerical uncertainty.  Compare your ground state energy to the expected result:
 $$E_0 = \epsilon$$
