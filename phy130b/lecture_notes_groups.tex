@@ -1,0 +1,2249 @@
+\documentclass[12pt]{article}
+
+\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.75in]{geometry}
+\usepackage{cite}
+\usepackage{slashed}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{braket}
+%\usepackage[american,fulldiode]{circuitikz}
+\usepackage{tikz}
+\begin{document}
+
+\title{PHY 130B \\ Lecture Notes G: \\
+Introduction to Groups, Symmetries, and Lie Algebras\\}
+\author{Michael Mulhearn}
+
+\maketitle
+
+\newcounter{exercise}
+\setcounter{exercise}{0}
+
+\newcommand{\exercise}{
+\stepcounter{exercise}
+\noindent
+{\bf Exercise R.\theexercise:}
+}
+
+\noindent
+{\it These notes are largely based on Chapters 4 and 5 of Jeevanjee's
+  excellent text ``An Introduction to Tensors and Group Theory for
+  Physicists'' which I highly recommend working through carefully if
+  you enjoy the small taste presented here.  An online version is
+  available through the UC Davis library.}
+
+\section{Groups and Symmetry}
+
+\noindent
+A \textbf{group} is a set $G$ with an operation $\cdot$ which satistifies:
+\begin{itemize}
+  \item \textbf{Closure}:  for all $g, h \in G$  
+    \begin{equation*}
+      g \, \cdot \, h \quad \in G 
+    \end{equation*}
+
+  \item \textbf{Associativity}:  for all $g, h, k \in G$  
+    \begin{equation*}
+      g \cdot (h \cdot k) \quad = \quad (g \cdot h) \cdot k
+    \end{equation*}
+
+  \item \textbf{Existence of identity}: There exists $e \in G$ such that for all $g \in G$:
+    \begin{equation*}
+      g \cdot e \quad = \quad e \cdot g \quad = \quad g 
+    \end{equation*}
+
+  \item \textbf{Existence of inverses}: For any $g \in G$, there exists $h \in G$ such that
+    \begin{equation*}
+      g \cdot h \quad = \quad h \cdot g \quad = \quad e
+    \end{equation*}
+\end{itemize}
+Note that 
+\begin{itemize}
+  \item Commutativity is \emph{not} required (i.e., $g \cdot h \neq h \cdot g$ in general).
+  \item The operation $\cdot$ is abstract.  it need not be multiplication in the conventional sense.  We sometimes use $\odot$ when we want to emphasize it is abstract mutiplication.
+  \item In concrete cases, the operation is often composition.
+\end{itemize}
+There are several important properties of groups that follow directly from the axioms:
+\begin{itemize}
+
+\item {\bf The identity is unique:} Suppose $e$ and $f$ are both identities. Then:
+\begin{align*}
+  e &= e \cdot f \quad & (f \text{ is identity}) \\
+    &= f & (e \text{ is identity}) \\
+\end{align*}
+\item {\bf Inverses are unique: } Suppose both $h$ and $k$ are inverses of $g$ so that:
+$$ g \cdot h = h \cdot g = e$$
+and  
+$$ g \cdot k = k \cdot g = e$$
+So then:
+\begin{align*}
+  gh &= gk \\
+  hgh &= hgk \\
+  eh &= ek \\
+  h &= k \\
+\end{align*}
+We denote the unique inverse to $g$ as $g^{-1}$.
+\item {\bf Right inverses are inverses: } Suppose that $h$ is a right inverge to $g$:
+$$ gh \quad = e$$
+  Then we have:
+\begin{align*}
+g^{-1} g h &= g^{-1} e \\
+e h &= g^{-1} e \\
+  h &= g^{-1} \\
+\end{align*}  
+A similar result holds for left inverses.  So any right or left inverse is the unique inverse $g^{-1}$. 
+\end{itemize}
+
+
+%% ============================================================
+%% PAGE 7 -- Example: Additive Group of Real Numbers
+%% ============================================================
+
+\subsection*{Example: Additive Group of Real Numbers}
+
+Let $x,\, y \in \mathbb{R}$, with operation $x \odot y := x + y$.
+
+\textbf{Closure:}
+\begin{equation*}
+  x + y \in \mathbb{R} \checkmark
+\end{equation*}
+
+\textbf{Associativity:}
+\begin{equation*}
+  x + (y + z) = (x + y) + z \checkmark
+\end{equation*}
+
+\textbf{Identity:} $0 \in \mathbb{R}$,
+\begin{equation*}
+  x + 0 = x \checkmark
+\end{equation*}
+
+\textbf{Inverses:} $-x \in \mathbb{R}$,
+\begin{equation*}
+  x + (-x) = 0 \checkmark
+\end{equation*}
+
+%% ============================================================
+%% PAGE 8 -- GL(V)
+%% ============================================================
+
+\subsection*{Example: General Linear Group $GL(V)$}
+
+$GL(V)$ is the set of all invertible linear operators $T: V \to V$,
+with group operation being composition:
+\begin{equation*}
+  (TU)(x) = T(U(x))
+\end{equation*}
+
+Note: $T: V \to V$, $H$ is the identity operator, $(TU) \in GL(V)$.
+
+\textbf{Closure:}
+\begin{equation*}
+  (TU)(\alpha x + \beta y)
+  = T\!\bigl(U(\alpha x + \beta y)\bigr)
+  = T\!\bigl(\alpha U(x) + \beta U(y)\bigr)
+  = \alpha\, T(U(x)) + \beta\, T(U(y)) \checkmark
+\end{equation*}
+
+\textbf{Note:} Invertible maps onto $V$.
+
+\textbf{Identity:} The identity operator $H(x) = x$:
+\begin{equation*}
+  (TH)(x) = T(H(x)) = T(x) \checkmark
+\end{equation*}
+
+\textbf{Inverses:} For $T \in GL(V)$, $T^{-1}$ exists and is linear (shown below),
+so $T^{-1} \in GL(V)$:
+\begin{equation*}
+  T^{-1}(\alpha x + \beta y) = \alpha\, T^{-1}(x) + \beta\, T^{-1}(y)
+\end{equation*}
+
+%% ============================================================
+%% PAGE 9 -- GL(V) continued
+%% ============================================================
+
+\textbf{Associativity:}
+\begin{equation*}
+  \bigl(T(UU)\bigr)(x) = T\!\bigl(U(U(x))\bigr) = \bigl((TU)U\bigr)(x) \checkmark
+\end{equation*}
+
+\textbf{Identity:} $H$ such that $T(H(x)) = T(x)$. \checkmark
+
+\textbf{Inverses:} $T^{-1}$ is linear. For $a = T(T^{-1}(a))$, $b = T(T^{-1}(b))$:
+\begin{equation*}
+  T^{-1}(\alpha a + \beta b)
+  = T^{-1}\!\bigl(\alpha\, T(T^{-1}(a)) + \beta\, T(T^{-1}(b))\bigr)
+  = T^{-1}\!\bigl(T(\alpha\, T^{-1}(a) + \beta\, T^{-1}(b))\bigr)
+  = \alpha\, T^{-1}(a) + \beta\, T^{-1}(b) \checkmark
+\end{equation*}
+
+Also $T^{-1}$ is invertible (its inverse is $T$), so $T^{-1} \in GL(V)$. \checkmark
+
+%% ============================================================
+%% PAGE 10 -- Subgroups
+%% ============================================================
+
+\subsection*{Subgroups}
+
+A subset $H$ of $G$ called a \textbf{subgroup} if $H$ is itself a group.
+
+\textbf{Examples:}
+\begin{itemize}
+  \item The integers $\mathbb{Z}$ are an additive subgroup of $\mathbb{R}$:
+    \begin{equation*}
+      \mathbb{Z} < \mathbb{R}
+    \end{equation*}
+  \item The even integers $2\mathbb{Z}$ are a subgroup of $\mathbb{Z}$:
+    \begin{equation*}
+      2\mathbb{Z} < \mathbb{Z}, \qquad n\mathbb{Z} < \mathbb{Z}
+    \end{equation*}
+  \item (Associativity subgroup): $-\mathbb{Z} = \mathbb{Z}$ is ``free'' for the action.
+\end{itemize}
+
+%% ============================================================
+%% PAGE 11 -- Symmetry
+%% ============================================================
+
+\subsection*{Symmetry}
+
+Groups as the natural mathematical framework for describing symmetry.
+
+Suppose $V$ is a vector space with a NDHF. $GL(V)$ has the isometries
+$\mathrm{Isom}(V)$ as a subgroup; the NDHF is the isometry $(\cdot\mid\cdot)$.
+
+$T$ is an isometry if it preserves the NDHF:
+\begin{equation*}
+  \bigl(T(v) \mid T(u)\bigr) = (v \mid u)
+\end{equation*}
+
+\textbf{Closure:}
+\begin{equation*}
+  \bigl((TU)(v) \mid (TU)(u)\bigr)
+  = \bigl(T(U(v)) \mid T(U(u))\bigr)
+  = \bigl(U(v) \mid U(u)\bigr)
+  = (v \mid u) \checkmark
+\end{equation*}
+
+\textbf{Identity:}
+\begin{equation*}
+  \bigl(H(v) \mid H(u)\bigr) = (v \mid u) \checkmark
+\end{equation*}
+
+\textbf{Inverses:}
+\begin{equation*}
+  \bigl(T^{-1}(v) \mid T^{-1}(u)\bigr)
+  = \bigl(T(T^{-1}(v)) \mid T(T^{-1}(u))\bigr)
+  = (v \mid u) \checkmark
+\end{equation*}
+
+%% ============================================================
+%% PAGE 12 -- Special Relativity Review
+%% ============================================================
+
+\section*{Special Relativity Review}
+
+Under SR: frame-invariant vector space $V \times V \to \mathbb{R}$,
+with NDHF $g(s, b)$ (Minkowski metric), non-degenerate and indefinite.
+The inner product is:
+
+\begin{equation*}
+  (a \mid b) = g_{\mu\nu}\, a^\mu b^\nu
+\end{equation*}
+
+The matrix representation $G = [g_{\mu\nu}]$ is:
+
+\begin{equation*}
+  G = [g_{\mu\nu}] =
+  \begin{pmatrix}
+    -1 & 0 & 0 & 0 \\
+     0 & 1 & 0 & 0 \\
+     0 & 0 & 1 & 0 \\
+     0 & 0 & 0 & 1
+  \end{pmatrix}
+\end{equation*}
+
+and the Lorentz-invariant product in matrix form is:
+
+\begin{equation*}
+  (a \mid b) = [a]^T G\, [b]
+\end{equation*}
+
+Lorentz transforms $\Lambda$ preserve this, so requiring
+$({\Lambda x} \mid {\Lambda y}) = (x \mid y)$ gives, via the Lorentz transformation
+$[x]^{\mu'} = \Lambda^{\mu'}{}_\nu [x]^\nu$:
+
+\begin{equation*}
+  [x]^T [\Lambda]^T G\, [\Lambda]\, [y] = [x]^T G\, [y]
+  \implies L^T G\, L = G
+\end{equation*}
+
+where $L = [\Lambda^{\mu'}{}_\nu]$.
+
+%% ============================================================
+%% PAGE 13 -- Lorentz Group SO(3,1)
+%% ============================================================
+
+\subsection*{Lorentz Group $SO(3,1)$: Isometries of the Minkowski Metric}
+
+The Lorentz group is the group of isometries of the Minkowski metric. Requiring:
+
+\begin{equation*}
+  (\Lambda x \mid \Lambda y) = (x \mid y)
+\end{equation*}
+
+gives in component form:
+
+\begin{equation*}
+  [\Lambda x]^T G\, [\Lambda y]
+  = [x]^T [\Lambda]^T G\, [\Lambda]\, [y]
+  = [x]^T G\, [y]
+\end{equation*}
+
+so:
+
+\begin{equation*}
+  [\Lambda]^T G\, [\Lambda] = G
+\end{equation*}
+
+In terms of our matrix notation $L = [\Lambda^{\mu'}{}_\nu]$:
+
+\begin{equation*}
+  \boxed{L^T G\, L = G}
+\end{equation*}
+
+%% ============================================================
+%% PAGE 14 -- Verify SO(3,1) is a group
+%% ============================================================
+
+\subsection*{Verify $SO(3,1)$ is a Group}
+
+\textbf{Closure:} If $A,\, B$ both satisfy $L^T G L = G$, does $AB$?
+\begin{equation*}
+  (AB)^T G\,(AB) = B^T A^T G\, A B = B^T G\, B = G \checkmark
+\end{equation*}
+
+\textbf{Associativity:} Matrix multiplication is associative. \checkmark
+
+\textbf{Identity:} $L = I$:
+\begin{equation*}
+  I^T G\, I = G \checkmark
+\end{equation*}
+
+$L^{-1}$ in $GL(G)$: since $SO(3,1) \subseteq GL(n,\mathbb{R})$, $L^{-1}$ exists.
+$L$ is $3\times 3$, so $SO(3,1) \subseteq GL(G)$.
+
+Note that $SO(3,1)$ is a subgroup of $GL(G)$, where $g$ is $3\times 3$.
+
+%% ============================================================
+%% PAGE 15 -- Determinants
+%% ============================================================
+
+\subsection*{Determinants}
+
+From $L^T G\, L = G$, taking determinants of both sides:
+\begin{equation*}
+  \det(L^T)\,\det(G)\,\det(L) = \det(G)
+\end{equation*}
+
+Since $\det(G) \neq 0$ (non-degenerate):
+\begin{equation*}
+  \bigl(\det L\bigr)^2 = 1 \implies \det(L) = \pm 1
+\end{equation*}
+
+\textbf{Subgroup structure:} The $\det = +1$ elements form a subgroup:
+\begin{equation*}
+  \det(A) = +1,\;\det(B) = +1 \implies \det(AB) = \det(A)\,\det(B) = +1 \checkmark
+\end{equation*}
+
+The $\det = -1$ side is \emph{not} a subgroup, since it is not closed:
+\begin{equation*}
+  \det(A) = -1,\;\det(B) = -1 \implies \det(AB) = +1 \quad \text{(not } -1\text{)}
+\end{equation*}
+
+Note: $\det(A) = \det(B)$ if $A, B \in SO$.
+
+%% ============================================================
+%% PAGE 16 -- Homomorphisms and Isomorphisms (title page)
+%% ============================================================
+
+\section*{Homomorphisms and Isomorphisms}
+
+%% ============================================================
+%% PAGE 17 -- Homomorphisms and Isomorphisms
+%% ============================================================
+
+\subsection*{Homomorphisms and Isomorphisms}
+
+For groups $G$ and $H$, a \textbf{homomorphism} $\phi: G \to H$ satisfies:
+\begin{equation*}
+  \phi(g \cdot h) = \phi(g) \cdot \phi(h) \quad \forall\, g, h \in G
+\end{equation*}
+
+One can show that a homomorphism maps the identity to the identity:
+\begin{equation*}
+  \phi(e_G) = e_H
+\end{equation*}
+and maps inverses to inverses:
+\begin{equation*}
+  \phi(g^{-1}) = \phi(g)^{-1}
+\end{equation*}
+
+If $\phi$ is one-to-one and onto, we call it an \textbf{isomorphism} and write $G \cong H$.
+
+%% ============================================================
+%% PAGE 18 -- Examples (Simple)
+%% ============================================================
+
+\subsection*{Examples}
+
+\textbf{Trivial example:} For any groups $G$ and $H$, the map $\phi(g) = e_H$ for all $g$
+is always a homomorphism:
+\begin{equation*}
+  \phi: G \to H, \quad \phi(g) = e_H \;\forall\, g \in G
+\end{equation*}
+\begin{equation*}
+  \phi(g \cdot h) = e_H = e_H \cdot e_H = \phi(g) \cdot \phi(h) \checkmark
+\end{equation*}
+
+\textbf{Example 2:} $(\mathbb{R}^+,\times) \cong (\mathbb{R}, +)$ via $\phi(x) = \ln x$:
+\begin{equation*}
+  \phi: (\mathbb{R}^+,\,\times) \to (\mathbb{R},\,+), \quad \phi(x) = \ln x
+\end{equation*}
+\begin{equation*}
+  \phi(x \cdot y) = \ln(xy) = \ln x + \ln y = \phi(x) + \phi(y) \checkmark
+\end{equation*}
+
+\textit{One-to-one:} $\phi(x) = \phi(y) \implies \ln x = \ln y \implies x = y$. \checkmark
+
+\textit{Onto:} For any $s \in \mathbb{R}$, $\phi(e^s) = \ln(e^s) = s$. \checkmark
+
+So $\phi$ is an isomorphism: $(\mathbb{R}^+, \times) \cong (\mathbb{R}, +)$.
+
+Note: An isomorphism maps a vector space to a group.*
+
+%% ============================================================
+%% PAGE 19 -- Example: GL(V) -> GL(n, C)
+%% ============================================================
+
+\subsection*{Example: $GL(V) \to GL(n, \mathbb{C})$}
+
+\textbf{Claim:} $GL(V) \cong GL(n, \mathbb{C})$ (is an isomorphism).
+
+\textbf{Recall:} For any $T \in GL(V)$ and any basis $\{e_j\}$, $j = 1,\ldots,n$,
+the components of $T$ are defined by:
+\begin{equation*}
+  T(e_j) = [T]^i{}_j\, e_i
+\end{equation*}
+
+\textbf{Plan:}
+\begin{enumerate}
+  \item Show $[TU] = [T][U]$ (homomorphism, i.e.\ $GL(V) \to GL(n,\mathbb{C})$ is a homomorphism)
+  \item Show $[T] \in GL(n,\mathbb{C})$ (onto)
+  \item Show it is 1-to-1 $\implies$ isomorphism \checkmark
+\end{enumerate}
+
+%% ============================================================
+%% PAGE 20 -- Proof of Homomorphism (1)
+%% ============================================================
+
+\subsubsection*{Proof of Homomorphism (1)}
+
+Define: $U(v) = U^j{}_k\, v^k\, e_j$, \quad $T(v) = T^j{}_k\, v^k\, e_j$,
+so $[x]^j = U^j{}_k\,[v]^k$.
+
+Then:
+\begin{equation*}
+  [TU\, v]^i = [T]^i{}_j\,[U]^j{}_k\,[v]^k = \bigl([T][U]\bigr)^i{}_k\,[v]^k
+\end{equation*}
+
+Therefore $[TU] = [T][U]$, so $GL(V) \to GL(n,\mathbb{C})$ is a homomorphism. \checkmark
+
+%% ============================================================
+%% PAGE 21 -- Proof of Isomorphism (2) + (3)
+%% ============================================================
+
+\subsubsection*{Proof of (2) + (3)}
+
+\textbf{(2) Onto:} For any matrix $M \in GL(n,\mathbb{C})$, define $T$ by its action on components:
+\begin{equation*}
+  T(v) = M^i{}_j\, v^j\, e_i
+\end{equation*}
+Then $[T] = M$, so the map is onto $GL(n,\mathbb{C})$. \checkmark
+
+\textbf{(3) 1-to-1:} Suppose $[T] = [S]$ (same matrix). Then $T(e_i) = S(e_i)$ for all $i$.
+Since $\{e_i\}$ is a basis (linearly independent and spanning), for any $v \in V$:
+\begin{equation*}
+  v = v^i\, e_i \implies T(v) = v^i\, T(e_i) = v^i\, S(e_i) = S(v)
+\end{equation*}
+So $T = S$, and the map is 1-to-1. \checkmark
+
+Combined: $GL(V) \cong GL(n,\mathbb{C})$ is an isomorphism. \checkmark
+
+%% ============================================================
+%% PAGE 22 -- Isometric Groups
+%% ============================================================
+
+\subsection*{Isometric Groups}
+
+Recall: an isometry $T$ preserves the NDHF $(T \times \mid T y) = (x \mid y)$.
+
+Just shown: $GL(V)$ is isomorphic to $n \times n$ invertible matrices $GL(n,\mathbb{C})$.
+
+\medskip
+\noindent\fbox{\parbox{0.9\textwidth}{
+  Isometries are isomorphic to subgroups of invertible $n\times n$ matrices
+  (with certain properties).
+}}
+
+%% ============================================================
+%% PAGE 23 -- Rotations and Reflections
+%% ============================================================
+
+\subsection*{Rotations and Reflections}
+
+For a real vector space $V$ with Euclidean metric,
+the isometries $A$ satisfy $(Ax \mid Ay) = (x \mid y)$, i.e.:
+\begin{equation*}
+  [A\,x]^T[A\,y] = [x]^T[A]^T[A]\,[y] = [x]^T[y]
+  \implies [A]^T[A] = I
+\end{equation*}
+
+\textbf{Orthogonal Group:}
+\begin{equation*}
+  O(n) = \bigl\{R \in GL(n,\mathbb{R}) \mid R^T R = I\bigr\}
+\end{equation*}
+
+\begin{equation*}
+  \det(R^T R) = \bigl(\det R\bigr)^2 = 1 \implies \det(R) = \pm 1
+\end{equation*}
+
+\textbf{Special Orthogonal Group:}
+\begin{equation*}
+  SO(n) = \bigl\{R \in O(n) \mid \det(R) = +1 \bigr\}
+\end{equation*}
+
+$SO(n)$ is a subgroup since $\det(AB) = \det(A)\cdot\det(B) = 1$ if $A, B \in SO(n)$.
+
+HW: if $A, B \in SO(n)$, $\det(AB) = \det(A)\cdot\det(B) = 1$. \checkmark
+
+%% ============================================================
+%% PAGE 24 -- Rotations in 2D
+%% ============================================================
+
+\subsection*{Rotations in $n = 2$}
+
+\begin{equation*}
+  R(\theta) = \begin{pmatrix} \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta \end{pmatrix},
+  \qquad
+  R^T(\theta) = \begin{pmatrix} \cos\theta & \sin\theta \\ -\sin\theta & \cos\theta \end{pmatrix}
+  = R(-\theta)
+\end{equation*}
+
+Parity matrix $P$:
+\begin{equation*}
+  P = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix},
+  \qquad P^T P = I \checkmark
+\end{equation*}
+
+\textbf{HW: Show}
+\begin{equation*}
+  SO(2) = \bigl\{R(\theta) \mid \theta \in \mathbb{R} \bigr\}
+\end{equation*}
+\begin{equation*}
+  O(2) = \bigl\{R(\theta) \mid \theta \in \mathbb{R}\bigr\}
+         \cup \bigl\{P\,R(\theta) \mid \theta \in \mathbb{R}\bigr\}
+\end{equation*}
+
+%% ============================================================
+%% PAGE 25 -- Unitary Group
+%% ============================================================
+
+\subsection*{Unitary Group}
+
+For a finite-dimensional complex inner product space, the isometries satisfy
+$\langle A\phi \mid A\psi \rangle = \langle \phi \mid \psi \rangle$, i.e.:
+\begin{equation*}
+  [A\phi]^\dagger [A\psi]
+  = [\phi]^\dagger [A]^\dagger [A]\,[\psi]
+  \implies [A]^\dagger [A] = I
+\end{equation*}
+
+\textbf{Unitary Group:}
+\begin{equation*}
+  U(n) = \bigl\{U \in GL(n,\mathbb{C}) \mid U^\dagger U = I\bigr\}
+\end{equation*}
+
+\begin{equation*}
+  \det(U^\dagger U) = \det(I)
+  \implies \overline{\det(U)}\cdot\det(U) = 1
+  \implies |\det(U)|^2 = 1
+  \implies |\det(U)| = 1
+\end{equation*}
+
+\textbf{Special Unitary Group:}
+\begin{equation*}
+  SU(n) = \bigl\{U \in U(n) \mid \det(U) = 1\bigr\}
+\end{equation*}
+
+\textbf{Claim:} For an orthonormal basis $B$:
+\begin{equation*}
+  [U^\dagger]_B = [U]^\dagger_B
+\end{equation*}
+
+(See problem 2.7.)
+
+
+
+
+
+
+
+
+
+
+
+a set $G$ with
+
+
+
+
+
+
+
+\section{Vectors and Change of Basis}
+\label{sec:vectors}
+
+One of the first concepts encountered in introductory physics is the
+vector as a geometric object with both a magnitude and a direction.
+In more advanced subjects, like quantum mechanics, we introduce the
+abstract definition of a vector space $V$ over a scalar field $F$
+(e.g. the real or complex numbers).  The vector space is closed under
+vector addition and scalar multiplication, and has the following
+defining properties:
+\begin{center}
+\begin{tabular}{ll}
+{\bf (1)} & $v+w = w+v$ for all $v,w \in V$.\\
+{\bf (2)} & $v+(w+x) = (v+w)+x$ for all $v,w,x \in V$. \\
+{\bf (3)} & There exists $0 \in V$ such that $v+0=v$ for all $v \in V$.\\
+{\bf (4)} & For all $v \in V$ there exists $-v \in V$ such that $v + (-v) = 0$.\\
+{\bf (5)} & $c(v+w) = cv + cw$ for all $v,w \in V$ and $c \in F$.\\
+{\bf (6)} & $1v = v$ for all $v \in V$ (note: $1 \in F$).\\
+{\bf (7)} & $(a+b)v = a v + b v$ for all $v \in V$ and $a,b \in F$.\\
+{\bf (8)} & $a(b v) = (a b ) v$ for all $v \in V$ and $a,b \in F$.\\
+\end{tabular}
+\end{center}
+As you will show in the exercise below, additional basic properties are deducible from these axioms:
+\begin{center}
+  \begin{tabular}{lll}
+{\bf (9)}  & $0 \in V$ is unique & (Show $0'+v = v \implies 0' = 0$) \\
+{\bf (10)} & $0 v = 0$ for all $v \in V$ & (Use $0+0=0$ for scalars) \\
+{\bf (11)} & $-v \in V$ is unique & (Show that $v+(-v') = 0 \implies -v = -v')$\\
+{\bf (12)} & $(-1)v = -v$ for all $v \in V$ & (Use $1+(-1)=0$ for scalars)\\
+\end{tabular}
+\end{center}
+Note that we use the same symbol ($0$) for both the scalar zero and
+the zero vector; you must infer which one it refers to from context.\\
+
+\exercise Deduce properties (9)-(12) from axioms (1)-(8) and known
+properties of the scalar field $F$.  $\square$ \\[3pt]
+
+\noindent
+The vector space ${\mathbb R}^n$ was the inspiration for the abstract
+vector space, but there are many more examples: complex numbers as
+vectors over the field of complex numbers, $n \times m$ real matrices
+over the scalar field of real numbers with ordinary matrix addition
+and scalar multiplication, real-valued periodic functions $f(x)$ of a
+real variable with period $T$ over the scalar field of real numbers
+with ordinary addition and multiplication.
+
+\exercise The set $V$ is the rational numbers $\mathbb{R}$ and the
+field $F$ is the real numbers, with ordinary addition and
+multiplication.  Show that $V$ is not a vector space. $\square$
+\\[3pt]
+
+\exercise The set $V$ is the empty set.  Is $V$ a vector space?
+$\square$ \\[3pt]
+
+\exercise For a vector space $V$ scalar multiplication is a null
+operation, that is $a v = v$ for all $a \in F$ and $v \in V$.  Deduce
+all of the vectors in the vector space $V$.  $\square$ \\[3pt]
+
+\exercise (*) The set $V$ is the positive reals, with all reals as the
+scalar field $F$.  For clarity in what follows, we'll use $\oplus$ for
+vector addition and $\odot$ for scalar multiplication.  Vector
+addition is defined as multiplication of the real numbers, which we
+write as:
+$$v \oplus w = v \, w  \hspace{1cm} v,w \in V$$
+for $w,v \in V$.  Scalar multiplication is exponentiation, which we write as:
+$$c \odot v = v^c  \hspace{1cm} v \in V, c \in F$$
+Show that $V$ is a vector space.  What is the real number corresponding to the vector $0$?
+ $\square$ \\[3pt]
+
+\exercise (*) For the previous exercise, verify explicitly that
+derived properties (10) and (12) hold for this vector space.
+$\square$ \\[3pt]
+
+\noindent
+A basis $\mathcal{B}$ for a vector space $V$ is an ordered set of
+vectors $\mathcal{B} = \{e_1, e_2, \cdots, e_m\}$ with the following
+properties:
+\begin{itemize}
+\item They are linearly independent, that is:
+$$c^1 e_1 + c^2 e_2 + \cdots + c^n e_n = 0$$
+only if $c^i=0$ for all $i$.
+\item They span the space, that is for every $v \in V$ there exists a set of scalars $\{v^i \in F\}$ such that:
+$$v = \sum_i v^i e_i$$.
+\end{itemize}
+The scalar quantities $v^i$ are called the components of the vector,
+and they depend on the basis $\mathcal{B}$ chosen.  This is crucial
+point to understand, so it bears repeating: {\bf a vector $v$ exists
+  independently of any basis, but its components $v^i$ depend on the
+  basis chosen $\mathcal{B} = \{e_i\}$.}  Also, take care that $e_i$
+is not a scalar, it is a vector, in particular, it is this $i$-th
+basis vector.  Don't let the index fool you into thinking $e_i$ is a
+scalar like $v^i$.\\
+
+\exercise (*) Show that the components $v^i$ of a vector $v$ for basis
+$\mathcal{B}$ are unique. (This is essential for many of the results
+that follow.)  $\square$ \\[3pt]
+
+\noindent
+Throughout this course, we will use the {\bf Einstein summation
+  convention}, whereby there is an implicit sum over repeated dummy
+indices with one a superscript and the other a subscript, e.g.:
+$$v = v^i e_i \equiv \sum_i v^i e_i$$
+Only {\bf after} a basis $\mathcal{B}$ is chosen, it is possible to represent a vector as a column vector:
+$$[v]_{\mathcal{B}} = \begin{pmatrix} v^1 \\ v^2 \\ \vdots \\ v^n \end{pmatrix}$$
+or a row vector:
+$$[v]_{\mathcal{B}}^T = \begin{pmatrix} v^1 & v^2 & \cdots & v^n \end{pmatrix}$$.
+
+\exercise (*) We can think of the complex numbers as 2-D vector space with
+the real numbers as scalars.  Show that $e_1 = 1$ and $e_2 = i$ are a
+basis $\mathcal{B}$ for this vector space.  For $v = a + b i$, write
+the column vector $[v]_\mathcal{B}$.  This is why we are able to
+visualize the complex plane as a 2-D space.  $\square$ \\[3pt]
+
+\exercise (*) The Pauli matrices:
+$$\sigma_1 = \begin{pmatrix}
+  0 &  1 \\ 1  & 0 \\
+\end{pmatrix},\hspace{1cm}
+\sigma_2 = \begin{pmatrix}
+  0 &  -i \\ i  & 0 \\
+\end{pmatrix},\hspace{1cm}
+\sigma_3 = \begin{pmatrix}
+  1 &  0 \\ 0  & -1 \\
+\end{pmatrix},
+$$
+are a basis for the vector space of traceless $2\times2$ Hermitian matrices.  Write the $2\times2$ matrix (an element of this vector space):
+$$v =
+\begin{pmatrix}
+  z &  x-iy \\ x+iy  & -z \\
+\end{pmatrix}$$
+as a column vector $[v]_\mathcal{B}$ with basis $\mathcal{B}=\{\sigma_1, \sigma_2, \sigma_3 \}$  $\square$ \\[3pt]
+
+\noindent
+Suppose we have two bases $\mathcal{B}$ and $\mathcal{B}'$.  We have:
+$$\mathcal{B} = \{e_i\}$$
+as before, but for the primed basis we will write:
+$$\mathcal{B}' = \{e_{i'}\}.$$
+Notice that it is the index $i$ that is primed in order to indicate
+that it is an index in the $\mathcal{B}'$ basis.  The quantity $e$ is
+not primed.  We'll justify this convention shortly.
+
+Since each $e_i$ is a vector in $V$, and $\{e_{i'}\}$ is a basis,
+there must (by definition of basis, as above) exist scalar values
+$A^i_{j'}$ such that:
+$$e_i = A^{j'}_i e_{j'}$$
+(Remember there is an implicit sum across $j'$ here.)  Similarly,
+since each $e_{i'}$ is a vector in $V$, and $\{e_i\}$ is a basis,
+there must be some scalar values $A^{j}_{i'}$ such that:
+$$e_{i'} = A^{j}_{i'} e_j$$
+Remember, the location of the prime matters, so $A^{i}_{j'}$ refers to something altogether different from $A^{j}_{i'}$.  But they are related:
+$$e_i = A^{j'}_{i} e_{j'} = A^{j'}_i A^{k}_{j'}e_{k}$$
+which requires (recall that the components of a basis are unique) that:
+$$A^{j'}_i A^{k}_{j'} = \delta^k_i$$
+and similarly:
+$$A^i_{j'} A^{j'}_k = \delta^i_k$$
+where
+$$\delta^i_j = \begin{cases} 1 & i=j \\ 0 & \text{otherwise}\end{cases}$$
+
+Any vector $v$ can be expressed in terms of either basis $\mathcal{B}$
+or basis $\mathcal{B}'$, which we write as:
+$$v = v^{i}e_{i} = v^{j'}e_{j'}$$
+but we also have:
+\begin{equation}
+\label{eqn:tfbasis}
+e_{j'} = A^{i}_{j'} e_i
+\end{equation}
+so that:
+$$v^{i}e_{i} = v^{j'}e_{j'} = v^{j'} \, (A^{i}_{j'} \, e_i) = (A^{i}_{j'} \, v^{j'}) \, e_i$$
+In a previous exercise you showed that the components of a vector within a basis (such as $\{e_i\}$ here) are unique.  Therefore, we can conclude that for all $i$:
+$$v^{i} = A^{i}_{j'} \, v^{j'}$$
+In a similar fashion, we can find that:
+$$v^{j'} = A^{j'}_{i} \, v^{i}$$
+Compare this transformation rule to Equation~\ref{eqn:tfbasis}, we see that the components $v^i$ transform via $A^{j'}_i$, whereas the basis vectors $e_i$ transform via $A^{i}_{j'}$.  That is, they transform in a contrary fashion.  {\bf We call the vector components $v^i$ contravariant, and we indicate this with an upper index.  We call the basis vector $e_i$ covariant, and we indicate this with the lower index.}
+\begin{center}
+\begin{tabular}{lllll}
+ & index location & quantity & transformation & inverse transformation \\
+\hline
+$v^i$ & upper index & contravariant component & $v^{i'} = A^{i'}_{j} v^{j}$ & $v^{i} = A^{i}_{j'} v^{j'}$ \\
+$e_i$ & lower index & covariant basis vector & $e_{i'} = A^{j}_{i'} e_{j}$ & $e_{i} = A^{j'}_{i} e_{j'}$ \\
+\end{tabular}
+\end{center}
+
+
+\exercise Our first definition of a vector is a geometric object with
+a magnitude and direction.  Suppose we scale each basis vector by a
+scalar $s$, to obtain a new basis.  We must scale the components from
+the original basis by some scalar value in order to obtain new
+components for the new basis which preserve the magnitude of the
+vector.  What is that scalar value?  Does the ``contra'' in
+contravariant components make sense in this context?  $\square$
+\\[3pt]
+
+\exercise Consider the previous exercise, but instead of scaling, we
+rotate the original basis vectors by an angle $\theta$ about some axis
+$w$ to obtain a new basis.  Now we must rotate the components from the
+original basis about the axis $w$ by some angle, in order to obtain
+new components for the new basis which preserve the direction of the
+vector.  What is that angle?  Does the ``contra'' in contravariant
+components make sense in this context?  $\square$ \\[3pt]
+
+\exercise (*) Consider the vector space $\mathbb{R}^2$ as a vector
+space of the real numbers with the usual addition and scalar
+multiplication.  Suppose that in the standard basis
+$$\mathcal{B} = \{(1,0), (0,1)\}$$
+the components of a vector $v$ are:
+$$[v]_\mathcal{B} = \begin{pmatrix} a \\ b \end{pmatrix}$$
+For the alternative basis:
+$$\mathcal{B}' = \{(1,1), (1,-1)\}$$
+write the components of vector $v$ as a column matrix:
+$$[v]_{\mathcal{B}'} = \begin{pmatrix} ? \\ ? \end{pmatrix}$$\\[3pt]
+
+
+
+
+\section{Dual Vectors}
+
+For a vector space $V$ over a scalar field $F$, we define a dual
+vector $f$ as an $F$-valued linear function on $V$:
+$$f: V \to F $$
+That is, if $f$ is a dual vector, then for any $v \in V$ we have $f(v)
+\in F$.  The linearity means that for any $v,w \in V$ and $c \in F$ we
+have also:
+$$f(v + c \, w) = f(v) + c \, f(w)$$
+The set of all dual vectors to a vector space $V$ is called the {\bf
+  dual space of $V$}, and it is denoted as $V^*$.  As you will verify in the
+exercise below, the dual space is itself a vector space.\\[3pt]
+
+\exercise (**)
+For a vector space $V$ over scalar field $F$, show that its dual space
+($V^*$) is itself a vector space.  Vector addition (addition of dual
+vectors) and scalar multiplication are defined such that:
+$$(f+cg)(v) = f(v) + c g(v) \hspace{2cm} f,g \in V^*,\; v \in V,\; c \in F $$
+ $\square$ \\[3pt]
+
+\noindent
+Assume that $\mathcal{B} = \{ e_i\}$ is a basis for the vector space $V$.
+The action of any dual vector $f \in V^*$ on any vector $v \in V$ is completely determined by
+the action of $f$ on the basis vectors $e_i$.  For each i, we define a scalar quantity
+$$f_i \equiv f(e_i)~~~~~(f_i \in F)$$
+and we see that:
+\begin{equation}
+\label{eqn:dualout}
+f(v) = f (v^i e_i) = v^i f(e_i) = v^i f_i
+\end{equation}
+which only depends on $f$ via the scalar quantities $f_i$.
+
+For each $i$, we also define a dual vector $e^i \in V^*$ by:
+$$e^i(v) = v^i$$
+We say that $e^i$ picks off the $i$th component of $v$.
+If follows that
+$$e^i(e_j) = \delta^i_j$$
+because $e_j$ is a vector in $V$ whose components are all 0, except for the $j$th component, which is 1.  You will show in the exercises below that the set of dual vectors $\{e^i\}$ are a basis for $V^*$, which we call the {\bf dual basis} and denote as $\mathcal{B}^*$
+You will also show that the scalar quantities $f_i$ are in fact the components of $f$ in the basis $\mathcal{B}$, so we have:
+$$f = f_i e^i$$
+which shows a dual vector $f$ expanded in terms of its components $f_i$ and basis vectors $e^i$.
+
+The dual basis $\mathcal{B}^*$ depends entirely on the basis $\mathcal{B}$ of
+$V$.  As $\mathcal{B}^*$ has one basis vector defined for each basis vector in
+$\mathcal{B}$, we see that {\bf if $V$ is finite dimensional, then it's
+dual space $V^*$ has the same dimension.}\\[3pt]
+
+\exercise 
+Verify from the definition of $e^i$ that  $e^i(v + c w) = e^i(v) + c e^i(w)$ so that $e^i$ is indeed a dual vector. $\square$ \\[3pt]
+
+\exercise Show that
+$$f = f_i e^i$$
+is a valid expansion for $f$, by verifying that
+$$f(v) = v^i f_i$$
+as required by Equation~\ref{eqn:dualout}. This shows that $\{e^i\}$ spans the dual space. $\square$ \\[3pt]
+
+\exercise (*)
+Show that if:
+$a_i e^i = 0$
+then, for all $i$
+$a_i = 0$
+This shows that $\{e^i\}$ is linearly independent.
+Hint: define the dual vector
+$a = a_i e^i$
+and evaluate $a(e_i)$ for each $i$.  $\square$ \\[3pt]
+
+We showed previously that the components of a vector $v$ transform in a
+covariant fashion, so we call the $v^i$ the covariant components.
+Suppose that our basis transforms according to:
+$$e_{i'} = A^{j}_{i'} e_{j}$$
+then we see that:
+$$f_{i'} = f(e_{i'}) = f(A^{j}_{i'} e_{j}) = A^{j}_{i'} f(e_{j}) = A^{j}_{i'} f_j$$
+so the components of the dual vector $f_i$ transform covariantly.  Notice how nicely our notation tracks covariance and contravariance.  As long as we keep indices in the same position on both side of equations, avoiding constructions like:
+$$f^i = f(e_i) \hspace{1cm} \text(wrong!)$$
+then linearity ensures the covariance and contravariance of quantities
+can be read off from the location of the index.  (This is an important
+practical matter, so take the time to understand it.)
+
+To recap, we can expand a vector $v \in V$ in terms of any basis
+$\mathcal{B}=\{e_i\}$ and its scalar components $v^i \in F$:
+$$v = v^i e_i.$$
+We can likewise expand a dual vector $f \in V^*$ in terms of the dual
+basis $\mathcal{B}^*$ and its scalar components $f_i \in F$:
+$$f = f_i e^i$$
+Notice that the location of the indices in dual vectors is opposite
+that of vectors, reflecting that dual vectors have covariant
+components and vectors have contravariant components.  We can think of
+the scalar components $v^i$ and $f_i$ in two complementary ways.
+First, $v^i$ and $f_i$ are the unique set of scalars which scale the
+basis vectors of $\mathcal{B}$ and $\mathcal{B}^*$ to the vectors $v$
+and $f$.  Secondly, the components can both be obtained by evaluating
+a dual vector:
+$$v^i = e^i(v)$$
+and
+$$f_i = f(e_i)$$
+In the vector space $\mathbb{R}^3$ we are familiar with obtaining the
+components of a vector by taking dot products.  In a Hilbert space, we
+do so with an inner product.  But here, we have not defined an inner
+product.  We see that dual vectors are a generalization of the dot
+product idea.\\[3pt]
+
+\exercise Using the definition, show that $e^i$ transforms
+contravariantly, as expected for a quantity with upper indices.\\[3pt]
+
+
+\section{Introduction to Tensors}
+\label{sec:tensors}
+
+A traditional physics definition of a tensor is a generalization of
+scalars and vectors, to include quantities with multiple indices which
+transform in a specific way when changing the basis.  This definition
+is perfectly reasonable, but it is not particularly insightful, and
+things (like the transformation rules) seem to come from nowhere.  We
+are going to use a more modern definition of a tensor, which is
+equivalent, but clarifies the situation considerably.
+
+Let $V$ be vector space and $V^*$ its dual space.  We define an $(r,s)$ tensor as an $F$-valued multilinear function of $r$ vectors and $s$ dual vectors:
+\begin{displaymath}
+  T:\underbrace{V \times V \times \cdots \times V}_{r~\text{times}} \times \underbrace{V^* \times V^* \times \cdots \times V^*}_{s~\text{times}} \to F
+\end{displaymath}
+The scalar value returned by a tensor is written as:
+$$T(v_1,v_2,\cdots,v_n,f_1,f_2,\cdots,f_s)$$
+where $v_1,v_2,\cdots,v_r \in V$ and $f_1,f_2,\cdots,f_n \in V^*$ are
+{\bf not} components of vectors or dual vectors but $r$, despite the
+indices, but $r$ entire vectors and $s$ entire dual vectors.  We
+define addition and scalar multiplication in the obvious manner, as
+clarified by example below.  This makes the set of all $(r,s)$ tensors
+a vector space, which we call $\mathcal{T}^r_s(V)$.
+
+The proliferation of indices makes talking about general tensors
+cumbersome, so let's work things out explicitly for a (1,1) tensor
+even though our conclusions apply to all tensors.  We define tensor
+addition of two (1,1) tensors $T$ and $S$ by:
+$$(T+S)(v,f) = T(v,f) + S(v,f)$$
+with $v \in V$ and $f \in V^*$.  We define scalar multiplication by:
+$$(cT)(v,f) = c \; (T(v,f))$$
+with $c \in F$.  Multilinearity means that:
+\begin{eqnarray*}
+  T(v+cw,f) &=& T(v,f) + c \, T(w,f) \\
+  T(v,f+cg) &=& T(v,f) + c \, T(v,g)
+\end{eqnarray*}
+for $w \in V$ and $g \in V^*$.\\[3pt]
+
+\noindent
+Under the traditional definition, we consider tensors to be a
+generalization of the concept of scalars and vectors, so that scalar
+and vectors are examples of tensors.  Is that the case under the new
+definition?  The only immediately obvious connection is that a $(0,1)$
+tensor precisely reproduces the definition of a dual vector.  It is
+also convenient to consider (0,0) tensors as scalars.  That is, we can
+think of scalar as a scalar-valued function with zero vector and zero dual
+vector arguments.\\[3pt]
+
+\noindent
+It is a bit more challenging to connect vectors to tensors under the new definition.
+Formally, we say that vectors are isomorphic to the
+(1,0) tensors by mapping each vector $v \in V$ to a (1,0) tensor $T_v$
+$$v \mapsto T_v$$
+defined by:
+$$ T_v(f) \equiv f(v).$$
+Less formally, we are going to play a little game, you and I.  You
+only have an ordinary vector $v$, but you are going to convince me
+that you have a (0,1) tensor.  So I give you $f \in V^*$ and, quite
+cleverly really, you put your vector into my dual vector, and give me
+back $f(v)$.  This shows me that you have an $F$-valued function of $V^*$,
+as required for a (0,1) tensor.  But is it linear?  I give $g \in V^*$
+and you give me $g(v)$.  I give you $f+cg$ with $c \in F$ and you give
+me:
+$$(f+cg)(v) = f(v) + c g(v)$$
+which verifies that you have a linear function.  So you have now convinced
+me that you have a $(0,1)$ tensor, even though you really only had a vector.
+One more interpretation: a $(0,1)$ tensor is the dual of a dual
+vector, and so a vector.
+
+Next we'll consider a (2,0) tensor $T$.  By definition $T$ as an
+$F$-valued multilinear function of two vectors:
+\begin{displaymath}
+T:V \times V \to F
+\end{displaymath}
+and the scalar value returned for $v, w \in V$ is written as
+$$T(v, w).$$
+A tensor is completely described by its action on any set of basis
+vectors.  The components of $T$ are defined as
+$$T_{ij} \equiv T(e_i, e_j)$$
+we can calculate
+$$T(v,w) = T(v^i \, e_i, w^j \, e_j) = v^i T_{ij} w^j,$$
+which shows we can calculate $T(v,w)$ from only the components $T_{ij}$.\\[3pt]
+
+\noindent
+We can clearly see the difference between a tensor and a matrix.
+Remember that vectors are geometric objects that exist independently
+of any particular basis.  Only after a basis has been selected, we can
+refer to them by their components, and arrange their components into
+row or column vectors.  In exactly the same way, a tensor exists
+independently of any basis.  But once we define a basis $\mathcal{B}$
+we can refer to a vector by it's components.  We can arrange the
+components of a vector into a row vector (denoted $[v]_\mathcal{B}$)
+or a column vector (denoted $[v]^T_{\mathcal{B}}$).  Likewise, we can
+arrange the components of a (2,0) tensor into a matrix, denoted
+$[T]_{\mathcal{B}}$.  We can calculate the action of $T$ on vectors
+$v$ and $w$ via matrix multiplication:
+
+\begin{displaymath}
+T(v,w) = v^i \, T_{ij} \, w^j = [v]_\mathcal{B}^T \, [T]_\mathcal{B} \, [v]_\mathcal{B} = \begin{pmatrix} v^1 \, v^2 \, \cdots \, v^n \end{pmatrix}
+\begin{pmatrix}
+  T_{11} & T_{12} & \cdots & T_{1n} \\
+  T_{21} & T_{22} & \cdots & T_{2n} \\
+  \vdots & \vdots & \ddots &        \\
+  T_{n1} & T_{n2} &        & T_{nn} \\ \end{pmatrix}
+\begin{pmatrix} w^1 \\ w^2 \\ \vdots \\ w^n \end{pmatrix}
+\end{displaymath}
+Another benefit of the modern definition is that we can derive the transformation law for the components of the tensor, instead of treating that as part of the definition.\\[3pt]
+
+\exercise (*)
+Suppose that a basis $\mathcal{B}$ is related to another basis $\mathcal{B}'$ by:
+$$e_{i'} = A^{j}_{i'} e_{j}$$
+and
+$$e_{i} = A^{j'}_{i} e_{j'}$$
+Use multilinearity to show that:
+$$T_{i'j'} = A_{i'}^k A_{j'}^l T_{kl}$$
+and:
+$$T_{ij} = A_i^{k'} A_j^{l'} T_{k'l'} $$
+ $\square$ \\[3pt]
+
+\exercise
+For a vector space $V$ over scalar field $F$, show that the set of all (2,0) tensors is a vector space.\\[3pt]
+
+\noindent
+Suppose we have a (1,1) tensor $L$ so that $L:V \times V^* \to F$.  For any vector $v$ and basis $\mathcal{B}$, we can define a vector $w$ by its components:
+$$w^i = L(v,e^i) = L(v^j e_j, e^i) = L(e_j, e^i) v^j$$
+and so with components of $L$ defined as:
+$$L(e_j, e^i) \equiv L_j^i$$
+we have
+$$w^i = L^i_j v^j$$
+We can thus interpret as a (1,1) tensor as a linear operator that maps $V \to V$.
+
+\section{Non-degenerate Hermitian Forms and Metric Duals}
+\label{sec:metricdual}
+
+In quantum mechanics, we saw that a Hilbert space $H$ is a vector
+space with an inner product defined.  The inner product is positive
+definite:
+$$\braket{v|v} > 0$$
+for $v \in H$ and $v \neq 0$.  It turns out that this requirement is
+too restrictive for our purposes (special relativity).  We will need a
+slightly more general concept than the inner product.  We will use the
+bar symbol to denote complex conjugation, so $\bar{z}$ denotes the
+complex conjugate of $z$ for $z \in \mathbb{C}$.  If the bar symbol is
+applied to a real number, it has no effect.
+
+A non-degenerate Hermitian form on a vector space $V$ is an $F$-valued
+function, denoted $(\cdot|\cdot)$, which assigns to any ordered pair
+of vectors $v$ and $w$ the scalar value denoted $(v|w)$, and has the
+following properties:
+\begin{center}
+\begin{tabular}{lll}
+  {\bf (1)} & Linear in the second slot: \\
+  & $(v|w+c\, x) = (v|w) + c\, (v|x)$ for all  $v,w,x \in V$ and $c \in F$.\\[6pt]
+{\bf (2)} & Conjugate symmetry: \\
+  & $(v|w) = \overline{(w|v)}$ for all $v,w \in V$.\\[6pt]
+{\bf (3)} & Non-degenerate:\\
+ & For $v \in V$ and $v \neq 0$ there exists $w \in V$ with $(v|w) \neq 0$.\\[6pt]
+\end{tabular}
+\end{center}
+Now hopefully properties (1) and (2) are quite familiar properties of
+the inner products you already encountered in quantum mechanics, but
+property (3) is new.  Notice, however, that property (3) is
+automatically satisfied for a Hilbert space, by choosing $w=v$ and appealing to
+positive definiteness.  So conceptually, a non-degenerate form is an
+inner product but for the requirement of positive definiteness, which
+is loosened to property (3) instead.\\[3pt]
+
+\exercise
+Show that for a non-degenerate Hermitian form $(\cdot|\cdot)$ is conjugate-linear in the first slot:
+$$(v+c \, x| w) = (v| w) \; + \; \bar{c} \, (x| w)$$
+for all $v,w,x \in V$ and $c \in F$  $\square$ \\[3pt]
+
+\noindent
+Given a vector $v \in V$ with non-degenerate Hermitian form
+$(\cdot|\cdot)$ we can define a dual vector $\tilde{v}$ by:
+$$\tilde{v}(w) = (v|w)$$
+for all $w \in V$.  We call the dual vector $\tilde{v}$ the metric dual of $v$.  We sometimes write:
+$$\widetilde{v} = (v|\cdot)$$.
+
+Now consider the map $L: V \to V^*$ that sends a vector to it's metric dual:
+$$L(v) \equiv \tilde{v}$$
+In what follows, we will show that $L$ establishes a conjugate-linear bijection from $V$ to $V^*$.  That is:
+\begin{itemize}
+ \item $L$ is conjugate linear.
+ \item $L$ is one-to-one.
+ \item $L$ is onto.
+\end{itemize}
+This established a conjugate-linear isomorphism sending each vector to
+it's metric dual.  In layman's terms, this shows that the dual space
+is essentially a copy of the vector space, where each vector
+corresponds uniquely to a dual vector, and the structure of vector
+addition and scalar multiplication is preserved (with complex scalars
+conjugated.\\
+
+\exercise Show that $L$ is conjugate linear, that is for $v,x \in V$ and $c \in F$ then
+$$L(v + c \, x) = L(v) + \bar{c} \, L(x)$$
+Hint: $(L(v + c \, x))(w) = (v + c \, x | w)$  $\square$ \\[3pt]
+
+\exercise Show that $L$ sends zero to zero. That is, show $L(0) = 0$.  $\square$ \\[3pt]
+
+\exercise Show that the only vector $L$ sends to zero is zero, that is:
+$$L(w)=0 \implies w=0$$
+ $\square$ \\[3pt]
+
+\exercise (*) Show that $L$ is a one-to-one map of $V \to V^*$, that is, show that:
+$$L(w) = L(v) \implies w=v$$
+Hint: use non-degeneracy, i.e. if for all $x \in V$
+$$(v|x) = 0$$
+then
+$$v=0$$
+$\square$ \\[3pt]
+
+\noindent
+Let $\mathcal{B} = \{ e_i\}$ be a basis for $V$.  The set of dual
+vectors $\{L(e_i)\}$ are (as we will show) a basis for
+$V^*$.
+First, we show that $\{L(e_i)\}$ is linearly independent. Assume there
+is some set of scalars $a^i$ such that:
+$$a^i L(e_i) = 0$$
+Then define a vector $a \in V$ by
+$$a \equiv a^i e_i $$
+We have:
+$$L(a) = L(a^i e_i) = a^i L(e_i) = 0$$
+This implies (see previous exercises) that $a=0$, and so all of it's components are also 0:
+$$a^i = 0$$
+This shows that $\{L(e_i)\}$ is linearly independent.  Next, we show
+that $\{L(e_i)\}$ spans the space.  For a finite-dimensional vector
+space $V$, recall that the dual space $V^*$ has the same dimension as
+$V$.  We showed that $L$ is one-to-one, and so $\{L(e_i)\}$ has the
+same number of elements as $\mathcal{B}$, which is the dimension of
+$V^*$.  As they are linearly independent, they therefore must span the
+space $V^*$.  Therefore $\{L(e_i)\}$ is a basis for $V^*$\\[3pt]
+
+\exercise Given that $\{L(e_i)\}$ is a basis for $V^*$, show that the
+mapping $L$ from $V$ to $V^*$ is onto.  That is, show that for any $b
+\in V^*$, there is an $a \in V $ such that
+$$L(a) = b$$ $\square$ \\[3pt]
+
+\noindent
+By now we have shown that the mapping $L$ is both one-to-one and onto,
+which means that it is an invertible mapping.  {\bf We can move freely from
+a vector to its metric dual and back again with no ambiguity.}
+
+For a Hilbert space $H$ with inner product $\braket{\cdot|\cdot}$.  In
+Dirac notation, a vector $\psi \in H$ is written as a ket
+$\ket{\psi}$. It's metric dual $L(\psi)$ is written as a bra
+$\bra{\psi}$.\\[3pt]
+
+\exercise (*) For $\psi \in H$ and $c \in F$, show that
+$$\bra{c \psi} = \overline{c} \bra{\psi}$$
+ $\square$ \\[3pt]
+
+\exercise (*) Consider the vector space $\mathbb{R}^2$ as a vector
+space of the real numbers with the usual addition and scalar
+multiplication.  Take the vector dot product as an NDHF (now
+restricted to reals):
+$$(a, b) = \vec{a} \cdot \vec{b}$$
+Suppose that in the standard basis
+$$\mathcal{B} = \{(1,0), (0,1)\} = \{\hat{x}, \hat{y}\}$$
+the components of a vector $v$ are:
+$$[v]_\mathcal{B} = \begin{pmatrix} a \\ b \end{pmatrix}$$
+What are
+the components of the metric dual $\tilde{v}$ in the dual basis
+$\mathcal{B}^*$, written as a column vector:
+$$[\tilde{v}]_{\mathcal{B}^*} = \begin{pmatrix} ? \\ ? \end{pmatrix}$$
+(This is the reason that you can do a whole lot of linear algebra
+never having to discuss dual vectors.)\\[3pt]
+
+\exercise For the previous problem, let $L$ be the linear map that
+maps $v$ to $\tilde{v}$, again using the usual dot-product.  What are
+the components of the metric dual $\tilde{v}$ in the basis
+$\mathcal{L}=\{L(\hat{x}), L(\hat{y})\}$?
+$$[\tilde{v}]_{\mathcal{L}} = \begin{pmatrix} ? \\ ? \end{pmatrix}$$
+
+\noindent
+That completes the math preliminaries we will need for our
+invariance-based treatment of special relativity.\\[6pt]
+
+
+\section{Invariance of the Space-Time Interval}
+\label{sec:space-time-interval}
+
+Special relativity, as formulated by Einstein, is based on two postulates:
+\begin{center}
+\begin{tabular}{ll}
+  {\bf (1)} & Physical laws are the same for all inertial frames \\
+  {\bf (2)} & The speed of light in free space has the same value $c$ in all inertial frames \\
+\end{tabular}
+\end{center}
+In what follows, we will only consider inertial frames, so we will
+drop the word ``inertial''.  We will also only consider inertial
+frames with a relative velocity less than the speed of light.  In the
+exercises, you will explore the paradoxes that follow if inertial
+frames exist with a relative velocity equal to or greater than the
+speed of light.
+
+Suppose that in some frame $F$, light is emitted at time $t_{\rm A}$
+and position $(x_{\rm A}, y_{\rm A}, z_{\rm A})$.  The light travels
+through free space until some later time $t_{\rm B}$, when the light
+is absorbed at position $(x_{\rm B}, y_{\rm B}, z_{\rm B})$.  Because
+the speed of light in vacuum is the universal constant $c$ we have:
+$$c = \frac{\sqrt{(x_{\rm B}-x_{\rm A})^2 + (y_{\rm B}-y_{\rm A})^2 + (z_{\rm B}-z_{\rm A})^2}}{t_{\rm B}-t_{\rm A}}$$
+or equivalently:
+$$c^2(t_{\rm B}-t_{\rm A})^2 - (x_{\rm B}-x_{\rm A})^2 - (y_{\rm B}-y_{\rm A})^2 - (z_{\rm B}-z_{\rm A})^2  = 0$$
+In any other inertial frame $F'$, in which the light is
+emitted at time $t'_{\rm A}$ and position $(x'_{\rm A}, y'_{\rm A}, z'_{\rm A})$ and absorbed
+at time $t'_{\rm B}$ and position $(x'_{\rm B}, y'_{\rm B}, z'_{\rm B})$,
+$$c^2(t'_{\rm B}-t'_{\rm A})^2 - (x'_{\rm B}-x'_{\rm A})^2 - (y'_{\rm B}-y'_{\rm A})^2 - (z'_{\rm B}-z'_{\rm A})^2  = 0$$
+Quantities that have the same value in every reference frame are
+precious.  So this result alone is enough motivation to define the space-time
+interval $\Delta S^2$ between any two events A and B as:
+\begin{equation}
+\Delta S^2 \equiv c^2 (t_{\rm B}-t_{\rm A})^2 - (x_{\rm B}-x_{\rm A})^2 - (y_{\rm B}-y_{\rm A})^2 - (z_{\rm B}-z_{\rm A})^2
+\end{equation}
+The space-time interval thus defined has several properties that are immediately evident:
+\begin{center}
+\begin{tabular}{ll}
+ {\bf (A)} & If $\Delta S^2 = 0$ in one frame, then it is zero in every frame.\\
+ {\bf (B)} & $\Delta S^2$ is invariant with respect to rotations in space.\\
+ {\bf (C)} & $\Delta S^2$ is invariant with respect to translations in space and time.\\
+\end{tabular}
+\end{center}
+Property (A) is evident from the calculation that motivated the
+definition.  Property (B) follows because $\Delta S^2$ only involves
+the spatial components via the usual Euclidean metric:
+$$\Delta D^2 \equiv (x_{\rm B}-x_{\rm A})^2 + (y_{\rm B}-y_{\rm A})^2 + (z_{\rm B}-z_{\rm A})^2$$
+which is invariant under rotations.
+Property (C) follows because $\Delta S^2$ only involves differences in time and spatial components, e.g. $t_{\rm B} - t_{\rm A}$.
+
+
+\begin{figure}[htbp]
+\begin{center}
+\begin{tikzpicture}[scale=1]
+
+  % Frame F picture
+  \node at (3,-1) {$F$};
+  \node at (-0.3,2) {$ct$};
+  \draw[->, thick] (0,0.5) -- ++(0,5.0);
+
+  \node at (2,-0.3) {$x$};
+  \draw[->, thick] (0.5,0) -- ++(5.0,0.0);
+
+  \node[shape=circle,draw,thick] at (0,0) {A};
+
+  \draw[->, thick] (0.4,0.4) -- ++(1.25,1.25);
+
+  \node[shape=circle,draw,thick] at (2,2) {B};
+
+  \draw[->, thick] (2,2.5) -- ++(0,1.0);
+
+  \node[shape=circle,draw,thick] at (2,4) {C};
+
+  \draw[-, thick, dashed] (2.3,2.3) -- (5.0,5.0);
+
+  % Frame F' picture
+  \node at (10,-1) {$F'$};
+
+  \node at (6.7,2) {$ct'$};
+  \draw[->, thick] (7,0.5) -- ++(0,5.0);
+
+  \node at (9,-0.3) {$x'$};
+  \draw[->, thick] (7.5,0) -- ++(5.0,0.0);
+
+  \node[shape=circle,draw,thick] at (7,0) {A};
+
+  \draw[->, thick] (7.4,0.4) -- ++(1.25,1.25);
+
+  \node[shape=circle,draw,thick] at (9,2) {B};
+
+  \draw[->, thick] (9.15,2.5) -- ++(0.2,1.0);
+
+  \node[shape=circle,draw,thick] at (9.5,4) {C};
+
+  \draw[-, thick, dashed] (9.3,2.3) -- (12.0,5.0);
+\end{tikzpicture}
+\end{center}
+\caption{\label{fig:abctex} A light pulse is emitted at event A and absorbed and recorded at event B, as seen in two frames $F$ and $F'$.  The record of the event remains at rest in frame $F$.}
+\end{figure}
+
+Next we'll show that the following additional property holds:
+\begin{center}
+\begin{tabular}{ll}
+{\bf (D)} & The sign of $\Delta S^2$ is invariant \\
+\end{tabular}
+\end{center}
+Suppose (as shown in Fig.~\ref{fig:abctex}) there are two events,
+labeled A and C, and some frame $F$ where $\Delta S^2>0$. In frame
+$F$, we emit a light pulse at Event A.  The light pulse travels
+through vacuum until it reaches the location of Event C, where it is
+absorbed and recorded, at an event we label B.  The record remains at
+rest until event C.  Now consider how this looks in some other frame
+$F'$ traveling at velocity $v<c$ wrt frame $F$.  The light is emitted
+at Event A, and absorbed and recorded at Event B, but now the record
+travels at speed $v<c$ until Event C.  Since $v < c$, the distance
+between Event A and Event C must therefore be less than $c(t'_{\rm
+  B}-t'_{\rm A})$ so $\Delta S^2 > 0$.
+
+We categorize space time intervals by the sign of the space-time interval as follows:
+\begin{center}
+\begin{tabular}{lcl}
+  $\Delta S^2 = 0$ & $\iff$ & light-like \\
+  $\Delta S^2 < 0$ & $\iff$ & space-like \\
+  $\Delta S^2 > 0$ & $\iff$ & time-like \\
+\end{tabular}
+\end{center}
+From property (A) we see that if the space-time interval between two
+events in one frame is light-like, it is light-like in all frames.  We
+have also just shown that if the interval is space-like in one frame, it is
+space-like in all frames.  It follows that if the interval is
+time-like in one frame, it is time-like in all frames (or else we
+would have a contradiction of one of the previous two results).  Which demonstrates property (D).
+
+Finally, we will show that $\Delta S^2$ is invariant.  Consider an
+infinitesimal space-time interval calculated in frame $F$:
+\begin{equation}
+dS^2 = dt^2 - dx^2 - dy^2 - dz^2
+\end{equation}
+and the corresponding quantity in frame $F'$:
+\begin{equation}
+(dS^2)' = (dt')^2 - (dx')^2 - (dy')^2 - (dz')^2
+\end{equation}
+Now $(dS^2)'$, which is quadratic in differentials of the primed
+coordinates, must also be quadratic in differentials of the unprimed
+coordinates, because, as shown in the appendix, coordinate
+transformations are linear.
+
+We can formally expand $(d{S^2})'$ as a power series in $dS^2$:
+$$d{S^2}' = a + b dS^2 + c (dS^2)^2 + \cdots $$ with coefficients
+$a,b,c,\cdots$ to be determined.  From property (A) we see that $a=0$.
+But $(dS^2)^2$ is quartic (power 4) in differentials of the
+coordinates, while $(dS^2)'$ is quadratic, and so higher order terms
+($c$ and beyond) vanish.  This leads to:
+$$d{S^2}' = b dS^2$$
+with $b$ still unknown.  But $b$ cannot dependent on the
+absolute position in space and time, because of property (C).  It can
+depend on the relative motion between the $F$ and $F'$ frames, but not
+the direction, because of property (B).  So it can only dependent on
+the relative speed of $F$ and $F'$.  But this is the same in both
+frames, so we must also have:
+$$d{S^2} = b d{S^2}'$$
+and so:
+$$d{S^2} = b^2 d{S^2}$$
+from which we conclude $b=\pm1$.  But $b=-1$ would violate property (D).  So:
+$$(d{S^2})' = d{S^2}$$
+and (by integration) $\Delta S^2$ is invariant as well.
+
+Thus we conclude with the main result of this section, {\bf the
+  space-time interval defined as:}
+\begin{equation}
+ \label{eqn:invariance}
+  \Delta S^2 = \Delta t^2 - \Delta x^2 - \Delta y^2 - \Delta z^2
+\end{equation}
+{\bf is frame invariant.}  Note that we have set $c=1$ in writing
+Equation~\ref{eqn:invariance}, as will be our convention from here on.\\[4pt]
+
+\exercise Consider Fig.~\ref{fig:abctex} and suppose there is a frame
+$F''$ in which events A and B occur at the spatial origin.  What is
+the speed of of frame $F''$ in frame F?  Show that events $A$ and $B$
+must occur simultaneously in frame $F$.  Note that as a result, the
+spatial origin of frame $F''$ at $t''=0$ is located at both events $A$
+and $B$ in the frame $F$.  So therefore there is no invertable map of
+space-time points between frame $F$ and $F''$.  We conclude that it is
+not possible for an inertial frame to travel at the speed of light as
+viewed from any other inertial frame.
+
+\section{Four-Vectors and the Metric of Space-Time}
+
+In order to represent points in space-time, we use the space
+$\mathbb{R}^4$, which is a vector space with the standard basis
+$\mathcal{B}$ consisting of of the following vectors:
+\begin{eqnarray*}
+  e_0 &=& (1,0,0,0) \\
+  e_1 &=& (0,1,0,0) \\
+  e_2 &=& (0,0,1,0) \\
+  e_3 &=& (0,0,0,1) \\
+\end{eqnarray*}
+We define a {\bf position-space four-vector} (v) as a vector from the
+vector space $\mathbb{R}^4$, which, under the standard basis $\mathcal{B}=\{e_\mu\}$, has contravariant components $v^\mu$ matched to space-time
+coordinates from frame $F$ as:
+\begin{equation}
+  v^0 = t, \hspace{1cm} v^1 = x, \hspace{1cm} v^2 = y, \hspace{1cm} v^3 = z.
+\end{equation}
+It is conventional to use greek indices, which run from from 0 to 3, when referring to the components of four-vectors:
+$$v = v^\mu e_\mu$$
+Associated with the four-vector space, we define a non-degenerate
+Hermitian form:
+\begin{equation}
+\label{eqn:ndhf}
+(a|b) = a^0 b^0 - a^1 b^1 - a^2 b^2 - a^3 b^3
+\end{equation}
+
+\exercise
+Show that $(\cdot|\cdot)$ as defined above is a
+non-degenerate Hermitian form, by demonstrating that it has the three
+defining properties.  $\square$ \\[3pt]
+
+\exercise
+For position four-vectors $a,b \in V$ with space time interval $\Delta S^2(a,b)$ between them, show that:
+$$(b-a|b-a) = \Delta S^2(a,b)$$
+ $\square$ \\[3pt]
+
+\exercise
+Show that $(\cdot|\cdot)$ as defined above is {\bf not} an inner product.
+ $\square$ \\[3pt]
+
+\noindent
+We can interpret our non-degenerate Hermitian form as multilinear
+map $g: V\times V \to R$.  That is, as a (2,0) tensor:
+$$g(a,b) \equiv (a | b)$$
+As always, we can work out the components of the tensor in the standard basis $\mathcal{B}$ with
+\begin{equation}
+\label{eqn:metrictensor}
+g_{\mu\nu} \equiv g(e_\mu, e_\nu) = (e_\mu | e_\nu)
+\end{equation}
+So now we can write:
+$$(a|b) = g(a,b) = g(a^\mu e_\mu, b^\nu e_\nu) =  a^\mu b^\nu g(e_\mu, e_\nu) = a^\mu b^\nu g_{\mu\nu} $$
+For this reason, we call $g$ the {\bf metric tensor} (recall that the
+$(\cdot|\cdot)$ was defined based on the space-time interval.)
+
+In the exercises you will show that
+\begin{equation}
+  \label{eqn:metric-components}
+  g_{00}=1, \hspace{1cm} g_{11} = g_{22} = g_{33} = -1
+\end{equation}
+and all other elements are zero.  Thus, the metric tensor $g$ can be represented by a matrix $G$ as:
+\begin{equation}
+\label{eqn:metric-matrix}
+[g]_\mathcal{B} = G \equiv
+\begin{pmatrix}
+1 &  0 &  0 &  0 \\
+0 & -1 &  0 &  0 \\
+0 &  0 & -1 &  0 \\
+0 &  0 &  0 & -1 \\
+\end{pmatrix}
+\end{equation}
+Now, there is nothing special about the frame $F$ and its standard
+basis $\mathcal{B}$.  Therefore, we must reach the same conclusion
+about the matrix representation of $G$ in any other inertial frame
+$F'$ with standard basis $\mathcal{B}'$.  Specifically, we must have:
+$$
+[g]_\mathcal{B} = [g]_{\mathcal{B}'} = G
+$$
+for all frames.  The components of the metric tensor are the same in
+all inertial frames.  Here, our primed index notation becomes just a
+little bit cumbersome, but we can write this as:
+\begin{equation}
+\label{eqn:invariant-tensor}
+g_{\alpha'\beta'} = \delta_{\alpha'}^\alpha \delta_{\beta'}^\beta
+g_{\alpha\beta}
+\end{equation}
+where the $\delta$ factors are just an artifact of our notation.  In matrix notation, this reads:
+$$G' = I \, G \, I = G$$
+\\[5pt]
+
+\exercise
+Verify Equations \ref{eqn:metric-components} and \ref{eqn:metric-matrix} by calculating the matrix components.
+ $\square$ \\[3pt]
+
+\exercise
+Use Equation \ref{eqn:invariant-tensor} to show that for any two position-space four vectors $a$ and $b$, the quantity
+$$(a|b) = a^\mu b_\mu$$
+is frame invariant. $\square$ \\[3pt]
+
+\noindent
+Notice that $g$ is its own inverse, so defining:
+$$g^{\mu \nu} \equiv g_{\mu \nu}$$
+we have
+$$g^{\mu \alpha} g_{\alpha \nu}  = \delta^{\mu}_{\nu}$$
+
+\noindent
+With a Non-Degenerate Hermitian Form $(\cdot|\cdot)$ defined in Equation~\ref{eqn:ndhf}, then, as shown in Section~\ref{sec:metricdual}, to each vector $v \in V$ we can associate a metric dual
+$$\tilde{v} \equiv (v|\cdot)$$
+which is shorthand for defining its action on any vector $w \in V$
+$$\tilde{v}(w) = (v|w)$$
+We can also fully describe $\tilde{v}$ by its components with respect to the basis vectors $\mathcal{B} = \{{e_\mu}\}$, because:
+$$\tilde{v}(w) = \tilde{v}(w^\mu e_\mu) = w^\mu \tilde{v}(e_\mu) = w^\mu \tilde{v}_\mu$$
+where the components of $\tilde{v}$ are:
+$$\tilde{v}_\mu \equiv \tilde{v}(e_\mu) = (v|e_\mu) = g(v,e_\mu) = g(v^\nu e_\nu , e_\mu)
+= v^\nu g(e_\nu , e_\mu)$$
+leading to the very useful result:
+\begin{equation}
+\tilde{v}_\mu = v^\nu g_{\nu \mu} = g_{\mu \nu} v^\nu
+\end{equation}
+So we see that we can use the metric tensor $g$ to lower indices.\\[3pt]
+
+\exercise (*) Show that:
+$$v^\mu = g^{\mu\nu} \, \tilde{v}_\nu$$
+so that we can use the metric tensor to raise indices as well.
+Hint:  $g^{\mu \alpha} \, g_{\alpha \nu}  = \delta^{\mu}_{\nu}$.\\[3pt]
+
+\noindent
+{\bf Notation: } It is common practice to omit the tilde from the
+dual of a four-vector $\tilde{v}_\mu$ as it can be inferred from the
+lowered index:
+$${v}_\mu \equiv \tilde{v}_\mu = g_{\mu\nu} \, v^\nu$$
+
+\noindent
+Notice how our tensor definition applies here.  The metric tensor is a
+mapping $g:V \times V \to F$.  With one vector given, the metric
+tensor thus provides a map from $V \to F$, which is a dual vector.  So
+we can interpret a (2,0) tensor has a linear operator from $V \to
+V^*$, exactly as seen here with $g_{\mu\nu}$.  Similarly, $g^{\mu\nu}$
+can be seen as the components of a (0,2) tensor and as a linear operator from $V^* \to V$.\\[3pt]
+
+\exercise
+In matrices, the lowering of an index reads:
+$$[\tilde{v}]_\mathcal{B^*} = G \, [v]_\mathcal{B}$$
+Consider the position four-vector with components in the standard basis $\mathcal{B}$:
+$$[v]_\mathcal{B} = \begin{pmatrix} t \\ x \\ y \\ z\end{pmatrix}$$
+Using matrices, show that the components of its metric dual in the
+dual basis are
+$$[\tilde{v}]_{\mathcal{B}^*} = \begin{pmatrix} t \\ -x \\ -y \\ -z\end{pmatrix}$$
+
+\section{Coordinate Transformations}
+
+Suppose that in the vector space $\mathbb{R}^4$ for position-space
+four-vectors, the standard basis vectors $\mathcal{B}$ of frame $F$
+are related to the standard basis vector $\mathcal{B}'$ of frame $F'$
+by a coordinate transformation:
+$$e_{\mu'} = \Lambda^{\nu}_{\mu'} \, e_{\nu}.$$
+We showed before that there is an inverse transformation:
+$$e_{\mu} = \Lambda^{\nu'}_{\mu} \, e_{\nu'}$$
+with:
+$$\Lambda^{\beta}_{\eta'} \Lambda^{\eta'}_{\alpha} = \delta^{\beta}_{\alpha}$$
+As shown in Section~\ref{sec:vectors}, the contravariant components of
+a position-space four-vector $v$ will therefore transform as:
+$$v^{\mu'} = \Lambda^{\mu'}_{\nu} v^{\nu}$$
+Any vector in $\mathbb{R}^4$ whose contravariant components transform
+in the same manner as a position-space four-vector is called a {\bf
+  four-vector}.\\[3pt]
+
+\noindent
+We might be tempted to consider the real numbers
+$\Lambda^{\nu'}_{\mu}$ as components of a (1,1) tensor.  However,
+notice that one set of indices refers to the $\mathcal{B}$ basis and
+another the $\mathcal{B'}$.  Therefore, it is best to leave tensors
+aside and interpret $\Lambda^{\mu'}_{\nu}$ as the components of a
+matrix, labeled by the two sets of basis vectors which it transforms
+between:
+$$[\Lambda]^{ \mathcal{B}'}_\mathcal{B}
+\equiv \begin{pmatrix}
+  \Lambda^{0'}_0 &\Lambda^{0'}_1 &\Lambda^{0'}_2 &\Lambda^{0'}_3 \\[3pt]
+  \Lambda^{1'}_0 &\Lambda^{1'}_1 &\Lambda^{1'}_2 &\Lambda^{1'}_3 \\[3pt]
+  \Lambda^{2'}_0 &\Lambda^{2'}_1 &\Lambda^{2'}_2 &\Lambda^{2'}_3 \\[3pt]
+  \Lambda^{3'}_0 &\Lambda^{3'}_1 &\Lambda^{3'}_2 &\Lambda^{3'}_3 \\
+\end{pmatrix}$$
+where we have left the primes in place, even on numerical values,
+because in our notation the location of the primed index
+(i.e. $\Lambda^{1'}_{2}$ means $\Lambda^{\mu'}_{\nu}$ for $\mu'=1$ and
+$\nu=2$.)  Notice that we have chosen to associate the {\bf upper}
+index with the row of the matrix, which is simply a matter of choice,
+but one which we must apply consistently.  In matrix notation, we
+have:
+$$[v]_\mathcal{B'} \; = \; [\Lambda]^{\mathcal{B}'}_\mathcal{B} \; [v]_\mathcal{B}$$
+which for for a position-space four vector is:
+$$\begin{pmatrix} t' \\ x' \\ y' \\ z' \end{pmatrix} =
+\begin{pmatrix}
+  \Lambda^{0'}_0 &\Lambda^{0'}_1 &\Lambda^{0'}_2 &\Lambda^{0'}_3 \\[3pt]
+  \Lambda^{1'}_0 &\Lambda^{1'}_1 &\Lambda^{1'}_2 &\Lambda^{1'}_3 \\[3pt]
+  \Lambda^{2'}_0 &\Lambda^{2'}_1 &\Lambda^{2'}_2 &\Lambda^{2'}_3 \\[3pt]
+  \Lambda^{3'}_0 &\Lambda^{3'}_1 &\Lambda^{3'}_2 &\Lambda^{3'}_3 \\
+\end{pmatrix}
+\begin{pmatrix} t \\ x \\ y \\ z \end{pmatrix}$$
+
+\noindent
+In similar fashion, we can consider $\Lambda^{\nu}_{\mu'}$ as the
+components of a matrix, labeled by the two sets of basis vectors it
+connects:
+$$[\Lambda]^\mathcal{B}_{\mathcal{B}'}
+\equiv \begin{pmatrix}
+  \Lambda^{0}_{0'} &\Lambda^{0}_{1'} &\Lambda^{0}_{2'} &\Lambda^{0}_{3'} \\[3pt]
+  \Lambda^{1}_{0'} &\Lambda^{1}_{1'} &\Lambda^{1}_{2'} &\Lambda^{1}_{3'} \\[3pt]
+  \Lambda^{2}_{0'} &\Lambda^{2}_{1'} &\Lambda^{2}_{2'} &\Lambda^{2}_{3'} \\[3pt]
+  \Lambda^{3}_{0'} &\Lambda^{3}_{1'} &\Lambda^{3}_{2'} &\Lambda^{3}_{3'} \\
+\end{pmatrix}$$
+
+\noindent
+These matrices are related by:
+$$\Lambda^{\beta}_{\eta'} \Lambda^{\eta'}_{\alpha} = \delta^{\beta}_{\alpha}$$
+which in terms of the above matrices reads:
+$$[\Lambda]^\mathcal{B}_{\mathcal{B}'} \;  [\Lambda]^{\mathcal{B}'}_\mathcal{B} = I $$
+which is as one would hope.\\[4pt]
+
+\noindent
+{\bf Notation:} When there is little chance of confusion,
+we drop the explicit labeling by basis vectors, and speak
+of the transformation $\Lambda$, with matrix representation
+$$\Lambda \equiv [\Lambda]^{\mathcal{B}'}_\mathcal{B}$$
+which would implicitly refer to the
+transformation applicable to the contravariant components when moving
+from frame $F$ to $F'$ (or, equivalently, to the covariant components
+when moving from frame $F'$ to $F$).  The inverse transformation is:
+$$\Lambda^{-1} = [\Lambda]^\mathcal{B}_{\mathcal{B}'}$$
+which is the transformation applicable to the
+contravariant components when moving from frame $F'$ to $F$ (or,
+equivalently, to the covariant components when moving from frame $F$
+to $F'$).\\[3pt]
+
+\noindent
+Note that Giffiths uses the notation:
+$$(v^\mu)' = \Lambda^\mu_\nu \, v^\nu$$
+so
+$$\Lambda^{\mu'}_\nu \longrightarrow  \Lambda^\mu_\nu \hspace{0.5cm}(\text{Griffiths})$$
+and
+$$\Lambda^{\mu}_{\nu'} \longrightarrow  ({\Lambda^{-1}})^\mu_\nu \hspace{0.5cm}(\text{Griffiths})$$
+
+\section{The Lorentz Group}
+
+\noindent
+A group $G$ is a set of elements and an operation $\cdot$ with the properties:
+\begin{center}
+\begin{tabular}{ll}
+  {\bf (A)} & closure:  if $a,b \in G$ then $a \cdot b \in G$ \\
+  {\bf (B)} & associative:  if $a,b,c \in G$ then $(ab)c = a(bc)$ \\
+  {\bf (C)} & identity:  there exists $e$ such that $ea = ae = a$ \\
+  {\bf (D)} & inverses:  for each $a \in G$ there exists $a^{-1}$ such that $a^{-1}a = a a^{-1} = e$ \\
+\end{tabular}
+\end{center}
+In this section, we'll show that the set of transformations between
+inertial references frames in special relativity form a group, which we call the Lorentz
+group.\\[4pt]
+
+\exercise (*) For $a,b \in G$, show that if $a b = e$ then $b = a^{-1}$.  $\square$ \\[3pt]
+
+\exercise For $a,b \in G$, show that if $a b = a$ then $b = e$.  $\square$ \\[3pt]
+
+\exercise For $a \in G$ show that $(a^{-1})^{-1} = a.$  $\square$ \\[3pt]
+
+\noindent
+{\bf Valid Coordinate Transformations:} The requirement that the
+space-time interval is invariant significantly constrains the valid
+coordinate transformations between inertial frames.  For any
+four-vector $v$ we have:
+$$(v|v) = v^{\mu} v^{\nu} g_{\mu\nu}$$
+but also
+\begin{eqnarray*}
+  (v|v) &=& v^{\alpha'} v^{\beta'} g_{\alpha'\beta'}\\
+  &=& (v^{\mu}\Lambda^{\alpha'}_{\mu}) (v^{\nu}\Lambda^{\beta'}_\nu) g_{\alpha'\beta'}\\
+    &=& v^{\mu} v^{\nu} \Lambda^{\alpha'}_{\mu} g_{\alpha'\beta'} \Lambda^{\beta'}_\nu \\
+\end{eqnarray*}
+so, as $v$ is arbitrary, we must have:
+\begin{equation}
+\label{eqn:lorentzgrouptn}
+\Lambda^{\alpha'}_{\mu} g_{\alpha'\beta'} \Lambda^{\beta'}_\nu =g_{\mu\nu}
+\end{equation}
+This is simply the transformation rule for any (2,0)-tensor.  However, the components of the metric tensor are frame invariant, which led us to Equation~\ref{eqn:invariant-tensor}:
+$$g_{\alpha'\beta'} = \delta_{\alpha'}^\alpha \delta_{\beta'}^\beta
+g_{\alpha\beta}$$
+We have therefore:
+\begin{equation}
+ \label{eqn:lorentztensor}
+  \delta^{\alpha'}_\alpha \delta^{\beta'}_\beta \Lambda^{\alpha'}_{\mu} g_{\alpha\beta} \Lambda^{\beta'}_\nu =g_{\mu\nu}
+\end{equation}
+In the previous section, we saw that we can write
+$\Lambda^{\beta'}_\nu$ as the components of a matrix $\Lambda$.
+We can write this result in matrix notation as:
+\begin{equation}
+ \label{eqn:lorentzgroup}
+ \Lambda^T G \Lambda = G
+\end{equation}
+where $G$ is the frame invariant matrix representation of the metric
+tensor.  The need to transpose (via the symbol $T$) in the first
+factor follows from the convention we choose for $\Lambda$, that the
+upper index refers to the row of the matrix, in order to match the
+calculation in Equation~\ref{eqn:lorentztensor}.  The $\delta$ factors
+are just identity matrices, which have been omitted.  It is only the
+fact that the metric tensor has the same components in any basis that
+leads to this important result.\\[3pt]
+
+
+\noindent
+The set of all matrices $\Lambda$ that satisfy
+Equation~\ref{eqn:lorentzgroup}, with ordinary matrix
+multiplication defines the Lorentz group.  Group property (B) follows
+directly from the associative property of matrix multiplication.  The
+identity matrix satisfies Equation~\ref{eqn:lorentzgroup} so property
+(C) holds.\\[5pt]
+
+\exercise (*) Show that property (A) holds for the Lorentz group.  That is, if
+$$A^T G A = G$$
+and
+$$B^T G B = G$$
+then
+$$(AB)^T G (AB) = G. \hspace{1cm} \square$$
+\\
+
+\exercise (A) Show that property (D) holds for the Lorentz group.  If 
+$$A^T G A = G$$
+first show that:
+$$A^{-1} = G A^T G$$
+then 
+$$(A^{-1})^T G A^{-1} = G. \hspace{1cm} \square$$ 
+\\
+
+\exercise (*) Show that a rotation by angle $\theta$ about the $z$-axis
+$$R = \begin{pmatrix}
+  1 & 0 & 0 & 0 \\[3pt]
+  0 & \cos\theta & -\sin\theta & 0 \\[3pt]
+  0 &\sin\theta & \cos\theta & 0 \\[3pt]
+  0 & 0 & 0 & 1 \\
+\end{pmatrix}$$
+is a member of the Lorentz Group. $\square$\\[3pt]
+
+\exercise (**) Show that a Lorentz boost along the $x$-axis:
+$$L = \begin{pmatrix}
+  \gamma & -\beta\gamma & 0 & 0 \\[3pt]
+  -\beta\gamma & \gamma & 0 & 0 \\[3pt]
+  0 &0 & 1 & 0 \\[3pt]
+  0 & 0 & 0 & 1 \\
+\end{pmatrix}$$
+with
+$$\gamma \equiv \frac{1}{\sqrt{1-\beta^2}}$$
+is a member of the Lorentz Group. $\square$\\[3pt]
+
+\exercise (*) Show that time reversal:
+$$T = \begin{pmatrix}
+  -1 & 0 & 0 & 0 \\[3pt]
+  0  & 1 & 0 & 0 \\[3pt]
+  0  & 0 & 1 & 0 \\[3pt]
+  0  & 0 & 0 & 1 \\
+\end{pmatrix}$$
+is a member of the Lorentz Group. $\square$\\[3pt]
+
+\exercise (*) Show that parity:
+$$P = \begin{pmatrix}
+  1 &  0 &  0 &  0 \\[3pt]
+  0 & -1 &  0 &  0 \\[3pt]
+  0 &  0 & -1 &  0 \\[3pt]
+  0 &  0 &  0 & -1 \\
+\end{pmatrix}$$
+is a member of the Lorentz Group. $\square$\\[3pt]
+
+\exercise Show that:
+\begin{eqnarray*}
+  G \, R^T \, G &=& R^{-1} \\
+  G \, L^T \, G &=& L^{-1} \\
+  G \, P^T \, G &=& P^{-1} \\
+  G \, T ^T\, G &=& T^{-1} \\
+\end{eqnarray*}
+Note that this follows from the group property:
+\begin{eqnarray*}
+  g_{\alpha\beta} &=& g_{u'w'} \Lambda^{u'}_\alpha \Lambda^{w'}_{\beta}\\
+  g^{\gamma\alpha} g_{\alpha\beta} &=& g^{\gamma\alpha} \Lambda^{u'}_{\alpha} g_{\mu'w'}\Lambda^{w'}_\beta\\
+\delta^\gamma_\beta &=& (g^{\gamma\alpha} \Lambda^{u'}_{\alpha} g_{\mu'w'}) \Lambda^{w'}_\beta
+\end{eqnarray*}
+Notice also how nicely our notation (with primed indices) works:
+$$g^{\gamma\alpha} \Lambda^{u'}_{\alpha} g_{\mu'w'} = \Lambda^{\gamma}_{w'} $$
+
+\section{Relativistic Kinematics}
+
+
+The principle of conservation of momentum, using the classical
+definition of momentum $\vec{p}=m\vec{v}$, is not consistent with
+special relativity.  See the exercises below for a concrete example.
+Experimental evidence supports special relativity.  So we must abandon
+our classical notion of momentum.
+
+%\exercise Example showing it fails...
+
+If we can find a four-vector quantity related to momentum, and
+likewise conserved, so e.g.:
+$$p^\mu_A + p^\mu_B = p^\mu_C + p^\mu_D$$
+then we can simply apply a Lorentz transformation to both sides:
+$$\Lambda^{\nu'}_\mu p^\mu_A + \Lambda^{\nu'}_\mu p^\mu_B = \Lambda^{\nu'}_\mu p^\mu_C + \Lambda^{\nu'}_\mu p^\mu_D$$
+and obtain:
+$$p^{\nu'}_A + p^{\nu'}_B = p^{\nu'}_C + p^{\nu'}_D$$
+which shows that the law will hold in any frame $F'$.  Finding this
+quantity is the goal of this section.
+
+Consider two time-like events A and B, which (by definition) have a
+space-time interval $\Delta S^2 > 0$.  We define the proper-time
+($\tau$) between these two events as:
+$$\tau \equiv \sqrt{\Delta S^2}$$
+The proper-time $\tau$ is equivalent to the elapsed (positive) time in the {\bf
+  particular} frame where the events occur at the same location.  Such
+a frame exists because $\Delta S^2 > 0$, and calculating in that frame
+(call it $F'$) we have:
+$$ 0 < \Delta S^2 = (\Delta t')^2 - (\Delta x')^2 - (\Delta y')^2- (\Delta z')^2$$
+but in this particular frame we have:
+$$(\Delta x')^2 = (\Delta y')^2 = (\Delta z')^2 = 0$$
+so:
+$$\Delta S^2 = (\Delta t')^2$$
+and we see that
+$$\tau \equiv \Delta t'$$
+Let $\beta$ be the relative speed between frame $F$ and the frame $F'$ in
+which the events A and B occur at the same location.  Then we can
+calculate the elapsed time $t$ in frame F according to the inverse Lorentz
+transformation:\\
+\begin{equation*}
+\begin{pmatrix} t \\ x \end{pmatrix} =
+\begin{pmatrix} \gamma & \gamma \beta \\ \gamma \beta & \gamma \\ \end{pmatrix}
+\begin{pmatrix} \tau \\ 0 \end{pmatrix}
+= \begin{pmatrix}  \gamma \tau \\ \gamma \tau \beta \end{pmatrix}
+\end{equation*}
+From which we see that:\\
+\begin{equation}
+\tau = t / \gamma
+\end{equation}
+but take care that $\gamma$ is for the particular frame where the
+events occur at the same location, as measured from the frame in which
+$t$ is measured.
+
+We use the proper-time $\tau$ to define the four-velocity $\eta$ (also
+called proper velocity in Griffiths) by its components:
+\begin{equation}
+\eta^\mu \equiv \frac{dx^\mu}{d\tau}
+\end{equation}
+Since $\tau$ and so $d\tau$ is an invariant, we see that the components $\eta^\mu$
+transform as for a four-vector, and so, by definition, the four-velocity is a four-vector.  Let's work out the coordinates in frame $F$ by using $d\tau = dt/\gamma$:
+$$\eta^\mu = \gamma \frac{dx^\mu}{dt}$$
+and so for the time component:
+$$\eta^0 = \gamma \frac{dt}{dt} = \gamma$$
+and for the $x$ component:
+$$\eta^1 = \gamma \frac{dx}{dt} = \gamma \beta_x$$
+and similar for the $y$ and $z$ components.  So writing $\eta$
+as a column vector in the standard basis $\mathcal{B}$:
+$$[\eta]_\mathcal{B} = \gamma \begin{pmatrix} 1 \\ \beta_x \\ \beta_y \\\ \beta_z \end{pmatrix}$$
+It is left as an exercise to show that the invariant associated with $\eta$ is
+\begin{equation}
+\label{eqn:fvsq}
+\eta^\mu \eta_\mu = \eta^\mu \eta^\nu g_{\mu \nu} = 1 = (c^2)
+\end{equation}
+
+\exercise Show by an explicit calculation that Equation~\ref{eqn:fvsq} is correct. $\square$\\[3pt]
+
+Next we define the momentum four-vector $p$ by its components:
+\begin{equation}
+p^\mu \equiv m \eta^\mu
+\end{equation}
+assuming that the mass of a particle is invariant, then $p^\mu$ transforms as a four-vector, and so is itself a four-vector, with
+$$[p]_\mathcal{B} = \begin{pmatrix} \gamma m \\ \gamma m \beta_x \\ \gamma m \beta_y \\\ \gamma m \beta_z \end{pmatrix}$$
+In the non-relativistic limit, we can approximate $\gamma$ by its Taylor series near $\beta=0$
+$$\gamma = \frac{1}{\sqrt{1-\beta^2}} = 1 + \frac{1}{2} \beta^2$$
+In this limit, we see that
+\begin{eqnarray*}
+  p^1 &\approx& m \beta_x \\
+  p^2 &\approx& m \beta_y \\
+  p^3 &\approx& m \beta_z \\
+\end{eqnarray*}
+so that the spatial part of $p$ reproduces the non-relativistic
+momentum for small $\beta$.  For the temporal component, we see that:
+$$p^0  \approx m + \frac{1}{2} m \beta^2$$
+The second term is just the classical kinetic energy, which identifies
+$p^0$ as the relativistic energy of the particle.  The first term
+$m$ is a new contribution to the energy, due to special relativity,
+called the rest energy.  We see that massive particles, even at rest,
+have a non-zero energy due to their mass.
+
+Thus we have identified exactly the quantity we sought, a four-vector
+$p$ which we can write as a column vector:
+$$[p]_{\mathcal B} = \begin{pmatrix} E \\ \vec{p} \end{pmatrix}$$
+where $E$ is relativistic energy:
+$$E = \gamma m $$
+and $\vec{p}$ is the relativistic momentum:
+$$\vec{p} = \gamma m \vec{v}$$
+A common mistake by students new to relativistic kinematics is to
+forget the new factor $\gamma$ when they encounter the familiar symbol
+$\vec{p}$.  We have taken that symbol over to refer to the
+relativistic momentum, which reproduces the classical momentum only
+for small $\beta$.
+
+Notice that the invariant associated with $p$ is:
+$$p^\mu p_\mu = m^2 \eta^\mu \eta_\mu = m^2 $$
+and also:
+$$p^\mu p_\mu = E^2 - \vec{p}\cdot\vec{p}$$
+so we have:
+\begin{equation}
+E^2 = m^2 + |\vec{p}|^2
+\end{equation}
+We often write this simply as:
+\begin{equation}
+E^2 = m^2 + p^2
+\end{equation}
+where $p$ is implicitly $|\vec{p}|$ and not the four-vector $p$.
+{\bf You must memorize this equation} (or its derivation).  It will
+not be given to you on exams, and you will need it.
+
+The experimental evidence confirms that the momentum four vector $p$
+is indeed conserved.  In classical mechanics, we had conservation of
+energy and momentum separately.  In relativistic kinematics,
+four-momentum is conserved which implies conservation of relativistic
+energy and relativistic momentum.\\[5pt]
+
+\noindent
+{\bf Exercise:} Consider a particle moving with velocity $\alpha$ so
+that $x = \alpha t$ in frame $F$.  Consider frame $F'$ moving at
+velocity $\beta$ in the negative $x$ direction.  Under the Gallilean
+(non-relativistic) transormation, the velocity of the particle is
+$\alpha + \beta$ in frame $F'$.  Derive the velocity addition formula:
+\begin{equation*}
+v = \frac{\alpha + \beta}{1 + \alpha \, \beta}
+\end{equation*}
+by apply the Lorentz transformation:
+\begin{equation*}
+  L = \begin{pmatrix}
+  \gamma & -\beta\gamma \\[3pt]
+  -\beta\gamma & \gamma \\[3pt]
+  \end{pmatrix}
+\end{equation*}
+to the position space four-vector in frame $F$:
+\begin{equation*}
+  x = \begin{pmatrix}
+  t \\[3pt]
+  \alpha t \\[3pt]
+  \end{pmatrix}
+\end{equation*}
+
+\noindent
+{\bf Exercise:}
+As measured in frame F, particles $A$ and $B$, each of mass $m$, have velocity $\alpha$ in the negative and positive 
+$y$-direction, respectively.  After an elastic collision, they have velocity $\alpha$ in the negative and positive 
+$y$-direction, respectively.
+\begin{center}
+\begin{tikzpicture}[scale=1]
+  \node[shape=circle,draw,thick] at (0,2) {A};
+  \draw[->, thick] (0,1.5) -- ++(0,-1.4);
+  \node at (0.5, 0.75) {$\alpha$};
+
+  \node[shape=circle,draw,thick] at (0,-2) {B};
+  \draw[->, thick] (0,-1.5) -- ++(0, 1.4);
+  \node at (0.5, -0.75) {$\alpha$};
+  \node at (-1.5,-1.0) {Initial};
+
+  \node[shape=circle,draw,thick] at (2, 0) {A};
+  \draw[<-, thick] (2.5,0) -- ++(1.4,0);
+  \node at (3.2, 0.3) {$\alpha$};
+  \node[shape=circle,draw,thick] at (6,0) {B};
+  \draw[<-, thick] (5.5,0) -- ++(-1.4, 0);
+  \node at (4.8, 0.3) {$\alpha$};
+  \node at (4,-1.0) {Final};  
+\end{tikzpicture}
+\end{center}
+Now consider frame $F'$, in the rest frame of particle $A$ in the
+final state.  (A) Show that under the Gallilean (non-relativistic)
+transformation, the total classical momentum in the $y$ direction is
+$2m\alpha$ in both the initial and final state. (B) Using the velocity
+addition formula from the previous exercise, show that under special relativy,
+the total classical momentum in the $y$ direction is 
+$2 m \alpha$ in the initial state, but
+$$\frac{2 m \alpha}{1 + \alpha^2}$$
+in the final state.  The conservation of classical momentum is not
+consistent with special relativity.
+
+\exercise Suppose a particle of mass $m>0$ has total energy $E$.  Show
+that the speed of the particle is less than $c$.  Because of
+conservation of energy, this shows that a massive particle cannot be
+accelerated to the speed of light by consuming a finite amount of
+energy.  Assuming any observers would have $m>0$, this is one
+explanation for why no inertial frames have a speed that exceeds the
+speed of light. $\square$ \\[3pt]
+
+
+\exercise (*)
+Particle A of mass $M$ decays into particles B and C, each of mass
+$m$, with $m < M/2$.  Particle A has momentum $p$, and the momentum of
+particles B and C are at the same angle with respect to the momentum
+of Particle A.  What is the magnitude of the momentum of particle B
+($q$)?  What is the angle ($theta$) between the momentum of Particle A
+and the momentum of Particle B? $\square$ \\[3pt]
+
+\begin{center}
+\begin{tikzpicture}[scale=1]
+  \node[shape=circle,draw,thick] at (0,0) {A};
+  \draw[->, thick] (0.5,0) -- ++(3.0,0);
+  \draw[dashed, thick] (1.3,0) -- ++(7,0);
+  \node at (0.5,-0.5) {$M$};
+  \node at (2.0,0.3) {$p$};
+
+  \node at (0.7,-1.2) {Initial};
+
+  \draw[->, thick] (4,0) -- ++(3.0, 1.0);
+  \draw[->, thick] (4,0) -- ++(3.0,-1.0);
+  \node at (6.5,-0.4) {$\theta$};
+  \node at (6.5, 0.4) {$\theta$};
+
+  
+  \node[shape=circle,draw,thick] at (7.6, 1.2) {B};
+  \node at (8.1,0.7) {$m$};
+  
+  \node[shape=circle,draw,thick] at (7.6,-1.2) {C};
+  \node at (8.1,-1.7) {$m$};
+  
+  \node at (5.5, 0.75) {$q$};
+  
+  \node at (5.0,-1.2) {Final};
+\end{tikzpicture}
+\end{center}
+
+
+\exercise (*)
+Particles A and B each of mass $M$ collide to produce particles $1$
+and $2$ each of mass $m$.  In the center of mass frame, particles A
+and B have magnitude of momentum $p$.  What is the magnitude of the
+momentum of particle 1 ($q$)?
+
+\begin{center}
+\begin{tikzpicture}[scale=1]
+  \node[shape=circle,draw,thick] at (0,0) {A};
+  \draw[->, thick] (0.5,0) -- ++(1.4,0);
+  \node at (0.5,-0.5) {$M$};
+  \node at (1.0,0.3) {$p$};
+
+  \node[shape=circle,draw,thick] at (4,0) {B};
+  \draw[->, thick] (3.5,0) -- ++(-1.4,0);
+  \node at (4.5,-0.5) {$M$};
+  \node at (3.0,0.3) {$p$};
+
+  \node at (2.0,-1.2) {Initial};
+
+
+  \node[shape=circle,draw,thick] at (6,-2) {2};
+  \draw[<-, thick] (6.3,-1.7) -- (7.8,-0.2);
+  \node at (6.5,-2.5) {$m$};
+
+
+  \node[shape=circle,draw,thick] at (10,2) {1};
+  \draw[<-, thick] (9.7,1.7) -- (8.2,0.2);
+  \node at (10.5,1.5) {$m$};
+  \node at (8.7,1.2) {$q$};
+  
+  \node at (9.0,-1.2) {Final};
+\end{tikzpicture}
+\end{center}
+
+\section{Massless Particles}
+
+Special relativity provides a mechanism for massless particles to exist.  Notice that:
+$$\vec{p}=\frac{m\vec{v}}{\sqrt{1-\beta^2}}$$
+and
+$$E=\frac{m}{\sqrt{1-\beta^2}}$$
+both go to zero for $m=0$ {\bf unless} $v=c$ in which case they are indeterminate.  We still have, however,
+$$E^2 = m^2 + |\vec{p}|^2$$
+which yields:
+$$E = |\vec{p}|$$
+So special relativity allows for massless particles that travel
+exclusively at the speed of light.  Massive particles have their momentum and energy defined by their velocity, but that is not possible for massless particles which travel at the speed of light.  Special relativity has no prescription for how the energy of massless particle is determined, but quantum mechanics does.  We have photons with energy given by:
+$$E = \hbar \omega$$
+
+\exercise (*)
+Show that a massless photon ($\gamma$) cannot decay to two massive
+particles (e.g. $\gamma \to e^- e^+$) in a vacuum. $\square$ \\[3pt]
+
+\section{Additional Exercises}
+
+\exercise 
+Suppose a particle of mass $M$ has momentum $p$ and
+energy $E$ in the lab frame.  It decays to three particles, A, B, and
+C, each with mass $M/3$.  What is $\beta$ of particle A in the lab
+frame? $\square$ \\[3pt]
+
+\exercise(*)
+For the decay $a \to 1 + 2$ show that in the CMS the magnitude of the momentum of particle 1 is:
+$$p^* = \frac{1}{2m_a} \, \sqrt{\left(m_a^2-(m_1 + m_2)^2\right)\left(m_a^2-(m_1 - m_2)^2\right)}$$
+Hint:  When doing serious algebra, don't move around numbers like $m_1$.  Instead, do something like:
+$$m_a \to a, \hspace{0.5cm} m_1 \to b, \hspace{0.5cm} m_2 \to c$$
+Treat yourself right! $\square$ \\[3pt]
+
+
+\exercise (*)
+The anti-proton was discovered via the process:
+$$p + p \to p + p + p + \bar{p}$$ Calculate the beam energy at which
+this process is first kinematically allowed (A) for two colliding
+beams of protons with equal energy, and (B) for one beam of protons
+striking stationary protons.  Your calculation might lead you to
+conclude that the antiproton discovery was made using colliding beams
+(as in A), but in fact, the discover was made here in California,
+using the bevatron in a fixed target experiment (as in B).  We did not
+yet have the ability to focus beams which is necessary to collide two
+beams at a high rate of collisions. $\square$ \\[3pt]
+
+\exercise (*)
+The neutrino was discovered by studying the kinetic energy of the
+electron produces from beta decay of radioactive nuclei.  Consider the
+nuclear decay:
+$$^3_1H \to ^3_1He + e^- + \bar{\nu}_e$$
+If the neutrino is neglected from the process, this becomes a two body decay.  Calculate the kinetic energy:
+$$K = \sqrt{p^2+m^2} - m$$
+of the electron in the rest frame of the $$^3_1H$$ nucleus.  Use $m(3^H)=2808.921~\rm MeV$, 
+$m(3^He)=2808.391~\rm MeV$, and $m(e) = 0.511~\rm MeV$. Compare your single value to Fig. 1.5 in Griffiths.
+$\square$ \\[3pt]
+
+\exercise
+For two-body scattering $a + b \to 1 + 2$, show that the Lorentz invariant flux term:
+$$F \equiv 4 E_a E_b (v_a + v_b)$$
+is equivalent to:
+$$F = 4 c^3 \sqrt{ (p_a \cdot p_b)^2 - m_a^2 m_b^2 c^4 } $$
+Hint: Calculate $F^2$ and then calculate $(p_a \cdot p_b)^2$.
+ $\square$ \\[3pt]
+
+
+\exercise
+Show that in the lab frame where $b$ is at rest, the Lorentz invariant flux term is:
+$$F = 4 c^4 m_b p_a$$ $\square$ \\[3pt]
+
+
+
+\appendix
+
+\section{Linearity of Transformation between Inertial Frames}
+
+Suppose we have frames $F$ and $F'$.  For simplicity, we
+will consider only the time and x position, for which there is a
+coordinate transformation:
+\begin{eqnarray*}
+x' &=& f(x,t)\\
+t' &=& g(x,t)\\
+\end{eqnarray*}
+So then:
+\begin{eqnarray*}
+dx' &=& \frac{\partial f}{\partial x}dx + \frac{\partial f}{\partial t}dt \\
+dt' &=& \frac{\partial g}{\partial x}dx + \frac{\partial g}{\partial t}dt \\
+\end{eqnarray*}
+and:
+\begin{eqnarray*}
+\frac{dx'}{dt'} &=&
+\frac{\displaystyle \frac{\partial f}{\partial x}\frac{dx}{dt} + \frac{\partial f}{\partial t}}
+{\displaystyle \frac{\partial g}{\partial x}\frac{dx}{dt} + \frac{\partial g}{\partial t}}\\
+\end{eqnarray*}
+Now consider a particle moving at constant velocity $dx/dt$ in frame
+$F$.  By the invariance of the laws of physics, this particle must
+also move at constant velocity $dx'/dt'$ in frame $F'$.  This
+requirement implies that the partial derivatives
+$$
+\frac{\partial f}{\partial
+  x}, \hspace{0.5cm}\frac{\partial f}{\partial
+  t}, \hspace{0.5cm}\frac{\partial g}{\partial
+  x}, \hspace{0.5cm}\frac{\partial g}{\partial t}
+$$
+are constant along the particle's trajectory.
+
+Because any two events in space-time can be connected using a
+combination of particles at rest and particles moving at constant
+velocities, these partial derivatives must in fact be constant
+throughout space-time.  Therefore, the most general form of the transformation is:
+\begin{eqnarray*}
+x' &=& A x + B t + C \\
+t' &=& D x + E t + F \\
+\end{eqnarray*}
+If we take the origin to coincide, we have:
+\begin{eqnarray*}
+x' &=& A x + B t\\
+t' &=& D x + E t\\
+\end{eqnarray*}
+demonstrating that the transformations between inertial frames are linear. 
+
+
+\end{document}
+
+
+\documentclass{article}
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\begin{document}
+
+%% ============================================================
+%% PAGE 2 -- Notation Update
+%% ============================================================
+
+\section*{Notation Update}
+
+We use the following conventions. Let $x = (a, b) \in \mathbb{R}^2$. 
+We denote tensor components and their matrix representations as:
+
+\begin{equation*}
+  [x]_j, \quad [x]^j, \quad [x]^j{}_k, \quad [x]^j{}_{kl}
+\end{equation*}
+
+For primed and unprimed indices:
+
+\begin{equation*}
+  [x]^{j'}{}_k, \qquad [x]^{j'}{}_{k'}
+\end{equation*}
+
+Clean notation: $B = \{(D,0),\,(0,1)\}$, i.e.\ the standard basis.
+The components $[x]^j$ are clear, but we need to clarify $[x]^{j'}$, $[x]^j$.
+
+For the NDHF we use (sometimes):
+\begin{equation*}
+  (a \mid b) \quad \text{(sometimes } (a,b) \text{)}
+\end{equation*}
+
+%% ============================================================
+%% PAGE 3 -- Notation Update (continued)
+%% ============================================================
+
+\subsection*{Notation Update (continued)}
+
+Continuing notation. For primed indices:
+
+\begin{equation*}
+  x^{s'}, \qquad x^s
+\end{equation*}
+
+The contraction with a Lorentz transformation uses primed/unprimed indices:
+
+\begin{equation*}
+  x^{s'} = \Lambda^{s'}{}_s\, x^s, \qquad \theta_{s'} = \Lambda^s{}_{s'}\,\theta_s
+\end{equation*}
+
+Note: $3'$, $3$ label components with and without primes.
+Basis vectors $\{e_s\}$, $\{e_{s'}\}$ transform accordingly.
+The contraction is numerically:
+
+\begin{equation*}
+  \theta_s \, x^s = \theta_{s'} \, x^{s'}
+\end{equation*}
+
+Use $(a \mid b)$ (sometimes $(a,b)$) for the NDHF. The matrix of Lorentz components is:
+
+\begin{equation*}
+  L = [\Lambda^{\mu'}{}_\nu]
+\end{equation*}
+
+
+\end{document}
