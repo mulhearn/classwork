@@ -141,7 +141,7 @@ because it is not positive definite, as the next exercise will show.\\[5pt]
 \exercise (*) Show that:
 $$\psi = A \exp(-i E t / \hbar)$$
 is a solution to the KG equation if $E = \pm m$, and in this case:
-$\rho = 2E |\psi|^2$
+$\rho = 2E \frac{|A|^2}{\hbar}$
 which is less than zero for $E = -m$.$\square$\\[5pt]
 
 This renders the K-G equation unsuitable for our current purposes of
@@ -652,9 +652,12 @@ $$p^2 = (m)^2$$
 We conclude that $p^\mu = \pm \hbar k^\mu$.  However, only $p^\mu = \hbar k^\mu$
 leads to the correct time-dependence 
 $$\psi = a \, e^{-ikx} \, u(k) = a \, \exp(- iEt/\hbar) \exp(i\vec{p}\cdot\vec{x}) u(k)$$
-for a particle of energy $E$ and momentum $\vec{p}$.  We may rewrite Equation~\ref{eqn:ub} as:
-$$u_B = \frac{\vec{p}\cdot\vec{\sigma}}{p^0+m} u_A = \frac{1}{E+m} \; \vec{p}\cdot\vec{\sigma} \; u_A$$
-and writing out $\vec{p}\cdot\vec{\sigma}$ as a matrix:
+for a particle of energy $E$ and momentum $\vec{p}$.  We may rewrite Equation~\ref{eqn:ub} equivalently as:
+\begin{equation}
+\label{eqn:plane-wave-lower}
+u_B = \frac{\vec{\sigma}\cdot\vec{p}}{E+m}   \; u_A
+\end{equation}
+and writing out $\vec{\sigma}\cdot\vec{p}$ as a matrix:
 $$u_B = \frac{1}{E+m} \; \begin{pmatrix} p_z & p_x - i p_y \\ p_x + i p_y & -p_z \\ \end{pmatrix} u_A
 $$
 And next we find two solutions by applying this result to a starting choice for $u_A$:
@@ -711,8 +714,8 @@ $p^\mu = \pm \hbar k^\mu$.  However, only $p^\mu = \hbar k^\mu$
 leads to the correct time-dependence 
 $$\psi = a \, e^{ikx} \, v(k) = a \, \exp(iEt/\hbar) \exp(-i\vec{p}\cdot\vec{x}) v(k)$$
 for an antiparticle of energy $E$ and momentum $\vec{p}$.  We may rewrite Equation~\ref{eqn:va} as:
-$$v_A = \frac{\vec{p}\cdot\vec{\sigma}}{p^0+m} v_B = \frac{1}{E+m} \; \vec{p}\cdot\vec{\sigma} \; v_B$$
-and writing out $\vec{p}\cdot\vec{\sigma}$ as a matrix:
+$$v_A = \frac{\vec{\sigma}\cdot\vec{p}}{p^0+m} v_B = \frac{1}{E+m} \; \vec{\sigma}\cdot\vec{p} \; v_B$$
+and writing out $\vec{\sigma}\cdot\vec{p}$ as a matrix:
 $$v_A = \frac{1}{E+m} \; \begin{pmatrix} p_z & p_x - i p_y \\ p_x + i p_y & -p_z \\ \end{pmatrix} v_B
 $$
 And next we find two solutions by applying this result to a starting choice for $v_B$:
@@ -1039,15 +1042,7 @@ $$[H, L_x + S_x] = [H, L_y + S_y] = 0$$
 
 \exercise For a particle at reset ($\vec{p}=0$) categorize $u^{(1)}$, $u^{(2)}$, $v^{(1)}$, $v^{(2)}$ as either spin-up or spin down.
 
-
-
-
-
-
-\end{document}
-
-
-\subsection{Relativistic Transformation of Bi-Spinors}
+\section{Relativistic Transformation of Bi-Spinors}
 
 Suppose that two frames are related by a Lorentz transformation:
 $$x^{\mu'} = \Lambda^{\mu'}_\nu x^\nu$$
@@ -1267,7 +1262,7 @@ $$(\gamma^1)^\dagger = \gamma^0 \gamma^1 \gamma^0 = - \gamma^1 (\gamma^0)^2 = -\
 \section{Othornormality of Bispinors}
 
 With the Dirac adjoint operation defined, we can now tackle the orthogonality and completeness of the plane-wave solutions.  Recall, that the particle solutions were of the form:
-$$u^{(i)} = N \begin{pmatrix}  \displaystyle u_A^{(i)} \\[5pt] \displaystyle \frac{\vec{p}\cdot\vec{\sigma}}{p^0 + m} u_A^{(i)}\\ \end{pmatrix}$$
+$$u^{(i)} = N \begin{pmatrix}  \displaystyle u_A^{(i)} \\[5pt] \displaystyle \frac{\vec{\sigma}\cdot\vec{p}}{p^0 + m} u_A^{(i)}\\ \end{pmatrix}$$
 where $N$ is a normalization factor we will soon determine, and we took:
 $$u_A^{(1)}=\begin{pmatrix} 1 \\ 0 \\ \end{pmatrix}, \hspace{1cm} u_A^{(2)}=\begin{pmatrix} 0 \\ 1 \\ \end{pmatrix}$$
 We can now determine:
@@ -1275,11 +1270,11 @@ We can now determine:
 \overline{u}^{(i)} &=& (u^{(i)})^\dagger \gamma^0 = 
 N^*
 \begin{pmatrix} 
-\displaystyle (u_A^{(i)})^\dagger & \displaystyle \frac{\vec{p}\cdot\vec{\sigma}}{p^0 + m} (u_A^{(i)})^\dagger \\
+\displaystyle (u_A^{(i)})^\dagger & \displaystyle \frac{\vec{\sigma}\cdot\vec{p}}{p^0 + m} (u_A^{(i)})^\dagger \\
 \end{pmatrix}
 \begin{pmatrix} 1 & 0 \\ 0 & -1 \\ \end{pmatrix}\\
 \overline{u}^{(i)} &=& N^* \begin{pmatrix} 
-\displaystyle (u_A^{(i)})^\dagger & \displaystyle -\frac{\vec{p}\cdot\vec{\sigma}}{p^0 + m} (u_A^{(i)})^\dagger \\
+\displaystyle (u_A^{(i)})^\dagger & \displaystyle -\frac{\vec{\sigma}\cdot\vec{p}}{p^0 + m} (u_A^{(i)})^\dagger \\
 \end{pmatrix} \\
 \end{eqnarray*}
 We can finally calculate:
@@ -1325,13 +1320,13 @@ If we take an outer product of bispinors, we get a 4x4 matrix.  So, using our re
 \sum_i u^{(i)} \overline{u}^{(i)}  &=& |N|^2 
 \begin{pmatrix} 
 \displaystyle I & -\displaystyle \frac{\vec{p}\cdot \vec{\sigma}}{p^0+m} \\
-\displaystyle \frac{\vec{p}\cdot\vec{\sigma}}{p^0+m} &
--\displaystyle \frac{(\vec{p}\cdot\vec{\sigma})^2}{p^0+m}\\ 
+\displaystyle \frac{\vec{\sigma}\cdot\vec{p}}{p^0+m} &
+-\displaystyle \frac{(\vec{\sigma}\cdot\vec{p})^2}{p^0+m}\\ 
 \end{pmatrix}\\
 &=&
 \begin{pmatrix} 
 \displaystyle (p^0+m) I & \displaystyle -\vec{p}\cdot \vec{\sigma} \\
-\displaystyle \vec{p}\cdot\vec{\sigma} &
+\displaystyle \vec{\sigma}\cdot\vec{p} &
 \displaystyle -(p^0-m) I\\ 
 \end{pmatrix}\\
 &=& p^0 \begin{pmatrix} I & 0 \\ 0 & -I \end{pmatrix} 
@@ -1362,6 +1357,198 @@ For the plane-wave particles, we have:
 $$(\slashed{p} - m) u = 0, \hspace{1cm} \overline{u} (\slashed{p} - m) = 0$$
 For the plane-wave antiparticles, we have:
 $$(\slashed{p} + m) w = 0, \hspace{1cm} \overline{w} (\slashed{p} + m) = 0$$
+
+
+\section{Helicity Eigenstates}
+
+We saw that plane-wave solutions to the Dirac equation are only eigenstates of $S_z$ when $p_x = p_y = 0$.  More generally, plane-wave solutions to the Dirac equation are not eigenstates of spin:
+$$[\vec{S}]_D = \frac{\hbar}{2}
+\begin{pmatrix}
+\vec{\sigma} & 0 \\
+0 & -\vec{\sigma}\\
+\end{pmatrix}
+$$
+but they are eigenstates of the spin component in the direction of the
+momentum, which is known as the helicity:
+$$\hat{h} = \frac{\vec{S}\cdot\vec{p}}{p}$$
+In the Dirac representation, the helicity is:
+$$[h]_D = [\frac{\vec{S}\cdot\vec{p}}{2p}]_D = \frac{\hbar}{2 p}
+\begin{pmatrix}
+\vec{\sigma}\cdot\vec{p} & 0 \\
+0 & -\vec{\sigma}\cdot\vec{p}\\
+\end{pmatrix}
+$$
+In the exercises, you will show that the helicity operator commutes
+with the Hamiltonian, so we can find plane-waves (eigenstates of the
+Hamilitonian) which are simultanously eigenstates of helicity.\\[5pt]
+
+\exercise (*) Show that:
+$$[H, h] = 0$$
+Work in the Dirac representation, where:
+$$[H]_D = \begin{pmatrix}
+m & \vec{\sigma}\cdot\vec{p} \\
+\vec{\sigma}\cdot\vec{p} & -m\\
+\end{pmatrix}$$\\
+$\square$\\[5pt]
+We wish to find plane-waves $\Psi$ that are eigenstates of helicity:
+$$\hat{h} \Psi = \lambda \Psi$$
+or equivalently:
+\begin{equation}
+\label{eqn:helicity-eigenstates}
+\frac{\hbar}{2p}
+\begin{pmatrix}
+\vec{\sigma}\cdot\vec{p} & 0 \\
+0 & -\vec{\sigma}\cdot\vec{p}\\
+\end{pmatrix}
+\begin{pmatrix}
+u_A \\ u_B \\
+\end{pmatrix}
+= \lambda
+\begin{pmatrix}
+u_A \\ u_B \\
+\end{pmatrix}
+\end{equation}
+from which we infer:
+\begin{equation}
+\label{eqn:helicity-ua}
+(\vec{\sigma} \cdot \vec{p}) \, u_A = \frac{2 p \lambda}{\hbar} u_A
+\end{equation}
+In the exercises, you will show that the allowed eigenvalues are:
+$$\lambda \pm \frac{\hbar}{2}$$
+exactly as expected for a component of spin for a spin one-half particle.\\[5pt]
+
+\exercise Using 
+$$(\vec{\sigma} \cdot \vec{p})^2 = p^2$$
+verify that the eigenstates of helicity are 
+$$\lambda = \pm \frac{\hbar}{2}.$$
+Hint:  calculate
+$$ (\vec{\sigma} \cdot \vec{p})^2 u_A$$
+by applying Equation~\ref{eqn:helicity-ua} twice.
+$\square$\\[5pt]
+Starting from Equation~\ref{eqn:plane-wave-lower}:
+$$u_B = \frac{\vec{\sigma}\cdot\vec{p}}{E+m} u_A $$
+and then applying Equation~\ref{eqn:helicity-ua} we have
+\begin{equation}
+\label{eqn:lower-helicity}
+u_B = \frac{2 p \lambda/\hbar}{E+m} u_A
+\end{equation}
+which can be used to determine $u_B$ for a simultaneous eigenstate of
+helicity and the Hamiltonian once we have $u_A$ for an eigentstate of
+helicity.  It is convenient to work in spherical coordinates, where:
+$$[\frac{\vec{\sigma}\cdot \vec{p}}{p}]_D =
+\frac{1}{p}
+\begin{pmatrix}
+p_z & p_x-i p_y \\
+p_x-i p_y & -p_z\\
+\end{pmatrix}
+=
+\begin{pmatrix}
+\cos \theta & \sin \theta e^{-i\phi} \\
+\sin \theta e^{i\phi} & -\cos \theta \\
+\end{pmatrix}
+$$
+and setting:
+$$u_A =
+\begin{pmatrix}
+a \\
+b \\
+\end{pmatrix}
+$$
+The eigenstate for $\lambda = \frac{\hbar}{2}$ will satisfy:
+$$
+\begin{pmatrix}
+\cos \theta & \sin \theta e^{-i\phi} \\
+\sin \theta e^{i\phi} & -\cos \theta \\
+\end{pmatrix}
+\,
+\begin{pmatrix}
+a \\
+b \\
+\end{pmatrix}
+=
+\begin{pmatrix}
+a \\
+b \\
+\end{pmatrix}
+$$
+From which we infer:
+$$a \cos\theta + \sin \theta e^{-i\phi} = a$$
+or:
+$$\frac{b}{a} = \frac{1 - \cos \theta}{\sin \theta} e^{i\phi}$$
+and using the half-angle identities:
+$$ \frac{b}{a} = \frac{\sin(\theta/2)}{\cos(\theta/2)}e^{i\phi}$$
+Defining:
+$$s = \sin(\theta/2)$$
+and
+$$c = \cos(\theta/2)$$
+we see that for:
+$$a = c$$
+and
+$$b = s e^{i\phi}$$
+has
+$$|a|^2 + |b|^2 = 1$$
+
+Applying Equation~\ref{eqn:lower-helicity} we determine the eigenstate for a particle
+with positive helicity:
+$$u^{\uparrow} = \sqrt{E+m}
+\begin{pmatrix} c \\ s e^{i\phi} \\ \frac{p}{E+m} c \\[5pt] \frac{p}{E + m} s e^{i\phi}\end{pmatrix}
+$$
+similarly, we can determine the eigenstate for a particle with negative helicity:
+$$u^{\downarrow} = \sqrt{E+m}
+\begin{pmatrix} -s \\ c e^{i\phi} \\ \frac{p}{E+m} s \\[5pt] -\frac{p}{E + m} c e^{i\phi}\end{pmatrix}
+$$
+The antiparticle eigenstates are:
+$$v^{\uparrow} = \sqrt{E+m}
+\begin{pmatrix}
+  \frac{p}{E+m} s \\[5pt] -\frac{p}{E + m} c e^{i\phi} \\ -s \\ c e^{i\phi} \\
+\end{pmatrix}
+\qquad \qquad
+v^{\downarrow} = \sqrt{E+m}
+\begin{pmatrix}
+  \frac{p}{E+m} c \\[5pt] \frac{p}{E + m} s e^{i\phi} \\ c \\ s e^{i\phi} \\
+\end{pmatrix}
+$$
+
+In the ultra-relativistic limit:
+$$E \gg m$$
+these reduce to:
+$$u^{\uparrow} = \sqrt{E}
+\begin{pmatrix} c \\ s e^{i\phi} \\ c \\[5pt] s e^{i\phi}\end{pmatrix}
+\qquad \qquad
+u^{\downarrow} = \sqrt{E}
+\begin{pmatrix} -s \\ c e^{i\phi} \\ s \\[5pt] -c e^{i\phi}\end{pmatrix}
+$$
+and
+$$v^{\uparrow} = \sqrt{E}
+\begin{pmatrix}
+  s \\[5pt] -c e^{i\phi} \\ -s \\ c e^{i\phi} \\
+\end{pmatrix}
+\qquad \qquad
+v^{\downarrow} = \sqrt{E}
+\begin{pmatrix}
+  c \\[5pt] s e^{i\phi} \\ c \\ s e^{i\phi} \\
+\end{pmatrix}
+$$
+
+\exercise Our derivation did not use the second constraint from
+Equation~\ref{eqn:helicity-eigenstates} on $u_B$.  Show that this is
+already satisified by our solutions, which are simultaneous
+Eigenstates of the Hamiltonian.
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
+
+
 
 \section{Orphaned}
 
@@ -1412,7 +1599,7 @@ $$S^{-1} \gamma^\mu S = \Lambda^\mu_\omega \gamma^\omega$$
 Technically, we have only shown this for the particular Lorentz transformation $\Lambda^\mu_\omega$ with $\beta$ in the positive $x$-direction, but we can always change coordinates to arrange that this is so.
 
 
-\end{document}
+
 
 \section{A Remarkable Matrix}
 Let's start by defining a matrix $S$ and exploring its properties:

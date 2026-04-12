@@ -133,6 +133,11 @@ Only {\bf after} a basis $\mathcal{B}$ is chosen, it is possible to represent a 
 $$[v]_{\mathcal{B}} = \begin{pmatrix} v^1 \\ v^2 \\ \vdots \\ v^n \end{pmatrix}$$
 or a row vector:
 $$[v]_{\mathcal{B}}^T = \begin{pmatrix} v^1 & v^2 & \cdots & v^n \end{pmatrix}$$.
+When the basis is clear from convect, we may omit the basis label:
+$$[v] \equiv [v]_\mathcal{B}$$
+Sometimes, we might prefer to emphasize the frame containing
+the basis, while leaving the basis implicit, and so will write instead:
+$$[v]_F \equiv [v]_\mathcal{B} \quad \quad (\mathcal{B}~\text{in frame}~F)$$
 
 \exercise (*) We can think of the complex numbers as 2-D vector space with
 the real numbers as scalars.  Show that $e_1 = 1$ and $e_2 = i$ are a
@@ -202,8 +207,8 @@ Compare this transformation rule to Equation~\ref{eqn:tfbasis}, we see that the 
 \begin{center}
 \begin{tabular}{lllll}
  & index location & quantity & transformation & inverse transformation \\
-\hline
-$v^i$ & upper index & contravariant component & $v^{i'} = A^{i'}_{j} v^{j}$ & $v^{i} = A^{i}_{j'} v^{j'}$ \\
+  \hline \\[-11pt]
+$v^i$ & upper index & contravariant component & $v^{i'} = A^{i'}_{j} v^{j}$ & $v^{i} = A^{i}_{j'} v^{j'}$ \\[5pt]
 $e_i$ & lower index & covariant basis vector & $e_{i'} = A^{j}_{i'} e_{j}$ & $e_{i} = A^{j'}_{i} e_{j'}$ \\
 \end{tabular}
 \end{center}
@@ -490,10 +495,10 @@ bar symbol to denote complex conjugation, so $\bar{z}$ denotes the
 complex conjugate of $z$ for $z \in \mathbb{C}$.  If the bar symbol is
 applied to a real number, it has no effect.
 
-A non-degenerate Hermitian form on a vector space $V$ is an $F$-valued
-function, denoted $(\cdot|\cdot)$, which assigns to any ordered pair
-of vectors $v$ and $w$ the scalar value denoted $(v|w)$, and has the
-following properties:
+A non-degenerate Hermitian form (NDHF) on a vector space $V$ is an
+$F$-valued function, denoted $(\cdot|\cdot)$, which assigns to any
+ordered pair of vectors $v$ and $w$ the scalar value denoted $(v|w)$,
+and has the following properties:
 \begin{center}
 \begin{tabular}{lll}
   {\bf (1)} & Linear in the second slot: \\
@@ -872,7 +877,7 @@ In the exercises you will show that
 and all other elements are zero.  Thus, the metric tensor $g$ can be represented by a matrix $G$ as:
 \begin{equation}
 \label{eqn:metric-matrix}
-[g]_\mathcal{B} = G \equiv
+[g]_F = G \equiv
 \begin{pmatrix}
 1 &  0 &  0 &  0 \\
 0 & -1 &  0 &  0 \\
@@ -885,19 +890,17 @@ basis $\mathcal{B}$.  Therefore, we must reach the same conclusion
 about the matrix representation of $G$ in any other inertial frame
 $F'$ with standard basis $\mathcal{B}'$.  Specifically, we must have:
 $$
-[g]_\mathcal{B} = [g]_{\mathcal{B}'} = G
+[g]_\mathcal{F} = [g]_{\mathcal{F}'} = G
 $$
 for all frames.  The components of the metric tensor are the same in
-all inertial frames.  Here, our primed index notation becomes just a
-little bit cumbersome, but we can write this as:
+all inertial frames, and we denote that as:
 \begin{equation}
 \label{eqn:invariant-tensor}
-g_{\alpha'\beta'} = \delta_{\alpha'}^\alpha \delta_{\beta'}^\beta
-g_{\alpha\beta}
+g_{\alpha'\beta'} = g_{\alpha\beta}
 \end{equation}
-where the $\delta$ factors are just an artifact of our notation.  In matrix notation, this reads:
-$$G' = I \, G \, I = G$$
-\\[5pt]
+by which we mean that numerically $\alpha'=\alpha$ and $\beta'=\beta$,
+but the LHS refers to the components in frame $F'$ and the RHS refers
+to the components in frame $F$.\\[5pt]
 
 \exercise
 Verify Equations \ref{eqn:metric-components} and \ref{eqn:metric-matrix} by calculating the matrix components.
@@ -979,12 +982,12 @@ in the same manner as a position-space four-vector is called a {\bf
 \noindent
 We might be tempted to consider the real numbers
 $\Lambda^{\nu'}_{\mu}$ as components of a (1,1) tensor.  However,
-notice that one set of indices refers to the $\mathcal{B}$ basis and
-another the $\mathcal{B'}$.  Therefore, it is best to leave tensors
+notice that one set of indices refers to the $\mathcal{B}$ basis of frame $F$ and
+another the $\mathcal{B'}$ basis for frame $F'$.  Therefore, it is best to leave tensors
 aside and interpret $\Lambda^{\mu'}_{\nu}$ as the components of a
 matrix, labeled by the two sets of basis vectors which it transforms
 between:
-$$[\Lambda]^{ \mathcal{B}'}_\mathcal{B}
+$$[\Lambda]^{ F'}_F
 \equiv \begin{pmatrix}
   \Lambda^{0'}_0 &\Lambda^{0'}_1 &\Lambda^{0'}_2 &\Lambda^{0'}_3 \\[3pt]
   \Lambda^{1'}_0 &\Lambda^{1'}_1 &\Lambda^{1'}_2 &\Lambda^{1'}_3 \\[3pt]
@@ -998,7 +1001,7 @@ $\nu=2$.)  Notice that we have chosen to associate the {\bf upper}
 index with the row of the matrix, which is simply a matter of choice,
 but one which we must apply consistently.  In matrix notation, we
 have:
-$$[v]_\mathcal{B'} \; = \; [\Lambda]^{\mathcal{B}'}_\mathcal{B} \; [v]_\mathcal{B}$$
+$$[v]_\mathcal{F'} \; = \; [\Lambda]^{F'}_F \; [v]_F$$
 which for for a position-space four vector is:
 $$\begin{pmatrix} t' \\ x' \\ y' \\ z' \end{pmatrix} =
 \begin{pmatrix}
@@ -1013,7 +1016,7 @@ $$\begin{pmatrix} t' \\ x' \\ y' \\ z' \end{pmatrix} =
 In similar fashion, we can consider $\Lambda^{\nu}_{\mu'}$ as the
 components of a matrix, labeled by the two sets of basis vectors it
 connects:
-$$[\Lambda]^\mathcal{B}_{\mathcal{B}'}
+$$[\Lambda]^F_{F'}
 \equiv \begin{pmatrix}
   \Lambda^{0}_{0'} &\Lambda^{0}_{1'} &\Lambda^{0}_{2'} &\Lambda^{0}_{3'} \\[3pt]
   \Lambda^{1}_{0'} &\Lambda^{1}_{1'} &\Lambda^{1}_{2'} &\Lambda^{1}_{3'} \\[3pt]
@@ -1025,19 +1028,19 @@ $$[\Lambda]^\mathcal{B}_{\mathcal{B}'}
 These matrices are related by:
 $$\Lambda^{\beta}_{\eta'} \Lambda^{\eta'}_{\alpha} = \delta^{\beta}_{\alpha}$$
 which in terms of the above matrices reads:
-$$[\Lambda]^\mathcal{B}_{\mathcal{B}'} \;  [\Lambda]^{\mathcal{B}'}_\mathcal{B} = I $$
+$$[\Lambda]^F_{F'} \;  [\Lambda]^{F'}_F = I $$
 which is as one would hope.\\[4pt]
 
 \noindent
 {\bf Notation:} When there is little chance of confusion,
 we drop the explicit labeling by basis vectors, and speak
 of the transformation $\Lambda$, with matrix representation
-$$\Lambda \equiv [\Lambda]^{\mathcal{B}'}_\mathcal{B}$$
+$$\Lambda \equiv [\Lambda]^{F'}_F$$
 which would implicitly refer to the
 transformation applicable to the contravariant components when moving
 from frame $F$ to $F'$ (or, equivalently, to the covariant components
 when moving from frame $F'$ to $F$).  The inverse transformation is:
-$$\Lambda^{-1} = [\Lambda]^\mathcal{B}_{\mathcal{B}'}$$
+$$\Lambda^{-1} = [\Lambda]^F_{F'}$$
 which is the transformation applicable to the
 contravariant components when moving from frame $F'$ to $F$ (or,
 equivalently, to the covariant components when moving from frame $F$
@@ -1090,14 +1093,12 @@ so, as $v$ is arbitrary, we must have:
 \label{eqn:lorentzgrouptn}
 \Lambda^{\alpha'}_{\mu} g_{\alpha'\beta'} \Lambda^{\beta'}_\nu =g_{\mu\nu}
 \end{equation}
-This is simply the transformation rule for any (2,0)-tensor.  However, the components of the metric tensor are frame invariant, which led us to Equation~\ref{eqn:invariant-tensor}:
-$$g_{\alpha'\beta'} = \delta_{\alpha'}^\alpha \delta_{\beta'}^\beta
-g_{\alpha\beta}$$
-We have therefore:
+This is simply the transformation rule for any (2,0)-tensor.  However, the components of the metric tensor are frame invariant (Equation~\ref{eqn:invariant-tensor}) and so we have:
 \begin{equation}
  \label{eqn:lorentztensor}
-  \delta^{\alpha'}_\alpha \delta^{\beta'}_\beta \Lambda^{\alpha'}_{\mu} g_{\alpha\beta} \Lambda^{\beta'}_\nu =g_{\mu\nu}
+\Lambda^{\alpha'}_{\mu} g_{\alpha\beta} \Lambda^{\beta'}_\nu =g_{\mu\nu}
 \end{equation}
+Take care the we are still summing across $\alpha=\alpha'$ and $\beta=\beta'$
 In the previous section, we saw that we can write
 $\Lambda^{\beta'}_\nu$ as the components of a matrix $\Lambda$.
 We can write this result in matrix notation as:
@@ -1202,8 +1203,6 @@ special relativity.  See the exercises below for a concrete example.
 Experimental evidence supports special relativity.  So we must abandon
 our classical notion of momentum.
 
-%\exercise Example showing it fails...
-
 If we can find a four-vector quantity related to momentum, and
 likewise conserved, so e.g.:
 $$p^\mu_A + p^\mu_B = p^\mu_C + p^\mu_D$$
@@ -1260,8 +1259,8 @@ $$\eta^0 = \gamma \frac{dt}{dt} = \gamma$$
 and for the $x$ component:
 $$\eta^1 = \gamma \frac{dx}{dt} = \gamma \beta_x$$
 and similar for the $y$ and $z$ components.  So writing $\eta$
-as a column vector in the standard basis $\mathcal{B}$:
-$$[\eta]_\mathcal{B} = \gamma \begin{pmatrix} 1 \\ \beta_x \\ \beta_y \\\ \beta_z \end{pmatrix}$$
+as a column vector in the standard basis of frame $F$:
+$$[\eta]_F = \gamma \begin{pmatrix} 1 \\ \beta_x \\ \beta_y \\\ \beta_z \end{pmatrix}$$
 It is left as an exercise to show that the invariant associated with $\eta$ is
 \begin{equation}
 \label{eqn:fvsq}
@@ -1275,7 +1274,7 @@ Next we define the momentum four-vector $p$ by its components:
 p^\mu \equiv m \eta^\mu
 \end{equation}
 assuming that the mass of a particle is invariant, then $p^\mu$ transforms as a four-vector, and so is itself a four-vector, with
-$$[p]_\mathcal{B} = \begin{pmatrix} \gamma m \\ \gamma m \beta_x \\ \gamma m \beta_y \\\ \gamma m \beta_z \end{pmatrix}$$
+$$[p]_F = \begin{pmatrix} \gamma m \\ \gamma m \beta_x \\ \gamma m \beta_y \\\ \gamma m \beta_z \end{pmatrix}$$
 In the non-relativistic limit, we can approximate $\gamma$ by its Taylor series near $\beta=0$
 $$\gamma = \frac{1}{\sqrt{1-\beta^2}} = 1 + \frac{1}{2} \beta^2$$
 In this limit, we see that
@@ -1295,7 +1294,7 @@ have a non-zero energy due to their mass.
 
 Thus we have identified exactly the quantity we sought, a four-vector
 $p$ which we can write as a column vector:
-$$[p]_{\mathcal B} = \begin{pmatrix} E \\ \vec{p} \end{pmatrix}$$
+$$[p]_{F} = \begin{pmatrix} E \\ \vec{p} \end{pmatrix}$$
 where $E$ is relativistic energy:
 $$E = \gamma m $$
 and $\vec{p}$ is the relativistic momentum:

@@ -82,7 +82,7 @@ Where we can now match term by term to obtain:
 \end{equation}
 This is everything we hoped for!  Notice that $H^{(0)}$ operator does
 not appear explicitly in Equation~\ref{eqn:cmdot}.  The unperturbed
-Hamiltonian determines the eigenstates $\bar{m}$ and the energies
+Hamiltonian determines the eigenstates $\ket{m}$ and the energies
 $E_m$, but its impact on the time-dependence of the coefficients
 $c_m(t)$ is solely through the phase factor:
 $$\exp\left( i \frac{(E_m - E_n) t}{\hbar} \right)$$
@@ -423,9 +423,9 @@ read off the phase space integral consistent with the new normalization, and com
 In this section, we'll apply Fermi's Golden Rule to the process
 $$a + b + \dots \to 1 + 2 + \ldots$$
 so that the initial state is:
-$$\ket{i} = \ket{p_a \, p_b \, \ldots} = \ket{p_a} \times \ket{p_b} \times \ldots$$
+$$\ket{i} = \ket{p_a \, p_b \, \ldots} = \ket{p_a} \otimes \ket{p_b} \times \ldots$$
 and the final states is:
-$$\ket{f} = \ket{p_1 \, p_1 \, \ldots} = \ket{p_1} \times \ket{p_1} \times \ldots$$
+$$\ket{f} = \ket{p_1 \, p_2 \, \ldots} = \ket{p_1} \otimes \ket{p_2} \times \ldots$$
 We'll use a simple notation where
 $$\sum E_a = E_a + E_b + \ldots$$
 and
@@ -763,7 +763,7 @@ It is convenient to express Equation~\ref{eqn:dndthreek} as a differential in en
 $$E=\frac{(\hbar k)^2}{2 m}$$
 so we have:
 \begin{eqnarray*}
-dk   &=& \frac{m}{\hbar^2 k} \\[4pt]
+dk   &=& \frac{m}{\hbar^2 k} dE \\[4pt]
 d^3k &=& k^2 dk d\Omega = \frac{m k }{\hbar^2} d\Omega dE \\[4pt]
 dn   &=& \left( \frac{L}{2\pi} \right)^3 \left(\frac{m}{\hbar^2 k}\right) d\Omega \; dE
 \end{eqnarray*}
