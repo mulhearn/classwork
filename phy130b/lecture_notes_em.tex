@@ -1,0 +1,496 @@
+\documentclass[12pt]{article}
+
+\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.75in]{geometry}
+\usepackage{cite}
+\usepackage{slashed}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{braket}
+%\usepackage[american,fulldiode]{circuitikz}
+\usepackage{tikz}
+\usepackage{arydshln}
+
+\begin{document}
+
+\title{PHY 130B \\ Lecture Notes E: \\
+Electricity and Magnetism\\}
+\author{Michael Mulhearn}
+
+\maketitle
+
+\newcounter{exercise}
+\setcounter{exercise}{0}
+
+\newcommand{\exercise}{
+\stepcounter{exercise}
+\noindent
+{\bf Exercise E.\theexercise:}
+}
+
+\section{The Maxwell Equations}
+
+Setting:
+$$\hbar = c = \epsilon_0 = \mu_0 = 1$$
+the Maxwell Equations become:
+\begin{equation}
+\label{eqn:maxwell}
+\begin{aligned}
+\nabla \cdot \vec{E} &= \rho \qquad \text{(a)} \qquad &\nabla \times \vec{E} &= -\frac{\partial \vec{B}}{\partial t} \qquad \text{(b)}\\[6pt]
+\nabla \cdot \vec{B} &= 0 \qquad \text{(c)} \qquad &\nabla \times \vec{B} &= \vec{J} + \frac{\partial \vec{E}}{\partial t} \qquad \text{(d)}
+\end{aligned}
+\end{equation}
+Taking the gradiant of (d):
+\begin{equation*}
+\nabla \cdot (\nabla \times \vec{B}) = \nabla \cdot \vec{J} + \frac{\partial}{\partial t} \, (\nabla \cdot \vec{E}) 
+\end{equation*}
+and then using (a) we have:
+\begin{equation}
+  \label{eqn:qcons-nabla}
+\frac{\partial \rho}{\partial t} =  -\nabla \cdot \vec{J} 
+\end{equation}
+and so:
+\begin{align*}
+  \int_V \frac{\partial \rho}{\partial t} \; dV &=  \int_V -\nabla \cdot \vec{J} \; dV \\[7pt]
+  \frac{d}{dt} \int_V \; \rho \; dV &=  \int_V \vec{J} \cdot dV 
+\end{align*}
+Assuming that $\vec{J}$ vanishes at infinity (or that no current leaves a finite volume), we have:
+\begin{equation}
+  \frac{d}{dt} \int_V \; \rho \; dV =  0 
+\end{equation}
+We see that electric charge conservation is a direct consequence of the Maxwell Equations.
+Defining:
+\begin{equation}
+\label{eqn:four-current}  
+[J^\mu] = (\rho, \vec{J})
+\end{equation}
+and recalling that:
+\begin{equation*}
+[\partial_\mu] = (\frac{\partial}{\partial t}, \nabla)
+\end{equation*}
+we can write Equation~\ref{eqn:qcons-nabla} as:
+\begin{equation}
+\label{eqn:conserved-four-current}
+\partial_\mu J^\mu = 0
+\end{equation}
+and see that $J$ a {\it conserved four-current density}, but we most
+often just call it a {\it conserved current}.  Since $\partial_\mu$ is
+a four-vector and $0$ is a scalar, we see that $J^\mu$ is indeed a
+four-vector.\\[5pt]
+
+\exercise Consider a region of uniform charge density and no current so that in frame $F$:
+$$[J^\mu]_F = (\rho, 0, 0, 0)$$\\
+Using the Lorentz transformation, show that in frame $F'$ moving at
+velocity $\beta$ in the $z$ direction,
+$$[J^\mu]_F = (\gamma \rho, 0, 0, -\gamma \beta \rho)$$\\
+Then explain these results in terms of length contraction (which
+increases the charge density) and the appearance of current, both due
+to the relative motion of $F'$ and $F$.
+
+\section{Gauge Invariance of the Scalar and Vector Potentials}
+
+As you will show in the exercises below, a field is curless if and
+only if it arises from a conservative potential:
+$$\nabla \times \vec{F} = 0 \iff \text{There exists} \; \phi \; \text{such that} \; \vec{F} = -\nabla \phi$$
+In a similar manner, a field is curless if and only if it arises from the curl of a vector potential:
+$$\nabla \cdot \vec{F} = 0 \iff \text{There exists} \; \vec{A} \; \text{such that} \; \vec{F} = \nabla \times \vec{A}$$
+The existence of $\vec{A}$ is indeed gauranteed but quite challenging to
+prove, so we will not attempt it here.  You will proof the other
+direction in the exercises, however.
+
+From Equation~\ref{eqn:maxwell}c of the Maxwell equations
+$$\nabla \cdot \vec{B} = 0$$
+we infer the existence of a vector potential $\vec{A}$ such that:
+\begin{equation}
+\label{eqn:bfield}
+\vec{B} = \nabla \times \vec{A}
+\end{equation}
+The electric field is neither curlness nor divergenceless, however, starting from Equation~\ref{eqn:maxwell}b
+$$\nabla \times \vec{E} \; = \; -\frac{\partial \vec{B}}{\partial t} \; = \; -\nabla \times \frac{\partial \vec{\vec{A}}}{\partial t} $$
+so there is curless quantity:
+$$\nabla \times \left( \vec{E} + \frac{\partial \vec{A}}{\partial t} \right) \; = \; 0$$
+from which we infer the existence of a scalar potential:
+$$\vec{E} + \frac{\partial \vec{A}}{\partial t} \; = \; -\nabla \phi$$
+and so the electric field can be calculated from the scalar and vector potentials as:
+\begin{equation}
+\label{eqn:efield}
+\vec{E} = -\nabla \phi - \frac{\partial \vec{A}}{\partial t}
+\end{equation}
+
+\noindent
+Taken together, the scalar potential $\phi$ and the vector potenial
+$\vec{A}$ uniquely specify the physical electromagentic fields
+$\vec{E}$ and $\vec{B}$.  However, the potentials themselves are {\bf
+  not} unique.  In what is the most important results of this section,
+you will show that the electric and magnetic fields are unchanged by the transformation
+$$\vec{A} \to \vec{A} + \nabla \lambda(\vec{x},t) \quad \text{and} \quad \phi \to \phi + \frac{\partial \lambda}{\partial t}$$
+where $\lambda(\vec{x},t)$ is a real valued function of position and space.  We will show soon that the quanity:
+$$[A_\mu] = (\phi, \vec{A})$$
+is indeed a four vector, and so we can write this transformation as:
+\begin{equation}
+\label{eqn:gauge-transformation}
+A_\mu \to A_\mu + \partial_\mu \, \lambda(x)
+\end{equation}
+where $x$ is the position-space four-vector.  We call this transformation a {\it gauge transformation}.\\[5pt]
+
+\exercise Show that
+\begin{equation*}
+\nabla \cdot \left( \nabla \times \vec{F} \right) = 0 \qquad \text{and} \qquad \nabla \times \left(\nabla \phi \right) = 0
+\end{equation*}
+Use tensor notation with
+$$(\nabla \times \vec{F})_i = \epsilon_{ijk}\partial_j F_k$$
+and
+$$\epsilon_{ijk} = \epsilon_{jki} = -\epsilon{ikj}. \qquad \square$$
+
+\exercise Show that if
+$$\nabla \times \vec{F} = 0$$
+then
+$$\phi(x) = \int_{x_0}^x \vec{F} \cdot d\vec{x}$$
+is idependent of the path followed.  Hint: use Stoke's theorem.$\qquad \square$\\[5pt]
+
+\exercise (*) Using Equation $\ref{eqn:bfield}$ show that the magnetic
+field $\vec{B}$ is unchanged by the gauge transformation of Equation
+$\ref{eqn:gauge-transformation}$.$\qquad \square$\\[5pt]
+
+\exercise (*) Using Equation $\ref{eqn:efield}$ show that the electric
+field $\vec{E}$ is unchanged by the gauge transformation of Equation
+$\ref{eqn:gauge-transformation}$.$\qquad \square$\\[5pt]
+
+\section{The Maxwell Equation in Lorentz Covariant Form}
+
+Equations~\ref{eqn:bfield} and \ref{eqn:efield} express the
+relationship between the electric and magnetic fields ($\vec{E}$ and
+$\vec{B}$) and the scalar and vector potentials ($\phi$ and
+$\vec{A}$).  You will verify below that these imply the homogenous
+Maxwell Equations (Equations ~\ref{eqn:maxwell}a$\&$c) are already
+satisfied.  In this section, we will express the remaining Maxwell
+equations in terms of the four-potential $A^\mu$.
+
+Starting from Equation~\ref{eqn:maxwell}a
+$$\nabla \cdot \vec{E} = \rho$$
+and inserting Equation~\ref{eqn:efield}
+\begin{align*}
+\nabla \cdot \left( -\nabla \phi - \frac{\partial A}{\partial t} \right) &= \rho \\
+-\nabla^2\phi - \frac{\partial}{\partial t}(\nabla \cdot \vec{A}) &= \rho \\
+\end{align*}
+Our final results will look best when expressed in terms of the d'Alembertian operator
+$$\square^2 = \partial^\mu \, \partial_\mu = \frac{\partial^2}{\partial t^2} - \nabla^2$$
+which we shall call box squared.  Noting that:
+$$-\nabla^2 = \square^2 - \frac{\partial^2}{\partial t^2}$$
+we have:
+\begin{equation}
+\label{eqn:box-squared-phi}
+  \Box^2 \phi - \frac{\partial}{\partial t}\left(\nabla \cdot \vec{A} + \frac{\partial \phi}{\partial t}\right) = \rho
+\end{equation}
+In a similar manner, starting from Equation~\ref{eqn:maxwell}d
+\begin{equation*}
+\nabla \times \vec{B} = \vec{J} + \frac{\partial \vec{E}}{\partial t}
+\end{equation*}
+you will show that:
+\begin{equation}
+\label{eqn:box-squared-A}
+\Box^2 \vec{A} + \nabla\left(\nabla \cdot \vec{A} + \frac{\partial \phi}{\partial t}\right) = \vec{J}
+\end{equation}
+Paying close attention to the signs, note that:
+$$\nabla \cdot \vec{A} + \frac{\partial \phi}{\partial t} =
+\partial_\mu A^\mu$$ And so Equations~\ref{eqn:box-squared-phi} and
+~\ref{eqn:box-squared-A} can be combined as:
+\begin{equation}
+\label{eqn:maxwell-covariant}
+\Box^2 A^\mu + \partial^\mu( \partial_\nu A^\nu) = J^\mu  
+\end{equation}
+Together with Equations~\ref{eqn:efield} and \ref{eqn:bfield} this is
+fully consistent with the original Maxwell equations.  This form is
+manifestly Lorentz covariant, which shows that $A^\mu$ is
+indeed a four-vector.  Often in this class, we have seen important
+equations often take two forms: one for calculations
+(e.g. Equations~\ref{eqn:maxwell}) and one for showing Lorentz
+covariance explicitly (e.g. Equation~\ref{eqn:maxwell-covariant}.
+
+Equation~\ref{eqn:maxwel-covariant} can be written equivalently as:
+\begin{equation*}
+\partial_\mu F^{\mu\nu} = J^\nu
+\end{equation*}
+where
+\begin{equation}
+F^{\mu\nu} = \partial^\mu A^\nu - \partial^\nu A^\mu
+\end{equation}
+is called the field strength tensor.  In the exercises, you will show that:
+\begin{equation}
+\label{eqn:field-strength-matrix}
+  [F] = \begin{pmatrix}
+    0 & -E_x & -E_y & -E_z \\
+  E_x &  0   & -B_z & \phantom{-}B_y \\
+  E_y &  \phantom{-}B_z &  0   & -B_x \\
+  E_z & -B_y &  \phantom{-}B_x &  0   \\
+  \end{pmatrix}
+\end{equation}
+
+
+
+The phenomenon of electricity and magnetism is a truly remarkable
+bridge between classical physics and modern physics.  Electrical and
+magnetic forces are part of our everyday lifes, and you can throughly
+explore the phenomomena using magnets, circuits, and other things you
+can hold in your own hands.  And yet, with no extra input, they are
+consistent with special relativity.  It turns out, this is just the
+beginning.  As you shall see, the E\&M bridge goes far indeed.\\[5pt]
+
+\exercise Using Equation~\ref{eqn:bfield} verify that
+Equation~\ref{eqn:maxwell}c is satisfied for any $A^\mu$.\\[5pt]
+
+\exercise Using Equations~\ref{eqn:efield} and \ref{eqn:bfield},
+verify that verify that Equation~\ref{eqn:maxwell}b is satisfied for
+any $A^\mu$.\\[5pt]
+
+\exercise Starting from Equation~\ref{eqn:maxwell}d and inserting
+Equations~\ref{eqn:efield} and ~\ref{eqn:bfield}, derive Equation~\ref{eqn:box-squared-A}.\\[5pt]
+
+\exercise (*) Verify the matrix representation in
+Equation~\ref{eqn:field-strength-matrix}.  Here is a start:
+$$F^{0i} = \frac{\partial A^i}{\partial t} + (\nabla \phi)^i = -E^i$$
+
+\exercise Since you know how to transform tensors, you know how to
+transform Electric and Magnetic fields now via
+Equation~\ref{eqn:field-strength-matrix}.  For a Lorentz boost $L$ we
+have:
+$$[F]_F' = L [F]_F L$$
+Write the field strength tensor $F$ for a uniform electric field of
+strength $E$ in the $+z$ direction.  Apply a Lorentz boost of speed
+$beta$ in the $+x$ direction.  Calculate the resulting electric and
+magnetic fields.
+
+\exercise Assume that the uniform electric field from the previous
+problem is the result of a uniform sheet of charge with charge density
+$\sigma$.  Show that result results from the previous calculation are
+consistent with your expectations accounting for length contraction,
+and the current introduced by the moving sheet.
+
+\section{The Lorenz Gauge}
+
+In the previous section, we saw that Maxwell's equations can be
+written in covariant form as:
+$$\Box^2 A^\mu + \partial^\mu( \partial_\nu A^\nu) = J^\mu$$  
+and before that, we saw that electric and magetic fields are unchanged by a gauge transformation:
+$$A_\mu \to A_\mu + \partial_\mu \, \lambda(x)$$
+Because the physical fields are unchanged by a gauge transformation,
+we are free to choose the gauge that we find most convenient.  The
+Lorenz Gauge (different person than Lorentz!) is the condition:
+$$\partial_\mu A^\mu = 0$$
+We can always find a gauge transformation $\lambda$ that imposes this condition, because
+$$\Box^2 \lambda(x) = -\partial_u A^\mu = f(x)$$
+is simply a wave equation for a known source, which certainly has a
+solution.
+
+With the Lorenz gauge, the covariant form of the Maxwell equations takes its most elegant form:
+\begin{equation}
+\label{eqn:maxwell-lorenz}
+\Box^2 A^\mu = J^\mu  
+\end{equation}
+
+\section{Global U(1) Symmetry}
+
+By definition, the $U(1)$ symmetry group is the set of unitary $1 \times 1$ complex
+matrices.  These are just the complex numbers of magnitude
+one:
+$$U(1) = \{ e^{i\alpha} \mid \alpha \in \mathcal{R}\}$$
+because:
+$$\left(e^{i\alpha}\right)^\dagger\, e^{i\alpha} = e^{-i\alpha} \, e^{i\alpha} = 1$$
+Under a global $U(1)$ symmetry, the equations of motion are unchanged
+by:
+$$\psi \to e^{i\alpha} \psi$$
+We already have several examples.  The Klein-Gordon equation
+\begin{equation}
+\label{eqn:klein-gordan}
+(\Box^2 + m^2)\psi = 0
+\end{equation}
+is invariant under $U(1)$ symmetry because an overall phase simply cancels:
+\begin{equation*}
+  (\Box^2 + m^2) \left(e^{i\alpha} \psi \right) = 0
+  \implies
+  (\Box^2 + m^2) \psi = 0
+\end{equation*}
+The Schr\"odinger equation
+\begin{equation}
+\label{eqn:schrodinger}
+i\frac{\partial\psi}{\partial t} = -\frac{\nabla^2}{2m}\psi
+\end{equation}
+and the Dirac equation
+\begin{equation}
+\label{eqn:dirac}
+(i\gamma^\mu\partial_\mu - m)\psi = 0
+\end{equation}
+are each invariant under the $U(1)$ symmetry.  This implies that each
+element of $U(1)$ commutes with Hamiltonian operator, and so the
+generators of $U(1)$ will commute as well.
+
+The generator of $U(1)$ is:
+$$T = (-i) \frac{\partial}{\partial \alpha} e^{i\alpha} = 1$$
+so we have:
+$$\frac{d}{dt}\braket{1} = \frac{d}{dt}\braket{\psi \mid 1 \mid \psi} =
+\frac{d}{dt} \braket{\psi \mid \psi} = 0$$
+So the conserved quantity associated with a global $U(1)$ symmetry is
+probability.  And, evidently, one is the generator of probability.
+
+In the exercises, you will show that for the Dirac equation, the current:
+\begin{equation}
+\label{eqn:jmu-dirac}
+j^\mu = \bar{\psi} \gamma^\mu \psi
+\end{equation}
+is conserved, so that:
+\begin{equation}
+\label{eqn:conserved-probability}
+\partial_\mu j^\mu = 0.
+\end{equation}
+The time-like component is :
+$$j^0 = \bar{\psi} \gamma^0 \psi = \psi^\dagger (\gamma^0)^2 \psi = \psi^\dagger \psi$$
+and so:
+$$\int \psi^\dagger \psi \, d^3x = \text{const}$$
+
+
+\exercise Show that if
+$$ \delta_\mu j^\mu = 0$$
+in some (possibly infinite) volume $V$ and
+$\vec{j}$ vanishes at the boundary, then
+$$\frac{d}{dt} \int_V j^0 dV = 0$$
+
+\exercise Show that Dirac Equation, can be written as:
+$$\gamma^\mu \, \partial_\mu \psi = - i m \psi$$
+and in the adjoint form:
+$$\left( \partial_\mu \bar{\psi} \right) \, \gamma^\mu = + i m \bar{\psi}$$
+Hint: you will need:
+$$(\gamma^0)^2=1, \quad \gamma^0 \gamma^\mu \gamma^0 = \left( \gamma^\mu \right)^\dagger$$
+~\\[-3pt]
+
+\exercise Using the results of the previous problem, show that for Dirac equation:
+$$\partial_\mu (\bar{\psi} \gamma^\mu \psi) = 0$$
+~\\[-3pt]
+
+\exercise Show that for the Klein-Gordon equation, the current:
+\begin{equation*}
+j^\mu = \frac{1}{2mi}\left(\psi^*\partial^\mu\psi - \psi\partial^\mu\psi^*\right)
+\end{equation*}
+satisfies $\partial_\mu j^\mu = 0$ using
+Equation~\ref{eqn:klein-gordan}. Note however that $j^0$ is not
+positive definite, and so cannot be interpreted as a probability
+density.\\[5pt]
+
+\exercise Show that for the Schr\"odinger equation, the probability density and current:
+\begin{equation*}
+\rho = \psi^*\psi \qquad \vec{j} = \frac{1}{2mi}\left(\psi^*\nabla\psi - \psi\nabla\psi^*\right)
+\end{equation*}
+satisfy the continuity equation:
+\begin{equation*}
+\frac{\partial\rho}{\partial t} + \nabla\cdot\vec{j} = 0
+\end{equation*}
+using Equation~\ref{eqn:schrodinger}.
+~\\[-3pt]
+
+\section{Charge Conservation}
+
+For a Fermion of charge $Qe$, we can also consider the $U(1)$ symmetry
+transformation:
+$$\psi \to e^{i Qe \alpha} \psi$$
+Our results only differ from the previous section by a factor of $Qe$,
+and instead of a probability density we will have a charge density.
+Now the generators is:
+$$T = (-i) \frac{\partial}{\partial \alpha} e^{iQe\alpha} = Qe$$
+with associated conserved current:
+\begin{equation}
+J^\mu = Q e j^\mu = Q e \bar{\psi} \gamma^\mu \psi
+\end{equation}  
+with
+$$\partial_\mu J^\mu = 0$$
+and:
+$$J^0 = Q e \psi^\dagger \psi = \rho$$
+is the charge density, which you should compare to
+Equations~\ref{eqn:four-current} and \ref{eqn:conserved-four-current}.
+
+\section{Local U(1) Symmetry}
+
+In the previous section we saw that global $U(1)$ symmetry,
+i.e. invariance under a global change of phase, is responsible for
+probability conservation and (equivalently) charge conservation.
+Next, let's consider what happens when we insist that our equations of
+motion are unchanged by a {\it local} $U(1)$ symmetry.  That is, we
+consider the transformation:
+$$\psi \to e^{i Qe \lambda(x)} \psi$$
+where $\lambda(x)$ is an arbitrary real function defined at each
+space-time coordinate $x$.  Under this transformation, the Dirac equation:
+\begin{align*}
+  (i \gamma^\mu \partial_\mu - m ) \psi &= 0\\
+  i \gamma^\mu \partial_\mu \psi &= m \psi 
+\end{align*}
+becomes:
+\begin{align*}
+  i \gamma^\mu \partial_\mu \left( e^{iQe\lambda} \psi \right) \; &= \; m \left( e^{iQe\lambda} \psi \right) \\[5pt]
+  e^{iQe\lambda} \, i \gamma^\mu \left( \partial_\mu  + i Qe (\partial_\mu \lambda) \right)  \psi
+  &= e^{iQe\lambda} \; m  \, \psi \\[5pt]
+  i \gamma^\mu \left( \partial_\mu  + i Qe (\partial_\mu \lambda) \right)  \psi
+  &= m  \, \psi 
+\end{align*}
+so the free-particle Dirac equation is not invariant under local $U(1)$ symmetry, as:
+$$\partial_\mu \to \partial_\mu + i (\partial_\mu \lambda)$$
+We can accommodate this symmetry by replacing $\partial_\mu$ with a new derivative:
+$$D_\mu \equiv \partial_\mu + i \, Q \, e \, A_\mu$$
+that adds a new term introducing a new interaction with a field $A_\mu(x)$. Now:
+\begin{equation*}
+D_\mu \left( e^{iQe\lambda(x)} \psi\right ) = e^{iQe\lambda(x)}
+\left(\partial_\mu + i \, Q \, e \, (A_\mu + (\partial_\mu \lambda)) \right) \psi
+\end{equation*}
+If the new interaction is invariant under a gauge transformation:
+$$A_\mu \to A_\mu + (\partial_\mu \lambda),$$
+then we have:
+\begin{equation*}
+D_\mu \left( e^{iQe\lambda(x)} \psi \right) = e^{iQe\lambda(x)} D_\mu \, \psi
+\end{equation*}
+This shows that $D_\mu$ tranforms in the same manner as $\psi$, and so
+we call $D_\mu$ a covariant derivative.
+The Dirac equation using the covariant derivative $D_\mu$:
+\begin{equation*}
+  (i \gamma^\mu D_\mu - m ) \psi = 0
+\end{equation*}
+is invariant under the local $U(1)$ transformation:
+The covariant derivative is not gauge invariant, and physical
+quanitites must be guage invariant.  In the exercises, you will show
+that the commutator of covariant derivatives is gauge invariant and:
+\begin{equation}
+\label{eqn:covariant-commutator}
+[D_\mu, D_\nu] = i Q e (\partial_\mu A_\nu -\partial_\nu A_\mu).
+\end{equation}
+  
+Thus, the symmetry requirements have compelled us to introduce a new
+field $A_\mu$, and an interaction that is invariant under a gauge
+transformation
+$$A_\mu \to A_\mu + d_\mu \lambda$$
+which is identical to that of the Maxwell equations.  
+We can also construct a gauge invariant quantity for the interaction,
+and it is identical to the electromagnetic field strength tensor:
+$$[D_\mu, D_\nu] = i Q e F_{\mu\nu}$$
+Using field theory, we would write down the most general
+Lagrangian consistent with local $U(1)$ symmetry and derive the
+equations of motion for the particles, obtaining the Dirac equation,
+and the equations for $A^\mu$, which would be the Maxwell equations.  We
+haven't shown things quite so directly here, but I hope you still find
+these results compelling.  Local $U(1)$ symmetry requires an
+interaction like electricity and magnetism.\\[5pt]
+
+\exercise Verify Equation~\ref{eqn:covariant-commutator}.
+
+\section{The Electromagnetic Interaction Hamiltonian}
+
+We obtain the Hamiltonian from the Dirac Equation by noting that:
+$$i \frac{d}{dt} \psi = H \psi$$
+The Dirac equation, including the E+M interaction from $U(1)$ symmetry is:
+$$i \gamma^\mu ( \partial_\mu + i Qe A_\mu) - m) \psi = 0$$
+
+
+
+
+
+
+
+
+
+\end{document}
