@@ -11,6 +11,7 @@
 %\usepackage[american,fulldiode]{circuitikz}
 \usepackage{tikz}
 \usepackage{arydshln}
+\usepackage[compat=1.1.0]{tikz-feynman}
 
 \begin{document}
 
@@ -41,7 +42,7 @@ the Maxwell Equations become:
 \nabla \cdot \vec{B} &= 0 \qquad \text{(c)} \qquad &\nabla \times \vec{B} &= \vec{J} + \frac{\partial \vec{E}}{\partial t} \qquad \text{(d)}
 \end{aligned}
 \end{equation}
-Taking the gradiant of (d):
+Taking the divergence of (d):
 \begin{equation*}
 \nabla \cdot (\nabla \times \vec{B}) = \nabla \cdot \vec{J} + \frac{\partial}{\partial t} \, (\nabla \cdot \vec{E}) 
 \end{equation*}
@@ -53,7 +54,7 @@ and then using (a) we have:
 and so:
 \begin{align*}
   \int_V \frac{\partial \rho}{\partial t} \; dV &=  \int_V -\nabla \cdot \vec{J} \; dV \\[7pt]
-  \frac{d}{dt} \int_V \; \rho \; dV &=  \int_V \vec{J} \cdot dV 
+  \frac{d}{dt} \int_V \; \rho \; dV &=  \int_V \vec{J} \cdot dA 
 \end{align*}
 Assuming that $\vec{J}$ vanishes at infinity (or that no current leaves a finite volume), we have:
 \begin{equation}
@@ -93,10 +94,10 @@ to the relative motion of $F'$ and $F$.
 As you will show in the exercises below, a field is curless if and
 only if it arises from a conservative potential:
 $$\nabla \times \vec{F} = 0 \iff \text{There exists} \; \phi \; \text{such that} \; \vec{F} = -\nabla \phi$$
-In a similar manner, a field is curless if and only if it arises from the curl of a vector potential:
+In a similar manner, a field (in 3-D) is curless if and only if it arises from the curl of a vector potential:
 $$\nabla \cdot \vec{F} = 0 \iff \text{There exists} \; \vec{A} \; \text{such that} \; \vec{F} = \nabla \times \vec{A}$$
 The existence of $\vec{A}$ is indeed gauranteed but quite challenging to
-prove, so we will not attempt it here.  You will proof the other
+prove, so we will not attempt it here.  You will prove the other
 direction in the exercises, however.
 
 From Equation~\ref{eqn:maxwell}c of the Maxwell equations
@@ -124,13 +125,13 @@ $\vec{A}$ uniquely specify the physical electromagentic fields
 $\vec{E}$ and $\vec{B}$.  However, the potentials themselves are {\bf
   not} unique.  In what is the most important results of this section,
 you will show that the electric and magnetic fields are unchanged by the transformation
-$$\vec{A} \to \vec{A} + \nabla \lambda(\vec{x},t) \quad \text{and} \quad \phi \to \phi + \frac{\partial \lambda}{\partial t}$$
+$$\vec{A} \to \vec{A} + \nabla \lambda(\vec{x},t) \quad \text{and} \quad \phi \to \phi - \frac{\partial \lambda}{\partial t}$$
 where $\lambda(\vec{x},t)$ is a real valued function of position and space.  We will show soon that the quanity:
-$$[A_\mu] = (\phi, \vec{A})$$
+$$[A^\mu] = (\phi, \vec{A})$$
 is indeed a four vector, and so we can write this transformation as:
 \begin{equation}
 \label{eqn:gauge-transformation}
-A_\mu \to A_\mu + \partial_\mu \, \lambda(x)
+A^\mu \to A^\mu - \partial^\mu \, \lambda(x)
 \end{equation}
 where $x$ is the position-space four-vector.  We call this transformation a {\it gauge transformation}.\\[5pt]
 
@@ -163,7 +164,7 @@ Equations~\ref{eqn:bfield} and \ref{eqn:efield} express the
 relationship between the electric and magnetic fields ($\vec{E}$ and
 $\vec{B}$) and the scalar and vector potentials ($\phi$ and
 $\vec{A}$).  You will verify below that these imply the homogenous
-Maxwell Equations (Equations ~\ref{eqn:maxwell}a$\&$c) are already
+Maxwell Equations (Equations ~\ref{eqn:maxwell}b$\&$c) are already
 satisfied.  In this section, we will express the remaining Maxwell
 equations in terms of the four-potential $A^\mu$.
 
@@ -190,7 +191,7 @@ In a similar manner, starting from Equation~\ref{eqn:maxwell}d
 you will show that:
 \begin{equation}
 \label{eqn:box-squared-A}
-\Box^2 \vec{A} + \nabla\left(\nabla \cdot \vec{A} + \frac{\partial \phi}{\partial t}\right) = \vec{J}
+\Box^2 \vec{A} - \nabla\left(\nabla \cdot \vec{A} + \frac{\partial \phi}{\partial t}\right) = \vec{J}
 \end{equation}
 Paying close attention to the signs, note that:
 $$\nabla \cdot \vec{A} + \frac{\partial \phi}{\partial t} =
@@ -198,7 +199,7 @@ $$\nabla \cdot \vec{A} + \frac{\partial \phi}{\partial t} =
 ~\ref{eqn:box-squared-A} can be combined as:
 \begin{equation}
 \label{eqn:maxwell-covariant}
-\Box^2 A^\mu + \partial^\mu( \partial_\nu A^\nu) = J^\mu  
+\Box^2 A^\mu - \partial^\mu( \partial_\nu A^\nu) = J^\mu  
 \end{equation}
 Together with Equations~\ref{eqn:efield} and \ref{eqn:bfield} this is
 fully consistent with the original Maxwell equations.  This form is
@@ -206,9 +207,8 @@ manifestly Lorentz covariant, which shows that $A^\mu$ is
 indeed a four-vector.  Often in this class, we have seen important
 equations often take two forms: one for calculations
 (e.g. Equations~\ref{eqn:maxwell}) and one for showing Lorentz
-covariance explicitly (e.g. Equation~\ref{eqn:maxwell-covariant}.
-
-Equation~\ref{eqn:maxwel-covariant} can be written equivalently as:
+covariance explicitly (e.g. Equation~\ref{eqn:maxwell-covariant})!
+Equation~\ref{eqn:maxwell-covariant} can be written equivalently as:
 \begin{equation*}
 \partial_\mu F^{\mu\nu} = J^\nu
 \end{equation*}
@@ -240,26 +240,26 @@ beginning.  As you shall see, the E\&M bridge goes far indeed.\\[5pt]
 \exercise Using Equation~\ref{eqn:bfield} verify that
 Equation~\ref{eqn:maxwell}c is satisfied for any $A^\mu$.\\[5pt]
 
-\exercise Using Equations~\ref{eqn:efield} and \ref{eqn:bfield},
+\exercise Using Equations~\ref{eqn:bfield} and \ref{eqn:efield},
 verify that verify that Equation~\ref{eqn:maxwell}b is satisfied for
 any $A^\mu$.\\[5pt]
 
 \exercise Starting from Equation~\ref{eqn:maxwell}d and inserting
 Equations~\ref{eqn:efield} and ~\ref{eqn:bfield}, derive Equation~\ref{eqn:box-squared-A}.\\[5pt]
 
-\exercise (*) Verify the matrix representation in
+\exercise Verify the matrix representation in
 Equation~\ref{eqn:field-strength-matrix}.  Here is a start:
 $$F^{0i} = \frac{\partial A^i}{\partial t} + (\nabla \phi)^i = -E^i$$
 
-\exercise Since you know how to transform tensors, you know how to
+\exercise (*) Since you know how to transform tensors, you know how to
 transform Electric and Magnetic fields now via
 Equation~\ref{eqn:field-strength-matrix}.  For a Lorentz boost $L$ we
 have:
 $$[F]_F' = L [F]_F L$$
 Write the field strength tensor $F$ for a uniform electric field of
 strength $E$ in the $+z$ direction.  Apply a Lorentz boost of speed
-$beta$ in the $+x$ direction.  Calculate the resulting electric and
-magnetic fields.
+$\beta$ in the $+x$ direction.  Calculate the resulting electric and
+magnetic fields.\\[5pt]
 
 \exercise Assume that the uniform electric field from the previous
 problem is the result of a uniform sheet of charge with charge density
@@ -271,15 +271,15 @@ and the current introduced by the moving sheet.
 
 In the previous section, we saw that Maxwell's equations can be
 written in covariant form as:
-$$\Box^2 A^\mu + \partial^\mu( \partial_\nu A^\nu) = J^\mu$$  
+$$\Box^2 A^\mu - \partial^\mu( \partial_\nu A^\nu) = J^\mu$$  
 and before that, we saw that electric and magetic fields are unchanged by a gauge transformation:
-$$A_\mu \to A_\mu + \partial_\mu \, \lambda(x)$$
+$$A_\mu \to A_\mu - (\partial_\mu \, \lambda(x))$$
 Because the physical fields are unchanged by a gauge transformation,
 we are free to choose the gauge that we find most convenient.  The
 Lorenz Gauge (different person than Lorentz!) is the condition:
 $$\partial_\mu A^\mu = 0$$
 We can always find a gauge transformation $\lambda$ that imposes this condition, because
-$$\Box^2 \lambda(x) = -\partial_u A^\mu = f(x)$$
+$$\Box^2 \lambda(x) = -\partial_\mu A^\mu = f(x)$$
 is simply a wave equation for a known source, which certainly has a
 solution.
 
@@ -331,7 +331,7 @@ so we have:
 $$\frac{d}{dt}\braket{1} = \frac{d}{dt}\braket{\psi \mid 1 \mid \psi} =
 \frac{d}{dt} \braket{\psi \mid \psi} = 0$$
 So the conserved quantity associated with a global $U(1)$ symmetry is
-probability.  And, evidently, one is the generator of probability.
+total probability.  And, evidently, one is the generator of probability.
 
 In the exercises, you will show that for the Dirac equation, the current:
 \begin{equation}
@@ -363,7 +363,7 @@ Hint: you will need:
 $$(\gamma^0)^2=1, \quad \gamma^0 \gamma^\mu \gamma^0 = \left( \gamma^\mu \right)^\dagger$$
 ~\\[-3pt]
 
-\exercise Using the results of the previous problem, show that for Dirac equation:
+\exercise (*) Using the results of the previous problem, show that for Dirac equation:
 $$\partial_\mu (\bar{\psi} \gamma^\mu \psi) = 0$$
 ~\\[-3pt]
 
@@ -431,7 +431,7 @@ becomes:
   &= m  \, \psi 
 \end{align*}
 so the free-particle Dirac equation is not invariant under local $U(1)$ symmetry, as:
-$$\partial_\mu \to \partial_\mu + i (\partial_\mu \lambda)$$
+$$\partial_\mu \to \partial_\mu + i Q e (\partial_\mu \lambda)$$
 We can accommodate this symmetry by replacing $\partial_\mu$ with a new derivative:
 $$D_\mu \equiv \partial_\mu + i \, Q \, e \, A_\mu$$
 that adds a new term introducing a new interaction with a field $A_\mu(x)$. Now:
@@ -439,12 +439,13 @@ that adds a new term introducing a new interaction with a field $A_\mu(x)$. Now:
 D_\mu \left( e^{iQe\lambda(x)} \psi\right ) = e^{iQe\lambda(x)}
 \left(\partial_\mu + i \, Q \, e \, (A_\mu + (\partial_\mu \lambda)) \right) \psi
 \end{equation*}
-If the new interaction is invariant under a gauge transformation:
-$$A_\mu \to A_\mu + (\partial_\mu \lambda),$$
+If simultaneously, the new interaction is invariant under the gauge transformation:
+$$A_\mu \to A_\mu - (\partial_\mu \lambda),$$
 then we have:
 \begin{equation*}
 D_\mu \left( e^{iQe\lambda(x)} \psi \right) = e^{iQe\lambda(x)} D_\mu \, \psi
 \end{equation*}
+% consider using an explicit prime throughout.  There's sort of an implicit ' on LHS there...
 This shows that $D_\mu$ tranforms in the same manner as $\psi$, and so
 we call $D_\mu$ a covariant derivative.
 The Dirac equation using the covariant derivative $D_\mu$:
@@ -463,7 +464,7 @@ that the commutator of covariant derivatives is gauge invariant and:
 Thus, the symmetry requirements have compelled us to introduce a new
 field $A_\mu$, and an interaction that is invariant under a gauge
 transformation
-$$A_\mu \to A_\mu + d_\mu \lambda$$
+$$A_\mu \to A_\mu - (\partial_\mu \lambda)$$
 which is identical to that of the Maxwell equations.  
 We can also construct a gauge invariant quantity for the interaction,
 and it is identical to the electromagnetic field strength tensor:
@@ -482,15 +483,405 @@ interaction like electricity and magnetism.\\[5pt]
 
 We obtain the Hamiltonian from the Dirac Equation by noting that:
 $$i \frac{d}{dt} \psi = H \psi$$
-The Dirac equation, including the E+M interaction from $U(1)$ symmetry is:
+The Dirac equation, including the E\&M interaction from $U(1)$ symmetry is:
 $$i \gamma^\mu ( \partial_\mu + i Qe A_\mu) - m) \psi = 0$$
+And noting that:
+$$i \gamma^0 \gamma^\mu \partial_\mu = i \frac{\partial}{\partial t} + i \gamma^0 \vec{\gamma} \cdot \nabla$$
+we obtain:
+$$i \frac{d}{dt} \psi = \left( \gamma^0 m - i \gamma^0 \vec{\gamma} \cdot \nabla + Q e \gamma^0 \gamma^\mu A_\mu \right) \psi$$
+In the interaction picture, the total Hamiltonian has two parts:
+$$H = H^{(0)} + H_{\rm E\&M}$$
+the free particle Hamiltonian $H^{(0)}$ and the interaction $H_{\rm E\&M}$. We can read off the free particle Hamiltonian by setting $A_\mu$ to zero:
+$$H^{(0)} = \gamma^0 m - i \gamma^0 \vec{\gamma} \cdot \nabla$$
+and the remainder is the interaction Hamiltonian:
+\begin{equation}
+\label{eqn:hem}
+H_{\rm E\&M} = Q e \gamma^0 \gamma^\mu A_\mu 
+\end{equation}
+
+\exercise Show that the electromagnetic interaction Hamiltonian is Hermitian, ii.e.:
+$$H_{\rm E\&M}^\dagger = H_{\rm E\&M}$$
+assuming that the electromagnetic field $A^\mu$ is real.$\qquad \square$
 
 
+\section{Interaction by Particle Exchange}
+In non-relativistic time-dependent pertubration theory we calculate
+the transition matrix $T_{fi}$ perturbatively as:
+$$T_{fi} = \braket{f | V | i} = \sum_{j \neq i} \frac{\braket{f|V|j}\braket{j|V|i}}{E_i - E_j}$$
+We will be calculating the transition matrix for particle exchange using the second term.
+We model particle exchange as:\\
+\begin{tabular}{cc}
+\begin{tikzpicture}
+\begin{feynman}
+  \vertex (a) at (0,0) {$a$};
+  \vertex [below=4cm of a](b) {$b$};
+  \vertex [below right=2cm and 3.5cm of a](x) {$X$};
+  \vertex [right=6cm of a](c) {$c$};
+  \vertex [right=6cm of b](d) {$d$};  
+  \vertex [below right=1cm and 2cm of a] (va);
+  \vertex [above right=1cm and 4cm of b] (vb);
+  \diagram*{
+    (a) -- [fermion] (va) -- [fermion] (c),
+    (b) -- [fermion] (vb) -- [fermion] (d),
+    (va) -- [boson] (vb) 
+  };
+\end{feynman}
+\end{tikzpicture}
+&
+\begin{tikzpicture}
+\begin{feynman}
+  \vertex (a) at (0,0) {$a$};
+  \vertex [below=4cm of a](b) {$b$};
+  \vertex [right=6cm of a](c) {$c$};
+  \vertex [right=6cm of b](d) {$d$};
+  \vertex [below right=2cm and 3.5cm of a](x) {$X$};
+  \vertex [below right=1cm and 4cm of a] (va);
+  \vertex [above right=1cm and 2cm of b] (vb);
+  \diagram*{
+    (a) -- [fermion] (va) -- [fermion] (c),
+    (b) -- [fermion] (vb) -- [fermion] (d),
+    (va) -- [boson] (vb) 
+  };
+\end{feynman}
+\end{tikzpicture}
+\\
+\end{tabular}
+
+Calculating the transition matrix for the left side:
+\begin{align*}
+T_{fi}^{(1)} &= \frac{\braket{f|V|j}\braket{j|V|i}}{E_i - E_j} \\[7pt]
+&= \frac{\braket{c,d|V|c,b,X}\braket{c,b,X|V|a,b}}{(E_a+E_b) - (E_b+Ec+Ex)}
+\end{align*}
+Factoring out the spectators and the intermediate particles from the vertex interactions:
+\begin{align*}
+T_{fi}^{(1)} &= \frac{\braket{d|V_X|b}\braket{c|V_X|a}\ket{X}\bra{X}}{(E_a-E_c-E_X)} \\[7pt]
+\end{align*}
+We convert to Lorentz Invariant matrix elements by introducing
+normalization factors of $1/\sqrt{2E}$ for each particle.  These cancel for all but the intermediate particle so that we obtain:
+\begin{align*}
+\mathcal{M}_{fi}^{(1)} &= \frac{\mathcal{M}^{db}_X \mathcal{M}^{cd}_X \ket{X}\bra{X}}{(E_a - E_c - E_X) 2E_X}
+\end{align*}
+where $\ket{X}$ now has Lorentz invariant normalization.  This result, with energies in the denominator, is clearly not Lorentz invariant.  However, if we consider the second time ordering, we have:
+\begin{align*}
+  E_i - E_j &= (E_a + E_b) - (E_a + E_d + E_X) \\
+            &= E_b - E_d - E_X \\
+\end{align*}
+And energy conservation gives:
+$$E_b - E_d = -(E_a - E_c)$$
+and 
+$$E_i - E_j = - (E_a + E_d + E_X)$$
+Thus we have:
+\begin{align*}
+\mathcal{M}_{fi} &= \mathcal{M}_{fi}^{(1)} + \mathcal{M}_{fi}^{(2)}\\
+\left\{\frac{1}{E_a-E_c-Ex} - \frac{1}{E_a-E_c+Ex} \right\}
+\end{align*}
+and so:
+\begin{equation}
+\mathcal{M}_{fi} = \frac{\mathcal{M}^{db}_X \mathcal{M}^{cd}_X \ket{X}\bra{X}}{(E_a-E_c) - E_X^2}
+\end{equation}
+In TDPT, energy is not conserved because time invariance is broken, but the momentum is still conserved.  Therefore we have:
+$$E_X^2 = m_X^2 + |\vec{p}_a - \vec{p}_c|^2$$
+and the denominator is:
+$$(E_a-E_c)^2 - |\vec{p}_a - \vec{p}_c|^2 - m_X^2$$
+if energy were conserved, than this would be zero.  We can simplify define the four-momentum:
+$$q^\mu = \pm(p_a^\mu - p_c^\mu) $$
+and associate that with an incoming or outgoing virtual particle $X$.  Now energy and
+momentum are conserved, but the denominator is still non-zero, because
+the virtual particle is off its mass shell.
+
+In the NR TDPT picture, we have two different time-orderings, momentum
+is conserved, but energy is not conserved.  In the Lorentz invariant
+virtual particle picture, time invariance is restored, four-momentum
+is conserved at every vertex, but virtual particles are off their mass
+shell.
+
+We find:
+\begin{equation}
+\mathcal{M}_{fi} = \frac{\mathcal{M}^{db}_X \mathcal{M}^{cd}_X \ket{X}\bra{X}}{q^2 - m_X^2}
+\end{equation}
+The matrix element has two parts:  the matrix elements for the vertex interaction 
+($\mathcal{M}^{db}_X$ and $\mathcal{M}^{cd}_X$), and the propagator:
+$$\frac{\ket{X}\bra{X}}{q^2 - m_X^2}$$
+For a scalar particle:
+$$\ket{X}\bra{X} = 1$$
+and the propagator is:
+$$\frac{1}{q^2 - m_X^2}$$  
+
+For a fermion, the completeness relation is:
+$$\sum \ket{X}\bra{X} \to \sum_s u^s(q)\bar{u}^s(q) = \slashed{q} + m$$
+and the propagator is:
+$$\frac{i(\slashed{q} + m)}{q^2 - m^2}$$
+If the flow of $q$ is opposite the fermion flow, indicating an anti-fermion, than the sign of $m$ changes:
+$$\sum_s v^s(q)\bar{v}^s(q) = \slashed{q} - m$$
+
+\section{Photons}
+
+In free space, we have
+$$\Box^2 A^\mu = 0$$
+and we can find plane wave solutions with:
+$$A^\mu = \epsilon^\mu(q) \; e^{-iqx}$$
+where $\epsilon^\mu(q)$ is called a polarization vector. We have:
+\begin{align*}
+\Box^2 A^\mu &= \epsilon^\mu(q) \, \partial^\omega \, \partial_\omega \, e^{-iqx} \\
+&= \epsilon^\mu(q) (-iq^\omega) (-i q_\omega) e^{-iqx} \\
+&= -q^2 A^\mu = 0 \\
+\end{align*}
+and so
+$$q^2 = 0$$
+which shows that the photon is massless.
+
+The Lorentz Gauge condition, 
+$$\partial_\mu A^\mu = 0$$
+applied to a plane wave, gives:
+$$\partial_\mu A^\mu = (-i q_\mu \epsilon^\mu(q) e^{-iqx}) = 0$$
+which implies:
+$$q_\mu \epsilon^\mu(q) = 0$$
+and this constraint leaves three degrees of freedom in the four vector $\epsilon^\mu$.
+In the exercises, you will show that:
+$$A^\mu \to A^\mu - a q^\mu e^{-iqx}$$
+is an additional gauge feedom, which we can use to set
+$$\epsilon^0 = 0$$
+or equivalently (within the Lorentz gauage):
+$$\vec{q} \cdot \vec{\epsilon} = 0$$
+This additional constraint reduces the degrees of freedom for the
+photon to two.\\[5pt]
+
+\exercise (*) Show that within the Lorentz gauge, the additional gauge
+transformation
+$$A\mu \to A^\mu - a q^\mu e^{-iqx}$$
+has no impact on:
+$$\Box^2 A^\mu = 0$$
+and 
+$$\partial_\mu A^\mu = 0\qquad \square$$
+
+\noindent
+Let's consider a photon traveling in the plus $z$ direction so that:
+$$[q^\mu] = (q, 0, 0, q)$$
+In the position-basis, we saw that the angular momentum operator was:
+$$L_z = \begin{pmatrix}
+0 & -i & 0\\ 
+i &  0 & 0\\
+0 &  0 & 0\\
+\end{pmatrix}$$
+Adding the time dimension, and using $J$ for spin instead we have:
+$$J_z = \begin{pmatrix}
+0 & -i & 0 & 0\\ 
+i &  0 & 0 & 0\\
+0 &  0 & 0 & 0\\
+0 &  0 & 0 & 0\\
+\end{pmatrix}$$
+with eigenvectors:
+$$
+[\hat{\epsilon}_+^\mu] = \sqrt{\frac{1}{2}}\begin{pmatrix} 0 \\ 1 \\ i \\ 0 \end{pmatrix}, \quad
+[\hat{\epsilon}_-^\mu] = \sqrt{\frac{1}{2}}\begin{pmatrix} 0 \\ 1 \\ -i \\ 0 \end{pmatrix}, \quad
+[\hat{\epsilon}_0^\mu] = \begin{pmatrix} \alpha \\ 0 \\ 0 \\ \beta \end{pmatrix}
+$$
+So that any polarization vector can be written as:
+$$\epsilon^\mu = a \, \hat{\epsilon}_+^\mu + b \, \hat{\epsilon}_-^\mu + c \, \hat{\epsilon}_0^\mu $$
+The Lorentz Gauge condition:
+$$q_\mu \epsilon^\mu = 0$$
+implies that:
+$$c q \alpha - c q \beta = 0$$
+or:
+$$\alpha = \beta$$
+so then:
+$$\alpha \neq 0$$
+or else $\hat{\epsilon}_0$ would be the zero vector.
+Then in the Couloumb gauge:
+$$\epsilon^0 = c \alpha = 0$$
+which which we have:
+$$c = 0$$
+and any polarization vector can be written as:
+$$\epsilon^\mu = a \, \hat{\epsilon}_+^\mu + b \, \hat{\epsilon}_-^\mu$$
+That is the photon has spin one, but it's component in the direction
+of motion is either +1 or -1, but not zero.
+
+\section{Massive Spin-1 Particles}
+From the Klein-Gordan equation we deduce that the substitution 
+$$\Box^2 \to \Box^2 +m^2$$
+gives a particle mass.  Applying that to Maxwell's equation in free
+space, we obtain the Proca equation:
+$$(\Box^2 + m^2) B^\mu - d^\mu d_\nu B^\nu = 0$$
+Applying $d_\mu$ we find:
+$$m^2 d_\mu B^\mu = 0$$
+That is:
+$$d_\mu B^\mu = 0$$
+this looks like the Lorentz gauge but it is not a freedom, this is a
+requirement for massive spin-one particles.
+
+In the homework, you will show that for a massive spin-1 particle
+traveling in the $+z$ direction with momentum $p$ and energy $E$ the
+basis vectors are:
+\begin{equation}
+\label{eqn:proca-basis}
+[\hat{\epsilon}_+] = \sqrt{\frac{1}{2}}\begin{pmatrix} 0 \\ 1 \\ i \\ 0 \end{pmatrix}, \quad
+[\hat{\epsilon}_-] = \sqrt{\frac{1}{2}}\begin{pmatrix} 0 \\ 1 \\ -i \\ 0 \end{pmatrix}, \quad
+[\hat{\epsilon}_0] = \frac{1}{m}\begin{pmatrix} p \\ 0 \\ 0 \\ E \end{pmatrix}
+\end{equation}
+and their polarization sum is:
+\begin{equation}
+\label{eqn:proca-sum}
+\sum_\lambda e^{*\mu}_\lambda e^\nu_\lambda = -g^{\mu\nu} + \frac{q^\mu q^\nu}{m^2}
+\end{equation}
+
+\exercise Verify that the basis vectors in Equation~\ref{eqn:proca-basis} satisfy:
+$$q_\mu B^\mu = 0$$
+and are normalized as:
+$$\epsilon^\mu \epsilon_\mu^* = -1$$
+
+\exercise (*) Verify Equation~\ref{eqn:proca-sum} in the special case that the momentum is in the $+z$ direction.\\[5pt]
 
 
+%This is good content for 130A, earlier...
+\exercise (*) Equation~\ref{eqn:proca-sum} is relativisitically covariant
+(i.e. the indices are consistent with one another throughout the
+equation).  It follows, as you will show, that the equation is the same in
+a rotated basis, one where the momentum is {\bf not} along the $z$ axis.
+We use this sort of argument all the time in physics, but you now have the
+tools to show carefully that is really true.  Define the rank-2
+tensor $T$ as:
+$$T^{\mu\omega} = q^\mu q^\omega$$
+Then show (Easily! This is a one-line problem, I promise!) that:
+$$T^{\mu'\omega'} = q^{\mu'} q^{\omega'}$$
+~\\[5pt]
 
 
+\section{The QED Vertex}
 
+We are now ready to calculate the matrix element for the fundamental QED vertex:
+\begin{center}
+\begin{tikzpicture}
+\begin{feynman}
+  \vertex (g) at (0,0) {$A^\mu$};
+  \vertex [below=4cm of g](a) {$a$};
+  \vertex [below right=2cm and 3.5cm of g](x);
+  \vertex [right=3cm of x](b) {$b$};
+   \diagram*{
+    (a) -- [fermion] (x) -- [fermion] (b),
+    (g) -- [boson] (x) 
+  };
+\end{feynman}
+\end{tikzpicture}
+\end{center}
+The plane waves are:
+\begin{align*}
+  \Psi_a &= u(a) \exp(-iax) \\
+  \Psi_b &= u(b) \exp(-ibx) \\
+  A^\mu  &= \epsilon^\mu(q) \exp(-iqx) 
+\end{align*}
+And the Hamiltonian (from Equation~\ref{eqn:hem}) is:
+$$H_{\rm E\&M} = Q e \gamma^0 \gamma^\mu A_\mu$$
+with matrix element:
+\begin{align*}
+  \braket{b | H_{E\&M} | a} \; &= \; (Qe) \, u^\dagger(b) \gamma^0 \gamma^\mu u(a) \; \epsilon_\mu(q) \;  
+\left\{ \int d^3x \; e^{i (b-a-q) \cdot x} \right\}\\
+&= \; (Qe) \, \bar{u}(b) \gamma^\mu u(a) \; \epsilon_\mu(q) \;  
+(2\pi)^3 \delta^3(\vec{b}-\vec{a}-\vec{q}) \; e^{-i (E_b-E_a-E_q)t}
+\end{align*}
+Notice that we have three-momentum conservation, but not energy
+conservation, as we expect for the time-ordered picture in TDPT.  When
+we switch to the virtual particle picture, we set:
+$$E_b-E_a-E_q = 0$$
+which will put the virtual particle off its mass shell.  We recover four-momentum conservation, so:
+\begin{align*}
+  \braket{b | H_{E\&M} | a} \; 
+&= \; (Qe) \, \bar{u}(b) \gamma^\mu u(a) \; \epsilon_\mu(q) \;  
+(2\pi)^4 \delta^4(b-a-q)
+\end{align*}
+The extra $\delta$-function imposes energy conservation at the
+vertex, and now we will integrate over $d^4q$ instead of
+$d^3q$ when summing the intermediate states.  We can summarize this result as:
+\begin{equation}
+\braket{b | H_{E\&M} | a} \; 
+= \; J^\mu_{ab} \; \epsilon_\mu(q) \;  
+(2\pi)^4 \delta^4(b-a-q)
+\end{equation}
+where
+\begin{equation}
+J^\mu_{ab} = (Qe) \, \bar{u}(b) \gamma^\mu u(a) 
+\end{equation}
+For emission, we put $\epsilon^\mu \to (\epsilon^\mu)^*$ and naturally $q \to -q$.
+
+\section{$J^\mu$ Conservation}
+
+The Dirac equation:
+\begin{equation*}
+i \gamma^\mu \partial_\mu \psi = m\psi
+\end{equation*}
+when applied to plane waves (i.e. eigenstates of the momentum operator
+$i \partial_\mu$) yields:
+$$i \gamma^\mu \partial_\mu \psi_p = \gamma^\mu p_\mu \psi_p
+= m \psi$$
+Or using our slashed notation:
+\begin{equation}
+\slashed{p} \psi_p = m \psi_p
+\end{equation}
+and the conjugate form:
+\begin{equation}
+\bar{\psi}_p \slashed{p} = m \bar{\psi}_p
+\end{equation}
+For 
+$$J^\mu_{ab} = (Qe) \, \bar{u}(b) \gamma^\mu u(a)$$
+and:
+$$q_\mu = b_\mu - a_\mu$$
+we have:
+\begin{align*}
+q_\mu J^\mu_{ab} &= (Qe) \, \bar{u}(b) (\slashed{b} - \slashed{a}) u(a) \\
+ &= (Qe) \, (m-m) \; \bar{u}(b) u(a) \\
+ &= 0\\
+\end{align*}
+
+\section{Particle Exchange}
+
+The real-valued plane-wave solutions for physical electromagentic fields are:
+\begin{equation*}
+A^\mu = \epsilon^\mu \, \exp(-iq x) \; + \; (\epsilon^{\mu})^* \, \exp(iq x)
+\end{equation*}
+where the first term corresponds to absorption and the second to
+emission.  In the particle exchange model, when we sum across time
+orderings, we, equivalently, sum across emission and absorption at
+each vertex.
+
+After summing the two time-orderings, we obtain
+\begin{equation}
+  M_{fi} = \frac{J_{ac}^\mu J_{bd}^\nu}{q^2 - m^2}
+  \sum \epsilon^{(s)}_\mu(q) (\epsilon^{(s)}_\nu(q))^*
+\end{equation}
+Equation ~\ref{eqn:proca-sum} show the completeness relation for polarization vectors of massive spin-1 particles as:
+$$\sum_\lambda e^{*\mu}_\lambda e^\nu_\lambda = -g^{\mu\nu} + \frac{q^\mu q^\nu}{m^2}$$
+However, the second term will not contribute as:
+$$J_{ac}^\mu q_\mu = 0$$
+and we obtain:
+\begin{equation}
+  M_{fi} = -J_{ac}^\mu J_{bd}^\nu \frac{g_{\mu \nu}}{q^2 - m^2}
+\end{equation}
+This allows us to simply read off the Feynman rules, which we report in the next section.\\
+
+\exercise (*) Show that:
+$$(J^\mu_{ab})^\dagger = J^\mu_{ba}$$
+This explains why we swap the order (incoming versus outgoing) for
+anti-fermion currents relative to fermion currents.
+
+\section{Feynman Rules}
+
+\begin{center}
+\begin{tabular}{ll}
+incoming/outgoing fermion & $u(p) / \bar{u}(p)$ \\
+incoming/outgoing anti-fermion & $\bar{v}(p) / v(p)$ \\
+initial state photon  & $\epsilon_\mu^{(s)}(q)$ \\
+outgoing photon       & $(\epsilon_\mu^{(s)})^*(q)$ \\
+photon propagator     & $\dfrac{-ig_{\mu\nu}}{q^2}$ \\[8pt]
+QED vertex            & $iQe\gamma^\mu$ \\[5pt]
+fermion propagator    & $\dfrac{i(\slashed{q} + m)}{q^2 - m^2}$ \\
+\end{tabular}
+\end{center}
+
+\exercise Calculate the lowest order matrix element for:
+$$e^+ + e^- \to \mu+ + \mu-$$
+
+\exercise (*) (Thomson 5.3) Calculate the two lowest order matrix
+elements for:
+$$e^+ + e^- \to \gamma + \gamma$$
 
 
 \end{document}

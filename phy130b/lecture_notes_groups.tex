@@ -10,6 +10,8 @@
 \usepackage{braket}
 %\usepackage[american,fulldiode]{circuitikz}
 \usepackage{tikz}
+\usepackage{arydshln}
+
 \begin{document}
 
 \title{PHY 130B \\ Lecture Notes G: \\
@@ -33,6 +35,13 @@ Introduction to Groups, Symmetries, and Lie Algebras\\}
   Physicists'' which I highly recommend working through carefully if
   you enjoy the small taste presented here.  The online version is
   available free through the UC Davis library!}
+
+%
+% Missing:
+%  Infinitesimal Generators
+%  Isomorphism between {1,i,\ldots} and {I,(iLz),ldots}
+%  e(i theta Lz) = I cos theta + i Lz sin theta = Rz(theta)
+%
 
 \section{Groups and Symmetry}
 
@@ -61,13 +70,16 @@ A \textbf{group} is a set $G$ with an operation $\cdot$ which satistifies:
 \end{itemize}
 Note that 
 \begin{itemize}
-  \item Commutativity is \emph{not} required (i.e., $g \cdot h \neq h \cdot g$ in general).
-  \item The operation $\cdot$ is abstract.  it need not be multiplication in the conventional sense.  We sometimes use $\odot$ when we want to emphasize it is abstract mutiplication.
+  \item Commutativity is \emph{not} required (i.e., $g \cdot h \neq h
+    \cdot g$ in general).
+  \item The operation $\cdot$ is abstract.  It need not be
+    multiplication in the conventional sense.  We sometimes use
+    $\odot$ when we want to emphasize that it is abstract
+    mutiplication.
   \item In concrete cases, the operation is often composition.
 \end{itemize}
 There are several important properties of groups that follow directly from the axioms:
 \begin{itemize}
-
 \item {\bf The identity is unique:} Suppose $e$ and $f$ are both identities. Then:
 \begin{align*}
   e &= e \cdot f \quad & (f \text{ is identity}) \\
@@ -140,11 +152,11 @@ satisfied:\\[10pt]
 and (TU) in invertible because:
 $$(TU)^{-1} = U^{-1} \, T^{-1}$$
 works and we show below that the inverses $U^{-1}$ and $T^{-1}$ are also in GL(V).\\[5pt]
-\textbf{Associativity:}
+\textbf{Associativity:} Use composition and then back it out in the new order:
 \begin{align*}
   \bigl(T(UV)\bigr)(x) &= T\!\bigl((UV)(x)\bigr)
-  = \Bigl(T\bigl(U(V(x)\bigr)\Bigr) \\
-   &= \bigl((TU)V\bigr)(x) \quad \checkmark
+  = T\Bigl(U\bigl(V(x)\bigr)\Bigr) \\
+  &= \bigl(TU\bigr)\bigl(V(x)\bigr) = \bigl((TU)V\bigr)(x) \quad \checkmark
 \end{align*}
 \textbf{Identity:} For the identity operator $I(x) = x$:
 \begin{align*}
@@ -180,8 +192,7 @@ Some examples of subgroups:
     \textbf{Identity:} $e = 0 \in Z$ \\
     \textbf{Inverses:} Each $n \in Z$ has inverse $-n \in Z$ 
 \end{itemize}    
-Note that we need not verify the associative axiom for any subgroup, since the elents of the subgroup are elements of the group, and so the axiom holds.
-
+Note that we need not verify the associative axiom for any subgroup, since the elements of the subgroup are elements of the group, and so the axiom holds.
 
 \subsection*{Symmetry}
 
@@ -245,14 +256,15 @@ $$\phi: (\mathbb{R}, +) \to (\mathbb{R}^+,\times)$$
 with:
 $$\phi(x) = \exp(x) \quad \square$$\\[5pt]
 
-\subsection*{Matrix Represenation of Linear Operators}
+\subsection*{Matrix Representation of Linear Operators}
 
 Since the beginning of this course we have been associating tensors
 $T$ with their matrix representation in a particular basis.  We can
-now state this relation more precisely.  For a vector space $V$ of
-over the complex numbers, with finite dimension $n$, there is an
+now state this relation more precisely.  For a vector space $V$ over
+the complex numbers, with finite dimension $n$, there is an
 isomorphism between the general linear group $GL(V)$ and the
-invertible $n \times n$ complex matrices, $GL(n, \mathbb(C))$ given by:
+invertible $n \times n$ complex matrices, $GL(n, \mathbb(C))$ given
+by:
 $$T \mapsto [T]_{B}$$
 for $T \in GL(V)$.  We'll prove this in three steps:
 \begin{enumerate}
@@ -273,7 +285,7 @@ $$[x] = [TU][v]$$
 but can also be written as:
 $$x = T\bigl(U(v)\bigr) = T(w)$$
 and so:
-$$x^i = T^i{}_j w^j = T^i{}_j\,U^j{}_k\,w^k$$
+$$x^i = T^i{}_j w^j = T^i{}_j\,U^j{}_k\,v^k$$
 which has matrix representation:
 $$[x] = [T][U][v]$$
 So
@@ -424,9 +436,9 @@ We define the Special Unitary group as:
 \end{equation*}
 
 \noindent
-\textbf{Claim:} For an orthonormal basis $B$:
+\textbf{Claim:} For an orthonormal basis $\mathcal{B}$:
 \begin{equation*}
-  [U^\dagger]_B = [U]^\dagger_B
+  [U^\dagger]_\mathcal{B} = [U]^\dagger_\mathcal{B}
 \end{equation*}
 We will occassionally need this, but we won't prove it here.  See problem 2.7 in Jeevanjee for how to prove it.\\[5pt]
 
@@ -435,24 +447,48 @@ $$U(1) = \bigl\{e^{i\theta} \mid \theta \in \mathbb{R} \bigr\}$$
 and
 $$SU(1) = {1} \quad \square $$
 
+\section{Additional Problems (for HW 1)}
+
+\exercise List at least two reasons that there is no subgroup of $O(n)$ containing only matrices with determinant equal to negative one. $\quad \square$ \\[5pt]
+
+\exercise (*) Show that all groups with two elements are isomorphic to $(\{+1,-1\}, \times)$.  Hint: write a generic two element group as ${e, a}$ and work out the multiplication table. $\quad \square$ \\[5pt]
+
+\exercise (*) Construct a homomorphism between $O(n)$ and $(\{+1,-1\}, \times)$
+that is onto.  Is it one-to-one? $\quad \square$ \\[5pt]
+
+\exercise (*) Construct an isomorphism between $U(1)$ and $SO(2)$.  Hint: think of $e^{i\theta}$ as a rotation of $z=1$ by $\theta$ in the complex plane. $\quad \square$ \\[5pt]
+
 \section{SU(2) and SO(3)}
 
 \subsection*{The Group SO(3)}
 
-We have already seen that $SO(3)$ consists of the real $3\times 3$ matrices
-satisfying $R^T R = I$ with $\det(R) = +1$.  These are precisely the proper
-rotations of $\mathbb{R}^3$.  Any element of $SO(3)$ can be written as a
-rotation about some axis, and the group is parameterized by \textbf{3
-parameters} (e.g.\ three Euler angles, or an axis direction plus an angle).
-
-Rotations about the three coordinate axes are given by:
+$SO(3)$ is the group of real $3\times 3$ orthogonal matrices
+ with determinant one:
 \begin{equation*}
-  R_x(\theta) = \begin{pmatrix} 1 & 0 & 0 \\ 0 & \cos\theta & -\sin\theta \\ 0 & \sin\theta & \cos\theta \end{pmatrix}, \quad
-  R_y(\theta) = \begin{pmatrix} \cos\theta & 0 & \sin\theta \\ 0 & 1 & 0 \\ -\sin\theta & 0 & \cos\theta \end{pmatrix}, \quad
-  R_z(\theta) = \begin{pmatrix} \cos\theta & -\sin\theta & 0 \\ \sin\theta & \cos\theta & 0 \\ 0 & 0 & 1 \end{pmatrix}.
+  SO(3) = \bigl\{ R \in GL(3,\mathbb{R}) \mid R^T R = I,\; \det R = 1 \bigr\}.
 \end{equation*}
-A general rotation $R(\psi,\theta,\phi) \in SO(3)$ can be expressed in terms
-of these, using 3 parameters.
+These are precisely the proper rotations of $\mathbb{R}^3$.  Any
+element of $SO(3)$ can be written as a rotation about some axis, and
+the group is parameterized by \textbf{3 parameters} (e.g.\ three Euler
+angles, or an axis direction plus an angle).
+
+Passive rotations\footnote{Here passive means covariant: appropriate
+for rotating the basis vectors by $\theta$.  After the change of
+basis, the contravariant components of a vector will appear to have
+been rotated by $-\theta$ in the new reference frame.  To check the
+convention, simply calculate e.g. $R_z(\theta) \hat{x}$ and see where
+it goes.} about the three coordinate axes are given by:
+\begin{align}
+  \label{eqn:so3-rotations}
+  R_x(\theta) &= \begin{pmatrix} 1 & 0 & 0 \\ 0 & \cos\theta & \sin\theta \\ 0 & -\sin\theta & \cos\theta \end{pmatrix}, \notag \\[5pt]
+  R_y(\theta) &= \begin{pmatrix} \cos\theta & 0 & -\sin\theta \\ 0 & 1 & 0 \\ \sin\theta & 0 & \cos\theta \end{pmatrix},  \\[5pt]
+  R_z(\theta) &= \begin{pmatrix} \cos\theta & \sin\theta & 0 \\ -\sin\theta & \cos\theta & 0 \\ 0 & 0 & 1 \end{pmatrix}. \notag
+\end{align}
+A general rotation can can be expressed in terms of three parameters, for example, in the ZXZ convention:
+\begin{equation}
+ \label{eqn:rot-zxz}
+ R(\psi,\theta,\phi) = R_z(\psi) R_x(\theta) R_z(\phi)
+\end{equation}
 
 \subsection*{The Group SU(2)}
 
@@ -462,64 +498,77 @@ one:
   SU(2) = \bigl\{ A \in GL(2,\mathbb{C}) \mid A^\dagger A = I,\; \det A = 1 \bigr\}.
 \end{equation*}
 A general element has the form:
-\begin{equation*}
+\begin{equation}
+  \label{eqn:su2-element}
   A = \begin{pmatrix} \alpha & \beta \\ -\bar\beta & \bar\alpha \end{pmatrix}, \qquad |\alpha|^2 + |\beta|^2 = 1.
-\end{equation*}
-\textbf{Parameter count:} $A \in GL(2,\mathbb{C})$ has $2\times 2 = 4$ complex
+\end{equation}
+Thus $A \in GL(2,\mathbb{C})$ has $2\times 2 = 4$ complex
 entries, giving 8 real parameters.  The unitary constraint $A^\dagger A = I$
 imposes 4 real constraints, leaving 4 parameters; the determinant condition
-imposes 1 more, leaving \textbf{3 parameters} — the same as $SO(3)$.
+imposes 1 more, leaving \textbf{3 parameters} — the same as $SO(3)$.\\[5pt]
 
-\exercise (*) Verify that the general form above satisfies $A^\dagger A = I$
-and $\det A = 1$. $\quad\square$\\[5pt]
-
-\subsection*{The Pauli Space $\mathcal{C}_P$}
+\exercise Verify that $A$ from Equation~\ref{eqn:su2-element} satisfies $A^\dagger A = I$
+and $\det A = 1$. $\quad\square$\\
 
 \noindent
-\textbf{Definition:} The \textbf{Pauli space} $\mathcal{C}_P$ is the real
-vector space of $2\times 2$ traceless Hermitian matrices.
+An alternative parameterization for an element of SU(2) is:
+\begin{equation}
+  \label{eqn:su2-element-half-angle}
+  A(\psi, \theta, \phi) =
+  \begin{pmatrix}
+    e^{-i(\psi+\phi)/2} \cos \frac{\theta}{2} & 
+    -ie^{-i(\psi-\phi)/2} \sin \frac{\theta}{2} \\[5pt]
+    -ie^{i(\psi-\phi)/2} \sin \frac{\theta}{2} & 
+    e^{i(\psi+\phi)/2} \cos \frac{\theta}{2} \\
+  \end{pmatrix}
+\end{equation}  
+Notice that this is $4\pi$ periodic and we have used the same
+parameters as for SO(3), both harbingers of things to come!
+
+
+\subsection*{The Pauli Space $\mathfrak{p}$}
 
 \noindent
-\textbf{Note:} The Pauli matrices
+\textbf{Definition:} The \textbf{Pauli space} $\mathfrak{p}$ is the real
+vector space of $2\times 2$ traceless Hermitian matrices.\\[5pt]
+
+\noindent
+The Pauli matrices
 \begin{equation*}
-  \sigma_x = \begin{pmatrix}0&1\\1&0\end{pmatrix},\quad
-  \sigma_y = \begin{pmatrix}0&-i\\i&0\end{pmatrix},\quad
-  \sigma_z = \begin{pmatrix}1&0\\0&-1\end{pmatrix}
+  \sigma_1 = \begin{pmatrix}0&1\\1&0\end{pmatrix},\quad
+  \sigma_2 = \begin{pmatrix}0&-i\\i&0\end{pmatrix},\quad
+  \sigma_3 = \begin{pmatrix}1&0\\0&-1\end{pmatrix}
 \end{equation*}
-are a basis for $\mathcal{C}_P$, and a general element is
+are a basis for $\mathfrak{p}$, and a general element is
 \begin{equation*}
-  X = x\,\sigma_x + y\,\sigma_y + z\,\sigma_z = \begin{pmatrix} z & x-iy \\ x+iy & -z \end{pmatrix}, \qquad x,y,z \in \mathbb{R}.
+  X = x\,\sigma_1 + y\,\sigma_2 + z\,\sigma_3 = \begin{pmatrix} z & x-iy \\ x+iy & -z \end{pmatrix}, \qquad x,y,z \in \mathbb{R}.
 \end{equation*}
-Note that $X \in GL(\mathcal{C}_P)$ is a 2$\times$2 matrix acting on a 3-dimensional
-real vector space, so $\mathcal{C}_P \cong \mathbb{R}^3$.  A key
-identity is:
+with components in the Pauli basis:
+\begin{equation*}
+  [X]= \begin{pmatrix} x \\ y \\ z \end{pmatrix} \equiv \vec{x}.
+\end{equation*}
+Note that:
 \begin{equation}
   \label{eqn:det-pauli}
-  -\det(X) = x^2 + y^2 + z^2,
+  -\det(X) = x^2 + y^2 + z^2
 \end{equation}
 so $-\det(X)$ is precisely the squared Euclidean norm of the corresponding
-vector $(x,y,z) \in \mathbb{R}^3$.  \textbf{Careful:} $[X]$ is a $2\times 2$
-matrix whose column vectors are \emph{not} the components of $x$; the components
-$(x,y,z)$ must be read off from the matrix entries.
-
-\exercise (*) Verify Equation~\ref{eqn:det-pauli}.  Also show that
-$-\det(X) = ([x]^T[x])$, i.e.\ it equals the squared Euclidean norm.
-$\quad\square$\\[5pt]
+vector $(x,y,z) \in \mathbb{R}^3$:
+$$|\vec{x}|^2 \equiv ([X] \mid [X]) \equiv x^2 + y^2 + z^2 $$
 
 \subsection*{The Homomorphism $\rho: SU(2) \to SO(3)$}
 
-For each $A \in SU(2)$, define a linear operator $L: \mathcal{C}_P \to \mathcal{C}_P$ by:
+For each $A \in SU(2)$, define a linear operator $L: \mathfrak{p} \to \mathfrak{p}$ by:
 \begin{equation*}
   L(X) = A\,X\,A^\dagger.
 \end{equation*}
-We verify that $L$ maps $\mathcal{C}_P$ to itself and defines a group
+We verify that $L$ maps $\mathfrak{p}$ to itself and defines a group
 homomorphism.
 
-\noindent\textbf{Invertible:} $L^{-1}(X) = A^\dagger X A$, so $L \in GL(\mathcal{C}_P)$. \\[3pt]
-\noindent\textbf{Linear:} 
-\begin{equation*}
-  L^{-1}(L(L(X))) = L^{-1}(\alpha X + \beta Y) = A^\dagger(\alpha X + \beta Y)A = \alpha\,A^\dagger X A + \beta\,A^\dagger Y A \quad\checkmark
-\end{equation*}
+\noindent\textbf{Invertible:} $L^{-1}(X) = A^\dagger X A$ exists and works as inverse.\\[3pt]
+\noindent\textbf{Linear:} A quick check shows:
+$$L(\alpha X + \beta Y) = \alpha L(X) + \beta L(Y)$$
+for $\alpha,\beta \in \mathbb{C}$ and $X,Y \in \mathfrak{p}$
 \noindent\textbf{Hermitian:}
 \begin{equation*}
   (AXA^\dagger)^\dagger = (A^\dagger)^\dagger X^\dagger A^\dagger = AXA^\dagger \quad\checkmark
@@ -528,47 +577,76 @@ homomorphism.
 \begin{equation*}
   \mathrm{Tr}(AXA^\dagger) = \mathrm{Tr}(X\,A^\dagger A) = \mathrm{Tr}(X) = 0 \quad\checkmark
 \end{equation*}
-So $L \in GL(\mathcal{C}_P)$.  Now define $\rho: SU(2) \to GL(\mathcal{C}_P) \cong GL(3,\mathbb{R})$ by $\rho(A) = L$.
-
-\noindent\textbf{Homomorphism:} For $A, B \in SU(2)$:
+So $L$ maps $\mathfrak{p}$ to itself and is linear and invertable, i.e. $L\in GL(\mathfrak{p})$.  But what does it do?  The operator $L$ takes:
+$$\vec{x} = [X]$$
+and returns:
+$$\vec{y} \equiv [L(x)]$$
+Note that:
+$$|\vec{y}|^2 = ([L(x)] \mid [L(x)]) = -\det(L(X)) = -\det(AXA^\dagger) = -\det(X\,A^\dagger\,A) = -\det(X)$$
+and so:
+$$|\vec{y}|^2 = |\vec{x}|^2$$
+which says that $L$ preserves norms.  Now, as a linear operator on the
+real 3D vector space $\mathfrak{p}$, $L$ is isomorphic to its matrix
+representation, which we shall call $\rho(A)$, and so:
+$$L \mapsto [L] \equiv \rho(A) \in GL(3,\mathbb{R})$$ In the exercise
+below, you will show that a linear operator that preserves norms is an
+isometry. By the isomorphism, $\rho(A) \in GL(3, \mathbb{R})$
+preserves norms, and is therefore an isometry of the Euclidean norm,
+which means that in fact $\rho(A) \in O(3)$.  As an element of $O(3)$ the determinant of $\rho(A)$ is $\pm 1$.  However,
+$$\det(\rho(I))=\det(I) = 1$$
+and so continuity requires that
+$$\det(\rho(A))=1$$
+and therefore in fact $\rho(A) \in SO(3)$ with $A$ in $SU(2)$. By definition:
+$$\rho(A)[X] = [A X A^\dagger]$$
+and so for $A,B \in SU(2)$
 \begin{equation*}
-  \rho(AB)[X] = (AB)X(AB)^\dagger = A(BXB^\dagger)A^\dagger = \rho(A)\bigl(\rho(B)[X]\bigr) \quad\checkmark
+  \rho(AB)[X] = (AB)X(AB)^\dagger = A(BXB^\dagger)A^\dagger = \rho(A)\bigl(\rho(B)[X]\bigr) 
 \end{equation*}
-\noindent\textbf{Image in $SO(3)$:} Since $\det(AXA^\dagger) = \det(X)$ (as
-$\det(A)=1$), the operator $\rho(A)$ preserves $-\det(X) = x^2+y^2+z^2$,
-i.e.\ it is an isometry of $\mathbb{R}^3$.  So $\rho(A) \in O(3)$.  By
-continuity of the determinant and the fact that $\rho(I) = I$ has
-$\det = +1$, we have $\det(\rho(A)) = +1$, so $\rho(A) \in SO(3)$.
-
-\noindent\textbf{Onto:} The action of $L$ is just a rotation of $(x,y,z)$;
-one can show (see HW) that every rotation in $SO(3)$ arises from some
-$A \in SU(2)$.
-
-\noindent\textbf{Not one-to-one:} Note that $\rho(-A)[X] = (-A)X(-A)^\dagger = AXA^\dagger = \rho(A)[X]$.
-So $\rho(A) = \rho(-A)$ for every $A \in SU(2)$: the map is \textbf{2-to-1}.
-We say that $SU(2)$ is the \textbf{double cover} of $SO(3)$.
-
-\exercise (*) Show that $\rho$ is onto $SO(3)$ by showing $R_z(\theta) =
-\rho(A)$ for
+or, as $X$ is arbitrary:
 \begin{equation*}
-  A = \begin{pmatrix} e^{i\theta/2} & 0 \\ 0 & e^{-i\theta/2} \end{pmatrix}
+  \rho(AB) = \rho(A) \rho(B)
 \end{equation*}
-and finding similar $A$'s for $R_x$ and $R_y$. $\quad\square$\\[5pt]
+Therefore:
+$$\rho: SU(2) \to SO(3)$$
+is a homomorphism.  It can be shown that $\rho$ is onto.  However, it is clearly not one-to-one as:
+$$\rho(-A) = \rho(A)$$
+It can be shown that $\rho$ is exactly two-to-one.  We say that SU(2) is the ``double cover'' of SO(3).  It is onto (cover) but two-to-one (double).  Rotations in $SU(2)$ are $4\pi$ periodic, which is the origin of half-integer spin.\\
 
-\exercise (*) Verify that $R(\psi,\theta,\phi) = \rho(A(\psi,\theta,\phi))$
-has the same 3 parameters as the general SU(2) element, and confirm that the
-period of $\rho$ is $4\pi$ (i.e.\ $A$ must rotate by $4\pi$ to return to the
-identity, whereas $R(\theta)$ has period $2\pi$).  This is the origin of
-half-integer spin. $\quad\square$\\[5pt]
+\exercise (*) Show that a linear operator $L$ that preserves norms is an isometry, i.e.:
+$$(Lv \mid Lv)=(v \mid v ) \quad \forall v \in V \quad \implies \quad
+(Lv \mid Lw)=(v \mid w ) \quad \forall v,w \in V$$
+For simplicity, assume $V$ is a real vector space (the result still
+holds for complex vector space, but with a bit more algebra).  Hint:
+consider $L(v+w)$ and use bilinearity of the NDHF.$\quad
+\square$\\[5pt]
+
+\exercise (*) Show that $R_z(\phi) = \rho(A)$ for
+\begin{equation*}
+  A = \begin{pmatrix} e^{-i\phi/2} & 0 \\ 0 & e^{i\phi/2} \end{pmatrix}
+\end{equation*}
+Note that this is $4 \pi$ periodic.  Compare $A$ to Equation~\ref{eqn:su2-element-half-angle} with $\psi=\theta=0$.  Hint: a good notation will really help you out here.  Define
+$$a = e^{i\phi/2}, \quad \quad w \equiv x+iy$$
+and write the matrices involved in terms of $a$,$a^*$,$w$,$w^*$,and $z$.$\quad \square$\\[5pt]
+
+\exercise Find $A$ so that $\rho(A)$ is a rotation about $x$ by
+$\theta$.  Hint: use Equation~\ref{eqn:su2-element-half-angle}.
+One can construct any rotation from three rotations about $z$, about $x$, and about $z$ again. Therefore, together this exercise and the previous exercise show that $\rho$ is onto.$\quad \square$\\[5pt]
+
+\exercise Using rotations about $x$ and $z$ determined in the previous exercises, find $A$ so that $\rho(A)$ is a rotation about $y$ by $\theta$.$\quad \square$\\[5pt] 
+
+\exercise In case you missed it in lecture, checkout ``Dirac's belt
+trick'' online (or ask your classmates!) for a nice demonstration.$\quad \square$\\[5pt]
 
 \section{Lie Groups and Lie Algebras}
-
 \subsection*{Lie Groups}
 
-\noindent
-\textbf{Intuition:} A Lie group $G$ is a group that is also a smooth
-manifold: near each element, it looks like $\mathbb{R}^n$ for some
-dimension $n$.
+\noindent\textbf{Intuition:} A Lie group is a group that looks like
+$\mathbb{R}^n$ in a small enough neighborhood of each element.
+Starting from the identity, one can move continuously through the
+group, in order to reach any connected element.  Defining this
+precisely, however, requires the theory of differential manifolds.
+Following Jeevanjee, we will use a less intuitive, but fully
+servicable, pragmatic definition instead.
 
 \begin{center}
 \begin{tikzpicture}
@@ -576,215 +654,540 @@ dimension $n$.
     coordinates {(0,0) (1.5,0.3) (2.5,0.8) (2.2,1.8) (1,2) (-0.3,1.5)};
   \filldraw (0.5,0.8) circle (2pt) node[below] {$g(0)$};
   \filldraw (1.2,1.3) circle (2pt) node[right] {$g(x)$};
-  \filldraw (1.9,1.0) circle (2pt) node[right] {$g(y)$};
   \draw[->] (0.5,0.8) .. controls (0.8,1.1) .. (1.2,1.3);
 \end{tikzpicture}
 \end{center}
 
-\noindent
-\textbf{Pragmatic Definition:} A \textbf{matrix Lie group} $G$ is a closed
-subgroup of $GL(n,\mathbb{C})$:
+\noindent\textbf{Pragmatic Definition:} A \textbf{matrix Lie group} $G$ is a
+closed subgroup of $GL(n, \mathbb{C})$:
 \begin{quote}
-  \textit{If $A_n \in G$ is any sequence with $A_n \to A$, then either
-  $A \in G$ or $A$ is not invertible.}
+  \textit{If $A_n \in G$ and $A_n \to A$, then either $A \in G$ or $A$ is
+  not invertible.}
 \end{quote}
-\noindent\textbf{Example:} $O(n)$ is a matrix Lie group.  Put
-$f(A) = A^T A$; this is a continuous function, so $f(A) = I$ defines a
-closed set.  Similarly $SO(n)$, $U(n)$, $SU(n)$ are all matrix Lie groups.\\[5pt]
-
-\noindent\textbf{Examples and their dimensions:}
-\begin{itemize}
-  \item $SO(2) = \{R(\theta) \mid \theta \in \mathbb{R}\}$, a \textbf{Lie
-    group of dimension 1} (proper rotations of the plane, parameterized
-    by one angle).
-  \item $O(2)$ includes reflections, so it has two connected components
-    ($\det = \pm 1$); it is technically a \textbf{Lie group of dimension 0}
-    (in the sense that it is not connected, though it is still 1-dimensional
-    as a manifold).
-  \item $\{I, -I\} \subseteq SU(2)$: sequences converge only to $I$ or $-I$,
-    so this is a \textbf{0-dimensional} closed (but not connected) Lie group.
-\end{itemize}
-
-\subsection*{Lie Algebras and Symmetry}
-
-The key to making Lie groups tractable is to work with the tangent space at the
-identity — the \textbf{Lie algebra}.
-
-\noindent\textbf{Observation:} Suppose $G$ is a matrix Lie group with
-isometries, e.g.\ $SO(n)$ or $SU(n)$.  Consider a smooth path
-$U(\theta) \in G$ with $U(0) = I$.  Then:
-\begin{equation*}
-  U(\theta) = \exp(i\theta\, T) \approx I + i\theta\, T \quad \text{for small } \theta,
-\end{equation*}
-where
-\begin{equation*}
-  T = (-i)\,\frac{dU}{d\theta}\bigg|_{\theta=0}.
-\end{equation*}
-We call $T$ a \textbf{generator} of $G$.  The set of all such generators
-forms the Lie algebra $\mathfrak{g}$.
 
 \noindent
-\fbox{\parbox{0.9\textwidth}{
-  If $G \ni U(\theta) = \exp(i\theta T)$, then $T$ is a generator of $G$.  We call $\mathfrak{g}$ the set of generators a \textbf{symmetry} of $G$.
-}}\\[8pt]
+\textbf{Example:} $O(n)$ is a matrix Lie group.  Define:
+$$f(A) = A^T A$$
+and suppose there exists ${A_n \in O(n)}$ such that
+$$\lim_{n\to\infty} A_n = A,$$
+Then:
+\begin{align}
+  f(A) \quad &= \quad f(\lim_{n\to\infty} A_n) = \lim_{n\to\infty} f(A_n)  \quad & \text{(continuity)} \\
+  &= \quad \lim_{n\to\infty} I = I  \quad & (A_n \in O(n)) \\
+\end{align} 
+so $A$ is also in O(n).  So O(n) is a matrix Lie group.
 
-\noindent\textbf{Generators of $SO(3)$:} Taking derivatives of the rotation
-matrices at $\theta=0$ and dividing by $i$:
+\noindent
+\textbf{Example:} $SO(n)$ is a matrix Lie group.  Put:
+$$g(A) = \det(A)$$
+and proceed as in the previous example.
+
+\noindent
+\textbf{Example:} $SO(2) = \{R(\theta) \mid \theta \in \mathbb{R}\}$, with
 \begin{equation*}
-  L_x = (-i)\frac{dR_x}{d\theta}\bigg|_0 = \begin{pmatrix}0&0&0\\0&0&-i\\0&i&0\end{pmatrix},\quad
-  L_y = \begin{pmatrix}0&0&i\\0&0&0\\-i&0&0\end{pmatrix},\quad
-  L_z = \begin{pmatrix}0&-i&0\\i&0&0\\0&0&0\end{pmatrix}.
-\end{equation*}
-These are traceless, Hermitian (i.e.\ $L_k^\dagger = L_k$), and satisfy the
-commutation relations
+      R(\theta) = \begin{pmatrix}\cos\theta & -\sin\theta \\ \sin\theta & \cos\theta\end{pmatrix},
+    \end{equation*}
+is a matrix Lie group of dimension 1.
+
+\noindent
+\textbf{Example:} $O(2)$ has elements $\{R(\theta)\} \cup \{PR(\theta)\}$ where $P =
+    \begin{pmatrix}1&0\\0&-1\end{pmatrix}$; it is a Lie group of dimension 1
+    but is not connected.
+
+\subsection*{Motivation:  Symmetry and Generators}
+
+The Lie Groups of Isometries consist of unitary matrices such as the
+elements SU(n).  Note that the elements of SO(n) are unitary as well,
+because othogonal real matrices are unitary (the hermitian conjugate
+is just the transpose). Observables in QM are associted with Hermitan
+matrices, not unitary matrices.  Suppose we find\footnote{Here we
+define the exponential by it's Taylor series expansion, which we can
+calculate in terms of powers of the Matrix} a matrix $T$ such that:
+$$U(\theta) = \exp(i \theta T)$$
+then $U$ is unitary if $T$ is Hermitian.  We define the generator as:
 \begin{equation}
-  \label{eqn:angular-momentum-algebra}
-  [L_x, L_y] = i L_z, \qquad [L_y, L_z] = i L_x, \qquad [L_z, L_x] = i L_y.
+  T = -i\;\frac{dU}{d\theta}\bigg|_{\theta=0}.
 \end{equation}
 
-\exercise (*) Compute $[L_x, L_y]$ explicitly and verify it equals $iL_z$.
-$\quad\square$\\[5pt]
-
-\subsection*{Matrix Lie Algebras}
-
-\noindent\textbf{Definition:} The \textbf{matrix Lie algebra} $\mathfrak{g}$
-of a matrix Lie group $G$ is:
+\noindent\textbf{Generators of $SO(3)$:} For example, consider the
+rotations of$SO(3)$ from Equation~\ref{eqn:so3-rotations}.  Rotations
+about the $z$-axis:
 \begin{equation*}
-  \mathfrak{g} = \bigl\{ X \in M_n(\mathbb{C}) \mid e^{tX} \in G \text{ for all } t \in \mathbb{R} \bigr\}.
+  R_z(\theta) = \begin{pmatrix}\cos\theta& \sin\theta&0\\ -\sin\theta&\cos\theta&0\\0&0&1\end{pmatrix},
 \end{equation*}
+have generator:
+\begin{equation}
+  \label{eqn:tz}
+  T_z \equiv -i \frac{dR_z}{d\theta}\bigg|_{\theta=0} = \begin{pmatrix}0&-i&0\\i&0&0\\0&0&0\end{pmatrix},
+\end{equation}
+and similarly:
+\begin{align}
+\notag
+T_x &= \begin{pmatrix}0&0 &0\\0&0&-i\\0&i&0\end{pmatrix}, \\[5pt]
+\label{eqn:txy}
+T_y &= \begin{pmatrix}0&0&i\\0&0&0\\-i&0&0\end{pmatrix}. \\[5pt]
+\notag
+\end{align}
+In the exercises, you'll verify that these generators have the commutation relations:
+\begin{equation}
+ \label{eqn:momentum-commutators}      
+ [T_x, T_y] = i T_z
+\end{equation}
+and cyclic permuations, and so they are matrix representation of the angular momentum operators.\\[5pt]
 
-\noindent\textbf{Theorem:} $\mathfrak{g}$ is a real vector space closed under
-the \textbf{Lie bracket} $[X,Y] = XY - YX$.  That is:
+\exercise Confirm Equation~\ref{eqn:momentum-commutators} (you need
+not check all the permutations, but they do hold).$\quad
+\square$\\[5pt]
+
+\subsection*{Matrix Lie Algebra}
+
+The previous section motivates the following definition, and the
+results are quite general, as stated in the theorem that follows.  For
+a proof of the theorem, please see Jeevanjee.\\[5pt]
+
+\noindent\textbf{Definition:} A \textbf{complex matrix Lie algebra}
+$\mathfrak{g}$ of a matrix Lie group $G$ is the set of matrices $T$,
+called generators, that map to elements in $G$ via exponentiation, plus its complexification:
+\begin{align*}
+  \mathfrak{g}_\mathcal{R} &= \bigl\{T \in M_n(\mathbb{C}) \mid e^{i \,
+    \theta \, T} \in G \;\text{for all}\; \theta \in
+  \mathbb{R}\bigr\}\\
+  \mathfrak{g} &= \{T+iS \mid T,S \in \mathfrak{g}_\mathcal{R}\}
+\end{align*}
+
+\noindent\textbf{Theorem:} If $\mathfrak{g}$ is a complex matrix Lie algebra,
+then $\mathfrak{g}$
 \begin{enumerate}
-  \item $\mathfrak{g}$ is a real vector space: if $X, Y \in \mathfrak{g}$ and
-    $\lambda \in \mathbb{R}$, then $X + Y \in \mathfrak{g}$ and $\lambda X \in \mathfrak{g}$.
-  \item $\mathfrak{g}$ is closed under the bracket: $[X,Y] \in \mathfrak{g}$.
-  \item All elements of $\mathfrak{g}$ satisfy the \textbf{Jacobi identity}:
-    \begin{equation*}
-      [A,[B,C]] + [B,[C,A]] + [[C,A],B] = 0.
-    \end{equation*}
+\item Is a complex vector space.
+\item Is closed under the Lie bracket: $X,Y \in \mathfrak{g} \implies [X,Y] \in \mathfrak{g}$.
+\item Any elements $A,B,C \in \mathfrak{g}$ satisfy the Jacobi identity:
+  \begin{equation*}
+    [A,[B,C]] + [B,[C,A]] + [C,[A,B]] = 0.
+  \end{equation*}
+  This result follows algebraically from the definition of the commutator.
 \end{enumerate}
 
-\noindent\textbf{Example:} For $G = O(n)$ with $R^TR = I$, we showed previously
-that the generators satisfy $T^T = -T$ (antisymmetric real matrices), and
-$\mathrm{Tr}(T) = 0$ follows automatically.  For $G = SU(n)$, the generators
-are traceless Hermitian matrices.
+\noindent\textbf{Example:} In the previous section we found the
+generators of $SO(3)$.  The three basis vectors ${T_x, T_y, T_z}$ span
+the real vector space of antisymmetric Hermitian matrices (take care
+that it is real vector space despite the appearance of $i$ in the
+generators).  The angular momentum commutation relations show that the
+space is closed under commutators, but only if we extend it to a
+complex vector space.  The Lie algebra of $SO(3)$ is denoted
+$\mathfrak{so}(3)$.\\[5pt]
+
+\exercise Verify that the Jacobi identify follows from the definition of the commutator.\\[5pt]
+
+\noindent\textbf{A Note on physics vs math convention:} Mathmaticians
+define Lie groups without a factor of $i$ in the exponent, and end up
+with a real vector space that closes under the commutator. Nice!
+However, if the Lie Group is unitary, the matrices of the
+mathematicians Lie algebra are all anti-Hermitian.  Physicists, wedded
+as we are to real measurements from Hermitian operators, simply cannot
+abide anti-Hermitian matrices, and so add a factor of $i$ to the
+exponent, ending with a real vector space ($\mathfrak{g}_\mathcal{R}$)
+of Hermitian operators.  But then the real vector space must be
+complexified ($\mathfrak{g}$) so that the commutators close, because
+we just stubbornly slapped on a factor of $i$, and $i^2=-1$.  In
+short, mathematicians are happy with having only anti-Hermitian
+generators and get a real vector space.  Physicists insist on having
+Hermitian generators, but the price we pay is to have both Hermitian
+and anti-Hermitian matrices in the Lie algebra.  We will use the
+physics convention, but I must admit that the mathematicians may have
+us on this one...\\[5pt]
+
+\exercise Show that the {\bf complex} vector space with generators ${T_x,
+  T_y, T_z}$ as basis includes non-Hermitian matrices.\\[5pt]
+
+\subsection*{The Matrix Lie algebra $\mathfrak{so}(3)$}
+
+We calculated the generators of $SO(3)$, which together form a basis
+for the complex matrix Lie algebra $\mathfrak{so}(3)$, with the results in
+Equations~\ref{eqn:tz} and~\ref{eqn:txy}.  We identified the
+generators $T_x$, $T_y$, $T_z$ as a matrix representation of the angular
+momentum operators, because they follow the angular momentum commutation
+relations (Equation~\ref{eqn:momentum-commutators}).
+In particular, since we started with rotation matrices in
+the position basis ($\{x,y,z\}$), we have for example:
+$$[L_z]_{\{x,y,z\}} = T_z = \begin{pmatrix}
+  0&-i&0\\i&0&0\\0&0&0 \end{pmatrix}$$
+If the results look unfamiliar, it is because we usuallly work in in
+the basis where $L_z$ is diagonal, which we will call the $L_z$ basis,
+where (as you will show):
+\begin{align}
+[L_z]_{L_z} \quad &= \quad \begin{pmatrix}1&0&0\\0&0&0\\0&0&-1\end{pmatrix} \neq T_z \\[5pt]
+\notag
+\end{align}
+In the exercises, you will find the eigenvalues ($m$) and eigenvectors
+of $T_z$ and find that they are:
+\begin{equation}
+\label{eqn:lz-eigenvectors}
+\begin{array}{ccc}
+  m=1 & m=0 & m=-1 \\[6pt]
+  \sqrt{\frac{1}{2}}\begin{pmatrix}-1\\-i\\0\end{pmatrix} &
+  \begin{pmatrix}0\\0\\1\end{pmatrix} &
+  \sqrt{\frac{1}{2}}\begin{pmatrix}1\\-i\\0\end{pmatrix}
+\end{array}
+\end{equation}
+A standard technique from Linear algebra is to diagonalize a matrix
+$A$, which we will take to be 3x3, using  its three eigenvectors $v_1, v_2, v_3$ with eigenvalues
+$\lambda_1, \lambda_2, \lambda_3$ to obtain:
+$$D \equiv [A]_A = \begin{pmatrix} \lambda_1 & 0 & 0 \\ 0 & \lambda_2 & 0 \\ 0 & 0 & \lambda_3 \end{pmatrix}$$
+We define the 3x3 matrix
+$$S=(v_1 | v_2 | v_3)$$
+by inserting the three column vectors as shown.  We will assume that
+the eigenvectors are linearly independent, and so $S$ has non-zero
+deteriminant and is invertible.  Note that the
+action of $A$ on $S$ is:
+$$A\,S= (A v_1 | A v_2 | A v_3) = (\lambda_1 v_1 | \lambda_2 v_2 | \lambda_3 v_3)$$
+but also note that:
+$$(v_1 | v_2 | v_3)\, D = (\lambda_1 v_1| \lambda_2 v_2 | \lambda_3 v_3)$$
+and so we have:
+$$A S = S D$$
+or (since we assumed the eigenvectors are linearly indepedent):
+$$D = S^{-1} A S $$ which is called a similary transformation, and
+effects a change of basis to ${v_1, v_2, v_3}$ where $A$ is diagonal.
+Notice that the condition that the eigenvectors being linearly
+indepedent (so that $S$ is invertible) is precisely the condition for
+them to constitute a basis.  If $A$ is Hermitian (our case) then the
+eigenvectors are orthogonal, and we can arrange for them to be an
+orthonormal basis.  In this case, the matrix $S$ is unitarity, and the
+transformation becomes:
+$$D = U^\dagger A U$$
+
+\noindent
+Returning to $L_z$, we construct:
+\begin{equation}
+\label{eqn:diagnolize}
+U = \sqrt{\frac{1}{2}} \begin{pmatrix} -1 & 0 & 1 \\ -i & 0 & -i \\ 0 & \sqrt{2} & 0 \end{pmatrix}
+\end{equation}
+from the eigenvectors.  In the exercises, you will first confirm that:
+\begin{equation}
+U^\dagger \, U = I
+\end{equation}
+and
+\begin{equation}
+  \label{eqn:lz}
+  [L_z]_{L_z} = U^\dagger [L_z]_{x,y,z} U = \quad \begin{pmatrix}1&0&0\\0&0&0\\0&0&-1\end{pmatrix}
+\end{equation}
+and then calculate:
+\begin{align}    
+  [L_x]_{L_z} \quad &= \sqrt{\frac{1}{2}} \quad \begin{pmatrix}0&1&0\\1&0&1\\0&1&0\end{pmatrix} \notag\\[5pt]
+    \label{eqn:lxy}
+  [L_y]_{L_z} \quad &= \sqrt{\frac{1}{2}} \quad \begin{pmatrix}0&-i&0\\i&0&-i\\0&i&0\end{pmatrix}\\
+    \notag
+\end{align}
+
+
+
+\exercise Solve for the eigenvectors of $L_z$ with eigenvalue $m$ and
+show compare to the results in Equation~\ref{eqn:lz-eigenvectors} (they should agree to within an overal phase for each vector).$\quad \square$\\[5pt]
+
+\exercise Compare the eivenvectors of $L_z$ from Equation~\ref{eqn:lz-eigenvectors} to the
+spherical Harmonics (ignoring normlization):
+$$r Y_{lm} \quad = \quad \epsilon \, e^{im\phi} \, P_l^m(\theta)$$
+with
+$$P_1^0 = \cos \theta, \quad \quad P_1^1 = \sin \theta$$
+and
+\begin{equation*}
+\epsilon = \begin{cases} (-1)^m & m \geq 0 \\ 1 & m < 0 \end{cases}
+\end{equation*}
+$\square$\\[5pt]
+
+
+\exercise Verify that the unitary matrix $U$ from Equation~\ref{eqn:diagnolize} is indeed unitary by directly calculating $U^\dagger U$$\quad \square$\\[5pt]
+
+\exercise Calculate $[L_z]_{L_z} =  U^\dagger \, [L_z]_{x,y,z} \, U $ and compare with Equation~\ref{eqn:lz}.$\quad \square$\\[5pt]
+
+\exercise (*) Calculate $[L_x]_{L_z} =  U^\dagger \, [L_x]_{x,y,z} \, U $ and compare with Equation~\ref{eqn:lxy}.$\quad \square$\\[5pt]
+
+\exercise Calculate $[L_y]_{L_z} =  U^\dagger \, [L_y]_{x,y,z} \, U $ and compare with Equation~\ref{eqn:lxy}.$\quad \square$\\[5pt]
+
+\exercise (*) Calculate the raising operator $L_+ = L_x + i L_y$ to get:
+$$
+L_+ = \sqrt{2}\begin{pmatrix} 0 & 1 & 0 \\ 0 & 0 & 1 \\ 0 & 0 & 0 \end{pmatrix}
+$$
+and confirm it's action on the basis vectors of $L_z$:
+\begin{center}
+\begin{tabular}{ccc}
+  $m=1$ & $m=0$ &  $m=-1$ \\
+$\begin{pmatrix} 1 \\ 0 \\ 0 \end{pmatrix}$ &
+$\begin{pmatrix}  0 \\  1 \\ 0 \end{pmatrix}$ &
+$\begin{pmatrix}  0 \\ 0 \\ 1 \end{pmatrix}$ \\
+\end{tabular}
+\end{center}
+
+
+\exercise Calculate the lowering operator $L_- = L_x - i L_y$ to get:
+$$
+L_- = \sqrt{2}\begin{pmatrix} 0 & 0 & 0 \\ 1 & 0 & 0 \\ 0 & 1 & 0 \end{pmatrix}
+$$
+and confirm it's action (as in the previous problem.)
+
+\subsection*{The Matrix Lie Algebra $\mathfrak{su}(2)$}
+
+We saw previously that a general element of $SU(2)$ can be written
+as:
+\begin{equation*}
+  A = \begin{pmatrix} \alpha & \beta \\ -\bar\beta & \bar\alpha \end{pmatrix}, \qquad |\alpha|^2 + |\beta|^2 = 1.
+\end{equation*}
+Writing $\alpha = a + id$ and $\beta = c + ib$ with $a,b,c,d \in \mathbb{R}$ we have
+\begin{equation*}
+  A = \begin{pmatrix} a+id & c+ib \\ -c+ib & a-id \end{pmatrix}
+\end{equation*}
+and the constraint $|\alpha|^2 + |\beta|^2 = 1$ becomes:
+\begin{equation*}
+  a^2 + b^2 + c^2 + d^2 = 1,
+\end{equation*}
+leaving three independent parameters, which we will take to be $b$, $c$, and $d$.  At the identity:
+$$a=1, \quad b=0, \quad c=0, \quad d=0$$
+and so near the identity we have
+$$a(b,c,d) = \sqrt{1-b^2-c^2-d^2} \approx 1 - \frac{1}{2}(b^2 + c^2 + d^2)$$
+and:
+$$\frac{da}{db}\Big|_{b=0} \quad = \quad \frac{da}{dc}\Big|_{c=0}
+\quad = \quad \frac{da}{dd}\Big|_{d=0} \quad = \quad 0$$
+In the exercises, you will compute the generators of $SU(2)$ as:
+\begin{equation*}
+  T_b = \begin{pmatrix}0&1\\1&0\end{pmatrix} = \sigma_1, \qquad
+  T_c = \begin{pmatrix}0&-i\\i&0\end{pmatrix} = \sigma_2, \qquad
+  T_d = \begin{pmatrix}1&0\\0&-1\end{pmatrix} = \sigma_3.
+\end{equation*}
+The generators of $SU(2)$ are precisely the Pauli matrices $\sigma_1,
+\sigma_2, \sigma_3$, and the Lie algebra of $SU(2)$ is the real vector
+space that they span:
+\begin{equation*}
+  \mathfrak{su}(2) = \{\vec{\sigma} \cdot \vec{x} \; \mid \; \vec{x} \in \mathcal{R}^3\}
+  = \mathfrak{p}
+\end{equation*}
+which is exactly the Pauli space that we encountered previously.
+Since the Pauli matrices satisfy $[\sigma_1, \sigma_2] = 2i\sigma_3$
+(and cyclic permutations), the generators $J_i = \frac{1}{2}\sigma_i$
+satisfy the angular momentum commutation relations:
+\begin{equation*}
+  [J_x, J_y] = iJ_z \quad \text{(and cyclic permutations)},
+\end{equation*}
+
 
 \subsection*{The Lie Algebras of SU(2) and SO(3)}
 
-\noindent\textbf{Theorem (Isomorphism between Lie algebras):}
-If there is a continuous homomorphism $\phi: G \to H$ between Lie groups, it
-induces a Lie algebra homomorphism $d\phi: \mathfrak{g} \to \mathfrak{h}$
-between the Lie algebras.\\[5pt]
+\noindent\textbf{Theorem:} If there is a continuous homomorphism $\phi: G \to
+H$ between Lie groups, it induces a Lie algebra homomorphism $d\phi:
+\mathfrak{g} \to \mathfrak{h}$.  If $\phi$ is onto, then so is $d\phi$.
+If $\phi$ is an isomorphism, then so is $d\phi$.\\[5pt]
 
-\noindent\textbf{Example:} The double cover $\rho: SU(2) \to SO(3)$ is a
-continuous homomorphism, so it induces a Lie algebra isomorphism
+\noindent\textbf{Example:} The double cover $\rho: SU(2) \to SO(3)$
+induces a Lie algebra homomorphism:
+$$d\rho: \mathfrak{su}(2) \to \mathfrak{so}(3).$$
+$\rho$ is double valued, but:
+$$\rho(I)=\rho(-I)$$
+Therefore, near the origin, the induced homomorphism $d\rho$ is single valued, and the
+relationship is an isomorphism:
 \begin{equation*}
   \mathfrak{su}(2) \cong \mathfrak{so}(3).
 \end{equation*}
-This is consistent with both algebras being 3-dimensional and satisfying the
-same commutation relations~(\ref{eqn:angular-momentum-algebra}).
 
-\exercise (*) Show that $\mathfrak{su}(2)$ and $\mathfrak{so}(3)$ both satisfy
-the commutation relations $[T_i, T_j] = i\epsilon_{ijk} T_k$, where
-$\epsilon_{ijk}$ is the Levi-Civita symbol. $\quad\square$\\[5pt]
+\section{Abstract Lie Algebras and Representations}
 
-\section{Representations}
+\subsection*{Abstract Lie Algebras}
 
-\noindent\textbf{Definition:} A \textbf{representation} of a group $G$ is a
-vector space $V$ with a homomorphism:
-\begin{equation*}
-  \Pi: G \to GL(V).
-\end{equation*}
-If $\Pi$ is one-to-one, it is called a \textbf{faithful} representation (i.e.\
-$G$ is isomorphic to a subgroup of $GL(V)$).\\[5pt]
+We have gained a lot by abstracting the essential properties of the vector
+space $R^n$ into a set of axioms for an abstract vector space.  In a
+similar manner, we abstract the essential properties of a complex matrix Lie
+algebra as a set of axioms for an abstract Lie algebra.\\[5pt]
 
-\noindent\textbf{Example:} $\Pi: SU(2) \to SO(3) \subset GL(3,\mathbb{R})$
-is a representation of $SU(2)$, but it is not faithful (it is 2-to-1).\\[5pt]
+\noindent
+{\bf Definition:} An abstract Lie algebra is a vector space
+$\mathfrak{g}$ equiped with a bilinear map
+$$[\cdot,\cdot]:\mathfrak{g} \times \mathfrak{g} \to \mathfrak{g}$$
+called the Lie bracket which satisfies:\\[5pt]
+{\bf Antisymmetry:} $[X,Y] = -[X,Y] \quad \quad \forall X,Y \in \mathfrak{g}$\\[5pt]
+{\bf Jacobi Identity:} $[[X,Y],Z] + [[Y,Z],X] + [[Z,X],Y] = 0$\\[5pt]
 
-\noindent\textbf{Lie algebra representation:} A \textbf{Lie algebra
-representation} is a linear map:
-\begin{equation*}
-  \pi: \mathfrak{g} \to \mathfrak{gl}(V), \qquad \pi: T_i \mapsto \frac{dU}{d\theta}\bigg|_{\theta=0}
-\end{equation*}
-that preserves the Lie bracket: $\pi([T_i, T_j]) = [\pi(T_i), \pi(T_j)]$.\\[5pt]
+\noindent
+{\bf Example:} Any complex matrix Lie algebra is also an abstract Lie
+algebra.  The properties of complex matrix Lie algebras informed these
+definitions.\\[5pt]
 
-For a homomorphism $\phi: G \to H$ between Lie groups, the induced Lie algebra
-homomorphism must be continuous; if $\phi$ is a homomorphism then $d\phi$ is
-also a homomorphism (cited without proof).
+\noindent
+{\bf Example:} Operators acting on a finite or infinite dimensional
+vector space, with commutators defined in the usual matter:
+$$[A,B] = A\,B - B\,A$$
+are an abstract Lie algebra.  The commutator is closed under operators, and the antisymmetry and Jacobi axioms follow from its definition.\\[5pt]
 
-\subsection*{Symmetry and Representations}
+\noindent
+{\bf Example:} For a classical system with phase space parameterized
+by generalized momentum $p$ and generalized coordinate $q$ the set of
+complex-valued infinitely differentiable functions of $p$ and $q$ form
+a vector space $\mathfrak{C}(P)$.  For $f,g \in \mathfrak{C}(P)$ the
+Poisson bracket of $f$ and $g$, with $f,g \in \mathfrak{C}(P)$, is
+defined as:
+$$\{\,f\,,\,g\,\} = \frac{\partial f}{\partial q} \, \frac{\partial
+  g}{\partial p} - \frac{\partial g}{\partial q} \, \frac{\partial
+  f}{\partial p}$$
+The Poisson bracket is closed because $f$ and $g$ are infinitely
+differentiable, and the antisymmetry and Jacobi axioms follow from its
+the definition.  This makes the classical phase space $P$ and the
+Poisson bracket an abstract Lie algebra.\\[5pt]
 
-Suppose a Lie group $G$ acts on a Hilbert space $\mathcal{H}$ via unitary
-operators $U(g)$ for $g \in G$:
-\begin{equation*}
-  g \mapsto U(g), \qquad U(g) \in \mathcal{H}, \qquad U(0) = I.
-\end{equation*}
-Then:
-\begin{equation*}
-  U(\theta) = \exp(i\theta T), \qquad T = (-i)\frac{dU}{d\theta}\bigg|_{\theta=0}.
-\end{equation*}
-For the generators $T_i$ of the symmetry $G$, the Lie algebra representation
-gives the abstract Lie algebra $\mathfrak{g}$ satisfying $[T_i, T_j] = C_{ij}^k T_k$.
-The representations $G^1, G^2, \ldots$ correspond to different choices of the
-representation space $V$ (faithful, spin-$\tfrac{1}{2}$, spin-1, etc.).
+\noindent
+{\bf Example:} The abstract angular momentum operators $\{J_x, J_y,
+J_z\}$ are the basis of a complex vector space that is closed under the 
+the angular momentum commutation relations:
+$$[J_x,J_y] = iJ_z \quad \quad \text{(and cyclic permutations)}$$
 
-\subsection*{Diagonalizing Hermitian Matrices}
+\noindent
+{\bf Conclusion:} We've seen that $\mathfrak{su}(2)$ shares the same
+angular momentum commutation relations as worked out in the previous
+example, but in this case every element in vector space has $j=1/2$.
+We've seen that $\mathfrak{so}(3)$ shares the same angular momentum
+commutation relations but every element in vector space has $j=1$.
+These are two different {\bf representations} of the abstract Lie
+algebra for angular momentum.  Evidently there are many more.  In the
+next sections we'll see how to describe, build up, and break down
+represenations.
 
-\noindent\textbf{Claim:} A Hermitian matrix $A$ with eigenvalues
-$\lambda_1, \lambda_2, \lambda_3$ and (why?) orthonormal eigenvectors
-$v_1, v_2, v_3$ can be normalized and assembled into a unitary matrix $U$
-such that:
-\begin{equation*}
-  (v_i \mid v_j) = \delta_{ij}, \qquad U^\dagger A\, U = \begin{pmatrix}\lambda_1 & 0 & 0 \\ 0 & \lambda_2 & 0 \\ 0 & 0 & \lambda_3\end{pmatrix}.
-\end{equation*}
-Note: $U^\dagger U = I$ (unitary).  Then $A = U\,\mathrm{diag}(\lambda_i)\,U^\dagger$
-is a similarity transformation.  This is useful because:
-\begin{equation*}
-  [U^\dagger A U, U^\dagger B U] = U^\dagger [A, B] U.
-\end{equation*}
-So commutators transform covariantly under a change of basis.
+\subsection*{Representations}
 
-\exercise (*) Show that the eigenvectors of a Hermitian matrix belonging to
-distinct eigenvalues are orthogonal.  (This is the reason we can always
-normalize them.) $\quad\square$\\[5pt]
+A representation of a group G is a vector space $V$ with a
+homomorphism:
+$$\Pi: G \to GL(V)$$
+If $\Pi$ is one-to-one, we say that
+it is {\bf faithful} representation, and then $G$ is isomorphic to a
+subset of $GL(V)$.
 
-\section{Angular Momentum and Representations of SU(2)}
+A Lie algebra representation is a homomorphism between the Lie
+algebras of $G$ and $GL(V)$:
+$$\pi: \mathfrak{g} \to \mathfrak{gl}(V)$$
 
-\subsection*{Eigenvectors of $L_z$ and Spherical Harmonics}
+\subsection*{Tensor Products}
 
-The generators $L_x, L_y, L_z$ defined above act on the Hilbert space of
-square-integrable functions.  We already know from the study of spherical
-harmonics that the spherical harmonics $Y_l^m(\theta,\phi)$ are simultaneously
-eigenvectors of both $L^2 = L_x^2 + L_y^2 + L_z^2$ and $L_z$:
-\begin{equation*}
-  L_z\, Y_l^m = m\, Y_l^m, \qquad L^2\, Y_l^m = l(l+1)\, Y_l^m.
-\end{equation*}
-Using the phase convention $p_l^m = \cos\theta$,
+When studying tensors, we empasised that a vector $v \in V$ is
+equivalent to a $(0-1)$ tensor $T_v$, something
+that eats a dual vector and returns a scalar, i.e.:
+$$v \mapsto T_v:V^* \to F$$
+defined by:
+$$T_v(u) = u(v)$$
+In the Dirac notation we have
+$$\ket{\Psi} \mapsto \braket{ \cdot \mid \Psi}$$
+This duality in perspective will be useful to keep in mind for what follows.\\[5pt]
+
+\noindent
+{\bf Definition:} For (possibly different) vector space $V$ and $W$, over the same scalar field $F$, we define the tensor product space
+$$V \otimes W = \{T: V^* \times W^* \to F\}$$
+and the tensor product of $v \in V$ and $w \in W$
+$$v \otimes w \in V \otimes W$$
+defined by its action on $h \in V^*$ and $g \in W^*$ 
+$$(v \otimes w) (h, g) = h(v) g(w)$$
+
+\noindent
+The tensor product stitches together two vector spaces using the only
+thing that they must share: the scalar field $F$, in which we know how to
+multiply.  Bringing back to mind the duality of views on vectors, we
+have:
 \begin{align*}
-  Y_{l,m=0} &\propto P_l^m(\cos\theta) \\
-  Y_{l,m} &\propto e^{im\phi}\,P_l^m(\cos\theta)\,\cos(m\phi) \\
-  Y_{l,-m} &\propto e^{-im\phi}\,P_l^m(\cos\theta)\,\cos(m\phi)
+  v &\mapsto T_v(h) = h(v) \\
+  v\otimes w &\mapsto T_{vw}(h,g) = h(v)\,g(w) \\
 \end{align*}
-These are already the eigenvectors of $L_z$ with eigenvalue $m$.
+In Dirac notation we have:
+$$\ket{\Psi} \otimes \ket{\Phi} \mapsto \braket{\cdot \mid \Psi} \braket{\cdot \mid \Phi} \equiv \ket{\Psi} \ket{\Phi}$$
+We state without prove (see Jeevanjee for references) that:
+$$(V \otimes W)^* = V^* \otimes W^*$$
+for vector space $V$ and $W$, and  
+$$(V_1 \otimes V_2) \otimes V_3 = V_1 \otimes (V_2 \otimes V_3)$$
+so that we can write:
+$$V_1 \otimes V_2 \otimes V_3$$
+for vector spaces $V_1$, $V_2$ and $V_3$.\\[5pt]
+\noindent
+In the exercises, you'll verify the major properties of the tensor product:
+\begin{align}
+(v_1 + v_2) \otimes w &= v_1 \otimes w + v_2 \otimes w & v_1,v_2 \in V \; w \in W \notag \\[5pt]
+v \otimes (w_1 + w_2) &= v \otimes w_1 + v \otimes w_2 & v \in V \; w_1,w_2 \in W\notag \\[5pt]
+c(v \otimes w) &= (cv) \otimes w = v \otimes (cw)  & v \in V \; w \in W \; c \in F \label{eqn:tensor-product-props}
+\end{align}
+You will also show that if $\{e_i\}$ is a basis for $V$ and 
+$\{f_j\}$ is a basis for $W$, then
+$$\{e_i \otimes f_j\}$$
+is a basis for $V \otimes W$.\\[5pt]
 
-\subsection*{Representations of SU(2): Spin-$j$}
+\exercise (*) Verify one side of the properties in
+Equation~\ref{eqn:tensor-product-props} by calculating:
+$$\big( (c v_1 + v_2) \otimes w \big)(g,h)$$ 
+and using the definition.\\[5pt]
 
-The faithful representations of $SU(2)$ are labeled by a non-negative
-half-integer $j = 0, \tfrac{1}{2}, 1, \tfrac{3}{2}, \ldots$\,:
-\begin{center}
-\begin{tabular}{ccc}
-  \hline
-  Name & $\dim = 2j+1$ & SU(2) rep faithfully \\
-  \hline
-  singlet   & 1 & $j=0$ \\
-  doublet   & 2 & $j=\tfrac{1}{2}$ \\
-  triplet   & 3 & $j=1$ \\
-  $\vdots$  & $\vdots$ & $\vdots$ \\
-  \hline
-\end{tabular}
-\end{center}
-The $m$ quantum numbers run $m = -j, -j+1, \ldots, j-1, j$ (so $2j+1$ values).
+\exercise Prove that if $\{e_i\}$ is a basis for $V$ and $\{f_j\}$
+is a basis for $W$, then $$\{e_i \otimes f_j\}$$ is a basis for $V
+\otimes W$.\\[5pt]
+
+\noindent
+
+Suppose we have a linear operators $A$ and vector $v$ from vector
+space $V$, and linear operator $B$ and vector $w$ from vector space
+$W$.  Linear opearators form their own vector space, so the tensor product $A \\odot B$ is already well defined.  But how should it operator on a vector from the vector space $V \times W$?  Here the duality serves us well again:
+\begin{align*}
+  A &\mapsto \braket{\cdot A \cdot }\\
+  B &\mapsto \braket{\cdot A \cdot }\\
+  A \otimes B &\mapsto \braket{\cdot A \cdot } \braket{\cdot B \cdot }\\
+  (A \otimes B)(v \otimes w) &\mapsto \braket{\cdot A v} \braket{\cdot B w }
+\end{align*}
+and so we must have:
+$$(A \otimes B)(v \otimes w) = (Av) \otimes (Bw)$$
+which is also emminently reasonable.
+It follows, as you will show in the homework, that for $A,C \in GL(V)$
+and $B,D \in GL(W)$ then:
+\begin{equation}
+\label{eqn:operator-product}
+(A \otimes B) (C \otimes D) = (AC) \otimes (BD) 
+\end{equation}
+Lastly, you will show that if $J_1$ and $J_2$ obey the commutation
+relations for angular momentum, then so does:
+\begin{equation}
+\label{eqn:jtot}  
+\vec{J} = \vec{J_1} \otimes I + I \otimes \vec{J_2}
+\end{equation}
+
+\exercise (*) Verify Equation~\ref{eqn:operator-product}.  Hint: it
+suffices to show that the identity holds for any vector $v \otimes w
+\in V \otimes W$, because any element of $V$ can be written as a sum
+of such vectors.
+
+
+$\quad \square$\\[5pt]
+
+\exercise (*) Verify that $\vec{J}$ as defined in
+Equation~\ref{eqn:jtot} obeys the angular momentum
+commutator relations.\\[5pt]
+
+
+To find the Matrix representation of a tensor product we first find the components by sending in a basis vector:
+\begin{align*}
+  (A \otimes B) \; (e_i \otimes f_j) &= A(e_i) \otimes B(f_j)\\
+  &= (A_i^{\ k} \, e_k) \, \otimes \, (B_j^{\ l} f_l)\\
+  &= A_i^{\ k} \, B_j^{\ l} \; (e_k \otimes f_l)\\
+\end{align*}
+From which we read off the components:
+$$[A \otimes B]^{(kl)}{}_{(ij)} = A^k_{\ i} \, B^l_{\ j}$$
+where the compound index $(ij)$ refers to the single basis vector $e_i \otimes f_j$, and similarly for $kl$. Visually we have:
+$$A \otimes B = \begin{pmatrix} 
+A^1_{\ 1} B & A^1_{\ 2} B & \cdots \\ 
+A^2_{\ 1} B & A^2_{\ 2} B & \cdots \\ 
+\vdots & & \ddots 
+\end{pmatrix}$$
+To perform the tensor product, we just replace each element in the matrix $A$ with the entire matrix $B$ times that element.
+
+In the exercise, you will show that:
+\begin{align}
+\sigma_1 \otimes \sigma_1 &= 
+\begin{pmatrix}0&0&0&1\\0&0&1&0\\0&1&0&0\\1&0&0&0\end{pmatrix} \notag \\[10pt]
+\label{eqn:pauli-products}
+\sigma_2 \otimes \sigma_2 &= 
+\begin{pmatrix}0&0&0&-1\\0&0&1&0\\0&1&0&0\\-1&0&0&0\end{pmatrix} \\[10pt]
+\sigma_3 \otimes \sigma_3 &= 
+\begin{pmatrix}1&0&0&0\\0&-1&0&0\\0&0&-1&0\\0&0&0&1\end{pmatrix} \notag
+\end{align}
+
+\exercise Verify all three identities in Equation~\ref{eqn:pauli-products}
+
+
 
 \subsection*{Direct Sums}
 
@@ -793,568 +1196,439 @@ $v \in V$ can be written \emph{uniquely} as $v = v_1 + \cdots + v_k$ with
 $v_i \in W_i$, we say $V$ is the \textbf{direct sum}:
 \begin{equation*}
   V = W_1 \oplus W_2 \oplus \cdots \oplus W_k.
-\end{equation*}
+k\end{equation*}
 \noindent\textbf{Claim:} $W_i \cap W_j = \{0\}$ for $i \neq j$.\\[3pt]
 \noindent\textbf{Proof:} Suppose $v \in W_i \cap W_j$ with $v \neq 0$.  Then
 we can write $v = v_i + v_j + \text{others}$ in two distinct ways, contradicting
 uniqueness. $\square$\\[5pt]
 
-\noindent\textbf{HW:} If $B_i$ is a basis for $W_i$, show that $B = B_1 \cup
+\exercise If $B_i$ is a basis for $W_i$, show that $B = B_1 \cup
 B_2 \cup \cdots \cup B_k$ is a basis for $V$. $\quad\square$\\[5pt]
 
-\subsection*{Tensor Products}
+\noindent
 
-For vector spaces $V$ and $W$ over the same field, we define the
-\textbf{tensor product} $V \otimes W$ by:
-\begin{equation*}
-  T \in V \otimes W \quad\text{is a bilinear map}\quad T: V^* \times W^* \to \mathbb{F}
-\end{equation*}
-defined (on decomposable elements) by $T(h,g) = h(v)\cdot g(w)$, written
-$T = v \otimes w$.  If $\{e_i\}$ is a basis for $V$ and $\{f_j\}$ is a basis
-for $W$, then $\{e_i \otimes f_j\}$ is a basis for $V \otimes W$, so
-\begin{equation*}
-  \dim(V \otimes W) = \dim V \cdot \dim W.
-\end{equation*}
-The matrix representation of $v \otimes w$ is the outer product:
-\begin{equation*}
-  [v \otimes w] = [v]\,[w]^T.
-\end{equation*}
-\noindent\textbf{Example:} For $v = \begin{pmatrix}a\\b\end{pmatrix}$ and $[v] \in V$, $V \otimes 3 = 3$:
-\begin{equation*}
-  [v] = \begin{pmatrix}a\\b\end{pmatrix}, \quad
-  [v \otimes w]_{T_3} = [v][w]^T = \begin{pmatrix} ac & ad \\ bc & bd \end{pmatrix} \quad\text{both in } V \otimes 3.
-\end{equation*}
-\noindent\textbf{Properties:} $V \otimes W$ is a vector space; $GL(V) \otimes GL(W) \subseteq GL(V \otimes W)$; also $(A \otimes B)(C \otimes D) = (AC) \otimes (BD)$.
+If a linear operator $A$ satisfies:
+$$A w \in W_i, \quad \forall w \in W_i$$
+we say that the subspaces ${W_i}$ are invariant.  The matrix representation of $A$ will be block diagonal.  For examples, if $A$ is a five by five matrix in the standard basis,
+with three invariant subspaces spanned by $\{e_1, e_2\}$, $\{e_3,e_4\}$,
+and $\{e_5\}$, then the Matrix representation of $A$ will be:
+$$
+[A] = 
+\left(\begin{array}{cc:cc:c}
+a_{11} & a_{12} & 0 & 0 & 0 \\
+a_{21} & a_{22} & 0 & 0 & 0 \\
+\hdashline
+0 & 0 & a_{33} & a_{34} & 0 \\
+0 & 0 & a_{43} & a_{44} & 0 \\
+\hdashline
+0 & 0 & 0 & 0 & a_{55}
+\end{array}\right)
+$$
 
-\exercise (*) Show that $\dim(V_1 \otimes V_2 \otimes V_3) = \dim V_1 \cdot \dim V_2 \cdot \dim V_3$, using bases.  State and prove the analogous statement about $GL$. $\quad\square$\\[5pt]
 
-\subsection*{Addition of Angular Momentum}
+\section{Addition of Angular Momentum}
 
-The total angular momentum generator for a tensor product system is:
-\begin{equation*}
-  \hat{J} = \hat{J}_x \otimes I + I \otimes \hat{J}_x, \quad \text{etc.,}
-\end{equation*}
-more compactly $\hat{J}_i = \hat{J}_{1,i} \otimes I + I \otimes \hat{J}_{2,i}$.
-In matrix form, with $T = (-i)\frac{dU}{d\theta}|_0$:
-\begin{equation*}
-  [J_i, J_j] = i\epsilon_{ijk}\,J_k.
-\end{equation*}
-The tensor product of two spin-$j$ representations decomposes as a
-\textbf{Clebsch-Gordan series}:
+The angular momentum commutators form an abstract Lie algebra:
 \begin{equation}
-  \label{eqn:clebsch-gordan}
-  j_1 \otimes j_2 = |j_1 - j_2| \oplus (|j_1-j_2|+1) \oplus \cdots \oplus (j_1+j_2).
+\label{eqn:spin-lie-algebra}
+[J_x, J_y] = i J_z, \quad \quad \text{(and cyclic permutations)}
 \end{equation}
-The $m$ values run from $-j$ to $j$ in steps of 1, giving representations of
-dimension $2j+1$.  The total number of states is:
+The total momentum squared operator is:
+$$J^2 = J_x^2 + J_y^2 + J_z^2$$
+and can be shown to commute with each generator:
+$$[J^2,J_x] = 0$$
+The raising and lowering operators\footnote{Here,
+perhaps, physicists get the last laugh, as mathematicians must
+complexify their real vector space of anti-Hermitian matrices in order
+to get raising and lowering operators.} are defined as:
+\begin{align}
+  J_+ &= J_x + i J_y \notag \\
+  J_- &= J_x - i J_y
+\end{align}
+It is standard treatment in Quantum Mechanics\footnote{You should
+consult an introductory QM text, such as Griffiths, if these results
+are not immediately familiar to you.}, which we will not reproduce
+here, to deduce that the simultaneous eigenstates of $J^2$ and $J_z$
+are:
+\begin{align}
+J^2 \ket{j,m_s} &= j(j+1) \ket{j,m_s} \notag \\
+\label{eqn:angular-momentum-observables} 
+J_z \ket{j,m_s} &= m_s \ket{j,m_s}
+\end{align}
+where
+\begin{align*}
+j &= 0,\frac{1}{2},1,\frac{3}{2},2,\ldots\\
+m_s &= -j, -j+1, \ldots j-1, j
+\end{align*}
+The action of the raising and lowering operators is:
+\begin{align}
+  J_+\ket{j,m} &= \sqrt{j(j+1) - m(m+1)}\,\ket{j,m+1} \notag \\
+  \label{eqn:raising-operators}
+  J_-\ket{j,m} &= \sqrt{j(j+1) - m(m-1)}\,\ket{j,m-1}
+\end{align}
+One can obtain all of the eigenstates for spin $j$ from the $m_s=+j$
+by successive applications of $J_-$.
+
+The general rule for combining two angular momenta $j_1$ and $j_2$ is:
 \begin{equation*}
-  (2j_1+1)(2j_2+1) = \sum_{j=|j_1-j_2|}^{j_1+j_2}(2j+1).
+j_1 \otimes j_2 \cong |j_1 - j_2| \oplus (|j_1 - j_2| + 1) \oplus \cdots \oplus (j_1 + j_2)
+\end{equation*}
+where the tensor product space decomposes into 
+representations of $SU(2)$ with total angular momentum $j$ ranging 
+from the two extremes:  $|j_1 - j_2|$ to $j_1 + j_2$ in integer steps.  As a check, the 
+dimensions on both sides must agree:
+\begin{equation*}
+(2j_1 + 1)(2j_2 + 1) = \sum_{j=|j_1-j_2|}^{j_1+j_2} (2j+1)
 \end{equation*}
 
-\exercise (*) Verify the Clebsch-Gordan decomposition for $j_1 = j_2 =
-\tfrac{1}{2}$ by noting that $\tfrac{1}{2} \otimes \tfrac{1}{2} = 0 \oplus 1$
-(singlet $\oplus$ triplet), consistent with $(2)(2) = 1 + 3$. $\quad\square$\\[5pt]
+We've seen now that the Lie algebras of $SO(3)$ and $SU(2)$, which are
+$\mathfrak{so}(3)$ and $\mathfrak{su}(2)$, are isomorphic to each
+other and to the abstract Lie space of angular momentum defined by
+Equation~\ref{eqn:spin-lie-algebra}.  These are two different
+representations of the fundamental symmetry $SO(3)$: the proper
+rotations in 3-D space.  From the eigenvalues, we see that
+$\mathfrak{su}(2)$ represents spin one-half particles, and
+$\mathfrak{so}(3)$ represents angular momentum one.  In this section,
+we'll see how to build all of the angular momentum representations up
+from the spin one-half representation.
 
-\exercise (*) HW: I ideas — traceless + det 1 + commutators.  Show that
-$[J_x, J_y] = iJ_z$ in the $j=1$ (spin-1) representation using the explicit
-$3\times 3$ matrices $L_x, L_y, L_z$ above. $\quad\square$\\[5pt]
+\subsection*{Example:  Addition of Two Spin One-half Particles}
 
+In this section, we will find the angular momentum represenation that results from combining two spin one-half representation.  Hopefully, you recall that the combination has either spin zero or spin one, which we write as:
+$$\frac{1}{2} \otimes \frac{1}{2} = 1 \oplus 0$$
+We won't assume that here, but will instead show how this emerges
+naturally from the tensor product.
 
-\subsection*{Worked Example: $\tfrac{1}{2} \otimes \tfrac{1}{2} = 1 \oplus 0$}
-
-We work this out completely and explicitly.  Each spin-$\tfrac{1}{2}$ factor
-has basis states $\ket{\uparrow} = \begin{pmatrix}1\\0\end{pmatrix}$ and
-$\ket{\downarrow} = \begin{pmatrix}0\\1\end{pmatrix}$, with generators
-(in the doublet representation):
-\begin{equation*}
-  J_x^{(1/2)} = \frac{1}{2}\begin{pmatrix}0&1\\1&0\end{pmatrix}, \quad
-  J_y^{(1/2)} = \frac{1}{2}\begin{pmatrix}0&-i\\i&0\end{pmatrix}, \quad
-  J_z^{(1/2)} = \frac{1}{2}\begin{pmatrix}1&0\\0&-1\end{pmatrix}.
-\end{equation*}
+Working in the $\mathfrak{su}(2)$ representation we represent spin-up and spin-down states as:
+$$\ket{\uparrow} = \begin{pmatrix}1\\0\end{pmatrix}, \quad \quad
+  \ket{\downarrow} = \begin{pmatrix}0\\1\end{pmatrix}$$
+with spin angular momentum operators:
+\begin{align*}
+  J_x^{(1/2)} \quad &= \quad \frac{1}{2} \, \sigma_1 \quad = \quad \frac{1}{2}\begin{pmatrix}0&1\\1&0\end{pmatrix} \\
+  J_y^{(1/2)} \quad &= \quad \frac{1}{2} \, \sigma_2 \quad = \quad \frac{1}{2}\begin{pmatrix}0&-i\\i&0\end{pmatrix} \\
+  J_z^{(1/2)} \quad &= \quad \frac{1}{2} \, \sigma_3 \quad = \quad \frac{1}{2}\begin{pmatrix}1&0\\0&-1\end{pmatrix} \\
+\end{align*}
 The tensor product space $V = \tfrac{1}{2} \otimes \tfrac{1}{2}$ has basis:
 \begin{equation*}
   \ket{\uparrow\uparrow},\quad \ket{\uparrow\downarrow},\quad \ket{\downarrow\uparrow},\quad \ket{\downarrow\downarrow},
 \end{equation*}
-in that order.  The total generators act as:
+which we will take in that order, and call the $m_1\, m_2$ basis.
+You showed in a previous exercise that the total angular momentum defined as:
 \begin{equation*}
   J_i = J_i^{(1/2)} \otimes I + I \otimes J_i^{(1/2)}.
 \end{equation*}
-
-\noindent\textbf{Building the $4\times 4$ matrices.}  Recall that for
-operators $A \otimes B$ acting on $V_1 \otimes V_2$, the matrix
-representation in the ordered basis above is the Kronecker product
-$[A]\otimes[B]$, defined by:
-\begin{equation*}
-  [A \otimes B] = \begin{pmatrix} A_{11}B & A_{12}B \\ A_{21}B & A_{22}B \end{pmatrix}.
-\end{equation*}
-We compute each term.  For $J_z \otimes I$:
-\begin{equation*}
-  [J_z^{(1/2)} \otimes I] =
-  \frac{1}{2}\begin{pmatrix}1&0\\0&-1\end{pmatrix} \otimes \begin{pmatrix}1&0\\0&1\end{pmatrix}
-  = \frac{1}{2}\begin{pmatrix}1&0&0&0\\0&1&0&0\\0&0&-1&0\\0&0&0&-1\end{pmatrix},
-\end{equation*}
-and for $I \otimes J_z$:
-\begin{equation*}
-  [I \otimes J_z^{(1/2)}] =
-  \begin{pmatrix}1&0\\0&1\end{pmatrix} \otimes \frac{1}{2}\begin{pmatrix}1&0\\0&-1\end{pmatrix}
-  = \frac{1}{2}\begin{pmatrix}1&0&0&0\\0&-1&0&0\\0&0&1&0\\0&0&0&-1\end{pmatrix}.
-\end{equation*}
-Adding these gives the total $J_z$:
+also obeys the angular momentum commutators.  In the exercises, you will show that the resulting total angular momentum squared operator is:
+$$[J^2]_{m_1\, m_2} = \begin{pmatrix}2&0&0&0\\0&1&1&0\\0&1&1&0\\0&0&0&2\end{pmatrix}$$
+Notice that $\ket{\uparrow\uparrow}$ and $\ket{\downarrow\downarrow}$
+are eigenvectors with eignevalue $\lambda = 2$, which you can
+directly verify from their matrix representation:
+$$v_1 \equiv [\ket{\uparrow\uparrow}]_{m_1\, m_2}=\begin{pmatrix}1\\0\\0\\0\end{pmatrix}, \quad \quad
+v_3 \equiv [\ket{\downarrow\downarrow}]_{m_1\, m_2}=\begin{pmatrix}0\\0\\0\\1\end{pmatrix}$$
+Recalling Equation~\ref{eqn:angular-momentum-observables} we have
+$$\lambda = j(j+1) = 2 \implies j=1$$
+and so both $\ket{\uparrow\uparrow}$ and $\ket{\downarrow\downarrow}$
+have $j=1$.  However, the states $\ket{\uparrow\downarrow}$ and
+$\ket{\downarrow\uparrow}$ do not have a well defined $j=1$.  In the exercises, you'll show
+that the remaining eigenvectors of $J^2$ are
+$$v_2 \equiv \frac{1}{\sqrt{2}}\begin{pmatrix}0\\1\\1\\0 \end{pmatrix}$$
+with eigenvalue $\lambda=2$ and so $j=1$, and
+$$v_4 \equiv \frac{1}{\sqrt{2}}\begin{pmatrix}0\\1\\-1\\0 \end{pmatrix}$$
+with eigenvalue $\lambda=0$ and so $j=0$.
+From these four eigenvectors we can constuct a unitary matrix:
 \begin{equation}
-  \label{eqn:Jz-total}
-  [J_z] = \begin{pmatrix}1&0&0&0\\0&0&0&0\\0&0&0&0\\0&0&0&-1\end{pmatrix}.
+\label{eqn:u-diagonal}
+U \equiv (v_1 \mid v_2 \mid v_3 \mid v_4) = 
+\begin{pmatrix}1&0&0&0\\0&1/\sqrt{2}&0&1/\sqrt{2}\\0&1/\sqrt{2}&0&-1/\sqrt{2}\\0&0&1&0\end{pmatrix}
 \end{equation}
-The eigenvalues are $m = +1, 0, 0, -1$, consistent with a spin-1 triplet
-(which has $m=+1,0,-1$) plus a spin-0 singlet ($m=0$).  Note that the
-$m=0$ eigenvalue is \emph{degenerate} — we must use $J^2$ to distinguish
-the triplet and singlet states.
-
-Similarly, for $J_x$:
-\begin{equation*}
-  [J_x^{(1/2)} \otimes I] =
-  \frac{1}{2}\begin{pmatrix}0&1\\1&0\end{pmatrix} \otimes \begin{pmatrix}1&0\\0&1\end{pmatrix}
-  = \frac{1}{2}\begin{pmatrix}0&0&1&0\\0&0&0&1\\1&0&0&0\\0&1&0&0\end{pmatrix},
-\end{equation*}
-\begin{equation*}
-  [I \otimes J_x^{(1/2)}] =
-  \begin{pmatrix}1&0\\0&1\end{pmatrix} \otimes \frac{1}{2}\begin{pmatrix}0&1\\1&0\end{pmatrix}
-  = \frac{1}{2}\begin{pmatrix}0&1&0&0\\1&0&0&0\\0&0&0&1\\0&0&1&0\end{pmatrix},
-\end{equation*}
-so the total $J_x$ is:
+that diagonalizes $J^2$ via:
 \begin{equation}
-  \label{eqn:Jx-total}
-  [J_x] = \frac{1}{2}\begin{pmatrix}0&1&1&0\\1&0&0&1\\1&0&0&1\\0&1&1&0\end{pmatrix}.
+\label{eqn:jsq_jm}
+U^\dagger \, [J^2]_{m_1\,m_2} \, U
+= \begin{pmatrix}2&0&0&0\\0&2&0&0\\0&0&2&0\\0&0&0&0\end{pmatrix}
 \end{equation}
-
-\noindent\textbf{Finding the Clebsch-Gordan eigenstates.}
-The $m=+1$ and $m=-1$ eigenstates of $J_z$ are non-degenerate and must
-belong to the triplet:
-\begin{equation*}
-  \ket{j=1,m=+1} = \ket{\uparrow\uparrow}, \qquad
-  \ket{j=1,m=-1} = \ket{\downarrow\downarrow}.
-\end{equation*}
-For the degenerate $m=0$ subspace, we use $J^2 = J_x^2 + J_y^2 + J_z^2$.
-Rather than computing $J^2$ directly, we use the \emph{lowering operator}
-$J_- = J_x - iJ_y$.  Acting on $\ket{j=1,m=+1}$:
-\begin{equation*}
-  J_-\ket{1,+1} = \sqrt{(1+1)(1-1+1)}\,\ket{1,0} = \sqrt{2}\,\ket{1,0}.
-\end{equation*}
-In the product basis:
-\begin{equation*}
-  J_- = J_-^{(1/2)} \otimes I + I \otimes J_-^{(1/2)}, \qquad
-  J_-^{(1/2)} = \begin{pmatrix}0&0\\1&0\end{pmatrix}.
-\end{equation*}
-Acting on $\ket{\uparrow\uparrow}$:
-\begin{equation*}
-  J_-\ket{\uparrow\uparrow} = (J_-\ket{\uparrow})\otimes\ket{\uparrow} + \ket{\uparrow}\otimes(J_-\ket{\uparrow})
-  = \ket{\downarrow\uparrow} + \ket{\uparrow\downarrow}.
-\end{equation*}
-So $\ket{1,0} = \frac{1}{\sqrt{2}}(\ket{\uparrow\downarrow} + \ket{\downarrow\uparrow})$.
-The orthogonal combination must be the singlet:
-\begin{equation*}
-  \ket{0,0} = \frac{1}{\sqrt{2}}(\ket{\uparrow\downarrow} - \ket{\downarrow\uparrow}).
-\end{equation*}
-The four Clebsch-Gordan states are therefore:
-\begin{align}
-  \ket{1,+1} &= \ket{\uparrow\uparrow} \label{eqn:cg1}\\
-  \ket{1,\phantom{+}0} &= \tfrac{1}{\sqrt{2}}\bigl(\ket{\uparrow\downarrow} + \ket{\downarrow\uparrow}\bigr) \label{eqn:cg2}\\
-  \ket{1,-1} &= \ket{\downarrow\downarrow} \label{eqn:cg3}\\
-  \ket{0,\phantom{+}0} &= \tfrac{1}{\sqrt{2}}\bigl(\ket{\uparrow\downarrow} - \ket{\downarrow\uparrow}\bigr). \label{eqn:cg4}
-\end{align}
-
-\noindent\textbf{The change-of-basis matrix.}
-The columns of the unitary matrix $U$ that transforms from the product basis
-$\{\ket{\uparrow\uparrow}, \ket{\uparrow\downarrow}, \ket{\downarrow\uparrow},
-\ket{\downarrow\downarrow}\}$ to the CG basis
-$\{\ket{1,1},\ket{1,0},\ket{1,-1},\ket{0,0}\}$ are the CG states
-written in the product basis:
+From the abstract Lie algebra, we know that
+$[J^2, J_z] = 0$
+and so $J^2$ and $J_z$ are combatible observables.  In the exercises,
+you will show that $U$ diagonizes $J_z$ as well, via:
 \begin{equation}
-  \label{eqn:cg-U}
-  U = \begin{pmatrix}
-    1 & 0 & 0 & 0 \\
-    0 & \frac{1}{\sqrt{2}} & 0 & \frac{1}{\sqrt{2}} \\
-    0 & \frac{1}{\sqrt{2}} & 0 & -\frac{1}{\sqrt{2}} \\
-    0 & 0 & 1 & 0
-  \end{pmatrix}.
+\label{eqn:jz_jm}
+U^\dagger \, [J_z]_{m_1\,m_2} \, U
+= \begin{pmatrix}1&0&0&0\\0&0&0&0\\0&0&-1&0\\0&0&0&0\end{pmatrix}
 \end{equation}
+Thus $U$ takes us from the $m_1\,m_2$ basis:
+$$\ket{\uparrow\uparrow}, \quad \ket{\uparrow\downarrow}, \quad
+\ket{\downarrow\uparrow}, \quad \ket{\downarrow\downarrow}, \quad$$
+where we know the $z$ component of each of the particles, to a new basis:
+$$\ket{J=1,M=1}, \quad \ket{J=1,M=0}, \ket{J=1,M=-1}, \ket{J=0,M=0}$$
+where we know the total angular momentum and its $z$-compnent.
+The components of $U$ are known as Clebsh-Gordan coefficients, and written:
+$$\braket{J=0,M=0 \, \mid \, \downarrow\uparrow} = -\frac{1}{\sqrt{2}}$$
+or more generally:
+$$\braket{ j_1\, m_1;\, j_2\, m_2 \mid j\, m } = 
+\braket{ \tfrac{1}{2}\, {-\tfrac{1}{2}};\, \tfrac{1}{2}\, \tfrac{1}{2} \mid 0\, 0 } = 
+-\frac{1}{\sqrt{2}}$$
 
-\noindent\textbf{Diagonalizing (block-diagonalizing) in the new basis.}
-We now compute $U^\dagger J_z U$ and $U^\dagger J_x U$.  For $J_z$,
-substituting Equation~\ref{eqn:Jz-total}:
+\exercise Using Equation~\ref{eqn:pauli-products} show that:
+\begin{align*}
+\sigma_1\otimes\sigma_1 + \sigma_2\otimes\sigma_2 + \sigma_3\otimes\sigma_3 &= 
+\begin{pmatrix}1&0&0&0\\0&-1&2&0\\0&2&-1&0\\0&0&0&1\end{pmatrix}
+\end{align*}
+As we will see, this little equation contains pretty much the entire story about
+addition of angular momentum.\\[5pt]
+
+\exercise (*) First show that for spin one-half, with
+$$J^{(1/2)}_i = \frac{1}{2} \sigma^i$$
+and
 \begin{equation*}
-  U^\dagger J_z U =
-  \begin{pmatrix}1&0&0&0\\0&0&0&0\\0&0&-1&0\\\hline 0&0&0&0\end{pmatrix}
-  \quad \longrightarrow \quad
-  \underbrace{\begin{pmatrix}1&0&0\\0&0&0\\0&0&-1\end{pmatrix}}_{\text{spin-1}} \oplus
-  \underbrace{\begin{pmatrix}0\end{pmatrix}}_{\text{spin-0}}.
+  J_i = J_i^{(1/2)} \otimes I + I \otimes J_i^{(1/2)}.
 \end{equation*}
-This is exactly the standard $J_z$ matrix for $j=1$, confirming the triplet,
-plus the trivial $1\times 1$ zero block for the singlet.
+then, 
+$$[J^2]_{m_1\, m_2} =
+[\vec{J}\cdot\vec{J}]_{m_1\, m_2} =
+\frac{3}{2} I + \frac{1}{2} (\sigma_1\otimes\sigma_1 + \sigma_2\otimes\sigma_2 + \sigma_3\otimes\sigma_3)$$
+Then, using the results of the previous exercise, show that:
+$$[J^2]_{m_1\, m_2} = \begin{pmatrix}2&0&0&0\\0&1&1&0\\0&1&1&0\\0&0&0&2\end{pmatrix}$$
 
-For $J_x$, substituting Equation~\ref{eqn:Jx-total}:
+\exercise We can find the eigenvectors $v_2$ and $v_4$ using our
+knowledge of suspaces to simplify matters.  The block diagonal form of
+$J^2$ let's us focus on finding the eigenvalues of $J^2$ in the
+subspace spanned by $\ket{\uparrow\downarrow}$ and
+$\ket{\downarrow\uparrow}$, where $J^2$ is
+$$\begin{pmatrix} 1 & 1 \\ 1 & 1\end{pmatrix}$$
+Find the eigenvalues and eigenvectors of this matrix and use them to
+construct $v_2$ and $v_4$.\\[5pt]
+
+\exercise Verify that $U^\dagger U = 1$\\[5pt]
+  
+\exercise Verify Equation~\ref{eqn:jsq_jm} by explicitly calculating:
+$$U^\dagger \, [J^2]_{m_1\,m_2} \, U\\[5pt]$$
+
+\exercise Use the tensor product rule for matrices and
+$$J_z^{(1/2)} = \frac{1}{2}\sigma_3$$
+to show first that
+$$[J_z]_{m_1\, m_2} = \begin{pmatrix}1&0&0&0\\0&0&0&0\\0&0&0&0\\0&0&0&-1\end{pmatrix}$$
+and then use $U$ from Equation~\ref{eqn:u-diagonal} to transform to the $J\,M$ basis where:
+$$[J_z]_{J\, M} = U^\dagger \, [J_z]_{m_1\, m_2} \, U = \begin{pmatrix}1&0&0&0\\0&0&0&0\\0&0&-1&0\\0&0&0&0\end{pmatrix} \\[5pt]\\[5pt]$$
+
+\exercise Using the tensor product rule for matrices, and
+$$J_x^{(1/2)} = \frac{1}{2}\sigma_1$$
+to show first that 
 \begin{equation*}
-  U^\dagger J_x U =
-  \frac{1}{\sqrt{2}}\begin{pmatrix}0&1&0&0\\1&0&1&0\\0&1&0&0\\\hline 0&0&0&0\end{pmatrix}
-  \quad \longrightarrow \quad
-  \underbrace{\frac{1}{\sqrt{2}}\begin{pmatrix}0&1&0\\1&0&1\\0&1&0\end{pmatrix}}_{\text{spin-1}} \oplus
-  \underbrace{\begin{pmatrix}0\end{pmatrix}}_{\text{spin-0}}.
+[J_x]_{m_1\, m_2} = \frac{1}{2}\begin{pmatrix}0&1&1&0\\1&0&0&1\\1&0&0&1\\0&1&1&0\end{pmatrix}
 \end{equation*}
-Again the matrix is block-diagonal.  The $3\times 3$ upper-left block is
-precisely the standard $J_x$ matrix for $j=1$:
+Then diagonalize using $U$ to show that in the coupled basis  
+$$\{\ket{J,M}\} = \{\ket{1,1}, \ket{1,0}, \ket{1,-1}, \ket{0,0}\}$$
+and then use $U$ from Equation~\ref{eqn:u-diagonal} to transform to the $J\,M$ basis where:
 \begin{equation*}
-  J_x^{(j=1)} = \frac{1}{\sqrt{2}}\begin{pmatrix}0&1&0\\1&0&1\\0&1&0\end{pmatrix},
+[J_x]_{J\, M} = \frac{1}{\sqrt{2}}\begin{pmatrix}0&1&0&0\\1&0&1&0\\0&1&0&0\\0&0&0&0\end{pmatrix}
 \end{equation*}
-and the singlet block is zero, as required — the singlet carries no angular
-momentum.
+Compare to Equation~\ref{eqn:lxy} and indicate the block diagonal
+subspaces for $j=1$ and $j=0$ using dashed lines.\\[5pt]
 
-\exercise (*) Compute $U^\dagger J_y U$ and verify it is block-diagonal with
-the standard $j=1$ matrix $J_y^{(j=1)} = \frac{1}{\sqrt{2}}\begin{pmatrix}0&-i&0\\i&0&-i\\0&i&0\end{pmatrix}$
-in the upper block and zero in the singlet block. $\quad\square$\\[5pt]
+\exercise (*) Using the tensor product rule for matrices, and
+$$J_y^{(1/2)} = \frac{1}{2}\sigma_2$$
+to show first that
+\begin{equation*}
+[J_y]_{m_1\, m_2} = \frac{1}{2}\begin{pmatrix}0&-i&-i&0\\i&0&0&-i\\i&0&0&-i\\0&i&i&0\end{pmatrix}
+\end{equation*}
+Then diagonalize using $U$ to show that in the coupled basis
+$$\{\ket{J,M}\} = \{\ket{1,1}, \ket{1,0}, \ket{1,-1}, \ket{0,0}\}$$
+and then use $U$ from Equation~\ref{eqn:u-diagonal} to transform to the $J\,M$ basis where:
+\begin{equation*}
+[J_y]_{J\, M} = \frac{1}{\sqrt{2}}\begin{pmatrix}0&-i&0&0\\i&0&-i&0\\0&i&0&0\\0&0&0&0\end{pmatrix}
+\end{equation*}
+Compare to Equation~\ref{eqn:lxy} and indicate the block diagonal
+subspaces for $j=1$ and $j=0$ using dashed lines.\\[5pt]
 
-\exercise (*) Verify directly that $[J_x^{(j=1)}, J_y^{(j=1)}] = i J_z^{(j=1)}$
-using the explicit $3\times 3$ matrices above. $\quad\square$\\[5pt]
+\exercise (*) From Equation~\ref{eqn:u-diagonal} read off the following Clebsch-Gordan coefficients:
+\begin{align*}
+\text{(A)} &\quad\braket{ j_1\, m_1;\, j_2\, m_2 \mid j\, m } = 
+\braket{ \tfrac{1}{2}\, {\tfrac{1}{2}};\, \tfrac{1}{2}\, {-\tfrac{1}{2}} \mid 0\, 0 }\\[7pt]
+\text{}(B) &\quad\braket{ j_1\, m_1;\, j_2\, m_2 \mid j\, m } = 
+\braket{ \tfrac{1}{2}\, {-\tfrac{1}{2}};\, \tfrac{1}{2}\, {\tfrac{1}{2}} \mid 1\, 0 }\\[7pt]
+\text{(C)} &\quad\braket{ j_1\, m_1;\, j_2\, m_2 \mid j\, m } = 
+\braket{ \tfrac{1}{2}\, {-\tfrac{1}{2}};\, \tfrac{1}{2}\, {-\tfrac{1}{2}} \mid 1\, -1 }\\[7pt]
+\text{(D)} &\quad\braket{ j_1\, m_1;\, j_2\, m_2 \mid j\, m } = 
+\braket{ \tfrac{1}{2}\, {\tfrac{1}{2}};\, \tfrac{1}{2}\, {\tfrac{1}{2}} \mid 0\, 0 }\\[7pt]
+\end{align*}
 
-\exercise (*) Show that $U$ in Equation~\ref{eqn:cg-U} is unitary.
-$\quad\square$\\[5pt]
+\section{Symmetry in Quantum Mechanics}
 
+\section*{Natural Units}
 
+The symmetries in physics become more self-evident when we use natural units.
+First we set $c=1$ to put space and time on equal footing:
+$$c = 1$$
+and
+\begin{align*}
+[x] &= [t]  &  [m] &= [E] = [p] = [1/E]
+\end{align*}
+Then we put
+$\hbar = 1$
+\begin{align*}
+[x] &= [t]  = [1/E]
+\end{align*}
+A useful conversion is:
+\begin{equation*}
+  \hbar c = 197.3 \;\text{MeV}\cdot\text{fm}
+\end{equation*}
+
+\noindent\textbf{Units:}
+$$[E] = \text{GeV}, [p] = \text{GeV}/c, [m] = \text{GeV}/c^2$$
+In practice, masses, momenta are often reported in just ``GeV''.\\
+
+\noindent\textbf{Scales:}
+\begin{itemize}
+\item Visible light: $1.8$--$3.1\;\text{eV}$
+\item $e^-$: $\sim 511\;\text{keV}$
+\item $p$: $\sim 0.938\;\text{GeV}$
+\end{itemize}
+
+\section*{Isometries}
+
+Suppose there is some physical symmetry group $G$ with members
+$$g,h \in G$$
+Then there is a map
+$$U: G \to GL(V), \qquad g \mapsto U(g)$$
+which maps elements of the symmetry group to an operator that
+applies the symmetry operation to the quantum mechanical state:
+$$\ket{\Psi} \xrightarrow{\;h\;} U(h) \ket{\Psi} \xrightarrow{\;g\;} U(g) U(h) \ket{\Psi}$$
+and
+$$\ket{\Psi} \xrightarrow{\;gh\;} U(gh) \ket{\Psi} $$
+So
+$$U(gh) = U(g) \, U(h)$$
+So that $U$ is a homo-morphism.  Is it onto?  That is unlikely: the
+set of linear operators is huge!  Must it be one-to-one?  No, all
+rotations map to the identity operation for scalars.\\
+
+The symmetry operation must leave the state normalized so:
+$$\braket{ U\psi \mid U\psi } = \braket{ \psi \mid \psi }$$
+but we saw that transformations that preserve norms are isometries:
+$$\braket{ U\psi \mid U\phi } = \braket{ \psi \mid \phi }$$
+It also follows that
+$$\braket{\psi \mid U^\dagger U\phi } = \braket{ \psi \mid \phi }$$
+So $U$ is unitary.
+
+\section*{Symmetries of the Hamiltonian}
+
+Suppose $U$ is an isometry and it \emph{preserves energies}.  Then for the energy eigenstates:
+$$H\ket{n} = E_n\ket{n}$$
+we have:
+\begin{align*}
+  H\bigl(U\ket{n}\bigr)
+  &= E_n \bigl(U\ket{n}\bigr)
+\end{align*}
+and so
+\begin{align*}
+  U^{\dagger}HU\ket{n} &= U^{\dagger} E_n U\ket{n} = E_n\ket{n} \\
+  &\Rightarrow\quad H = UHU^{\dagger}
+\end{align*}
+\noindent\textbf{Also:}
+Also:
+\begin{align*}
+  H &= UHU^{\dagger}\\
+  HU &= UHU^{\dagger}U\\
+  HU &= UH \\
+  0 &= UH-HU  
+\end{align*}
+so
+\begin{equation*}
+  [U, H] = 0
+\end{equation*}
+Symmetries are often used to break degenerate spaces into
+non-degenerate subspaces.
+
+%%=============================================================
+%\pagelabel{4}
+%%=============================================================
+\section*{Noether's Theorem}
+
+Suppose $G$ is a Lie group with some parameter $\theta$, and so:
+$$U(\theta) = e^{i\theta T}$$
+for some Hermitian (observable) $T$.
+\begin{equation*}
+  T = (-i)\frac{\partial}{\partial \theta}U(\theta)\Big|_{\theta=0}
+\end{equation*}
+Then:
+\begin{align*}
+  [T, H] &= (-i)\frac{\partial}{\partial \theta}[U(\theta),H]\Big|_{\theta=0}
+         &= 0
+\end{align*}
+\begin{equation*}
+  \frac{\partial}{\partial t}\braket {T} = \braket{[T,H]} = 0
+\end{equation*}
+This is Noether's Theorem: for each continuous symmetry, there is a
+conserved quantity.
+
+\section*{Time Invariance}
+
+Suppose $H$ is time-independent. We will find the time evolution
+operator $U(a)$ such that
+$$\ket{\psi(t)} = U(a)\ket{\psi(0)}$$.\\[6pt]
+Expanding in energy eigenstates $\ket{n}$:
+\begin{align*}
+  \ket{\psi(t)} &= \sum_k c_k\,e^{-iE_k t}\ket{k}\\
+  &= e^{-i H t} \sum_k c_k\,\ket{k}
+\end{align*}
+which shows that:
+$$U(t) = e^{-i H t}$$
+and 
+\begin{equation*}
+  H = (i)\frac{d}{dt}U\Big|_{t=0}
+\end{equation*}
+The difference in sign compared to our definition of Lie Algebra is
+because this is an active transormation.  Active and passive
+transformations are related by $t \to -t$.
+Energy $E$ is the generator of time translations, and time translation
+invariance $\Rightarrow$ $E$ conserved.
+
+\section*{Spatial Translation}
+An active spatial translation $U(a)$ is:
+$$U(a) \braket{x \mid A} = \braket {x-a \mid \psi }$$
+Working in Fourier space:
+\begin{align*}
+  U(a)\langle x\mid\psi\rangle
+  &= \int dp\,\langle x-a \mid p\rangle\langle p\mid\psi\rangle \\
+  &= \int dp\,e^{ip(x-a)}\langle p\mid\psi\rangle \\
+  &= e^{-i\hat{p}a}\,\int dp\,e^{ipx}\langle p\mid\psi\rangle \\
+\end{align*}
+where we $\hat{p}$ is the momentum operator, distinct from the integration variable $p$.  So
+\begin{equation*}
+  U(a) = e^{-i\hat{p}a}
+\end{equation*}
+and $p$ is the generator of translations.  Translation invariance
+leads to momentum conservation.
 
 \section*{Quantum Numbers}
 
-A \textbf{quantum number} is an eigenvalue of an operator that commutes with
-the Hamiltonian.  If $[H, A] = 0$, then energy eigenstates can be
-simultaneously chosen to be eigenstates of $A$:
+We now understand that symmetries lead to conserved quantities which
+we call ``quantum numbers''. Continuous symmetries lead to Lie groups
+with Lie Algebras as vector spaces (with addition).  The quantum
+numbers are additive.  Discrete symmetries remain as groups (with
+multiplication).  The quantum numbers are mutliplicative.
+
+\section*{Infinitesimal Transformations}
+
+It is common in physics to consider infinitesimal transformations. 
+For a unitary $U(\varepsilon)$:
 \begin{equation*}
-  H\ket{\psi} = E\ket{\psi}, \qquad A\ket{\psi} = a\ket{\psi}.
+  U(\varepsilon) = e^{-i\varepsilon T} = 1 - i\varepsilon T + \ldots
 \end{equation*}
-The eigenvalue $a$ is then conserved — it does not change under time
-evolution — and we call it a quantum number of the state.  From a group
-theory perspective, $A$ is a generator (or a function of generators) of a
-symmetry of the system, and the quantum number labels which representation
-the state belongs to.
-
-\subsection*{Additive Quantum Numbers}
-
-Many familiar quantum numbers are \textbf{additive}: for a composite system
-of two subsystems with quantum numbers $a_1$ and $a_2$, the total quantum
-number is:
 \begin{equation*}
-  a_{\text{total}} = a_1 + a_2.
+  U^{\dagger}(\varepsilon) = e^{+i\varepsilon T} = 1 + i\varepsilon T + \ldots
 \end{equation*}
-This is the natural behavior for quantum numbers associated with generators
-of continuous symmetry groups, because the total generator is the sum of
-the individual generators:
 \begin{equation*}
-  J_i = J_i^{(1)} \otimes I + I \otimes J_i^{(2)}.
+  UU^{\dagger} = (1 - i\varepsilon T)(1 + i\varepsilon T) = 1 + \mathcal{O}(\varepsilon^2) \approx I \checkmark
 \end{equation*}
-We saw this explicitly when constructing the $4\times 4$ matrices above:
-the eigenvalues of $J_z$ in the tensor product space are $m_1 + m_2$, which
-is why the $m$ quantum number is additive.  Other examples of additive
-quantum numbers include electric charge $Q$, baryon number $B$, and lepton
-number $L$.
-
-\subsection*{Multiplicative Quantum Numbers}
-
-Other quantum numbers are \textbf{multiplicative}: for a composite system,
-the total quantum number is:
+We can build finite transformations from many infinitesimal transformations:
 \begin{equation*}
-  a_{\text{total}} = a_1 \cdot a_2.
-\end{equation*}
-This arises for quantum numbers associated with \emph{discrete} symmetry
-groups, where the symmetry operation acts by multiplication rather than
-addition.  The key example is parity.
-
-To see why parity must be multiplicative, consider how the parity operator
-acts on a tensor product state $\ket{\psi_1} \otimes \ket{\psi_2}$.  The
-parity operator on the combined system is:
-\begin{equation*}
-  P_{\text{total}} = P_1 \otimes P_2,
-\end{equation*}
-because parity reverses the coordinates of \emph{each} particle
-independently.  If each state is a parity eigenstate:
-\begin{equation*}
-  P_1\ket{\psi_1} = \eta_1\ket{\psi_1}, \qquad P_2\ket{\psi_2} = \eta_2\ket{\psi_2},
-\end{equation*}
-then:
-\begin{equation*}
-  P_{\text{total}}\bigl(\ket{\psi_1}\otimes\ket{\psi_2}\bigr)
-  = (P_1\ket{\psi_1})\otimes(P_2\ket{\psi_2})
-  = \eta_1\eta_2\,\ket{\psi_1}\otimes\ket{\psi_2}.
-\end{equation*}
-So the total parity eigenvalue is $\eta_{\text{total}} = \eta_1 \cdot \eta_2$.
-This is directly analogous to the group structure of $(\{+1,-1\},\times)$:
-the product of two parity eigenvalues is itself a parity eigenvalue.
-
-The contrast with additive quantum numbers is really a contrast between the
-group structures involved.  For $m$ (magnetic quantum number), the relevant
-group is $(\mathbb{R}, +)$, and representations are labeled by real numbers
-that add.  For parity, the relevant group is $\mathbb{Z}_2 = \{+1,-1\}$, and
-representations are labeled by $\pm 1$ that multiply.  In both cases the rule
-for combining quantum numbers follows directly from the group operation.
-
-
-%%============================================================
-\section*{Parity and Angular Momentum}
-%%============================================================
-
-\subsection*{The Parity Operator}
-
-The \textbf{parity operator} $P$ reverses all spatial coordinates:
-\begin{equation*}
-  P: \mathbf{r} \mapsto -\mathbf{r}, \qquad \text{i.e.,}\quad (x,y,z) \mapsto (-x,-y,-z).
-\end{equation*}
-In matrix form on $\mathbb{R}^3$:
-\begin{equation*}
-  [P] = \begin{pmatrix}-1&0&0\\0&-1&0\\0&0&-1\end{pmatrix} = -I.
-\end{equation*}
-Note that $\det(P) = -1$, so $P \in O(3)$ but $P \notin SO(3)$.  We have
-$P^2 = I$, so the eigenvalues of $P$ are $\pm 1$.
-
-\subsection*{Parity as a Group}
-
-The set $\{I, P\}$ with the operation of composition forms a group — it is
-isomorphic to $(\{+1,-1\},\times)$, the group we encountered earlier.  The
-full orthogonal group $O(3)$ decomposes as:
-\begin{equation*}
-  O(3) = SO(3) \cup P\cdot SO(3),
-\end{equation*}
-that is, every improper rotation (element of $O(3)$ with $\det = -1$) can be
-written as $P$ followed by a proper rotation.
-
-\subsection*{Parity of Vectors and Pseudovectors}
-
-Physical quantities transform under parity in two distinct ways.
-
-A \textbf{polar vector} (or simply a vector) changes sign under parity:
-\begin{equation*}
-  P: \mathbf{v} \mapsto -\mathbf{v}.
-\end{equation*}
-Examples include position $\mathbf{r}$, momentum $\mathbf{p}$, and the
-electric field $\mathbf{E}$.
-
-An \textbf{axial vector} (or pseudovector) is \emph{unchanged} under parity:
-\begin{equation*}
-  P: \mathbf{v} \mapsto +\mathbf{v}.
-\end{equation*}
-Examples include angular momentum $\mathbf{L} = \mathbf{r} \times \mathbf{p}$
-and the magnetic field $\mathbf{B}$.  This makes sense: under parity,
-$\mathbf{r} \to -\mathbf{r}$ and $\mathbf{p} \to -\mathbf{p}$, so
-$\mathbf{L} = \mathbf{r}\times\mathbf{p} \to (-\mathbf{r})\times(-\mathbf{p})
-= +\mathbf{r}\times\mathbf{p} = +\mathbf{L}$.
-
-\subsection*{Parity Eigenvalues of Wavefunctions}
-
-Since $P^2 = I$, quantum states can be eigenstates of $P$ with eigenvalue
-$\eta = \pm 1$, called the \textbf{intrinsic parity}.  For the spherical
-harmonics, one can show:
-\begin{equation*}
-  P\, Y_l^m(\theta,\phi) = Y_l^m(\pi-\theta,\phi+\pi) = (-1)^l\, Y_l^m(\theta,\phi).
-\end{equation*}
-So spherical harmonics are parity eigenstates with eigenvalue $(-1)^l$:
-even-$l$ states are \emph{even} under parity, odd-$l$ states are \emph{odd}.
-
-\subsection*{Parity and the Representations of SO(3)}
-
-Since $P$ commutes with all rotations ($[P, R] = 0$ for all $R \in SO(3)$),
-parity is a separate, independent symmetry.  The representations of the full
-rotation-inversion group $O(3)$ are therefore labeled by both $j$ and a
-parity eigenvalue $\eta = \pm 1$, often written $j^P$ or $j^\eta$.  For
-example:
-\begin{itemize}
-  \item A spin-1 state with $\eta = -1$ is written $1^-$ (like a polar vector).
-  \item A spin-1 state with $\eta = +1$ is written $1^+$ (like an axial vector or a magnetic field).
-  \item A spin-0 state with $\eta = +1$ is a \textbf{scalar} ($0^+$).
-  \item A spin-0 state with $\eta = -1$ is a \textbf{pseudoscalar} ($0^-$), e.g.\ the pion $\pi^0$ in particle physics.
-\end{itemize}
-
-\exercise List the parity eigenvalues of $Y_0^0$, $Y_1^m$, and $Y_2^m$, and
-identify which are scalars, vectors, etc.\ in the language above.
-$\quad\square$\\[5pt]
-
-\exercise (*) Show that $\mathbf{L} = \mathbf{r}\times\mathbf{p}$ is a
-pseudovector, and hence that the orbital angular momentum generators
-$L_x, L_y, L_z$ are parity-even.  What does this imply for the commutation
-relations $[L_i, L_j] = i L_k$ under parity? $\quad\square$\\[5pt]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\section{Additional Problems}
-
-\exercise List at least two reasons that there is no subgroup of $O(n)$ containing only matrices with determinant equal to negative one. $\quad \square$ \\[5pt]
-
-\exercise (*) Show that all groups with two elements are isomorphic to $(\{+1,-1\}, \times)$.  Hint: write a generic two element group as ${e, a}$ and work out the multiplication table. $\quad \square$ \\[5pt]
-
-\exercise (*) Construct an isomorphism between $O(n)$ and $(\{+1,-1\}, \times)$
-that is onto.  Is it one-to-one? $\quad \square$ \\[5pt]
-
-\exercise (*) Construct an isomorphism between $U(1)$ and $SO(2)$.  Hint: think of $e^{i\theta}$ as a rotation of $z=1$ by $\theta$ in the complex plane. $\quad \square$ \\[5pt]
-
-
-
-\end{document}
-
-
-Work in progress...
-
-\section*{Special Relativity Review}
-
-Under SR: frame-invariant vector space $V \times V \to \mathbb{R}$,
-with NDHF $g(s, b)$ (Minkowski metric), non-degenerate and indefinite.
-The inner product is:
-
-\begin{equation*}
-  (a \mid b) = g_{\mu\nu}\, a^\mu b^\nu
+  U(\theta) = \lim_{n\to\infty}\left(1 + \frac{i\theta T}{n}\right)^n = e^{i\theta T}
 \end{equation*}
 
-The matrix representation $G = [g_{\mu\nu}]$ is:
 
-\begin{equation*}
-  G = [g_{\mu\nu}] =
-  \begin{pmatrix}
-    -1 & 0 & 0 & 0 \\
-     0 & 1 & 0 & 0 \\
-     0 & 0 & 1 & 0 \\
-     0 & 0 & 0 & 1
-  \end{pmatrix}
-\end{equation*}
 
-and the Lorentz-invariant product in matrix form is:
 
-\begin{equation*}
-  (a \mid b) = [a]^T G\, [b]
-\end{equation*}
 
-Lorentz transforms $\Lambda$ preserve this, so requiring
-$({\Lambda x} \mid {\Lambda y}) = (x \mid y)$ gives, via the Lorentz transformation
-$[x]^{\mu'} = \Lambda^{\mu'}{}_\nu [x]^\nu$:
 
-\begin{equation*}
-  [x]^T [\Lambda]^T G\, [\Lambda]\, [y] = [x]^T G\, [y]
-  \implies L^T G\, L = G
-\end{equation*}
-
-where $L = [\Lambda^{\mu'}{}_\nu]$.
-
-%% ============================================================
-%% PAGE 13 -- Lorentz Group SO(3,1)
-%% ============================================================
-
-\subsection*{Lorentz Group $SO(3,1)$: Isometries of the Minkowski Metric}
-
-The Lorentz group is the group of isometries of the Minkowski metric. Requiring:
-
-\begin{equation*}
-  (\Lambda x \mid \Lambda y) = (x \mid y)
-\end{equation*}
-
-gives in component form:
-
-\begin{equation*}
-  [\Lambda x]^T G\, [\Lambda y]
-  = [x]^T [\Lambda]^T G\, [\Lambda]\, [y]
-  = [x]^T G\, [y]
-\end{equation*}
-
-so:
-
-\begin{equation*}
-  [\Lambda]^T G\, [\Lambda] = G
-\end{equation*}
-
-In terms of our matrix notation $L = [\Lambda^{\mu'}{}_\nu]$:
-
-\begin{equation*}
-  \boxed{L^T G\, L = G}
-\end{equation*}
-
-%% ============================================================
-%% PAGE 14 -- Verify SO(3,1) is a group
-%% ============================================================
-
-\subsection*{Verify $SO(3,1)$ is a Group}
-
-\textbf{Closure:} If $A,\, B$ both satisfy $L^T G L = G$, does $AB$?
-\begin{equation*}
-  (AB)^T G\,(AB) = B^T A^T G\, A B = B^T G\, B = G \checkmark
-\end{equation*}
-
-\textbf{Associativity:} Matrix multiplication is associative. \checkmark
-
-\textbf{Identity:} $L = I$:
-\begin{equation*}
-  I^T G\, I = G \checkmark
-\end{equation*}
-
-$L^{-1}$ in $GL(G)$: since $SO(3,1) \subseteq GL(n,\mathbb{R})$, $L^{-1}$ exists.
-$L$ is $3\times 3$, so $SO(3,1) \subseteq GL(G)$.
-
-Note that $SO(3,1)$ is a subgroup of $GL(G)$, where $g$ is $3\times 3$.
-
-%% ============================================================
-%% PAGE 15 -- Determinants
-%% ============================================================
-
-\subsection*{Determinants}
-
-From $L^T G\, L = G$, taking determinants of both sides:
-\begin{equation*}
-  \det(L^T)\,\det(G)\,\det(L) = \det(G)
-\end{equation*}
-
-Since $\det(G) \neq 0$ (non-degenerate):
-\begin{equation*}
-  \bigl(\det L\bigr)^2 = 1 \implies \det(L) = \pm 1
-\end{equation*}
-
-\textbf{Subgroup structure:} The $\det = +1$ elements form a subgroup:
-\begin{equation*}
-  \det(A) = +1,\;\det(B) = +1 \implies \det(AB) = \det(A)\,\det(B) = +1 \checkmark
-\end{equation*}
-
-The $\det = -1$ side is \emph{not} a subgroup, since it is not closed:
-\begin{equation*}
-  \det(A) = -1,\;\det(B) = -1 \implies \det(AB) = +1 \quad \text{(not } -1\text{)}
-\end{equation*}
-
-Note: $\det(A) = \det(B)$ if $A, B \in SO$.
 
 \end{document}
