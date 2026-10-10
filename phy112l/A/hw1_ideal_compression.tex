@@ -41,7 +41,7 @@ where $\braket{K}$ is the average kinetic energy across all molecules, and so:
 \braket{K} = \frac{f}{2}kT
 \end{equation}
 
-In two dimenstions (2-D), the ideal gas law becomes:
+In two dimensions (2-D), the ideal gas law becomes:
 \begin{equation}
 O \, A  = N \, k \, T
 \end{equation}
@@ -60,11 +60,11 @@ The temperature is related to average kinetic energy across all molecules as (se
 \begin{center}
 {\includegraphics[width=0.60\textwidth]{plots/mbvelocity.pdf}}
 \end{center}
-\caption{\label{fig:mbvelocity} The PDF for each components of velocity of an ideal gas is a Gaussian distribution.  The corresponding PDF for the speed is the Maxwell-Boltzmann distribution.}
+\caption{\label{fig:mbvelocity} The PDF for each component of velocity of an ideal gas is a Gaussian distribution.  The corresponding PDF for the speed is the Maxwell-Boltzmann distribution.}
 \end{figure}
 The probability of finding a particular molecule with kinetic energy:
 $$K = \frac{1}{2} mv^2$$
-is proptional to the Boltzmann factor for the total energy $E$ of the single molecule:
+is proportional to the Boltzmann factor for the total energy $E$ of the single molecule:
 $$f(v) \; dv \; \propto \; \exp \left(-\frac{E}{kT}\right) dv \; = \; 
 \exp \left(-\frac{mv^2}{2kT}\right) dv$$
 because for an ideal gas $E=K$.  Properly normalized this is the Maxwell-Boltzmann distribution.
@@ -199,8 +199,8 @@ $$W = - \int_{V_1}^{V_2} P(V) \; dV \; = \; - P_1 V_1 \int_{V_1}^{V_2} \frac{dV}
 \end{figure}
 
 
-Consider the 2-D gas column showin in Fig.~\ref{fig:cgas}.  When the
-column is at heigh $h$ the area of the gas is $A = a h$.  In the
+Consider the 2-D gas column shown in Fig.~\ref{fig:cgas}.  When the
+column is at height $h$ the area of the gas is $A = a h$.  In the
 isothermal case, the temperature remains at $T=T_1$.  So the ideal gas
 law (as written in Equation~\ref{eqn:iglaw}) becomes:
 \begin{equation}
@@ -214,11 +214,11 @@ If the piston is initially at $y=h_1$ and we compress it until $y=h_2$, we have,
 \end{equation}
 and in our program we would calculate the work as
 \begin{python}
-def work_iso(T, hi, hf)
+def work_iso(T, hi, hf):
      return T * np.log(hi/hf)
 \end{python}
 
-\section{Adiabatic Compression}
+\section{Adiabatic Compression (Not Needed Until HW 2)}
 
 During an adiabatic process, no thermal energy enters or leaves the gas, so
 $$Q = 0$$
@@ -243,7 +243,7 @@ T^{f/2}\;V &=& C \\
 T\;V^{2/f} &=& C \\
 \end{eqnarray*}
 Using the ideal gas law to write $T$ in terms of $P$ and $V$ we obtain:
-$$P\;V^{((f+2)/f} = C $$
+$$P\;V^{(f+2)/f} = C $$
 
 In the case of 2-D gas with initial pressure $O_1$ and area $A_1$ the
 pressure $O$ and area $A$ during adiabatic compression or expansion is
@@ -305,7 +305,7 @@ and the work done compressing the gas until the height is $h_2$ is:
   \node[left] at (-0.8,-1.4) {$-\vec{w}$};
 
 \end{tikzpicture}
-\caption{The collision model in the center-of-mass:  incoming molecule $a$ with velocity $\vec{u}$ collides with the incoming particle $b$ of identical mass with velocity $-\vec{u}$.  Particle $a$ is scattered by angle $\theta$ and leaves with velocity $\vec{w}$, while particle $b$ leaves with velocity $\vec{w}$.  The magnitude of the final and initial velocities are the same:  $|\vec{u}| = |\vec{w}|$.}
+\caption{The collision model in the center-of-mass:  incoming molecule $a$ with velocity $\vec{u}$ collides with the incoming particle $b$ of identical mass with velocity $-\vec{u}$.  Particle $a$ is scattered by angle $\theta$ and leaves with velocity $\vec{w}$, while particle $b$ leaves with velocity $-\vec{w}$.  The magnitude of the final and initial velocities are the same:  $|\vec{u}| = |\vec{w}|$.}
 \label{fig:collcms}
 \end{center}
 \end{figure}
@@ -376,7 +376,7 @@ def collide(ax,ay,bx,by,theta):
     # your code here
     return ax, ay, bx, by # updated values
 \end{python}
-which takes the lab frame veclocitys of particle a (ax,ay) and b (bx,
+which takes the lab frame velocities of particle a (ax,ay) and b (bx,
 by) and returns the lab frame velocities after scattering by an angle
 theta.  {\bf Please stick to these variable names and function
   definition in your own program}.  It will help us help you debug
@@ -416,15 +416,14 @@ anything else!
 
 Our model will consist of $N=10000$ molecules constrained to a 2-D
 cylinder of width $a$ and initial height $H = 4 a$.  We will track
-both components of each particles velocity $v_x$ and $v_y$, but we
-will only track the particles $y$ position.  Nothing we are doing will
+both components of each particle's velocity $v_x$ and $v_y$, but we
+will only track each particle's $y$ position.  Nothing we are doing will
 depend on the $x$ position, so we do not track it: we can imagine each
 particle bouncing off the side walls as needed to stay in position.
 In python, this would be coded as:
 \begin{python}
 NGAS=10000
 H  = 4
-VM
 vx = np.random.uniform(size=NGAS, low=-3, high=3)
 vy = np.random.uniform(size=NGAS, low=-3, high=3)
 y  = np.random.uniform(size=NGAS, low= 0, high=H)
@@ -447,19 +446,19 @@ plt.errorbar(cbins, hvx,fmt="ro", yerr=np.sqrt(hvx),label="vx")
 Immediately after initialization, as shown in Fig.~\ref{fig:vinit} the
 gas is not in thermal equilibrium, due to our non-physical
 initialization of the momenta.  We will use our simple collision model
-to allow the gas to reach equilibrium.  Too keep things simple, we won't insist on physical proximity (the $y$ values) in order to collide particles.  We'll simply choose pairs at random, such as with:
+to allow the gas to reach equilibrium.  To keep things simple, we won't insist on physical proximity (the $y$ values) in order to collide particles.  We'll simply choose pairs at random, such as with:
 \begin{python}
 a,b = np.random.choice(NGAS,size=2, replace=False)
 \end{python}
 and collide particles $a$ and $b$ by updating their $v_x$ and $v_y$
-coordinates using the collision function and a randomly choosen value
+coordinates using the collision function and a randomly chosen value
 of $\theta$.  After 100k collisions, the system reaches thermal
 equilibrium, as shown in Fig.~\ref{fig:vself}.
 
 The temperature of the gas remains the same, however, as the
 collisions conserve energy.  In order to set the temperature, we will
 let the system reach thermal equilibrium with a reservoir at the
-desired temperature.  To simulated this process, we'll draw random
+desired temperature.  To simulate this process, we'll draw random
 values from the Maxwell-Boltzmann distribution of the velocity
 components:
 \begin{python}
@@ -468,14 +467,14 @@ rx = np.random.normal(0,np.sqrt(Tr),size=n)
 ry = np.random.normal(0,np.sqrt(Tr),size=n)
 \end{python}
 and collide these $n$ reservoir particles with another $n$ randomly
-choosen gas particles.  Each reservoir particle should be used for one
+chosen gas particles.  Each reservoir particle should be used for one
 collision only and then discarded, to simulate an infinitely large
 reservoir.
 
 
 \section{Bouncing and Compression}
 
-Our numerical model includes the $y$-position of each molecules.  While inside the container, the molecules position can be updated for a time step $\Delta t$ as:
+Our numerical model includes the $y$-position of each molecules.  While inside the container, a molecule's position can be updated for a time step $\Delta t$ as:
 $$y \to y + v_y \Delta t$$
 This is fine, for as long as the particles remain within the container.  However, particles with negative $v_y$ will eventually be updated to have $y < 0$.  These particles are bounced back into the container by the simple update:
 \begin{equation}
@@ -547,19 +546,94 @@ w_y = -u_y + 2 \, v_y
 \end{equation}
 Note carefully that a piston moving down, as for compression, will have $v_y < 0$.
 
+\subsection*{The move function}
+
+\noindent
+You will implement the motion of the molecules, including all bouncing, as a Python function:
+\begin{python}
+def move(y, vy, h, vp, dt):
+    # your code here
+    return y, vy, dvy # updated values
+\end{python}
+which takes the arrays {\tt y} and {\tt vy} of positions and $y$-velocities of all molecules, the
+location {\tt h} of the piston, the $y$-velocity {\tt vp} of the piston ({\tt vp = 0} for a
+stationary piston, {\tt vp < 0} during compression), and the time step {\tt dt}.  It should:
+\begin{itemize}
+\item update every position by $y \to y + v_y \Delta t$,
+\item bounce molecules with $y < 0$ off the bottom ($y \to -y$, $v_y \to -v_y$) and molecules with
+  $y > h$ off the piston ($y \to 2h - y$, $v_y \to -v_y + 2 v_p$: Equation~\ref{eqn:mpiston}, with the piston velocity written as $v_p$),
+  {\bf repeating until every molecule is inside the container}, $0 \le y \le h$,
+\item return the updated arrays {\tt y} and {\tt vy}, and {\tt dvy}: the total momentum (per unit
+  mass) given to the piston, which is the sum of $(v_y^{\rm before} - v_y^{\rm after})$ over every bounce off the piston.
+\end{itemize}
+Keep {\tt h} fixed during a single call; when the piston moves (Problem 6), update {\tt h} between calls.
+{\bf Please stick to this function name and definition.}  A test value: a single molecule at
+$y=1$ moving up with $v_y = 1$ in a container with a stationary piston at $h=4$ crosses the
+container twice in $\Delta t = 10$:
+\begin{python}
+y1, vy1, dvy1 = move(np.array([1.0]), np.array([1.0]), 4, 0, 10)
+print(y1, vy1, dvy1)
+\end{python}
+should output {\tt [3.] [1.] 2.0}.
+
+
+\section{Checking Your Notebook: hw1check}
+
+\noindent
+This assignment comes with a checker, {\tt hw1check.py}, available with the assignment on the
+course website.  Put it in the same folder as your notebook.  If you work on a cloud server
+(e.g.\ JupyterHub or Google Colab), upload {\tt hw1check.py} next to your notebook there.  Do not
+modify it.  Use it as follows:
+\begin{itemize}
+\item {\bf Import it} in the first cell of your notebook, along with everything else you need:
+\begin{python}
+# Setup
+import numpy as np
+import matplotlib.pyplot as plt
+import hw1check
+\end{python}
+\item {\bf Label your cells.}  The first line of every other code cell is a comment naming the
+  problem it belongs to: {\tt \# Problem 1}, {\tt \# Problem 2}, \ldots, {\tt \# Problem 6}.
+\item {\bf Required functions.}  Define {\tt collide}, {\tt temp} and {\tt move} exactly as described in the
+  text, at the top level of your notebook (not inside another function), and use them in your solution.
+\item {\bf Report each result} once, with {\tt hw1check.report}, in the cell where you calculate it:
+\begin{python}
+hw1check.report("P2 T", T)
+\end{python}
+  The results to report are listed with each problem: {\tt "P2 T"}, {\tt "P3 T"}, {\tt "P4 T"},
+  {\tt "P5 O"}, {\tt "P6 A"}, {\tt "P6 O"} and {\tt "P6 W"}.
+\item {\bf Register each required plot} by calling {\tt hw1check.figure} right after making it, in
+  place of {\tt plt.show()}:
+\begin{python}
+hw1check.figure("P2")
+\end{python}
+  The required plots are {\tt "P2"}, {\tt "P3"}, {\tt "P4"} and {\tt "P6"}.
+\item {\bf Run the checker in the last cell:}
+\begin{python}
+import hw1check; hw1check.run()
+\end{python}
+  It tests your {\tt collide} and {\tt move} functions with the test values in this assignment,
+  checks that every result and plot is there, tells you whether each result is correct to within
+  the expected precision, and warns you about signs of cells run out of order.  It ends either
+  with ``ready to submit'' or with a list of what is still to do.
+\end{itemize}
+{\bf Before submitting, use Kernel $\rightarrow$ Restart \& Run All}, and check that the last cell
+says ``ready to submit''.  If you cannot get there, add a text (markdown) cell at the end of your
+notebook explaining why.  An honest result outside the expected precision, with your explanation,
+is better than one tuned to pass.  Passing the checker does not guarantee credit: we run
+additional tests when grading.
 
 \section{Homework Problems}
 
 \noindent
 {\bf Please submit one PDF file (including output) and one python
-  notebook file (.ipynb) of your completed assignment.}  If using
-C/C++, submit text or PDF of your output and the source code.
-
-
-{\bf Zero credit if you do not use our system of units consistently!}
-When I ask you to calculate a quantity, e.g. temperature, I want the
-answer in our units, e.g. $T_0$.  Do not first calculate in SI units
-and then convert!
+  notebook file (.ipynb) of your completed assignment}, after Restart
+\& Run All, with {\tt hw1check.run()} in the last cell.  This
+assignment must be done in Python, in a Jupyter notebook.
+You will receive {\bf zero credit if you do not use our system of
+  units consistently!}  Whenasked to calculate a quantity,
+e.g. temperature, answer in our units, e.g. $T_0$.  Do not first
+calculate in SI units and then convert!\\[8pt]
 
 \noindent
 {\bf Problem 1:} Implement the collision model described in the text.
@@ -610,7 +684,7 @@ which should output:
 [ 1. -1.  1.  1.]
 [2. 0. 0. 0.]
 \end{verbatim} \vskip 0.25cm
-Finally, test your collision function with randomly choosen values:
+Finally, test your collision function with randomly chosen values:
 \begin{python}
 # test with random values:
 print(np.around(collide(6.24, 1.78, 3.35, 5.98, 3.19),2))
@@ -625,35 +699,38 @@ which should output:
 [4.76 5.22 5.29 2.99]
 [4.58 4.46 3.73 7.07]
 \end{verbatim}
-Being able to Develop good testing regimens is an essential program skill.\\[3pt] 
+Being able to develop good testing regimens is an essential programming skill.\\[3pt] 
 
 
 \noindent
-{\bf Problem 2:} Initialize the numerical model as described in the text, and reproduce Fig.~\ref{fig:vinit}.  Calculate the temperature.\\[3pt]
+{\bf Problem 2:} Initialize the numerical model as described in the text, and reproduce Fig.~\ref{fig:vinit}.  Calculate the temperature using your {\tt temp} function.
+Report it as {\tt "P2 T"} and register your plot as {\tt "P2"}.\\[3pt]
 
 \noindent
-{\bf Problem 3:} By applying your collision model to randomly choosen molecules 100,000 times, bring your model to thermal equilibrium and reproduce Fig.~\ref{fig:vself}. Calculate the temperature.\\[3pt]
+{\bf Problem 3:} By applying your collision model to randomly chosen molecules 100,000 times, bring your model to thermal equilibrium and reproduce Fig.~\ref{fig:vself}. Calculate the temperature.  It should be unchanged from Problem 2.
+Report it as {\tt "P3 T"} and register your plot as {\tt "P3"}.\\[3pt]
 
 \noindent
 {\bf Problem 4:}  Bring your model into thermal equilibrium with a reservoir at $T = 1 T_0$.
-Apply your collision model to a radomly choosen gas molecule and a randomly drawn reservoir particle, as described in the text, 100,000 times.  Plot the resulting histogram, as in the previous problems.  Calculate the temperature.  It should match the reservoir!\\[3pt]
+Apply your collision model to a randomly chosen gas molecule and a randomly drawn reservoir particle, as described in the text, 100,000 times.  Plot the resulting histogram, as in the previous problems.  Calculate the temperature.  It should match the reservoir!
+Report it as {\tt "P4 T"} and register your plot as {\tt "P4"}.\\[3pt]
 
 \noindent
 {\bf Problem 5:}
 Simulate pressure with the gas at $T = 1 T_0$ and the plunger {\bf
-  stationary} at $h=4a$.  Update the $y$ position of each molecule for
-a time interval $\Delta t = 10 \tau$.  Handle bouncing at both $y=h$
-and $y=0$.  Keep track of the total $\Delta v_y$ for particles bounced
-at the piston.  In our system of units, the presure can be calculated
-as:
-$$\frac{O}{O_0} = \frac{1}{N}\frac{\Delta v_y}{v_0} \frac{\tau}{\Delta t}$$.
-Compare yours simulated pressure with your expectation from
-Equation~\ref{eqn:iglaw}.
+  stationary} at $h=4a$.  Use your {\tt move} function to update the $y$
+position of each molecule for a time interval $\Delta t = 10 \tau$,
+bouncing at both $y=h$ and $y=0$.  The total $\Delta v_y$ for particles
+bounced at the piston is {\tt dvy}.  In our system of units, the pressure
+can be calculated as:
+$$\frac{O}{O_0} = \frac{1}{N}\frac{\Delta v_y}{v_0} \frac{\tau}{\Delta t}.$$
+Compare your simulated pressure with your expectation from
+Equation~\ref{eqn:iglaw}.  Report it as {\tt "P5 O"}.
 
 \noindent
-{\bf Hint}: the time interval of $10\tau$ was choosen to give you
+{\bf Hint}: the time interval of $10\tau$ was chosen to give you
 plenty of collisions for an accurate estimate of the pressure.
-However, it means that some particles will travel more that twice the
+However, it means that some particles will travel more than twice the
 length of the cylinder during this time.  In order to get accurate
 results, you will have to keep bouncing {\bf multiple times} until
 every particle is located within the volume.  If your answer is close
@@ -666,26 +743,16 @@ pressure!\\[3pt]
 Simulate isothermal compression of the gas from $h=4a$ to $h=2a$ in 20
 timesteps of size $\Delta t = 10 \tau$.  Set the speed of the piston
 appropriately.  Repeat the pressure calculation from the previous
-problem at each step, updating the location of the piston before each
-step, and accounting for its speed in the momentum transferred to
-bouncing molecules, as in Equation~\ref{eqn:mpiston}.  Simulate an
-isothermal process by bringing the system into thermal equilibrium
-with a reservoir at $T = 1 T_0$ after each step.  Plot your measured
-$O$ versus $A$ and compare to your expectation from
-Equation~\ref{eqn:oiso} Integrate your curve to get the work done, and
-compare to your expectation from Equation~\ref{eqn:wiso}\\[3pt]
-
-\noindent
-{\bf Problem 7: (Not due until HW 2).}
-Simulate adiabatic compression of the gas from $h=4a$ to $h=2a$ in 80
-timesteps of size $\Delta t = 10 \tau$.  Set the speed of the piston
-appropriately.  Repeat the pressure calculation as in the previous
-problem.  The collisions with the piston bring the gas out of thermal
-equilibrium at each step.  This is an adiabatic process, so you cannot
-use a reservoir.  Instead, bring the system into thermal equilibrium
-by colliding pairs of particles as in Problem 2.  Plot your measured
-$O$ versus $A$ and compare to your expectation from
-Equation~\ref{eqn:oadi} Integrate your curve to get the work done, and
-compare to your expectation from Equation~\ref{eqn:wadi}.\\[3pt]
+problem at each step with your {\tt move} function, updating the location
+of the piston before each step, and accounting for its speed in the
+momentum transferred to bouncing molecules, as in
+Equation~\ref{eqn:mpiston}.  Simulate an isothermal process by bringing
+the system into thermal equilibrium with a reservoir at $T = 1 T_0$
+after each step.  Plot your measured $O$ versus $A$ and compare to your
+expectation from Equation~\ref{eqn:oiso}.  Integrate your curve to get
+the work done, and compare to your expectation from
+Equation~\ref{eqn:wiso}.  Report the area $A = a h$ and the pressure
+$O$ of each step as arrays {\tt "P6 A"} and {\tt "P6 O"}, and the work
+as {\tt "P6 W"}.  Register your plot as {\tt "P6"}.\\[3pt]
 
 \end{document}

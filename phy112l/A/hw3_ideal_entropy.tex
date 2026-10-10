@@ -19,11 +19,11 @@
 
 \section{Introduction}
 
-In this assignment, will will introduce the Gibbs Entropy as a
+In this assignment, you will introduce the Gibbs Entropy as a
 convenient way to measure changes in entropy for a numerical
 simulation.  We will apply it to measure the change of entropy of an
-ideal gas due to heating and free expansion in a molecular simluation,
-and compare it to our expecation.  We will also examine a gas
+ideal gas due to heating and free expansion in a molecular simulation,
+and compare it to our expectation.  We will also examine a gas
 expanding into a region at a higher potential energy.
 
 \section{Gibbs Entropy}
@@ -36,7 +36,7 @@ where $k$ is Boltzmann's constant and $\Omega$ is the multiplicity of
 microstates corresponding to the macrostate.
 
 To compute the Gibbs Entropy, we divide the total phase space into $M$
-cells.  The macrostate is specfied by the number of particles in each
+cells.  The macrostate is specified by the number of particles in each
 cell $n_i$.  To count these microstates, start by assuming the we have
 only two cells, with the first containing $a$ particles.  The binomial
 theorem gives us the multiplicity of states:
@@ -45,43 +45,50 @@ If we divide the second cell into two cells containing $b$ and $c$ particles res
 $$N-a = b+c$$
 then the binomial theorem implies that the multiplicity of states is:
 $$\Omega_{(3)} = \frac{N!}{a! (N-a)!} \cdot \frac{(N-a)!}{b! c!} = \frac{N!}{a! b! c!}$$
-If we continue in this way for $M$ cells, we arrive at the multinomial constant:
+If we continue in this way for $M$ cells, we arrive at the multinomial coefficient:
 \begin{equation}
 \Omega = \frac{N!}{\prod_{i=1}^M n_i!}
 \end{equation}
 Calculating
 $$\ln \Omega = \ln N! - \sum_i \ln n_i!$$
 and applying Stirling's approximation:
-$$\ln \Omega = N \ln N - N - \sum_i (n_i \ln n_i - n_i)$$
-Noting that:
-$$N = \sum_i n_i$$
-we have:
-\begin{eqnarray*}
-  \ln \Omega &=& -\sum_i n_i (\ln n_i - \ln N)\\
-  &=& \- \sum_i n_i \ln \left( \frac{n_i}{N} \right)\\
-\end{eqnarray*}
+
+$$\ln \Omega =  N \ln N - N - \sum_i (n_i \ln n_i - n_i)$$
+Using $\sum_i n_i = N$ we expand the sum and cancel terms:
+\[
+  \ln\Omega = N\ln N - N - \sum_i n_i\ln n_i + \sum_i n_i
+           = N\ln N - \sum_i n_i\ln n_i,
+\]
+and hence
+\[
+  \ln\Omega = -\sum_i n_i\big(\ln n_i - \ln N\big)
+             = -\sum_i n_i\ln\!\left(\frac{n_i}{N}\right).
+\]
 and so:
-$$\frac{S}{kN} = \- \sum_i \frac{n_i}{N} \ln \left( \frac{n_i}{N} \right) $$
+$$\frac{S}{kN} = - \sum_i \frac{n_i}{N} \ln \left( \frac{n_i}{N} \right) $$
 and defining probability per bin as:
 $$p_i = \frac{n_i}{N}$$
 we have at last:
 \begin{equation}
-\frac{S}{kN} = \- \sum_i p_i \ln ( p_i )
+\frac{S}{kN} = - \sum_i p_i \ln ( p_i )
 \end{equation}
-which is known as the Gibbs Entropy (or Shanon Entropy for $k$=1).
+which is known as the Gibbs Entropy (or Shannon Entropy for $k$=1).
+When calculating the Gibbs Entropy numerically, set the contribution
+from bins with $p_i=0$ to zero, which is consistent with the limiting
+behavior.
 
-For a uniform distribution in $M$ cells, the probabibility of visiting each cell is identical, with:
+For a uniform distribution in $M$ cells, the probability of visiting each cell is identical, with:
 $$p_i = 1/M$$
 and so in this case:
 \begin{equation}
 \frac{S}{kN} = \ln ( M )
 \end{equation}
-Notice that even in this simple case, the Gibbs Energy is dedpendent
+Notice that even in this simple case, the Gibbs Entropy is dependent
 on the choice of bins.
 
 As is always the case for classical entropy, the Gibbs entropy is only
 determined to within an overall constant, which in this case depends
-on the cells that we have choose.  However, as long as we keep our
+on the cells that we have chosen.  However, as long as we keep our
 choice of bins constant, we can reliably calculate a change in entropy
 between initial and final states using this formula.  To compute
 $p_i$, we need only count the number of particles present in each cell
@@ -91,22 +98,24 @@ To determine the values of $p_i$ more reliably (with more statistics)
 we can simulate many time steps, and count the number of visits of
 particles to each cell.  Dividing the result by the total number of
 visits (the number of particles times the number of time steps) we
-determine $p_i$ in each cell with less statitical uncertainty.  This
+determine $p_i$ in each cell with less statistical uncertainty.  This
 only works once the system has reached equilibrium (or else the Gibbs
 Entropy will be changing).
 
 \section{Entropy Changes for an Ideal Gas}
 
-If no work is done on our gas, then:
-$$dU = Q$$
-and so
-$$dS \equiv \frac{Q}{T} = \frac{NkdT}{T}$$
-Thus the change in entropy for a gas that is heated at constant volume is given by:
-$$\Delta S = \int_{T_I}^{T_f} \frac{NkdT}{T}$$
-and so:
-\begin{equation}
-\Delta S = Nk \ln \left( \frac{T_f}{T_i}\right)
-\end{equation}
+If no work is done on our gas, then the heat added equals the change in internal energy,
+$$\Delta U = Q.$$
+For a reversible heating process the entropy change is
+$$\mathrm{d}S = \frac{\delta Q_{\rm rev}}{T}.$$
+At constant volume (no work), $\delta Q_{\rm rev} = \mathrm{d}U$, and for a 2-D ideal gas $U = NkT$, so $\mathrm{d}U = Nk\,\mathrm{d}T$. Hence
+\[
+\mathrm{d}S = \frac{Nk\,\mathrm{d}T}{T},
+\]
+and integrating between initial and final temperatures gives
+\[
+\Delta S = \int_{T_i}^{T_f} \frac{Nk\,\mathrm{d}T}{T} = Nk\ln\!\left(\frac{T_f}{T_i}\right).
+\]
 Next, suppose that instead that we expand the gas from $V_1$ to $V_2$
 at constant temperature.  The velocity profile remains unchanged, due
 to the constant temperature, and so the phase-space only changes by
@@ -114,7 +123,7 @@ the volume, with:
 $$\Omega \propto V^N$$
 and so:
 \begin{eqnarray*}
-  \Delta S &=& k \, \ln(\Omega_2) - k \, ln(\Omega_1) \\
+  \Delta S &=& k \, \ln(\Omega_2) - k \, \ln(\Omega_1) \\
            &=& k \ln\left(\frac{\Omega_2}{\Omega_1}\right) \\
 \end{eqnarray*}
 and so:
@@ -127,12 +136,33 @@ and so:
 Consider an ideal gas contained within $0 \leq y \leq 4 a$ subject to a potential energy:
 \begin{equation}
   V(y) = \begin{cases}
-    V_{\rm S} & y > 2 a \\
+    V_{\rm step} & y > 2 a \\
     0 & {\rm otherwise} \\
     \end{cases}
 \end{equation}
+We can develop an accurate numerical simulation for this potential
+based on conservation of energy, but with the crucial caveat that the
+molecules momentum in the $x$ direction is unchanged by the potential.
+We define the contribution to the kinetic energy due to the particles'
+motion in the $y$-direction as
+\begin{equation}
+  K_{(y)} \equiv \frac{1}{2} m v_y^2
+\end{equation}
+Molecules in the lower region ($y<2a$) with:
+$$ K_{(y)} \le V_{\rm step} $$
+never escape the lower region, and bounce at the boundaries.  But molecules with
+$$ K_{(y)} > V_{\rm step} $$
+can cross from the lower region to the upper region ($y>2a$), and have the
+momentum in the $y$ direction reduced such that:
+$$ K_{(y)} \to K_{(y)} - V_{\rm step} $$
+Molecules can always cross from the upper region into the lower
+region, and have their momentum in the $y$ direction increased such
+that:
+$$ K_{(y)} \to K_{(y)} + V_{\rm step} $$
+We will call the function that implements this algorithm {\tt reflect}.
+
 The relative occupancy of the upper and lower regions (which are the same area) will be:
-$$\frac{p_{\rm up}}{p_{\rm dn}} = \exp \left( - \frac{V_{\rm S}}{kT} \right) \equiv \alpha $$
+$$\frac{p_{\rm up}}{p_{\rm dn}} = \exp \left( - \frac{V_{\rm step}}{kT} \right) \equiv \alpha $$
 and so:
 \begin{equation}
 p_{\rm up} = \frac{\alpha}{1 + \alpha}
@@ -142,7 +172,8 @@ and
 p_{\rm dn} = \frac{1}{1 + \alpha}
 \end{equation}
 If we consider this like a two state system going from the ground state ($S=0$) to a state at equilibrium with occupancies $p_{\rm up}$ and $p_{\rm dn}$, we expect the change in entropy to be:
-$$\Delta S = p_{\rm up} \ln p_{\rm up} + p_{\rm dn} \ln p_{\rm dn}$$
+$$\frac{\Delta S}{kN} = - (p_{\rm up} \ln p_{\rm up} + p_{\rm dn} \ln p_{\rm dn})$$
+
 
 \section{System of Units}
 
@@ -158,22 +189,27 @@ distribution, the velocity unit $v_0$ is defined by:
 $$ v_0^2 \equiv \frac{k T_0}{m}$$
 and the unit for time is:
 $$ \tau \equiv a / v_0$$
-Motivated by the ideal gas law, we can set the unit of pressure to:
-$$O_0 \equiv \frac{NkT_0}{a^2}$$
-and the unit of total energy:
+Motivated by the ideal gas law, we can set the unit of total energy to:
 $$U_0 = N k T_0$$
-For this assignment, will measure potential energy (of a single particle) using units of
+For this assignment, you will measure the potential energy (of a
+single particle) using units of
 $$V_0 = k T_0$$
 Remember that for analytic work, we keep these factors in place.  But when using an
 analytic result within our computer programs, we set all of these quantities to 1:
-$$m = a = g = T_0 = v_0 = \tau = O_0 = U_0 = V_0 = 1$$
+$$m = a = T_0 = v_0 = \tau = U_0 = V_0 = 1$$
 As before, the temperature of an ideal gas is still calculated through
 the average kinetic energy, which in our system of units becomes:
 \begin{equation}
  \label{eqn:expv}
   \frac{T}{T_0} = \frac{\braket{v_x^2/v_0^2} + \braket{v_y^2/v_0^2}}{2}
 \end{equation}
-This is also the total kinetic energy of the gas, in units of total energy.
+Equation~\eqref{eqn:expv} gives the dimensionless temperature, which
+in our units is also equal to the total kinetic energy of the gas
+divided by $U_0$:
+\[
+\frac{U_{\rm kinetic}}{U_0} = \frac{T}{T_0}.
+\]
+(Equivalently, this is the average energy per particle, in dimensionless units.)
 
 
 \section{Required Functions}
@@ -197,7 +233,7 @@ def gibbs_entropy(*, vx, vy, y, hbins, vmax, vbins):
         vmax  : float       Max |v| for velocity range (-vmax, vmax).
         vbins : int         Number of velocity bins per component.
     Returns:    
-        float The dimensionless Gibbbs entroy S/(kN)        
+        float The dimensionless Gibbs entropy S/(kN)        
     """
     pass
 \end{python}
@@ -278,22 +314,26 @@ that is uniformly distributed in $v_x$, $v_y$ and $h$.\\[4pt]
 \noindent
 {\bf Problem 2:} Implement the function {\tt collide\_reservoir}, with
 the required signature, that simulates collisions of your gas with a
-thermal reservoir.  Calculate the the change in entropy when your gas
-is heated from $T_I = 1$ to $T_I =2$ and compare to your
-expectation.\\[4pt]
+thermal reservoir.  Calculate the change in entropy when your gas
+is heated from $T = 1$ to $T =2$ and compare to your expectation.
+Remember that for the Gibbs Entropy will change by an (unknown)
+constant factor if you change the binning, so you must keep the bins
+{\bf exactly the same} for both the initial and final state in order
+to accurately determine the change in entropy from your
+simulation.\\[4pt]
 
 \noindent
 {\bf Problem 3:} Implement the functions {\tt step} and {\tt bounce}.
 Use them to simulate the free expansion of a gas from $h=2a$ to $h=4a$
-at a contant temperature $T_I = 1$.  Compare your measured change in
+at a constant temperature $T_i = 1$.  Compare your measured change in
 entropy to your expectation.\\[4pt]
 
 \noindent
 {\bf Problem 4:} Implement the function {\tt reflect}.  Use it to
-simulate the expansion of a gas from $h=2a$ to $h=4a$ at a contant
-temperature $T_I = 1$ when the upper region from $h=2a$ to $h=4a$ is
-at a higher potential energy $V_0$ compared to lower region, which you
-should take as the zero of potentail.  Show that the occupancy of the
+simulate the expansion of a gas from $h=2a$ to $h=4a$ at a constant
+temperature $T_i = 1$ when the upper region from $h=2a$ to $h=4a$ is
+at a higher potential energy $V_{\rm step}$ compared to lower region, which you
+should take as the zero of potential.  Show that the occupancy of the
 upper region matches your expectation.\\[4pt]
 
 \noindent
