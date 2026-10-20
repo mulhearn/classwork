@@ -9,5 +9,6 @@
 BROKEN
 Icon?
 *.mp4
+__pycache__/
 
 
