@@ -120,7 +120,7 @@ becomes, in our system of units:
 \end{equation}
 and within our program as:
 \begin{python}
-  def O(T, A):
+  def O(*, T, A):
        return T / A
 \end{python}
 The PDF for the $x$ component of velocity becomes:
@@ -139,9 +139,42 @@ which in our system of units becomes:
 $$\frac{T}{T_0} = \frac{\braket{v_x^2/v_0^2} + \braket{v_y^2/v_0^2}}{2}$$
 and could be calculated as:
 \begin{python}
-def temp(vx, vy):
+def temp(*, vx, vy):
      return 0.5*(np.mean(vx**2) + np.mean(vy**2))
 \end{python}
+The {\tt *} makes the arguments {\em keyword-only}: you call this function as {\tt temp(vx=vx, vy=vy)}
+(Section~\ref{sec:kwonly}).
+
+\section{Keyword-Only Arguments}
+\label{sec:kwonly}
+
+\noindent
+Python lets you define a function so that every argument must be named when you call it: put a
+{\tt *} first in the list of parameters.  For example, the collision function of this
+assignment is defined as
+\begin{python}
+def collide(*, ax, ay, bx, by, theta):
+\end{python}
+and called as
+\begin{python}
+collide(ax=vx[a], ay=vy[a], bx=vx[b], by=vy[b], theta=theta)
+\end{python}
+The order of the named arguments does not matter, and a call such as {\tt collide(1, 0, -1, 0, 0)}
+stops with an error ({\tt TypeError}).
+
+Most of our functions take several arguments of the same kind, numbers
+or arrays of numbers.  If two of them are accidently swapped in a
+call, e.g.\ $v_x$ and $v_y$, or the height of the piston and its
+velocity, Python cannot notice, and the program runs and gives the
+wrong physics.  These are among the hardest bugs to find, and a common
+mistake.  With keyword-only arguments every call says which value is
+which, and a missing or misspelled name is an error right away, at the
+line where it happens.
+
+{\bf Course policy:} every required function in this course is defined
+with keyword-only arguments, with exactly the names given in the
+assignment.  We recommend the same for your own functions whenever
+they take more than one or two arguments.
 
 \section{Isothermal Compression}
 
@@ -214,7 +247,7 @@ If the piston is initially at $y=h_1$ and we compress it until $y=h_2$, we have,
 \end{equation}
 and in our program we would calculate the work as
 \begin{python}
-def work_iso(T, hi, hf):
+def work_iso(*, T, hi, hf):
      return T * np.log(hi/hf)
 \end{python}
 
@@ -372,13 +405,13 @@ We'll use the Python variable names {\tt ax}, {\tt ay}, {\tt bx}, and
 
 You will implement the collision model as a Python function:
 \begin{python}
-def collide(ax,ay,bx,by,theta):
+def collide(*, ax, ay, bx, by, theta):
     # your code here
     return ax, ay, bx, by # updated values
 \end{python}
 which takes the lab frame velocities of particle a (ax,ay) and b (bx,
-by) and returns the lab frame velocities after scattering by an angle
-theta.  {\bf Please stick to these variable names and function
+by) as keyword-only arguments (Section~\ref{sec:kwonly}) and returns the lab frame velocities after
+scattering by an angle theta.  {\bf Please stick to these variable names and function
   definition in your own program}.  It will help us help you debug
 your code.
 
@@ -551,7 +584,7 @@ Note carefully that a piston moving down, as for compression, will have $v_y < 0
 \noindent
 You will implement the motion of the molecules, including all bouncing, as a Python function:
 \begin{python}
-def move(y, vy, h, vp, dt):
+def move(*, y, vy, h, vp, dt):
     # your code here
     return y, vy, dvy # updated values
 \end{python}
@@ -571,7 +604,7 @@ Keep {\tt h} fixed during a single call; when the piston moves (Problem 6), upda
 $y=1$ moving up with $v_y = 1$ in a container with a stationary piston at $h=4$ crosses the
 container twice in $\Delta t = 10$:
 \begin{python}
-y1, vy1, dvy1 = move(np.array([1.0]), np.array([1.0]), 4, 0, 10)
+y1, vy1, dvy1 = move(y=np.array([1.0]), vy=np.array([1.0]), h=4, vp=0, dt=10)
 print(y1, vy1, dvy1)
 \end{python}
 should output {\tt [3.] [1.] 2.0}.
@@ -595,7 +628,8 @@ import hw1check
 \item {\bf Label your cells.}  The first line of every other code cell is a comment naming the
   problem it belongs to: {\tt \# Problem 1}, {\tt \# Problem 2}, \ldots, {\tt \# Problem 6}.
 \item {\bf Required functions.}  Define {\tt collide}, {\tt temp} and {\tt move} exactly as described in the
-  text, at the top level of your notebook (not inside another function), and use them in your solution.
+  text, with keyword-only arguments (Section~\ref{sec:kwonly}), at the top level of your notebook (not
+  inside another function), and use them in your solution.
 \item {\bf Report each result} once, with {\tt hw1check.report}, in the cell where you calculate it:
 \begin{python}
 hw1check.report("P2 T", T)
@@ -642,10 +676,8 @@ zero,quarter,half,and three quarters of a full turn:
 \begin{python}
 tau = 2*np.pi # Using 2 pi is like saying twice half-way...
 # lab frame is cms, incoming on x axis:
-print(np.around(collide(1,0,-1,0,0),2)+0)
-print(np.around(collide(1,0,-1,0,tau/4),2)+0)
-print(np.around(collide(1,0,-1,0,tau/2),2)+0)
-print(np.around(collide(1,0,-1,0,3*tau/4),2)+0)
+for theta in [0, tau/4, tau/2, 3*tau/4]:
+    print(np.around(collide(ax=1, ay=0, bx=-1, by=0, theta=theta), 2) + 0)
 \end{python}
 which should have the output:
 \begin{verbatim}
@@ -657,10 +689,8 @@ which should have the output:
 And:
 \begin{python}
 # lab frame is cms, incoming on	y axis:
-print(np.around(collide(0,1,0,-1,0),2)+0)
-print(np.around(collide(0,1,0,-1,tau/4),2)+0)
-print(np.around(collide(0,1,0,-1,tau/2),2)+0)
-print(np.around(collide(0,1,0,-1,3*tau/4),2)+0)
+for theta in [0, tau/4, tau/2, 3*tau/4]:
+    print(np.around(collide(ax=0, ay=1, bx=0, by=-1, theta=theta), 2) + 0)
 \end{python}
 which should have the output:
 \begin{verbatim}
@@ -672,10 +702,8 @@ which should have the output:
 Then test your collision function where the lab frame is not the CMS frame:
 \begin{python}
 # boost along x axis, incoming on y axis:
-print(np.around(collide(1,1,1,-1,0),2)+0)
-print(np.around(collide(1,1,1,-1,tau/4),2)+0)
-print(np.around(collide(1,1,1,-1,tau/2),2)+0)
-print(np.around(collide(1,1,1,-1,3*tau/4),2)+0)
+for theta in [0, tau/4, tau/2, 3*tau/4]:
+    print(np.around(collide(ax=1, ay=1, bx=1, by=-1, theta=theta), 2) + 0)
 \end{python}
 which should output:
 \begin{verbatim}
@@ -687,10 +715,10 @@ which should output:
 Finally, test your collision function with randomly chosen values:
 \begin{python}
 # test with random values:
-print(np.around(collide(6.24, 1.78, 3.35, 5.98, 3.19),2))
-print(np.around(collide(4.07, 4.69, 1.61, 4.54, 2.46),2))
-print(np.around(collide(5.28, 2.99, 4.77, 5.22, 3.15),2))
-print(np.around(collide(2.84, 5.37, 5.47, 6.16, 1.59),2))
+tests = [(6.24, 1.78, 3.35, 5.98, 3.19), (4.07, 4.69, 1.61, 4.54, 2.46),
+         (5.28, 2.99, 4.77, 5.22, 3.15), (2.84, 5.37, 5.47, 6.16, 1.59)]
+for ax, ay, bx, by, theta in tests:
+    print(np.around(collide(ax=ax, ay=ay, bx=bx, by=by, theta=theta), 2))
 \end{python}
 which should output:
 \begin{verbatim}
@@ -754,5 +782,37 @@ the work done, and compare to your expectation from
 Equation~\ref{eqn:wiso}.  Report the area $A = a h$ and the pressure
 $O$ of each step as arrays {\tt "P6 A"} and {\tt "P6 O"}, and the work
 as {\tt "P6 W"}.  Register your plot as {\tt "P6"}.\\[3pt]
+
+% ------------------------------------------------------------------------------------------------
+% THIS YEAR ONLY:  DELETE this appendix before next year's version goes live (the keyword-only section
+% above stays).
+\appendix
+\section{Converting a Finished Notebook (This Year Only)}
+
+\noindent
+If you finished HW 1 before keyword-only arguments were introduced (Section~\ref{sec:kwonly}), your
+{\tt collide}, {\tt temp} and {\tt move} probably take positional arguments.  {\tt hw1check} accepts
+that with a warning, so you do not need to change your HW 1 submission.  HW 2 reuses these functions
+and requires them to be keyword-only, so you will need to convert them before then.
+
+You may do the conversion by hand, which takes a few minutes.  {\bf As an explicit exception to the
+AI policy in the syllabus, you may also use a generative AI tool for this conversion, and for nothing
+else}:  it may add the {\tt *} to the definitions of {\tt collide}, {\tt temp} and {\tt move} and
+name the arguments in every call to them, and make no other change to your code.  If you use AI:
+\begin{itemize}
+\item check every changed line yourself, then use Kernel $\rightarrow$ Restart \& Run All and check
+  that {\tt hw1check} no longer warns;
+\item add a text (markdown) cell at the top of your notebook saying that you used AI for the
+  keyword-only conversion, and which tool.
+\end{itemize}
+An example prompt (paste your code after it):
+\begin{quote}\small
+Convert the Python functions {\tt collide}, {\tt temp} and {\tt move} in the code below to
+keyword-only arguments, by adding {\tt *} as the first parameter, for example {\tt def collide(*,
+ax, ay, bx, by, theta)}.  Then change every call to these three functions so that each argument is
+passed by name, for example {\tt collide(ax=vx[a], ay=vy[a], bx=vx[b], by=vy[b], theta=theta)}.
+Do not change anything else:  no other lines, names, numbers, comments or formatting, and do not fix
+or improve the code, even if you see a mistake.  Afterwards, list every line you changed.
+\end{quote}
 
 \end{document}

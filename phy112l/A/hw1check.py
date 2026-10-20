@@ -22,6 +22,7 @@ Then use Kernel -> Restart & Run All, and check that the last cell says
 from __future__ import print_function
 
 import base64
+import inspect
 import io
 import math
 import re
@@ -30,7 +31,7 @@ import sys
 
 import numpy as np
 
-VERSION = "1.0"
+VERSION = "1.1"
 
 # Results to report, in problem order.  Scalars unless listed in ARRAYS.
 RESULTS = ["P2 T", "P3 T", "P4 T", "P5 O", "P6 A", "P6 O", "P6 W"]
@@ -63,6 +64,11 @@ COLLIDE_TOL = 0.006  # expected values are rounded to 2 decimals
 MOVE_TEST = (([1.0], [1.0], 4, 0, 10), ([3.0], [1.0], 2.0))
 
 TIME_LIMIT = 20  # seconds per function test
+
+# Required functions and their keyword-only arguments (Section "Keyword-Only Arguments").  In HW 1 a
+# positional definition is accepted with a note; from HW 2 on it is required.
+REQUIRED_PARAMS = {"collide": ["ax", "ay", "bx", "by", "theta"], "temp": ["vx", "vy"],
+                   "move": ["y", "vy", "h", "vp", "dt"]}
 
 CELL_LABEL = re.compile(r"^#\s*(Setup|Problem\s+[1-6])\b")
 
@@ -145,6 +151,28 @@ def _describe_error(e):
     return "raised %s: %s" % (type(e).__name__, e)
 
 
+def _caller(f, fname, todo, notes):
+    """Return (call, style):  call(*values) calls f with the required arguments in the assignment's
+    order, by name if f is keyword-only, else by position (as hw1check 1.0 did).  style is
+    'keyword-only', 'positional' or 'wrong names'."""
+    names = REQUIRED_PARAMS[fname]
+    by_position = lambda *values: f(*values)
+    try:
+        params = inspect.signature(f).parameters
+    except (TypeError, ValueError):
+        return by_position, "positional"
+    kwonly = [n for n, p in params.items() if p.kind == inspect.Parameter.KEYWORD_ONLY]
+    if all(n in kwonly for n in names):
+        return (lambda *values: f(**dict(zip(names, values)))), "keyword-only"
+    want = "def %s(*, %s)" % (fname, ", ".join(names))
+    if kwonly:
+        todo.append("%s has keyword-only arguments, but not the required names:  define it as %s." % (fname, want))
+        return (lambda *values: f(**dict(zip(names, values)))), "wrong names"
+    notes.append("%s takes positional arguments.  Accepted in HW 1, but required from HW 2 on:  define it as %s "
+                 "(Section \"Keyword-Only Arguments\")." % (fname, want))
+    return by_position, "positional"
+
+
 # ---------------------------------------------------------------- student API
 
 def report(name, value):
@@ -200,71 +228,81 @@ def _namespace():
     return vars(sys.modules["__main__"])
 
 
-def _check_collide(ns, todo):
+def _check_collide(ns, todo, notes):
     f = ns.get("collide")
     if not callable(f):
-        todo.append("Define the function collide(ax, ay, bx, by, theta) (Problem 1).")
+        todo.append("Define the function collide(*, ax, ay, bx, by, theta) (Problem 1).")
         return {"present": False}
+    f, style = _caller(f, "collide", todo, notes)
+    if style == "wrong names":
+        return {"present": True, "passed": 0, "total": len(COLLIDE_TESTS), "signature": style}
     failed = []
     for args, expected in COLLIDE_TESTS:
         try:
             got = np.asarray(_call_with_limit(f, args), dtype=float).ravel()
             ok = got.shape == (4,) and np.all(np.abs(got - expected) <= COLLIDE_TOL)
             if not ok:
-                failed.append("collide(%s) gave %s, expected %s"
-                              % (_fmt_args(args), np.array2string(np.round(got, 2) + 0),
-                                 list(expected)))
+                failed.append("collide(ax=%s, ay=%s, bx=%s, by=%s, theta=%s) gave %s, expected %s"
+                              % (tuple("%.4g" % x for x in args) + (np.array2string(np.round(got, 2) + 0),
+                                                                     list(expected))))
         except Exception as e:
-            failed.append("collide(%s) %s" % (_fmt_args(args), _describe_error(e)))
+            failed.append("collide(ax=%s, ay=%s, bx=%s, by=%s, theta=%s) %s"
+                          % (tuple("%.4g" % x for x in args) + (_describe_error(e),)))
             if isinstance(e, _Timeout):
                 break
     passed = len(COLLIDE_TESTS) - len(failed)
     if failed:
         todo.append("collide fails %d of %d tests from Problem 1, e.g. %s"
                     % (len(failed), len(COLLIDE_TESTS), failed[0]))
-    return {"present": True, "passed": passed, "total": len(COLLIDE_TESTS)}
+    return {"present": True, "passed": passed, "total": len(COLLIDE_TESTS), "signature": style}
 
 
-def _check_temp(ns, todo):
+def _check_temp(ns, todo, notes):
     f = ns.get("temp")
     if not callable(f):
-        todo.append("Define the function temp(vx, vy) as given in the text.")
+        todo.append("Define the function temp(*, vx, vy) as given in the text.")
         return {"present": False}
+    f, style = _caller(f, "temp", todo, notes)
+    if style == "wrong names":
+        return {"present": True, "passed": False, "signature": style}
     try:
         got = float(_call_with_limit(f, (np.array([1.0, -1.0]), np.array([0.0, 2.0]))))
         ok = abs(got - 1.5) < 1e-9
     except Exception as e:
         todo.append("temp(vx, vy) %s" % _describe_error(e))
-        return {"present": True, "passed": False}
+        return {"present": True, "passed": False, "signature": style}
     if not ok:
         todo.append("temp(vx, vy) does not match the definition in the text "
                     "(T = (<vx^2> + <vy^2>)/2).")
-    return {"present": True, "passed": ok}
+    return {"present": True, "passed": ok, "signature": style}
 
 
-def _check_move(ns, todo):
+def _check_move(ns, todo, notes):
     f = ns.get("move")
     if not callable(f):
-        todo.append("Define the function move(y, vy, h, vp, dt) (see \"The move function\").")
+        todo.append("Define the function move(*, y, vy, h, vp, dt) (see \"The move function\").")
         return {"present": False}
+    f, style = _caller(f, "move", todo, notes)
+    if style == "wrong names":
+        return {"present": True, "passed": False, "signature": style}
     (y, vy, h, vp, dt), (ey, evy, edvy) = MOVE_TEST
     try:
         out = _call_with_limit(f, (np.array(y), np.array(vy), h, vp, dt))
         if not isinstance(out, (tuple, list)) or len(out) != 3:
             todo.append("move(y, vy, h, vp, dt) must return three values: y, vy, dvy.")
-            return {"present": True, "passed": False}
+            return {"present": True, "passed": False, "signature": style}
         gy, gvy, gdvy = out
         ok = (np.allclose(np.asarray(gy, dtype=float).ravel(), ey)
               and np.allclose(np.asarray(gvy, dtype=float).ravel(), evy)
               and np.isclose(float(np.sum(gdvy)), edvy))
     except Exception as e:
         todo.append("move test %s" % _describe_error(e))
-        return {"present": True, "passed": False}
+        return {"present": True, "passed": False, "signature": style}
     if not ok:
         todo.append("move fails the test in \"The move function\": "
-                    "move([1.], [1.], 4, 0, 10) gave y=%s, vy=%s, dvy=%s; expected [3.] [1.] 2.0"
+                    "move(y=[1.], vy=[1.], h=4, vp=0, dt=10) gave y=%s, vy=%s, dvy=%s; expected [3.] [1.] 2.0"
                     % (np.asarray(gy).ravel()[:3], np.asarray(gvy).ravel()[:3], gdvy))
-    return {"present": True, "passed": bool(ok)}
+    return {"present": True, "passed": bool(ok), "signature": style}
 
 
 def _latest_results():
@@ -413,9 +451,9 @@ def run():
     ns = _namespace()
     todo, notes = [], []
     functions = {
-        "collide": _check_collide(ns, todo),
-        "temp": _check_temp(ns, todo),
-        "move": _check_move(ns, todo),
+        "collide": _check_collide(ns, todo, notes),
+        "temp": _check_temp(ns, todo, notes),
+        "move": _check_move(ns, todo, notes),
     }
     results = _check_results(todo, notes)
     figures = _check_figures(todo)
@@ -426,10 +464,11 @@ def run():
     for fname, r in sorted(functions.items()):
         if not r["present"]:
             lines.append("  %-8s missing" % fname)
-        elif "total" in r:
-            lines.append("  %-8s %d of %d tests passed" % (fname, r["passed"], r["total"]))
         else:
-            lines.append("  %-8s %s" % (fname, "test passed" if r["passed"] else "test FAILED"))
+            tests = ("%d of %d tests passed" % (r["passed"], r["total"]) if "total" in r
+                     else "test passed" if r["passed"] else "test FAILED")
+            sig = "" if r.get("signature") == "keyword-only" else "  (%s: see notes)" % r.get("signature", "?")
+            lines.append("  %-8s %s%s" % (fname, tests, sig))
     lines.append("")
     lines.append("Results:")
     for name in RESULTS:

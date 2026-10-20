@@ -376,13 +376,17 @@ You will have to keep bouncing molecules until all of them have $y \ge
 Define these functions at the top level of your notebook (not inside
 another function), and use them in your solution.  {\bf Please stick to
 these function names and definitions.}  It will help us help you debug
-your code.
+your code.  As explained in HW 1 (Section ``Keyword-Only Arguments''),
+every required function takes {\bf keyword-only arguments}, with exactly
+the names given here; from this assignment on, {\tt hw2check} does not
+accept positional definitions.
 \begin{itemize}
-\item From HW 1, unchanged: {\tt collide(ax, ay, bx, by, theta)}, {\tt
-  temp(vx, vy)} and {\tt move(y, vy, h, vp, dt)}.
+\item From HW 1: {\tt collide(*, ax, ay, bx, by, theta)}, {\tt
+  temp(*, vx, vy)} and {\tt move(*, y, vy, h, vp, dt)}.  If your HW 1
+  versions take positional arguments, convert them first (HW 1, Appendix).
 \item Thermal contact with a reservoir at temperature {\tt Tr}, for {\tt ncoll} collisions:
 \begin{python}
-def collide_reservoir(vx, vy, Tr, ncoll):
+def collide_reservoir(*, vx, vy, Tr, ncoll):
     # your code here
     return vx, vy, Q # updated values, and the heat given to the gas
 \end{python}
@@ -392,7 +396,7 @@ def collide_reservoir(vx, vy, Tr, ncoll):
   the System of Units).
 \item Thermal contact between two gases A and B, for {\tt ncoll} collisions:
 \begin{python}
-def collide_gases(vxa, vya, vxb, vyb, ncoll):
+def collide_gases(*, vxa, vya, vxb, vyb, ncoll):
     # your code here
     return vxa, vya, vxb, vyb # updated values
 \end{python}
@@ -400,7 +404,7 @@ def collide_gases(vxa, vya, vxb, vyb, ncoll):
   randomly chosen molecule of gas B.
 \item The motion of the molecules under gravity, including all bouncing at $y=0$:
 \begin{python}
-def move_gravity(y, vy, g, dt):
+def move_gravity(*, y, vy, g, dt):
     # your code here
     return y, vy # updated values
 \end{python}
@@ -408,15 +412,14 @@ def move_gravity(y, vy, g, dt):
   values: a single molecule at rest at $y=1$ falls and bounces once in
   $\Delta t = 2$, and twice in $\Delta t = 5$:
 \begin{python}
-print(np.around(move_gravity(np.array([1.0]), np.array([0.0]), 1, 2), 3))
-print(np.around(move_gravity(np.array([1.0]), np.array([0.0]), 1, 5), 3))
+for dt in [2, 5]:
+    y1, vy1 = move_gravity(y=np.array([1.0]), vy=np.array([0.0]), g=1, dt=dt)
+    print(np.around(y1, 3), np.around(vy1, 3))
 \end{python}
   should output:
 \begin{verbatim}
-[[0.657]
- [0.828]]
-[[0.784]
- [0.657]]
+[0.657] [0.828]
+[0.784] [0.657]
 \end{verbatim}
 \end{itemize}
 
@@ -438,7 +441,8 @@ import hw2check
 \end{python}
 \item {\bf Label your cells.}  The first line of every other code cell is a comment naming the
   problem it belongs to: {\tt \# Problem 1}, {\tt \# Problem 2}, \ldots, {\tt \# Problem 6}.
-\item {\bf Required functions.}  Define the functions listed above, exactly as described.
+\item {\bf Required functions.}  Define the functions listed above, exactly as described, with
+  keyword-only arguments.
 \item {\bf Report each result} once, with {\tt hw2check.report}, in the cell where you calculate it:
 \begin{python}
 hw2check.report("P1 C", C)

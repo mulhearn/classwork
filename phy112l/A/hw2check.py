@@ -22,6 +22,7 @@ Then use Kernel -> Restart & Run All, and check that the last cell says
 from __future__ import print_function
 
 import base64
+import inspect
 import io
 import re
 import signal
@@ -58,6 +59,12 @@ MOVE_TEST = (([1.0], [1.0], 4, 0, 10), ([3.0], [1.0], 2.0))
 MOVE_GRAVITY_TESTS = [(([1.0], [0.0], 1, 2), (0.657, 0.828)),
                       (([1.0], [0.0], 1, 5), (0.784, 0.657))]
 MOVE_GRAVITY_TOL = 0.0006   # expected values are rounded to 3 decimals
+
+# Required functions and their keyword-only arguments (HW 1, Section "Keyword-Only Arguments"):  required
+# from HW 2 on.
+REQUIRED_PARAMS = {"collide": ["ax", "ay", "bx", "by", "theta"], "temp": ["vx", "vy"],
+                   "move": ["y", "vy", "h", "vp", "dt"], "collide_reservoir": ["vx", "vy", "Tr", "ncoll"],
+                   "collide_gases": ["vxa", "vya", "vxb", "vyb", "ncoll"], "move_gravity": ["y", "vy", "g", "dt"]}
 
 N_TEST = 10000       # the gas size of the assignment, for the reservoir and gas-gas tests
 TIME_LIMIT = 30      # seconds per function test
@@ -202,54 +209,89 @@ def figure(name):
 
 # ---------------------------------------------------------------- function checks
 
-def _missing(ns, fname, signature, todo):
+def _signature(fname):
+    return "%s(*, %s)" % (fname, ", ".join(REQUIRED_PARAMS[fname]))
+
+
+def _missing(ns, fname, todo):
     if callable(ns.get(fname)):
         return False
-    todo.append("Define the function %s as given in the text (see \"Required Functions\")." % signature)
+    todo.append("Define the function %s as given in the text (see \"Required Functions\")." % _signature(fname))
     return True
 
 
+def _keyword_only(ns, fname, todo):
+    """A caller that passes the required arguments by name, in the assignment's order, or None (with a to-do)
+    if the function does not take exactly those keyword-only arguments."""
+    f = ns[fname]
+    names = REQUIRED_PARAMS[fname]
+    try:
+        params = inspect.signature(f).parameters
+    except (TypeError, ValueError):
+        params = {}
+    kwonly = [n for n, p in params.items() if p.kind == inspect.Parameter.KEYWORD_ONLY]
+    if all(n in kwonly for n in names):
+        return lambda *values: f(**dict(zip(names, values)))
+    if kwonly:
+        todo.append("%s has keyword-only arguments, but not the required names:  define it as def %s."
+                    % (fname, _signature(fname)))
+    else:
+        todo.append("%s takes positional arguments:  from HW 2 on, define it with keyword-only arguments, "
+                    "def %s (HW 1, Section \"Keyword-Only Arguments\" and Appendix)." % (fname, _signature(fname)))
+    return None
+
+
 def _check_collide(ns, todo):
-    if _missing(ns, "collide", "collide(ax, ay, bx, by, theta)", todo):
+    if _missing(ns, "collide", todo):
         return {"present": False}
-    f = ns["collide"]
+    f = _keyword_only(ns, "collide", todo)
+    if f is None:
+        return {"present": True, "passed": 0, "total": len(COLLIDE_TESTS), "signature": "positional"}
     failed = []
     for args, expected in COLLIDE_TESTS:
         try:
             got = np.asarray(_call_with_limit(f, args), dtype=float).ravel()
             if not (got.shape == (4,) and np.all(np.abs(got - expected) <= COLLIDE_TOL)):
-                failed.append("collide(%s) gave %s, expected %s"
-                              % (_fmt_args(args), np.array2string(np.round(got, 2) + 0), list(expected)))
+                failed.append("collide(ax=%s, ay=%s, bx=%s, by=%s, theta=%s) gave %s, expected %s"
+                              % (tuple("%.4g" % x for x in args) + (np.array2string(np.round(got, 2) + 0), list(expected))))
         except Exception as e:
-            failed.append("collide(%s) %s" % (_fmt_args(args), _describe_error(e)))
+            failed.append("collide(ax=%s, ay=%s, bx=%s, by=%s, theta=%s) %s"
+                          % (tuple("%.4g" % x for x in args) + (_describe_error(e),)))
             if isinstance(e, _Timeout):
                 break
     if failed:
         todo.append("collide fails %d of %d tests from HW 1, e.g. %s"
                     % (len(failed), len(COLLIDE_TESTS), failed[0]))
-    return {"present": True, "passed": len(COLLIDE_TESTS) - len(failed), "total": len(COLLIDE_TESTS)}
+    return {"present": True, "passed": len(COLLIDE_TESTS) - len(failed), "total": len(COLLIDE_TESTS),
+            "signature": "keyword-only"}
 
 
 def _check_temp(ns, todo):
-    if _missing(ns, "temp", "temp(vx, vy)", todo):
+    if _missing(ns, "temp", todo):
         return {"present": False}
+    f = _keyword_only(ns, "temp", todo)
+    if f is None:
+        return {"present": True, "passed": False, "signature": "positional"}
     try:
-        got = float(_call_with_limit(ns["temp"], (np.array([1.0, -1.0]), np.array([0.0, 2.0]))))
+        got = float(_call_with_limit(f, (np.array([1.0, -1.0]), np.array([0.0, 2.0]))))
         ok = abs(got - 1.5) < 1e-9
     except Exception as e:
         todo.append("temp(vx, vy) %s" % _describe_error(e))
         return {"present": True, "passed": False}
     if not ok:
         todo.append("temp(vx, vy) does not match the definition (T = (<vx^2> + <vy^2>)/2).")
-    return {"present": True, "passed": ok}
+    return {"present": True, "passed": ok, "signature": "keyword-only"}
 
 
 def _check_move(ns, todo):
-    if _missing(ns, "move", "move(y, vy, h, vp, dt)", todo):
+    if _missing(ns, "move", todo):
         return {"present": False}
+    f = _keyword_only(ns, "move", todo)
+    if f is None:
+        return {"present": True, "passed": False, "signature": "positional"}
     (y, vy, h, vp, dt), (ey, evy, edvy) = MOVE_TEST
     try:
-        out = _call_with_limit(ns["move"], (np.array(y), np.array(vy), h, vp, dt))
+        out = _call_with_limit(f, (np.array(y), np.array(vy), h, vp, dt))
         if not isinstance(out, (tuple, list)) or len(out) != 3:
             todo.append("move(y, vy, h, vp, dt) must return three values: y, vy, dvy.")
             return {"present": True, "passed": False}
@@ -260,21 +302,24 @@ def _check_move(ns, todo):
         todo.append("move test %s" % _describe_error(e))
         return {"present": True, "passed": False}
     if not ok:
-        todo.append("move fails the HW 1 test: move([1.], [1.], 4, 0, 10) should give [3.] [1.] 2.0.")
-    return {"present": True, "passed": bool(ok)}
+        todo.append("move fails the HW 1 test: move(y=[1.], vy=[1.], h=4, vp=0, dt=10) should give [3.] [1.] 2.0.")
+    return {"present": True, "passed": bool(ok), "signature": "keyword-only"}
 
 
 def _check_collide_reservoir(ns, todo):
-    if _missing(ns, "collide_reservoir", "collide_reservoir(vx, vy, Tr, ncoll)", todo):
+    if _missing(ns, "collide_reservoir", todo):
         return {"present": False}
+    f = _keyword_only(ns, "collide_reservoir", todo)
+    if f is None:
+        return {"present": True, "passed": False, "signature": "positional"}
     rng = np.random.RandomState(2)
     vx, vy = rng.normal(0, 1, N_TEST), rng.normal(0, 1, N_TEST)
     e0, t0 = _energy(vx, vy) / N_TEST, 0.5 * (np.mean(vx ** 2) + np.mean(vy ** 2))
     try:
-        gvx, gvy, gq = _arrays(_call_with_limit(ns["collide_reservoir"], (vx.copy(), vy.copy(), 2.0, 2 * N_TEST)),
+        gvx, gvy, gq = _arrays(_call_with_limit(f, (vx.copy(), vy.copy(), 2.0, 2 * N_TEST)),
                                3, "vx, vy, Q")
     except Exception as e:
-        todo.append("collide_reservoir(vx, vy, 2, 20000) %s" % _describe_error(e))
+        todo.append("collide_reservoir(vx=vx, vy=vy, Tr=2, ncoll=20000) %s" % _describe_error(e))
         return {"present": True, "passed": False}
     problems = []
     if gvx.shape != (N_TEST,) or gvy.shape != (N_TEST,):
@@ -291,22 +336,25 @@ def _check_collide_reservoir(ns, todo):
     if problems:
         todo.append("collide_reservoir test (a gas of %d molecules at T = 1, reservoir at 2, 20000 collisions): %s."
                     % (N_TEST, "; ".join(problems)))
-    return {"present": True, "passed": not problems}
+    return {"present": True, "passed": not problems, "signature": "keyword-only"}
 
 
 def _check_collide_gases(ns, todo):
-    if _missing(ns, "collide_gases", "collide_gases(vxa, vya, vxb, vyb, ncoll)", todo):
+    if _missing(ns, "collide_gases", todo):
         return {"present": False}
+    f = _keyword_only(ns, "collide_gases", todo)
+    if f is None:
+        return {"present": True, "passed": False, "signature": "positional"}
     rng = np.random.RandomState(3)
     va = [rng.normal(0, 1, N_TEST), rng.normal(0, 1, N_TEST)]
     vb = [rng.normal(0, np.sqrt(3), N_TEST), rng.normal(0, np.sqrt(3), N_TEST)]
     e0 = _energy(*va) + _energy(*vb)
     ta0, tb0 = [0.5 * (np.mean(v[0] ** 2) + np.mean(v[1] ** 2)) for v in (va, vb)]
     try:
-        out = _arrays(_call_with_limit(ns["collide_gases"], (va[0].copy(), va[1].copy(), vb[0].copy(),
+        out = _arrays(_call_with_limit(f, (va[0].copy(), va[1].copy(), vb[0].copy(),
                                                              vb[1].copy(), 2 * N_TEST)), 4, "vxa, vya, vxb, vyb")
     except Exception as e:
-        todo.append("collide_gases(vxa, vya, vxb, vyb, 20000) %s" % _describe_error(e))
+        todo.append("collide_gases(vxa=..., vya=..., vxb=..., vyb=..., ncoll=20000) %s" % _describe_error(e))
         return {"present": True, "passed": False}
     problems = []
     if any(x.shape != (N_TEST,) for x in out):
@@ -322,28 +370,32 @@ def _check_collide_gases(ns, todo):
                             "heat should flow from B to A" % (ta0, tb0, ta1, tb1))
     if problems:
         todo.append("collide_gases test (gas A at T = 1, gas B at T = 3, 20000 collisions): %s." % "; ".join(problems))
-    return {"present": True, "passed": not problems}
+    return {"present": True, "passed": not problems, "signature": "keyword-only"}
 
 
 def _check_move_gravity(ns, todo):
-    if _missing(ns, "move_gravity", "move_gravity(y, vy, g, dt)", todo):
+    if _missing(ns, "move_gravity", todo):
         return {"present": False}
+    f = _keyword_only(ns, "move_gravity", todo)
+    if f is None:
+        return {"present": True, "passed": 0, "total": len(MOVE_GRAVITY_TESTS), "signature": "positional"}
     failed = []
     for (y, vy, g, dt), (ey, evy) in MOVE_GRAVITY_TESTS:
         try:
-            gy, gvy = _arrays(_call_with_limit(ns["move_gravity"], (np.array(y), np.array(vy), g, dt)), 2, "y, vy")
+            gy, gvy = _arrays(_call_with_limit(f, (np.array(y), np.array(vy), g, dt)), 2, "y, vy")
             if not (gy.shape == (1,) and gvy.shape == (1,) and abs(gy[0] - ey) <= MOVE_GRAVITY_TOL
                     and abs(gvy[0] - evy) <= MOVE_GRAVITY_TOL):
-                failed.append("move_gravity([1.], [0.], 1, %g) gave y = %s, vy = %s; expected %.3f, %.3f"
+                failed.append("move_gravity(y=[1.], vy=[0.], g=1, dt=%g) gave y = %s, vy = %s; expected %.3f, %.3f"
                               % (dt, np.round(gy, 3), np.round(gvy, 3), ey, evy))
         except Exception as e:
-            failed.append("move_gravity([1.], [0.], 1, %g) %s" % (dt, _describe_error(e)))
+            failed.append("move_gravity(y=[1.], vy=[0.], g=1, dt=%g) %s" % (dt, _describe_error(e)))
             if isinstance(e, _Timeout):
                 break
     if failed:
         todo.append("move_gravity fails %d of %d tests from \"Required Functions\", e.g. %s"
                     % (len(failed), len(MOVE_GRAVITY_TESTS), failed[0]))
-    return {"present": True, "passed": len(MOVE_GRAVITY_TESTS) - len(failed), "total": len(MOVE_GRAVITY_TESTS)}
+    return {"present": True, "passed": len(MOVE_GRAVITY_TESTS) - len(failed), "total": len(MOVE_GRAVITY_TESTS),
+            "signature": "keyword-only"}
 
 
 # ---------------------------------------------------------------- results
@@ -525,6 +577,8 @@ def run():
         r = functions[fname]
         if not r["present"]:
             lines.append("  %-18s missing" % fname)
+        elif r.get("signature") == "positional":
+            lines.append("  %-18s positional arguments: not tested (see To do)" % fname)
         elif "total" in r:
             lines.append("  %-18s %d of %d tests passed" % (fname, r["passed"], r["total"]))
         else:
