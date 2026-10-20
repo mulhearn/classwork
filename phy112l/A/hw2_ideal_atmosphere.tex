@@ -22,7 +22,11 @@
 
 In this assignment, we will model an atmosphere as an ideal gas in two
 dimensions.  We will measure the heat exchanged during the approach to
-thermal equilibrium, numerically determine the heat capacity of an ideal gas, and compare with our theoretical expectaion.  Next, we will add gravity to our model and measure how this impacts the molecular density and heat capacity of the atmosphere.
+thermal equilibrium, numerically determine the heat capacity of an
+ideal gas, and compare with our theoretical expectation.  We will use
+the heat capacity to understand adiabatic compression, and simulate
+it.  Next, we will add gravity to our model and measure how this
+impacts the molecular density and heat capacity of the atmosphere.
 
 \section{Heat Capacity of an Ideal Gas}
 
@@ -32,7 +36,7 @@ kinetic, and the equipartition theorem implies that:
 U = \frac{f}{2}NkT
 \end{equation}
 where $f$ is the number of quadratic degrees of freedom: 3 for an
-ideal-gas in 3-D, and 2 for an ideal-gas in 2-D.
+ideal gas in 3-D, and 2 for an ideal gas in 2-D.
 
 The heat capacity $C$ describes quantitatively how the temperature of the gas changes as heat is added or removed:
 \begin{equation}
@@ -54,21 +58,71 @@ Applying this to an ideal gas we find that:
 C_V = \frac{f}{2} N k
 \end{equation}
 
-When two systems, $A$ and $B$, initally at temperatures $T_A$ and $T_B$ are brought into thermal contact, they reach an equilibrium temperature $T$ by exchanging heat.  The conservation of energy implies that:
+When two systems, $A$ and $B$, initially at temperatures $T_A$ and $T_B$ are brought into thermal contact, they reach an equilibrium temperature $T$ by exchanging heat.  The conservation of energy implies that:
 $$C_A T_A + C_B T_B = C_A T + C_B T$$
-where $C_A$ and $C_B$ are the heat capacities of the two sytems.  Equivalently:
+where $C_A$ and $C_B$ are the heat capacities of the two systems.  Equivalently:
 \begin{equation}
+\label{eqn:tcontact}
 T = \frac{C_A}{C_A + C_B} \cdot T_A + \frac{C_B}{C_A + C_B} \cdot T_B
 \end{equation}
 Notice that for an infinite reservoir $R$ with $C_R = \infty$ this reduces to:
 $$T = T_R$$
 Also, in the case that $C_A = C_B$, we have:
 $$T = \frac{T_A + T_B}{2}$$
-that is, the temperatue is just the average of the two system.
+that is, the temperature is just the average of the two systems.
+
+\section{Adiabatic Compression and the Heat Capacity}
+
+In HW 1 we derived the pressure and work for adiabatic compression of
+an ideal gas, directly from $U = \frac{f}{2}NkT$.  Here we derive them
+again from the heat capacity.  During an adiabatic process no heat
+enters or leaves the gas, $Q=0$, so each small change in the energy of
+the gas is work done on it.  For our 2-D gas, with pressure $O$ and
+area $A$:
+$$dU = dW = -O\,dA$$
+At constant area, the same change in temperature $dT$ would require a
+heat $C_V\,dT$, and because the energy of an ideal gas depends only on
+its temperature, $dU = C_V\,dT$ in any process.  So:
+$$C_V\,dT = -O\,dA = -\frac{NkT}{A}\,dA$$
+using the ideal gas law $OA = NkT$.  Dividing by $C_V T$:
+$$\frac{dT}{T} = -\frac{Nk}{C_V}\,\frac{dA}{A}$$
+and integrating both sides:
+\begin{equation}
+\label{eqn:tacv}
+T\,A^{Nk/C_V} = {\rm const}
+\end{equation}
+For our 2-D ideal gas, $C_V = Nk$ (Equation~\ref{eqn:cv} with $f=2$),
+so during adiabatic compression:
+\begin{equation}
+\label{eqn:tadi}
+T\,A = T_1 A_1
+\end{equation}
+and with $O = NkT/A$:
+$$O A^2 = O_1 A_1^2$$
+as we found in HW 1.  The work done on the gas compressing it from
+$A_1$ to $A_2$ is simply the change in its energy:
+\begin{equation}
+\label{eqn:wcv}
+W = \Delta U = C_V\,(T_2 - T_1) = N k T_1 \left( \frac{A_1}{A_2} - 1 \right)
+\end{equation}
+which agrees with the integral $-\int O\,dA$ from HW 1.  For the gas
+cylinder of HW 1, compressed from height $h_1$ to $h_2$, $A_1/A_2 =
+h_1/h_2$, and in our system of units:
+\begin{equation}
+\label{eqn:oadi}
+\frac{O}{O_0} = \left( \frac{T_1}{T_0} \right) \left( \frac{a h_1}{h^2} \right)
+\end{equation}
+\begin{equation}
+\label{eqn:wadi}
+\frac{W}{U_0} = \frac{T_1}{T_0} \left( \frac{h_1}{h_2} - 1 \right)
+\end{equation}
+For example, compressing the gas from $h_1 = 4a$ to $h_2 = 2a$
+starting at $T_1 = T_0$ doubles its temperature, to $T_2 = 2T_0$, and
+takes work $W = 1\,U_0$.
 
 \section{Ideal Gas with Gravity}
 
-Suppose now that our ideal gas is in a constant gravitation field with acceleration $g$.
+Suppose now that our ideal gas is in a constant gravitational field with acceleration $g$.
 Then each particle has gravitational potential energy:
 \begin{equation}
 E_{\rm grav} = m g y
@@ -82,6 +136,7 @@ The normalization condition:
 $$\int_0^\infty p(y) dy = 1$$
 gives us the normalization constant, and so:
 \begin{equation}
+\label{eqn:py}
 p(y) = \frac{mg}{kT} \exp\left( -\frac{m g y}{kT} \right)
 \end{equation}
 This is a decaying exponential, so that the atmosphere gets thinner as you go higher, exactly as we expect.  The average height of the gas molecules is:
@@ -89,7 +144,7 @@ This is a decaying exponential, so that the atmosphere gets thinner as you go hi
 \label{eqn:yexp}
 \braket{y} = \frac{k T }{m g}
 \end{equation}
-The total gravitation potential energy for the entire gas is:
+The total gravitational potential energy for the entire gas is:
 $$U_{\rm grav} = \sum_i m g y_i = N m g \braket{y}$$
 and using Equation~\ref{eqn:yexp} we have:
 $$U_{\rm grav} = N kT$$
@@ -103,20 +158,20 @@ thus the heat capacity of our atmosphere is:
 C_V = \left( \frac{\partial U}{\partial T} \right)_V = \frac{f+2}{2} N k
 \end{equation}
 Notice the system is still at constant V (just V is now infinite) or,
-more importantly, no external work is done to the atmosphere, so our
-previous result for the kinetic part still apply.  The influence of
+more importantly, no external work is done on the atmosphere, so our
+previous result for the kinetic part still applies.  The influence of
 gravity increases the heat capacity by $Nk$.  This additional heat
-capacity comes from the systems ability to stash additional energy as
-gravitation potential energy.  This situation is quite analogous to a
-gas under constant pressure, for which the same addtional factor for the heat capacity is obtained.
+capacity comes from the system's ability to stash additional energy as
+gravitational potential energy.  This situation is quite analogous to a
+gas under constant pressure, for which the same additional term in the heat capacity is obtained.
 
 \section{System of Units}
 
-We will use our same system of units as in the previous assignment
-with one additional constraint.  Interesting, the ideal gas model of
-HW 1 had no specific length scale defined, we simply took it to be
+We will use the same system of units as in the previous assignment
+with one additional constraint.  Interestingly, the ideal gas model of
+HW 1 had no specific length scale defined: we simply took it to be
 some scale of interest which we called $a$.  Our results apply equally
-well to the air in child's balloon or the vast extremely low-density
+well to the air in a child's balloon or the vast extremely low-density
 plasmas of the interstellar medium.  Once we turn on gravity, however,
 there is a relevant length scale given by Equation~\ref{eqn:yexp}.  So
 we set:
@@ -147,6 +202,7 @@ Motivated by the ideal gas law, we can set the unit of pressure to:
 $$O_0 \equiv \frac{NkT_0}{a^2}$$
 and the unit of total energy:
 $$U_0 = N k T_0$$
+so that the unit of heat capacity is $U_0/T_0 = Nk$.
 Remember that for analytic work, we keep these factors in place.  But when using an
 analytic result within our computer programs, we set all of these quantities to 1:
 $$m = a = g = T_0 = v_0 = \tau = O_0 = U_0 = 1$$
@@ -159,7 +215,10 @@ the average kinetic energy, which in our system of units becomes:
   \frac{T}{T_0} = \frac{\braket{v_x^2/v_0^2} + \braket{v_y^2/v_0^2}}{2}
 \end{equation}
 This is also the total kinetic energy of the gas, in units of total energy.
-The total energy of the gas has a new term from the gravitation potentail energy, so that:
+The energy of any group of molecules, e.g.\ the heat $Q$ given up by
+reservoir particles, is measured in the same unit: a sum of
+$\frac{1}{2}(v_x^2 + v_y^2)/v_0^2$ over the molecules, divided by $N$.
+The total energy of the gas has a new term from the gravitational potential energy, so that:
 \begin{equation}
   \frac{U}{U_0} = \frac{\braket{v_x^2/v_0^2} + \braket{v_y^2/v_0^2}}{2} + \braket{y/a}
 \end{equation}
@@ -190,12 +249,12 @@ and set $f=2$.
 
 When simulating our atmosphere under the influence of gravity, we'll
 have to adjust our algorithm for circulating the gas and bouncing off
-the ground.  We'll no longer need a top for our cylinder of gas, we'll
+the ground.  We'll no longer need a top for our cylinder of gas: we'll
 allow particles to reach as high as they can under the influence of
 gravity.
 
-Our numerical model includes the $y$-position of each molecules.
-While inside the container, the molecules position can be updated for
+Our numerical model includes the $y$-position of each molecule.
+While inside the container, a molecule's position can be updated for
 a time step $\Delta t$ as:
 \begin{equation}
 y \to y + v_y \; \Delta t - \frac{1}{2} \; g \; (\Delta t)^2
@@ -245,7 +304,7 @@ v_y \to v_y \; - g \Delta t
       \node[black, below] at (2, 0) {$y=0$};
       \node[black, right] at (\xend-1, 3) {$y=y_b, v_y=v_b$};
       \node[black, right] at (\xend-1,-7) {$y=y_a, v_y=v_a$};
-      \node[black, below] at (\xb-2,0) {$v_y=\pm v_0$};
+      \node[black, below] at (\xb-2,0) {$v_y=\pm v_c$};
 
       \node[black, below] at (20,0) {$t \rightarrow$};
 
@@ -271,129 +330,249 @@ $$v_a < 0.$$ Bouncing is not so simple in this case, due to the
 acceleration due to gravity.  Our approach will be to find position
 $y_b$ and velocity $v_b$ if the particle had bounced, instead of
 simply passing through $y=0$.  Our first step is to find the time $t$
-since we passed though $y=0$, with $y = y_0 = 0$ and $v_y = v_0$.  We
-do not yet know either $v_0$ or $t$, but they are easy to calculate from 1-D kinematics:
-$$v_a = v_0 - gt$$
+since we passed through $y=0$, with $y = 0$ and $v_y = v_c$, the
+velocity at the crossing.  (We call it $v_c$ to keep it apart from our
+unit of velocity $v_0$.)  We do not yet know either $v_c$ or $t$, but
+they are easy to calculate from 1-D kinematics:
+$$v_a = v_c - gt$$
 so that:
-$$t = \frac{v_0 - v_a}{g}$$
+$$t = \frac{v_c - v_a}{g}$$
 and also:
-$$v_a^2 = v_0^2 - 2 g y_a$$
+$$v_a^2 = v_c^2 - 2 g y_a$$
 so:
-$$v_0 = - \sqrt{v_a^2 + 2 g y_a}$$
+$$v_c = - \sqrt{v_a^2 + 2 g y_a}$$
 notice that we have kept the negative square root corresponding to the most
-recent crossing of $y=0$ with $v_0 < 0$.  (The other root corresponds
+recent crossing of $y=0$ with $v_c < 0$.  (The other root corresponds
 to an earlier time with the molecule passing upwards through $y=0$.)
 And so:
 $$t = \frac{-v_a-\sqrt{v_a^2 + 2 g y_a}}{g}$$
 
 That result for $t$ is completely valid, except it is numerically
-unstable.  In the vicinity of $y_a=0$, which is where we are located, the $2 g y_a$ will be overcome by numerical roundoff errors from calcuating:
+unstable.  In the vicinity of $y_a=0$, which is where we are located, the $2 g y_a$ will be overcome by numerical roundoff errors from calculating:
 $$-v_a-\sqrt{v_a^2} = |v_a| - |v_a| = 0$$
-Instead we use the algebraic equivalent but numerically stable form:
+Instead we use the algebraically equivalent but numerically stable form:
 \begin{equation}
 t = \frac{- 2 y_a}{\sqrt{v_a^2 + 2 g y_a} - v_a}
 \end{equation}
 which we obtain by multiplying the top and bottom by the conjugate.
 
-With $v_0$ and $t$ now in hand, we can calculate the position $y_b$ and the
-$y$-component of veloctiy $v_b$ had the particle bounced at $y=0$, which is to say $v_0 \to -v_0$.  So:
+With $v_c$ and $t$ now in hand, we can calculate the position $y_b$ and the
+$y$-component of velocity $v_b$ had the particle bounced at $y=0$, which is to say $v_c \to -v_c$.  So:
 \begin{equation}
-y_b = (-v_0 t) - \frac{1}{2}\; g t^2
+y_b = (-v_c t) - \frac{1}{2}\; g t^2
 \end{equation}
 and:
 \begin{equation}
-v_b = (-v_0) - g\,t
+v_b = (-v_c) - g\,t
 \end{equation}
-Take care that $-v_0$ is positive!  Also notice that if $t$ is large
-enough, the particle may have fallen below $y=0$, so that $y_b<0$.
-You will have to keep bouncing molecules until all of them have $y >
+Take care that $-v_c$ is positive!  Also notice that if $t$ is large
+enough, the particle may have fallen below $y=0$ again, so that $y_b<0$.
+You will have to keep bouncing molecules until all of them have $y \ge
 0$ at the end of the time step.
+
+\section{Required Functions}
+
+\noindent
+Define these functions at the top level of your notebook (not inside
+another function), and use them in your solution.  {\bf Please stick to
+these function names and definitions.}  It will help us help you debug
+your code.
+\begin{itemize}
+\item From HW 1, unchanged: {\tt collide(ax, ay, bx, by, theta)}, {\tt
+  temp(vx, vy)} and {\tt move(y, vy, h, vp, dt)}.
+\item Thermal contact with a reservoir at temperature {\tt Tr}, for {\tt ncoll} collisions:
+\begin{python}
+def collide_reservoir(vx, vy, Tr, ncoll):
+    # your code here
+    return vx, vy, Q # updated values, and the heat given to the gas
+\end{python}
+  Each collision uses a new reservoir particle, drawn as in HW 1, and
+  a randomly chosen gas molecule.  {\tt Q} is the kinetic energy the
+  reservoir particles lose in the collisions, in units of $U_0$ (see
+  the System of Units).
+\item Thermal contact between two gases A and B, for {\tt ncoll} collisions:
+\begin{python}
+def collide_gases(vxa, vya, vxb, vyb, ncoll):
+    # your code here
+    return vxa, vya, vxb, vyb # updated values
+\end{python}
+  Each collision is between a randomly chosen molecule of gas A and a
+  randomly chosen molecule of gas B.
+\item The motion of the molecules under gravity, including all bouncing at $y=0$:
+\begin{python}
+def move_gravity(y, vy, g, dt):
+    # your code here
+    return y, vy # updated values
+\end{python}
+  {\bf Keep bouncing until every molecule has $y \ge 0$.}  Test
+  values: a single molecule at rest at $y=1$ falls and bounces once in
+  $\Delta t = 2$, and twice in $\Delta t = 5$:
+\begin{python}
+print(np.around(move_gravity(np.array([1.0]), np.array([0.0]), 1, 2), 3))
+print(np.around(move_gravity(np.array([1.0]), np.array([0.0]), 1, 5), 3))
+\end{python}
+  should output:
+\begin{verbatim}
+[[0.657]
+ [0.828]]
+[[0.784]
+ [0.657]]
+\end{verbatim}
+\end{itemize}
+
+\section{Checking Your Notebook: hw2check}
+
+\noindent
+As in HW 1, this assignment comes with a checker, {\tt hw2check.py},
+available with the assignment on the course website.  Put it in the
+same folder as your notebook.  If you work on a cloud server
+(e.g.\ JupyterHub or Google Colab), upload {\tt hw2check.py} next to
+your notebook there.  Do not modify it.  Use it as follows:
+\begin{itemize}
+\item {\bf Import it} in the first cell of your notebook, along with everything else you need:
+\begin{python}
+# Setup
+import numpy as np
+import matplotlib.pyplot as plt
+import hw2check
+\end{python}
+\item {\bf Label your cells.}  The first line of every other code cell is a comment naming the
+  problem it belongs to: {\tt \# Problem 1}, {\tt \# Problem 2}, \ldots, {\tt \# Problem 6}.
+\item {\bf Required functions.}  Define the functions listed above, exactly as described.
+\item {\bf Report each result} once, with {\tt hw2check.report}, in the cell where you calculate it:
+\begin{python}
+hw2check.report("P1 C", C)
+\end{python}
+  The results to report are listed with each problem.
+\item {\bf Register each required plot} by calling {\tt hw2check.figure} right after making it, in
+  place of {\tt plt.show()}:
+\begin{python}
+hw2check.figure("P1b")
+\end{python}
+  The required plots are {\tt "P1a"}, {\tt "P1b"}, {\tt "P3"} and {\tt "P5"}.
+\item {\bf Run the checker in the last cell:}
+\begin{python}
+import hw2check; hw2check.run()
+\end{python}
+  It tests your functions with the test values in this assignment,
+  checks that every result and plot is there, tells you whether each result is correct to within
+  the expected precision, and warns you about signs of cells run out of order.  It ends either
+  with ``ready to submit'' or with a list of what is still to do.
+\end{itemize}
+{\bf Before submitting, use Kernel $\rightarrow$ Restart \& Run All}, and check that the last cell
+says ``ready to submit''.  If you cannot get there, add a text (markdown) cell at the end of your
+notebook explaining why.  An honest result outside the expected precision, with your explanation,
+is better than one tuned to pass.  Passing the checker does not guarantee credit: we run
+additional tests when grading.
 
 \section{Homework Problems}
 
-{\bf Zero credit if you do not use our system of units consistently!}
-When I ask you to calculate a quantity, e.g. temperature, I want the
-answer in our units, e.g. $T_0$.  Do not first calculate in SI units
-and then convert!\\[3pt]
+\noindent
+{\bf Please submit one PDF file (including output) and one python
+  notebook file (.ipynb) of your completed assignment}, after Restart
+\& Run All, with {\tt hw2check.run()} in the last cell.  This
+assignment must be done in Python, in a Jupyter notebook.
+You will receive {\bf zero credit if you do not use our system of
+  units consistently!}  When asked to calculate a quantity,
+e.g. temperature, answer in our units, e.g. $T_0$.  Do not first
+calculate in SI units and then convert!\\[8pt]
 
 \noindent
-The starting point for this assigment is Problem 4 from the previous
+The starting point for this assignment is Problem 4 from the previous
 homework.  You will want to initialize a numerical model for an ideal
 gas tracking variables $v_x$, $v_y$, and $y$ for $N=10000$ molecules,
-with height $H=4a$.  If you haven't already, define a function that
-brings your gas into thermal contact with a reservoir of temperature
-$T_R$, with an input parameter for the number of collisions.  Call it
-what you want, but we will refer to it as {\tt collide\_reservoir}
-below.  Use {\tt collide\_reservoir} to bring your gas into
-equilibrium with a reservoir with $T_r = 1 T_0$.\\[3pt]
+with height $H=4a$.  Use {\tt collide\_reservoir} to bring your gas
+into equilibrium with a reservoir at $T_R = 1\, T_0$.\\[3pt]
 
 \noindent
-{\bf Problem 0:} If you did not finish the last problem of HW 1, submit it with this assignment instead.  If you completed it already in HW 1, leave a comment to that effect in your notebook.\\[3pt]
+{\bf Problem 1:} Start with the gas at $T=1\,T_0$ and bring it into
+thermal contact with a reservoir at $T_R=2\,T_0$ in ten steps: call
+{\tt collide\_reservoir} ten times, each time for $n_{\rm coll} = N =
+10000$ collisions, and record the gas temperature and the heat
+exchanged after each call.  Plot $Q$ versus iteration (from 1 to 10)
+and $T$ versus iteration (from 1 to 10).  You should see the $Q$
+values are large for the first few iterations and then oscillate near
+zero, and the temperature rising steadily until it reaches $T=2\,
+T_0$.  This should convince you that it takes about ten times as many
+collisions as gas molecules, $n_{\rm coll} = 10 N = 100,000$, to
+reliably bring your gas into thermal equilibrium.  Register this plot
+as {\tt "P1a"}.
+
+Next, bring your gas into thermal contact with a reservoir at
+$T_R=3\,T_0$, with a single call for $10 N$ collisions, and record the
+temperature and the heat exchanged.  Repeat with reservoirs at $4\,T_0$
+and $5\,T_0$.  Plot the total heat exchanged as a function of the
+temperature at each of the four temperature points ($2\,T_0$ to
+$5\,T_0$).  For example, the total heat exchanged at temperature
+$T=3\,T_0$ is the sum of all the $Q$ exchanged with the reservoir at
+$T_R = 2\,T_0$ and the $Q$ exchanged with the reservoir at $T_R = 3\,T_0$.
+Read off the heat capacity of your gas from the plot, and compare it
+to your expectation in the comments.  Report the four temperatures as
+an array {\tt "P1 T"}, the four totals of heat as {\tt "P1 Q"}, and
+your heat capacity as {\tt "P1 C"}.  Register this plot as {\tt
+  "P1b"}.\\[3pt]
 
 \noindent
-{\bf Problem 1:} Modify your {\tt collide\_reservoir} function to
-measure the kinetic energy of the reservoir before and after the
-collisions, and return the heat $Q$ transferred to the gas as the
-return value for the function.  Start with the gas at $T=1~\rm T_0$.
-Call {\tt collide\_reservoir} to perform $n_{\rm coll} = N = 10000$
-collisions with a reservoir at $T=2~\rm T_0$.  Record the gas
-temperature and the heat exchanged at this step.  Call the {\tt
-  collide\_reservoir} function a total of 10 times in this manner,
-recording the gas temperature and heat exchanged each time.  Plot $Q$
-versus iteration (from 1 to 10) and $T$ versus iteration (from 1 to
-10).  You should see the $Q$ values are large for the first few
-iterations and then oscillate near zero.  You should see the
-temperature rising steadily until it reaches $T=2 T_0$.  This exercise
-should convince you that it takes about ten times as many collisions
-as gas molecules to reliably bring your gas into thermal equilibrium.\\[3pt]
+{\bf Problem 2:} Call your current gas model ``gas A''.  Create a
+second gas model ``gas B'' with the same parameters.  Initialize gas A
+to $T=1\, T_0$ and gas B to $T=2\, T_0$.  Bring gas A and gas B into
+thermal contact with each other, using {\tt collide\_gases}, for
+$n_{\rm coll} = 10 N = 100,000$ collisions.  Measure the temperature
+of both after the collisions and compare, in the comments, with the
+prediction of Equation~\ref{eqn:tcontact}: the two gases have the same
+heat capacity, $C_A = C_B = 1\,U_0/T_0$, so both should reach the
+average, $T = 1.5\,T_0$.  Report them as {\tt "P2
+  TA"} and {\tt "P2 TB"}.\\[3pt]
 
 \noindent
-{\bf Problem 2:} Return your gas to $T=1~\rm T_0$.  Then call {\tt
-  collide\_reservoir} with $T_r = 2\;T_0$ for $n_{\rm coll} = 10 N =
-100,000$ collisions, and record the temperature of your gas and the
-heat exchanged.  Next, bring your gas into thermal contact with a
-reservoir at $T=3\;T_0$, and record the heat exchanged.  Repeat this
-process until your reach $T=5\;T_0$.  Plot the total heat exchanged as
-a function of each temperature point. For example, the total heat
-exchanged at temperature $T=3\;T_0$ would be the sum of the $Q$
-exchanged with the reservoirs at $T_r = 2\;T_0$ and at $T_r = 3\;
-T_0$. Read off the heat capacity of your gas from the plot, and
-compare it to expecation in the comments.\\[3pt]
+{\bf Problem 3:} Simulate adiabatic compression of gas A, starting at
+$T = 1\,T_0$, from $h=4a$ to $h=2a$ in 80 timesteps of size $\Delta t
+= 10 \tau$, with your {\tt move} function from HW 1.  Set the speed of
+the piston appropriately, and calculate the pressure at each step as
+in HW 1.  The collisions with the piston bring the gas out of thermal
+equilibrium at each step.  This is an adiabatic process, so you cannot
+use a reservoir.  Instead, bring the gas back into thermal equilibrium
+after each step by colliding $N = 10000$ randomly chosen pairs of its
+own molecules, as in Problem 3 of HW 1.  Plot your measured $O$ versus
+$A$ and compare to your expectation from Equation~\ref{eqn:oadi}.
+Integrate your curve to get the work done, and compare to your
+expectation from Equation~\ref{eqn:wadi}.  Measure the final
+temperature, and check that $W = C_V\,\Delta T$
+(Equation~\ref{eqn:wcv}).  Report the area $A = a h$ and the pressure
+$O$ of each step as arrays {\tt "P3 A"} and {\tt "P3 O"}, the work as
+{\tt "P3 W"}, and the final temperature as {\tt "P3 T"}.  Register
+your plot as {\tt "P3"}.\\[3pt]
 
 \noindent
-{\bf Problem 3:} Call your current gas model ``gas A''.  Create a
-second gas model ``gas B'' with the same parameters.  Intialize gas A
-to $T=1 T_0$ and gas B to $T=2 T_0$.  Bring gas A and gas B into
-thermal contact with each other for $n_{\rm coll} = 10 N = 100,000$
-collisions.  Measure the temperature of both after the collisions and
-compare with your expectations in the comments.\\[3pt]
-
-\noindent
-{\bf Problem 4:} Define a function that updates your gas for a time
-step $\Delta t$ accounting for a non-zero gravity, and handling
-bouncing at $y=0$, as described in the text.  Use this to turn gas A
-into a model for the atmosphere with gravity and $T = 1\rm T_0$.  To
-do so use\footnote{Other combinations work, but I found this to be a reliable and reasonably efficient setting.} a total of $n_{\rm coll} = 20 N = 200,000$
-collisions and $n_{\rm step} = 2000$ time steps of size $\Delta t =
-0.01\tau$.  During each time step, account for gravity and then
-simulate thermal contact with a reservoir at $T_r = 1 T_0$ for $n_{\rm
-  coll}/n_{\rm step}$ collisions.  Measure the temperature of the gas
-and the total energy (kinetic and gravitational) and compare with your
-expectation.\\[3pt]
+{\bf Problem 4:} Use your {\tt move\_gravity} function to turn gas A
+into a model for the atmosphere with gravity and $T = 1\,T_0$.  To do
+so use\footnote{Other combinations work, but I found this to be a
+  reliable and reasonably efficient setting.} a total of $n_{\rm coll}
+= 20 N = 200,000$ collisions and $n_{\rm step} = 2000$ time steps of
+size $\Delta t = 0.01\tau$.  During each time step, account for
+gravity and then simulate thermal contact with a reservoir at $T_R = 1\,
+T_0$ for $n_{\rm coll}/n_{\rm step}$ collisions.  Measure the
+temperature of the gas and the total energy (kinetic and
+gravitational) and compare with your expectation.  Report them as {\tt
+  "P4 T"} and {\tt "P4 U"}.\\[3pt]
 
 \noindent
 {\bf Problem 5:} Make a histogram of the $y$-position of the
-molecules, and compare to the theoretical prediction in the text.\\[3pt]
+molecules, and compare to the theoretical prediction of
+Equation~\ref{eqn:py}.  Report the mean height $\braket{y}$ as {\tt "P5
+  y"}, and register your plot as {\tt "P5"}.\\[3pt]
 
 \noindent
-{\bf Problem 6:} Bring your atmosphere (gas A) at temperature $T=1~\rm
-T_0$ into thermal contact with (gas B) at temperature $T=4~\rm T_0$.
+{\bf Problem 6:} Bring your atmosphere (gas A) at temperature $T=1\,
+T_0$ into thermal contact with gas B at temperature $T=4\, T_0$.
 Apply gravity to gas A but not to gas B.  Use a total of $n_{\rm coll}
 = 20 N = 200,000$ collisions, spread across $n_{\rm step} = 2000$ time
-steps of size $\Delta t = 0.01\tau$, as in the previous problem.
-Measure the equilibrium temperature and compare to your expectation,
-based on the heat capacities of the two gases.  (Make sure you do not
-use {\tt collide\_reservoir} while bring the two gases into
-equilibrium.)\\[3pt]
+steps of size $\Delta t = 0.01\tau$, as in Problem 4, with
+{\tt collide\_gases}.  Measure the equilibrium temperature of both
+gases and compare to the prediction of Equation~\ref{eqn:tcontact}:
+with gravity, gas A has heat capacity $C_A = 2\,U_0/T_0$, and without
+it gas B has $C_B = 1\,U_0/T_0$, so both should reach $T = 2\,T_0$.  (Make sure you do not use {\tt collide\_reservoir}
+while bringing the two gases into equilibrium.)  Report the
+temperatures as {\tt "P6 TA"} and {\tt "P6 TB"}.\\[3pt]
 
 \end{document}
