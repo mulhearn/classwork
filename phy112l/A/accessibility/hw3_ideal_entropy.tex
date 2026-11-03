@@ -1,11 +1,12 @@
-% accessibility/hw3_ideal_entropy.tex:  accessibility settings for hw3_ideal_entropy.tex
-% (common/mulhearn/accessibility.txt).  Maintained by the agents;  hw3_ideal_entropy.tex has only  \input{accessibility/hw3_ideal_entropy}
-% as its first line.  Build with LuaLaTeX.
+% accessibility/hw3_ideal_entropy.tex:  accessibility settings and alternative text
+% for hw3_ideal_entropy.tex (common/mulhearn/accessibility.txt).  Maintained by the agents;
+% hw3_ideal_entropy.tex has only \input{accessibility/hw3_ideal_entropy} as its first line.
+% Build with LuaLaTeX.
 \DocumentMetadata{lang=en-US, pdfversion=2.0, pdfstandard=ua-2, tagging=on}
 
 \makeatletter
 
-% --- document information (needs hyperref, loaded here so main.tex does not have to)
+% --- document information (needs hyperref, loaded here so the document does not have to)
 \AddToHook{begindocument/before}{%
   \RequirePackage{hyperref}%
   \hypersetup{pdftitle={PHY 112L: Entropy of a 2-D Ideal-Gas}, pdfauthor={Michael Mulhearn},
@@ -13,10 +14,11 @@
     pdfsubject={\access@statement}}}
 
 % --- the statement:  read first by assistive technology, not visible on the page
-\def\access@statement{I have attempted to bring this document into compliance with the accessibility
-  requirements of the Americans with Disabilities Act (Title II) and University of California policy
-  (WCAG 2.1 Level AA).  If this minimal standard is insufficient or ineffective for your needs, please bring
-  the matter to my attention, so that I can provide additional accommodations as appropriate.}
+\def\access@statement{I have attempted to bring this document into compliance with the
+  accessibility requirements of the Americans with Disabilities Act (Title II) and University of
+  California policy (WCAG 2.1 Level AA).  If this minimal standard is insufficient or ineffective
+  for your needs, please bring the matter to my attention, so that I can provide additional
+  accommodations as appropriate.}
 \AddToHook{begindocument/end}{%
   \tagstructbegin{tag=Figure, alt={\access@statement}}\tagmcbegin{}\tagmcend\tagstructend}
 
@@ -26,21 +28,27 @@
   \NewCommandCopy\access@includegraphics\includegraphics
   \RenewDocumentCommand\includegraphics{s O{} m}{%
     \@ifundefined{access@alt@#3}%
-      {\PackageWarning{accessibility}{no alternative text for #3}\access@includegraphics[#2]{#3}}%
+      {\PackageWarning{accessibility}{no alternative text for #3}%
+       \access@includegraphics[#2]{#3}}%
       {\access@includegraphics[alt={\@nameuse{access@alt@#3}},#2]{#3}}}}
 
-% --- alternative text for TikZ / circuitikz pictures, by source file and order:  \AltTikZ{file.tex}{n}{text}
+% --- alternative text for TikZ pictures, by source file and order:  \AltTikZ{file.tex}{n}{text}
+% (in the main file \CurrentFile is empty:  the main file's own name is used)
 \newcommand\AltTikZ[3]{\@namedef{access@tikz@#1@#2}{#3}}
 \newcount\access@depth
 \def\access@tikzbegin{%
   \ifnum\access@depth=0
-    \@ifundefined{access@tikzn@\CurrentFile}{\global\@namedef{access@tikzn@\CurrentFile}{0}}{}%
-    \xdef\access@n{\the\numexpr\@nameuse{access@tikzn@\CurrentFile}+1}%
-    \global\expandafter\let\csname access@tikzn@\CurrentFile\endcsname\access@n
-    \@ifundefined{access@tikz@\CurrentFile @\access@n}%
-      {\PackageWarning{accessibility}{no alternative text for TikZ picture \access@n\space in \CurrentFile}%
+    \edef\access@file{\CurrentFile}%
+    \ifx\access@file\@empty \edef\access@file{\jobname.tex}\fi
+    \@ifundefined{access@tikzn@\access@file}{\global\@namedef{access@tikzn@\access@file}{0}}{}%
+    \xdef\access@n{\the\numexpr\@nameuse{access@tikzn@\access@file}+1}%
+    \global\expandafter\let\csname access@tikzn@\access@file\endcsname\access@n
+    \@ifundefined{access@tikz@\access@file @\access@n}%
+      {\PackageWarning{accessibility}%
+         {no alternative text for TikZ picture \access@n\space in \access@file}%
        \global\let\access@tagged\@false}%
-      {\tagstructbegin{tag=Figure, alt={\@nameuse{access@tikz@\CurrentFile @\access@n}}}\tagmcbegin{}%
+      {\tagstructbegin{tag=Figure, alt={\@nameuse{access@tikz@\access@file @\access@n}}}%
+       \tagmcbegin{}%
        \global\let\access@tagged\@true}%
   \fi
   \global\advance\access@depth 1 }
@@ -50,16 +58,15 @@
 \def\@true{true}\def\@false{false}
 \AddToHook{env/tikzpicture/before}{\access@tikzbegin}
 \AddToHook{env/tikzpicture/after}{\access@tikzend}
-\AddToHook{env/circuitikz/before}{\access@tikzbegin}
-\AddToHook{env/circuitikz/after}{\access@tikzend}
 
-% --- code listings:  listings (pythonhighlight) cannot be tagged yet (TeX Live 2026:  unbalanced paragraph
-% hooks), so the python environment becomes a framed fancyvrb Verbatim, same font and frame, without colours
+% --- code listings:  listings (pythonhighlight) cannot be tagged yet (TeX Live 2026:
+% unbalanced paragraph hooks), so the python environment becomes a framed fancyvrb Verbatim,
+% same font and frame, without colours
 \AddToHook{begindocument/before}{%
   \RequirePackage{fancyvrb}%
   \RenewDocumentEnvironment{python}{}%
-    {\VerbatimEnvironment\begin{Verbatim}[fontsize=\footnotesize, frame=single, rulecolor=\color{black!40}]}%
+    {\VerbatimEnvironment
+     \begin{Verbatim}[fontsize=\footnotesize, frame=single, rulecolor=\color{black!40}]}%
     {\end{Verbatim}}}
 
 \makeatother
-
