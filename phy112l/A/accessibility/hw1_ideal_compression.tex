@@ -33,22 +33,25 @@
       {\access@includegraphics[alt={\@nameuse{access@alt@#3}},#2]{#3}}}}
 
 % --- alternative text for TikZ pictures, by source file and order:  \AltTikZ{file.tex}{n}{text}
-% (in the main file \CurrentFile is empty:  the main file's own name is used)
+% (in the main file \CurrentFile is empty:  the main file's own name is used;  the stored text is
+% put into the alt key before \tagstructbegin, which does not expand it)
 \newcommand\AltTikZ[3]{\@namedef{access@tikz@#1@#2}{#3}}
 \newcount\access@depth
 \def\access@tikzbegin{%
   \ifnum\access@depth=0
-    \edef\access@file{\CurrentFile}%
-    \ifx\access@file\@empty \edef\access@file{\jobname.tex}\fi
-    \@ifundefined{access@tikzn@\access@file}{\global\@namedef{access@tikzn@\access@file}{0}}{}%
+    \edef\access@file{\ifx\CurrentFile\@empty\jobname.tex\else\CurrentFile\fi}%
+    \@ifundefined{access@tikzn@\access@file}%
+      {\global\@namedef{access@tikzn@\access@file}{0}}{}%
     \xdef\access@n{\the\numexpr\@nameuse{access@tikzn@\access@file}+1}%
     \global\expandafter\let\csname access@tikzn@\access@file\endcsname\access@n
     \@ifundefined{access@tikz@\access@file @\access@n}%
       {\PackageWarning{accessibility}%
          {no alternative text for TikZ picture \access@n\space in \access@file}%
        \global\let\access@tagged\@false}%
-      {\tagstructbegin{tag=Figure, alt={\@nameuse{access@tikz@\access@file @\access@n}}}%
-       \tagmcbegin{}%
+      {\edef\access@tmp{\noexpand\tagstructbegin{tag=Figure, alt={\unexpanded
+         \expandafter\expandafter\expandafter
+         {\csname access@tikz@\access@file @\access@n\endcsname}}}}%
+       \access@tmp\tagmcbegin{}%
        \global\let\access@tagged\@true}%
   \fi
   \global\advance\access@depth 1 }
