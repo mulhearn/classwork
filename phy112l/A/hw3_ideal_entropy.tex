@@ -1,3 +1,4 @@
+\input{accessibility/hw3_ideal_entropy}
 \documentclass[12pt]{article}
 
 \usepackage[dvips,letterpaper,margin=0.75in,bottom=0.5in]{geometry}
@@ -37,7 +38,7 @@ microstates corresponding to the macrostate.
 
 To compute the Gibbs Entropy, we divide the total phase space into $M$
 cells.  The macrostate is specified by the number of particles in each
-cell $n_i$.  To count these microstates, start by assuming the we have
+cell $n_i$.  To count these microstates, start by assuming that we have
 only two cells, with the first containing $a$ particles.  The binomial
 theorem gives us the multiplicity of states:
 $$\Omega_{(2)} = \frac{N!}{a! (N-a)!}$$
@@ -100,7 +101,12 @@ particles to each cell.  Dividing the result by the total number of
 visits (the number of particles times the number of time steps) we
 determine $p_i$ in each cell with less statistical uncertainty.  This
 only works once the system has reached equilibrium (or else the Gibbs
-Entropy will be changing).
+Entropy will be changing).  With the function {\tt gibbs\_entropy}
+below, you do not need to count the visits yourself: save the arrays
+{\tt vx}, {\tt vy} and {\tt y} at each time step you want to
+include, join each of them into one long array with {\tt
+  np.concatenate}, and pass the three long arrays to {\tt
+  gibbs\_entropy}.  The number of entries is then the number of visits.
 
 \section{Entropy Changes for an Ideal Gas}
 
@@ -142,7 +148,7 @@ Consider an ideal gas contained within $0 \leq y \leq 4 a$ subject to a potentia
 \end{equation}
 We can develop an accurate numerical simulation for this potential
 based on conservation of energy, but with the crucial caveat that the
-molecules momentum in the $x$ direction is unchanged by the potential.
+molecules' momentum in the $x$ direction is unchanged by the potential.
 We define the contribution to the kinetic energy due to the particles'
 motion in the $y$-direction as
 \begin{equation}
@@ -161,7 +167,9 @@ that:
 $$ K_{(y)} \to K_{(y)} + V_{\rm step} $$
 We will call the function that implements this algorithm {\tt reflect}.
 
-The relative occupancy of the upper and lower regions (which are the same area) will be:
+For a gas in equilibrium at temperature $T$ (kept constant by
+thermal contact with a reservoir), the relative occupancy of the upper
+and lower regions (which are the same area) will be:
 $$\frac{p_{\rm up}}{p_{\rm dn}} = \exp \left( - \frac{V_{\rm step}}{kT} \right) \equiv \alpha $$
 and so:
 \begin{equation}
@@ -214,130 +222,234 @@ divided by $U_0$:
 
 \section{Required Functions}
 
-You must implement the following functions as part of your solution.
-You may substitute similar signatures if using a language other than
-Python, but you must use exactly these signatures if using Python. You
-do not need to include the docstrings.  You are encouraged to define
-additional functions as part of your solution, but these functions are
-the most significant.
-
+\noindent
+Define these functions at the top level of your notebook (not inside
+another function), and use them in your solution.  {\bf Please stick to
+these function names and definitions.}  It will help us help you debug
+your code.  As explained in HW 1 (Section ``Keyword-Only Arguments''),
+every required function takes {\bf keyword-only arguments}, with exactly
+the names given here; {\tt hw3check} does not accept positional
+definitions.  Every required function {\bf returns} its results: it
+does not change the arrays you pass to it.
+\begin{itemize}
+\item From HW 1: {\tt temp(*, vx, vy)}.  From HW 2: {\tt
+  collide\_reservoir(*, vx, vy, Tr, ncoll)}, which returns {\tt vx,
+  vy, Q}.
+\item The Gibbs Entropy $S/(kN)$ of a gas, with $v_x$ and $v_y$ each
+  divided into {\tt vbins} bins from $-${\tt vmax} to {\tt vmax}, and
+  $y$ into {\tt hbins} bins from $0$ to $H = 4a$, for {\tt vbins}
+  $\times$ {\tt vbins} $\times$ {\tt hbins} cells in all:
 \begin{python}
 def gibbs_entropy(*, vx, vy, y, hbins, vmax, vbins):
-    """Compute dimensionless Gibbs entropy S/(kN).
-
-    Parameters:
-        vx    : np.ndarray  x-velocity components.
-        vy    : np.ndarray  y-velocity components.
-        y     : np.ndarray  Vertical positions.
-        hbins : int         Number of y bins.
-        vmax  : float       Max |v| for velocity range (-vmax, vmax).
-        vbins : int         Number of velocity bins per component.
-    Returns:    
-        float The dimensionless Gibbs entropy S/(kN)        
-    """
-    pass
+    # your code here
+    return S # dimensionless Gibbs entropy S/(kN)
 \end{python}
-
+  The $y$ range is always the full container, $0 \le y \le 4a$, even
+  when the gas fills only part of it.  {\tt np.histogramdd} does the
+  counting for you.  Test values: four molecules in three cells, with
+  $p_i = 1/2, 1/4, 1/4$, and then all four in two cells, with $p_i =
+  1/2, 1/2$:
 \begin{python}
-def collide_reservoir(*, vx, vy, Tr, ncoll):
-    """Perform collisions of selected particles with a gas reservoir.
-
-    Parameters:
-        vx    : np.ndarray  Particle x-velocities (updated in place).
-        vy    : np.ndarray  Particle y-velocities (updated in place).
-        Tr    : float       Gas reservoir temperature.
-        ncoll : int         Number of collisions to perform.
-    """
-    pass
+vx = np.array([0.2, 0.2, -0.2, -0.2])
+vy = np.array([0.2, 0.2, 0.2, 0.2])
+for y in [np.array([1.5, 1.5, 1.5, 3.5]), np.array([1.5, 1.5, 1.5, 1.5])]:
+    S = gibbs_entropy(vx=vx, vy=vy, y=y, hbins=4, vmax=5, vbins=20)
+    print(np.around(S, 3))
 \end{python}
-
+  should output:
+\begin{verbatim}
+1.04
+0.693
+\end{verbatim}
+\item The motion of the molecules for one time step, without any walls:
 \begin{python}
 def step(*, vy, y, dt):
-    """Advance particle positions for one timestep.
-
-    Parameters:
-        vy : np.ndarray  Vertical velocity components.
-        y  : np.ndarray  Vertical positions (updated in place).
-        dt : float       Time step.
-    """
-    pass
+    # your code here
+    return y # updated values
 \end{python}
-
+\item Elastic reflection at the walls $y = 0$ and $y = h$:
 \begin{python}
 def bounce(*, vy, y, h):
-    """Reflect particles elastically at y=0 and y=h boundaries.
-
-    Parameters:
-        vy : np.ndarray  Vertical velocity components (updated in place).
-        y  : np.ndarray  Vertical positions (updated in place).
-        h  : float       Container height.
-    """
-    pass
+    # your code here
+    return y, vy # updated values
 \end{python}
-
+  Test values:
+\begin{python}
+y1, vy1 = bounce(vy=np.array([-1.0, 2.0, 1.0]), y=np.array([-0.1, 4.3, 2.0]), h=4)
+print(np.around(y1, 3), np.around(vy1, 3))
+\end{python}
+  should output:
+\begin{verbatim}
+[0.1 3.7 2. ] [ 1. -2.  1.]
+\end{verbatim}
+\item Reflection and transmission at the potential step at $y = $ {\tt
+  h\_step}, as described in Section ``Ideal Gas with a Step
+  Potential'', for the molecules that crossed it during the last time
+  step, from {\tt y\_old} to {\tt y}:
 \begin{python}
 def reflect(*, vy, y_old, y, h_step, V_step):
-    """Handle reflection and transmission at a potential step.
-
-    Parameters:
-        vy     : np.ndarray  Vertical velocities (updated in place).
-        y_old  : np.ndarray  Positions before the time step.
-        y      : np.ndarray  Positions after the time step (updated in place).
-        h_step : float       The y-position of the potential step.
-        V_step : float       Potential of the upper region
-    """
-    pass
+    # your code here
+    return y, vy # updated values
 \end{python}
-These functions use the Keyword-only arguments feature of python.  The
-arguments following the asterix (*) must be assigned by name, like {\tt
-  vx=vx\_a} or {\tt vx=vx}.  This is a good practice when you have
-arguments of identical types and no obvious order.
+  A molecule that reaches the step from below with $K_{(y)} \le V_{\rm
+  step}$ is reflected: $y \to 2 h_{\rm step} - y$ and $v_y \to -v_y$.
+  A molecule that crosses keeps its position and has its speed changed
+  as described above, keeping its direction.  Test values, with
+  $h_{\rm step} = 2a$ and $V_{\rm step} = 1\,V_0$: a molecule reflected,
+  one crossing up, one crossing down, and one that does not reach the
+  step:
+\begin{python}
+y1, vy1 = reflect(vy=np.array([1.0, 2.0, -1.0, 1.0]),
+                  y_old=np.array([1.95, 1.9, 2.05, 1.0]),
+                  y=np.array([2.05, 2.1, 1.95, 1.1]), h_step=2, V_step=1)
+print(np.around(y1, 3), np.around(vy1, 3))
+\end{python}
+  should output:
+\begin{verbatim}
+[1.95 2.1  1.95 1.1 ] [-1.     1.414 -1.732  1.   ]
+\end{verbatim}
+\end{itemize}
+
+\section{Checking Your Notebook: hw3check}
+
+\noindent
+As in HW 1 and HW 2, this assignment comes with a checker, {\tt
+  hw3check.py}, available with the assignment on the course website.
+Put it in the same folder as your notebook.  If you work on a cloud
+server (e.g.\ JupyterHub or Google Colab), upload {\tt hw3check.py}
+next to your notebook there.  Do not modify it.  Use it as follows:
+\begin{itemize}
+\item {\bf Import it} in the first cell of your notebook, along with everything else you need:
+\begin{python}
+# Setup
+import numpy as np
+import matplotlib.pyplot as plt
+import hw3check
+\end{python}
+\item {\bf Label your cells.}  The first line of every other code cell is a comment naming the
+  problem it belongs to: {\tt \# Problem 1}, {\tt \# Problem 2}, \ldots, {\tt \# Problem 5}.
+\item {\bf Required functions.}  Define the functions listed above, exactly as described, with
+  keyword-only arguments.
+\item {\bf Report each result} once, with {\tt hw3check.report}, in the cell where you calculate it:
+\begin{python}
+hw3check.report("P1 S", S)
+\end{python}
+  The results to report are listed with each problem.
+\item {\bf Register each required plot} by calling {\tt hw3check.figure} right after making it, in
+  place of {\tt plt.show()}:
+\begin{python}
+hw3check.figure("P3")
+\end{python}
+  The required plots are {\tt "P3"} and {\tt "P4"}.
+\item {\bf Run the checker in the last cell:}
+\begin{python}
+import hw3check; hw3check.run()
+\end{python}
+  It tests your functions with the test values in this assignment,
+  checks that every result and plot is there, tells you whether each result is correct to within
+  the expected precision, and warns you about signs of cells run out of order.  It ends either
+  with ``ready to submit'' or with a list of what is still to do.
+\end{itemize}
+{\bf Before submitting, use Kernel $\rightarrow$ Restart \& Run All}, and check that the last cell
+says ``ready to submit''.  If you cannot get there, add a text (markdown) cell at the end of your
+notebook explaining why.  An honest result outside the expected precision, with your explanation,
+is better than one tuned to pass.  Passing the checker does not guarantee credit: we run
+additional tests when grading.
 
 \section{Homework Problems}
 
-{\bf Zero credit if you do not use our system of units consistently!}
-When I ask you to calculate a quantity, e.g. temperature, I want the
-answer in our units, e.g. $T_0$.  Do not first calculate in SI units
-and then convert!\\[4pt]
+\noindent
+{\bf Please submit one PDF file (including output) and one python
+  notebook file (.ipynb) of your completed assignment}, after Restart
+\& Run All, with {\tt hw3check.run()} in the last cell.  This
+assignment must be done in Python, in a Jupyter notebook.
+You will receive {\bf zero credit if you do not use our system of
+  units consistently!}  When asked to calculate a quantity,
+e.g. temperature, answer in our units, e.g. $T_0$.  Do not first
+calculate in SI units and then convert!\\[8pt]
 
 \noindent
 As a starting point, as in previous assignments, you will want to
 initialize a numerical model for an ideal gas tracking variables
-$v_x$, $v_y$, and $y$ for $N=10000$ molecules, with height $H=4a$.\\[4pt]
+$v_x$, $v_y$, and $y$ for $N=10000$ molecules, in a container of
+height $H=4a$.  Use {\tt collide\_reservoir} with $n_{\rm coll} = 10 N
+= 100,000$ collisions to bring your gas into equilibrium with a
+reservoir at $T_R = 1\, T_0$.\\[3pt]
+
+\noindent
+{\bf Binning.}  Throughout this assignment, use the same bins for every
+Gibbs Entropy: {\tt hbins = 4}, {\tt vmax = 5}, {\tt vbins = 20}.  The
+step at $y = 2a$ is then a bin edge.\\[3pt]
+
+\noindent
+{\bf Measuring the entropy of a state.}  Except in Problem 1, measure
+every entropy in the same way, summing visits as described in Section
+``Gibbs Entropy'': run $n_{\rm step} = 4000$ time steps of size $\Delta
+t = 0.01\tau$ in thermal contact with a reservoir at temperature $T_R$.
+In each time step, call {\tt step}, then {\tt reflect} (only where
+there is a potential step), then {\tt bounce}, and then {\tt
+  collide\_reservoir} for $n_{\rm coll} = 250$ collisions (in all,
+$10^6 = 100 N$ collisions per run).  Save {\tt vx}, {\tt vy} and {\tt
+  y} every 20 time steps during the last 1000 time steps (50
+snapshots), and compute the Gibbs Entropy from all of the snapshots
+together.  The first 3000 time steps bring the gas into equilibrium.
+You will want to write this procedure once, as your own function, and
+call it for each state.\\[3pt]
 
 \noindent
 {\bf Problem 1:} Implement the function {\tt gibbs\_entropy}, with the
 required signature, that computes the Gibbs Entropy for a gas using
-the specified bins.  Validate your function on an initial distribution
-that is uniformly distributed in $v_x$, $v_y$ and $h$.\\[4pt]
+the specified bins.  Validate your function on a single sample of $N$
+molecules distributed uniformly in $v_x$ and $v_y$ from $-${\tt vmax}
+to {\tt vmax}, and in $y$ from $0$ to $4a$.  Compare your result to
+the expectation $\ln M$ for $M$ cells, and explain any difference in
+the comments.  Report your result as {\tt "P1 S"}.\\[3pt]
 
 \noindent
-{\bf Problem 2:} Implement the function {\tt collide\_reservoir}, with
-the required signature, that simulates collisions of your gas with a
-thermal reservoir.  Calculate the change in entropy when your gas
-is heated from $T = 1$ to $T =2$ and compare to your expectation.
-Remember that for the Gibbs Entropy will change by an (unknown)
-constant factor if you change the binning, so you must keep the bins
-{\bf exactly the same} for both the initial and final state in order
-to accurately determine the change in entropy from your
-simulation.\\[4pt]
+{\bf Problem 2:} Implement the functions {\tt step} and {\tt bounce},
+and your procedure for measuring the entropy of a state.  Measure the
+entropy of your gas in equilibrium at $T
+= 1\,T_0$, with $h = 4a$ and $T_R = 1\,T_0$.  Then continue from the
+final state with $T_R = 2\,T_0$ to heat it to $T = 2\,T_0$, and measure
+its entropy again.  Calculate the change in entropy $\Delta S/(kN)$ and
+compare to your expectation.  Remember that the Gibbs Entropy will
+change by an (unknown) constant if you change the binning, so you must
+keep the bins {\bf exactly the same} for both the initial and final
+state in order to accurately determine the change in entropy from your
+simulation.  Report the change in entropy as {\tt "P2 dS"} and the
+final temperature as {\tt "P2 T"}.\\[3pt]
 
 \noindent
-{\bf Problem 3:} Implement the functions {\tt step} and {\tt bounce}.
-Use them to simulate the free expansion of a gas from $h=2a$ to $h=4a$
-at a constant temperature $T_i = 1$.  Compare your measured change in
-entropy to your expectation.\\[4pt]
+{\bf Problem 3:} Simulate the free expansion of a gas from $h=2a$ to $h=4a$
+at a constant temperature $T = 1\,T_0$ ($T_R = 1\,T_0$).  Start with
+the gas distributed uniformly in $0 \le y \le 2a$, and measure its
+entropy with the walls at $h = 2a$.  Then continue from the final
+state with the walls at $h = 4a$, and measure its entropy again.
+Compare your measured change in entropy to your expectation.  Report
+it as {\tt "P3 dS"}.  During the expansion, also compute the Gibbs
+Entropy of a single snapshot every 20 time steps, and plot it versus
+time.  Register this plot as {\tt "P3"}.\\[3pt]
 
 \noindent
 {\bf Problem 4:} Implement the function {\tt reflect}.  Use it to
 simulate the expansion of a gas from $h=2a$ to $h=4a$ at a constant
-temperature $T_i = 1$ when the upper region from $h=2a$ to $h=4a$ is
-at a higher potential energy $V_{\rm step}$ compared to lower region, which you
-should take as the zero of potential.  Show that the occupancy of the
-upper region matches your expectation.\\[4pt]
+temperature $T = 1\,T_0$ ($T_R = 1\,T_0$) when the upper region from
+$y=2a$ to $y=4a$ is at a higher potential energy $V_{\rm step} = 1\,V_0$
+compared to the lower region, which you should take as the zero of
+potential.  Start from the same confined gas as in Problem 3 (its final
+state at $h=2a$).  Show that the occupancy of the upper region matches
+your expectation: measure the fraction $p_{\rm up}$ of the visits in
+the snapshots with $y > 2a$, and measure the temperature of the gas at
+the end of the run.  Report them as {\tt "P4 pup"} and {\tt "P4 T"}.
+Make a histogram of $y$ from the snapshots, with the expected
+occupancy of each region drawn on top, and register this plot as {\tt
+  "P4"}.\\[3pt]
 
 \noindent
-{\bf Problem 5:} Calculate the change in entropy from Problem 4 and
-compare to your expectation.\\[4pt]
+{\bf Problem 5:} Calculate the change in entropy from Problem 4,
+between the confined gas of Problem 3 and the final state of Problem 4,
+and compare to your expectation.  Compare it also to the free expansion
+of Problem 3, and explain the difference in the comments.  Report it as
+{\tt "P5 dS"}.\\[3pt]
 
 \end{document}
