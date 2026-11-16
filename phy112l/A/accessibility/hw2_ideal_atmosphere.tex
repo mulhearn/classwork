@@ -2,7 +2,13 @@
 % for hw2_ideal_atmosphere.tex (common/mulhearn/accessibility.txt).  Maintained by the agents;
 % hw2_ideal_atmosphere.tex has only \input{accessibility/hw2_ideal_atmosphere} as its first line.
 % Build with LuaLaTeX.
-\DocumentMetadata{lang=en-US, pdfversion=2.0, pdfstandard=ua-2, tagging=on}
+\DocumentMetadata{lang=en-US, pdfversion=2.0, pdfstandard=ua-2, tagging=on,
+  tagging-setup={math/alt/use}}   % every Formula:  its LaTeX source as /Alt, next to the MathML
+% the /Alt is the bare source ("S = k \ln \Omega"), without latex-lab's "LaTeX formula starts \begin{math} ..."
+% wrapper (an internal of latex-lab-math, TL 2026)
+\ExplSyntaxOn
+\AddToHook{begindocument/before}{\tl_set:Nn \l__math_content_template_tl { \exp_not:V \g__math_grabbed_math_tl }}
+\ExplSyntaxOff
 
 \makeatletter
 
