@@ -36,25 +36,24 @@ Quantum Chromodynamics\\}
 
 \section{The Need for Color}
 
-In the homework we found that the  baryon is an
-isospin quartet ($I=3/2$) with $J=3/2$ $\Delta^{++}$
-composed of three up quarks,
+In the homework we found that the $\Delta^{++}$ baryon is an
+isospin quartet ($I=3/2$) with $J=3/2$ composed of three up quarks,
 \begin{equation*}
     \Delta^{++} = uuu, \qquad J^P = \tfrac{3}{2}^{+}, \qquad L = 0.
 \end{equation*}
 With $L=0$ the spatial wavefunction is symmetric, and by considering
 $J_z=\pm 3/2$, the spin wavefunction
 (e.g.\ $\ket{\uparrow\uparrow\uparrow}$) is also symmetric. The
-overall wavefunction of three identical fermions appears therefore
+overall wavefunction of three identical fermions therefore
 appears to be symmetric under exchange --- in violation of
-Fermi--Dirac statistics.  This suggest that quarks must carry an
+Fermi--Dirac statistics.  This suggests that quarks must carry an
 additional quantum number, \emph{color}.  Each quark has three color
 states,
 \begin{equation*}
     q \;\longrightarrow\; q_R,\; q_G,\; q_B,
 \end{equation*}
-As we shall the see, the quarks are arranged in an antisymmetric color
-singlet, so the total wave function is antisymmetric, conistent with
+As we shall see, the quarks are arranged in an antisymmetric color
+singlet, so the total wave function is antisymmetric, consistent with
 Fermi-Dirac statistics.
 
 Further experimental evidence comes from $e^+e^-$ annihilation, with:
@@ -71,8 +70,8 @@ cross-section for hadron production to muon production is:
 \end{equation*}
 where the sum runs over quark flavors kinematically accessible at
 $\sqrt{s}$.  This shows that each quark flavor contributes a factor of
-three to the cross-section, consistent with three quark flavors (each
-contributing equally to the rate).
+three to the cross-section, consistent with three quark colors, each
+contributing equally to the rate.
 
 \section{SU(3) Gauge Symmetry}
 
@@ -101,7 +100,7 @@ flavor symmetry.\\[5pt]
 
 \noindent
 {\bf QED review:}
-Let's first recall how QED emergies from local $U(1)$ symmetry.  We
+Let's first recall how QED emerges from local $U(1)$ symmetry.  We
 promote a global symmetry to a local one, $\lambda \to
 \lambda(x)$. The naive derivative no longer transforms covariantly:
 \begin{equation*}
@@ -246,7 +245,7 @@ charge), $G^a_\mu(x)$ is a real field (one for each of the eight
 gluons), $T^a$ is a 3x3 matrix representing a linear operator in color
 space, and the gamma matrices are 4x4 matrices that act on bispinors.
 Nonetheless, the interaction term is quite similar to QED in
-structcure, with the replacement
+structure, with the replacement
 \begin{equation*}
     e\,Q\, A_\mu(x) \;\longrightarrow\; g_s\, G^a_\mu(x)\, T^a,
 \end{equation*}
@@ -269,7 +268,7 @@ and the color basis is complete as well:
 \end{equation*}
 The plane waves for the gluon field are similar to the photon plane waves, except that there are eight of them:
 \begin{equation*}
-    G^a_\mu(x) \;=\; \sum_a \varepsilon^a_\mu(q)\, e^{-i q \cdot x},
+    G^a_\mu(x) \;=\; \varepsilon^a_\mu(q)\, e^{-i q \cdot x},
 \end{equation*}
 with polarization vector $\varepsilon^a_\mu$ and adjoint color label
 $a$. As in QED, the exponential factors at each vertex enforce
@@ -336,7 +335,7 @@ $$\braket{|M_{ij \to kl}|^2} = 2 g_s^4 \frac{t^2+u^2}{s^2}|T^a_{ji}\, T^a_{kl}|^
 $$\frac{1}{9} \sum_{i,j,k,l} | T_{ji}^a T_{kl}^a |^2= \frac{2}{9}$$
 Hint:  use Casimir's trick and note that:
 $$\sum_{ij} \lambda_{ij}^a \lambda_{ji}^b = \Tr(\lambda^a \lambda^b) = 2 \delta^{ab}$$
-where you showed the last step in a previous homework (flavor symmetry).  It's remarkable that the net effect of eight guons in a 3-D color space contributes only a factor of $2/9$!
+where you showed the last step in a previous homework (flavor symmetry).  It's remarkable that the net effect of eight gluons in a 3-D color space contributes only a factor of $2/9$!
 
 \section{The Gluon Field}
 
@@ -377,8 +376,8 @@ have an extra term.  We define the adjoint covariant derivative as:
   D_\mu \equiv \partial_\mu + i g_s [G_\mu^a \, T^a, \cdot]
 \end{equation}
 which you will show in the exercises transforms as needed.
-In the Lorenz Guage, with:
-$$\partial_\mu G^{\mu \omega} = 0$$
+In the Lorenz Gauge, with:
+$$\partial_\mu G^{\mu a} = 0$$
 you will show that the field equations become:
 \begin{equation}
   \label{eqn:gluon-field-equations}
@@ -389,18 +388,15 @@ you will show that the field equations become:
       \big[T^a, [T^b, T^c]\big]
 \end{equation}
 The left hand side is the gluon propagator term (similar to a photon).
-The first term on the RHS (quadratic in the the gloun field $G$) is a
+The first term on the RHS (quadratic in the gluon field $G$) is a
 three gluon vertex of strength $g_s$ and the second term ($G^3$) is a
 four gluon vertex of strength $g_s^2$.
 
 \exercise Show that the adjoint covariant derivative as defined in
 Equation~\ref{eqn:adjoint-covariant-derivative} is indeed
-caovarariant, provided the gluon fields transforms as in Equation~\ref{eqn:gluon-transformation}.\\[5pt]
+covariant, provided the gluon fields transforms as in Equation~\ref{eqn:gluon-transformation}.\\[5pt]
 
-\exercise Working in the Lorenz guage, verify Equation~\ref{eqn:gluon-field-equations}.  Hints: use
-$$\partial_\mu G^{\mu \omega} = \Box^2 G^{\omega a } T^a$$
-in the Lorenz gauge, which is your LHS.  Then the other side comes from calculating
-$$i g_s [G_\mu^a T^a, G^{\mu \omega}].\\[5pt]$$
+\exercise Working in the Lorenz gauge, verify Equation~\ref{eqn:gluon-field-equations}.\\[5pt]
 
 \section{QCD Potential and Bound States}
 
@@ -444,26 +440,28 @@ The corresponding matrix elements are:
 $$\mathcal{M}_{\rm QED} = -\frac{e^2}{t}\big(\bar u(c)\gamma^\mu u(a)\big)\big(\bar v(b)\gamma_\mu v(d)\big)$$
 and
 $$\mathcal{M}_{\rm QCD} = -\frac{g_s^2}{t}\, T^a_{ki}\, T^a_{jl}\, \big(\bar u(c)\gamma^\mu u(a)\big)\big(\bar v(b)\gamma_\mu v(d)\big)$$
-In the low energy limit, the QED process reduces to the familiar Coloumb potential:
+In the low energy limit, the QED process reduces to the familiar Coulomb potential:
 $$V_{\rm QED} = - \frac{e^2}{4\pi r}$$
-By comparing the two Matrix elements we expect that the corresponding low-energy limit for QCD is:
+By comparing the two matrix elements we expect that the corresponding low-energy limit for QCD is:
 $$V_{\rm QCD} = - \frac{g_s^2}{4\pi r} T_{ki}^a T_{jl}^a$$
 In the homework, you will show that the QCD potential is attractive for the color singlet state of the $q \bar{q}$ system and repulsive for a colored state. \\[5pt]
 
-%\exercise (*) Show that the average of the color factor:
-%$$T_{ki}^a T_{jl}^a$$
-%is positive for the singlet color state:
-%$$\tfrac{1}{\sqrt{3}}\Big( r\bar r + g\bar g + b\bar b \Big)$$
-%and repulsive for the colored states:
-%$$\tfrac{1}{\sqrt{2}}\Big( r\bar r - g \bar g \Big)$$
-%and 
-%$$\tfrac{1}{\sqrt{6}}\Big( r\bar r + g \bar g - 2 b \bar b\Big)$$
-%you may use the Fierz Identity:
-%\begin{equation}
-%  \label{eqn:fierz}
-%  \sum_a T^a_{ki}\, T^a_{jl} \;=\; \tfrac{1}{2}\delta_{il}\delta_{jk}
-%                              \;-\; \tfrac{1}{6}\delta_{ki}\delta_{jl}.
-%\end{equation}
+\exercise (*) Define the meson color factor operator by the matrix element:
+$$\braket{ k \bar{l} \mid C_f \mid i \bar{j}} = T_{ki}^a T_{jl}^a
+= c_k^\dagger T^a c_i \; c_j^\dagger T^a c_l$$
+For the singlet state:
+$$\sqrt{\tfrac{1}{3}} \big( r \bar r   + b \bar b + g \bar g \big)$$
+which we can write as:
+$$\ket{1} = \sqrt{\tfrac{1}{3}} \sum_m \ket{m \bar{m}}$$
+show that the average color factor is:
+$$\braket{C_f} = \braket{1 \mid C_f \mid 1} = \frac{4}{3}$$
+Hint: convert to a trace and use completeness of the color space basis:
+$$\sum_m c_m \; c_m^\dagger = 1.$$
+
+\exercise (*) Show that the average color factor of the $r\bar{b}$ state is
+$$\braket{C_f} = T^a_{rr} T^a_{bb} = -\frac{1}{6}$$
+Hint: there are eight Gell-Mann matrices to consider, but only two of
+them have non-zero diagonal elements ($\lambda_3$ and $\lambda_8$).\\[5pt]
 
 \exercise (*) Show that fully antisymmetric 3-color state:
 $$\tfrac{1}{\sqrt{6}}
@@ -472,9 +470,7 @@ is a color singlet, by applying the color raising operator $T_+$ with
 $$T_+ r = g,  \quad T_+ g = 0, \quad T_+ b = 0.$$ 
 and the color lowering operator:
 $$T_- r = 0,  \quad T_- g = r, \quad T_- b = 0.$$ 
-In principle, there are four more operators, but they have a similar results due to symmetry.
-
-
-
+In principle, there are four more raising and lowering operators, but
+they have a similar result due to symmetry.\\[5pt]
 
 \end{document}
