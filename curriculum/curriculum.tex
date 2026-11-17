@@ -55,7 +55,7 @@ explicitly list PHY 9HE as a requirement (even an alternate) or a
 prerequisite.
 
 Our revisions to the computational curriculum involves the replacement
-of PHY 102 and PHY 104B with PHY 45, 110L, 112L, and 115L.  The third
+of PHY 102 and PHY 104B with PHY 45.  The third
 quarter of electricity and magnetism, PHY 110C is also eliminated,
 with the mathematical review that used to be part of the sequence
 taken up in PHY 9 and PHY 104.  Details concerning how these affect
@@ -291,7 +291,7 @@ year in Tables~\ref{tbl:current-transfers} and
 \ref{tbl:proposed-transfers}; this is a major feature of this
 proposal.  This gentle introduction does not come at the cost of
 dramatically increased unit loads later on: transfer students can
-still complete the degree without exceeding 13 units of physics
+still complete the degree without exceeding 12 units of physics
 coursework in any quarter.
 
 The college imposes a limit of 110 units of required coursework,
@@ -599,17 +599,15 @@ others require changes to their content:
   students taking honors physics will take the course in the spring,
   while most transfer students will take the course in the fall.  Two
   offerings will remove a major bottleneck, and allow for a smaller class
-  sizes.  Most four-year students from honors physics will take the
-  spring offering, whereas most incoming junior year transfer students
-  will take the fall offering.  This will allow the course to be
+  sizes.  This will allow the course to be
   pitched slightly differently in each quarter, to better reflect
   student preparation.
 
 \item 105: The timing of the 105AB sequence is adjusted to start in
   winter.  The content of 105AB should be at a level appropriate for a
   sophomore completing 9HD in the previous quarter.  Mathematical
-  physics (PHY 104A) is not a prerequisite, but typically students
-  will take 104A either concurrently with 105B or before 105A.
+  physics (PHY 104A) is not a prerequisite for 105A, but it is for
+  105B, so students take 104A before 105B.
 
 \item 110: The present curriculum devotes three quarters of required
   upper division coursework to Electricity and Magnetism (110ABC).
@@ -619,8 +617,8 @@ others require changes to their content:
   relativistic mechanics, and introductory electricity and magnetism.
   This material must be covered adequately in the 9 series and 104A.
 
-\item 112: The 115A prerequisite for 112 has been removed, and the
-  treatment must rely on quantum from the PHY 9 series instead.  Fermi
+\item 112: 115A may now be taken concurrently with 112, so the
+  treatment must rely on quantum from the PHY 9 series.  Fermi
   and Bose statistics will be introduced independently in 112.  PHY 9
   and 9H must consistently cover discrete energy levels from the
   particle in a box and simple harmonic oscillator.  The annual
@@ -638,7 +636,7 @@ others require changes to their content:
 
 \item The computational courses are described in
   Section~\ref{sec:computing}. PHY 40 is updated, PHY 102 and 104B are
-  dropped, and new courses PHY 45, 110L, 112L and 115L are added.
+  dropped, and a new course, PHY 45, is added.
   Computational Physics majors substitute ECS coursework for PHY 45,
   and the prerequisites of computational courses reflect this.
 
@@ -652,16 +650,13 @@ presented in Section~\ref{sec:syllabi}.
 
 This proposal is approximately neutral with respect to the cost of
 instruction if we assume that the cost of electives is held constant
-(we of course have no obligation to do so.)  Instructors teaching a
-one-unit computation lab course will receive credit for one third of a
-standard podium course.  The three new computational lab courses
-together add one new instructor.  The second offering of 104A and the
+(we of course have no obligation to do so.)  The second offering of 104A and the
 new required course 45 add two new instructors.  But dropping courses
 9HE, 102, 104B, 110C and replacing 116ABC with 117 and 118 frees 4.3
-instructors, for a net decrease of 1.3 instructors.  If the need for
+instructors, for a net decrease of 2.3 instructors.  If the need for
 more sections of 80 requires an additional instructor (currently
 typically two, although three were initially planned for 2020-2021)
-there would be a decrease of 0.3 instructors.  Additional fall
+there would be a decrease of 1.3 instructors.  Additional fall
 offerings for 122A/B could be added as well, if needed to meet demand.
 
 \section{Theoretical Physics}
@@ -700,7 +695,7 @@ The major topics from the first curriculum discussion were:
  \item It was agreed that 105A needs to cover Hamiltonian mechanics, by
    adding supplementary material to the preferred textbook (Morin).
  \item The treatment of radiation in 110AB is limited.
- \item There is support for covering waveguides in either 110AB, 80, or even 110L.   
+ \item There is support for covering waveguides in either 110AB or 80.   
  \item PHY 104A plays a central role in providing students with the
    analytic techniques needed for upper division coursework.  This
    course has been far too topical for the central role it plays in
@@ -754,9 +749,7 @@ homework, is a more appropriate format for PHY 40.
 In the current program, the additional computational physics
 requirement is either PHY 102 (1 unit) or 104B (4 units).  This
 proposal replaces these options with a single new required four-unit
-computational physics course, PHY 45.  In addition, BS physics majors
-are required to take three one-unit computational lab courses:
-110L,112L, and 115L.  PHY 80 is a traditional lab course, as described in
+computational physics course, PHY 45.  PHY 80 is a traditional lab course, as described in
 Section~\ref{sec:labs}, but it is included in this discussion as it
 also includes significant computational aspect.
 
@@ -772,10 +765,6 @@ also includes significant computational aspect.
 \node[right] at (0,2.5) {80};
 %\draw (0,2) coordinate(X) -- ++(0,1.0) -- ++(1.2,0) |- (X);
 \node[right] at (2.1,2.5) {45};
-\draw[->] (2.5,3) --(2.5,4);
-% 3rd tier:
-\draw (0,4.0) coordinate(X) -- ++(0,1) -- ++(3.5,0) |- (X);
-\node[right] at (0,4.5) {110L, 112L, 115L};
 \end{tikzpicture}
 \caption{\label{fig:comps} Prerequisite structure of computational courses.}
 \end{center}
@@ -803,33 +792,12 @@ proposal include:
   scientific python for data analysis and presentation, including
   curve fitting and plotting scientific data.
   
-\item 110L, 112L, and 115L: These three new one-unit computational lab
-  courses are designed to be taken concurrently with 110B, 112, and
-  115B. They are computational problem solving labs related to E\&M,
-  statistical mechanics, and quantum mechanics.  The emphasis will be
-  on solving problems from upper division physics using computing at
-  the level of PHY 45.  One unit courses should involve three hours of
-  academic work per week as described below.  Each course is offered
-  in a different quarter, so students get three units of computational
-  problem-solving spread across at least one year.  BS physics majors
-  are required to take all three.  A major emphasis of these lab
-  courses is to give students practice at using programming to solve
-  computational physics problems {\em independently}. They will be
-  solving problems as homework, instead of in a lab section with TA
-  support.
-  
-\item 105B: this course now has PHY 40 as a prerequisite and can
-  therefore include computational problems in mechanics using
-  Scientific Python or computer algebra.
-
 \item 115C: This new elective course has PHY 45 as a prerequisite and
   is intended to include extensive computational problem solving as an
   integral part of the course.
   
 \end{itemize}
-Physics BS majors will be required to take 18 units (22 recommended)
-of coursework that involves extensive computing exercises.
-Furthermore, once student computing abilities are on more solid
+Once student computing abilities are on more solid
 ground, capstone and advanced elective courses could further evolve to
 include additional computing exercises and add 45 (or at least 40) as
 a prerequisite.  All majors now require PHY 40, so that could be added
@@ -837,22 +805,9 @@ as a prerequisite to any upper division course.  All applied majors
 include 45 or an equivalent, so, for example, 140A or 140B could include
 a computational component.
 
-The content of PHY 40, 45, 105L, 110L. and 115L will likely evolve with our
-experience teaching these courses.  Furthermore, the content of the
-one-unit computational labs will benefit from coordination with the
-lecturer for the corresponding lecture course (e.g. 115L and 115B).
-The annual faculty curriculum discussion will be one venue for these
+The content of PHY 40 and 45 will likely evolve with our
+experience teaching these courses.  The annual faculty curriculum discussion will be one venue for these
 discussions to unfold.
-
-{\bf One-unit workload: }It is important that 110L, 112L, and 115L are
-taught as one-unit courses.  A one-unit course should involve three
-hours of total academic work per week, which in this case includes the
-one hour of scheduled lecture time.  For example, an appropriate
-workload would be five computing assignments due every two weeks
-during the ten week quarter.  Each assignment would be introduced with
-a one-hour lecture, with a second one-hour lecture devoted to helping
-students complete the assignment.  The assignments should take about
-five hours to complete, including one hour of help.
 
 \section{Experimental Physics}
 \label{sec:labs}
@@ -901,17 +856,11 @@ this remapping, which is summarized in Table~\ref{tbl:labs}
 
 The 122A/B labs cycle students through experimental stations, and
 enrollment in each quarter is limited by the number of available
-stations.  This proposal makes some adjustments to the prerequisites
-of 122A/B which would allow for fall offerings.  This will help meet
-the expected increase in demand for 122A/B due to increased
-enrollment.  As can be seen in Table~\ref{tbl:proposed-honors}, many
-seniors have room to take 122A/B in the fall of their senior year.  We
-also plan to add additional stations to 122A/B, which is independent
+stations.  We also plan to add additional stations to 122A/B, which is independent
 from this proposal.
 
-PHY 80, 117, and 118 share the same dedicated lab space.  The primary
-time for taking 80 will be in spring quarter, but it will also be
-offered in fall, and possibly winter, while 117 and 118 will be
+PHY 80, 117, and 118 share the same dedicated lab space.  PHY 80 will
+be offered in winter and spring, while 117 and 118 will be
 offered in fall and winter respectively.  The department plans to
 expand the lab space available for 80, 117, and 118 to meet the needs
 of increased enrollment.
@@ -977,13 +926,11 @@ take 104A until the spring.
 The most important changes to the prerequisite structure in the proposal are:
 \begin{itemize}
 \item The 9 and 9H prerequisites have been updated to better reflect the current policy actually enforced.
-\item PHY 112 does not require 115A anymore, it is taught at a level where 104A and PHY 9A-D suffice.  
+\item PHY 112 allows 115A concurrently, and is taught at a level where 104A and PHY 9A-D suffice.  
 \item PHY 110A does not require 105A anymore. 
-\item PHY 105B requires 40, so that computational examples can be used in this course if the instructor chooses.
-\item PHY 80 adds 40 as a prerequisite.
 \item PHY 122A/B adds a 115A prerequisite, which was implicit when
-  115A was a prerequisite for 112.  Both 112 and 115A are allowed to
-  be concurrent, although that will never happen unless we add a fall
+  115A was a prerequisite for 112.  112 is allowed to be
+  concurrent, although that will never happen unless we add a fall
   offering of 122A/B.
 \item The 116ABC sequence is replaced with independent courses 117 and
   118 which each have 80 as a prerequisite.
@@ -999,12 +946,9 @@ forgiving.
 
 
 \section{Proposed BS with Specialization in Astrophysics}
-The astrophysics specialization requires updates to the prerequisites
-for PHY 151-158, mainly to accommodate the new schedule which offers
-PHY 105A in the winter and to add PHY 40 as a new required course.
 The astrophysics specialty courses now include 158, for a total of
 five, from which four are chosen.  Limits on the number of units
-preclude including PHY 45, and the related lab courses, to the
+preclude including PHY 45 in the
 program.  However, the PHY 151-158 courses already include extensive
 computational physics directly related to astrophysics, using the
 Python tool kit established in PHY 40.
@@ -1133,8 +1077,7 @@ Senior   & 115A     & 115B & 108+L\\
 The applied physics majors overlap significantly with the physics
 major, and so most of the updates already proposed apply directly to
 the applied physics majors.  In this proposal, all applied physics
-majors now require PHY 40, 45 (or an equivalent), 80, and at least one
-computing lab (from 110L,112L, and 115L).  Most require at least two
+majors now require PHY 40, 45 (or an equivalent), and 80.  Most require at least two
 upper division lab courses.  In some cases, the second lab course can
 be outside of physics.
 
@@ -1148,13 +1091,6 @@ giving students more options to choose from, offering greater
 flexibility.  Many courses offer a range of prerequisites appropriate
 for all of the students taking these courses, but only the most
 relevant prerequisites for our majors are considered below.
-
-The Department of Earth and Planetary Sciencies is currently updating
-its course offerings, with many changing the subject from GEL to EPS.
-In what follows, we use the symbol G$\to$EPS to mark this transition,
-with any changing quantities that follow (e.g. course number) marked
-by the $\to$ symbol as well.  We will maintain our requirements in the
-catalog to track EPS as needed throughout their transition.
 
 \begin{table}[htbp]
 \caption{\label{tbl:depth-applied} Depth subject matter for
@@ -1195,16 +1131,14 @@ This proposal includes modifications to all of the applied physics majors:
 
 \item The Computational Physics major requires either ECS 32 or ECS 36
   sequence, reflecting student difficulty with registering for the
-  latter sequence.  The major does not require PHY 45 and ECS 36B or
-  32C will satisfy the prerequisite for the computing labs.  The
+  latter sequence.  The major does not require PHY 45.  The
   elective choices from the Computer Science and Engineering
   department have been extended.  See Table~\ref{tbl:computational}.
   
 \item The Physical Electronics major excludes PHY 117 as part of the
   upper division lab requirement.  The major instead includes a large
   amount of electronics from the Electrical and Computer Engineering
-  department.  Due to unit limits, only one computational lab is
-  required.  See Table~\ref{tbl:electronics}.
+  department.  See Table~\ref{tbl:electronics}.
 
 \item The Materials Science major is renamed Materials Physics, and
   the elective choices have been extended.  Students may now use a
@@ -1212,27 +1146,25 @@ This proposal includes modifications to all of the applied physics majors:
   upper division lab courses.  See Table~\ref{tbl:materials}.
   
 \item The Geological Physics major has been reworked to account for
-  new prerequisites and infrequent offerings of courses like G$\to$EPS
-  162.  The major now features a choice between ATM 60 and GEO 60,
+  new prerequisites and infrequent offerings of courses like EPS
+  162.  The major now features a choice between ATM 60 and the CHE 4A, 4B, and EPS 101 sequence,
   both of which open up opportunities for upper division electives, and
   the elective choices have been expanded accordingly.  The major
-  features 12-16 units of coursework in ATM, EPS, GEL, and PHY.  See
+  features 12-16 units of coursework in ATM, EPS, and PHY.  See
   Table~\ref{tbl:geophysics}.
     
 \item In the past, the Atmospheric Physics major required the Physical
-  and Chemical Oceanography course (G$\to$EPS 150A), which now has extensive
+  and Chemical Oceanography course (EPS 150A), which now has extensive
   prerequisites that would exceed the unit limit.  The Oceanography
   thrust of this course has been relocated to the electives, including
-  the more easily obtained (G$\to$EPS 116N).  The list of Atmospheric
+  the more easily obtained (EPS 116).  The list of Atmospheric
   Physics electives has been extended.  See
   Table~\ref{tbl:atmospheric}.
 
-\item The Physical and Chemical Oceanography course (G$\to$EPS 150A) now has
+\item The Physical and Chemical Oceanography course (EPS 150A) now has
   extensive prerequisites, which are now included explicitly as
   required courses.  The elective choices have been updated.  See
-  Table~\ref{tbl:oceanography}.  We presume (the more rigorous) CHE
-  4C is adequate for CHE 2C prerequisites despite not being listed in
-  the course catalog.
+  Table~\ref{tbl:oceanography}.
 
 \item The Chemical Physics major requires the courses listed in
   Tables~\ref{tbl:prep} and~\ref{tbl:chemical}.  Both chemistry
@@ -1243,7 +1175,7 @@ This proposal includes modifications to all of the applied physics majors:
   required.  This major features two paths, one featuring PHY 112 and
   115AB, and the other featuring CHE 110ABC.  The latter choice relies
   on the treatment of quantum mechanics and thermodynamics provided by
-  our colleagues in the chemistry department.  This major requires 6
+  our colleagues in the chemistry department.  This major requires 4
   units of upper division lab work in chemistry or physics.
 \end{itemize}
 Examples schedules for Applied Physics majors are in
@@ -1481,11 +1413,11 @@ EPS       & 101L   & 2 & EPS 101$\parallel$ & Earth Materials Lab\\
 \end{tabular}\\
 \noindent
 $^\#$: not offered every year, $\parallel$: concurrently, $\dagger$
-alternative upper division coursework from PHY, GEL, EPS, or ATM can be
+alternative upper division coursework from PHY, EPS, or ATM can be
 substituted, with consent of department, in case none of these courses
 are available.\\[4pt]
 \noindent
-{\bf Electives:} Four additional upper division course offerings in ATM, EPS, GEL, or PHY of four or more units, or three units with consent of the department, or from the following list of pre-approved three-unit courses:  EPS 101,102,109,116,132,137,163.\\[4pt]
+{\bf Electives:} Four additional upper division course offerings in ATM, EPS, or PHY of four or more units, or three units with consent of the department, or from the following list of pre-approved three-unit courses:  EPS 101,102,109,116,132,137,163.\\[4pt]
 \noindent
 {\bf Total Units (minimum):} 108
 (Tables \ref{tbl:prep}, \ref{tbl:depth-applied}, and \ref{tbl:geophysics} $\implies 54+24+9+9+12$)\\
@@ -1687,8 +1619,8 @@ Tables~\ref{tbl:prep} (excluding PHY 45) and \ref{tbl:ab-depth}.
 The college requirements for an AB degree include a cap of 80 units on
 major requirements.  The current AB Physics major requires 82 units,
 which was approved by the Education Policy Committee in the past
-despite exceeding the cap.  This proposal requires only 80 units for
-the AB, of which 32 units are in upper division coursework.  Note that the
+despite exceeding the cap.  This proposal requires only 78 units for
+the AB, of which 28 units are in upper division coursework.  Note that the
 university and college impose additional requirements beyond those
 discussed here.
 
@@ -1742,7 +1674,7 @@ not require campus approval, and the department began implementing
 those changes in AY 2021-2022.  We also proposed several new required
 classes, and all of these have been approved, added to the course
 catalog, and have been taught for several years now.  These courses
-are PHY 45, 110L, 112L, 115L, 117, and 118.  We have been encouraging
+are PHY 45, 117, and 118.  We have been encouraging
 majors to take advantage of the new course offerings, even though they
 are not yet required.
 
@@ -1827,9 +1759,7 @@ on department websites or the course catalog.
 
 As shown in the examples schedules, even with limited preparation at
 the CC, all of the majors can be completed in two years with at most
-16 units per quarter.  With more preparation at the CC, all of the
-majors can be completed in two years with at most 13 units per
-quarter.
+16 units per quarter.
 
 \begin{table}[htbp]
 \caption{\label{tbl:sched-computational} Example two-year schedule
@@ -2259,8 +2189,7 @@ Experimental techniques. Design of circuits. Data analysis, sources of
 noise, statistical and systematic uncertainties. Light sources,
 detection, and measurement in basic optical systems.
 
-PHY 80 uses Scientific Python for data analysis.  With PHY 40 added as
-a prerequisite, this component can be more ambitious:
+PHY 80 uses Scientific Python for data analysis:
 \begin{itemize}
 \item Plotting and Curve fitting (Current focus)
 \item Fourier Analysis: discrete sampled data and Shannon-Nyquist, periodogram (New)
@@ -2407,72 +2336,6 @@ topics.
 
 \vskip 1cm
 \noindent
-{\bf PHY 110L --- Computational Physics Lab for Electricity and Magnetism (1):}
-Applications of computational physics to problems from Electricity and
-Magnetism.
-
-This course, which has one hour of lecture per week, includes
-extensive problems from numerical physics related to PHY 110AB, using
-the techniques introduced in PHY 40 and 45.
-
-See comments in Section~\ref{sec:computing} regarding workload for one
-unit courses.  Example topics for assignments include:
-\begin{itemize}
-\item Variations of related problems from PHY 45.
-\item Visualizing Electric and Magnetic fields (Gezerlis 1.7)
-\item Multipole Expansion (Gezerlis 4.2)
-\item Magnetic Fields produced by current distribution (Giordano 5.3-4)
-\item Waves on a String: Spectral methods (Giordano 6.4)
-\item Relaxation Method Solution to Laplace's Equation (Giordano 5.1-2, Garcia 8)
-\item Fourier Analysis:  Spectral method (Garcia 8.2)
-\item Waveguides
-\item Analytic solutions to special cases are calculated and used throughout the
-  course to validate the numerical approach.
-\end{itemize}
-
-\vskip 1cm
-\noindent {\bf PHY 112 --- Thermodynamics and Statistical Mechanics (4):}  
-Introduction to classical and quantum statistical mechanics and their connections with thermodynamics.
-
-The reference text is ``Thermal Physics'' by Schroeder.  The core topics are:
-\begin{itemize}
-\item Energy in Thermal Physics (Chap 1)
-\item Second Law of Thermodynamics (Chap 2)
-\item Interactions and Implications (Chap 3)
-\item Free Energy (Chap 5)
-\item Boltzmann Statistics (Chap 6) (Target for midpoint of course)
-\item Quantum Statistics (Chap 7) 
-\end{itemize}
-
-\vskip 1cm
-\noindent
-{\bf PHY 112L --- Computational Physics Lab for Statistical Mechanics (1):}
-Applications of computational physics to problems from statistical mechanics.
-
-This course, which has one hour of lecture per week, includes
-extensive problems from numerical physics related to PHY 105A and 112,
-using the techniques introduced in PHY 40 and 45.
-% see also Garcia 11 when arrives
-
-See comments in Section~\ref{sec:computing} regarding workload for one
-unit courses.  Example topics for assignments include:
-\begin{itemize}
-\item Variations of related problems from PHY 45.
-\item Testing the Stefan-Boltzmann Law (Gezerlis 6.6)
-\item Mean Field Theory Solution to Ising Model (Giordano 8.2)
-\item Metropolis Algorithm (Giordano 8.3)
-\item Phase Transitions (Giordano 8.4-8.5)
-\item Monte Carlo Simulation of Dilute Gas (Giordano 9.1) 
-\item Melting (Giordano 9.2)
-\item Protein Folding (Giordano 12.1)
-\item Analytic solutions to special cases are calculated and used throughout the
-  course to validate the numerical approach.
-\end{itemize}
-
-
-
-\vskip 1cm
-\noindent
 {\bf PHY 115A --- Quantum Mechanics I (4):}
 Introduction to quantum mechanics.  The Schr\"odinger Equation, Hilbert
 Space, Dirac Notation, position and momentum space representations,
@@ -2551,34 +2414,6 @@ otherwise be missed for students who took PHY 115A under a different
 ordering.  This situation should be a rare occurrence: instructors tend
 to teach for multiple years in a row, and students tend to take both
 courses within the same year.
-
-\vskip 1cm
-\noindent
-{\bf PHY 115L --- Computational Physics Lab for Quantum Mechanics (1):}
-Applications of computational physics to problems from Classical and Quantum Mechanics.
-
-This course, which has one hour of lecture per week, includes
-extensive problems from numerical physics related to PHY 115A and 115B,
-using the techniques introduced in PHY 40 and 45.
-
-See comments in Section~\ref{sec:computing} regarding workload for one
-unit courses.  Example topics for assignments include:
-\begin{itemize}
-\item Variations of related problems from PHY 45.
-\item Symplectic Algorithms
-\item Extremizing the Action (Gezerlis 5.6)
-\item Solution of the Time-independent Schr\"odinger equation: 
-  Harmonic oscillator, Lennard-Jones potential (Giordano 10.2).
-\item Variational Quantum Monte Carlo (Giordano 10.4, Gezerlis 7.8)
-\item Time-dependent Schr\"odinger equation:  reflection of wave packets (Giordano 10.5)
-\item Spectral method solutions to Schr\"odinger equation.  (Giordano 10.7)
-\item Matrix Representation of Interacting spin-half particles (Gezerlis 4.5)
-\item Analytic solutions to special cases are calculated and used throughout the course to validate the numerical approach.
-\end{itemize}
-
-
-
-
 
 \vskip 1cm
 \noindent
