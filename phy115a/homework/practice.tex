@@ -1,0 +1,107 @@
+\documentclass[12pt]{article}
+
+
+\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.5in]{geometry}
+\usepackage{cite}
+\usepackage{slashed}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{braket}
+\usepackage[american,fulldiode]{circuitikz}
+
+\begin{document}
+\newcommand{\ihbar}{\ensuremath{i \hbar}}
+\newcommand{\dPsidt}{\ensuremath{ \frac{\partial \Psi}{\partial t} }}
+\newcommand{\dPsidx}{\ensuremath{ \frac{\partial \Psi}{\partial x} }}
+\newcommand{\ddPsidx}{\ensuremath{ \frac{\partial^2 \Psi}{\partial x^2} }}
+\newcommand{\dPssdt}{\ensuremath{ \frac{\partial \Psi^*}{\partial t} }}
+\newcommand{\dPssdx}{\ensuremath{ \frac{\partial \Psi^*}{\partial x} }}
+\newcommand{\ddPssdx}{\ensuremath{ \frac{\partial^2 \Psi^*}{\partial x^2} }}
+
+\newcommand{\dphidt}{\ensuremath{ \frac{d \phi}{dt} }}
+\newcommand{\dpsidx}{\ensuremath{ \frac{d \psi}{dx} }}
+\newcommand{\ddpsidx}{\ensuremath{ \frac{d^2 \psi}{dx^2} }}
+
+
+\date{\vspace{-5ex}}
+
+\title{Practice Problems}
+
+\maketitle
+
+No solutions will be posted for these practice problems.. they are intended to focus your mind on the material.\\[5pt]
+
+\noindent
+{\bf Problem 1:}
+A particle is in an infinite square well potential of width $b$ for which we know that the allowed energies are:
+$$E_n = \frac{n^2 \pi^2 \hbar^2}{2mb^2}$$
+for
+$$n=1,2,3,4,\ldots$$
+and the orthonormal stationary states are:
+$$
+\psi_n(x) = 
+\begin{cases}    
+   {\displaystyle \sqrt{\frac{2}{b}}\sin(k_n x)} & 0 {\displaystyle \leq x \leq b} \\[8pt]
+   0 & {\rm otherwise} \\
+\end{cases}   
+$$
+where
+\begin{eqnarray*}
+k_n&=&\frac{n\pi}{b}
+\end{eqnarray*}
+At time $t=0$, the particle is in a state where the wavefunction within the square well is:
+$$\Psi(x,0) = A\left( \psi_1(x) + i\psi_2(x) + \psi_3(x) \right)$$
+\noindent
+(A) What is the value of the constant $A$ which correctly normalizes $\Psi(x,0)$, if we take it to be positive and real?\\[5pt]
+(B) What is the probability that a measurement of the particles total energy at $t=0$ would yield the value $E_2$?\\[5pt]
+(C) What is the probability that a measurement of the particles total energy at $t=0$ would yield the value $9\,E_1$?\\[5pt]
+(D) What is the probability that a measurement of the particles total energy at $t=0$ would yield the value $7\,E_1$?\\[5pt]
+(E) What is the probability that a measurement of the particles total energy at $t=0$ would yield the value $16\,E_1$?\\[5pt]
+(F) What is the expectation value for the total energy divided by $E_1$:
+$$\frac{\braket{\hat{H}}}{E_1}$$
+(G) Write down the time-dependent wave function $\Psi(x,t)$.\\[5pt]
+(H) What is the probability that a measurement of the particles total energy at time $t$ would yield the value $9\,E_1$?\\[5pt]
+
+\noindent
+{\bf Problem 2:}
+A particle is in a harmonic oscillator potential:
+$$V(x) = \frac{1}{2}k x^2 = \frac{1}{2} m \omega^2 x^2$$
+where:
+\begin{equation}
+E_n = \hbar \omega \left( n + \frac{1}{2} \right)
+\end{equation}
+for
+$$n=0,1,2,3,\ldots$$
+and the stationary states of the Hamiltonian are:
+$$\psi_n(x)$$
+This problem will use the ladder operators:
+\begin{eqnarray}
+\hat{a}_- &\equiv& \frac{1}{\sqrt{2}}\left(i \frac{\hat{p}}{p_0} + \frac{\hat{x}}{x_0}\right) \notag \\
+\hat{a}_+ &\equiv& \frac{1}{\sqrt{2}}\left(-i \frac{\hat{p}}{p_0} + \frac{\hat{x}}{x_0} \right) \notag \\
+\end{eqnarray}
+where:
+$$x_0 \equiv \sqrt{\frac{\hbar}{m \omega}}$$
+and also:
+$$p_0 \equiv \frac{\hbar}{x_0} = \sqrt{\hbar m \omega}$$
+Suppose that at $t=0$, the state is:
+$$\Psi(x,0) = A \left( \psi_2(x) + \psi_3(x)\right)$$
+\noindent
+(A) What is the positive real value of $A$ that correctly normalizes $\Psi(x,0)$?\\[5pt]
+
+\noindent
+(B) Using the ladder operators (instead of calculating integrals) calculate $\braket{x}$
+at $t=0$.\\[5pt]
+
+\noindent
+(C) Write down the time dependent wave function.\\[5pt]
+
+\noindent
+(D) Using the ladder operators (instead of calculating integrals) calculate $\braket{x}$
+at time $t$.\\[5pt]
+
+\end{document}
+
+
+
+

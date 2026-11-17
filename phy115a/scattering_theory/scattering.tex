@@ -1,0 +1,501 @@
+\documentclass[12pt]{article}
+
+
+\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.5in]{geometry}
+\usepackage{cite}
+\usepackage{slashed}
+\usepackage{graphicx}
+\usepackage{amsmath}
+
+\begin{document}
+\newcommand{\pt}           {\ensuremath{ p_{\rm T} }}
+\newcommand{\Et}           {\ensuremath{ E_{\rm t}     }}
+
+\let\divsymb=\div % rename builtin command \div to \divsymb
+\newcommand{\gv}[1]{\ensuremath{\mbox{\boldmath$ #1 $}}} 
+\newcommand{\grad}[1]{\gv{\nabla} #1} % for gradient
+\renewcommand{\div}[1]{\gv{\nabla} \cdot #1} % for divergence
+
+
+%\let\vaccent=\v % rename builtin command \v{} to \vaccent{}
+%\renewcommand{\v}[1]{\ensuremath{\mathbf{#1}}} % for vectors
+%\let\divsymb=\div % rename builtin command \div to \divsymb
+%\newcommand{\uv}[1]{\ensuremath{\mathbf{\hat{#1}}}} % for unit vector
+\newcommand{\abs}[1]{\left| #1 \right|} % for absolute value
+\newcommand{\avg}[1]{\left< #1 \right>} % for average
+
+
+
+
+\let\underdot=\d % rename builtin command \d{} to \underdot{}
+\renewcommand{\d}[2]{\frac{d #1}{d #2}} % for derivatives
+\newcommand{\dd}[2]{\frac{d^2 #1}{d #2^2}} % for double derivatives
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}} % for partial derivatives
+\newcommand{\pdd}[2]{\frac{\partial^2 #1}{\partial #2^2}} % for double partial derivatives
+\newcommand{\pdc}[3]{\left( \frac{\partial #1}{\partial #2} \right)_{#3}} % for thermodynamic partial derivatives
+
+\newcommand{\planewave}{e^{\textstyle i\vec{k} \cdot \vec{x}}}
+\newcommand{\radialwave}{\frac{1}{r} \, e^{\textstyle ikr}} 
+
+\section{Introduction}
+
+We will examine the effect of a potential $V(\vec{r})$ on an incident beam of
+particles, starting from the time-independent Schrodinger equation:
+
+\begin{equation} \label{eqn:tise}
+\left( \frac{\hbar^2}{2m} \grad^2 + E_k \right) \Psi = V(\vec{r})~\Psi.
+\end{equation}
+
+\section{Plane and Radial Waves}
+
+Both plane waves 
+\begin{displaymath}
+\Psi_{\vec{k}} = \planewave
+\end{displaymath}
+and radial waves
+\begin{displaymath}
+\Psi_k = \radialwave
+\end{displaymath}
+are solutions to Eq.~\eqref{eqn:tise} in the absence of any potential
+($V(\vec{r})=0$).  Too see this, note that the calculations
+\begin{displaymath}
+\grad^2 \, \planewave 
+=\left(\pdd{}{x}  + \pdd{}{y}  + \pdd{}{z} \right) \, \planewave
+=\left((ik_x)^2 + (ik_x)^2 + (ik_x)^2\right) \, \planewave
+= -k^2 \, \planewave
+\end{displaymath}
+and
+\begin{displaymath}
+\grad^2 \, \radialwave = \frac{1}{r^2} \pd{}{r} r^2 \pd{}{r} \radialwave
+= k^2 \, \radialwave.
+\end{displaymath}
+show that in both cases
+\begin{equation} \label{eqn:solk}
+\grad^2 \Psi = -k^2 \Psi
+\end{equation}
+and so Eq.~\eqref{eqn:tise} is satisfied when
+\begin{displaymath}
+E_k = \frac{(\hbar k)^2}{2m}
+\end{displaymath}
+i.e.
+\begin{displaymath}
+\hbar k = p
+\end{displaymath}
+
+
+\section{A Complete Solution}
+
+A fundamental result from the theory of Fourier analysis is that
+
+\begin{equation} \label{eqn:complete}
+\int_{-\infty}^{+\infty} dk \, e^{\textstyle ikx} = 2 \pi \, \delta (x).
+\end{equation}
+
+We will not prove \eqref{eqn:complete}, but note that it makes some intuitive
+sense: the integral clearly blows up at $x=0$, while for $x \ne 0$ the integral
+oscillates around zero.  Practically, it means that we can represent any
+function as a sum of exponential functions:
+\begin{displaymath}
+f(x) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{+\infty} dk \, e^{\textstyle ikx} F(k) 
+\end{displaymath}
+where each expential function has been weighted by its Fourier transform:
+\begin{displaymath}
+F(k) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{+\infty} dx \, e^{\textstyle -ikx} f(x). 
+\end{displaymath}
+These two equations follow from \eqref{eqn:complete} as can be seen by substituting the second integral as $F(k)$ in the first integral:
+\begin{eqnarray*}
+f(x) &=&
+\frac{1}{2\pi} \int_{-\infty}^{+\infty} dk \, e^{\textstyle ikx} 
+\int_{-\infty}^{+\infty} dx' \, e^{\textstyle -ikx'} \, f(x') \\
+&=&
+\frac{1}{2\pi} \int_{-\infty}^{+\infty} dx' \, f(x') 
+\int_{-\infty}^{+\infty} dk \, e^{\textstyle ik(x-x')} \\ 
+&=&
+\int_{-\infty}^{+\infty} dx' \, f(x') 
+\delta(x-x')\\
+&=& f(x)
+\end{eqnarray*}
+The exercise works starting with $F(k)$ as well.
+
+Returning to our plan wave solutions, we can now see that they have what will
+turn out to be a very handy property:
+
+\begin{eqnarray*}
+\int^{+\infty}_{-\infty} d^3x 
+\, \Psi_{\vec{k}}(\vec{x}) 
+\; \Psi^*_{\vec{k'}}(\vec{x}) 
+&=&
+\int^{+\infty}_{-\infty} d^3x 
+\; e^{\textstyle i\vec{k}\cdot\vec{x}}
+\; e^{\textstyle -i\vec{k'}\cdot\vec{x}}\\
+&=&
+\int^{+\infty}_{-\infty} d^3x 
+\; e^{\textstyle i(\vec{k}-\vec{k'})\cdot\vec{x}}\\
+&=&
+\left(\int^{+\infty}_{-\infty} dx 
+\; e^{\textstyle i(k_x-k_x')x}
+\middle)
+\times \middle( x \to y \middle) \times \middle( x \to z \right)\\
+&=& (2 \pi)^3 \; \delta(k_x-k_x')\,\delta(k_y-k_y')\,\delta(k_z-k_z')\\
+\end{eqnarray*}
+
+We end up with the product of three identical integrals for each variable
+$x$,$y$, and $z$, each yielding a delta function.  We combine these delta functions into a 3-dimensional delta function so we can more compactly write
+\begin{equation} \label{eqn:planeorth}
+\int^{+\infty}_{-\infty} d^3x 
+\, \Psi_{\vec{k}}(\vec{x}) 
+\; \Psi^*_{\vec{k'}}(\vec{x}) 
+= (2 \pi)^3 \; \delta^3(\vec{k}-\vec{k}').
+\end{equation}
+Because of this property, we say that our plan wave solutions 
+are orthogonal.  We also have:
+\begin{equation} \label{eqn:planecomplete}
+\int^{+\infty}_{-\infty} d^3k 
+\, \Psi_{\vec{k}}(\vec{x}) 
+\; \Psi^*_{\vec{k}}(\vec{x'}) 
+= (2 \pi)^3 \; \delta^3(\vec{x}-\vec{x}').
+\end{equation}
+from which we say they are our complete.
+
+\section{Green's Functions}
+
+We need one more mathematical tool.  We are interested in linear operators that act upon a function to produce another function:
+\begin{displaymath}
+L f(x) = g(x).
+\end{displaymath}
+We will first discuss these linear operators generally, but in the end, we will
+be concerned with the particular operator
+\begin{displaymath}
+L = \frac{\hbar^2}{2m} \grad^2 + E_k
+\end{displaymath}
+from the time-independent Schrodinger equation.
+
+An eigenfunction $\Psi_n(x)$ of a linear operator $L$ is unchanged by $L$ except for a constant scale factor $\lambda_n$. 
+\begin{displaymath}
+L \Psi_n(x) = \lambda_n \Psi_n(x)
+\end{displaymath}
+
+If we have a complete orthogonal set of eigenfunctions of an operator $L$, we
+can construct what is called a Green's function as follows:
+
+\begin{equation} \label{eqn:green}
+G(x,x') = \sum_n \frac{\Psi_n(x) \, \Psi^*_n(x')}{\lambda_n}
+\end{equation}
+
+The Green's function has the useful property that:
+\begin{displaymath}
+\begin{split}
+L \, G(x,x') & = L \sum_n \frac{\Psi_n(x) \, \Psi^*_n(x')}{\lambda_n}\\
+& = \sum_n \frac{ \left( L \Psi_n(x) \right) \, \Psi^*_n(x')}{\lambda_n}\\
+& = \sum_n \frac{ \left( \lambda_n \Psi_n(x) \right) \, \Psi^*_n(x')}{\lambda_n}\\
+& = \sum_n \Psi_n(x) \, \Psi^*_n(x')\\
+& = \delta(x-x')
+\end{split}
+\end{displaymath}
+where we note that the operator $L$ only acts on functions of $x$, not $x'$, and the lsat line comes from the completeness of the $\Psi_n$.  The equation
+\begin{equation} \label{eqn:greendelta}
+L G(x,x') = \delta(x-x')
+\end{equation}
+is the {\it raison d'etre} for a Green's function.  If the $\delta$-function is
+unity, than the Green's function is the inverse of L.  We can use this property
+to solve differential equations of the form:
+\begin{equation}
+L f(x) = g(x)
+\end{equation}
+by simply constructing:
+\begin{equation}
+f(x) = \int dx' G(x,x') g(x')
+\end{equation}
+for then we have simply
+\begin{eqnarray*}
+L f(x) &=& L \int dx' G(x,x') g(x')\\
+&=& \int dx' \left(L G(x,x')\right) g(x')\\
+&=& \int dx' \delta(x-x') g(x')\\
+&=& g(x)
+\end{eqnarray*}
+
+\section{Solving the Schrodinger Equation with a Potential}
+
+Now we are looking for solutions to \eqref{eqn:tise} including the potential
+term $V(\vec{r})$.  
+
+We take the LHS of \eqref{eqn:tise} as our linear operator
+\begin{displaymath}
+L = \frac{\hbar^2}{2m} \grad^2 + E_k.
+\end{displaymath}
+From \eqref{eqn:solk} we see that the plane waves $\Psi_{\vec{k'}}$ are eigenfunctions of $L$:
+\begin{eqnarray*}
+L \Psi_{\vec{k'}} 
+&=& \left( \frac{\hbar^2}{2m} \grad^2 + E_k \right) \Psi_{\vec{k'}}\\
+&=& \left( -\frac{(\hbar k')^2}{2m} + E_k \right) \Psi_{\vec{k'}}\\
+&=& \frac{\hbar^2}{2m}\left( k^2 - k'^2 \right) \Psi_{\vec{k'}}
+\end{eqnarray*}
+
+where the eigenvalues mix $k$ and $k'$ because the eigenfuction is parameterized
+by $k'$ and the operator by $k$ (in $E_k$).  So our plane waves are
+eigenfunctions of $L$.  From \eqref{eqn:planeorth} and \eqref{eqn:planecomplete}
+they are also orthogonal and complete.  Therefore, we can build a Green's function for $L$, just as in \eqref{eqn:green}, using our complete orthogonal eigenfunctions:
+
+\begin{displaymath}
+G(\vec{x},\vec{x'}) 
+= \frac{2m}{\hbar^2} \int d^3k \, 
+\frac{e^{\textstyle i\vec{k}\cdot \vec{x}} \; e^{\textstyle -i\vec{k} \cdot \vec{x'}}}
+{k^2-k'^2} 
+= \frac{2m}{\hbar^2} \int d^3k \, 
+\frac{e^{\textstyle i\vec{k}\cdot (\vec{x}-\vec{x'})}}
+{k^2-k'^2}. 
+\end{displaymath}
+We can construct our solutions to the wave equation as:
+
+\begin{eqnarray*}
+\Psi(\vec{x})&=&\int d^3x' \, G(\vec{x},\vec{x'})\,V(\vec{x'})\,\Psi(\vec{x})\\
+&=&
+\frac{2m}{\hbar^2} 
+\int d^3x'\,d^3k'\; 
+\frac{e^{\textstyle i\vec{k}\cdot (\vec{x}-\vec{x'})}}
+{k^2-k'^2}\,V(\vec{x'})\,\Psi(\vec{x}).
+\end{eqnarray*}
+
+By construction, this will solve \eqref{eqn:tise}, but it is not particularly
+illuminating, as it defines $\Psi$ in terms of $\Psi$!
+
+To arrive at a solution, we use the Born approximation, and take the incident wave equation (instead of the full solution) an the integrand.  For an incident plan wave, we obtain:
+
+\begin{eqnarray*}
+\Psi(\vec{x})&=&
+\frac{2m}{\hbar^2} 
+\int d^3x'\,d^3k'\; 
+\frac{e^{\textstyle i\vec{k}\cdot (\vec{x}-\vec{x'})}}
+{k^2-k'^2}\,V(\vec{x'})\,e^{\textstyle i\vec{k}\cdot\vec{x}}.
+\end{eqnarray*}
+
+
+
+\section{The Residue Theorem of Contour Integration} 
+
+We are going to derive a truly spectacular result of complex analysis, examined from a
+less formal (mathematicians would say hand-waving, but we know better!)
+perspective using vector calculus.
+
+\vskip 0.5cm
+\noindent
+{\bf The Cauchy-Riemann Equations}
+\vskip 0.5cm
+\noindent
+Consider what it means for a complex function to be differentiable.  The
+following limmit must exists
+\begin{displaymath}
+f'(z) = \lim_{\Delta z \to 0} \, \frac{f(z+\Delta z) - f(z)}{\Delta z}
+\end{displaymath}
+and its value must be {\it independent} of the sequence choosen for $\Delta z
+\to 0$.  This means, for instance, we can approach from the real or imaginary
+axis and must reach the same limit.  Let's define real numbers $x$ and $y$, and
+real functions $u$ and $v$ by:
+\begin{equation}
+z = x + iy
+\end{equation}
+and
+\begin{equation}
+f(z) = u(x,y) + i\,v(x,y),
+\end{equation}
+then for f(z) to be differentiable we must have:
+\begin{displaymath}
+\lim_{\Delta x \to 0} \, \frac{f(z+\Delta x)-f(z)}{\Delta x} =
+\lim_{\Delta y \to 0} \, \frac{f(z+i\Delta y)-f(z)}{i\Delta y}.
+\end{displaymath}
+Note the $i$ in the second denominator coming from $\Delta z = x + i(y + \Delta y) = i \Delta y$.  In terms of the real functions $u$ and $v$ this becomes:
+\begin{displaymath}
+\begin{split}
+\lim_{\Delta x \to 0} \, \frac{u(x+\Delta x,y)+i \,v(x+\Delta x,y)-u(x,y)-i\,v(x,y)}{\Delta x} = \\
+\lim_{\Delta y \to 0} \, \frac{u(x,y+\Delta y)+i \,v(x,y+\Delta y)-u(x,y)-i\,v(x,y)}
+{i \Delta y} 
+\end{split}
+\end{displaymath}
+the first limit can be rearranged into two parts:
+\begin{displaymath}
+\lim_{\Delta x \to 0} \, \frac{u(x+\Delta x,y)-u(x,y)}{\Delta x} 
++ i\lim_{\Delta x \to 0} \, \frac{v(x+\Delta x,y)-v(x,y)}{\Delta x} = 
+\pd{u}{x}+i\pd{v}{x}.
+\end{displaymath}
+while in much the same manner the second yields:
+\begin{equation} \label{eqn:swap}
+\frac{1}{i}
+\left( \pd{u}{y}+i\pd{v}{y} \right)
+= \pd{v}{y}-i\pd{u}{y}.
+\end{equation}
+As these two limits must be identical for f(z) to be differentiable, we must have:
+\begin{displaymath}
+\pd{u}{x}+i\pd{v}{x}
+= \pd{v}{y}-i\pd{u}{y}.
+\end{displaymath}
+This leads to our first main result, the Cauchy-Riemann Equations:
+\begin{equation} \label{eqn:cauchyriemann}
+\begin{split}
+\pd{u}{x} - \pd{v}{y} & = 0\\
+\pd{v}{x} + \pd{u}{y} & = 0.
+\end{split}
+\end{equation}
+It is interesting to note that everything that follows will hinge on these
+equations, which replace $\delta x$ and $\delta y$ when comparing partials of
+$u$ and $v$, which results from the factor $1/i$ in \eqref{eqn:swap}.
+
+\vskip 0.5 cm
+\noindent
+{\bf Contour Integrals of Differentiable Functions}
+\vskip 0.5 cm
+\noindent
+If you have been using vector calculus long enough, the Cauchy-Riemann Equation
+\eqref{eqn:cauchyriemann} should feel very curly to you!  To be more precise, if
+we reinterpret our real and imaginary components of our complexed valued
+function $f$ as the $y$ and $x$ components of an real vector function $\vec{F}$:
+\begin{displaymath}
+\vec{F}(x,y) = (v(x,y), u(x,y))
+\end{displaymath}
+then the curl of $F$ will be 
+\begin{displaymath}
+\grad \times \vec{F} = \pd{u}{x} - \pd{v}{y} = 0
+\end{displaymath}
+where the identification with zero comes from the first Cauchy-Riemann Equations.
+Similar, if we reinterpret:
+\begin{displaymath}
+\vec{F}(x,y) = (-u(x,y), v(x,y))
+\end{displaymath}
+then the curl of $F$ will also be 
+\begin{displaymath}
+\grad \times \vec{F} = \pd{v}{x} + \pd{u}{y} = 0.
+\end{displaymath}
+
+Now recall from vector calculus that Stoke's theorem relates the integral over a surface $S$ with the line integral along the boundary $C$. 
+\begin{equation}
+\int_A \grad \times \vec{F} \cdot d\vec{A}= \oint_C \vec{F} \cdot d\vec{s}
+\end{equation}
+Since taking either $\vec{F}=(v,u)$ or $\vec{F}=(-u,v)$ results in $\grad \times \vec{F} = 0$, in either case we will have:
+\begin{equation}
+\oint_C \vec{F} \cdot d\vec{s} = 0
+\end{equation}
+If we parameterize the curve along the boundary $C$ by two functions $x(t)$ and $y(t)$, then we have:
+\begin{eqnarray*}
+\vec{s}(t) &=& \left(x(t),y(t)\right)\\
+d\vec{s} &=& \left(x',y'\right)\,dt
+\end{eqnarray*}
+and using the first interpretation of $F$ we obtain
+\begin{equation} \label{eqn:vecb}
+0 = \oint_C \vec{F} \cdot d\vec{s} 
+= \int (v,u) \cdot (x',y')\,dt
+= \int (v\,x' + u\, y') dt
+\end{equation}
+while from the second interpretation of $F$ we obtain
+\begin{equation} \label{eqn:vecb}
+0 = \oint_C \vec{F} \cdot d\vec{s} 
+= \int (-u,v) \cdot (x',y')\,dt
+= \int (v\,y' - u\, x') dt
+\end{equation}.
+Now we are ready to go back to the complex plane.  We can now calculate the contour integral
+\begin{displaymath}
+\oint_C f(z) dz
+\end{displaymath}
+using the same parameterization for C as in the vector calculus interpretation, namely $z = x(t) + i\,y(t)$.  We therefore have:
+
+\begin{displaymath}
+\oint_C f(z) dz = \int (u+iv)(x'+iy')dt = \int(ux'-vy')\,dt + i\,\int(vx'+uy')\,dt
+\end{displaymath}
+But from our calculations under the vector calculus interpretation
+\eqref{eqnveca} and\eqref{eqnveca} we saw that both the integrals on the right hand side vanish, resulting in a truly amazing result 
+\begin{equation}
+\oint_C f(z) dz = 0.
+\end{equation}
+
+We can state it as follows:  if $f$ is differentiable everywhere inside a closed contour $C$, then the contour integral of $f$ along $C$ is zero.
+
+Let's summarize how we determined this.  A differentiable function $f$ can be
+interpreted as two different vector fields with zero curl.  The real and
+imaginary parts of the contour integral of $f$ can then be interpreted as line
+integrals of these two different vector fields, which, by Stoke's theorem, both
+vanish.  That's amazing, right?
+
+There is an immediate corrolary to this result.  If two contour integrals of $f$
+differ by only a region where $f$ is differentiable, then the integrals are
+identical.
+
+\vskip 0.5 cm
+\noindent
+{\bf Contour Integrals Around Poles}
+\vskip 0.5 cm
+\noindent
+Consider the complex valued function
+\begin{equation}
+g(z) = \frac{1}{z}
+\end{equation}
+which is differentiable everywhere
+\begin{equation}
+g'(z) = -\frac{1}{z^2}
+\end{equation}
+except at the origin $z=0$.
+
+Now consider the contour $C$ that circles $z=0$ at radius $\abs{z} = R$ in the
+counter-clockwise direction, which we can parameterize by:
+\begin{displaymath}
+z = Re^{\textstyle i \theta}
+\end{displaymath}
+We can therefore calculate the contour integral as:
+
+\begin{displaymath}
+\oint_C \frac{1}{z}\,dz = \int_0^{2\pi} \frac{1}{z}\,\d{z}{\theta}\,d\theta
+= \int_0^{2\pi} \frac{1}{Re^{\textstyle i\theta}}\,iRe^{\textstyle i\theta}
+ d\theta = i \int_0^{2\pi}d\theta = 2 \pi i 
+\end{displaymath}
+
+Note that this result was independent of the radius $R$!  But this shouldn't surprise us, because we already know that contour integrals that differ by only by including areas where the function is differentiable are identical.  Outside of $z=0$, $f(z)=1/z$ is differentiable, so the size of the radius does not effect the result!
+
+You can check by integrating from $0$ to $-2\pi$ or putting $\theta \to -
+-\theta$ that the contour integral in the clockwise direction changes the sign
+to $-2 \pi i$.  In what follows, we'll assume that all contours are taken in the
+counter-clockwise direction.
+
+Let's consider a more complicated contour integral
+\begin{displaymath}
+\oint_C \frac{f(z)}{z}\,dz 
+\end{displaymath}
+where $f(z)$ is an everywhere differentiable function.
+
+
+This means that the integrand $f(z)/z$ is differentiable everywhere except at $z=0$.
+
+Therefore, if the contour $C$ is a closed curve that does not circle the origin,
+the contour integral vanishes.  If the contour $C$ encloses the origin, the
+contour integral will have the same value as that of any circle around the
+origin.  Since $f(z)$ is differentiable, we should be able to choose the radius
+$\epsilon$ small enough that $f(z)$ remains infinitesimally close to $f(0)$
+along the whole circle.  We can therefore write:
+
+\begin{displaymath}
+\oint_C \frac{f(z)}{z}\,dz = 
+\oint_{\abs{z}=\epsilon} \frac{f(z)}{z}\,dz =
+f(0) \, \oint_{\abs{z}=\epsilon} \frac{1}{z}\,dz + O(\epsilon)
+= 2 \pi i \, f(0)
+\end{displaymath}
+
+\vskip 0.5 cm
+\noindent
+{\bf The Cauchy Residue Theorem}
+\vskip 0.5 cm
+\noindent
+
+The position of the pole does not matter.  A circle around a pole a $z=z_0$ will give the same result (just change coordinates).  If there are mutiple poles included in the contour, we can use purely geometric arguments to arrive at our final result.
+
+\begin{equation}
+\begin{split}
+\oint_C \frac{f(z)}{(z-z_0)(z-z_1)(z-z_2)\dots(z-z_N)} \\
+= 2 \pi i (
+\frac{f(z_0)}{(z-z_1)(z-z_2)\dots(z-z_N)} 
++\frac{f(z_1)}{(z-z_0)(z-z_2)(z-z_3)\dots(z-z_N)} \\
++ \dots
++\frac{f(z_N)}{(z-z_0)(z-z_1)(z-z_2)\dots(z-z_N)}
+)
+\end{split}
+\end{equation}
+\end{document}
+
+
+
+

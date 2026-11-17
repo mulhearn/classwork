@@ -40,11 +40,11 @@ These problems are graded on effort only.\\
 \section*{Additional Problems}
 
 \noindent
-{\bf Problem 1:} Show that:
+    {\bf Problem 1:} Using the same methods that we used in the proof that the Shr\"odinger Equation preserves normalization and to derive Ehrenfest's theorem, show that:
 $$\frac{d}{dt}\braket{\hat{x}\hat{p}} = 2\braket{\hat{T}} - \braket{x \frac{dV}{dx}}$$
 where
 $$\hat{T} = \frac{\hat{p}^2}{2m}$$
-is the kinetic energy.  This is the quantum mechanical version of the virial theorem of classical mechanics.  Hint: look at the technique we used to derive Ehrenfest's Theorem in the chapter one lecture notes.\\
+is the kinetic energy.  This is the quantum mechanical version of the virial theorem of classical mechanics.  Hint: look in the sections ``Normalization of the Wave Function'' and ``Ehrenfest's Theorem'' to see the techniques you should use.  Make sure you use the latest version on the course site.  There are more detailed hints at the end of this set as well.\\ 
 
 \vskip 2cm
 
@@ -86,7 +86,7 @@ $$\exp(-z^2+2zu) = \sum_{n=0}^{\infty} \frac{z^n}{n!}H_n(u)$$
 allows us to read off the Hermite Polynomial from its Taylor Series expansion.  Use this technique to determine $H_0(u)$,$H_1(u)$,$H_2(u)$,$H_3(u)$, and $H_4(u)$. Compare to your answers in part (A), and note that you are free to multiply your solutions by an arbitrary normalization factor.\\
 
 \noindent
-(D) For some $n$, what is the term with the highest power of $n$ in $H_n(u)$?\\
+(D) For some $n$, what is the term with the highest power of $u$ in $H_n(u)$?\\
 
 \vskip 2cm
 
@@ -102,6 +102,60 @@ $$ [\hat{A}\hat{B}, \hat{C}] = \hat{A}[\hat{B}, \hat{C}] + [\hat{A}, \hat{C}]\ha
 (B) Prove the Jacobi Identity:
 $$ [\hat{A},[\hat{B}, \hat{C}]] + [\hat{B},[\hat{C}, \hat{A}]] + [\hat{C},[\hat{A}, \hat{B}]] = 0$$
 (This is the property of the algebra of commutators that replaces associativity)
+
+\newpage
+
+\noindent
+{\bf More Hints on Problem 1:}
+
+This hint outlines one valid approach that breaks the problem up into more managable parts.  You do not need to change your solution if you took another valid approach!\\
+
+\noindent
+(I) First show using integration by parts that:
+$$\frac{d}{dt}\braket{xp} = I_0 + I_1$$
+where:
+$$I_0 = (i\hbar) \int_{-\infty}^{+\infty} \frac{\partial \Psi}{\partial t} \psi^* dx$$
+and:
+$$I_1 = (i\hbar) \int_{-\infty}^{+\infty} x
+\left(
+\frac{\partial \Psi}{\partial t} \, \frac{\partial \Psi^*}{\partial x}
+\; - \;
+\frac{\partial \Psi}{\partial x} \, \frac{\partial \Psi^*}{\partial t}
+\right) dx$$
+
+\noindent
+(II) Using the SE show that:
+$$I_0 = \braket{H} = \braket{T} + \braket{V}$$ \\
+
+\noindent
+(III) Then show that:
+$$I_1 = \braket{T} - \braket{V} - \braket{x\frac{dV}{dx}}$$\\
+by (A) using the SE to determine substitutions for:
+$$\frac{\partial \Psi}{\partial t} \hspace{1cm} {\rm and} \hspace{1cm}
+\frac{\partial \Psi^*}{\partial t}$$
+and (B) grouping terms containing $V$ together into one integral $I_V$ which should yield:
+$$I_V = -\braket{V}-\braket{x\frac{dV}{dx}}$$
+and (C) showing that the other terms form an integral $I_T$ for which:
+$$I_T = <T>$$
+here you should use:
+$$
+\left(
+\frac{\partial^2 \Psi}{\partial x^2} \, \frac{\partial \Psi^*}{\partial x}
+\; + \;
+\frac{\partial^2 \Psi^*}{\partial x^2} \, \frac{\partial \Psi}{\partial x}
+\right)
+\; = \; \frac{\partial}{\partial x}\,
+\left(
+\frac{\partial \Psi}{\partial x} \, \frac{\partial \Psi^*}{\partial x}
+\right)
+$$
+(This was written incorrectly in chapter one lecure notes!  It didn't matter there because it integrated to zero...  but you'll need this correct version here.)
+
+
+
+
+
+
 
 \end{document}
 
