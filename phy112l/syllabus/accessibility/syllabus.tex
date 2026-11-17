@@ -1,0 +1,49 @@
+% accessibility/syllabus.tex:  accessibility settings and alternative text for syllabus.tex
+% (common/mulhearn/accessibility.txt).  Maintained by the agents;  syllabus.tex has only
+% \input{accessibility/syllabus} as its first line.  Build with LuaLaTeX:  latexmk-ua syllabus.tex
+\DocumentMetadata{lang=en-US, pdfversion=2.0, pdfstandard=ua-2, tagging=on,
+  tagging-setup={math/alt/use}}   % every Formula:  its LaTeX source as /Alt, next to the MathML
+
+% --- math alt text:  the bare source ("S = k \ln \Omega"), without latex-lab's "LaTeX formula starts \begin{math} ..."
+% wrapper (an internal of latex-lab-math, TL 2026)
+\ExplSyntaxOn
+\AddToHook{begindocument/before}{\tl_set:Nn \l__math_content_template_tl { \exp_not:V \g__math_grabbed_math_tl }}
+\ExplSyntaxOff
+
+\makeatletter
+
+% --- document information (needs hyperref, loaded here so syllabus.tex does not have to)
+\AddToHook{begindocument/before}{%
+  \RequirePackage{hyperref}%
+  \hypersetup{pdftitle={PHY 112L Syllabus, Fall Quarter 2026}, pdfauthor={Michael Mulhearn},
+    pdflang=en-US, pdfdisplaydoctitle, hidelinks,
+    pdfsubject={\access@statement}}}
+
+% --- the statement:  read first by assistive technology, not visible on the page
+\def\access@statement{I have attempted to bring this document into compliance with the accessibility
+  requirements of the Americans with Disabilities Act (Title II) and University of California policy
+  (WCAG 2.1 Level AA).  If this minimal standard is insufficient or ineffective for your needs, please bring
+  the matter to my attention, so that I can provide additional accommodations as appropriate.}
+\AddToHook{begindocument/end}{%
+  \tagstructbegin{tag=Figure, alt={\access@statement}}\tagmcbegin{}\tagmcend\tagstructend}
+
+% --- the syllabus's tables only place the logo and the photo beside text:  layout, not data
+\AddToHook{begindocument}{\tagpdfsetup{table/tagging=div}}
+
+% --- the syllabus's headings are \subsubsection* (the look);  tagged as level-1 headings (no visible change)
+\AddToHook{begindocument}{\AssignStructureRole{sec/3/title}{H1}}
+
+% --- alternative text for \includegraphics, by file name
+\newcommand\AltText[2]{\@namedef{access@alt@#1}{#2}}
+\AddToHook{begindocument/before}{%
+  \NewCommandCopy\access@includegraphics\includegraphics
+  \RenewDocumentCommand\includegraphics{s O{} m}{%
+    \@ifundefined{access@alt@#3}%
+      {\PackageWarning{accessibility}{no alternative text for #3}\access@includegraphics[#2]{#3}}%
+      {\access@includegraphics[alt={\@nameuse{access@alt@#3}},#2]{#3}}}}
+
+\makeatother
+
+% --- alternative text
+\AltText{logo.jpg}{UC Davis Department of Physics logo.}
+\AltText{mike.jpg}{Photograph of the instructor, Michael Mulhearn.}
