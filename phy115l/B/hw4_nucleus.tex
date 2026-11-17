@@ -1,0 +1,243 @@
+\documentclass[12pt]{article}
+
+\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.5in]{geometry}
+\usepackage{cite}
+\usepackage{slashed}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{braket}
+\usepackage{pythonhighlight}
+\usepackage{mathtools}
+\begin{document}
+
+\newcommand{\ihbar}{\ensuremath{i \hbar}}
+\newcommand{\Pss}{\ensuremath{\Psi^*}}
+\newcommand{\dPsidt}{\ensuremath{ \frac{\partial \Psi}{\partial t} }}
+\newcommand{\dPsidx}{\ensuremath{ \frac{\partial \Psi}{\partial x} }}
+\newcommand{\ddPsidx}{\ensuremath{ \frac{\partial^2 \Psi}{\partial x^2} }}
+\newcommand{\dPssdt}{\ensuremath{ \frac{\partial \Psi^*}{\partial t} }}
+\newcommand{\dPssdx}{\ensuremath{ \frac{\partial \Psi^*}{\partial x} }}
+\newcommand{\ddPssdx}{\ensuremath{ \frac{\partial^2 \Psi^*}{\partial x^2} }}
+
+\newcommand{\dphidt}{\ensuremath{ \frac{d \phi}{dt} }}
+\newcommand{\dpsidx}{\ensuremath{ \frac{d \psi}{dx} }}
+\newcommand{\ddpsidx}{\ensuremath{ \frac{d^2 \psi}{dx^2} }}
+
+
+\title{PHY 115L \\ Woods-Saxon Model for the Nucleus \\ using Variational Methods }
+\author{Michael Mulhearn}
+
+\maketitle
+
+\section{Introduction}
+
+%A good reference for our approach is here: https://arxiv.org/pdf/0709.3525.
+
+%Another good reference:  https://phys.libretexts.org/Bookshelves/Nuclear_and_Particle_Physics/Introduction_to_Applied_Nuclear_Physics_(Cappellaro)/05%3A_Nuclear_Structure/5.03%3A_Nuclear_Models
+
+
+In this assignment we will develop a numerical model for the atomic
+nucleus, based on the Woods-Saxon potential, an effective potential
+for the nuclear strong force which binds the nucleus together:
+
+We'll use the Woods-Saxon potential:
+\begin{equation}
+V(r) = -\frac{V_0}{1 + \exp\left( \frac{r-R}{a} \right)}
+\end{equation}
+where:
+\begin{equation}
+R = r_0 A^{1/3} 
+\end{equation}
+and $A$ is the mass number.  Throughout this exercise, we will be using these values for the parameters:
+\begin{eqnarray*}
+V_0 &=& 47.78 ~ {\rm MeV} \\
+r_0 &=& 1.285 ~ {\rm fm}\\
+a   &=& 0.65 ~ {\rm fm}\\
+\end{eqnarray*}
+In principle, the parameters can be tuned differently for protons and
+neutrons, but we will be using the same values for both nucleons.
+
+\begin{figure}[thb]
+\begin{center}
+{\includegraphics[width=0.60\textwidth]{plots/woodssaxon.pdf}}
+\end{center}
+\caption{\label{fig:woodssaxon} The Woods-Saxon potential for $a/R=0.1$.}
+\end{figure}
+
+An example of this potential is plotted in Fig.~\ref{fig:woodssaxon}.
+It is an effective potential for the nucleus which represents the
+nucleus as a whole (minus the one single nucleon under consideration).
+It is appropriate for the nuclear strong force, which is strong but only at short distances.
+
+We will also need to account for the Coloumb repulsion experienced by
+proton.  We will model the charge distribution in the nucleus as a
+uniform sphere of radius $R$ (with $R$ as above).  So this adds an
+additional term to the potential (for protons only!):
+$$V(r) = (Z-1)\frac{e^2}{4\pi\epsilon_0} \frac{F(r/R)}{R}$$
+with dimensionless function:
+$$F(x) \equiv  \begin{cases}
+\frac{3-x^2}{2} & r \leq 1 \\
+  1/x & r > 1 \\
+\end{cases}
+$$
+which accounts for the fraction of the total change $(Z-1)e$ enclosed in a sphere at or radius $r$.
+
+\section{System of Units}
+
+We will be looking at neutrons and protons (each with a different
+mass) and using their reduced mass (context dependent).  Our system of
+units from previous assignments includes the mass of the particle in
+the definition of the energy scale, which is now quite unworkable for
+us.
+
+We will base our new system of units around two quantities:
+$$ \hbar c   = 197.326~\rm MeV \; fm$$
+and the fine structure constant:
+$$\alpha = \frac{e^2}{4\pi\epsilon_0 \hbar c} = \frac{1}{137.035}$$
+Atomic nuclei range in size from $1.6~\rm fm$ to $15~\rm fm$.  Therefore,
+we will set our length scale to:
+$$L \equiv 1~\rm fm$$
+We will set our energy scale to:
+$$\epsilon = \frac{\hbar c}{L} = 197.326~\rm MeV$$
+
+The Hamiltonian operator:
+\begin{equation}
+\hat{H} = -\frac{\hbar^2}{2 M} \; \frac{d^2}{dx^2} \, + \, V(x)
+\end{equation}
+becomes:
+\begin{equation}
+\frac{\hat{H}}{\epsilon} = -\frac{L^2}{2 \mu} \; \frac{d^2}{dx^2} \, + \, \frac{V(x)}{\epsilon}
+\end{equation}
+where $\mu$ is dimensionless quantity related to the mass $M$ by:
+$$\mu = \frac{Mc^2}{\epsilon}$$
+
+The masses of the nucleons (neutrons and protons) are:
+\begin{eqnarray*}
+m_{\rm p} &=& 938.272~\rm MeV/c^2\\
+m_{\rm n} &=& 939.565~\rm MeV/c^2\\
+\end{eqnarray*}
+so in our units:
+\begin{eqnarray*}
+\mu_{\rm p} &=& 4.75493\\
+\mu_{\rm n} &=& 4.76148\\
+\end{eqnarray*}
+
+As before, we will be considering {\bf non-periodic} wave functions.
+To use the Fourier series approach in this case, we take the period
+$a$ to be large compared to $L$, and use the fact that the wave
+function approaches zero to approximate a periodic function.
+
+
+The Fourier series is an expansion in planes waves with momentum $p = \hbar k$ and wavenumbers:
+$$k = \frac{2 \pi m}{a}$$
+And so the kinetic energy $K(m)$ of a particle described by the plane wave for coefficient $c_m$ is:
+$$ K = \frac{p^2}{2M} = \frac{(\hbar k)^2}{2M}$$
+and so in our units:
+$$ \frac{K}{\epsilon} = \frac{1}{2 \mu} k^2 L^2 = \left(\frac{1}{2\mu}\right) \; (2 \pi m)^2 \; \left( \frac{L}{a}\right)^2$$
+This differs from our previous exercises by the factor:
+$$\left(\frac{1}{2\mu}\right)$$
+which you will have to add to your code.
+
+Using the method of separation of variables (e.g. Griffiths Chapter 4) we write the total wave function as:
+$$\Psi_{nlm}(r,\theta,\phi) = \frac{u_{nl}(r)}{r} Y_{lm}(\theta,\phi)$$
+for quantum numbers $n,l,m$.  The radial part satisfies 
+\begin{equation*}
+  \frac{\hat{E}}{\epsilon} u(r) = -\frac{L}{2\mu}^2\frac{d^2 u}{dr^2} + \left(V(r)+ \frac{1}{2\mu}l(l+1) \frac{L^2}{r^2}\right)
+\end{equation*}
+Notice that this looks exactly like a 1-D particle, but with an effective potential:
+$$\frac{V_{\rm eff}(r)}{\epsilon} = V(r) + \frac{1}{2\mu}l(l+1) \frac{L^2}{r^2}$$
+The term proportional to $l(l+1)$ is called the centrifugal term, and
+it accounts for the additional kinetic energy in the non-radial
+direction, due to the angular momentum of the particle.  Not suprisingly (since it is due to kinetic energy) it differs from our previous exercise by the same factor
+$$\left(\frac{1}{2\mu}\right)$$
+which you will have to add to your code as well.
+
+
+In our system of units, the Woods-Saxon potential becomes:
+\begin{equation}
+\frac{V(r/L)}{\epsilon} = -\frac{V_0/\epsilon}{1 + \exp\left( \frac{r/L-R/L}{a/L} \right)}
+\end{equation}
+where
+$$R/L = (r_0/L) A^{1/3} $$
+and the parameters were discussed previously.
+
+In our system of units, the Coulomb potential becomes:
+$$\frac{V(r/L)}{\epsilon} = (Z-1) \; \alpha \; \left( \frac{L}{R} \right) \; F(r/R)$$
+
+Note that when reporting energy values to compare with published results (in MeV) you will need to scale by $\epsilon$.  (This differs from previous exercises where we stayed exclusively in the the dimensionless system of units.)
+
+\section{Homework Problems}
+
+\noindent
+{\bf Please submit one PDF file (including output) and one python
+  notebook file (.ipynb) of your completed assignment.}  If using
+C/C++, submit text or PDF of your output and the source code.\\[3pt]
+
+\noindent
+{\bf Problem 1:} Plot the total effective potential (Woods-Saxon, Centrifugal Barrier, and Coulomb potential) for neutrons and protons with $l=0$ on the same graph.  Plot the same quantities on a second graph for $l=1$.  Use the typical parameters from the writeup for both neutrons and protons.\\[5pt]
+
+
+\noindent
+{\bf Problem 2:} We'll reproduce the results in https://arxiv.org/pdf/1910.03808 for the 1S and 2S neutron oribitals of $^{56}\rm Fe$.  Set the parameters to
+\begin{eqnarray*}
+V_0/\epsilon &=& 47.78 {\rm MeV} / 197.3~{\rm MeV} \\
+r_0/L &=& 1.285 \\
+a/L   &=& 0.65 \\
+\end{eqnarray*}
+as specified in the paper.  For $l=0$ (no centrifugal barrier) and no
+Coulomb term, the ground state energy should be $-38.3~\rm MeV$ (this
+is the 1S orbital).  The next state with $l=0$ should be $-18.2~\rm
+MeV$ (this is the 2S orbital).\\[5pt]
+
+\noindent
+{\bf Problem 3:} Using the same parameters as in the previous problem
+(for both neutrons and protons) calculate the energies for neutron and
+proton orbitals 1S,1P,1D,1F,2S and 2P of $^{56}\rm Fe$,
+Produce an energy level diagram, with neutrons on the left and protons on the right.  Draw a line at each energy level and label it with the orbital and occupancey (e.g. ``1P ---- 6'').\\[5pt]
+
+\noindent
+{\bf Problem 4:} From your plot, you should be able to discern the
+magic numbers for nuclei: 2,8,20, and 40.  Isotopes with a number or
+protons or neutrons equal to a magic number tend to be more stable.
+The magic numbers should correspond to numbers that completely fill energy levels below a large gap.  Label each gap in your plot by the corresponding magic number. (Note:  we are neglecting spin-orbit coupling which effects things dramatically above the magic number of 20)\\[5pt]
+
+\noindent
+{\bf Problem 5:} Using the energy levels for an $^{56}\rm Fe$ core
+with binding energy $492~\rm MeV$, estimate the binding energies for
+$^{57}\rm Fe (500~MeV)$ and $^{57}\rm Co (498~MeV)$ by adding the
+binding energy for a proton or neutron from the appropriate energy level.\\[5pt]
+
+\noindent
+{\bf Problem 6:} Using the energy levels for an $^{56}\rm Fe$ core
+with binding energy $492~\rm MeV$, estimate the binding energies for
+$^{55}\rm Fe (483~MeV)$ and $^{55}\rm Mn (482~MeV)$ by adding the
+binding energy for a proton or neutron from the appropriate energy level.\\[5pt]
+
+\noindent
+{\bf Problem 7:}  (Problem dropped:  this will not work properly without spin-orbit coupling) \\[5pt]
+
+\noindent
+{\bf Problem 8:}  Our simple model with only three parameters does reasonably well on light nuclei as well.  Using the energy levels of an $^{16}\rm O$ core (with binding energy $127~\rm MeV$, estimate the energy levels of the isotopes: $^{17}\rm O (131~MeV)$, $^{17}\rm F (128~MeV)$,
+$^{15}\rm O (111~MeV)$ and $^{15}\rm N (115~MeV)$.\\[5pt]
+
+\noindent
+{\bf Problem 9:} $^{16}\rm O$ is a doubly magic nucleus (8 protons and 8 neutrons).  Show that it is indeed quite stable by estimating the binding energies of the isotopes:
+$^{16}\rm F (111~MeV)$ and $^{16}\rm N (118~MeV)$.\\[5pt]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+\end{document}

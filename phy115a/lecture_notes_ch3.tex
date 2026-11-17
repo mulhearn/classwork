@@ -1,0 +1,937 @@
+\documentclass[12pt]{book}
+
+\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.5in]{geometry}
+\usepackage{cite}
+\usepackage{slashed}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{braket}
+\begin{document}
+
+\newcommand{\ihbar}{\ensuremath{i \hbar}}
+\newcommand{\Pss}{\ensuremath{\Psi^*}}
+\newcommand{\dPsidt}{\ensuremath{ \frac{\partial \Psi}{\partial t} }}
+\newcommand{\dPsidx}{\ensuremath{ \frac{\partial \Psi}{\partial x} }}
+\newcommand{\ddPsidx}{\ensuremath{ \frac{\partial^2 \Psi}{\partial x^2} }}
+\newcommand{\dPssdt}{\ensuremath{ \frac{\partial \Psi^*}{\partial t} }}
+\newcommand{\dPssdx}{\ensuremath{ \frac{\partial \Psi^*}{\partial x} }}
+\newcommand{\ddPssdx}{\ensuremath{ \frac{\partial^2 \Psi^*}{\partial x^2} }}
+
+\newcommand{\dphidt}{\ensuremath{ \frac{d \phi}{dt} }}
+\newcommand{\dpsidx}{\ensuremath{ \frac{d \psi}{dx} }}
+\newcommand{\ddpsidx}{\ensuremath{ \frac{d^2 \psi}{dx^2} }}
+
+
+\title{PHY 115A \\ Lecture Notes 3: \\ 
+Formalism \\
+(Griffith's Chapter 3)}
+\author{Michael Mulhearn}
+
+\maketitle
+
+\setcounter{chapter}{2}
+\chapter{Formalism}
+
+\section{Matter Waves}
+
+Early in the development of quantum mechanics it became clear that light was quantized as photons with discrete energy:
+$$E=h\nu$$
+but for a massless particle, we know that:
+$$E = pc$$
+and:
+$$pc = h\nu$$ 
+so that:
+$$\frac{h}{p} = \frac{\nu}{c} = \lambda$$
+where $\lambda$ is the wavelength of the light.  De Broglie made the hypothesis that matter was also described by a wave with frequency:
+$$\nu = \frac{E}{h}$$
+and wavelength:
+$$\lambda = \frac{h}{p}$$
+We are using the reduced Planck's constant:
+$$\hbar = \frac{h}{2\pi}$$
+so we write these relations equivalently as:
+$$E = h\nu = \hbar (2\pi \nu) = \hbar \omega$$
+and:
+$$p = \frac{h}{\lambda} = \hbar \frac{2\pi}{\lambda} = \hbar k$$
+Recall that in general a right traveling wave has the format:
+$$f(k\,x-\omega \, t)$$
+for $k>0$ and $\omega>0$.  So we can imagine several different functional forms for de Broglie's ``matter waves" traveling left:
+$$\Psi_1(x,t) = \cos(kx - \omega t)$$
+or:
+$$\Psi_2(x,t) = \sin(kx - \omega t)$$
+or
+$$\Psi_3(x,t) = \exp(ikx - i\omega t)$$
+where we don't care about the amplitude of the function yet.  But take care to note that:
+$$g(-k\,x+\omega \, t) = g(-(k\,x-\omega \, t))$$
+is also a right traveling wave, because it can be written as:
+$$f(k\,x-\omega \, t) \equiv g(-(k\,x-\omega \, t))$$
+But since:
+$$\cos(-k\,x+\omega \, t) = \cos(k\,x-\omega \, t)$$
+we don't need to consider that case.  And since:
+$$\sin(-k\,x+\omega \, t) = -\sin(k\,x-\omega \, t)$$
+and we don't care about the amplitude of the function yet, we can ignore that as well.  That only leaves one additional possibility to consider:
+$$\Psi_4(x,t) = \exp(-ikx + i\omega t)$$
+It seems like we could use any of these four options, but let's see what happens when we try to construct a standing wave by adding an equal mixture of right traveling and left traveling waves.  To switch to a left traveling wave, we just put:
+$$k \to -k$$
+Our standing wave using $\Psi_1$ is:
+$$\Psi(x) = \cos(k\,x-\omega \, t) + \cos(-k\,x-\omega \, t)$$
+but using:
+$$\cos(\alpha + \beta) = \cos(\alpha)\cos(\beta) - \sin(\alpha)\sin(\beta)$$
+we conclude:
+$$\Psi(x) = 2 \cos(k\,x) \cos(\omega \, t)$$
+which is an utter catastrophe, since the wave function vanishes everywhere whenever:
+$$\omega t = \frac{n \pi}{2} \hspace{2cm} n=1,3,5$$
+This would describe a particle that disappears and reappears from existence... not the theory we are trying to build!  So we discard option $\Psi_1$. Likewise for $\Psi_2$:
+$$\Psi(x) = \sin(k\,x-\omega \, t) + \sin(-k\,x-\omega \, t)$$
+but using:
+$$\sin(\alpha + \beta) = \sin(\alpha)\cos(\beta) + \cos(\alpha)\sin(\beta)$$
+we conclude:
+$$\Psi(x) = -2\cos(k\,x) \sin(\omega \, t)$$
+which is another catastrophe, since the wave function vanishes everywhere whenever:
+$$\omega t = n \pi \hspace{2cm} n=1,2,3,4,5$$
+But there is no such problem with $\Psi_3$ where:
+$$\Psi(x) = \exp(ik\,x-i\omega \, t) + \exp(-ik\,x-i\omega \, t) = 2 \cos(kx) e^{\displaystyle -i\omega t}$$
+this vanishes at specific locations in space, where the particle will never be found, but this is exactly what we would expect for a standing wave.  The only time-dependent factor 
+$$e^{\displaystyle -i \omega t}$$
+is never zero at any point in time.  Similarly, for $\Psi_4$:
+$$\Psi(x) = \exp(-ik\,x+i\omega \, t) + \exp(ik\,x+i\omega \, t) = 2 \cos(kx) e^{\displaystyle i\omega t}$$
+So it seems at this point that both $\Psi_3$ and $\Psi_4$ are valid options for a right-traveling matter waves, but if they are both valid, then we should be able to superimpose them:
+$$\Psi_3(x,t) + \Psi_4(x,t) = \exp(ik\,x-i\omega \, t) + \exp(-ik\,x+i\omega \, t)
+= 2 \cos(k\,x-\omega\,t)$$
+which we already saw was a problematic right traveling wave.  So we conclude that we can have $\Psi_3$ or $\Psi_4$, but {\bf not both}.  We choose the one that has $k>0$ for a right traveling wave, so that our right traveling matter wave is finally uniquely identified as:
+\begin{equation}
+\Psi_{\rm k}(x,t) \equiv \exp(ik\,x-i \omega \, t)
+\end{equation}
+with where:
+$$p=\hbar k, \hspace{1cm} {\rm and} \hspace{1cm} E = \hbar \omega.$$
+For the free particle, we also have:
+\begin{equation}
+E = \frac{p^2}{2m} = \frac{\hbar^2 k^2}{2m}
+\end{equation}
+and so:
+\begin{equation}
+\omega(k) = \frac{\hbar k^2}{2m} 
+\end{equation}
+The free particles have phase velocity:
+$$v_{\rm phase} = \frac{\omega}{k} = \frac{\hbar k}{2m}$$
+and group velocity:
+$$v_{\rm group} = \frac{d\omega}{dk} = \frac{\hbar k}{m}$$
+which is the classical velocity of the particle.  In chapter 2, we showed that this phase velocity is the velocity of a wave packet consisting of waves with wave numbers close to $k$.
+
+ \section{From Matter Waves to the Schr\"odinger Equation}
+
+With the matter waves in hand, we now will try to identify the wave equation that predicts matter waves for a free particle ($V(x)=0$), in the hope that we can generalize that equation in other contexts ($V(x) \neq 0$).
+
+The first thing we will try to do is determine the momentum of the matter wave.  Now, knowing that:
+$$\Psi_k(x,t) = \exp(ik\,x-i \omega \, t)$$
+we can of course simply read off the wave number $k$ and determine the momentum $p=\hbar k$.  But we cannot {\it generalize} that approach to other wave functions $\Psi(x,t)$.  In the general case, we will only know $\Psi(x,t)$, so we can only do things involving $x$ and $t$.  Here's something:
+$$-i\hbar \frac{\partial}{\partial x} \Psi_k(x,t) = (-i \hbar) (ik) \Psi_k(x,t) = \hbar k \Psi_k(x,t) = p \Psi_k(x,t)$$
+so we define the momentum operator:
+\begin{equation}
+\hat{p} \equiv -i \hbar \frac{\partial}{\partial x}
+\end{equation}
+and note that for our matter wave for free particles:
+\begin{equation}
+\hat{p} \, \Psi_k(x,t) = p \, \Psi_k(x,t)
+\end{equation}
+We say that the free particle solutions $\Psi_k(x,t)$ is an eigenstate of the momentum operator $\hat{p}$.  Note that this is true only for eigenstates.  For a general state with wave function $\Psi(x,t)$ generally:
+$$\hat{p} \, \Psi(x,t) \neq p \, \Psi(x,t)$$
+Note also that $\hat{p}$ and $p$ are two very different things.  Whereas $p$ is just a number, $\hat{p}$ is a complicated beast: an operator that when given a wave function returns a (possibly different) wave function.
+
+What about the position operator $\hat{x}$?  Since we have access to $x$ and $t$, for any wave function $\Psi(x,t)$, we need only write:
+\begin{equation}
+\hat{x} = x
+\end{equation}
+and so for {\em any wave function} $\Psi(x,t)$
+$$\hat{x} \, \Psi(x,t) = x \, \Psi(x,t)$$
+which looks like any $\Psi(x,t)$ is also an eigenstate of $\hat{x}$, but that is not so, because $x$ is not just a number here, and 
+$$x \, \Psi(x,t)$$
+is a new wave function that is distinct from $\Psi(x,t)$.
+
+Next we will try to find a recipe for determining the energy $E=\hbar \omega$ only through $\Psi(x,t)$.  We can try something similar:
+$$i\hbar \frac{\partial}{\partial t} \, \Psi_k(x,t) = (i\hbar)(-i\omega) \, \Psi_k(x,t) = \hbar \omega \, \Psi_k(x,t) = E \, \Psi_k(x,t)$$
+We also know that for the free particle:
+$$E = \frac{p^2}{2m}$$
+So let's find an operator $\hat{H}$ such that:
+$$\hat{H} \Psi_k(x,t) = \frac{p^2}{2m} \Psi_k(x,t)$$
+for our free particles.  Working with our definition of the momentum operator:
+$$\hat{H} \, \Psi_k(x,t) = \frac{p^2}{2m} \Psi_k(x,t) = \frac{p}{2m}(p\,\Psi_k(x,t)) = \frac{p}{2m}\;
+\left(-i \hbar \frac{\partial}{\partial x}\,\Psi_k(x,t)\right)$$
+but $p$ here is just a number (unlike $\hat{p}$ or $\partial/\partial x$) so we are free to move it right up against $\Psi_k(x,t)$ and continue on:
+$$\hat{H} \, \Psi_k(x,t) = \frac{-i\hbar}{2m}\;\frac{\partial}{\partial x}\;(p\,\Psi_k(x,t))
+= \frac{-i\hbar}{2m}\;\frac{\partial}{\partial x}\;
+\left(-i \hbar \frac{\partial}{\partial x}\,\Psi_k(x,t)\right)=-\frac{\hbar^2}{2m}\,\frac{\partial^2}{\partial x^2}\,\Psi_k(x,t)$$
+from which we read off the operator $\hat{H}$ for the free particle:
+$$\hat{H} = -\frac{\hbar^2}{2m}\frac{\partial^2}{\partial x^2} = \frac{\hat{p}^2}{2m}$$
+this is the Hamiltonian operator (for the free particle) which does not have any potential energy.  For a general potential, we need to find an operator $\hat{V}$ and the total energy will be obtained by:
+$$\hat{H} = \frac{\hat{p}^2}{2m} + \hat{V}$$
+But the potentials we will encounter will depend only on $x$ and $t$, so the operator $\hat{V}$ is trivial:
+$$\hat{V} = V(\hat{x},t) = V(x,t)$$
+So for the free particle with $V(x,t)=0$ we have shown that:
+$$i\hbar \frac{\partial}{\partial t} \Psi_k(x,t) = \hat{H} \, \Psi_k(x,t)$$
+but our assumption is that when $V(x,t) \neq 0$ we can determine the possible states as solutions to the equation:
+\begin{equation}
+i\hbar \frac{\partial}{\partial t} \Psi(x,t) = \hat{H} \, \Psi(x,t)
+\end{equation}
+or equivalently
+\begin{equation}
+i\hbar \frac{\partial}{\partial t} \Psi(x,t) = -\frac{\hbar^2}{2m}\frac{\partial^2}{\partial x^2}\, \Psi(x,t) + V(x,t) \Psi(x,t)
+\end{equation}
+So we have plausibly deduced the Schr\"odinger Equation from the deBroglie hypothesis via the Matter Waves.  
+
+\section{Hilbert Space}
+
+In quantum mechanics, the state of a system is represented by a wave function, $\Psi(x,t)$ and we interpret $|\Psi(x,t)|^2$ as the probability density for measuring the particle at position $x$ at time $t$.  For this interpretation to work, we must have:
+$$\int_{-\infty}^{+\infty} |\Psi(x,t)|^2 dx = 1$$
+But for a function $f(x)$ to be a candidate for a wave function we need only satisfy the weaker condition:
+$$\int_{-\infty}^{+\infty} |f(x)|^2 dx = C < \infty$$
+for then we can always just multiple $f(x)$ by $\sqrt{1/C}$ to obtain a properly normalized wave function.  We call such a function a square-integrable function.
+
+We saw in the Fourier Series appendix that periodic functions satisfy the axiomatic properties of an abstract vector space.  What about square-integrable functions?  They are closed under addition as a consequence of the Schwarz inequality:
+\begin{equation}
+\left|\int_a^b \, f(x)^* g(x) \, dx\right| \leq \sqrt{\int_a^b |f(x)|^2 \, dx \; \int_a^b |g(x)|^2 \, dx}
+\end{equation}
+with which you should be able to show that if $f(x)$ and $g(x)$ are square integrable, then:
+$$\int_{-\infty}^{+\infty} |f(x) + g(x)|^2 \; dx < \, \infty$$
+The other properties are of an abstract vector space are easy to establish for square integrable functions, as they follow immediately from the familiar algebraic properties of functions. 
+
+We define an inner product for this vector space as:
+$$\braket{f|g} \equiv \int_a^b \, f(x)^* g(x) \, dx$$
+Here again the Schwarz inequality shows that for vectors $f$ and $g$ the inner product is finite.  Most of the properties of an inner product again follow directly from familiar algebraic properties.  One subtlety arises when showing that:
+$$\braket{f|f}=0$$
+if and only if:
+$$f(x)=0$$
+To see the challenge, consider the (non-continuous) square-integrable function:
+$$f(x)=
+\begin{cases}
+1 & x=\pi \\
+0 & {\rm otherwise} \\
+\end{cases}
+$$
+which has $\braket{f|f}=0$ but is not $f(x)=0$.  The solution is to define two functions $f$ and $g$ as equivalent (the same vector) whenever:
+$$\int_{-\infty}^{+\infty} |f(x) - g(x)|^2 \; dx = 0 $$
+So now clearly if:
+$$\braket{f|f} = 0$$
+then:
+$$\int_{-\infty}^{+\infty} |f(x)|^2 \; dx = 0 $$
+and so too:
+$$\int_{-\infty}^{+\infty} |f(x) - 0|^2 \; dx = 0 $$
+so that $f(x)$ is equivalent to $g(x)=0$.
+
+Last we turn to the property of completeness\footnote{Unfortunately, ``completeness'' has two very different meanings.}:  any sequence of functions that gets closer and closer together will converge to a vector in the inner-product space.
+That is, if a sequence of functions $\{f_n(x)\}$ has the property that:
+$$\int_{-\infty}^{+\infty} |f_n(x) - f_m(x)|^2 \; dx \to 0, \hspace{1cm} {\rm as} \hspace{1cm} m,n \to \infty$$
+then:
+$$f_n(x) \to f(x), \hspace{1cm} {\rm as} \hspace{1cm} n \to \infty$$
+for some vector $f(x)$ in the vector space.
+
+And with this property, we run into serious trouble, for we already know that $\delta(x)$ is the limit of a sequence of taller and narrower square-integrable functions, but it isn't itself square integrable.  Nonetheless, the fact is that one can build a complete inner product space that contains the $\delta$-function and the limits of any sequence of square-integrable functions.  But to do so requires complicating {\bf everything} in order to properly handle vectors like the $\delta$ function.  Physicists make a different choice: we keep to our much simple definitions that apply perfectly well to the square integrable wave functions we encounter, and simply accept that we will also occasionally encounter the delta function posing as if it were an actual function.  We find that, inevitably, we integrate this delta function away before obtaining any observable result.
+
+The mathematical term for a complete inner-product space is a Hilbert Space.  Apart from side-stepping the issue of completeness, we have shown that the square-integrable functions form a Hilbert Space.  
+For the state described by wave function:
+$$\Psi(x,t)$$
+we will write this as a vector in Hilbert space like this:
+$$\ket{\Psi(t)}$$
+often, when we are not immediately concerned with the time dependence, we will omit it, like this:
+$$\ket{\Psi}$$
+but we still use the capital $\Psi$ as in $\Psi(x,t)$ because the time dependence is still there, even if we aren't concerned with it at the moment.
+
+
+\section{Operators and Observables}
+
+An operator $\hat{O}$ in a Hilbert Space $V$ is a mapping of vectors in $V$ to vectors in $V$.  We could just call it a function, but that terminology would be confusing as the vectors it has as input and output are themselves square-integrable functions.  Given a vector $\ket{\Psi}$ in the Hilbert Space, an operator returns a (possibly new) vector $\ket{\Phi}$:
+$$\hat{O}\ket{\Psi} = \ket{\Phi}$$ 
+or we might choose to write that equivalently as:
+$$\hat{O}\ket{\Psi} = \ket{\hat{O} \Psi}$$ 
+where the LHS is an operator acting on the vector $\Psi$ whereas the RHS is the vector obtained by acting on $\Psi$ with the operator $\hat{O}$.  We will only consider linear operators with the defining properties:
+$$\hat{O}(\ket{\Psi}+\ket{\Phi}) = \hat{O}\ket{\Psi}+\hat{O}\ket{\Phi}$$
+and:
+$$\hat{O}\,(\alpha\ket{\Psi}) = \alpha \,\hat{O}\,\ket{\Psi}$$
+
+We associate expectation values with inner products:
+$$\braket{O} \equiv \braket{\Psi|\hat{O}\Psi} = \int_{-\infty}^{+\infty}\; \Psi^*(x,t) \, \hat{O} \, \Psi(x,t) \, dx$$
+For an operator $\hat{O}$ we define its hermitian adjoint $\hat{O}^\dagger$ by the behavior:
+$$\braket{f|\hat{O}^\dagger g} = \braket{\hat{O} f| g}$$
+or equivalently:
+$$\braket{f|\hat{O} g} = \braket{\hat{O}^\dagger f| g}$$
+When an operator is its own hermitian adjoint:
+$$\hat{Q}^\dagger = \hat{Q}$$
+we call it a hermitian operator, and it's expectation value is real:
+$$\braket{Q} = \braket{\Psi|\hat{Q}\Psi} = \braket{\hat{Q}^\dagger \Psi|\Psi}=\braket{\hat{Q}\Psi|\Psi}=\braket{\Psi|\hat{Q}\Psi}^* = \braket{Q}^*$$
+Therefore, we associate physical observables with hermitian operators, as in ``the observable $\hat{Q}$''.
+
+
+\section{Determinate States}
+
+We've accepted that Quantum Mechanics is indeterminate, in the sense
+that if we prepare many copies of a system, each described by the same
+state vector $\ket{\Psi}$, and we repeat the same measurement for each
+copy, then the outcome of each of those measurements may be different.
+
+Now we wish to consider if it is possible to prepare a system that is
+guaranteed to give a particular result $q$ for the measurement of an observable $\hat{Q}$.  We already know of one example of such a state:  the stationary solutions of the Schr\"odinger equations have definite energy, and we saw that they are eigenfunctions of the Hamiltonian operator.  We can write this with our updated notation as:
+$$\hat{H} \ket{\Psi_E} = E \ket{\Psi_E}$$
+which says equivalently that the stationary states are eigenvectors of the Hamilitonian operator.  Let's see if this generalizes.
+
+For a determinate state, every measurement results in $q$, so then:
+$$\braket{\hat{Q}} = q$$
+but also:
+$$\sigma^2 = \braket{\left(\hat{Q}-\braket{Q}\right)^2} = 0$$
+and so:
+$$0 = \braket{\left(\hat{Q}-q\right)^2} = \braket{\Psi|\left(\hat{Q}-q\right)^2\Psi}$$
+but since $\hat{Q}$ is an observable and $q$ is a real number $\hat{Q}-q$ is a hermitian operator so:
+
+$$\braket{\Psi|\left(\hat{Q}-q\right)^2\Psi} = \braket{\left(\hat{Q}-q\right)\Psi|\left(\hat{Q}-q\right)\Psi} = 0$$
+but an axiomatic property of the inner product is that:
+$$\braket{f|f} = 0 \iff \ket{f} = 0$$
+so we have:
+\begin{eqnarray*}
+ 0 &=& \ket{\left(\hat{Q}-q\right)\Psi}\\
+ 0 &=& \left(\hat{Q}-q\right)\ket{\Psi}\\
+\hat{Q}\ket{\Psi} &=& q \ket{\Psi}\\
+\end{eqnarray*}
+So, exactly as we found already for the specific case of the Hamiltonian operator, the eigenvectors of any observable (hermetian operator) $\hat{Q}$ are determinate states.
+Note that the vector $0$ is never considered to be an eigenvector (as
+it would trivially be an eigenvector of every operator, adding nothing
+of value), but the value $0$ can certainly be an eigenvalue.  
+
+\section{Eigenvalues of Observables}
+
+Operators associated with physical observables, that is, hermitian operators, have a special property:
+\begin{itemize}
+\item {\bf The eigenvalues of hermitian operators are real.}  Suppose $\ket{\Psi}$ is an eigenvector of hermitian operator $\hat{Q}$ with eigenvalue $q$:
+$$\hat{Q}\ket{\Psi} = q \ket{\Psi}$$
+We know that for a determinate state $\braket{Q} = q$, and since the expectation values of hermitian operators are real, then $q$ is real too.  
+\end{itemize}
+
+\noindent
+It's useful practice to work this result out explicitly:
+$$\braket{\Psi | \hat{Q} \Psi} = \braket{\hat{Q} \Psi | \Psi}$$
+so:
+\begin{eqnarray*}
+q \braket{\Psi | \Psi} &=& q^* \braket{\Psi | \Psi}\\
+(q-q^*) \braket{\Psi | \Psi} &=& 0\\
+\end{eqnarray*}
+But by definition eigenvectors cannot be zero, so:
+$$\ket{\Psi} \neq 0 \implies \braket{\Psi | \Psi} \neq 0$$
+So 
+$$q=q^*$$
+which shows that $q$ is real.
+
+The collection of eigenvalues of an operator is called its spectrum.  In what follows we will consider discrete spectra and continuous spectra separately, but no matter the type of spectra {\bf the eigenvalues of a hermitian operator are real.}
+
+\section{Eigenvectors of Observables with Discrete and Non-Degenerate Spectra}
+
+Let's consider the case of an operator $\hat{Q}$ with a discrete (whether finite or infinite) spectrum of eigenvalues $\{\alpha_i\}$.  In this case, it is convenient to label the state vector of each determinate state by it's eigenvalue:
+$$\hat{Q}\ket{\alpha_i} = \alpha_i \ket{\alpha_i}$$
+If one vector is a scalar times another vector:
+$$\ket{\alpha_i} = k \ket{\alpha_j}$$
+we call them linearly dependent.  When this is not the case they are linearly independent.
+Sometimes two linearly independent vectors $\ket{\alpha_i}$ and $\ket{\alpha_j}$ have the same eigenvalue for an operator $\hat{Q}$:
+$$\alpha_i = \alpha_j$$
+In this case, we call the spectrum degenerate.  Here we are assuming the spectrum is non-degenerate, and tackle the minor complexity of degeneracy later.
+
+For an operator with discrete non-generate spectrum, the determinate states have some useful properties:
+
+\begin{itemize} 
+\item {\bf They are orthogonal:}  
+\begin{eqnarray*}
+\braket{\alpha_i | \hat{Q} \alpha_j} &=& \braket{\hat{Q} \alpha_i | \alpha_j}\\
+\alpha_j \braket{\alpha_i | \alpha_j} &=& \alpha_i \braket{\alpha_i | \alpha_j}\\
+(\alpha_j-\alpha_i) \braket{\alpha_i | \alpha_j} &=& 0\\
+\end{eqnarray*}
+As we are assuming non-degenerate spectrum in this section:
+$$\alpha_j \neq \alpha_i \implies \braket{\alpha_i | \alpha_j} = 0$$
+Furthermore, as the $\ket{\alpha_i}$ are vectors in the Hilbert space of square-integrable functions,
+they can be properly normalized, so that:
+$$\braket{\alpha_n|\alpha_m} = \delta_{nm}$$.
+
+\item {\bf They are complete.}  Below we show this in the general case for a finite dimensional Hilbert space.  We've also already seen it hold true in infinite dimensions in the case of the Fourier series solutions to the infinite square well potential.  Beyond this, we will ``assume the eigenfunctions of an observable are complete unless proven otherwise.'' 
+\end{itemize}
+
+\section{Generalized Statistical Interpretation}
+
+We've seen that the eigenvectors of an observable with a discrete non-degenerate spectrum have the ``Big Three'' properties:  (1) they have real eigenvalues, (2) they be arranged to be orthonormal, and (3) they are complete.  In this context, we are now ready to state {\bf the most important material of this quarter}:  the general statistical interpretation of the eigenfunctions of an observable.  We will be explicit with time dependence throughout this section.
+
+Because of property (3), we can express any state vector $\ket{\Psi(t)}$ as a sum of eigenvectors of {\bf any} observable $\hat{Q}$:
+\begin{equation}
+\label{eqn:sumeigen}
+\ket{\Psi(t)} = \sum_n c_n(t) \ket{\alpha_n}
+\end{equation}
+The sum over $n$ here is over all possible values, which will vary from case to case (e.g. finite for bounds states of a square well, infinite starting at $n=1$ for the infinite square well, infinite starting at $0$ for the harmonic oscillator potential).  The eigenvectors $\ket{\alpha_n}$ have the defining property:
+$$\hat{Q} \ket{\alpha_n} = \alpha_n \ket{\alpha_n}$$
+and property (1) informs us that every $\alpha_n$ is real.  
+
+Because of property (2), we can determine the coefficients $c_n(t)$ via Fourier's trick. First
+we'll change the sum over $n$ in Equation~\ref{eqn:sumeigen} to a sum over $m$.  We {\rm can} do this because it is a dummy variable (it has no meaning outside the sum), and we {\bf must} do this in order to avoid getting confused the $n$ in $c_n$:
+$$\ket{\Psi(t)} = \sum_m c_m(t) \ket{\alpha_m}$$
+Because the inner product is linear in the second slot\footnote{That is, for $F(x)$ and $G(x) = a\,f(x) + b\,g(x)$ we have $\braket{F|G} = a \braket{F,f} + b \braket{F,g}$.} we have:
+\begin{eqnarray*}
+\braket{\alpha_n| \Psi(t)} &=& \sum_m c_m(t) \braket{\alpha_n | \alpha_m}\\
+ &=& \sum_m c_m(t) \delta_{nm}\\
+ &=& c_n(t) \\
+\end{eqnarray*}
+Next let's see how to obtain the expectation value for the observable $\hat{Q}$:
+$$\braket{\hat{Q}} = \braket{\Psi(t) \, | \, \hat{Q} \, \Psi(t)}$$
+Note that:
+$$\hat{Q}\ket{\Psi(t)} = \sum_m c_m(t) \hat{Q}\ket{\alpha_m} = \sum_m \alpha_m c_m(t) \ket{\alpha_m}$$
+So we'll use the linearity of the inner product twice:
+\begin{eqnarray*}
+\braket{\hat{Q}} &=& \braket{\Psi(t) \, | \, \hat{Q} \, \Psi(t)} \\
+&=& \sum_{m} \; \alpha_m \; c_m(t) \; \braket{\Psi(t) | \alpha_m} \\
+&=& \sum_{m} \; \alpha_m \; c_m(t) \; \braket{\alpha_m | \Psi(t)}^*\\
+&=& \sum_{m} \; \alpha_m \; c_m(t) \; \left( c_n(t) \; \sum_{n} \braket{\alpha_m \,|\, \alpha_n} \right)^*\\
+&=& \sum_{n,m} \; c_n^*(t) \; \alpha_m \; c_m(t) \; \braket{\alpha_n | \alpha_m}\\
+&=& \sum_{n,m} \; c_n^*(t) \; c_m(t) \; \alpha_m \; \delta_{nm}\\
+&=& \sum_n \;|c_n(t)|^2 \; \alpha_n\\
+\end{eqnarray*}
+But our statistical interpretation of an expectation value is the weighted average of possible outcomes, with the weight equal to the probability of each outcome.  So evidently {\bf \boldmath the probability that a measurement will yield outcome $\alpha_n$ is $|c_n(t)|^2$.}
+
+For this interpretation to work we should have:
+$$\sum_n |c_n(t)|^2 = 1$$
+and sure enough:
+\begin{eqnarray*}
+1 &=&\braket{\Psi(t) | \Psi(t)} \\
+&=& \sum_{n,m} c_n^*(t) c_m(t) \braket{\alpha_n | \alpha_m}\\
+&=& \sum_{n,m} c_n^*(t) c_m(t) \delta_{nm}\\
+&=& \sum_n |c_n(t)|^2 \\ 
+\end{eqnarray*}
+
+To summarize:  the eigenvectors of any observable $\hat{Q}$ have the defining property:
+$$\hat{Q} \ket{\alpha_n} = \alpha_n \ket{\alpha_n}$$
+These eigenvectors have the big three properties: (1) their eigenvalues ($\alpha_n$) are real, (2) they can be arranged to be orthonormal, and (3) they are complete.  Therefore, any state vector can be expressed as a sum of eigenvectors:
+$$\ket{\Psi(t)} = \sum_n c_n(t) \ket{\alpha_n}$$
+The probability that a measurement of the observable $\hat{Q}$ results in the particular real value $\alpha_n$ is $|c_n(t)|^2$. 
+
+Notice that as a logical consequence, the outcome of a measurement is limited to one of the eigenvalues of the operator.  Furthermore, as we first discussed in Chapter 1 (but have done little with so far), the action of making a measurement causes the wave function to collapse.  We can be more specific now, and say that after a measurement of outcome $\alpha_n$, the wave function collapses
+\footnote{There are other possible interpretations, but this is consistent with the Copenhagen interpretation which we will take as our baseline interpretation for this course.} to the unique eigenstate corresponding to that eigenvalue (we are not considering degenerate spectra yet.)
+$$\ket{\Psi(t)} \longrightarrow \ket{\alpha_n}$$
+So, assuming that the wave function does not evolve further, subsequence measurements of the observable $\hat{Q}$ will yield the value $\alpha_n$ with $|c_n(t)|^2 = 1 = 100\%$ certainty.
+
+\section{Eigenvectors of Hermitian Operators with Degenerate Spectra}
+
+If one vector is a scalar times another vector:
+$$\ket{\alpha_i} = k \ket{\alpha_j}$$
+we call them linearly dependent.  When this is not the case they are linearly independent.
+Sometimes two linearly independent vectors $\ket{\alpha_i}$ and $\ket{\alpha_j}$ have the same eigenvalue for an operator $\hat{Q}$:
+$$\alpha_i = \alpha_j$$
+and in this case we say the spectrum is degenerate\footnote{By the way, be careful not to take our notation too literally here, we still have:
+$$\ket{\alpha_i} \neq \ket{\alpha_j}$$
+because it is completely clear which vector is which, even though $\alpha_i=\alpha_j$!}
+In this case, even though we cannot assume these eigenfunctions are orthogonal, we can arrange them so.  Consider the vector:
+$$\ket{T} \equiv \ket{\alpha_j} - \braket{\alpha_i|\alpha_j}\ket{\alpha_i}$$
+it is orthogonal to $\ket{\alpha_i}$ as we can see from:
+$$\braket{\alpha_i| T} = \braket{\alpha_i | \alpha_j} - \braket{\alpha_i|\alpha_j} \braket{\alpha_i|\alpha_i} = 0$$
+Furthermore, it cannot be zero for otherwise we would have:
+$$\ket{\alpha_j} = \braket{\alpha_i|\alpha_j}\ket{\alpha_i}$$
+and we already said $\ket{\alpha_j}$ and $\ket{\alpha_i}$ were linearly independent.
+Lastly, it too has eigenvalue $\alpha_j$:
+\begin{eqnarray*}
+\hat{Q}\ket{T} &=& \hat{Q}\ket{\alpha_j} - \braket{\alpha_i|\alpha_j}\hat{Q}\ket{\alpha_i}\\
+&=&\alpha_j \ket{\alpha_j} - \braket{\alpha_i|\alpha_j} \alpha_i \ket{\alpha_i}\\
+&=& \alpha_j \ket{T}\\
+\end{eqnarray*}
+This means $\ket{T}$ has the same eigenvalue as $\ket{\alpha_j}$ but is also orthogonal to $\ket{\alpha_i}$.  So we need only normalize $\ket{T}$ and then redefine:
+$$\ket{\alpha_j} \equiv \ket{T}$$
+so that now:
+$$\braket{\alpha_i | \alpha_j} = 0$$
+even though:
+$$\alpha_i = \alpha_j$$
+We can extend this to any number of vectors with degenerate eigenvalues as needed to obtain an orthogonal set of eigenvectors.  This process is called the Gram-Schmidt orthogonalization. 
+
+To summarize, for a degenerate discrete spectrum, the eigenvectors can be arranged, via the Gram-Schmidt orthogonalization, such that:
+$$\braket{\alpha_i | \alpha_j} = \delta_{ij}$$
+and thus arranged to have the same ``Big Three'' properties as do the eigenvectors of non-degenerate discrete spectrum.
+
+As a consequence, the standard statistical interpretation applies for degenerate spectra in exactly the same manner as for non-degenerate spectra.  The only minor subtlety is what happens in the case that the outcome of a measurement yields a degenerate result.  In this case, the wave function still collapses, but now to a linear combination of the (degenerate) eigenvectors.
+
+To illustrate, suppose the state vector is: 
+$$\ket{\Psi} = \frac{1}{2}\left(\ket{\alpha_1} + i\,\ket{\alpha_2} + \sqrt{2}\,\ket{\alpha_3}\right)$$
+where $\ket{\alpha_i}$ are eigenfunctions of the observable $\hat{Q}$ and $\alpha_1 = \alpha_2$ but $\alpha_3 \neq \alpha_1$.
+The probability that a measurement of $\hat{Q}$ results in $\alpha_3$ is:
+$$\left|\frac{\sqrt{2}}{2}\right|^2 = \frac{1}{2}$$
+After a measurement with outcome $\alpha_3$ the wave function collapses to:
+$$\ket{\Psi} \longrightarrow \ket{\alpha_3}$$
+On the other hand, the probability that a measurement of $\hat{Q}$ results in $\alpha_1 = \alpha_2$ is:
+$$\left|\frac{1}{2}\right|^2 + \left|\frac{i}{2}\right|^2 = \frac{1}{2}$$
+After a measurement with outcome $\alpha_1=\alpha_2$ the wave function collapses to:
+$$\ket{\Psi} \longrightarrow \frac{1}{\sqrt{2}}\left(\ket{\alpha_1} + i\,\ket{\alpha_2}\right)$$
+In all of the cases, we used our freedom to choose the overall phase of the wave-function, but notice that the relative phase of $\ket{\alpha_1}$ and $\ket{\alpha_2}$ is preserved by the collapse.
+
+\section{The Dirac Delta function and the Fourier Transform}
+
+It is both mathematically dubious and extremely useful to consider the Fourier Transform of the Dirac Delta function:
+$$
+\widetilde{\delta}(k) \; = \; \frac{1}{\sqrt{2\pi}} \; \int_{-\infty}^{\infty} \; \delta(x) \; e^{-ikx} \; dx  \; = \; \frac{e^{-ik0}}{\sqrt{2\pi}} \; = \; \frac{1}{\sqrt{2\pi}} 
+$$
+and so we can write the Dirac delta function as:
+\begin{eqnarray*}
+\delta(x) &=& \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} \; e^{ikx} \; \widetilde{\delta}(k) \; dk \\
+&=& \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} \; e^{ikx} \; \frac{1}{\sqrt{2\pi}} \; dk \\
+\end{eqnarray*}
+so we have:
+\begin{equation}
+\label{eqn:fourierdelta}
+\delta(x) = \frac{1}{2\pi} \int_{-\infty}^{\infty} \; e^{ikx} \; dk
+\end{equation}
+and by interchanging variables:
+\begin{equation*}
+\delta(k) = \frac{1}{2\pi} \int_{-\infty}^{\infty} \; e^{ikx} \; dx
+\end{equation*}
+As always when dealing with the Dirac delta function, these relations are only really valid within another integral, and that is precisely how we will use them in what follows.
+
+By substitution of variables\footnote{Don't get confused here, we are still in one-dimension, and $y$ is just a different dummy variable in the same direction as $x$.  You can think of it as $x'$ if you prefer, but $x'$ doesn't show up well on the board, so we use $y$ in lecture.}
+$$
+\delta(x-y) = \frac{1}{2\pi} \int_{-\infty}^{\infty} \; e^{ik(x-y)} \; dk
+$$
+and:
+$$
+\delta(k-l) = \frac{1}{2\pi} \int_{-\infty}^{\infty} \; e^{i(k-l)x} \; dx
+$$
+Equation~\ref{eqn:fourierdelta} is a kind of shorthand for the Fourier Transform, for we can use it to derive the Fourier and Inverse Fourier Transforms directly:
+\begin{eqnarray*}
+\psi(x) &=& \int_{-\infty}^{+\infty} \psi(y) \; \delta(x-y) \; dy \\
+&=& \frac{1}{2\pi}\int_{-\infty}^{+\infty} \int_{-\infty}^{+\infty} \psi(y) \; e^{ik(x-y)} \; dk \, dy \\
+&=& \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{+\infty} e^{ikx} 
+ \left( \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{+\infty} \psi(y) \; e^{-iky} \; dy \right) \, dk \\
+\end{eqnarray*}
+The quantity in parenthesis is just the fourier transform of $\psi(x)$, don't be fooled by the dummy variable $y$, so we have only to define:
+$$\widetilde{\psi}(k) \equiv \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{+\infty} \psi(x) \; e^{-ikx} \; dx $$
+and we have immediately:
+$$\psi(x) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{+\infty} \widetilde{\psi}(k) \; e^{ikx} \; dk $$
+Notice we could have made other choices here about how to distribute the factor of $1/2\pi$, we've chosen to write these in the most symmetric fashion.
+
+In the homework , you will derive the Parseval-Plancherel identity:
+$$\int_{-\infty}^{+\infty} |\Psi(x)|^2 \, dx \; = \; \int_{-\infty}^{+\infty} |\widetilde{\Psi}(p)|^2 \, dp$$
+
+%\begin{eqnarray*}
+%\int_{-\infty}^{+\infty} |\widetilde{\psi}(k)|^2 dk &=& \int_{-\infty}^{+\infty} \widetilde{\psi^*}(k) 
+%\widetilde{\psi}(k) dk\\
+%&=& \int_{-\infty}^{+\infty} 
+%\left( \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{+\infty} e^{-ikx} \psi(x) dx \right)^* 
+%\left( \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{+\infty} e^{-iky} \psi(y) dy \right)
+%dk\\
+%&=& \int_{-\infty}^{+\infty} \; \int_{-\infty}^{+\infty} 
+%\psi^*(x) \psi(y) \left( \frac{1}{2\pi} \int_{-\infty}^{+\infty} e^{ik(x-y)} dk \right) dx dy\\
+%&=& \int_{-\infty}^{+\infty} \; \int_{-\infty}^{+\infty} 
+%\psi^*(x) \psi(y) \delta(x-y) dx dy\\
+%&=& \int_{-\infty}^{+\infty} |\psi(x)|^2 \ dx\\
+%\end{eqnarray*}
+
+\section{Eigenvectors of Observables with Continuous Spectra}
+
+Let's consider the case of an operator $\hat{Q}$ with a continuous spectrum of eigenvalues $\{\alpha\}$.  In this case, it is convenient to label the state vector of each determinate state by it's eigenvalue:
+$$\hat{Q}\ket{\alpha} = \alpha \ket{\alpha}, \hspace{1cm} \hat{Q}\ket{\beta} = \beta \ket{\beta}$$
+where now there is no index $i$ on the eigenvalues, as the spectrum is uncountably infinite.  As $\hat{Q}$ is hermitian, the eigenvalues ($\alpha$ and $\beta$ here) are real.  Furthermore, we can show that:
+$$\braket{\alpha|\beta} = 0, \hspace{2cm} {\rm for} \;\alpha \neq \beta$$ 
+using the same calculation as for the discrete case, so the eigenfunctions are orthogonal too.  As is our right as physicists, we may assume (until proven otherwise) that the eigenvectors are complete, so we can write:
+$$\ket{\Psi} = \int_{-\infty}^{+\infty} a(\alpha) \ket{\alpha}d\alpha$$
+where we have replaced the sum over discrete eigenvalues with an integral over continuous eigenvalues.
+We expect to be able to determine the coefficients $a(\beta)$ using Fourier's trick:
+\begin{eqnarray*}
+\braket{\beta|\Psi} &=& \int_{-\infty}^{+\infty} a(\alpha) \braket{\beta | \alpha} d\alpha \\
+\end{eqnarray*}
+So for this to work, we need $\braket{\beta | \alpha}$ to pick out the particular value $a(\beta)$ from the integral.  No ordinary function will do this, but the delta function will.  With:
+$$\braket{\beta|\alpha} = \delta(\alpha-\beta)$$
+we obtain:
+$$\braket{\beta|\Psi} = a(\beta)$$
+as expected.
+
+Evidently, the eigenfunctions of continuous spectra are not normalizable!  We therefore cannot have normal orthonormality, but we have instead what Griffith's calls ``Dirac othonormality'', which replaces the Kronecker delta with the Dirac delta function.\\ 
+
+Let's look at some concrete examples:
+\begin{itemize}
+\item {\bf Eigenvectors of the momentum operator:}  For a concrete example, let's consider the eigenvectors of the momentum operator:
+$$\hat{p} \ket{p} = p \ket{p}$$
+The state vector $\ket{p}$ has an associated wave function $\psi_p(x)$, for which the momentum operator takes it's familiar form $\hat{p} = -i\hbar d/dx$, so we have:
+$$-i\hbar \frac{d}{dx}\psi_p(x) = p \psi_p(x)$$
+with solutions:
+$$\psi_p(x) = A e^{\displaystyle ipx/\hbar}$$
+These are none other than our plane wave solutions to the free particle SE.  This is no surprise, since the free-particle Hamiltonian depends only on $\hat{p}$, and so:
+$$\hat{H} \ket{p} = \frac{\hat{p}^2}{2m} \ket{p} = \frac{p^2}{2m} \ket{p}$$
+That is, eigenvectors of $\hat{p}$ are also eigenvectors of $\hat{H}$.
+
+We can check the orthogonality by calculating the inner product of the $\ket{p}$ with another eigenvector of the momentum operator $\ket{q}$:
+$$\braket{q|p} = |A|^2\int_{-\infty}^{+\infty} e^{i(p-q)x/\hbar} dx = |A|^2 \, 2\pi\hbar \, \delta(p-q)$$
+So if we take:
+$$\psi_p(x) = \frac{1}{\sqrt{2\pi \hbar}} e^{\displaystyle ipx/\hbar}$$
+Then:
+$$\braket{q|p} = \delta(p-q)$$
+which is Dirac orthonormality, exactly as we expect.  We can write any state vector as an integral over the eigenvectors:
+$$\ket{\Psi} = \int_{-\infty}^{+\infty} c(p) \ket{p} dp $$
+and obtain the coefficients from Fourier's Trick:
+\begin{eqnarray*}
+\braket{p|\Psi} &=& \int_{-\infty}^{+\infty} c(q) \, \braket{p|q} \, dq \\
+                &=& \int_{-\infty}^{+\infty} c(q) \, \delta(q-p) \, dq \\
+				&=& c(p) \\
+\end{eqnarray*}
+
+\item {\bf Eigenvectors of the position operator:}  Next let's consider the eigenvectors $\ket{y}$ of the position operator:
+$$\hat{x} \ket{y} = y \ket{y}$$
+Here we are using $y$ to indicate a specific value of the variable $x$.  The state vector $\ket{y}$ has an associated wave function $\psi_y(x)$ for which:
+$$\hat{x} \psi_y(x) = x \psi_y(x) = y \psi_y(x)$$
+where $x$ is a variable and $y$ is a specific value.  The solution is:
+$$\psi_y(x) = A \delta(x-y)$$
+for then:
+$$x \psi_y(x) = x A \delta(x-y) = y A \delta(x-y) = y \psi_y(x)$$
+as needed.  We can check orthogonality:
+$$\braket{y|z} = |A|^2 \int_{-\infty}^{+\infty} \delta(x-y) \delta(x-z) dx = |A|^2 \delta(y-z)$$
+If we choose $A=1$ we have:
+$$\braket{y|x} = \delta(x-y)$$
+From completeness we have:
+$$\ket{\psi} = \int_{-\infty}^{+\infty} c(x) \ket{x} dp $$
+and Fourier's Trick gives the expected outcome:
+\begin{eqnarray*}
+\braket{y|\psi} &=& \int_{-\infty}^{+\infty} c(x) \braket{y|x} dx \\
+                &=& \int_{-\infty}^{+\infty} c(x) \delta(y-x) dx \\
+                &=& c(x) \\
+\end{eqnarray*}
+and also:
+$$\braket{y|\psi} = \int_{-\infty}^{+\infty} \delta(x-y) \psi(x) dx = \psi(y)$$
+or equivalently:
+$$\psi(x) = \braket{x|\psi}$$
+\end{itemize}
+which at last precisely connects our Hilbert space state vectors to the wave function: the wave function is the inner product of the position eigenvector with the state vector.
+
+\section{Position and Momentum Space Wave Functions}
+
+We found in the previous sections that the eigenvector $\ket{y}$ of position has wave function:
+$$\psi_y(x) = \delta(x-y)$$
+which led to the formal connection between the state vector and wave function:
+$$\braket{x|\Psi} = \Psi(x)$$
+
+The eigenvector of momentum $\ket{p}$ has wave function:
+$$\psi_p(x) = \frac{1}{\sqrt{2\pi \hbar}} e^{\displaystyle i p x / \hbar}$$
+Now let's consider the inner product:
+$$\braket{p|\Psi} = \frac{1}{\sqrt{2\pi\hbar}}\int_{-\infty}^{+\infty} \Psi(x) e^{-ipx/\hbar} dx $$
+which we see is just the Fourier Transform of $\Psi(x)$, but with $k \to p/\hbar$.   We call this the momentum space wave function:
+$$\braket{p|\Psi} = \widetilde{\Psi}(p)$$
+We can expand the wave function as:
+$$\ket{\Psi} = \int c(x) \ket{x} dx$$
+or
+$$\ket{\Psi} = \int c(p) \ket{p} dp$$
+But we can determine the coefficients, as always, using Fourier's trick:
+$$c(x) = \braket{x|\Psi} = \Psi(x)$$
+and
+$$c(p) = \braket{p|\Psi} = \widetilde{\Psi}(p)$$
+So:
+$$\ket{\Psi} = \int \Psi(x) \ket{x} dx$$
+or
+$$\ket{\Psi} = \int \widetilde{\Psi}(p) \ket{p} dp$$
+In the case of discrete eigenvalues, we have:
+$$\ket{\Psi} = \sum_n c_n \ket{\alpha_n}$$
+and we saw that the probability of measuring value $\alpha_n$ was 
+$$P(n) = |c_n|^2 = |\braket{\alpha_n|\Psi}|^2$$
+In the continuous case we have:
+$$P(a\leq x \leq b) = \int_{a}^{b}|\Psi(x)|^2 dx = \int_{a}^{b}|\braket{x|\Psi}|^2 dx$$
+and
+$$P(a \leq p \leq b) = \int_{a}^{b}|\widetilde{\Psi}(p)|^2 dp = \int_{a}^{b}|\braket{p|\Psi}|^2 dp$$
+
+ 
+\section{Summary of Determinate States}
+
+The eigenfunctions of hermitian operators (observables) have the ``Big
+Three'' properties: (1) their eigenvalues of real, (2) they can be
+arranged into an orthonormal basis, and (3) they are complete.  If the
+spectrum is degenerate, the Gram-Schmitt procedure must be used to
+produce an orthonormal basis.  If the spectrum is continuous, the
+normal orthonormality is replaced by Dirac orthonormality.
+
+\begin{center}
+\begin{tabular}{lll}
+Property       & Discrete & Continuous \\[8pt]
+Orthonormality & $\braket{\alpha_m|\alpha_n} = \delta_{mn}$ & $\braket{\alpha|\beta} = \delta(\alpha-\beta)$ \\[8pt]
+Completeness   & $\displaystyle \ket{\Psi} = \sum_n c_n \ket{\alpha_n}$ & 
+$\displaystyle \ket{\Psi} = \int_{-\infty}^{+\infty} c(\alpha) \ket{\alpha}$\\[8pt]
+Normalization  & $\displaystyle \sum_n |c_n|^2 = 1$ & 
+$\displaystyle \int_{-\infty}^{+\infty} |c(\alpha)|^2  d\alpha = 1$ \\[8pt]
+\end{tabular}
+\end{center}
+
+\section{Dirac Notation}
+
+In this course, we started with position-space wave functions $\Psi(x,t)$.  We saw that the wave functions form a Hilbert space with an inner product:
+$$\braket{f|\Psi(t)} = \int_{-\infty}^{+\infty} f^*(x,t) \, \Psi(x,t) \, dx$$
+More recently, we've come to associate the position-space wave function with a state vector:
+$$\ket{\Psi(t)}$$
+with:
+$$\Psi(x,t) = \braket{x|\Psi(t)}$$
+That is, the value of the wave function at value $x$ is the inner product of the state vector 
+$\ket{\Psi(t)}$ with the eigenvectors of position $\ket{x}$.  The state $\ket{\Psi(t)}$ is more general than the position-space wave function, because, e.g. the state of the system can be equally well expressed by a momentum-space wave function:
+$$\widetilde{\Psi}(p,t) = \braket{p|\Psi(t)}$$
+
+We are going to drop the explicit time dependence in what follows (because there is more than enough going on already) and write:
+$$\Psi(x) = \braket{x|\Psi}$$
+it follows that:
+$$\Psi^*(x) = \braket{\Psi|x}$$
+While $\Psi(x)$ and $\Psi^*(x)$ are connected via complex conjugation:
+$$\Psi(x) \overset{\text{CC}}{\longleftrightarrow} \Psi^*(x)$$
+we should also have some connection (to be defined) between $\ket{\Psi}$ and $\bra{\Psi}$:
+$$\ket{\Psi} \overset{\text{dual}}{\longleftrightarrow} \bra{\Psi}$$
+But what is $\bra{\alpha}$?  It's not an operator!  An operator $\hat{O}$
+$$\hat{O} \ket{\Psi} = \ket{\Phi}$$
+acts on a vector to create a new vector, so we can say it maps a vector to a vector.  But:
+$$(\bra{\alpha}) \ket{\beta} = \braket{\alpha|\beta} \in \mathbb{C}$$
+so $\bra{\alpha}$ maps a vector to scalar.  It's a complex function (like a wave function) but takes a vector as input.  Just as our position-space wave functions were part of a Hilbert space, the $\bar{\alpha}$ are elements of a dual space.  But we don't really need to delve into those details, we need only recognize that when we multiply a member of the dual space, $\bra{\alpha}$, which we call a ``bra''
+by an element of a the Hilbert space, $\ket{\beta}$, which we call a ``ket'', we get the inner product
+$\braket{\alpha|\beta}$, which is also called a bracket\footnote{Get it??!!  Quantum mechanics has the worst jokes!  The only one that comes close to being funny is ``In Hilbert space, no one can hear you scream.'' If you want good jokes, take Stat Mech.  Now they have some great jokes!}.
+
+It helps to see a concrete example.  In a finite dimensional Hilbert space, we can write the kets as column vectors with respect to some basis:
+$$\ket{\beta} =
+\begin{pmatrix}
+           b_{1} \\
+           b_{2} \\
+           \vdots \\
+           b_{n}
+\end{pmatrix}
+$$
+so then bras will be row vectors:
+$$\bra{\alpha} =
+\begin{pmatrix}
+a_{1}^* & a_{2}^* & \ldots & a_{n}^*\\
+\end{pmatrix}
+$$
+with inner product:
+$$
+\braket{\alpha|\beta}
+\hspace{0.5cm} = \hspace{0.5cm}
+\begin{pmatrix}
+a_{1}^* & a_{2}^* & \ldots & a_{n}^*\\
+\end{pmatrix}
+\begin{pmatrix}
+           b_{1} \\
+           b_{2} \\
+           \vdots \\
+           b_{n}
+\end{pmatrix}
+\hspace{0.5cm} = \hspace{0.5cm} a_1^* \; b_{1} + a_2^* \; b_{2} + \ldots + a_n^* \; b_{n}\\
+$$
+
+To recap we have vectors written as kets:
+$$\ket{\beta}$$
+We have dual vectors written as bras:
+$$\bra{\alpha}$$
+Inner products written as brackets:
+$$\braket{\alpha|\beta}$$
+
+
+The preliminaries behind us, let's look at a few more advanced features of the notation:
+
+\subsection{Matrix Elements}
+
+Bras and kets are now separate entities, that form an inner product when multiplied.  Consider the ket that we get by hitting the ket $\ket{\beta}$ with operator $\hat{O}$:
+$$\ket{\hat{O}\beta} \equiv \hat{O} \ket{\beta}$$
+Then:
+$$\braket{\alpha|\hat{O}\beta} = \braket{\alpha|\hat{O}|\beta}$$
+So we can sandwich an operator between a bra and a ket, and it all makes perfect sense.  Here the operator $O$ acts on the ket $\ket{\beta}$ to create a new ket $\ket{O\beta}$, which when hit by the bra $\bra{\alpha}$ forms the inner product $\braket{\alpha|O\beta}$.  For reasons that will become clear below, we call this arrangement a ``matrix element''.
+
+This does raise an interesting question.  From:
+$$\braket{\alpha|\beta} = \braket{\beta|\alpha}^*$$
+we can read off that:
+$$\ket{\beta} \overset{\text{dual}}{\longleftrightarrow} \bra{\beta}$$
+But what is the dual to $\hat{O}\ket{\beta}$?  I suppse we could write:
+$$\hat{O}\ket{\beta} = \ket{\hat{O}\beta}$$
+and:
+$$\ket{O\beta} \overset{\text{dual}}{\longleftrightarrow} \bra{O\beta}$$
+but the interior of the bra and ket is just a label, so this really isn't illuminating at all!  Let's work it out a bit more carefully:
+$$\braket{\alpha|\hat{O}|\beta} = \braket{\alpha|\hat{O}\beta} = \braket{\hat{O}^\dagger\alpha|\beta}
+= \braket{\beta | \hat{O}^\dagger\alpha}^* = \braket{\beta | \hat{O}^\dagger | \alpha}^*$$
+from which\footnote{This is one of the things that drives mathematicians crazy about the Dirac notation... since the interior is just a label, we are just changing labels around here.  It's a valid criticism, but we are using well-chosen labels!} we read off:
+$$\hat{O}\ket{\beta} \overset{\text{dual}}{\longleftrightarrow} \bra{\beta} \hat{O}^\dagger$$
+For a hermitian operator $\hat{Q}$ we have:
+$$\hat{Q}\ket{\beta} \overset{\text{dual}}{\longleftrightarrow} \bra{\beta} \hat{Q}$$
+so Hermitian operators can act to either the left or the right when sandwiched in a braket.
+
+
+\subsection{Outer Products and Inserting Complete Sets}
+
+We have one more interesting shape to consider, which we call an ``outer product'':
+$$\ket{\alpha}\bra{\beta}$$
+This is an operator, which we can see by hitting a ket with it:
+$$(\ket{\alpha}\bra{\beta}) \ket{\Psi} = (\braket{\beta|\Psi}) \; \ket{\alpha}$$
+which has the form:
+$$\hat{O} \ket{\Psi} = \ket{\Phi}$$
+The outer product is the killer feature of Dirac notation.  Let's see why.  We already have a super compact notation for orthonormality using the Kroenecker delta:
+$$\braket{\lambda_n | \lambda_m} = \delta_{nm}$$
+With the Dirac notation, we also have a compact way to express completeness:
+$$\sum_n \ket{n}\bra{n} = 1$$
+Let's see how this works:
+$$\ket{\Psi} = 1 \, \ket{\Psi} = \left( \sum_n \ket{n}\bra{n} \right) \ket{\Psi}
+= \sum_n \braket{n|\Psi} \ket{n} = \sum_n c_n \ket{n}
+$$
+where:
+$$c_n = \braket{n | \Psi}$$
+evidently, our notation knows Fourier's trick!  For continuous eigenvalues, orthonormality becomes:
+$$\braket{k|l} = \delta(k-l)$$
+and completeness is:
+$$\int \ket{k} \bra{k} dk = 1$$
+For example, the position eigenvectors:
+$$\int \ket{x} \bra{x} dx = 1$$
+and the momentum eigenvectors:
+$$\int \ket{p} \bra{p} dx = 1$$
+We now live in the Hilbert space where the state is represented by a ket $\ket{\Psi}$ that is more general than the position space, wave function, but our notation knows how to calculate inner products in terms of the position wave functions:
+$$\braket{\Psi | \Phi} = \bra{\Psi}\left( 1 \right) \ket{\Phi}
+= \bra{\Psi}\left( \int \ket{x} \bra{x} dx \right) \ket{\Phi}
+= \int \braket{\Psi | x} \braket{x | \Phi} \, dx
+= \int \Psi^*(x) \, \Phi(x) \, dx
+$$
+Isn't that delightful?
+
+\subsection{Fourier Space}
+
+We can calculate:
+\begin{eqnarray*}
+  \braket{p|\Psi} &=& \braket{p|\left( \int \ket{x} \bra{x} dx \right)|\Psi} \\
+  &=& \int \braket{p|x} \braket{x|\Psi} dx \\
+  &=& \int \braket{x|p}^* \braket{x|\Psi} dx \\
+\end{eqnarray*}
+But $\braket{x|p}$ is just the wave function of the eigenvectors of the momentum operators, which we found previously were just the free particle wave functions:
+$$\braket{x|p} = \Psi_p(x) = \frac{1}{\sqrt{2\pi \hbar}} \exp(ipx/\hbar)$$
+So we have:
+\begin{eqnarray*}
+  \braket{p|\Psi} &=& \int \Psi^*_p(x) \Psi(x) dx \\
+  \widetilde{\Psi}(p) &=& \frac{1}{\sqrt{2\pi\hbar}}\int \exp(-ipx/\hbar) \, \Psi(x) \, dx \\
+\end{eqnarray*}
+So evidently our notation knows the Fourier transform.  Similarly:
+\begin{eqnarray*}
+  \braket{x|\Psi} &=& \braket{x|\left( \int \ket{p} \bra{p} dp \right)|\Psi} \\
+  &=& \int \braket{x|p} \braket{p|\Psi} dx \\
+  &=& \int \Psi^*_p(x) \widetilde{\Psi}(p) dp \\
+  \Psi(x) &=& \frac{1}{\sqrt{2\pi\hbar}}\int \exp(ipx/\hbar) \, \widetilde{\Psi}(p) \, dx \\
+\end{eqnarray*}
+So our notation knows the inverse Fourier transform as well.
+
+In the homework, you will use the Dirac notation to prove the Parseval-Plancherel identity:
+$$\int_{-\infty}^{+\infty} |\Psi(x)|^2 \, dx \; = \; \int_{-\infty}^{+\infty} |\widetilde{\Psi}(p)|^2 \, dp$$
+
+\subsection{Basis Vectors, Operators, and Matrix Elements}
+
+The state vector $\ket{\Psi}$ can now be represented in a number of different, ways, which we can obtain by inserting a complete set:
+\begin{itemize}
+\item of eigenvectors of the position operator:
+ $$\ket{\Psi} = \int \ket{x}\braket{x|\Psi} dx = \int \Psi(x) \ket{x} dx $$
+\item of eigenvectors of the momentum operator:
+  $$\ket{\Psi} = \int \ket{p}\braket{p|\Psi} dp = \int \widetilde{\Psi}(p) \ket{p} dp $$
+\item any complete set of orthonormal eigenvectors with discrete eigenvalues:
+ $$\ket{\Psi} = \sum_n \ket{n}\braket{n|\Psi} = \sum_n c_n \ket{n}$$
+\end{itemize}
+We say that $\ket{\Psi}$ can be represented by it's components in a particular basis.
+
+We can also represent operators in a particular basis, for example, consider calculating:
+\begin{eqnarray*}
+ \braket{\alpha|\hat{Q}\beta} &=& \braket{\alpha|Q|\beta}\\
+ &=& \braket{\alpha|\left( \sum_m \ket{m}\bra{m} \right) Q \left( \sum_n \ket{n}\bra{n} \right) |\beta}\\
+ &=& \sum_{m,n} \braket{\alpha|m} \braket{m | Q | n}  \braket{n|\beta}\\
+\end{eqnarray*}
+Defining:
+$$a_m = \braket{m|\alpha} \hspace{2cm} b_m = \braket{m|\beta}$$
+We could write this, for a finite dimensional Hilbert space, as:
+$$
+\begin{pmatrix}
+a_{1}^* & a_{2}^* & \ldots & a_{n}^*\\
+\end{pmatrix}
+\begin{pmatrix}
+           Q_{11} & Q_{12} & \ldots & Q_{1N} \\
+           Q_{21} & Q_{22} &        &        \\
+           \vdots &        & \ddots &        \\
+           Q_{N1} &        &        & Q_{NN} \\    
+\end{pmatrix}
+\begin{pmatrix}
+           b_{1} \\
+           b_{2} \\
+           \vdots \\
+           b_{n}
+\end{pmatrix}
+$$
+where:
+$$Q_{m,n} \equiv \braket{m|Q|n}$$
+are the ``matrix elements'' of $\hat{Q}$.
+
+\subsection{Matrix Elements of the position and momentum operator}
+
+Consider the position operator $\hat{x}$.  We know that:
+$$\hat{x} \ket{x} = x \ket{x}$$
+and, because it is Hermitian, also:
+$$\bra{x} \hat{x} = \bra{x} x$$
+So we have:
+$$\braket{x|\hat{x}|\Psi} = x \braket{x|\Psi}$$
+which is how we write:
+$$\hat{x} \Psi(x) = x \Psi(x)$$
+in the Dirac notation.  But what about the momentum basis?  
+\begin{eqnarray*}
+\braket{p|\hat{x}|\Psi} &=& \braket{p|\left( \int \ket{x}\bra{x}dx \right)\hat{x}|\Psi} \\
+&=& \int \braket{p|x}\braket{x|\hat{x}|\Psi} dx\\
+&=& \int \braket{p|x}x\braket{x|\Psi} dx\\
+&=& \int (x\braket{p|x})\braket{x|\Psi} dx\\
+\end{eqnarray*}
+To make progress, we'd like to find a way to replace the $x$ in $x\braket{p|x}$ as something we can pull outside of the integral.  Working it out:
+\begin{eqnarray*}
+  x \braket{p|x} &=& x \braket{x|p}^* = x \Psi_p^*(x) \\
+  &=& \frac{x}{\sqrt{2\pi\hbar}} \; \exp(-ipx/\hbar)\\
+  &=& \frac{1}{\sqrt{2\pi\hbar}} i\hbar\frac{\partial}{\partial p} \exp(-ipx/\hbar)\\
+  &=& i\hbar\frac{\partial}{\partial p} \braket{p|x}\\
+\end{eqnarray*}
+So returning to our original matrix element we have now:
+\begin{eqnarray*}
+ \braket{p|\hat{x}|\Psi} &=& i\hbar\frac{\partial}{\partial p} \int \braket{p|x}\braket{x|\Psi} dx\\
+&=& i\hbar \frac{\partial}{\partial p} \braket{p|\Psi}
+\end{eqnarray*}
+Which says that:
+$$\hat{x} \; \widetilde{\Psi}(p) = i \hbar \frac{\partial}{\partial p} \; \widetilde{\Psi}(p) $$
+
+So while in the position-space basis we have been using, all along:
+$$\hat{x} \longrightarrow x$$
+and:
+$$\hat{p} \longrightarrow i\hbar\frac{\partial}{\partial x}$$
+We now see that this is just one possible representation.  In the momentum basis:
+$$\hat{x} \longrightarrow i\hbar \frac{\partial}{\partial p} $$
+and (left as an exercise):
+$$\hat{p} \longrightarrow p$$
+
+\subsection{Closing Thoughts on the Dirac Notation}
+
+In quantum mechanics, we are constantly switching between different bases.  If we want to know the time evolution of the state, we need to know the wave function in the basis of the stationary states.  If we want to predict (probabilistically) the outcome of a measurement, we need to to know the wave function in the basis of the eigenvectors of the observable corresponding to that measurement.  As a result, we are constantly changing from one basis to another.  The Dirac notation makes it easy (by inserting complete sets) to change from one basis to another.  That is the main reason why it is such a useful notation.  The fact that it is also quite beautiful is just a bonus!
+
+\section{Optional:  Completeness of Eigenvectors of a Hermitian Operator in Finite Dimensions}
+
+{\bf This is just for fun, don't worry about this material.}  Here we
+will show that the eigenvectors of a Hermitian operator $Q$ are
+complete in any $n$ dimensional Hilbert space.
+
+It is evidently true for $n=1$.  We will assume it is true for $n-1$ and show that it is true for $n$.  The proof will follow from induction.
+
+Take any normalized eigenvector of $\hat{Q}$ in an $n$-dimensional Hilbert space $V$ can label it by it's eigenvalue $\lambda_n$:
+$$\hat{Q}\ket{\lambda_n} = \lambda_n \ket{\lambda_n}$$
+Now consider the subspace $S^\perp$ of all vectors perpendicular to $\ket{\lambda_n}$:
+$$S^\perp \equiv \{ \ket{x} \; {\rm such \; that} \; \braket{x|\lambda_n}=0 \}$$
+The subspace $S^\perp$ has dimension $n-1$ by construction.  To see
+this, note that $S^\perp$ has dimension $n$ at most, so we can write
+any $\ket{x}$ in $S^\perp$ in terms of $n$ orthonormal basis vectors, including $\ket{\lambda_n}$
+
+$$\ket{x} = A_n \ket{\lambda_n} + A_1 \ket{x_1} + A_2 \ket{x_2} + \ldots  + A_{n-1} \ket{x_{n-1}}$$
+but
+$$A_n = \braket{\lambda_n|x} = 0$$
+so really:
+$$\ket{x} = A_1 \ket{x_1} + A_2 \ket{x_2} \ldots A_{n-1} \ket{x_{n-1}}$$
+and we see that $S^\perp$ has $n-1$ dimensions as intended.
+
+Next we'll show that the $n-1$ dimensional subspace $S^\perp$ is closed under $\hat{Q}$, so that 
+we can consider $\hat{Q}$ as a Hermitian operator in an $n-1$ dimensional space, and the induction hypothesis applies.  For $\ket{x} \in S^\perp$ we have:
+$$\braket{Qx|\lambda_n} = \braket{x| Q\lambda_n} = \lambda_n \braket{x|\lambda_n} = 0$$
+which shows that $Q\ket{x}$ is in $S^\perp$ as well.  
+
+That means $n-1$ eigenvectors of $\hat{Q}$ are complete in the $n-1$
+dimensional space $S^\perp$ by our induction hypothesis, and so they
+are linearly indepdent.  Call them
+$$\{\ket{\lambda_1},\ket{\lambda_2}, \ldots, \ket{\lambda_{n-1}}\}$$
+As each is an element of $S^\perp$ they are also orthogonal to $\ket{\lambda_n}$:
+$$\braket{\lambda_i|\lambda_n} = 0, \hspace{2cm} i<n$$
+So
+$$\{\ket{\lambda_1}, \ket{\lambda_2}, \ldots, \ket{\lambda_{n-1}}, \ket{\lambda_n}\}$$
+is a set of $n$ eigenvectors of $V$, which are linearly independent, and therefore complete in $V$.
+
+\end{document}
+
+
+
+

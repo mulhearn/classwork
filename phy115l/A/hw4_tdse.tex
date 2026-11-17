@@ -1,0 +1,290 @@
+\documentclass[12pt]{article}
+
+\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.5in]{geometry}
+\usepackage{cite}
+\usepackage{slashed}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{braket}
+\usepackage{pythonhighlight}
+
+
+
+\begin{document}
+\newcommand{\ihbar}{\ensuremath{i \hbar}}
+\newcommand{\Pss}{\ensuremath{\Psi^*}}
+\newcommand{\dPsidt}{\ensuremath{ \frac{\partial \Psi}{\partial t} }}
+\newcommand{\dPsidx}{\ensuremath{ \frac{\partial \Psi}{\partial x} }}
+\newcommand{\ddPsidx}{\ensuremath{ \frac{\partial^2 \Psi}{\partial x^2} }}
+\newcommand{\dPssdt}{\ensuremath{ \frac{\partial \Psi^*}{\partial t} }}
+\newcommand{\dPssdx}{\ensuremath{ \frac{\partial \Psi^*}{\partial x} }}
+\newcommand{\ddPssdx}{\ensuremath{ \frac{\partial^2 \Psi^*}{\partial x^2} }}
+
+\newcommand{\dphidt}{\ensuremath{ \frac{d \phi}{dt} }}
+\newcommand{\dpsidx}{\ensuremath{ \frac{d \psi}{dx} }}
+\newcommand{\ddpsidx}{\ensuremath{ \frac{d^2 \psi}{dx^2} }}
+
+\title{PHY 115L \\ The Gaussian Wave Packet}
+\author{Michael Mulhearn}
+
+\maketitle
+
+\section{Introduction}
+
+For this assignment, we will animate solutions to the 1-D
+time-dependent Schr\"odinger Equation (TDSE):
+\begin{equation}
+\label{eqn:se}
+\ihbar \frac{\partial \Psi}{\partial t} = H \Psi(x,t)
+\end{equation}\\[3pt]
+where $H$ is the Hamiltonian operator:
+$$H = - \frac{\hbar^2}{2 m} \frac{\partial^2}{\partial x} + V(x) $$
+The energy eigenstates of the Hamiltonian:
+$$H \ket{n} = E_n \ket{n}$$
+are a basis for the Hilbert space and have a well understood time-dependence:
+$$\ket{n(t)} = \exp{\left(- \frac{i E_n t}{\hbar}\right)} \ket{n}$$
+So once we know the coefficients of the energy eigenstates for the wave function at $t=0$:
+$$c_n = \braket{n|\Psi(0)}$$
+then we have the time-dependent solution as well:
+\begin{equation}
+  \label{eqn:expansion}
+ \ket{\Psi(t)} = \sum_n c_n \exp{\left(- \frac{i E_n t}{\hbar}\right)} \ket{n}
+\end{equation}
+
+\section{System of Units}
+
+As ever, we will employ a numerical system with a characteristic
+length scale $a$.  In numerical analysis, it is more natural to use
+the wave number $k$, related to the momentum $p$, by:
+$$p = \hbar k$$
+In our system of units $k$ is measured in units of $1/a$.
+Equivalently, we can consider momentum to be measured in units of:
+$$p_0 = \hbar /a $$
+Energy will be measured in units of:
+\begin{equation}
+E_0 \equiv \frac{\hbar^2}{2ma^2}
+\end{equation}
+As always, quantities like $\hbar$, $a$, $p_0$ and $E_0$ should not
+appear in your program.  We keep track of them explicitly for analytic
+calculations, where dimensional analysis is useful, but we set them to
+one in our computer programs.
+
+\section{Time-Evolution of a Free Particle Wave Packet}
+
+For a free particle, the energy eigenstates are the momentum
+eigenstates, which are continuous.  Therefore, the sum in
+Equation~\ref{eqn:expansion} is replaced by an integral:
+\begin{equation}
+\Psi(x,t) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} \; \phi(k) \; \exp\left[ik\left(x-\frac{\hbar k}{2m}t\right)\right]\; dk 
+\end{equation}\\[3pt]
+where the discrete coefficients have been replaced by the continuous Fourier
+transform of the initial state:
+\begin{equation}
+\phi(k) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} \; \Psi(x,0) \; e^{-ikx} \; dx 
+\end{equation}
+We will consider the initial state to be:
+\begin{equation}
+\label{eqn:initial}
+\Psi(x,0) = N \exp\left( -\frac{x^2}{4\,\alpha^2} \right) \exp(i\beta x)
+\end{equation}
+with normalization factor:
+$$N = \left( \frac{1}{2 \pi \alpha^2} \right)^\frac{1}{4}$$
+Notice that:
+$$|\Psi(x,0)|^2 = \frac{1}{\sqrt{2\pi} \alpha} \exp\left( -\frac{x^2}{2\,\alpha^2} \right)$$
+which is a Gaussian distribution with width $\alpha$.  The Fourier transform of this initial state is:
+\begin{eqnarray*}
+\phi(k) &=& \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{+\infty} \; e^{-ikx} \; \Psi(x,0) \, dx \\
+        &=& \frac{N}{\sqrt{2\pi}} \int_{-\infty}^{+\infty} \; \exp(-X) \; dx \\
+\end{eqnarray*}
+where:
+\begin{eqnarray*}
+  X &=& \frac{1}{4} \left( \frac{x}{\alpha} \right)^2 + i\,(k-\beta)\,x\\
+    &=& \frac{1}{4} \left[ \frac{x}{\alpha}  + i 2 \alpha (k-\beta) \right]^2 + \alpha^2(k-\beta)^2\\
+\end{eqnarray*}
+and we have ``completed the square''.  To compute the integral, we make the substitution:
+$$u = \frac{1}{2} \left[ \frac{x}{\alpha} + i 2 \alpha (k-\beta)\right]$$
+so:
+$$X = u^2 + \alpha^2 (k-\beta)^2$$
+and
+$$dx = 2 \alpha \, du.$$
+Our new integration variable $u$ is complex, and our integral is now a
+contour integral on the complex plane, but we will get the correct
+result by simply rotating back to the $x$-axis, e.g.:
+$$u = \pm\infty + i 2 \alpha (k-\beta) \to \pm\infty$$
+so the integral becomes:
+$$\phi(k) = M \, \exp(-\alpha^2(k-\beta)^2)$$
+where
+$$M = \frac{2 \alpha N}{\sqrt{2\pi}} \int_{-\infty}^{\infty} e^{-u^2} du = \left( \frac{2\alpha^2}{\pi} \right)^\frac{1}{4}$$
+Notice that:
+$$|\phi(k)|^2 = \frac{1}{\sqrt{2\pi} \left(\frac{1}{2 \alpha}\right)} \exp\left( -\frac{(k-\beta)^2}{2\left( \frac{1}{2 \alpha}\right)^2}\right)$$
+which is a Gaussian distribution with mean $\beta$ and
+$$\sigma_k = \frac{1}{2 \alpha}$$
+Recalling that $\sigma_x = \alpha$ and $p =\hbar k$ we have:
+$$\sigma_x \sigma_p = \frac{\hbar}{2}$$
+so the wave packet has minimum uncertainty.
+
+Next we calculate the time-dependent wave function from:
+\begin{eqnarray*}
+  \Psi(x,t) &=& \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{+\infty} \phi(k) \; e^{ikx} \; \exp\left(\frac{-iEt}{\hbar}\right) dk \\
+  &=& M \int_{-\infty}^{+\infty} \; \exp(-X) \, dk\\  
+\end{eqnarray*}
+where:
+\begin{eqnarray*}
+  X &=& \alpha^2(k-\beta)^2 - ikx + i \frac{\hbar t}{2 m}\,k^2
+\end{eqnarray*}
+and we have used:
+$$E = \frac{\hbar^2 k^2}{2 m}.$$
+The algebra that follows turns out much simpler if we first make the substitution:
+$$q = k - \beta \implies k = q + \beta$$
+So we have:
+\begin{eqnarray*}
+  X &=& \alpha^2 q^2 - i(q+\beta)x + i \frac{\hbar t}{2 m}\,(q+\beta)^2\\
+  &=& \left(\alpha^2 + i \frac{\hbar t}{2 \, m}\right) q^2 + i(\frac{\hbar \beta t}{m}-x)q - i\beta x + i\frac{\hbar \beta^2}{2 m}\,t\\
+  &=& A \left( \frac{q}{\beta} \right)^2 + B \frac{q}{\beta} - i\beta x + i \frac{\hbar \beta^2}{2 m}\,t\\  
+\end{eqnarray*}
+where:
+\begin{eqnarray*}
+  A &=& n^2 + i \omega t \\
+  B &=& i (2 \omega t - \beta x) \\
+  n &=& \alpha \beta \\
+  \omega &=& \frac{\hbar \beta^2}{2m}\\ 
+\end{eqnarray*}
+Notice the coefficient of $q$ is pure imaginary, which is the
+simplification that resulted from our substitution.  Completing the square we find:
+\begin{equation*}
+X = A \left[ \frac{q}{\beta} + \frac{B}{2A} \right]^2 - \frac{B^2}{4A}-i\beta x+i \omega t
+\end{equation*}
+and substituting
+$$u = \sqrt{A} \left[\frac{q}{\beta} + \frac{B}{2A}\right]$$
+we have:
+\begin{equation*}
+X = u^2 - \frac{B^2}{4A}-i\beta x+i \omega t.
+\end{equation*}
+and:
+\begin{eqnarray*}
+-\frac{B^2}{4A} &=& \frac{(2 \omega t - \beta x)^2 }{4 (n^2+i\omega t)} \\[5pt]
+&=& \frac{\beta^2}{4 n^2} \, \frac{(x - \frac{2 \omega}{\beta} t)^2}{1 + i (\omega t / n^2)}\\
+&=& \frac{(x - v t)^2}{4 \alpha^2 (1 + i (\omega t / n^2))}\\
+\end{eqnarray*}
+where:
+$$v = \frac{2\omega}{\beta} = \frac{\hbar \beta}{m}$$
+We also have:
+$$-i\beta x + i\omega t = i \beta (x - v t / 2)$$
+Noting that:
+$$dk = dq = \frac{\beta}{\sqrt{A}} du$$
+we have:
+\begin{equation}
+\label{eqn:result}
+\Psi(x,t) = N(t) \, \exp\left( -\frac{(x - v t)^2}{4 \alpha^2 (1 + i (\omega t / n^2))} \right)
+\exp\left(i\beta\left(x-\frac{vt}{2}\right)\right)
+\end{equation}
+where:
+\begin{eqnarray*}
+  N(t) &=& \frac{1}{\sqrt{2\pi}} \left( \frac{2\alpha^2}{\pi} \right)^\frac{1}{4} \frac{\beta}{\sqrt{A}} \int_{-\infty}^{\infty} e^{-u^2} du\\ 
+  &=& \left( \frac{1}{2\pi \, \alpha^2} \right)^\frac{1}{4} \, \frac{1}{\sqrt{1 + i \omega t/n^2}}\\
+\end{eqnarray*}
+There is a lot of phenomenology contained in Equation~\ref{eqn:result}.  Things you can notice:
+\begin{itemize}
+\item The packet starts with initial width $\alpha$ and becomes wider over time via dispersion.
+\item The packet travels with group velocity $v=\hbar \beta/m$, i.e. the classical velocity of a particle with momentum $\hbar \beta$.
+\item The carrier waves (complex exponential) have a phase velocity that is one-half the group velocity.
+\end{itemize}
+You should arrange your animation so that these features are evident.
+
+\section{Animation in Scientific Python}
+
+To animate the time dependent solutions, we will use the FuncAnimation
+feature from matplotlib.animation.  To run in a jupyter notebook, you
+will want to use the matplotlib widget backend for animation:
+\begin{python}
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
+%matplotlib widget
+\end{python}
+Remember that the last line is not a comment, it is ``line magic''
+that starts the backend.  If you haven't used the matplotlib widget
+before, you may have to install it first.  For example, under conda:
+\begin{verbatim}
+conda install ipympl
+\end{verbatim}
+An example animation is provided on the course website (uncertainty.ipynb). In that example, the animation is implemented like this:
+\begin{python}
+# animation parameters
+tstep = 1
+fps = 20
+frame_ms = int(1000 / fps)
+second_tau = fps * tstep
+
+# setup the figures
+fig, axes = plt.subplots(1, 2, figsize=(16, 9), dpi=1920/32)
+xf = np.linspace(-10, 10, 1000)
+la, = axes[0].plot([], [], "b-")
+lb, = axes[1].plot([], [], "r-")
+
+axes[0].set_xlim(-10, 10)
+axes[1].set_xlim(-10, 10)
+axes[0].set_ylim(0, 1.5)
+axes[1].set_ylim(0, 1.5)
+
+axes[0].set_xlabel("$x$")
+axes[0].set_ylabel("$\\psi(x)$")
+axes[1].set_xlabel("$p$")
+axes[1].set_ylabel("$\\phi(p)$")
+
+# initialization of plots:
+def init():
+    la.set_data([], [])
+    lb.set_data([], [])
+    return la, lb
+
+# update plots once per frame:
+def animate(i):
+    s = sig(i)
+    la.set_data(xf, psi(xf, s))
+    lb.set_data(xf, phi(xf, s))
+    return la, lb
+
+#run the animation:
+anim = FuncAnimation(
+    fig,
+    animate,
+    frames=200,
+    init_func=init,
+    interval=frame_ms,
+    blit=False,
+    repeat=True,
+)
+
+plt.tight_layout()
+plt.show()
+\end{python}
+The main features are the initial setup of animation parameters and
+setting up the (empty) plots.  The init function is called at the
+start of the animation, but does little in this example.  In the
+animate function, which is called once per frame, the plots are
+updated with the data for that frame.  Last, the animation is called
+via FuncAnimation.
+
+\section{Homework Problems}
+
+\noindent
+{\bf Problem 1:} Get the example program (uncertainty.ipynb) running
+on your system successfully.  You have explicit permission to use the
+internet, AI, knowledgeable colleagues, etc, in order to accomplish
+this.  Please submit your working code (even if unchanged) for this
+problem, and include some brief comments about the installation steps
+that were needed.  Hopefully, the example code will just work out of
+the box for you, in which case this is a very easy problem!  \\[5pt]
+
+\noindent
+{\bf Problem 2:} Animate the time evolution of a stationary wave
+packet ($\beta=0$) Show the magnitude as a black line, and real and imaginary
+components as blue and red lines.  Use the parameterization from our derivation!\\[5pt]
+
+\noindent
+{\bf Problem 3:} Animate the time evolution of a travelling wave
+packet.  Use the parameterization from our derivation.\\[5pt]
+
+\end{document}

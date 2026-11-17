@@ -1,0 +1,331 @@
+\documentclass[12pt]{article}
+
+\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.5in]{geometry}
+\usepackage{cite}
+\usepackage{slashed}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{braket}
+\usepackage{pythonhighlight}
+\usepackage{mathtools}
+\begin{document}
+
+\newcommand{\ihbar}{\ensuremath{i \hbar}}
+\newcommand{\Pss}{\ensuremath{\Psi^*}}
+\newcommand{\dPsidt}{\ensuremath{ \frac{\partial \Psi}{\partial t} }}
+\newcommand{\dPsidx}{\ensuremath{ \frac{\partial \Psi}{\partial x} }}
+\newcommand{\ddPsidx}{\ensuremath{ \frac{\partial^2 \Psi}{\partial x^2} }}
+\newcommand{\dPssdt}{\ensuremath{ \frac{\partial \Psi^*}{\partial t} }}
+\newcommand{\dPssdx}{\ensuremath{ \frac{\partial \Psi^*}{\partial x} }}
+\newcommand{\ddPssdx}{\ensuremath{ \frac{\partial^2 \Psi^*}{\partial x^2} }}
+
+\newcommand{\dphidt}{\ensuremath{ \frac{d \phi}{dt} }}
+\newcommand{\dpsidx}{\ensuremath{ \frac{d \psi}{dx} }}
+\newcommand{\ddpsidx}{\ensuremath{ \frac{d^2 \psi}{dx^2} }}
+
+
+\title{PHY 115L \\ Variational Methods \\ using Fourier Series }
+\author{Michael Mulhearn}
+
+\maketitle
+
+
+
+\section{Notation}
+
+We'll reserve $k$ for the wave number of a particle.  We will use $m$
+and $n$ as dummy indices.  So we will use $M$ (capital) for the mass
+of a particle to avoid confusion with the index $m$.  We'll use $N$
+for the number of samples.  We'll use $a$ for the period of a
+function.  Note that the numpy FFT library uses different notation,
+taking $k$ as the index for Fourier coefficients (our $m$) and $n$ for
+the number of samples (our $N$).  The HW1 write-up has been updated to
+be consistent with this notation in case you want to refer back to
+anything there.  In our notation, the wave number associated with the
+Fourier index $m$ is given by:
+\begin{equation}
+k = \frac{2 \pi m}{a}
+\end{equation}
+
+\section{TISE and System of Units}
+
+\noindent
+We will use a variational approach to find the ground state
+$\Psi_0(x)$ of the Time-Independent Schr\"odinger Equation (TISE):
+$$\hat{H} \; \psi_0(x) = E_0 \; \psi_0(x)$$
+where the Hamiltonian operator is defined by:
+\begin{equation}
+\hat{H} = -\frac{\hbar^2}{2 M} \; \frac{d^2}{dx^2} \, + \, V(x)
+\end{equation}
+We will consider potentials with a characteristic length scale $L$.
+We will be considering {\bf non-periodic} wave function
+(e.g. solutions to the harmonic oscillator).  To use the Fourier
+series approach in this case, we take the period $a$ to be large
+compared to $L$, and use the fact that the wave function approaches
+zero to approximate a periodic function.
+
+Based on our characteristic length scale $L$, a characteristic energy is:
+\begin{equation}
+\epsilon \equiv \frac{\hbar^2}{2 M L^2}
+\end{equation}
+Note well:  your program should not be calculating a numerical value for
+$\epsilon$: that is the unit of energy for your program!  For example
+$V(x) = 2$ in your program represents $V(x) = 2 \epsilon$
+physically.  Using a system of units like this ensures that the
+numbers we are calculating will be near $1$, which minimizes round-off
+error.
+
+With these units, we have:
+\begin{equation}
+\frac{\hat{H}}{\epsilon} = -L^2\frac{d^2}{dx^2} + \frac{V(x)}{\epsilon}
+\end{equation}
+
+\section{The Variational Method of Finding the Ground State}
+
+Our technique is based on the observation that:
+$$\braket{\psi|\hat{H}|\psi} \geq E_0$$
+for all $\psi$.  Which you can see by expanding $\ket{\psi}$ in the complete set of energy eigenstates:
+$$\ket{\psi} = \sum c_m \ket{E_m}$$
+so:
+$$\braket{\psi|\hat{H}|\psi} = \sum |c_m|^2 E_m = |c_0|^2 E_0 + \sum_{m>0} |c_m|^2 E_m$$
+but:
+$$\sum |c_m|^2 = 1 \;\; \implies \;\; |c_0|^2 = 1 - \sum_{m>0} |c_m|^2$$
+so:
+$$\braket{\psi|\hat{H}|\psi} = E_0 + \sum_{m>0} |c_m|^2 (E_m - E_0)$$
+but as $E_m \geq E_0$ we have:
+$$\braket{\psi|\hat{H}|\psi} \geq E_0$$
+
+The variational technique starts with a first guess for the wave function $\psi$, for which we calculate:
+$$E=\braket{\psi|\hat{H}|\psi}$$
+During each iteration, we vary the wave function randomly to
+obtain $\psi'$, and calculate:
+$$E'=\braket{\psi'|\hat{H}|\psi'}$$
+If $E' < E$, then we update $\psi$ to $\psi'$ and $E$ to $E'$.
+Otherwise, we leave $\psi$ and $E$ as is.  Then we move on to the next
+iteration.
+
+\section{Fourier Series}
+
+One can apply the variational principle directly to the wave function.
+We approximate the continuous wave function as a set of y-values for
+each of $N$ x-values.  To estimate the kinetic energy we take a
+numerical second derivative.  However, to approximate a continuous
+function and its second derivative, we need to use lots of $x$-values
+(order 100).  And we have to vary each point, randomly, one by one.
+And so the convergence of the variational method with this approach is
+very slow, even for a relatively simple problem.
+
+We will instead use a Fourier series approach, taking advantage of the
+FFT library in numpy.  The Fourier series in many cases converges
+remarkably fast.  We will only need $N=16$ to handle the harmonic
+oscillator potential with high accuracy, for example.  And calculating
+the expectation value of the kinetic energy is very easy in frequency
+space, much easier than numerically calculating a second derivative.
+
+We will be considering a Fourier series expansion of the wave function:
+\begin{equation}
+\label{eqn:fs}
+\psi(x) = \sqrt{\frac{1}{a}} \sum_{m=-\infty}^{+\infty} c_m \exp(i\frac{2\pi m x}{a})
+\end{equation}
+where our normalization here is such that:
+$$\sum_{m=-\infty}^{+\infty} |c_m|^2 = 1$$
+As we will be considering stationary states of a 1-D potential, we can take $\psi(x)$ to be real, and so:
+$$c_{-k} = c_k^*$$
+During each iteration we will calculate the expectation value:
+$$\braket{\psi|\hat{H}|\psi} = \braket{\psi|K|\psi} + \braket{\psi|V(x)|\psi}$$
+where $K$ refers to the kinetic energy.
+
+The Fourier series is an expansion in planes waves with momentum $p = \hbar k$ and wavenumbers:
+$$k = \frac{2 \pi m}{a}$$
+And so the kinetic energy $K(m)$ of a particle described by the plane wave for coefficient $c_m$ is:
+$$ K(m) = \frac{p^2}{2M} = \frac{(\hbar k)^2}{2M}
+= \frac{(2 \pi \hbar m)^2}{2Ma^2} = \left( \frac{\hbar^2}{2ML^2} \right) (2 \pi m)^2 \left( \frac{L}{a}\right)^2$$
+And so:
+$$\frac{K(m)}{\epsilon} = (2 \pi m)^2 \left( \frac{L}{a}\right)^2 $$
+From the Fourier series coefficients we can therefore easily calculate the expectation value of the kinetic energy as an average over the kinetic energy of each plane wave:
+$$\braket{\psi|K|\psi} = \epsilon \sum_m (2\pi m)^2 |c_m|^2 \left( \frac{L}{a}\right)^2 $$
+The inverse discrete Fourier series, acting on these $n$ coefficients, will provide us with $\psi(x_m)$ for the $n$ $x$-values located at:
+$$x_m = x_0 + m \Delta a$$
+with
+$$\Delta a \coloneqq \frac{a}{n}$$
+We will use these to calculate:
+$$\braket{\psi|V(x)|\psi} = \sum_m V(x_m) \, |\psi(x_m)|^2 \, \Delta a $$
+Keep in mind what is changing and what is constant.  We'll be updating Forier coefficients ($c_m$) and that will change the values of $\psi(x_m)$ returned by the IFFT.  But the IFFT really only sees these as $\psi_m$.  The $x_m$ are fixed, and so your $V(x_m)$ are also fixed.
+
+\section{Real FFT in Numpy}
+
+We can always take our stationary solutions to 1-D potentials as real-valued.  This implies that:
+$$c_{-m} = c_{m}^*$$
+which implies that $c_0$ is real valued.  As we will be randomly
+varying these coefficients, we want to take full advantage of these
+constraints.  Therefore, we will be using the {\bf real} fast Fourier
+transform (RFFT), which has some different behavior from the fast
+fourier transform for a complex valued function that we need to sort
+out.
+
+Given $N$ data points, the RFFT provides coefficients $c_m$ for
+$$m = 0,1,2,\cdots,m_{\rm MAX}$$
+where:
+$$m_{\rm MAX} = (N//2) + 1$$
+and the $//$ refers to integer divide, e.g.:
+$$5 // 2 = 2$$
+Notice that the same number of coefficients are provided for
+e.g. $n=4$ and $n=5$. {\bf Important:} because of this ambiguity, you
+must specify the number of original data points via the option {\tt n=N}
+when calling the IFFT routine.  Otherwise, the number of sample points
+and there implicit locations may not be consistent with what you
+started with!
+
+The fast Fourier transform, as implemented in numpy, when using the {\tt norm=``ortho''} option, is:
+$$A_m = \sqrt{\frac{1}{n}} \sum_{j=0}^{n-1} a_j \exp \left( -i \frac{2 \pi m j}{n}\right)$$
+where the $a_j$ are the sampled function values:
+$$a_m = \psi(x_m) \psi(x_0 + \Delta a m)$$
+with inverse:
+$$a_m = \sqrt{\frac{1}{n}} \sum_{j=0}^{n-1} A_j \exp \left( i \frac{2 \pi m j}{n}\right)$$
+This differs from our (physics) based normalization which puts:
+$$\sum_{m=-\infty}^{+\infty} |c_m|^2 = 1$$
+In the previous assignment, we already worked out the conversion between our
+physics-based coefficients ($c_m$), and those returned by the tool
+($A_m$), as:
+\begin{equation}
+\label{eqn:am}
+A_m \equiv \frac{c_m}{\sqrt{a/N}} \exp\left(i \frac{2\pi m x_0}{a}\right)
+\end{equation}
+Keep in mind that while the tool provides $A_m$ for $m=0,1,2,\ldots,m_{\rm MAX}$, it is with the understanding that one obtains the coefficiets for $m=-1,-2,\ldots,-m_{\rm MAX}$ via:
+$$A_{-m} = A_{m}^*$$
+So we have:
+\begin{eqnarray*}
+  \sum_{m=\infty}^{m=+\infty} |c_m|^2
+  &=& \left( \frac{a}{N} \right) \sum_{m=-m_{\rm MAX}}^{m_{\rm MAX}} |A_m|^2 \\
+  &=& ( \Delta a ) \left( |A_0|^2 + 2 \sum_{m=0}^{m_{\rm MAX}} |A_m|^2 \right) \\
+\end{eqnarray*}
+So we can state the normalization of the Fourier coefficients $A_k$ as:
+\begin{equation}
+  \left(|A_0|^2 + 2 \cdot \sum_{m=1}^{m_{\rm MAX}} |A_m|^2 \right) \Delta a = 1
+\end{equation}
+Be careful about that factor of two.  It doesn't apply to the $m=0$
+term, and so you can't simply sum across the all $|A_m|^2$!
+
+To see how to reconstruct the continuous real function $\psi(x)$ from
+the Fourier coefficients $A_m$, plug Equation~\ref{eqn:am} into
+Equation~\ref{eqn:fs} to obtain (with some work):
+\begin{equation}
+  \psi(x) = \frac{1}{\sqrt{N}} \left( A_0 + \sum_{m=1}^{m_{\rm MAX}}
+  \left\{
+2 \, {\rm Re}(A_m) \, \cos\left( \frac{2 \pi m (x-x_0)}{a}\right)
+- 2 \, {\rm Im}(A_m) \, \sin\left( \frac{2 \pi m (x-x_0)}{a}\right) \right\} \right)
+\end{equation}
+
+\section{Numerical Algorithm}
+
+Suppose we are trying to find the ground state of a potential and it
+is {\bf even}.  This means that all of the Fourier coefficients are real (make sure you understand this!).
+Our algorithm starts with some preliminaries:
+\begin{itemize}
+\item Initialize a numpy array of your best-so-far Fourier
+  coefficients ($A_m$) by filling them with random numbers, but be sure that
+  each coefficient is real (zero imaginary component) as appropriate
+  for a real function.
+\item Normalize your best-so-far Fourier coefficients appropriately.
+\item Calculate the expectation value for the total energy $E$ of the best-so-far coefficients.
+\end{itemize}
+Then we enter an iterative process, which we run some number of times.  At each iteration:
+\begin{itemize}
+ \item Make a copy of best-so-far Fourier coefficients (call it $A'_m$).
+ \item Choose a random $m$ value and change $A'_m$ by a random amount uniform in $\pm \Delta A$.
+ \item Normalize $A'_m$ appropriately.
+ \item Calculate total energy $E'$ of the coefficients $A'_m$.
+ \item If $E' < E$, then update $A_m$ and $E$ to $A'_m$ and $E$.  Otherwise, abandon $A'_m$ and enter the next iteration.
+\end{itemize}
+
+Make sure you understand how numpy arrays work with respect to
+copying.  For example, it is very easy to introduce a bug that changes
+your best-so-far coefficients ($A_m$) when you only intended to change
+your trial coefficients ($A'_m$).  Write a simple little test code to
+check your approach to copying, instead of trying to test your
+understanding deep in the interior of a complicated algorithm.
+
+For precise results, it is helpful to use a process called simulated
+annealing, where we initially use a large value of $\Delta A$, so that
+the wave function changes rapidly, then reduce the value of $\Delta A$
+for fine tuning as we get closer to the ground state.
+
+\section{The Simple Harmonic Oscillator}
+
+In our system of units, the simple harmonic oscillator has potential:
+$$\frac{V(x)}{\epsilon} = \left(\frac{x}{L}\right)^2$$
+Remember, that in your program, this would be programmed as:
+\begin{python}
+def V(x):
+  return x**2
+\end{python}
+because we set $L=1$ and $\epsilon=1$ and leave them out of the
+program entirely.  The ground state is:
+$$\psi_0 \left( \frac{x}{L} \right) = \frac{1}{\pi^\frac{1}{4}}
+\exp\left( -\frac{x^2}{2 L^2} \right)$$
+and the first excited state:
+$$\psi_1 \left( \frac{x}{L} \right) = \frac{\sqrt{2}}{\pi^\frac{1}{4}} x \exp\left( -\frac{x^2}{2 L^2} \right) $$
+And the energy of each state is:
+$$\frac{E_n}{\epsilon} = 2 n + 1$$
+Last of all, we know that for this potential:
+$$\braket{V} = \braket{K}$$
+Analytic solutions like the Harmonic oscillator are absolute gems for
+developing numerical algorithms.  It is a much much more difficult problem
+to debug an algorithm when you do not know the correct answer!
+
+\section{Homework Problems}
+
+\noindent
+{\bf Please submit one PDF file (including output) and one python
+  notebook file (.ipynb) of your completed assignment.}  If using
+C/C++, submit text or PDF of your output and the source code.
+
+\noindent
+{\bf Problem 1:} For the harmonic oscillator, and using their known
+analytic functions, plot $V(x)$, $\psi_0(x)$, and $\psi_1(x)$ versus
+$x$ in our system of units. For better visiblity, offset the
+$y$-values by the energy of each state.  So e.g. plot $\psi_0(x)=0$ at
+$V(x)/\epsilon=1$.  See Griffith's Figure 2.7(a) which you are
+reproducing.\\[3pt]
+
+\noindent
+{\bf Problem 2:} Demonstrate mastery of the real fast fourier
+transform (RFFT) and its inverse (IRFFT) by doing the following.
+\begin{itemize}
+ \item Take $N=16$, $a=10$, and sample $\psi_0(x)$ appropriately. 
+ \item Plot A: Plot your sample points (as data points) on top of the
+   continuous function (fine binned line) in the same plot.
+ \item Plot B:  Use the RFFT to obtain the Fourier coefficients $A_m$ and plot them versus their index $m$.
+ \item Plot C:  Use the IRFFT to reproduce the sample points and plot them as in Plot A. If you have done this all correctly, then Plot C should reproduce Plot A. \\[3pt]
+\end{itemize}
+
+\noindent
+{\bf Problem 3:} Repeat Problem 2 for $\psi_1(x)$.\\[3pt]
+
+\noindent
+{\bf Problem 4:} Write a utility function to check the normalization of the $A_k$ and test it on the Fourier coefficients obtained for $\psi_0(x)$ and $\psi_1(x)$.\\[3pt]
+
+\noindent
+{\bf Problem 5:} Write a utility function to measure the expectation value for the kinetic energy from the Fourier coefficients $A_k$.   Validate it on $\psi_0(x)$ and $\psi_1(x)$.\\[3pt]
+
+\noindent
+{\bf Problem 6:} Write a utility function to measure the expectation
+value for the potential energy from the Fourier coefficients $A_k$ and
+the sampled potential $V(x_m)$.  This will use the IRFFT.  Validate it
+on $\psi_0(x)$ and $\psi_1(x)$.\\[3pt]
+
+\noindent
+{\bf Problem 7:} Use the variational method to calculate the ground state of the harmonic oscillaor.  Report the ground state energy and plot the wave function.\\[3pt]
+
+\noindent
+{\bf Problem 8:} Use the variational method to calculate the first
+excited state of the harmonic oscillator by modifying the algorithm
+appropriately.  (Hint: the first excited state is an {\bf odd} wave
+function.)  Report the ground state energy and plot the wave
+function.\\[3pt]
+
+\noindent
+{\bf Problem 9:} For problem 7, plot your starting guess, your final wave function, and several steps along the way, all in the same plot.\\[3pt]
+
+\end{document}

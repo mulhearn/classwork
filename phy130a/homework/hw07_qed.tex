@@ -1,0 +1,74 @@
+\documentclass[12pt]{article}
+
+\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.5in]{geometry}
+\usepackage{cite}
+\usepackage{slashed}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{braket}
+\usepackage[american,fulldiode]{circuitikz}
+
+\begin{document}
+
+\date{\vspace{-5ex}}
+
+\title{Homework Assignment 7 \\ Bhabha Scattering }
+
+\maketitle
+
+\noindent
+All problems are graded on effort only.\\
+
+In this problem set, we will consider the QED process
+$$e^- + e^+ \to e^- + e^+$$
+which is known as Bhabha scattering.  We will label the particles as:
+$$a + b \to 1 + 2$$
+so e.g. the final state $e^+$ is particle 2.
+We will consider the limit that $m_e \ll E$.  In this limit, the
+helicity eigenstates for particles are given by:
+$$\def\arraystretch{1.7}
+u^\uparrow = \sqrt{E} \begin{pmatrix} c  \\ s e^{i\phi} \\ c \\ s e^{i\phi} \end{pmatrix}, \hspace{1cm}
+u^\downarrow = \sqrt{E} \begin{pmatrix} -s \\ c e^{i\phi} \\ s \\ -c e^{i\phi} \end{pmatrix},
+$$
+and the helicity eigenstates for anti-particles are given by:
+$$\def\arraystretch{1.7}
+v^\uparrow = \sqrt{E} \begin{pmatrix} s \\ -c e^{i\phi} \\ -s \\ c e^{i\phi} \end{pmatrix}, \hspace{1cm}
+v^\downarrow = \sqrt{E} \begin{pmatrix} c \\  s e^{i\phi} \\  c \\ s e^{i\phi} \end{pmatrix},
+$$
+where in both cases:
+$$c \equiv \cos \left( \frac{\theta}{2} \right), \hspace{1cm } s \equiv \sin \left( \frac{\theta}{2} \right).$$
+
+\newpage
+
+\noindent
+{\bf Problem 1:}
+Show that the Matrix element for this process is:
+$$M = -\frac{g^2_e}{s} (j_{ab})^\mu (j_{12})^\mu
+-\frac{g^2_e}{t}(j_{a1})^\mu (j_{b2})^\mu$$ for suitably defined
+currents $j_{ab}$, $j_{12}$, $j_{a1}$, $j_{b2}$ and with $s$ and $t$ the
+Mandelstam variables.  Use a shorthand like $u(a)$, $v(2)$ for the
+bispinors and notice that the helicity states have not been specified yet.\\[5pt]
+
+\noindent
+{\bf Problem 2:}
+Why is there a contribution from both $s$ and $t$ channel, but no
+contribution from $u$ channel?\\[5pt]
+
+\noindent
+{\bf Problem 3:}
+Show that:
+$$M_{RL \to RL} = -g^2_e  (1 + \cos \theta) \left(1 - \frac{s}{t} \right) = -g^2_e  (1 + \cos \theta) \left(1 + \frac{2}{1-\cos \theta} \right)$$
+where $\theta$ is the angle between the initial and final state electrons.\\[5pt]
+
+\noindent
+{\bf Problem 4:}
+Use Fermi's golden rule to calculate the scattering cross-section
+$$\frac{d\sigma}{d\Omega}$$
+for this process in the CMS with helicity $RL \to RL$.\\[5pt]
+
+
+
+\end{document}
+
+

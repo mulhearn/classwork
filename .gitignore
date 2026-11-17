@@ -6,7 +6,12 @@
 *.aux
 *.log
 *.toc
+*.fls
+*.fdb_latexmk
+*.out
 BROKEN
 Icon?
+*.mp4
+__pycache__/
 
 

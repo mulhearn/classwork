@@ -1,0 +1,88 @@
+% accessibility/hw2_ideal_atmosphere.tex:  accessibility settings and alternative text
+% for hw2_ideal_atmosphere.tex (common/mulhearn/accessibility.txt).  Maintained by the agents;
+% hw2_ideal_atmosphere.tex has only \input{accessibility/hw2_ideal_atmosphere} as its first line.
+% Build with LuaLaTeX.
+\DocumentMetadata{lang=en-US, pdfversion=2.0, pdfstandard=ua-2, tagging=on,
+  tagging-setup={math/alt/use}}   % every Formula:  its LaTeX source as /Alt, next to the MathML
+% the /Alt is the bare source ("S = k \ln \Omega"), without latex-lab's "LaTeX formula starts \begin{math} ..."
+% wrapper (an internal of latex-lab-math, TL 2026)
+\ExplSyntaxOn
+\AddToHook{begindocument/before}{\tl_set:Nn \l__math_content_template_tl { \exp_not:V \g__math_grabbed_math_tl }}
+\ExplSyntaxOff
+
+\makeatletter
+
+% --- document information (needs hyperref, loaded here so the document does not have to)
+\AddToHook{begindocument/before}{%
+  \RequirePackage{hyperref}%
+  \hypersetup{pdftitle={PHY 112L: A 2-D Ideal-Gas Atmosphere}, pdfauthor={Michael Mulhearn},
+    pdflang=en-US, pdfdisplaydoctitle, hidelinks,
+    pdfsubject={\access@statement}}}
+
+% --- the statement:  read first by assistive technology, not visible on the page
+\def\access@statement{I have attempted to bring this document into compliance with the
+  accessibility requirements of the Americans with Disabilities Act (Title II) and University of
+  California policy (WCAG 2.1 Level AA).  If this minimal standard is insufficient or ineffective
+  for your needs, please bring the matter to my attention, so that I can provide additional
+  accommodations as appropriate.}
+\AddToHook{begindocument/end}{%
+  \tagstructbegin{tag=Figure, alt={\access@statement}}\tagmcbegin{}\tagmcend\tagstructend}
+
+% --- alternative text for \includegraphics, by file name
+\newcommand\AltText[2]{\@namedef{access@alt@#1}{#2}}
+\AddToHook{begindocument/before}{%
+  \NewCommandCopy\access@includegraphics\includegraphics
+  \RenewDocumentCommand\includegraphics{s O{} m}{%
+    \@ifundefined{access@alt@#3}%
+      {\PackageWarning{accessibility}{no alternative text for #3}%
+       \access@includegraphics[#2]{#3}}%
+      {\access@includegraphics[alt={\@nameuse{access@alt@#3}},#2]{#3}}}}
+
+% --- alternative text for TikZ pictures, by source file and order:  \AltTikZ{file.tex}{n}{text}
+% (in the main file \CurrentFile is empty:  the main file's own name is used;  the stored text is
+% put into the alt key before \tagstructbegin, which does not expand it)
+\newcommand\AltTikZ[3]{\@namedef{access@tikz@#1@#2}{#3}}
+\newcount\access@depth
+\def\access@tikzbegin{%
+  \ifnum\access@depth=0
+    \edef\access@file{\ifx\CurrentFile\@empty\jobname.tex\else\CurrentFile\fi}%
+    \@ifundefined{access@tikzn@\access@file}%
+      {\global\@namedef{access@tikzn@\access@file}{0}}{}%
+    \xdef\access@n{\the\numexpr\@nameuse{access@tikzn@\access@file}+1}%
+    \global\expandafter\let\csname access@tikzn@\access@file\endcsname\access@n
+    \@ifundefined{access@tikz@\access@file @\access@n}%
+      {\PackageWarning{accessibility}%
+         {no alternative text for TikZ picture \access@n\space in \access@file}%
+       \global\let\access@tagged\@false}%
+      {\edef\access@tmp{\noexpand\tagstructbegin{tag=Figure, alt={\unexpanded
+         \expandafter\expandafter\expandafter
+         {\csname access@tikz@\access@file @\access@n\endcsname}}}}%
+       \access@tmp\tagmcbegin{}%
+       \global\let\access@tagged\@true}%
+  \fi
+  \global\advance\access@depth 1 }
+\def\access@tikzend{%
+  \global\advance\access@depth -1
+  \ifnum\access@depth=0 \ifx\access@tagged\@true \tagmcend\tagstructend\fi\fi}
+\def\@true{true}\def\@false{false}
+\AddToHook{env/tikzpicture/before}{\access@tikzbegin}
+\AddToHook{env/tikzpicture/after}{\access@tikzend}
+
+% --- code listings:  listings (pythonhighlight) cannot be tagged yet (TeX Live 2026:
+% unbalanced paragraph hooks), so the python environment becomes a framed fancyvrb Verbatim,
+% same font and frame, without colours
+\AddToHook{begindocument/before}{%
+  \RequirePackage{fancyvrb}%
+  \RenewDocumentEnvironment{python}{}%
+    {\VerbatimEnvironment
+     \begin{Verbatim}[fontsize=\footnotesize, frame=single, rulecolor=\color{black!40}]}%
+    {\end{Verbatim}}}
+
+\makeatother
+
+% --- alternative text
+\AltTikZ{hw2_ideal_atmosphere.tex}{1}{Sketch of height against time t near the ground, with the
+  ground y = 0 as a dashed horizontal line.  A molecule's parabolic trajectory (solid) rises, falls
+  and reaches the ground with velocity minus v c;  without the ground it would continue below
+  (dashed) to y = y a, v y = v a at the end of the time step.  The bounced trajectory leaves the
+  ground with velocity plus v c and ends at the same time at y = y b, v y = v b.}

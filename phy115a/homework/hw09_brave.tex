@@ -1,0 +1,141 @@
+\documentclass[12pt]{article}
+
+\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.5in]{geometry}
+\usepackage{cite}
+\usepackage{slashed}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{braket}
+\usepackage[american,fulldiode]{circuitikz}
+
+\begin{document}
+\newcommand{\ihbar}{\ensuremath{i \hbar}}
+\newcommand{\dPsidt}{\ensuremath{ \frac{\partial \Psi}{\partial t} }}
+\newcommand{\dPsidx}{\ensuremath{ \frac{\partial \Psi}{\partial x} }}
+\newcommand{\ddPsidx}{\ensuremath{ \frac{\partial^2 \Psi}{\partial x^2} }}
+\newcommand{\dPssdt}{\ensuremath{ \frac{\partial \Psi^*}{\partial t} }}
+\newcommand{\dPssdx}{\ensuremath{ \frac{\partial \Psi^*}{\partial x} }}
+\newcommand{\ddPssdx}{\ensuremath{ \frac{\partial^2 \Psi^*}{\partial x^2} }}
+
+\newcommand{\dphidt}{\ensuremath{ \frac{d \phi}{dt} }}
+\newcommand{\dpsidx}{\ensuremath{ \frac{d \psi}{dx} }}
+\newcommand{\ddpsidx}{\ensuremath{ \frac{d^2 \psi}{dx^2} }}
+
+
+\date{\vspace{-5ex}}
+
+\title{Homework Assignment 9 \\ ``Brave and adept from this day on''}
+
+\maketitle
+
+\noindent At least half of the problems here are excellent practice for your final exam.
+
+\section*{Practice Problems}
+
+These problems are graded on effort only.\\
+\noindent
+{\bf Problem 1:} Reproduce the derivation of generalized Ehrenfest theorem (Eq. 3.73).\\
+\noindent
+{\bf Griffiths: P3.18, P3.19, P3.25, P3.26} \\
+  
+\section*{Additional Problems}
+
+\noindent
+{\bf Problem 2:} Suppose that the state vector is:
+$$\ket{\Psi} = \frac{i}{\sqrt{3}} \ket{\lambda_1} + k \ket{\lambda_2}$$
+where $\ket{\lambda_n}$ is a properly normalized eigenvector of an observable $\hat{Q}$ with eigenvalue $\lambda_n$.  Assume $\hat{Q}$ has a non-degenerate spectrum.  Hint:  I am not trying to trick you here (or anywhere in this course, really!)  If any of the answers below seem easy to you, then good for you!\\[5pt]
+
+\noindent
+(A) What is the probability of a measurement yielding the value $\lambda_1$?\\[5pt]
+
+\noindent
+(B) What is the probability of a measurement yielding the value $\lambda_2$?  (Give a numerical answer, such as $1/10$, not something that depends on $k$).\\[5pt]
+
+\noindent
+(C) What is expectation value of the observable $\hat{Q}$?\\[5pt]
+
+\noindent
+(D) What is $\braket{\lambda_1 | \lambda_1}$?\\[5pt]
+
+\noindent
+(E) What is $\braket{\lambda_1 | \lambda_2}$?\\[5pt]
+
+\noindent
+(F) What is $\braket{\lambda_1 | \Psi}$?\\[5pt]
+
+\noindent
+(G) What is $\braket{\Psi | \lambda_1}$?\\[5pt]
+
+\noindent
+(H) What is $|\braket{\lambda_2 | \Psi}|$?  (Notice the norm symbol $|\ldots|$ and give a numerical answer.)\\[5pt]
+\newpage
+
+\noindent
+{\bf Problem 3:} Suppose that the properly-normalized state vector at $t=0$ is:
+$$\ket{\Psi} = C \left( \ket{a_1} + i\ket{a_2} \right)$$
+where $C$ is a positive real constant and $\ket{a_n}$ is a properly normalized eigenvector of an observable $\hat{A}$ with eigenvalue $a_n$.  Assume $\hat{A}$ has a non-degenerate discrete spectrum (with $n=1,2,3,\ldots$). Further suppose the spectrum of the Hamiltonian is discrete and non-degenerate with eigenvalues $\{E_i\}$ and properly normalized eigenvectors $\ket{E_i}$.  Suppose we can write:
+$$\ket{E_1} = \frac{1}{\sqrt{2}} \ket{a_1} + \frac{1}{\sqrt{2}} \ket{a_2}$$
+$$\ket{E_2} = -\frac{i}{\sqrt{2}} \ket{a_1} + \frac{i}{\sqrt{2}} \ket{a_2}$$
+Do not leave an explicit dependence on $C$ in any your answers below (i.e. solve for $C$).\\[5pt]
+
+\noindent
+(A) Deduce the inner products $\braket{E_1|a_1}$ and $\braket{E_1|a_2}$.\\[5pt]
+
+\noindent
+(B) Deduce the inner products $\braket{E_2|a_1}$ and $\braket{E_2|a_2}$.\\[5pt]
+
+\noindent
+(C) Deduce the inner product $\braket{E_1|a_m}$ for $m>2$.\\[5pt]
+
+\noindent
+(D) Deduce the inner product $\braket{E_2|a_m}$ for $m>2$.\\[5pt]
+
+\noindent
+(E) Rewrite the state vector $\ket{\Psi}$ in terms of the stationary states $\ket{E_i}$ by inserting a complete set:
+$$1 = \sum_i \ket{E_i}\bra{E_i}$$
+and using your results from A-D.\\[5pt]
+
+\noindent
+(F) What is the expectation value for the observable $\hat{A}$ at $t=0$?\\[5pt]
+
+\noindent
+(G) What is the expectation value for the total energy?\\[5pt]
+
+\noindent
+(H) Write down the time-dependent state vector $\ket{\Psi(t)}$.\\[5pt]
+
+\noindent
+(I) Deterimine the time-dependent wave function $\Psi(x,t)$ in terms of the wave functions of the stationary states:
+$$\Psi_{i}(x) \equiv \braket{x|E_i}$$\\[5pt]
+You must start from your answer in (H) and explicitly use the Dirac notation to determine the wave function $\Psi(x,t)$.
+
+\newpage
+
+\noindent
+{\bf Problem 4:} The Parseval-Plancherel identity:
+$$\int_{-\infty}^{+\infty} |\Psi(x)|^2 \, dx \; = \; \int_{-\infty}^{+\infty} |\widetilde{\Psi}(p)|^2 \, dp$$
+shows that if a position-space wave function $\Psi(x)$ is normalized, then so is it's momentum-space wave function $\widetilde{\Psi}(p)$.\\[5pt]
+
+\noindent
+(A) Derive the Parseval-Plancherel identity by explicit integration.  {\bf Hint:  } start with the LHS and write out $\Psi(x)$ and $\Psi^*(x)$ in terms of their Fourier transforms.  Make sure you use two different dummy variables for the integral over momentum (e.g. dq and dp) .  At this point, you should have {\bf three} integrals: $dx$,$dp$, and $dq$.  Look carefully and note that only two factors involve $x$.  Move the integral $dx$ to include just those factors, and use the orthogonality of the complex exponentials:
+$$\frac{1}{2\pi\hbar}\int_{-\infty}^{+\infty} \exp(i(q-p)x/\hbar) \, dx = \delta(q-p)$$
+This kills the integral over $dx$, then use the resulting $\delta$-function to kill the integral of dq.\\[5pt]
+
+\noindent
+(B) Derive Parseval-Plancherel identity using the Dirac notation.  Start with:
+$$\braket{\Psi|\Psi}$$
+then insert the identity:
+$$\int dx \ket{x}\bra{x} = 1$$
+and identify:
+$$\Psi(x) = \braket{x|\Psi}$$
+Next, do the same thing but using the identity:
+$$\int dp \ket{p}\bra{p} = 1$$
+and identify:
+$$\widetilde{\Psi}(p) = \braket{p|\Psi}$$
+
+\end{document}
+
+
+
+

@@ -1,0 +1,188 @@
+\documentclass[12pt]{article}
+
+
+\usepackage[dvips,letterpaper,margin=0.75in,bottom=0.5in]{geometry}
+\usepackage{cite}
+\usepackage{slashed}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{braket}
+\usepackage{feynman}
+
+\DeclareMathOperator{\Tr}{Tr}
+\newcommand{\gv} {\ensuremath{g_{\mathrm v}}}
+\newcommand{\ga} {\ensuremath{g_{\mathrm a}}}
+\newcommand{\Ps} {\ensuremath{\slashed{P}}}
+\newcommand{\Qs} {\ensuremath{\slashed{Q}}}
+\newcommand{\Rs} {\ensuremath{\slashed{R}}}
+\newcommand{\Ss} {\ensuremath{\slashed{S}}}
+\newcommand{\ps}{\ensuremath{\slashed{p}}}
+\newcommand{\GeV} {\ensuremath{\mathrm{Ge\kern -0.08em V}}}
+
+\begin{document}
+
+\title{Homework Assignment 7 \\ QED }
+
+\maketitle
+
+\noindent
+All problems are graded on effort only.\\
+
+\noindent
+{\bf Problem 1:}  For the plane wave solutions to the Dirac Equation:
+$$\def\arraystretch{1.7}
+u^{(1)} = N \begin{pmatrix} 1 \\ 0 \\ {\displaystyle \frac{c p_z}{E+mc^2}} \\[5pt] {\displaystyle \frac{c p_x + i c p_y}{E + mc^2}} \end{pmatrix}, 
+\hspace{1cm}
+u^{(2)} = N \begin{pmatrix} 0 \\ 1 \\ {\displaystyle  \frac{c p_x - i c p_y}{E+mc^2}} \\ {\displaystyle  \frac{-c p_z}{E+mc^2}} \end{pmatrix}.
+$$
+Show that the normalization condition:
+$$u^{\dagger} u = 2E/c$$
+requires:
+$$|N|^2 = (E + mc^2)/c$$
+we choose to set:
+$$N = \sqrt{(E+mc^2)/c}$$
+~\\[5pt]
+    
+\noindent
+{\bf Problem 2:} Show that:
+$$\bar{u}^{(1)} u^{(1)} = 2mc$$
+You don't have to calculate it, but also:
+$$\bar{u}^{(2)} u^{(2)} = 2mc$$
+and:
+$$\bar{v}^{(1)} v^{(1)} = \bar{v}^{(2)} v^{(2)} = -2mc$$
+for the anti-particle bispinors $v$.\\[5pt]
+
+\newpage
+
+\noindent
+{\bf Problem 3:} In lecture we showed that bispinors are complete in the sense that:
+$$\sum_i u^{(i)}\bar{u}^{(i)} = u^{(1)}\bar{u}^{(1)} + u^{(2)}\bar{u}^{(2)} = \slashed{p} + mc$$
+and
+$$\sum_i v^{(i)}\bar{v}^{(i)} = v^{(1)}\bar{v}^{(1)} + v^{(2)}\bar{v}^{(2)} = \slashed{p} - mc$$
+For the simple case of particles at rest ($\vec{p} = 0$) show that this identity holds.  Hints:
+In this case $p^0 = mc$ and note that:
+$$\gamma^0 + 1 = \begin{pmatrix}
+  2 & 0 & 0 & 0 \\
+  0 & 2 & 0 & 0 \\
+  0 & 0 & 0 & 0 \\
+  0 & 0 & 0 & 0 \\
+\end{pmatrix}$$
+~\\[5pt]
+
+\begin{figure}[htbp]
+\begin{center}
+\begin{feynman}
+    \fermion{1.00, 1.00}{0.0, 0.2}
+    \fermion{0.0, 1.8}{1.00, 1.00}
+    \electroweak{1.00, 1.00}{2.00, 1.00}
+    \fermion{3.00, 0.2}{2.00, 1.00}
+    \fermion{2.00, 1.00}{3.00, 1.8}
+    \node at (0,0) {$\bar{v}(b)$};
+    \node at (0,2) {$u(a)$};
+    \node at (3,2) {$\bar{u}(1)$};
+    \node at (3,0) {$v(2)$};
+    \node at (1.5,1.2) {$\gamma$};
+    \node at (0,0.4) {$e$};
+    \node at (0,1.6) {$e$};
+    \node at (3.0,0.4) {$\mu$};
+    \node at (3.0,1.6) {$\mu$};
+\end{feynman}
+\caption{\label{fig:feyn} Leading order Feynman diagram for the process $e^- + e^+ \to \gamma \to \mu^- + \mu^+$.  The particle plane-wave bi-spinor is $u$ and the anti-particle plane-wave bi-spinor is $v$.}
+\end{center}
+\end{figure}
+~\\[5pt]
+
+\noindent
+{\bf Problem 4:} Using the Feynman rules for QED, show that the amplitude for the leading order contribution (Fig.~\ref{fig:feyn}) to $e^- + e^+ \to \mu^- + \mu^+$ is:
+\begin{eqnarray*}
+\mathcal{M}  &=&  -\frac{g_e^2}{(p_a+p_b)^2} \; \overline{v}(b) \, \gamma^\mu
+  \, u(a)  \; \bar{u}(1) \, \gamma_\mu \, v(2) \; 
+\end{eqnarray*}
+where:
+$$\gamma_\mu \equiv g_{\mu\nu} \gamma^\nu$$
+
+\newpage
+
+
+\noindent
+{\bf Problem 5:} {\bf Casimir's Trick} In many experiments, the
+incident beams are unpolarized (equal parts spin up and spin down).
+Furthermore, the detectors are often incapable of determining the spin
+of the final state particles.  In such contexts, the cross section is
+calculated from an average over incident spins ($s_a$ and $s_b$) with four possible combinations and summed over all final state spins ($s_1$ and $s_2$).  That is, we calculate
+$$ \braket{|\mathcal{M}|^2} \equiv \frac{1}{4} \; \sum_{s_a,s_b,s_1,s_2}
+\; \left| \mathcal{M}(s_a,s_b,s_1,s_2)\right|^2$$
+Casimir's trick yields the rather exceptionally clever and tedium avoiding identity:
+$$\sum_{i,j} \;
+\left( \bar{u}^{(i)}(p_a) \, \Gamma_1 \, u^{(j)}(p_b) \right) \; 
+\left( \bar{u}^{(i)}(p_a) \, \Gamma_2 \, u^{(j)}(p_b) \right)^\dagger \;
+= {\rm Tr}\,(\Gamma_1 \, (\slashed{p}_b + m_b c) \, \overline{\Gamma_2} \, (\slashed{p}_a + m_a c) )$$
+where $\rm Tr$ indicates taking the trace, $\Gamma_1$ and $\Gamma_2$ are 4x4 matrices, and
+$$\overline{\Gamma} \equiv \gamma^0 \Gamma^\dagger \gamma^0$$
+Prove the identity above.  Hints:
+\begin{itemize}
+\item Any number is equivalently a 1x1 matrix, and so any number $x$ is identical to its trace:
+$$x = {\rm Tr}(x)$$
+\item The quantity
+$$\left( \bar{u}^{(i)}(p_a) \, \Gamma_1 \, u^{(j)}(p_b) \right) \; 
+\left( \bar{u}^{(i)}(p_a) \, \Gamma_2 \, u^{(j)}(p_b) \right)^\dagger \;$$
+is just a number, and so equal to it's trace.
+\item As part of your solution, you will need to show that:
+$$[\bar{u}^{(i)}(p_a) \, \Gamma \, u^{(j)}(p_b)]^\dagger
+= \bar{u}^{(j)}(p_b) \bar{\Gamma} u^{(i)}(p_a)$$
+\item The trace is invariant under cyclic rotations, e.g.:
+$$Tr(ABC) = Tr(BCA)$$
+  for matrices $A$,$B$, and $C$.
+\item Use the completeness of the bispinors (see previous problems).
+\end{itemize}  
+
+Note that a similar results holds if some or all of the particle spinors are replaced with anti-particle spinors.  For each antiparticle:
+$$\slashed{p}+mc \to \slashed{p}-mc$$
+
+
+\newpage 
+
+\noindent
+{\bf Problem 6:} For the leading order process of $e^+ + e^- \to \mu^+ + \mu^- $, and taking $m_e = m_u = 0$ show that initial state spin-averaged, final state spin summed matrix element is:
+$$\braket{|\mathcal{M}|^2} = \frac{g_e^4}{4(p_a+p_b)^4}
+\Tr(\gamma^\mu\slashed{p_a}\gamma^\nu\slashed{p_b})
+\Tr(\gamma_\mu\slashed{p_2}\gamma_\nu\slashed{p_1})$$
+Hint:  Use Casimir's trick and note that the gamma matrices have the property that:
+$$\overline{\gamma_u} = \gamma_u$$
+~\\[5pt]
+
+\noindent
+{\bf Problem 7:} By calculating the traces in the previous problem, show that:
+$$ \braket{|\mathcal{M}|^2} 
+= \frac{8 g_e^4}{(p_a+p_b)^4}
+\left((p_a\cdot p_1)(p_b\cdot p_2) + (p_a\cdot p_2)(p_b\cdot p_1)\right)
+$$
+Hint: Griffith's works through a very similar product of traces in Example 7.6 (just note that we are taking $m$ and $M$ as zero).  You will need the identities:
+$$\Tr(\gamma^\mu \gamma^\alpha \gamma^\nu \gamma^\beta) 
+= 4 \, 
+(    \, g^{\mu\alpha}\,g^{\nu \beta}
+\, - \, g^{\mu\nu}\,g^{\alpha \beta}
+\, + \, g^{\mu\beta}\,g^{\alpha\nu} \, )$$
+and:
+$$g_{uw}g^{uw} = 4$$
+
+\noindent
+{\bf Problem 8:} Show that in the CMS, we have:
+$$ \braket{|\mathcal{M}|^2} = g_e^4 (1 + \cos^2 \theta)$$
+where $\theta$ is the angle between $\vec{p}_1$ and $\vec{p}_a$. 
+Hint: you want to show, for example, that:
+$$p_a\cdot p_1 = \frac{E^2}{c^2}(1 - \cos \theta)$$
+where $E$ is the energy of particle 1.\\[5pt]
+
+\newpage 
+
+\noindent
+{\bf Problem 9:} Fermi's Golden Rule for $a+b \to 1+2$ scattering in the CMS and averaging over spins is:
+$$ \frac{d\sigma}{d\Omega} = \left( \frac{\hbar c}{8 \pi}\right)^2 \frac{S \braket{|\mathcal{M}|^2}
+}{(E_a+E_b)^2}\frac{|\vec{p}_1|}{|\vec{p}_a|}$$
+Show that:
+$$\frac{d\sigma}{d\Omega} = (\hbar c)^2 \; \frac{\alpha^2}{4s} \; (1 + \cos^2 \theta)$$
+where $g_e = \sqrt{4\pi\alpha}$ and $s = (p_a + p_b)^2$.)
+
+\end{document}
+

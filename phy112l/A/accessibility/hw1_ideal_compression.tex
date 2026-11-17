@@ -1,0 +1,106 @@
+% accessibility/hw1_ideal_compression.tex:  accessibility settings and alternative text
+% for hw1_ideal_compression.tex (common/mulhearn/accessibility.txt).  Maintained by the agents;
+% hw1_ideal_compression.tex has only \input{accessibility/hw1_ideal_compression} as its first line.
+% Build with LuaLaTeX.
+\DocumentMetadata{lang=en-US, pdfversion=2.0, pdfstandard=ua-2, tagging=on,
+  tagging-setup={math/alt/use}}   % every Formula:  its LaTeX source as /Alt, next to the MathML
+% the /Alt is the bare source ("S = k \ln \Omega"), without latex-lab's "LaTeX formula starts \begin{math} ..."
+% wrapper (an internal of latex-lab-math, TL 2026)
+\ExplSyntaxOn
+\AddToHook{begindocument/before}{\tl_set:Nn \l__math_content_template_tl { \exp_not:V \g__math_grabbed_math_tl }}
+\ExplSyntaxOff
+
+\makeatletter
+
+% --- document information (needs hyperref, loaded here so the document does not have to)
+\AddToHook{begindocument/before}{%
+  \RequirePackage{hyperref}%
+  \hypersetup{pdftitle={PHY 112L: Compressing a 2-D Ideal Gas}, pdfauthor={Michael Mulhearn},
+    pdflang=en-US, pdfdisplaydoctitle, hidelinks,
+    pdfsubject={\access@statement}}}
+
+% --- the statement:  read first by assistive technology, not visible on the page
+\def\access@statement{I have attempted to bring this document into compliance with the
+  accessibility requirements of the Americans with Disabilities Act (Title II) and University of
+  California policy (WCAG 2.1 Level AA).  If this minimal standard is insufficient or ineffective
+  for your needs, please bring the matter to my attention, so that I can provide additional
+  accommodations as appropriate.}
+\AddToHook{begindocument/end}{%
+  \tagstructbegin{tag=Figure, alt={\access@statement}}\tagmcbegin{}\tagmcend\tagstructend}
+
+% --- alternative text for \includegraphics, by file name
+\newcommand\AltText[2]{\@namedef{access@alt@#1}{#2}}
+\AddToHook{begindocument/before}{%
+  \NewCommandCopy\access@includegraphics\includegraphics
+  \RenewDocumentCommand\includegraphics{s O{} m}{%
+    \@ifundefined{access@alt@#3}%
+      {\PackageWarning{accessibility}{no alternative text for #3}%
+       \access@includegraphics[#2]{#3}}%
+      {\access@includegraphics[alt={\@nameuse{access@alt@#3}},#2]{#3}}}}
+
+% --- alternative text for TikZ pictures, by source file and order:  \AltTikZ{file.tex}{n}{text}
+% (in the main file \CurrentFile is empty:  the main file's own name is used;  the stored text is
+% put into the alt key before \tagstructbegin, which does not expand it)
+\newcommand\AltTikZ[3]{\@namedef{access@tikz@#1@#2}{#3}}
+\newcount\access@depth
+\def\access@tikzbegin{%
+  \ifnum\access@depth=0
+    \edef\access@file{\ifx\CurrentFile\@empty\jobname.tex\else\CurrentFile\fi}%
+    \@ifundefined{access@tikzn@\access@file}%
+      {\global\@namedef{access@tikzn@\access@file}{0}}{}%
+    \xdef\access@n{\the\numexpr\@nameuse{access@tikzn@\access@file}+1}%
+    \global\expandafter\let\csname access@tikzn@\access@file\endcsname\access@n
+    \@ifundefined{access@tikz@\access@file @\access@n}%
+      {\PackageWarning{accessibility}%
+         {no alternative text for TikZ picture \access@n\space in \access@file}%
+       \global\let\access@tagged\@false}%
+      {\edef\access@tmp{\noexpand\tagstructbegin{tag=Figure, alt={\unexpanded
+         \expandafter\expandafter\expandafter
+         {\csname access@tikz@\access@file @\access@n\endcsname}}}}%
+       \access@tmp\tagmcbegin{}%
+       \global\let\access@tagged\@true}%
+  \fi
+  \global\advance\access@depth 1 }
+\def\access@tikzend{%
+  \global\advance\access@depth -1
+  \ifnum\access@depth=0 \ifx\access@tagged\@true \tagmcend\tagstructend\fi\fi}
+\def\@true{true}\def\@false{false}
+\AddToHook{env/tikzpicture/before}{\access@tikzbegin}
+\AddToHook{env/tikzpicture/after}{\access@tikzend}
+
+% --- code listings:  listings (pythonhighlight) cannot be tagged yet (TeX Live 2026:
+% unbalanced paragraph hooks), so the python environment becomes a framed fancyvrb Verbatim,
+% same font and frame, without colours
+\AddToHook{begindocument/before}{%
+  \RequirePackage{fancyvrb}%
+  \RenewDocumentEnvironment{python}{}%
+    {\VerbatimEnvironment
+     \begin{Verbatim}[fontsize=\footnotesize, frame=single, rulecolor=\color{black!40}]}%
+    {\end{Verbatim}}}
+
+\makeatother
+
+% --- alternative text
+\AltText{plots/mbvelocity.pdf}{Graph of the probability density, in units of 1 over v zero, against
+  one velocity component from minus 5 to 5 v zero, for three temperatures:  three Gaussians centred
+  on zero.  At T = 1 T zero (solid line) the curve is narrowest and tallest, peaking at 0.40;  at T
+  = 2 T zero (dashed) it peaks at 0.28;  at T = 5 T zero (dotted) it is widest and lowest, peaking
+  at 0.18.}
+\AltText{plots/vinit.pdf}{Histograms of the number of molecules against velocity, for vx (circles)
+  and vy (squares), just after initialization, at T = 3.0 T zero:  both are flat at about 830
+  molecules per bin between minus 3 and 3 v zero and empty outside, unlike the dashed
+  Maxwell-Boltzmann curve, a Gaussian peaking near 1150 molecules at zero velocity.}
+\AltText{plots/vself.pdf}{The same histograms of vx (circles) and vy (squares) after 100,000
+  collisions of the gas with itself, still at T = 3.0 T zero:  both now follow the dashed
+  Maxwell-Boltzmann curve, peaking near 1150 molecules at zero velocity and falling to a few dozen
+  at plus and minus 4.5 v zero.}
+\AltTikZ{hw1_ideal_compression.tex}{1}{Drawing of a two-dimensional cylinder of width a holding
+  scattered gas molecules (dots), closed at the top by a plunger with a handle.  A vertical y axis
+  beside it is marked at 0, 2a and 4a;  the plunger sits at y = 4a.}
+\AltTikZ{hw1_ideal_compression.tex}{2}{Diagram of a collision in the centre-of-mass frame:  molecule
+  a comes in from the left with velocity u and molecule b from the right with velocity minus u,
+  meeting at the centre.  They leave along a line turned by the angle theta from the incoming line,
+  a with velocity w (up and to the right) and b with velocity minus w (down and to the left).}
+\AltTikZ{hw1_ideal_compression.tex}{3}{Diagram of a molecule hitting the plunger:  molecule a moves
+  up and to the right with velocity u, strikes the underside of the plunger, which moves downward
+  with velocity minus v, and recoils down and to the right with velocity w.}
