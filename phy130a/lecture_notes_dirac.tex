@@ -21,7 +21,7 @@
 
 
 
-\title{PHY 130A \\ Lecture Notes: \\ 
+\title{PHY 130A \\ Lecture Notes: \\
 The Dirac Equation }
 \author{Michael Mulhearn}
 
@@ -85,13 +85,13 @@ $$
 Hint: use the matrix representation of the metric tensor $G$.$\square$\\[5pt]
 
 \exercise In Non-Relativistic Quantum Mechanics we replace the classical quantities total energy and momentum with operators:
-$$E \to \hat{E} \equiv i\hbar \frac{\partial}{\partial t}, \hspace{2cm}
-\vec{p} \to \hat{\vec{p}} \equiv -i\hbar \nabla
+$$E \to \hat{E} \equiv i \frac{\partial}{\partial t}, \hspace{2cm}
+\vec{p} \to \hat{\vec{p}} \equiv -i \nabla
 $$
 Following this same prescription, show that the four-momentum operator is:
-$$\hat{p}^\mu = i\hbar \partial^\mu$$
+$$\hat{p}^\mu = i \partial^\mu$$
 and
-$$\hat{p}_\mu = i\hbar \partial_\mu$$
+$$\hat{p}_\mu = i \partial_\mu$$
 
 \section{Klein-Gordon Equation}
 One approach to developing a relativistic quantum mechanics is
@@ -100,14 +100,14 @@ $$E^2 = p^2 + m^2$$
 which can be written in terms of a four-vector squared as:
 $$p^\mu p_\mu - m^2 = 0$$
 And make the replacement:
-$$p_\mu \to i \hbar \partial_\mu$$
+$$p_\mu \to i \partial_\mu$$
 The result is the Klein-Gordon equation:
-$$-\hbar^2 \partial_\mu \partial^\mu \psi - m^2 \psi = 0$$
+$$- \partial_\mu \partial^\mu \psi - m^2 \psi = 0$$
 or equivalently:
-$$-\frac{\partial^2 \psi}{\partial t^2} + \nabla^2 \psi = \left(\frac{m}{\hbar}\right)^2 \psi$$
+$$-\frac{\partial^2 \psi}{\partial t^2} + \nabla^2 \psi = m^2 \psi$$
 
 \exercise Show that
-$$\psi = A \sin\left(\frac{E t}{\hbar}\right) $$
+$$\psi = A \sin\left(E t\right) $$
 is a solution to KG equation, provided $E = \pm m$.$\square$\\[5pt]
 
 \exercise Show that $|\psi|^2$ for the previous exercise cannot
@@ -118,7 +118,11 @@ The existence of negative energy solutions (as shown in the exercises)
 is not a fatal problem (as we shall see).  The problem is that
 $|\psi|^2$ integrated over all space is not conserved.\\[5pt]
 
-\exercise Show that
+\exercise If $\psi$ is a solution to the Klein-Gordan equation, show that
+$$j^\mu \equiv \psi^* \partial^\mu \psi - \psi \partial^\mu \psi^*$$
+has the property that
+$$\partial_\mu j^\mu = 0$$
+
 $$\partial_\mu(\psi^* \partial^\mu \psi - \psi \partial^\mu \psi^*) = 0$$
 $\square$\\[5pt]
 
@@ -132,16 +136,16 @@ $$Q \equiv \int j^0 d^3 x$$
 is a constant, which we call the conserved charge.  (Hint: assume the conserved current vanishes at infinity.)$\square$\\[5pt]
 
 The exercises show that for:
-$$\rho \equiv i (\psi^* \partial^\mu \psi - \psi \partial^\mu \psi^*)$$
+$$\rho \equiv i \left( \psi^* \frac{\partial \psi}{\partial t} - \psi \frac{\partial \psi^*}{\partial t} \right)$$
 we could normalize the wave function such that
 $$\int \rho d^3x = 1$$
 always.  However, we cannot interpret $\rho$ as a probability density
 because it is not positive definite, as the next exercise will show.\\[5pt]
 
 \exercise (*) Show that:
-$$\psi = A \exp(-i E t / \hbar)$$
+$$\psi = A \exp(-i E t)$$
 is a solution to the KG equation if $E = \pm m$, and in this case:
-$\rho = 2E \frac{|A|^2}{\hbar}$
+$\rho = 2E |A|^2$
 which is less than zero for $E = -m$.$\square$\\[5pt]
 
 This renders the K-G equation unsuitable for our current purposes of
@@ -187,7 +191,7 @@ $$0 = p^\mu p_\mu - m^2 $$
 by finding appropriate $\gamma^\mu$ and $\beta^\mu$ such that:
 $$p^\mu p_\mu - m^2  = (\beta^\mu p_\mu + m) (\gamma^\omega p_\omega - m)$$
 Calculating:
-$$(\beta^\mu p_\mu + m) (\gamma^\omega p_\omega - m) 
+$$(\beta^\mu p_\mu + m) (\gamma^\omega p_\omega - m)
 = \beta^\mu \gamma^\omega p_\mu p_\omega - m^2 + m (\gamma^\omega p_\omega - \beta^\mu p_\mu)$$
 When dealing with the last term, note that we are free to adjust the dummy indices so that:
 $$\gamma^\omega p_\omega - \beta^\mu p_\mu = (\gamma^\mu - \beta^\mu) p_\mu$$
@@ -226,32 +230,32 @@ we can compactly express the requirements of Equations~\ref{eqn:gammasq} and \re
 = 2 g^{\mu \omega}
 \end{equation}
 This is the defining characteristic of the gamma group.  Any set of objects that satisfy the commutator relationship will do.  We will use the Dirac basis ($D$) in which these are 4x4 matrices of complex numbers:
-$$[\gamma^0]_D = \begin{pmatrix} 
-1 & 0 & 0 & 0 \\ 
-0 & 1 & 0 & 0 \\ 
-0 & 0 &-1 & 0 \\ 
-0 & 0 & 0 &-1 \\ 
+$$[\gamma^0]_D = \begin{pmatrix}
+1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 &-1 & 0 \\
+0 & 0 & 0 &-1 \\
 \end{pmatrix} \;\;
-[\gamma^1]_D = \begin{pmatrix} 
-0 & 0 & 0 & 1 \\ 
-0 & 0 & 1 & 0 \\ 
-0 &-1 & 0 & 0 \\ 
--1& 0 & 0 & 0 \\ 
+[\gamma^1]_D = \begin{pmatrix}
+0 & 0 & 0 & 1 \\
+0 & 0 & 1 & 0 \\
+0 &-1 & 0 & 0 \\
+-1& 0 & 0 & 0 \\
 \end{pmatrix} \;\;
 $$
 and:
 $$
-[\gamma^2]_D = \begin{pmatrix} 
- 0 & 0 & 0 &-i \\ 
- 0 & 0 & i & 0 \\ 
- 0 & i & 0 & 0 \\ 
--i & 0 & 0 & 0 \\ 
+[\gamma^2]_D = \begin{pmatrix}
+ 0 & 0 & 0 &-i \\
+ 0 & 0 & i & 0 \\
+ 0 & i & 0 & 0 \\
+-i & 0 & 0 & 0 \\
 \end{pmatrix} \;\;
-[\gamma^3]_D = \begin{pmatrix} 
-0 & 0 & 1 & 0 \\ 
-0 & 0 & 0 &-1 \\ 
--1& 0 & 0 & 0 \\ 
-0 & 1 & 0 & 0 \\ 
+[\gamma^3]_D = \begin{pmatrix}
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 &-1 \\
+-1& 0 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
 \end{pmatrix}.
 $$
 There are an infinite number of matrices that satisfy these
@@ -274,7 +278,7 @@ and the three $\sigma^i$ are the Pauli spin matrices:
 $$\sigma^1 = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}, \hspace{2cm}
 \sigma^2 = \begin{pmatrix} 0 & -i \\ i & 0 \end{pmatrix}, \hspace{2cm}
 \sigma^3 = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}\\
-\hspace{1cm} 
+\hspace{1cm}
 $$
 
 With a solution in hand, we now return to our original problem, which was to factor the relativistic energy equation as:
@@ -282,11 +286,11 @@ $$p^\mu p_\mu-m^2 = \left( \gamma^\mu p_\mu - m \right) \left( \gamma^\omega p_\
 Setting either of the two factors equal to zero will set the entire equation to zero (as needed).  It only makes a superficial difference which one we choose, but the conventional choice is to set:
 $$\gamma^\mu p_\mu - m = 0$$
 Now we can make the substitution:
-$$p_\mu \to i \hbar \partial_\mu$$
+$$p_\mu \to i \partial_\mu$$
 To obtain the Dirac Equation:
 \begin{equation}
 \label{eqn:dirac}
-i\hbar\gamma^\mu\partial_\mu \psi - m \psi = 0
+i\gamma^\mu\partial_\mu \psi - m \psi = 0
 \end{equation}
 Notice that $\psi$ can not be a scalar function in the Dirac basis,
 for that would have us adding a scalar to a 4x4 matrix.  The simplest
@@ -297,29 +301,29 @@ Despite having four components, $\psi$ is {\bf not} a four-vector because (as we
 \section{Solutions to the Dirac Equation}
 
 We'll find solutions to the Dirac equation:
-$$i\hbar \gamma^\mu \partial_\mu \psi -m \psi = 0$$
+$$i \gamma^\mu \partial_\mu \psi -m \psi = 0$$
 Let's first consider solutions with $\vec{p}=0$, so:
 $$\frac{\partial\psi}{\partial x} = \frac{\partial\psi}{\partial y} = \frac{\partial\psi}{\partial z} = 0$$
 and the Dirac equation becomes:
-$$\gamma^0 \frac{\partial \psi}{\partial t} = -i \frac{m}{\hbar} \psi $$
+$$\gamma^0 \frac{\partial \psi}{\partial t} = -i m \psi $$
 Writing this out the long way in the Dirac representation:
 $$
-\begin{pmatrix} 
+\begin{pmatrix}
 1 & 0 & 0 & 0\\
 0 & 1 & 0 & 0\\
 0 & 0 &-1 & 0\\
 0 & 0 & 0 &-1\\
 \end{pmatrix}
 \frac{\partial}{\partial t}
-\begin{pmatrix} 
+\begin{pmatrix}
 \psi_1\\
 \psi_2\\
 \psi_3\\
 \psi_4\\
 \end{pmatrix}
 =
--i \frac{m}{\hbar}
-\begin{pmatrix} 
+-i m
+\begin{pmatrix}
 \psi_1\\
 \psi_2\\
 \psi_3\\
@@ -329,15 +333,15 @@ $$
 or
 $$
 \frac{\partial}{\partial t}
-\begin{pmatrix} 
+\begin{pmatrix}
 \psi_1\\
 \psi_2\\
 -\psi_3\\
 -\psi_4\\
 \end{pmatrix}
 =
--i \frac{m}{\hbar}
-\begin{pmatrix} 
+-i m
+\begin{pmatrix}
 \psi_1\\
 \psi_2\\
 \psi_3\\
@@ -346,16 +350,16 @@ $$
 $$
 There are four independent solutions:
 $$
-[\psi^{(1)}]_D = N \exp\left(- i \frac{m}{\hbar} t\right)
-\begin{pmatrix} 
+[\psi^{(1)}]_D = N \exp\left(- i m t\right)
+\begin{pmatrix}
 1\\
 0\\
 0\\
 0\\
 \end{pmatrix},
 \hspace{1cm}
-[\psi^{(2)}]_D = N \exp\left(- i \frac{m}{\hbar} t\right)
-\begin{pmatrix} 
+[\psi^{(2)}]_D = N \exp\left(- i m t\right)
+\begin{pmatrix}
 0\\
 1\\
 0\\
@@ -364,16 +368,16 @@ $$
 $$
 and
 $$
-[\psi^{(3)}]_D = N \exp\left(+ i \frac{m}{\hbar} t\right)
-\begin{pmatrix} 
+[\psi^{(3)}]_D = N \exp\left(+ i m t\right)
+\begin{pmatrix}
 0\\
 0\\
 1\\
 0\\
 \end{pmatrix},
 \hspace{1cm}
-[\psi^{(4)}]_D = N \exp\left(+ i \frac{m}{\hbar} t\right)
-\begin{pmatrix} 
+[\psi^{(4)}]_D = N \exp\left(+ i m t\right)
+\begin{pmatrix}
 0\\
 0\\
 0\\
@@ -383,13 +387,13 @@ $$
 where $N$ is a normalization factor.
 
 Recalling that the energy operator is:
-$$E = i\hbar \frac{\partial}{\partial t}$$
+$$E = i \frac{\partial}{\partial t}$$
 We see that:
-$$ i\hbar \frac{\partial \Psi^{(1)}}{\partial t} = m \Psi^(1) \hspace{1cm}
-i\hbar \frac{\partial \Psi^{(2)}}{\partial t} = m \Psi^{(2)}$$ 
+$$ i \frac{\partial \Psi^{(1)}}{\partial t} = m \Psi^(1) \hspace{1cm}
+i \frac{\partial \Psi^{(2)}}{\partial t} = m \Psi^{(2)}$$
 and:
-$$ i\hbar \frac{\partial \Psi^{(3)}}{\partial t} = -m \Psi^(3) \hspace{1cm}
-i\hbar \frac{\partial \Psi^{(4)}}{\partial t} = -m \Psi^{(4)}$$ 
+$$ i \frac{\partial \Psi^{(3)}}{\partial t} = -m \Psi^(3) \hspace{1cm}
+i \frac{\partial \Psi^{(4)}}{\partial t} = -m \Psi^{(4)}$$
 So evidently $\Psi^{(1)}$ and $\Psi^{(2)}$ have energy $E=m$ while $\Psi^{(3)}$
 and $\Psi^{(4)}$ have energy $E=-m$.
 
@@ -411,7 +415,7 @@ so readily encountered with solutions to the K-G equation. Specifically, for our
 $|\Psi|^2 = |N|^2 > 0$
 independent of time for all four of these solutions.  More generally, it can be shown that
 $$\frac{d}{dt}\int |\Psi(x,t)|^2 d^3x = 0$$
-for all solutions to the Dirac equation, just as for the non-relativistic Schrodinger equation, and 
+for all solutions to the Dirac equation, just as for the non-relativistic Schrodinger equation, and
 $|\Psi(x,t)|^2 \geq 0$.
 
 \section{Antiparticles}
@@ -421,7 +425,7 @@ $|\Psi(x,t)|^2 \geq 0$.
 \begin{center}
 
 \begin{tabular}{cc}
-  
+
 \begin{tikzpicture}[scale=1]
 
 % Parameters
@@ -446,7 +450,7 @@ $|\Psi(x,t)|^2 \geq 0$.
 \node[left] at (-1.2,-2.3*\ysep-0.2) {$E<0$};
 \node[left] at (-1.2,2.3*\ysep+0.2) {$E>0$};
 
-\end{tikzpicture} & 
+\end{tikzpicture} &
 
 \begin{tikzpicture}[scale=1]
 
@@ -523,9 +527,9 @@ later discovered by Anderson.
 \end{figure}
 
 The energy eigenstates of particles with $E > 0$ have time-dependence:
-$$\exp(-iEt/\hbar) = \exp(-i|E|t/\hbar) $$
+$$\exp(-iEt) = \exp(-i|E|t) $$
 whereas particles with $E < 0$ have time-dependence:
-$$\exp(-iEt/\hbar) = \exp(+i|E|t/\hbar) $$ This suggests that
+$$\exp(-iEt) = \exp(+i|E|t) $$ This suggests that
 particles with negative energy can be reinterpreted as particles with
 positive energy that propagate backwards in time.  We derived the
 Dirac equation to be consistent with special relativity, and we have
@@ -544,16 +548,16 @@ so the mass of the antiparticle does not change sign, and we expect
 both particle and antiparticle to have the same positive mass.
 
 Particles wave functions have time-dependence:
-$$\exp(-iEt/\hbar)$$
+$$\exp(-iEt)$$
 and antiparticles wave functions have time dependence:
-$$\exp(iEt/\hbar)$$
+$$\exp(iEt)$$
 where $E>0$ in both cases is the physical energy of the particle.
 Particles have momentum operator given by:
-$$p_\mu = i \hbar \partial_\mu$$
+$$p_\mu = i \partial_\mu$$
 which leads to:
 $$p^0 = E$$
 as expected.  Antiparticles must therefore have:
-$$p_\mu = -i \hbar \partial_\mu$$
+$$p_\mu = -i \partial_\mu$$
 which leads to:
 $$p^0 = E$$ as expected.  The angular momentum operator, through its
 dependence on momentum, will also change sign.  Spin also changes
@@ -612,7 +616,7 @@ $$\psi = a \, e^{-ikx} \, u(k)$$
 where $a$ is a normalization factor, and the exponential contains a factor
 $$kx = k^\mu x_\mu$$
 which is the only space and time dependence.  The $u(k)$ is the bi-spinor part which we can write as either two spinors or four components:
-$$[u(k)]_D \equiv \begin{pmatrix} u_A \\ u_B \\ \end{pmatrix} \equiv 
+$$[u(k)]_D \equiv \begin{pmatrix} u_A \\ u_B \\ \end{pmatrix} \equiv
 \begin{pmatrix} u_1 \\ u_2\\ u_3 \\ u_4 \end{pmatrix}
 $$
 The components are still dependent on $k$ but we have dropped the explicit dependence for brevity.
@@ -620,38 +624,38 @@ The components are still dependent on $k$ but we have dropped the explicit depen
 Note that:
 $$\partial_\mu \psi = \frac{\partial \psi}{\partial x^\mu} = a \left( \frac{\partial}{\partial x^\mu} \exp(-ik_\mu x^\mu)\right) u(k) = -ik_\mu \psi$$
 The Dirac equation:
-$$i\hbar \gamma^\mu \partial_\mu \psi - m \psi = 0$$
+$$i \gamma^\mu \partial_\mu \psi - m \psi = 0$$
 when applied to the plane wave yields:
 \begin{eqnarray*}
-(\hbar \gamma^\mu k_\mu - m) \; \psi &=& 0 \\[5pt]
-(\hbar \gamma^\mu k_\mu - m) \; a \, e^{-ikx} \, u(k) &=& 0 \\[5pt]
-(\hbar \slashed{k} - m) \; u(k) &=& 0 \\[5pt]
+( \gamma^\mu k_\mu - m) \; \psi &=& 0 \\[5pt]
+( \gamma^\mu k_\mu - m) \; a \, e^{-ikx} \, u(k) &=& 0 \\[5pt]
+( \slashed{k} - m) \; u(k) &=& 0 \\[5pt]
 \begin{pmatrix}
-\hbar k^0-m & - \hbar \vec{k}\cdot\vec{\sigma} \\
-\hbar \vec{k}\cdot\vec{\sigma} & -\hbar k^0-m \\
+ k^0-m & -  \vec{k}\cdot\vec{\sigma} \\
+ \vec{k}\cdot\vec{\sigma} & - k^0-m \\
 \end{pmatrix}
-\begin{pmatrix} 
+\begin{pmatrix}
 u_A\\
 u_B\\
 \end{pmatrix}&=&0\\
 \end{eqnarray*}
 Solving the last matrix equation we obtain:
 \begin{eqnarray}
-u_A &=& \frac{\hbar\vec{k}\cdot\vec{\sigma}}{\hbar k^0-m} u_B \label{eqn:ua} \\
-u_B &=& \frac{\hbar\vec{k}\cdot\vec{\sigma}}{\hbar k^0+m} u_A \label{eqn:ub} \\
+u_A &=& \frac{\vec{k}\cdot\vec{\sigma}}{ k^0-m} u_B \label{eqn:ua} \\
+u_B &=& \frac{\vec{k}\cdot\vec{\sigma}}{ k^0+m} u_A \label{eqn:ub} \\
 \notag
 \end{eqnarray}
 Plugging the second equation into the first:
 \begin{eqnarray*}
-u_A &=& \frac{(\hbar\vec{k}\cdot\vec{\sigma})^2}{(\hbar k^0)^2-(m)^2} u_A \\
-    &=& \frac{\hbar^2|\vec{k}|^2}{(\hbar k^0)^2-(m)^2} u_A \\
-(m)^2 &=& \hbar^2((k^0)^2-|\vec{k}|^2) = \hbar^2 k^\mu k_\mu \\
+u_A &=& \frac{(\vec{k}\cdot\vec{\sigma})^2}{( k^0)^2-(m)^2} u_A \\
+    &=& \frac{|\vec{k}|^2}{( k^0)^2-(m)^2} u_A \\
+(m)^2 &=& (k^0)^2-|\vec{k}|^2 = k^\mu k_\mu \\
 \end{eqnarray*}
 But we already know a four-vector whose square is $m^2$, the four-momentum:
 $$p^2 = (m)^2$$
-We conclude that $p^\mu = \pm \hbar k^\mu$.  However, only $p^\mu = \hbar k^\mu$
-leads to the correct time-dependence 
-$$\psi = a \, e^{-ikx} \, u(k) = a \, \exp(- iEt/\hbar) \exp(i\vec{p}\cdot\vec{x}) u(k)$$
+We conclude that $p^\mu = \pm  k^\mu$.  However, only $p^\mu =  k^\mu$
+leads to the correct time-dependence
+$$\psi = a \, e^{-ikx} \, u(k) = a \, \exp(- iEt) \exp(i\vec{p}\cdot\vec{x}) u(k)$$
 for a particle of energy $E$ and momentum $\vec{p}$.  We may rewrite Equation~\ref{eqn:ub} equivalently as:
 \begin{equation}
 \label{eqn:plane-wave-lower}
@@ -662,18 +666,18 @@ $$u_B = \frac{1}{E+m} \; \begin{pmatrix} p_z & p_x - i p_y \\ p_x + i p_y & -p_z
 $$
 And next we find two solutions by applying this result to a starting choice for $u_A$:
 \begin{eqnarray*}
-u_A = \begin{pmatrix} 1 \\ 0 \\ \end{pmatrix} &\implies& 
+u_A = \begin{pmatrix} 1 \\ 0 \\ \end{pmatrix} &\implies&
 u_B = \frac{1}{E+m} \begin{pmatrix} p_z \\ p_x + i p_y \\ \end{pmatrix}\\
-u_A = \begin{pmatrix} 0 \\ 1 \\ \end{pmatrix} &\implies& 
+u_A = \begin{pmatrix} 0 \\ 1 \\ \end{pmatrix} &\implies&
 u_B = \frac{1}{E+m} \begin{pmatrix} p_x - i p_y \\ -p_z \\ \end{pmatrix}\\
 \end{eqnarray*}
 For particles, we can go no further.  If we attempt to make a choice for $u_B$, then we would be obliged to use Equation~\ref{eqn:ua}, which will blow up when $E=m$ due to the negative sign in the denominator.
 
 We assemble $u_A$ and $u_B$ to form the entire bi-spinor for the particle solutions:
 $$
-[u^{(1)}]_D = N \begin{pmatrix} 1 \\ 0 \\ \frac{p_z}{E+m} \\[5pt] \frac{p_x + i p_y}{E + m} \end{pmatrix}, 
+[u^{(1)}]_D = N \begin{pmatrix} 1 \\ 0 \\ \frac{p_z}{E+m} \\[5pt] \frac{p_x + i p_y}{E + m} \end{pmatrix},
 \hspace{1cm}
-[u^{(2)}]_D = N \begin{pmatrix} 0 \\ 1 \\ \frac{p_x - i c p_y}{E+m} \\ \frac{-p_z}{E+m} \end{pmatrix}.
+[u^{(2)}]_D = N \begin{pmatrix} 0 \\ 1 \\ \frac{p_x - i p_y}{E+m} \\ \frac{-p_z}{E+m} \end{pmatrix}.
 $$
 where $N$ is a not-yet-determined normalization factor. \\[5pt]
 
@@ -685,34 +689,34 @@ $$\psi = a \, e^{ikx} \, v(k)$$
 where $a$ is a normalization factor, and the exponential contains a factor
 $$kx = k^\mu x_\mu$$
 which is the only space and time dependence.  The $v(k)$ is the bi-spinor part which we can write as either two spinors or four components:
-$$[v(k)]_D \equiv \begin{pmatrix} v_A \\ v_B \\ \end{pmatrix} \equiv 
+$$[v(k)]_D \equiv \begin{pmatrix} v_A \\ v_B \\ \end{pmatrix} \equiv
 \begin{pmatrix} v_1 \\ v_2\\ v_3 \\ v_4 \end{pmatrix}
 $$
 In this case the Dirac equation
-$$i\hbar \gamma^\mu \partial_\mu \psi - m \psi = 0$$
+$$i \gamma^\mu \partial_\mu \psi - m \psi = 0$$
 when applied to the plane wave yields:
 \begin{eqnarray*}
-(-\hbar \gamma^\mu k_\mu - m) \; a \, e^{ikx} \, v(k) &=& 0 \\[5pt]
-(\hbar \slashed{k} + m) \; v(k) &=& 0 \\[5pt]
+(- \gamma^\mu k_\mu - m) \; a \, e^{ikx} \, v(k) &=& 0 \\[5pt]
+( \slashed{k} + m) \; v(k) &=& 0 \\[5pt]
 \begin{pmatrix}
-\hbar k^0+m & - \hbar \vec{k}\cdot\vec{\sigma} \\
-\hbar \vec{k}\cdot\vec{\sigma} & -\hbar k^0+m \\
+ k^0+m & -  \vec{k}\cdot\vec{\sigma} \\
+ \vec{k}\cdot\vec{\sigma} & - k^0+m \\
 \end{pmatrix}
-\begin{pmatrix} 
+\begin{pmatrix}
 v_A\\
 v_B\\
 \end{pmatrix}&=&0\\
 \end{eqnarray*}
 Solving the first row of matrix equation we obtain:
 \begin{eqnarray}
-v_A &=& \frac{\hbar\vec{k}\cdot\vec{\sigma}}{\hbar k^0+m} v_B \label{eqn:va} \\
-%v_B &=& \frac{\hbar\vec{k}\cdot\vec{\sigma}}{\hbar k^0-m} v_A \label{eqn:vb} \\
+v_A &=& \frac{\vec{k}\cdot\vec{\sigma}}{ k^0+m} v_B \label{eqn:va} \\
+%v_B &=& \frac{\vec{k}\cdot\vec{\sigma}}{ k^0-m} v_A \label{eqn:vb} \\
 \notag
 \end{eqnarray}
 By a similar calculation as in the previous section we conclude that:
-$p^\mu = \pm \hbar k^\mu$.  However, only $p^\mu = \hbar k^\mu$
-leads to the correct time-dependence 
-$$\psi = a \, e^{ikx} \, v(k) = a \, \exp(iEt/\hbar) \exp(-i\vec{p}\cdot\vec{x}) v(k)$$
+$p^\mu = \pm  k^\mu$.  However, only $p^\mu =  k^\mu$
+leads to the correct time-dependence
+$$\psi = a \, e^{ikx} \, v(k) = a \, \exp(iEt) \exp(-i\vec{p}\cdot\vec{x}) v(k)$$
 for an antiparticle of energy $E$ and momentum $\vec{p}$.  We may rewrite Equation~\ref{eqn:va} as:
 $$v_A = \frac{\vec{\sigma}\cdot\vec{p}}{p^0+m} v_B = \frac{1}{E+m} \; \vec{\sigma}\cdot\vec{p} \; v_B$$
 and writing out $\vec{\sigma}\cdot\vec{p}$ as a matrix:
@@ -720,9 +724,9 @@ $$v_A = \frac{1}{E+m} \; \begin{pmatrix} p_z & p_x - i p_y \\ p_x + i p_y & -p_z
 $$
 And next we find two solutions by applying this result to a starting choice for $v_B$:
 \begin{eqnarray*}
-v_B = \begin{pmatrix} 1 \\ 0 \\ \end{pmatrix} &\implies& 
+v_B = \begin{pmatrix} 1 \\ 0 \\ \end{pmatrix} &\implies&
 v_A = \frac{1}{E+m} \begin{pmatrix} p_z \\ p_x + i p_y \\ \end{pmatrix}\\
-v_B = \begin{pmatrix} 0 \\ 1 \\ \end{pmatrix} &\implies& 
+v_B = \begin{pmatrix} 0 \\ 1 \\ \end{pmatrix} &\implies&
 v_A = \frac{1}{E+m} \begin{pmatrix} p_x - i p_y \\ -p_z \\ \end{pmatrix}\\
 \end{eqnarray*}
 We assemble $v_A$ and $v_B$ to form the entire bi-spinor for the antiparticle solutions:
@@ -735,7 +739,7 @@ The rationale for ordering the solutions this way, and the reason for the overal
 
 We will use $u$ for particles and $v$ for antiparticles.  The Dirac equation for particles in terms of the momentum now reads:
 $$(\slashed{p}-m) u = 0$$
-For antiparticles, $k^\mu = -p^\mu / \hbar$, and the Dirac equation reads:
+For antiparticles, $k^\mu = -p^\mu$, and the Dirac equation reads:
 $$(\slashed{p}+m) v = 0$$
 
 
@@ -754,13 +758,13 @@ $$L^2 = L_x^2 + L_y^2 +L_z^2$$
 In the exercises, you will very that:
 \begin{equation}
 \label{eqn:lcom}
-      [L_x,L_y] = i\hbar Lz, \hspace{1cm} [L_y,L_z] = i\hbar Lx, \hspace{1cm} [L_z,L_x] = i\hbar Ly
-\end{equation}      
+      [L_x,L_y] = i Lz, \hspace{1cm} [L_y,L_z] = i Lx, \hspace{1cm} [L_z,L_x] = i Ly
+\end{equation}
 and
 \begin{equation}
 \label{eqn:lsqcom}
       [L^2,L_x] = [L^2,L_y] = [L^2,L_z] = 0
-\end{equation}      
+\end{equation}
 This shows that while $L_x$, $L_y$, and $L_z$ are incompatible
 observables, $L^2$ commutes with any single component.  So we can
 therefore find eigenstates of both $L^2$ and $L_z$.
@@ -768,21 +772,21 @@ therefore find eigenstates of both $L^2$ and $L_z$.
 Equation~\ref{eqn:lcom} reveals that there is a closed algebra of
 commutators over the angular momentum operators.  We use an algebraic
 approach based on the ladder operators:
-$$L_{\pm} \equiv L_x + i L_y$$
+$$L_{\pm} \equiv L_x \pm i L_y$$
 for which you will show:
 \begin{equation}
-\label{eqn:lsqlpmcom}  
+\label{eqn:lsqlpmcom}
      [L^2,L_{\pm}] = 0
 \end{equation}
 and:
 \begin{equation}
-\label{eqn:lzlpmcom}  
-     [L^2,L_{\pm}] = \pm \hbar L_{\pm}
+\label{eqn:lzlpmcom}
+     [L_z,L_{\pm}] = \pm  L_{\pm}
 \end{equation}
 and:
 \begin{equation}
-\label{eqn:ltop}  
-     L^2 = L_{\pm} L_{\mp} - L_z^2 \mp \hbar L_z
+\label{eqn:ltop}
+     L^2 = L_{\pm} L_{\mp} - L_z^2 \mp  L_z
 \end{equation}
 
 
@@ -798,46 +802,46 @@ and:
 
 With the heavy lifting behind us, we can consider a simultaneous eigenstate of both $L^2$ and $L_z$ so that:
 $$L^2 f = \alpha f$$
-and 
+and
 $$L_z f = \mu f$$
 Consider the state $L_+ f$. Using Equation~\ref{eqn:lsqlpmcom} we see that:
 $$L^2 (L_+ f) = L_+ (L^2 f) = L_+ (\lambda f) = \lambda (L_+ f) $$
 and using Equation~\ref{eqn:lzlpmcom} we see that:
-$$L_z (L_+ f) = (L_+ L_z + \hbar L_+) f = (\mu + \hbar) (L_+ f) $$
-This shows that $L_+ f$ remains an eigenstate of $L^2$ with the same eigenvalue as $f$, and also remains an eigenstate of $L_z$ but with new eigenvalue $\mu + \hbar$.  We say that $L_+$ is a raising operator.
+$$L_z (L_+ f) = (L_+ L_z +  L_+) f = (\mu + 1) (L_+ f) $$
+This shows that $L_+ f$ remains an eigenstate of $L^2$ with the same eigenvalue as $f$, and also remains an eigenstate of $L_z$ but with new eigenvalue $\mu + 1$.  We say that $L_+$ is a raising operator.
 
 We cannot keep applying the raising operator indefinitely, for eventually the square of the $z$ component of angular momentum would be larger than the $L^2$.  Therefore, after some number of applications of $L^+$ we must eventually reach a state $g$ for which:
 $$L_+ g = 0$$
 For convenience in what follows, let's define a dimensionless quantity $\ell$ by the eigenvalue of this ``top-rung'' state $g$:
-$$L_+ g \equiv \ell \hbar g$$
+$$L_+ g \equiv \ell  g$$
 In the exercises, you will show that:
-$$L^2 g = \hbar^2 \ell (\ell+1) g$$
+$$L^2 g =  \ell (\ell+1) g$$
 which relates the eigenvalue of $L^2$ (which we do not change via the raising operator) to the maximum eigenvalue of the $L_z$.
 
 In a similar fashion, we see that the operator $L_-$ is a lowering
 operator, so that $L_-f$ remains an eigenstate of $L^2$ with same
 eigenvalue, and also remains an eigenstate of $L_z$ but with new
-eigenvalue $\mu - \hbar$.  Also similarly, we cannot endlessly apply
+eigenvalue $\mu - 1$.  Also similarly, we cannot endlessly apply
 $L_-$.  After some number of applications of $L_-$ we must reach a
 state $h$ for which:
 $$L_- h = 0$$
 Again for convenience, we define a dimensionless quantity $\bar{\ell}$ by the eigenvalue of the ``bottom-rung'' state $h$:
-$$L_z h \equiv \bar{\ell} \hbar h$$
+$$L_z h \equiv \bar{\ell}  h$$
 In the exercises you will show that
-$$L^2 h = \hbar^2 \bar{\ell} (\bar{\ell}-1) h$$
+$$L^2 h =  \bar{\ell} (\bar{\ell}-1) h$$
 
 \exercise Using equation ~\ref{eqn:ltop} show that:
-$$L^2 g = \hbar^2 \ell (\ell+1) g$$
+$$L^2 g =  \ell (\ell+1) g$$
 and
-$$L^2 h = \hbar^2 \bar{\ell} (\bar{\ell}-1) h$$
+$$L^2 h =  \bar{\ell} (\bar{\ell}-1) h$$
 $\square$\\[5pt]
 
-Comparing these results for the lower-rung with those of the upper rung, and noting that the raising operator leaves the the eigenvalue of $L^2$ unchanged, we conclude that 
+Comparing these results for the lower-rung with those of the upper rung, and noting that the raising operator leaves the the eigenvalue of $L^2$ unchanged, we conclude that
 $\ell(\ell+1) = \bar{\ell}(\bar{\ell}-1)$
 So either
 $$\bar{\ell} = \ell+1$$
 which is impossible, since we must have the lower bound below the upper bound:
-$$\bar{\ell}\hbar < \ell \hbar$$
+$$\bar{\ell} < \ell $$
 or
 $$\bar{\ell} = -\ell$$
 This implies that $\ell$ is non-negative.  Furthermore, we move from $-\ell$ to $\ell$ in an integer number of applications of $N$, so:
@@ -850,17 +854,17 @@ $$\ell = 0, \frac{1}{2}, 1, \frac{3}{2}, 2, \ldots$$
 and
 $$m = -\ell, -\ell+1, \dots \ell$$
 with:
-$$L^2 \ket{lm} = \hbar^2 \ell (\ell+1) \ket{lm}$$
+$$L^2 \ket{lm} =  \ell (\ell+1) \ket{lm}$$
 and
-$$L_z \ket{lm} = \hbar m \ket{lm}$$
+$$L_z \ket{lm} =  m \ket{lm}$$
 
 In the last exercise of this section, you will show that:
-$$L_+ \ket{l\,m} = \hbar \sqrt{(l-m)(l+m+1)} \ket{l\,(m+1)}$$
+$$L_+ \ket{l\,m} =  \sqrt{(l-m)(l+m+1)} \ket{l\,(m+1)}$$
 Similarly:
-$$L_- \ket{l\,m} = \hbar \sqrt{(l+m)(l-m+1)} \ket{l\,(m-1)}$$
+$$L_- \ket{l\,m} =  \sqrt{(l+m)(l-m+1)} \ket{l\,(m-1)}$$
 
 \exercise Show that:
-$$L_+ \ket{l\,m} = \hbar \sqrt{(l-m)(l+m+1)} \ket{l\,(m+1)}$$
+$$L_+ \ket{l\,m} =  \sqrt{(l-m)(l+m+1)} \ket{l\,(m+1)}$$
 Hint:  First put:
 $$L_+ \ket{l\,m} = \alpha \ket{l\,m}$$
 where $\alpha$ is the quantity we seek to calculate.  Notice that $L_+^\dagger = L_-$ and so:
@@ -893,9 +897,9 @@ $$\ket{\uparrow} = \ket{\frac{1}{2}, \; \frac{1}{2}}$$
 and the spin down state has $s=1/2$ and $m=-1/2$ which we write as:
 $$\ket{\downarrow} = \ket{\frac{1}{2}, \; -\frac{1}{2}}$$
 They have the defining properties:
-$$S_z \ket{\uparrow} = \frac{\hbar}{2} \ket{\uparrow}$$
+$$S_z \ket{\uparrow} = \frac{1}{2} \ket{\uparrow}$$
 and
-$$S_z \ket{\downarrow} = -\frac{\hbar}{2} \ket{\downarrow}$$
+$$S_z \ket{\downarrow} = -\frac{1}{2} \ket{\downarrow}$$
 These two states are a basis for the spin one-half system, which we will call
 the $S_z$ basis.  We could of course form equivalent basis from the
 eigenstates of the $S_x$ operator, for example.  But we can write any
@@ -906,25 +910,25 @@ $$[\ket{\uparrow}]_{S_z} = \begin{pmatrix} 1 \\ 0 \end{pmatrix}$$
 and
 $$[\ket{\downarrow}]_{S_z} = \begin{pmatrix} 0 \\ 1 \end{pmatrix}$$
 The linear operator $S_z$ can be represented as a matrix in this base:
-$$[S_z]_{S_z} = \frac{\hbar}{2} \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix} = \frac{\hbar}{2} \sigma^3$$
+$$[S_z]_{S_z} = \frac{1}{2} \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix} = \frac{1}{2} \sigma^3$$
 The raising and lowering operators are:
 $$S_\pm = S_x \pm i S_y$$
 and we have:
-$$S_+ \ket{\downarrow} = \hbar \ket{\uparrow} \quad \quad S_+ \ket{\uparrow} = 0$$
+$$S_+ \ket{\downarrow} =  \ket{\uparrow} \quad \quad S_+ \ket{\uparrow} = 0$$
 and:
-$$S_- \ket{\uparrow} = \hbar \ket{\downarrow} \quad \quad S_- \ket{\downarrow} = 0$$
+$$S_- \ket{\uparrow} =  \ket{\downarrow} \quad \quad S_- \ket{\downarrow} = 0$$
 from which we infer:
-$$[S_+]_{S_z} = \hbar \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}$$
+$$[S_+]_{S_z} =  \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}$$
 and
-$$[S_+]_{S_z} = \hbar \begin{pmatrix} 0 & 0 \\ 1 & 0 \end{pmatrix}.$$
+$$[S_+]_{S_z} =  \begin{pmatrix} 0 & 0 \\ 1 & 0 \end{pmatrix}.$$
 We also have:
 $$S_x = \frac{S_+ + S_i}{2}$$
 and
 $$S_y = \frac{S_+ - S_i}{2i}$$
 and so:
-$$[S_x]_{S_z} =  \frac{\hbar}{2} \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix} = \frac{\hbar}{2} \sigma^1$$
+$$[S_x]_{S_z} =  \frac{1}{2} \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix} = \frac{1}{2} \sigma^1$$
 and
-$$[S_y]_{S_z} =  \frac{\hbar}{2} \begin{pmatrix} 0 & -i \\ i & 0 \end{pmatrix} = \frac{\hbar}{2} \sigma^2$$
+$$[S_y]_{S_z} =  \frac{1}{2} \begin{pmatrix} 0 & -i \\ i & 0 \end{pmatrix} = \frac{1}{2} \sigma^2$$
 
 How can we extend our spin-1/2 operator to our four-component
 bispinors?  Suppose we have a group $G$ with $a,b,c \in G$ and $ab =
@@ -937,16 +941,16 @@ $$
 the new group will preserve all the features of the old group because:
 $$\begin{pmatrix} a & 0 \\ 0 & a \\ \end{pmatrix}
 \begin{pmatrix} b & 0 \\ 0 & b \\ \end{pmatrix}
-= \begin{pmatrix} ab & 0 \\ 0 & ab \\ \end{pmatrix} = 
+= \begin{pmatrix} ab & 0 \\ 0 & ab \\ \end{pmatrix} =
 \begin{pmatrix} c & 0 \\ 0 & c \\ \end{pmatrix}$$
 We can therefore construct the $S_z$ operator appropriate for a
 bi-spinor by recycling the definition appropriate for a spinor:
-$$S_z = \frac{h}{2} \begin{pmatrix} \sigma^3 & 0 \\ 0 & \sigma^3 \end{pmatrix}
-= \begin{pmatrix} 
-1 & 0 & 0 & 0 \\ 
-0 &-1 & 0 & 0 \\ 
-0 & 0 & 1 & 0 \\ 
-0 & 0 & 0 &-1 \\ 
+$$S_z = \frac{1}{2} \begin{pmatrix} \sigma^3 & 0 \\ 0 & \sigma^3 \end{pmatrix}
+= \begin{pmatrix}
+1 & 0 & 0 & 0 \\
+0 &-1 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 &-1 \\
 \end{pmatrix}
 $$
 With this operator in hand, we see that $\psi^{(1)}$ has spin up, and $\psi^{(2)}$ has spin down.
@@ -961,11 +965,11 @@ $$S^2 \ket{\downarrow}$$
 explicitly in the Dirac basis.$\square$\\[5pt]
 
 \exercise (*) Verify that:
-$$[S_x, S_y] = i \hbar S_z$$
+$$[S_x, S_y] = i  S_z$$
 explicitly in the Dirac basis.$\square$\\[5pt]
 
 \exercise (*) Verify that:
-$$ S_+ \ket{\downarrow} = \hbar \ket{\uparrow}$$
+$$ S_+ \ket{\downarrow} =  \ket{\uparrow}$$
 and
 $$ S_+ \ket{\uparrow} = 0$$
 explicitly in the Dirac basis.$\square$\\[5pt]
@@ -981,14 +985,14 @@ we'll show that $L+S$, the orbital angular momentum plus an intrinsic
 angular momentum of spin one-half does commute with $H$.
 
 Starting from:
-$$i\hbar\gamma^\mu\partial_\mu \psi - m \psi = 0$$
+$$i\gamma^\mu\partial_\mu \psi - m \psi = 0$$
 we have
 \begin{eqnarray*}
-i\hbar\gamma^0 \frac{\partial}{\partial t}
+i\gamma^0 \frac{\partial}{\partial t}
 &=&
-i\hbar\gamma^i \frac{\partial}{\partial x^i} - m \\
+i\gamma^i \frac{\partial}{\partial x^i} - m \\
 &=&
-i\hbar\gamma^i p_i - m \\
+i\gamma^i p_i - m \\
 \end{eqnarray*}
 and so in the Dirac representation:
 $$[H]_D = \begin{pmatrix}
@@ -1002,18 +1006,18 @@ $$[m, L_z] = 0$$
 then
 \begin{eqnarray*}
 [\vec{\sigma}\cdot\vec{p}, L_z] &=&  [\sigma^x p_x + \sigma^y p_y, x p_y - y p_x] \\
-&=&  -i \hbar  \sigma^x p_y - \sigma^y p_x \\
-&=&  -i \hbar  [\vec{\sigma} \times \vec{p}]_z \\
+&=&  -i  \sigma^x p_y - \sigma^y p_x \\
+&=&  -i  [\vec{\sigma} \times \vec{p}]_z \\
 \end{eqnarray*}
 So then:
 $$
-[H, L_z] = -i \hbar  \begin{pmatrix}
+[H, L_z] = -i  \begin{pmatrix}
 0 & [\vec{\sigma} \times \vec{p}]_z\\
 [\vec{\sigma} \times \vec{p}]_z  & 0\\
 \end{pmatrix}
 $$
 Now using:
-$$S_z = \frac{\hbar}{2} \begin{pmatrix}
+$$S_z = \frac{1}{2} \begin{pmatrix}
 \sigma^z & 0 \\
 0  & \sigma^z\\
 \end{pmatrix}
@@ -1022,13 +1026,13 @@ and finding the component-wise commutators first:
 \begin{eqnarray*}
 [\vec{\sigma}\cdot\vec{p}, \sigma^z] &=&  [\sigma^x p_x + \sigma^y p_y, \sigma^z] \\
 &=&  2 i  (-\sigma^y p_x + \sigma^x p_y \\
-&=&  2 i  [\vec{\sigma} \times \vec{p}]_z 
+&=&  2 i  [\vec{\sigma} \times \vec{p}]_z
 \end{eqnarray*}
 where we have used cyclic rotations of:
 $$[\sigma^x \sigma^y] = 2i \sigma^z$$
 and so:
 $$
-[H, S_z] = i \hbar  \begin{pmatrix}
+[H, S_z] = i  \begin{pmatrix}
 0 & [\vec{\sigma} \times \vec{p}]_z\\
 [\vec{\sigma} \times \vec{p}]_z  & 0\\
 \end{pmatrix}
@@ -1043,7 +1047,6 @@ $$[H, L_x + S_x] = [H, L_y + S_y] = 0$$
 \exercise For a particle at reset ($\vec{p}=0$) categorize $u^{(1)}$, $u^{(2)}$, $v^{(1)}$, $v^{(2)}$ as either spin-up or spin down.
 
 \section{Relativistic Transformation of Bi-Spinors}
-
 Suppose that two frames are related by a Lorentz transformation:
 $$x^{\mu'} = \Lambda^{\mu'}_\nu x^\nu$$
 In this section, we are going determine the properties of the transformation $S$ which relates the bispinors appropriate to each frame:
@@ -1052,36 +1055,37 @@ and $S$ must be invertible so that we have:
 $$\psi = S^{-1} \psi'$$
 The Dirac equation, which we derived to be consistent with special
 relativity, must be equivalent in all reference frames:
-$$i\hbar \gamma^\mu \partial_\mu \psi = m \psi \;\; \Leftrightarrow \;\; 
-i\hbar \gamma^{\beta'} \partial_{\beta'} \psi' = m \psi'$$
+$$i \gamma^\mu \partial_\mu \psi = m \psi \;\; \Leftrightarrow \;\;
+i \gamma^{\omega'} \partial_{\omega'} \psi' = m \psi'$$
 Notice that we cannot use our primed indices notation on $\psi$, because $\psi$ does not have any indices, but yet it is not a scalar.  It is a bispinor, with four components, but it is not a four vector.  Hence we use $\psi'$ to refer to the bispinor with components appropriate to the frame $F'$.
-
-Since the $\gamma$ and $\delta$ tensors are invariant, we have:
-$$\gamma^{\beta'} =  \delta^{\beta'}_\alpha \gamma^\alpha$$
-and also:
+Since the $\gamma$ matrices are frame invariant, we have:
+$$\gamma^{\mu'} =  \gamma^\mu$$
+where you should note that numerically:
+$$\mu' = \mu$$
+and the prime just indicates which frame to take the component in.  We also have:
 \begin{eqnarray*}
-\partial_{\beta'} &=& \Lambda^\mu_{\beta'} \partial_\mu \\
+\partial_{\omega'} &=& \Lambda^\mu_{\omega'} \partial_\mu \\
 \psi' &=& S \psi
 \end{eqnarray*}
 So inserting these transformations into the Dirac equation in the primed frame:
 \begin{eqnarray*}
-  i\hbar \gamma^{\beta'} \partial_{\beta'} \psi' &=& m \psi'\\
-  i\hbar \delta^{\beta'}_\alpha \gamma^\alpha  \Lambda^\mu_{\beta'} \partial_\mu S \psi
-  &=& m S \psi \\
-  S^{-1} i\hbar \delta^{\beta'}_\alpha \gamma^\alpha  \Lambda^\mu_{\beta'} \partial_\mu S \psi
-  &=& m \psi \\
-  i\hbar \delta^{\beta'}_\alpha \Lambda^\mu_{\beta'} S^{-1} \gamma^\alpha S  \partial_\mu \psi
-  &=&  i\hbar \gamma^\mu \partial_\mu \psi \\  
+  i \gamma^{\alpha'} \partial_{\alpha'} \psi' &=& m \psi'\\
+  i \gamma^{\alpha'} \Lambda^\omega_{\alpha'} \partial_\omega S \psi
+  &=& m S \psi
 \end{eqnarray*}
+And then multiplying both sides by $S^-1$:
+$$
+i \Lambda^\omega_{\alpha'} \; S^{-1} \gamma^{\alpha'} S  \; \partial_\omega \psi
+\;=\;  S^{-1} m S \psi \;=\;  m \psi \;=\; i \gamma^\omega \partial_\omega \psi \\
+$$
 where we have taken care in the last line to maintain the order of matrices but have moved numbers around.  We see that it is sufficient that:
-$$\delta^{\beta'}_\alpha \Lambda^\mu_{\beta'} S^{-1} \gamma^\alpha S = \gamma^\mu$$
-Multiplying each side by $\Lambda^{\omega'}_\mu$:
+$$\Lambda^\omega_{\alpha'} S^{-1} \gamma^{\alpha'} S = \gamma^\omega$$
+Multiplying each side by $\Lambda^{\mu'}_\omega$:
 \begin{eqnarray*}
-(\delta^{\beta'}_\alpha \Lambda^\mu_{\beta'} \Lambda^{\omega'}_\mu) S^{-1} \gamma^\alpha S = \Lambda^{\omega'}_\mu \gamma^\mu \\
-\delta^{\omega'}_{\alpha} S^{-1} \gamma^\alpha S = \Lambda^{\omega'}_\mu \gamma^\mu \\
+\Lambda^{\mu'}_{\omega} \Lambda^{\omega}_{\alpha'} \, S^{-1} \gamma^{\alpha'} S &=& \Lambda^{\mu'}_\omega \gamma^\omega \\
+S^{-1} \gamma^{\mu'} S &=& \Lambda^{\mu'}_\omega \gamma^\omega \\
 \end{eqnarray*}
-The $\delta$ tensor on the LHS is an artifact of our notation which primes indices.
-
+where on the LHS we used $\Lambda^{\mu'}_{\omega} \Lambda^{\omega}_{\alpha'} = \delta^{\mu'}_{\alpha'}$.
 
 In the exercises, you will work with an explicit transformation matrix $S$ defined as:
 $$S \equiv a_+ \; + \; a_- \, \gamma^0 \, \gamma^1$$
@@ -1090,11 +1094,11 @@ $$a_\pm = \pm \sqrt{\frac{\gamma \pm 1}{2}}$$
 with $\gamma$ the usual factor for a Lorentz transformation.
 Remembering to insert identity matrices as needed, we can write $S$
 as:
-$$S = \begin{pmatrix} 
-a_+ & a_- \, \sigma^1 \\ 
+$$S = \begin{pmatrix}
+a_+ & a_- \, \sigma^1 \\
 a_- \, \sigma^1 & a_+ \\
 \end{pmatrix}
-= \begin{pmatrix} 
+= \begin{pmatrix}
 a_+ & 0 & 0   & a_- \\
 0 & a_+ & a_- & 0 \\
 0 & a_- & a_+ & 0 \\
@@ -1117,11 +1121,11 @@ Since $\sigma^1$ and $I$ commute, we can calculate the determinant of $S$ as if 
   &=& \det((a_+) (I)^2 - (a_-)^2(\sigma^1)^2)\\
   &=& \det((a_+^2 - a_-^2) I)\\
   &=& (a_+^2 - a_-^2) \det(I)\\
-  &=& 1\\  
+  &=& 1\\
 \end{eqnarray*}
 and so (again working as if S were a 2x2 matrix) we have:
-$$S^{-1} = \begin{pmatrix} 
-a_+ & -a_- \, \sigma^1 \\ 
+$$S^{-1} = \begin{pmatrix}
+a_+ & -a_- \, \sigma^1 \\
 -a_- \, \sigma^1 & a_+ \\
 \end{pmatrix}
 $$
@@ -1132,31 +1136,31 @@ $$S^{-1} = a_+ - a_- \gamma_0 \gamma_1$$
 \exercise (*) Verify that $S S^{-1} = 1$. $\square$\\[5pt]
 
 \exercise (*)  Show that:
-$$\delta^{\omega'}_{\alpha} S^{-1} \gamma^\alpha S = \Lambda_{\mu}^{\omega'} \gamma^{\mu}$$
-Note that the $\delta$ function is just an artifact from our primed indices notation: it is an identity matrix whenever we calculate anything.  So, for example, you will have to show that:
-$$S^{-1} \gamma^0 S = \gamma \gamma^{0} - \gamma |\beta| \gamma^3$$
+$$S^{-1} \gamma^\mu S = \Lambda_{\mu}^{\omega'} \gamma^{\omega'}$$
+So, for example, you will have to show that:
+$$S^{-1} \gamma^0 S = \gamma \gamma^{0} - \gamma |\beta| \gamma^1$$
 which you will do showing:
 $$
-\begin{pmatrix} 
-a_+ & -a_- \, \sigma^1 \\ 
+\begin{pmatrix}
+a_+ & -a_- \, \sigma^1 \\
 -a_- \, \sigma^1 & a_+ \\
 \end{pmatrix}
-\begin{pmatrix} 
-1 & 0  \\ 
+\begin{pmatrix}
+1 & 0  \\
 0 & -1\\
 \end{pmatrix}
-\begin{pmatrix} 
-a_+ & a_- \, \sigma^1 \\ 
+\begin{pmatrix}
+a_+ & a_- \, \sigma^1 \\
 a_- \, \sigma^1 & a_+ \\
 \end{pmatrix}
 =
-\gamma \begin{pmatrix} 
-1 & 0  \\ 
+\gamma \begin{pmatrix}
+1 & 0  \\
 0 & -1\\
 \end{pmatrix}
 - \gamma |\beta|
-\begin{pmatrix} 
-0 & \sigma^1  \\ 
+\begin{pmatrix}
+0 & \sigma^1  \\
 -\sigma^1 & 0\\
 \end{pmatrix}
 $$
@@ -1167,10 +1171,10 @@ $\square$\\[5pt]
 $$S^{\dagger} \gamma^0 S = \gamma^0$$
 $\square$\\[5pt]
 
-\exercise Notice that our original solutions to the Dirac equations are simply plane wave solutions with $\vec{p}=0$ and 
+\exercise Notice that our original solutions to the Dirac equations are simply plane wave solutions with $\vec{p}=0$ and
 $$u^{(1)} \equiv \begin{pmatrix}1 \\ 0 \\ 0 \\ 0 \end{pmatrix},
 \hspace{1cm}
-u^{(2)} \equiv \begin{pmatrix}1 \\ 0 \\ 0 \\ 0 \end{pmatrix}
+u^{(2)} \equiv \begin{pmatrix}0 \\ 1 \\ 0 \\ 0 \end{pmatrix}
 $$
 calculate $S u^{(1)}$ and $ S u^{(2)}$.  Compare to our results for $u^{(1)}$ and $u^{(2)}$ from the previous solution.  Hint: Don't get confused by an unexpected minus sign in your answer... if you boost to a frame with speed $\beta > 0$ in the $x$ direction, then a particle at rest in the original frame will appear to have momentum $-\gamma\beta m c$ in the new frame! $\square$\\[5pt]
 
@@ -1179,7 +1183,7 @@ calculate $S u^{(1)}$ and $ S u^{(2)}$.  Compare to our results for $u^{(1)}$ an
 
 Suppose we want to construct a Lorentz invariant scalar from
 the bi-spinor $\psi$. It would be quite reasonable to first consider:
-$$\psi^\dagger \psi = 
+$$\psi^\dagger \psi =
 \begin{pmatrix}
 \psi_1^* & \psi_2^* & \psi_3^* & \psi_4^* \\
 \end{pmatrix}
@@ -1191,7 +1195,7 @@ $$
 which is certainly a scalar, but is it Lorentz invariant?  We can check:
 $$\left( {\psi}^\dagger \psi \right)' =
 \left( {\psi}^\dagger\right)' \left( \psi \right)'
-= (S \psi)^\dagger (S \psi) = \psi^\dagger S^\dagger S \psi$$ 
+= (S \psi)^\dagger (S \psi) = \psi^\dagger S^\dagger S \psi$$
 which would be Lorentz invariant if $S^\dagger S = 1$ (i.e. if $S$ is
 unitary).  But alas, $S$ is not unitary, as you will show in an
 exercise.\\[5pt]
@@ -1219,6 +1223,7 @@ $$\overline{\psi} \gamma^\mu \psi$$
 transforms.  In the prime frame, using primed indices, we have the quantity:
 $$\overline{\psi}' \gamma^{\omega'} \psi'$$
 but the gamma matrices are the same in every frame, so we have:
+%PRIME_FIXME: $\delta^{\omega'}_\mu$ used throughout this block is the old prime-index style; with $\gamma^{\omega'} = \gamma^\omega$ (numerically) the deltas should be dropped.
 \begin{eqnarray*}
   \left( \overline{\psi} \right)' \gamma^{\omega'} \left( \psi \right)'
   &=& \delta^{\omega'}_\mu \left( \psi^\dagger \right)' \gamma^0  \gamma^{\mu} \psi' \\
@@ -1228,6 +1233,7 @@ but the gamma matrices are the same in every frame, so we have:
   &=&  \overline{\psi}  \delta^{\omega'}_\mu S^{-1} \gamma^{\mu} S \psi \\
 \end{eqnarray*}
 In a previous exercise, you showed that:
+%PRIME_FIXME: $\delta^{\omega'}_\mu$ is old prime-index style.
 $$\delta^{\omega'}_{\mu} S^{-1} \gamma^\alpha S = \Lambda_{\mu}^{\omega'} \gamma^{\mu}$$
 which leads to:
 \begin{equation}
@@ -1255,7 +1261,7 @@ then $\gamma^1$ is unitary by:
 $$(\gamma^1)^\dagger \gamma^1 = - (\gamma^1)^2 = 1$$
 and likewise for $\gamma^2$ and $\gamma^3$.  We can impose these four conditions as:
 $$(\gamma^\mu)^\dagger = \gamma^0 \gamma^\mu \gamma^0$$
-because e.g. 
+because e.g.
 $$(\gamma^1)^\dagger = \gamma^0 \gamma^1 \gamma^0 = - \gamma^1 (\gamma^0)^2 = -\gamma^1$$
 
 
@@ -1267,25 +1273,25 @@ where $N$ is a normalization factor we will soon determine, and we took:
 $$u_A^{(1)}=\begin{pmatrix} 1 \\ 0 \\ \end{pmatrix}, \hspace{1cm} u_A^{(2)}=\begin{pmatrix} 0 \\ 1 \\ \end{pmatrix}$$
 We can now determine:
 \begin{eqnarray*}
-\overline{u}^{(i)} &=& (u^{(i)})^\dagger \gamma^0 = 
+\overline{u}^{(i)} &=& (u^{(i)})^\dagger \gamma^0 =
 N^*
-\begin{pmatrix} 
+\begin{pmatrix}
 \displaystyle (u_A^{(i)})^\dagger & \displaystyle \frac{\vec{\sigma}\cdot\vec{p}}{p^0 + m} (u_A^{(i)})^\dagger \\
 \end{pmatrix}
 \begin{pmatrix} 1 & 0 \\ 0 & -1 \\ \end{pmatrix}\\
-\overline{u}^{(i)} &=& N^* \begin{pmatrix} 
+\overline{u}^{(i)} &=& N^* \begin{pmatrix}
 \displaystyle (u_A^{(i)})^\dagger & \displaystyle -\frac{\vec{\sigma}\cdot\vec{p}}{p^0 + m} (u_A^{(i)})^\dagger \\
 \end{pmatrix} \\
 \end{eqnarray*}
 We can finally calculate:
 \begin{eqnarray*}
-\overline{u}^{(i)} u^{(j)} &=& |N|^2 \left( 1 - \frac{(\vec{p}\cdot \vec{\sigma})^2}{(p^0+m)^2}\right) (u_A^{(i)})^\dagger u_A^{(j)}\\ 
+\overline{u}^{(i)} u^{(j)} &=& |N|^2 \left( 1 - \frac{(\vec{p}\cdot \vec{\sigma})^2}{(p^0+m)^2}\right) (u_A^{(i)})^\dagger u_A^{(j)}\\
 \end{eqnarray*}
 Next recalling:
 $$(\vec{p}\cdot \vec{\sigma})^2 = |\vec{p}|^2 = (p^0)^2-(m)^2 = (p^0+m)(p^0-m)$$
 We have:
 \begin{eqnarray*}
-\overline{u}^{(i)} u^{(j)} &=& |N|^2 \frac{2m}{p^0+m} (u_A^{(i)})^\dagger u_A^{(j)}\\ 
+\overline{u}^{(i)} u^{(j)} &=& |N|^2 \frac{2m}{p^0+m} (u_A^{(i)})^\dagger u_A^{(j)}\\
 \end{eqnarray*}
 Choosing:
 $$N = \sqrt{p^0+m} = \sqrt{\frac{E+m}{1}}$$
@@ -1305,7 +1311,7 @@ Remember in non-relativistic QM we wrote completeness like:
 $$\sum \ket{k} \bra{k} = 1$$
 Our spinors $u_A^{(i)}$ are also complete, as their outer products sum to unity:
 \begin{eqnarray*}
-\sum_i u_A^{(i)} (u_A^{(i)})^\dagger &=& 
+\sum_i u_A^{(i)} (u_A^{(i)})^\dagger &=&
 \begin{pmatrix} 1 \\ 0 \\ \end{pmatrix}
 \begin{pmatrix} 1 & 0 \\\end{pmatrix}
 +
@@ -1313,30 +1319,30 @@ Our spinors $u_A^{(i)}$ are also complete, as their outer products sum to unity:
 \begin{pmatrix} 0 & 1 \\\end{pmatrix}\\
 &=& \begin{pmatrix} 1 & 0 \\ 0 & 0 \\ \end{pmatrix}
 + \begin{pmatrix} 0 & 0 \\ 0 & 1 \\ \end{pmatrix}\\
-&=& \begin{pmatrix} 1 & 0 \\ 0 & 1 \\ \end{pmatrix} = I\\ 
+&=& \begin{pmatrix} 1 & 0 \\ 0 & 1 \\ \end{pmatrix} = I\\
 \end{eqnarray*}
 If we take an outer product of bispinors, we get a 4x4 matrix.  So, using our results from the previous section:
 \begin{eqnarray*}
-\sum_i u^{(i)} \overline{u}^{(i)}  &=& |N|^2 
-\begin{pmatrix} 
+\sum_i u^{(i)} \overline{u}^{(i)}  &=& |N|^2
+\begin{pmatrix}
 \displaystyle I & -\displaystyle \frac{\vec{p}\cdot \vec{\sigma}}{p^0+m} \\
 \displaystyle \frac{\vec{\sigma}\cdot\vec{p}}{p^0+m} &
--\displaystyle \frac{(\vec{\sigma}\cdot\vec{p})^2}{p^0+m}\\ 
+-\displaystyle \frac{(\vec{\sigma}\cdot\vec{p})^2}{p^0+m}\\
 \end{pmatrix}\\
 &=&
-\begin{pmatrix} 
+\begin{pmatrix}
 \displaystyle (p^0+m) I & \displaystyle -\vec{p}\cdot \vec{\sigma} \\
 \displaystyle \vec{\sigma}\cdot\vec{p} &
-\displaystyle -(p^0-m) I\\ 
+\displaystyle -(p^0-m) I\\
 \end{pmatrix}\\
-&=& p^0 \begin{pmatrix} I & 0 \\ 0 & -I \end{pmatrix} 
-- \begin{pmatrix} 0 & \vec{\sigma} \\ -\vec{\sigma} & 0 \end{pmatrix} \cdot \vec{p} 
+&=& p^0 \begin{pmatrix} I & 0 \\ 0 & -I \end{pmatrix}
+- \begin{pmatrix} 0 & \vec{\sigma} \\ -\vec{\sigma} & 0 \end{pmatrix} \cdot \vec{p}
 + m \begin{pmatrix} I & 0 \\ 0 & I \end{pmatrix} \\
 &=& \gamma^\mu p_\mu + m \\
 &=& \slashed{p} + m \\
 \end{eqnarray*}
 For antiparticles:
-$$\sum_i w^{(i)} \overline{w}^{(i)} = \slashed{p} - m$$
+$$\sum_i v^{(i)} \overline{v}^{(i)} = \slashed{p} - m$$
 
 
 \section{Adjoint Form of Dirac Equation}
@@ -1344,25 +1350,25 @@ $$\sum_i w^{(i)} \overline{w}^{(i)} = \slashed{p} - m$$
 The Dirac adjoint bi-spinor:
 $$\overline{\psi} \equiv \psi^\dagger \gamma^0$$
 satisfies an adjoint form of the Dirac equation.  Starting from the Dirac equation:
-$$\gamma^\mu \, \delta_\mu \psi = m \, \psi $$
+$$\gamma^\mu \, \partial_\mu \psi = m \, \psi $$
 and taking the ``normal'' adjoint of both sides:
-$$\delta_\mu \psi^\dagger (\gamma^\mu)^\dagger = m \psi^\dagger  $$
+$$\partial_\mu \psi^\dagger (\gamma^\mu)^\dagger = m \psi^\dagger  $$
 From the Hermicity of the gamma matrices, we have:
 $$(\gamma^\mu)^\dagger = \gamma^0 \gamma^\mu \gamma^0$$
 so:
-$$\delta_\mu \psi^\dagger \gamma^0 \gamma^\mu \gamma^0 = m \psi^\dagger$$
+$$\partial_\mu \psi^\dagger \gamma^0 \gamma^\mu \gamma^0 = m \psi^\dagger$$
 Multiplying both sides by $\gamma^0$ and using $(\gamma^0)^2=1$ so:
-$$\delta_\mu \overline{\psi}  \gamma^\mu  =  m \, \overline{\psi}$$
+$$\partial_\mu \overline{\psi}  \gamma^\mu  =  m \, \overline{\psi}$$
 For the plane-wave particles, we have:
 $$(\slashed{p} - m) u = 0, \hspace{1cm} \overline{u} (\slashed{p} - m) = 0$$
 For the plane-wave antiparticles, we have:
-$$(\slashed{p} + m) w = 0, \hspace{1cm} \overline{w} (\slashed{p} + m) = 0$$
+$$(\slashed{p} + m) v = 0, \hspace{1cm} \overline{v} (\slashed{p} + m) = 0$$
 
 
 \section{Helicity Eigenstates}
 
 We saw that plane-wave solutions to the Dirac equation are only eigenstates of $S_z$ when $p_x = p_y = 0$.  More generally, plane-wave solutions to the Dirac equation are not eigenstates of spin:
-$$[\vec{S}]_D = \frac{\hbar}{2}
+$$[\vec{S}]_D = \frac{1}{2}
 \begin{pmatrix}
 \vec{\sigma} & 0 \\
 0 & -\vec{\sigma}\\
@@ -1372,7 +1378,7 @@ but they are eigenstates of the spin component in the direction of the
 momentum, which is known as the helicity:
 $$\hat{h} = \frac{\vec{S}\cdot\vec{p}}{p}$$
 In the Dirac representation, the helicity is:
-$$[h]_D = [\frac{\vec{S}\cdot\vec{p}}{2p}]_D = \frac{\hbar}{2 p}
+$$[h]_D = [\frac{\vec{S}\cdot\vec{p}}{p}]_D = \frac{1}{2 p}
 \begin{pmatrix}
 \vec{\sigma}\cdot\vec{p} & 0 \\
 0 & -\vec{\sigma}\cdot\vec{p}\\
@@ -1395,7 +1401,7 @@ $$\hat{h} \Psi = \lambda \Psi$$
 or equivalently:
 \begin{equation}
 \label{eqn:helicity-eigenstates}
-\frac{\hbar}{2p}
+\frac{1}{2p}
 \begin{pmatrix}
 \vec{\sigma}\cdot\vec{p} & 0 \\
 0 & -\vec{\sigma}\cdot\vec{p}\\
@@ -1411,16 +1417,16 @@ u_A \\ u_B \\
 from which we infer:
 \begin{equation}
 \label{eqn:helicity-ua}
-(\vec{\sigma} \cdot \vec{p}) \, u_A = \frac{2 p \lambda}{\hbar} u_A
+(\vec{\sigma} \cdot \vec{p}) \, u_A = 2 p \lambda \, u_A
 \end{equation}
 In the exercises, you will show that the allowed eigenvalues are:
-$$\lambda \pm \frac{\hbar}{2}$$
+$$\lambda \pm \frac{1}{2}$$
 exactly as expected for a component of spin for a spin one-half particle.\\[5pt]
 
-\exercise Using 
+\exercise Using
 $$(\vec{\sigma} \cdot \vec{p})^2 = p^2$$
-verify that the eigenstates of helicity are 
-$$\lambda = \pm \frac{\hbar}{2}.$$
+verify that the eigenstates of helicity are
+$$\lambda = \pm \frac{1}{2}.$$
 Hint:  calculate
 $$ (\vec{\sigma} \cdot \vec{p})^2 u_A$$
 by applying Equation~\ref{eqn:helicity-ua} twice.
@@ -1430,7 +1436,7 @@ $$u_B = \frac{\vec{\sigma}\cdot\vec{p}}{E+m} u_A $$
 and then applying Equation~\ref{eqn:helicity-ua} we have
 \begin{equation}
 \label{eqn:lower-helicity}
-u_B = \frac{2 p \lambda/\hbar}{E+m} u_A
+u_B = \frac{2 p \lambda}{E+m} u_A
 \end{equation}
 which can be used to determine $u_B$ for a simultaneous eigenstate of
 helicity and the Hamiltonian once we have $u_A$ for an eigentstate of
@@ -1454,7 +1460,7 @@ a \\
 b \\
 \end{pmatrix}
 $$
-The eigenstate for $\lambda = \frac{\hbar}{2}$ will satisfy:
+The eigenstate for $\lambda = \frac{1}{2}$ will satisfy:
 $$
 \begin{pmatrix}
 \cos \theta & \sin \theta e^{-i\phi} \\
@@ -1472,7 +1478,7 @@ b \\
 \end{pmatrix}
 $$
 From which we infer:
-$$a \cos\theta + \sin \theta e^{-i\phi} = a$$
+$$a \cos\theta + b \sin \theta e^{-i\phi} = a$$
 or:
 $$\frac{b}{a} = \frac{1 - \cos \theta}{\sin \theta} e^{i\phi}$$
 and using the half-angle identities:
@@ -1535,233 +1541,7 @@ Equation~\ref{eqn:helicity-eigenstates} on $u_B$.  Show that this is
 already satisified by our solutions, which are simultaneous
 Eigenstates of the Hamiltonian.
 
-
-
-
-
-
-
-
-
-
-
-
 \end{document}
-
-
-
-\section{Orphaned}
-
-We are now well prepared to calculate the main result from this section, which is to calculate:
-$$S^{-1} \gamma^\mu S$$
-This is called a ``similarity transformation'' and appears frequently in linear algebra and group theory.  We can work this out as:
-\begin{eqnarray*}
-S^{-1} \gamma^\mu S &=& (a_+ - a_- \gamma^0 \gamma^1) \gamma^\mu (a_+ - a_- \gamma^0 \gamma^1)\\
-&=& a_+^2 \, \gamma^\mu - a_-^2 \, \gamma^0 \gamma^1 \gamma^\mu \gamma^0 \gamma^1
-+ a_+ a_- (\gamma^\mu \gamma^0 \gamma^1 - \gamma^0 \gamma^1 \gamma^\mu)\\
-\end{eqnarray*}
-The fundamental property of the gamma matrices is written as the anticommutator:
-$$\{\gamma^\mu, \gamma^\omega\} = 2 g^{\mu \omega}$$
-which more practically means that:
-$$(\gamma^0)^2 = 1, (\gamma^1)^2 = -1, (\gamma^2)^2 = -1, (\gamma^3)^2 = -1$$
-and:
-$$\gamma^\mu \gamma^\omega = -\gamma^\omega \gamma^\mu \hspace{2cm} (u \neq w)$$
-where we see that anti-commuting is almost as good as commuting, you just have to keep track of the minus signs. Using these properties alone, you can work out that:
-$$\gamma^0\gamma^1\gamma^\mu\gamma^0\gamma^1 = \begin{cases}
-- \gamma^\mu & u=0,1 \\
-\gamma^\mu & u=2,3 \\
-\end{cases}$$
-and:
-$$\gamma^\mu \gamma^0 \gamma^1 - \gamma^0 \gamma^1 \gamma^\mu 
-= \begin{cases}
-2\gamma^1 & u=0 \\
-2\gamma^0 & u=1 \\
-0 & u=2,3 \\ 
-\end{cases}$$
-by just working through each case explicitly.  So we can calculate:
-$$S^{-1} \gamma^\mu S = 
-\begin{cases}
-(a_+^2 + a_-^2) \gamma^0 + 2 a_+ a_- \gamma^1 & u=0 \\
-(a_+^2 + a_-^2) \gamma^1 + 2 a_+ a_- \gamma^0 & u=1 \\
-(a_+^2 - a_-^2) \gamma^2                      & u=2 \\
-(a_+^2 - a_-^2) \gamma^3                      & u=3 \\
-\end{cases}$$
-When we apply the identities above something magical occurs:
-$$S^{-1} \gamma^\mu S = 
-\begin{cases}
-\gamma \gamma^0 - \gamma |\beta| \gamma^1 & u=0 \\
-\gamma \gamma^1 - \gamma |\beta| \gamma^0 & u=1 \\
-\gamma^2                      & u=2 \\
-\gamma^3                      & u=3 \\
-\end{cases}$$
-which is just a Lorentz transformation as if $\gamma^\mu$ were a four vector.  Now of course $\gamma^\mu$ is {\bf not} a four vector, so there is more to this story, but for now we can write our most important result as:
-$$S^{-1} \gamma^\mu S = \Lambda^\mu_\omega \gamma^\omega$$
-Technically, we have only shown this for the particular Lorentz transformation $\Lambda^\mu_\omega$ with $\beta$ in the positive $x$-direction, but we can always change coordinates to arrange that this is so.
-
-
-
-
-\section{A Remarkable Matrix}
-Let's start by defining a matrix $S$ and exploring its properties:
-$$S \equiv a_+ \; + \; a_- \, \gamma^0 \, \gamma^1$$
-where:
-$$a_\pm = \pm \sqrt{\frac{\gamma \pm 1}{2}}$$
-with $\gamma$ the usual factor for a Lorentz transformation.  Let's take note right from the start the very useful identities:
-\begin{eqnarray*}
-a_{+}^2 - a_{-}^2 &=& 1 \\
-a_{+}^2 + a_{-}^2 &=& \gamma \\
-2 a_{+} a_{-} &=& -|\beta| \gamma \\
-\end{eqnarray*}
-from which we can see that we can construct every element of the a Lorentz Boost from $a_+$ and $a_-$.
-
-For clarity in what follows, we will explicitly write out the 2x2 identity matrix 
-$$I \equiv \begin{pmatrix} 
-1 & 0 \\
-0 & 1 \\
-\end{pmatrix}
-$$
-even though this is very often left out of expressions when its existence can be inferred implicitly.  Recall also that $\sigma^1$ is the Pauli matrix:
-$$\sigma^1 = \begin{pmatrix} 
-0 & 1 \\ 
-1 & 0 \\
-\end{pmatrix}
-$$
-Now noting that:
-$$\gamma^0 \gamma^1 = 
-\begin{pmatrix} 
-I &  0 \\ 
-0 & -I \\
-\end{pmatrix}
-\;
-\begin{pmatrix} 
-0 & \sigma^1 \\ 
--\sigma^1 & 0 \\
-\end{pmatrix}
-=
-\begin{pmatrix} 
-0 & \sigma^1 \\ 
-\sigma^1 & 0 \\
-\end{pmatrix}
-$$
-so we can write $S$ as:
-$$S = \begin{pmatrix} 
-a_+ I & a_- \, \sigma^1 \\ 
-a_- \, \sigma^1 & a_+ I \\
-\end{pmatrix}
-= \begin{pmatrix} 
-a_+ & 0 & 0   & a_- \\
-0 & a_+ & a_- & 0 \\
-0 & a_- & a_+ & 0 \\
-a_- & 0 & 0 & a_+ \\
-\end{pmatrix}
-$$
-which is rather strikingly beautiful, if nothing else!  
-
-Since $\sigma^1$ and $I$ commute, we can calculate the determinant of $S$ as if it were a 2x2 matrix:
-$$\det(S) = \det((a_+ I)^2 - (a_-\sigma^1)^2) = \det((a_+) (I)^2 - (a_-)^2(\sigma^1)^2)$$
-Recall that:
-$$\sigma^1^2 = 
-\begin{pmatrix} 
-0 & 1 \\ 
-1 & 0 \\
-\end{pmatrix}
-\,
-\begin{pmatrix} 
-0 & 1 \\ 
-1 & 0 \\
-\end{pmatrix}
-=
-\begin{pmatrix} 
-1 & 0 \\ 
-0 & 1 \\
-\end{pmatrix}
-=
-I
-$$
-and so:
-$$\det(S) = \det((a_+^2 - a_-^2) I) = (a_+^2 - a_-^2) \det(I) = 1 $$
-This is non-zero, so $S$ has an inverse.  We can compute the inverse of $S$ as if it was a 2x2 matrix:
-$$S^{-1} = \begin{pmatrix} 
-a_+ I & -a_- \, \sigma^1 \\ 
--a_- \, \sigma^1 & a_+ I \\
-\end{pmatrix}
-$$
-And a quick check shows that indeed:
-$$S^{-1}S = 
-\begin{pmatrix} 
-a_+ I & -a_- \, \sigma^1 \\ 
--a_- \, \sigma^1 & a_+ I \\
-\end{pmatrix}
-\,
-\begin{pmatrix} 
-a_+ I & a_- \, \sigma^1 \\ 
-a_- \, \sigma^1 & a_+ I \\
-\end{pmatrix}
-= 
-\begin{pmatrix} 
-a_+^2I^2-a_-^2\sigma^1^2 & 0 \\ 
-0 & a_+^2I^2-a_-^2\sigma^1^2 \\ 
-\end{pmatrix}
-=
-\begin{pmatrix} 
-I & 0 \\ 
-0 & I \\ 
-\end{pmatrix}
-$$
-We can write this as:
-$$S^{-1} = a_+ - a_- \gamma_0 \gamma_1$$
-We are now well prepared to calculate the main result from this section, which is to calculate:
-$$S^{-1} \gamma^\mu S$$
-This is called a ``similarity transformation'' and appears frequently in linear algebra and group theory.  We can work this out as:
-\begin{eqnarray*}
-S^{-1} \gamma^\mu S &=& (a_+ - a_- \gamma^0 \gamma^1) \gamma^\mu (a_+ - a_- \gamma^0 \gamma^1)\\
-&=& a_+^2 \, \gamma^\mu - a_-^2 \, \gamma^0 \gamma^1 \gamma^\mu \gamma^0 \gamma^1
-+ a_+ a_- (\gamma^\mu \gamma^0 \gamma^1 - \gamma^0 \gamma^1 \gamma^\mu)\\
-\end{eqnarray*}
-The fundamental property of the gamma matrices is written as the anticommutator:
-$$\{\gamma^\mu, \gamma^\omega\} = 2 g^{\mu \omega}$$
-which more practically means that:
-$$(\gamma^0)^2 = 1, (\gamma^1)^2 = -1, (\gamma^2)^2 = -1, (\gamma^3)^2 = -1$$
-and:
-$$\gamma^\mu \gamma^\omega = -\gamma^\omega \gamma^\mu \hspace{2cm} (u \neq w)$$
-where we see that anti-commuting is almost as good as commuting, you just have to keep track of the minus signs. Using these properties alone, you can work out that:
-$$\gamma^0\gamma^1\gamma^\mu\gamma^0\gamma^1 = \begin{cases}
-- \gamma^\mu & u=0,1 \\
-\gamma^\mu & u=2,3 \\
-\end{cases}$$
-and:
-$$\gamma^\mu \gamma^0 \gamma^1 - \gamma^0 \gamma^1 \gamma^\mu 
-= \begin{cases}
-2\gamma^1 & u=0 \\
-2\gamma^0 & u=1 \\
-0 & u=2,3 \\ 
-\end{cases}$$
-by just working through each case explicitly.  So we can calculate:
-$$S^{-1} \gamma^\mu S = 
-\begin{cases}
-(a_+^2 + a_-^2) \gamma^0 + 2 a_+ a_- \gamma^1 & u=0 \\
-(a_+^2 + a_-^2) \gamma^1 + 2 a_+ a_- \gamma^0 & u=1 \\
-(a_+^2 - a_-^2) \gamma^2                      & u=2 \\
-(a_+^2 - a_-^2) \gamma^3                      & u=3 \\
-\end{cases}$$
-When we apply the identities above something magical occurs:
-$$S^{-1} \gamma^\mu S = 
-\begin{cases}
-\gamma \gamma^0 - \gamma |\beta| \gamma^1 & u=0 \\
-\gamma \gamma^1 - \gamma |\beta| \gamma^0 & u=1 \\
-\gamma^2                      & u=2 \\
-\gamma^3                      & u=3 \\
-\end{cases}$$
-which is just a Lorentz transformation as if $\gamma^\mu$ were a four vector.  Now of course $\gamma^\mu$ is {\bf not} a four vector, so there is more to this story, but for now we can write our most important result as:
-$$S^{-1} \gamma^\mu S = \Lambda^\mu_\omega \gamma^\omega$$
-Technically, we have only shown this for the particular Lorentz transformation $\Lambda^\mu_\omega$ with $\beta$ in the positive $x$-direction, but we can always change coordinates to arrange that this is so.
-
-
-
-
-\end{document}
-
-
 
 
 % Exercise Ideas:

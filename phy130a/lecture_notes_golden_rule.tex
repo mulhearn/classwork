@@ -15,7 +15,7 @@
 \begin{document}
 
 
-\title{PHY 130A \\ Lecture Notes: \\ 
+\title{PHY 130A \\ Lecture Notes: \\
 Fermi's Golden Rule }
 \author{Michael Mulhearn}
 
@@ -33,35 +33,36 @@ interaction is time dependent and therefore has no energy eigenstates.
 The interaction picture factors out the simple and well-understood
 time dependence from $H^{(0)}$ from the to-be-determined time
 dependence of $\delta H(t)$ as:
-$$\ket{ \Psi(t) } = \sum_m c_m(t) \exp\left( -i \frac{E_m t}{\hbar} \right) \ket{m}$$
-The $\{\ket{m}\}$ are still a basis for the full Hamiltonian $H$, even
-though they are not eigenstates, so this is certainly a valid
-expansion, due to the time dependent coefficients $c_m(t)$.  This
-just says that $\ket{\Psi(t)}$ can be expressed at any time as
-a sum of basis vectors, which is certainly true.  We will know it is
-useful if it simplifies the problem.  Specifically, if the time
-dependence in the coefficients is due exclusively to $\delta H(t)$.
+$$\ket{ \Psi(t) } = \sum_m c_m(t) \exp\left( -i E_m t \right) \ket{m}$$
+Note we are using natural units with $\hbar=1$.  The $\{\ket{m}\}$ are
+still a basis for the full Hamiltonian $H$, even though they are not
+eigenstates, so this is certainly a valid expansion, due to the time
+dependent coefficients $c_m(t)$.  This just says that $\ket{\Psi(t)}$
+can be expressed at any time as a sum of basis vectors, which is
+certainly true.  We will know it is useful if it simplifies the
+problem.  Specifically, if the time dependence in the coefficients is
+due exclusively to $\delta H(t)$.
 
 Applying the SE:
 \begin{eqnarray*}
-  i \hbar \frac{\partial}{\partial t} \, \ket{\psi(t)} \; &=& \; H \, \ket{\psi(t)} \\[5pt]
+  i \frac{\partial}{\partial t} \, \ket{\psi(t)} \; &=& \; H \, \ket{\psi(t)} \\[5pt]
   &=& H^{(0)} \, \ket{\psi(t)} + \delta H(t) \, \ket{\psi(t)} \\[5pt]
-\left( i \hbar \frac{\partial}{\partial t} -  H^{(0)}\right) \ket{\psi(t)} \; &=& \; \delta H(t) \ket{\psi(t)} \\[5pt]
+\left( i \frac{\partial}{\partial t} -  H^{(0)}\right) \ket{\psi(t)} \; &=& \; \delta H(t) \ket{\psi(t)} \\[5pt]
 \end{eqnarray*}
 where we have arranged things in the hope of getting some cancellation on the left hand side:
 \begin{eqnarray*}
-\left( i \hbar \frac{\partial}{\partial t} -  H^{(0)}\right) \ket{\psi(t)} \; &=& \;
-\sum_m \left\{ i \hbar \dt{c_m}(t) + E_m c_m(t) - E_m c_m(t) \right\} \exp\left( -i \frac{E_m t}{\hbar} \right) \ket{m} \\
+\left( i \frac{\partial}{\partial t} -  H^{(0)}\right) \ket{\psi(t)} \; &=& \;
+\sum_m \left\{ i \dt{c_m}(t) + E_m c_m(t) - E_m c_m(t) \right\} \exp\left( -i E_m t \right) \ket{m} \\
   &=&
-\sum_m \, i\hbar \dt{c_m}(t)  \, \exp\left( -i \frac{E_m t}{\hbar} \right) \ket{m}
+\sum_m \, i \dt{c_m}(t)  \, \exp\left( -i E_m t \right) \ket{m}
 \end{eqnarray*}
 and indeed we do.  Meanwhile the RHS is:
-$$\delta H(t) \ket{\psi(t)} = \sum_m \, c_m(t)  \, \exp\left( -i \frac{E_m t}{\hbar} \right)
+$$\delta H(t) \ket{\psi(t)} = \sum_m \, c_m(t)  \, \exp\left( -i E_m t \right)
 \left(\delta H(t) \ket{m}\right)$$
 and so we cannot match coefficients term by term in the expansion because:
 $$\ket{m} \; \neq \; \delta H(t) \, \ket{m} $$
 So changing dummy variables to prepare for what follows:
-$$\delta H(t) \ket{\psi(t)} = \sum_n \, c_n(t)  \, \exp\left( -i \frac{E_n t}{\hbar} \right)
+$$\delta H(t) \ket{\psi(t)} = \sum_n \, c_n(t)  \, \exp\left( -i E_n t \right)
 \left(\delta H(t) \ket{n}\right)$$
 And inserting a complete set:
 \begin{eqnarray*}
@@ -70,25 +71,25 @@ And inserting a complete set:
 \end{eqnarray*}
 And now putting back LHS equal to RHS
 $$
-\sum_m \, i \hbar \dt{c_m}(t)  \, \exp\left( -i \frac{E_m t}{\hbar} \right) \ket{m}
-= \sum_m \sum_n \, c_n(t)  \, \exp\left( -i \frac{E_n t}{\hbar} \right)
-\braket{m | \delta H(t) | n} 
+\sum_m \, i \dt{c_m}(t)  \, \exp\left( -i E_m t \right) \ket{m}
+= \sum_m \sum_n \, c_n(t)  \, \exp\left( -i E_n t \right)
+\braket{m | \delta H(t) | n}
 $$
 Where we can now match term by term to obtain:
 \begin{equation}
 \label{eqn:cmdot}
-\dt{c_m}(t)  = - \frac{i}{\hbar} \sum_n \, c_n(t)  \, \exp\left( i \frac{(E_m - E_n) t}{\hbar} \right)
-\braket{m | \delta H(t) | n}  
+\dt{c_m}(t)  = -i \sum_n \, c_n(t)  \, \exp\left( i (E_m - E_n) t \right)
+\braket{m | \delta H(t) | n}
 \end{equation}
 This is everything we hoped for!  Notice that $H^{(0)}$ operator does
 not appear explicitly in Equation~\ref{eqn:cmdot}.  The unperturbed
 Hamiltonian determines the eigenstates $\ket{m}$ and the energies
 $E_m$, but its impact on the time-dependence of the coefficients
 $c_m(t)$ is solely through the phase factor:
-$$\exp\left( i \frac{(E_m - E_n) t}{\hbar} \right)$$
+$$\exp\left( i (E_m - E_n) t \right)$$
 The interaction picture
 \footnote{Formally, in the interaction picture the operators evolve as
-$$O(t) = {\rm exp}(iH^{(0)}t/\hbar) \; O \; {\rm exp}(-iH^{(0)}t/\hbar)$$
+$$O(t) = {\rm exp}(iH^{(0)}t) \; O \; {\rm exp}(-iH^{(0)}t)$$
 while the states carry the remaining time dependence.  Our derivation
 here achieves exactly the same separation of time dependence without
 invoking time evolution of the operators.}  has factored out the time
@@ -107,7 +108,7 @@ invoking time evolution of the operators.}  has factored out the time
     \node at (-0.5, 0.5) {$\delta H(t)$};
     \node at (2,  -0.75) {$H = H^{(0)}$};
     \node at (6,  -0.75)  {$H = H^{(0)} + V$};
-    \node at (10, -0.75) {$H = H^{(0)}$};    
+    \node at (10, -0.75) {$H = H^{(0)}$};
 \end{tikzpicture}
 \end{center}
 \caption{\label{fig:simple-perturbation} The interaction potential $V$
@@ -124,7 +125,7 @@ energy eigenstate $\ket{i}$ with
 $$H^{(0)} \ket{i} = E_i \ket{i}$$
 For $t \leq 0$, the interaction is absent, and $\ket{i}$ is a stationary state of total Hamiltonian,
 leading to the familiar time dependence:
-$$\ket{\Psi(t)} = \exp\left( -i \frac{E_i t}{\hbar}\right) \;
+$$\ket{\Psi(t)} = \exp\left( -i E_i t\right) \;
 \ket{i} \hspace{2cm} (t \leq 0)$$
 This implies that:
 \begin{equation*}
@@ -167,25 +168,38 @@ $$c_n(t) \sim c_n(0) = \delta_{ni}$$
 to obtain a first-order estimate:
 \begin{equation}
 \label{eqn:cmdot-first-order}
-\dt{c_m}(t)  = - \frac{i}{\hbar}  \, \exp\left( i \frac{(E_m - E_i) t}{\hbar} \right)
-\braket{m | \delta H(t) | i}   
+\dt{c_m}(t)  = -i  \, \exp\left( i (E_m - E_i) t \right)
+\braket{m | \delta H(t) | i}
 \end{equation}
 For any final state $\ket{f}$, we can estimate the corresponding coefficient for $t \geq T$ by an integral:
-$$c_f(T) = - \frac{i}{\hbar}  \; V_{fi} \; \int_0^T \exp\left( i \omega_{fi} t \right) \, dt$$
+$$c_f(T) = -i  \; V_{fi} \; \int_0^T \exp\left( i \omega_{fi} t \right) \, dt$$
 where we define the interaction potential matrix element:
 \begin{equation}
 V_{mn} = \braket{m|V|n}
 \end{equation}
 and the angular frequency:
 \begin{equation}
-\omega_{mn} = \frac{E_m - E_n}{\hbar}
+\omega_{mn} = E_m - E_n
 \end{equation}
-There is one subtlety, however.  This prescription is only valid for $f
-\neq i$.  At first order
-$$c_i(t) = 1.$$
-Although probability must flow out of the initial state as other
+There is one subtlety, however.  This prescription is only valid for
+$m \neq i$.  For $m=i$, Equation~\ref{eqn:cmdot} can be integrated to obtain:
+$$c_i(t) = 1 - i t \braket{i \mid V \mid i}$$
+We are going to impose\footnote{I'm being careful with wording here,
+this is more than a simplifying assumption.  It must be approximately
+true for perturbation theory to work in the first place.  Then we can,
+for example, move the zero point energy (slightly, we know $V$ is
+small) such that the condition is met.  The energy shift won't effect
+physically observable differences like $E_m - E_n$.  If you want to
+understand this significant issue more thoroughly, look for the
+``Optical Theorem'' in a text like Sakurai.  In Section 2.3.6, Thomson
+simply excludes $i$ from the sum with no explanation and moves
+on... perhaps he is the wiser!}  that:
+$$\braket{i \mid V \mid i} = 0$$
+which will make the calculations that follow significantly simpler.  At first order
+$$c_i(t) = 1$$
+Although probability must flow out of the initial state as the other
 coefficients become nonzero, probabilities are quadratic in the
-amplitudes, and $c_i(t)$ only changes at second order.
+amplitudes, and so this is correct at first order.
 
 \begin{figure}[thb]
 \begin{center}
@@ -199,13 +213,13 @@ $$\int_0^T e^{i\omega t} \, dt = e^{i\omega T/2} \frac{\sin(\omega T/2)}{\omega/
 we determine the first-order transition probability (for $f \neq i$) as:
 \begin{equation}
 \label{eqn:pfi-first-order}
-P_{fi}(T) = |c_f(T)|^2 = \frac{|V_{fi}|^2}{\hbar^2} \; \left( \frac{\sin(\omega_{fi} T / 2)}{\omega_{fi} / 2} \right)^2
+P_{fi}(T) = |c_f(T)|^2 = |V_{fi}|^2 \; \left( \frac{\sin(\omega_{fi} T / 2)}{\omega_{fi} / 2} \right)^2
 \end{equation}
 which is plotted in Fig.~\ref{fig:pfi-osc}.  Notice that $T$ appears in the numerator, but not the denominator, of the factor:
 \begin{equation}
 F_T(\omega_{fi}) = \left( \frac{\sin(\omega_{fi} T / 2)}{\omega_{fi} / 2} \right)^2
 \end{equation}
-In the next section, we shall see that this factor saves the day for us, twice.  
+In the next section, we shall see that this factor saves the day for us, twice.
 
 
 \section{Fermi's Golden Rule}
@@ -242,7 +256,7 @@ the Appendix.
 
 Using the main result from the previous section
 (Equation~\ref{eqn:pfi-first-order}) we now have:
-$$\sum_{\Delta f} P_{fi}(T) = \frac{1}{\hbar^2} \int_{\Delta f} \;
+$$\sum_{\Delta f} P_{fi}(T) = \int_{\Delta f} \;
 \rho(E_f) \; |V_{fi}|^2 \; \left( \frac{\sin(\omega_{fi} T /
   2)}{\omega_{fi} / 2} \right)^2 \; dE_f$$ At this point, a reasonable
 human being would consider giving up.  We don't know anything specific
@@ -273,21 +287,21 @@ which requires $E_f = E_i$.
 
 In light of these developments, we are justified to rewrite our
 integral as:
-$$\sum_{\Delta f} P_{fi} = \frac{1}{\hbar^2} \rho(E_i) \; |V_{fi}|^2 \;
-\int_{-\infty}^{+\infty} \; 
+$$\sum_{\Delta f} P_{fi} = \rho(E_i) \; |V_{fi}|^2 \;
+\int_{-\infty}^{+\infty} \;
 \left( \frac{\sin(\omega_{fi} T / 2)}{\omega_{fi} / 2} \right)^2 \; dE_f$$
 where we have taken $E_f = E_i$ and pulled out the constant factors
 $\rho(E_f)=\rho(E_i)$ and $|V_{fi}|^2$..  We have also extended the
 range of integration of $E_f$ to $(-\infty, +\infty)$, which is
 justified because the integral is zero outside of a very narrow range.
 The remaining integral is calculable, and yields:
-$$\sum_{\Delta f} P_{fi} = \frac{2 \pi}{\hbar} \rho(E_i) \; |V_{fi}|^2 \; T $$
+$$\sum_{\Delta f} P_{fi} = 2 \pi \rho(E_i) \; |V_{fi}|^2 \; T $$
 and recalling:
 $$\Gamma_{fi} = \frac{\sum_{\Delta f} P_{fi}}{T}$$
 we have:
 \begin{equation}
 \label{eqn:fgr}
-\Gamma_{fi} \; = \; \frac{2 \pi}{\hbar} \; \rho(E_i) \; |V_{fi}|^2
+\Gamma_{fi} \; = \; 2 \pi \; \rho(E_i) \; |V_{fi}|^2
 \end{equation}
 This result is known as Fermi's Golden Rule (FGR), and it is the foundation of
 particle physics.
@@ -296,6 +310,7 @@ We calculated this result with first-order time-dependent perturbation
 theory, so $V_{fi}$ is just the first term in a series that turns out
 to be:
 \begin{equation}
+\label{eqn:tfi-expansion}
 T_{fi} = \braket{f|V|i} + \sum_{j \neq i} \frac{\braket{f|V|j}\braket{j|V|i}}{E_i-E_j} + \ldots
 \end{equation}
 Further noting that
@@ -304,13 +319,14 @@ $$\rho(E_i) = \left. \left| \frac{dn}{dE_f} \right| \right|_{E_i} = \int \left| 
 we can write FGR as:
 \begin{equation}
 \label{eqn:nrfgr}
-\Gamma_{fi} \; = \; \frac{2 \pi}{\hbar} \; \int |T_{fi}|^2 \; \delta(E_f - E_i) \; dn
+\Gamma_{fi} \; = \; 2 \pi \; \int |T_{fi}|^2 \; \delta(E_f - E_i) \; dn
 \end{equation}
 The rate of a process is dependent on the transition matrix element squared
 ($|T_{fi}|^2$) which describes the dynamics of the interaction.  It
 also depends on the phase space available, consistent with
 conservation of energy: $\delta(E_f - E_i) \; dn$.  In the next
 section, will clarify the phase space integral.
+
 
 \section{Lorentz Invariant Phase Space}
 
@@ -372,7 +388,7 @@ In the exercises, you will show that:
 \label{eqn:invdeltafour}
 \delta^4(\Lambda p) = \delta^4(p)
 \end{equation}
-where $\Lambda$ is a Lorentz transformation.  
+where $\Lambda$ is a Lorentz transformation.
 That is, the four-dimensional $\delta$-function is Lorentz invariant.\\[4pt]
 
 \noindent
@@ -415,7 +431,7 @@ into the corresponding non-relativistic equations.\\[4pt]
 \noindent
 {\bf Exercise:} Starting from the completeness equation from NR QM:
 $$1 = \int \frac{d^3p}{(2\pi)^3} \ket{p} \bra{p},$$
-apply the substitution of Equation~\ref{eqn:covsub}, 
+apply the substitution of Equation~\ref{eqn:covsub},
 read off the phase space integral consistent with the new normalization, and compare to Lorentz Invariant Phase Space.  $\square$\\
 
 \section{Lorentz Covariant Form of Fermi's Golden Rule}
@@ -465,13 +481,13 @@ make it so.  Noting that:
 $$T_{fi} = \braket{p_a \, p_b \, \ldots | T | p_1 \, p_2 \, \ldots}$$
 we can apply the substitution of Equation~\ref{eqn:covsub} to obtain the combined substitution:
 \begin{equation}
- \label{eqn:subm}  
- |T_{fi}|^2 \to \frac{|M_{fi}|^2/\hbar^3}{\left( \prod 2\,E_a /\hbar^3 \right) \left( \prod 2\,E_i \right)}
+ \label{eqn:subm}
+ |T_{fi}|^2 \to \frac{|M_{fi}|^2}{\left( \prod 2\,E_a \right) \left( \prod 2\,E_i \right)}
 \end{equation}
 where $M_{fi}$ is the new Lorentz-invariant matrix element that will replace $T_{fi}$ in our calculations, and the factors of $\hbar$ are worked out in the exercises of Section~\ref{sec:volume-normalization}.  Applying Equations~\ref{eqn:nrphin} and \ref{eqn:subm} to Fermi's Golden Rule as written in Equation~\ref{eqn:nrfgr}, to obtain:
 \begin{equation}
 \label{eqn:covfgr}
-\Gamma_{fi} \; = \; \frac{1}{\hbar^4 \prod (2 E_a/\hbar^3)} \; \int |\mathcal{M}_{fi}|^2 \; (2\pi)^4 \delta^4(\sum p_a - \sum p_1) 
+\Gamma_{fi} \; = \; \frac{1}{\prod (2 E_a)} \; \int |\mathcal{M}_{fi}|^2 \; (2\pi)^4 \delta^4(\sum p_a - \sum p_1)
 \prod_i \frac{d^3p_i}{(2 E_i) \, (2\pi)^3 }
 \end{equation}
 The integral is manifestly Lorentz invariant (recall that the four-dimensional $\delta$-function is invariant as in Equation~\ref{eqn:invdeltafour}) so this form of FGR is covariant if $\Gamma_{fi}$ transforms as:
@@ -485,7 +501,7 @@ $$a \to 1 + 2$$
 in which FGR becomes:
 \begin{equation}
 \label{eqn:fgr-two-body-decay}
-\Gamma_{fi} \; = \; \frac{1}{\hbar 2 E_a} \; \int |\mathcal{M}_{fi}|^2 \; (2\pi)^4 \delta^4(p_1 + p_2 - p_a)
+\Gamma_{fi} \; = \; \frac{1}{2 E_a} \; \int |\mathcal{M}_{fi}|^2 \; (2\pi)^4 \delta^4(p_1 + p_2 - p_a)
 \, \frac{d^3p_1}{(2 E_1) \, (2\pi)^3 } \frac{d^3p_2}{(2 E_2) \, (2\pi)^3 }
 \end{equation}
 where, as always, we take care that $E_1$ and $E_2$ are functions of
@@ -502,14 +518,14 @@ $$\delta^4(p_1 + p_2 - p_a) = \delta(E_1+E_2 - m_a) \, \delta^3(\vec{p}_1+\vec{p
 The three-dimensional delta functions kills the integral over $d^3 p_2$, setting:
 $$\vec{p}_2 = -\vec{p}_1$$
 so that:
-$$\Gamma_{fi} \; = \; \frac{1}{32 \pi^2 m_a \hbar} \; \int |\mathcal{M}_{fi}|^2 \; \delta(E_1 + E_2 - m_a)
+$$\Gamma_{fi} \; = \; \frac{1}{32 \pi^2 m_a} \; \int |\mathcal{M}_{fi}|^2 \; \delta(E_1 + E_2 - m_a)
 \, \frac{d^3p_1}{E_1 E_2}$$
 Defining:
 $$p \equiv |\vec{p}_1|$$
 and changing to spherical coordinates:
 $$d^3 p_1 = p^2 dp d\Omega$$
 we have
-$$\Gamma_{fi} \; = \; \frac{1}{32 \pi^2 m_a \hbar} \; \int |\mathcal{M}_{fi}|^2 \; \delta(u - m_a)
+$$\Gamma_{fi} \; = \; \frac{1}{32 \pi^2 m_a} \; \int |\mathcal{M}_{fi}|^2 \; \delta(u - m_a)
 \, \frac{p^2 dp d\Omega}{E_1 E_2}$$
 where $d\Omega = d\phi d\cos\theta$ is the solid angle and:
 $$u \equiv E_1 + E_2$$
@@ -518,12 +534,12 @@ $$\frac{du}{dp} = \frac{E_1 + E_2}{E_1 E_2} \, p = \frac{up}{E_1 E_2}$$
 and so:
 $$\frac{du}{u} = \frac{p\, dp}{E_1 E_2}$$
 We now have:
-$$\Gamma_{fi} \; = \; \frac{1}{32 \pi^2 m_a \hbar} \; \int |\mathcal{M}_{fi}|^2 \; \delta(u - m_a) \, \frac{p}{u}\, du d\Omega$$
+$$\Gamma_{fi} \; = \; \frac{1}{32 \pi^2 m_a} \; \int |\mathcal{M}_{fi}|^2 \; \delta(u - m_a) \, \frac{p}{u}\, du d\Omega$$
 The last delta function kills the integral over u setting:
 $$u = E_1 + E_2 = m_a$$
 and so:
 $$
-\Gamma_{fi} \; = \; \frac{p^*}{32 \pi^2 m_a^2 \hbar} \; \int |\mathcal{M}_{fi}|^2  d\Omega$$
+\Gamma_{fi} \; = \; \frac{p^*}{32 \pi^2 m_a^2} \; \int |\mathcal{M}_{fi}|^2  d\Omega$$
 where:
 $$p^* = |\vec{p}_1|$$
 calculated for
@@ -574,12 +590,13 @@ takes.  Griffiths evades the topic entirely by just giving FGR for
 decays and cross-sections separately without any attempt at a
 derivation.  We are going to show how $V$ cancels beautifully when
 explicitly accounted for, thus justifying taking Thomson's approach
-and simply setting $V=1$ for calculations.
+and simply setting $V=1$ for calculations.  While we are at it, we
+shall restore $\hbar$ as well, in this section only.
 
 To normalize to one particle per volume $V$ we put:
 $$\ket{\Psi} \to \ket{\Psi}/\sqrt{V}$$
 Then we need:
-$$d\Phi \to V d\Phi$$  
+$$d\Phi \to V d\Phi$$
 which is no longer Lorentz Invariant.  However:
 \begin{equation*}
  \int d\Phi \, \ket{p}\bra{p}
@@ -596,7 +613,7 @@ $$\sum_{\Delta f} \to \int_{\Delta f} \, dn = V \int_{\Delta f} \,
 So our prescription for modifying the NR FGR becomes:
 \begin{equation}
 \label{eqn:voltfi}
-|T_{fi}|^2 \to \frac{(V/\hbar^3) |M_{fi}|^2}{(\prod 2 (V/\hbar^3) E_a) (\prod 2 (V/\hbar^3) E_i) }  
+|T_{fi}|^2 \to \frac{(V/\hbar^3) |M_{fi}|^2}{(\prod 2 (V/\hbar^3) E_a) (\prod 2 (V/\hbar^3) E_i) }
 \end{equation}
 and
 \begin{equation}
@@ -610,7 +627,7 @@ volume factor in FGR cancels a volume factor in the flux.\\[4pt]
 
 \noindent
 {\bf Exercise:} Set $V=1$ in Equations~\ref{eqn:voltfi} and \ref{eqn:volps}
-and apply the substitution to Fermi's Golden Rule as written in Equation~\ref{eqn:nrfgr}.  Show that you obtain Equation~\ref{eqn:covfgr} including the factors of $\hbar$.\\[5pt]
+and apply the substitution to Fermi's Golden Rule as written in Equation~\ref{eqn:nrfgr}.  Show that you obtain Equation~\ref{eqn:covfgr} when $\hbar = 1$.\\[5pt]
 
 \noindent
 {\bf Exercise:} Show that Equation \ref{eqn:fgr-two-body-decay} is unchanged when using the substitutions in Equations~\ref{eqn:voltfi} and \ref{eqn:volps}, which explicitly including the volume factors,instead of Equations~\ref{eqn:nrphin} and \ref{eqn:subm}.\\[5pt]
@@ -650,7 +667,7 @@ L = \frac{v_a + v_b}{V}.
 \end{equation}
 which contains the factors that influence the rate independently of the dynamics of the interaction.  We define the interaction cross section ($\sigma$) as the proportionality constant between the luminosity ($L$) and the rate ($\Gamma$):
 \begin{equation}
-\label{eqn:rate-sigma}  
+\label{eqn:rate-sigma}
 \Gamma = L \, \sigma
 \end{equation}
 Note that $\sigma$ must have units of area because
@@ -666,7 +683,7 @@ another.
 Fermi's Golden Rule determines the rate gamma for the scattering process
 $$a + b \to 1 + 2 + 3 + \ldots$$
 as:
-$$\Gamma_{fi} \; = \; \frac{1}{V} \, \frac{\hbar^2}{ 2 E_a 2 E_b} \;
+$$\Gamma_{fi} \; = \; \frac{1}{V} \, \frac{1}{ 2 E_a 2 E_b} \;
 \int |\mathcal{M}_{fi}|^2 \; (2\pi)^4 \delta^4(\sum p_a - \sum p_1)
 \prod_i \frac{d^3p_i}{(2 E_i) \, (2\pi)^3 }$$ where we are (for now)
 keeping the volume factors ($V$) explicit, by using the substitutions
@@ -675,7 +692,7 @@ for the two-body decay of Equation~\ref{eqn:fgr-two-body-decay}, the
 volume factors $V$ do not all cancel at this stage.  The additional
 initial state particle brings in one more factor of $V$ which is not
 cancelled.  However, using Equations~\ref{eqn:lumi} and \ref{eqn:rate-sigma} we have:
-$$\sigma \; = \; \frac{\hbar^2}{4 E_a E_b (v_a + v_b)} \;
+$$\sigma \; = \; \frac{1}{4 E_a E_b (v_a + v_b)} \;
 \int |\mathcal{M}_{fi}|^2 \; (2\pi)^4 \delta^4(\sum p_a - \sum p_1)
 \prod_i \frac{d^3p_i}{(2 E_i) \, (2\pi)^3 }$$
 As before, the integral is manifestly Lorentz invariant, so $\sigma$ will transform as $1/F$ where:
@@ -684,7 +701,7 @@ In the exercise below, you will show that $F$ can be written in the
 equivalent form (for this particular frame):
 \begin{equation}
 \label{eqn:lorentz-invariant-flux}
-F = 4 \sqrt{(p_a\cdot p_b)^2 - (m_a m_b)^2}  
+F = 4 \sqrt{(p_a\cdot p_b)^2 - (m_a m_b)^2}
 \end{equation}
 which is manifestly Lorentz invariant.\\[4pt]
 
@@ -695,7 +712,7 @@ in a frame where the velocities of $a$ and $b$ are collinear, and show that:
 $$F = 4 E_a E_b (v_a + v_b) = 4(E_a p_b + E_b p_a) \quad \square$$
 
 We can therefore write the cross-section as:
-$$\sigma \; = \; \frac{\hbar^2}{4 \sqrt{(p_a\cdot p_b)^2 - (m_a m_b)^2}} \;
+$$\sigma \; = \; \frac{1}{4 \sqrt{(p_a\cdot p_b)^2 - (m_a m_b)^2}} \;
 \int |\mathcal{M}_{fi}|^2 \; (2\pi)^4 \delta^4(\sum p_a - \sum p_1)
 \prod_i \frac{d^3p_i}{(2 E_i) \, (2\pi)^3 }$$
 which is manifestly Lorentz Invariant.  This is excellent news, as the
@@ -714,9 +731,9 @@ experiment.\\[5pt]
 In the exercise below, you will show that in the CMS, the golden rule for the two-body scattering  cross-section is:
 \begin{equation}
 \label{eqn:fgr-sigma-two-body}
-\sigma = \frac{\hbar^2 p_f^*}{64 \pi^2 s p_i^*} \int |\mathcal{M}_{fi}|^2 d\Omega
+\sigma = \frac{p_f^*}{64 \pi^2 s p_i^*} \int |\mathcal{M}_{fi}|^2 d\Omega
 \end{equation}
-where $s = (p_a + p_b)^2$ is the total energy in the CMS.  Hint: show that the 
+where $s = (p_a + p_b)^2$ is the total energy in the CMS.  Hint: show that the
 
 \noindent
 {\bf Exercise: } Show that in the CMS, the Lorentz invariant flux is
@@ -739,7 +756,7 @@ Assuming periodic boundary conditions:
 \begin{eqnarray*}
   k_x L &=& 2 \pi n_x  \\
   k_y L &=& 2 \pi n_y  \\
-  k_z L &=& 2 \pi n_z  
+  k_z L &=& 2 \pi n_z
 \end{eqnarray*}
 so that
 $$dn = dn_x dn_y dn_z = \left( \frac{L}{2\pi} \right)^3 dk_x dk_y dk_z$$
@@ -754,7 +771,7 @@ in terms of the momentum $p = \hbar k$, we have:
 dn = \frac{V/\hbar^3}{(2\pi)^3} \; d^3p
 \end{equation}
 which reproduces the single-particle phase-space factors in
-Equation~\ref{eqn:volps}, including the factors of $\hbar$.  Note that
+Equation~\ref{eqn:volps}, including the factors of $\hbar$, which we have restored for this purpose.  Note that
 in the convention here, $dn$ is dimensionless, consistent with our
 framing of the problem as counting discrete states of a particle
 constrained to a finite volume $V$.
@@ -769,11 +786,11 @@ dn   &=& \left( \frac{L}{2\pi} \right)^3 \left(\frac{m}{\hbar^2 k}\right) d\Omeg
 \end{eqnarray*}
 where we have identified the (classical) density of states:
 \begin{equation}
- \rho(E) \equiv \left| \frac{dn}{dE} \right| = \left( \frac{L}{2\pi} \right)^3 \left(\frac{m}{\hbar^2 k}\right) d\Omega 
+ \rho(E) \equiv \left| \frac{dn}{dE} \right| = \left( \frac{L}{2\pi} \right)^3 \left(\frac{m}{\hbar^2 k}\right) d\Omega
 \end{equation}
 with:
 \begin{equation}
- dn = \rho(E) \, dE 
+ dn = \rho(E) \, dE
 \end{equation}
 
 \section{Math Tools}
@@ -824,11 +841,61 @@ Now identify $\delta(x)$ with $\theta'(x)$ and simplifying:
                      &=& \frac{\delta(x-a)+\delta(x + a)}{2|a|}\\
 \end{eqnarray*}
 
-
+\section{Second-Order Time-Dependent Perturbation Theory}
+In Equation~\ref{eqn:tfi-expansion} we reported the first two terms in
+the perturbative expansion of $T_{fi}$ as:
+\begin{equation}
+\label{eqn:result-second-order}
+T_{fi} = \braket{f|V|i} + \sum_{k \neq i} \frac{\braket{f|V|k}\braket{k|V|i}}{E_i-E_k} + \ldots
+\end{equation}
+In this section, we will derive the second-order term using the same
+iterative approach that we used to derive Fermi's Golden Rule.
+Our starting point is Equation~\ref{eqn:cmdot}, which we integrate
+(for $0 \leq t \leq T$) to find the recursion relationship for the
+order $(n+1)$ transition amplitude to a final state $f$:
+\begin{equation}
+\label{eqn:cm-recursion}
+c_f^{(n+1)}(t)  = -i  \, \sum_{k} \, \int_0^t \, dt \, c_k^{(n)} \, e^{ i \omega_{fk} t }
+\, \braket{f | V | k}
+\end{equation}
+where
+$$\omega_{fk} \equiv E_f - E_k$$
+At zeroeth order, we have $c_f^{(0)}(t) = \delta_{fi}$, and
+Equation~\ref{eqn:cm-recursion} yields:
+\begin{equation*}
+c_f^{(1)}(t)  = -i  \, \braket{f | V | i} \, \int_0^t \, dt \, e^{ i \omega_{fi} t } \,
+\end{equation*}
+which we integrate to obtain the first order approximation (putting $f \to k$ for what follows):
+$$c_k^{(1)}(t) = \braket{k|V|i} \, \frac{e^{i \, \omega_{ki} \, t} - 1}{E_i-E_k}$$
+valid for $k \neq i$.  We substitute
+the first order result into Equation~\ref{eqn:cm-recursion} to obtain the second-order contribution to the transition amplitude for state $f$:
+\begin{align*}
+c_f^{(2)}(t) &= -i \sum_{k \neq i} \frac{\braket{f | V | k}
+  \braket{k | V | i}}{E_i - E_k} \; \int_0^t \, e^{ i \omega_{fi} t} \left(  1 \, - \,  e^{ i \omega_{ik} t} \right) dt \\
+\end{align*}
+where $k=i$ does not contribute because
+$$\braket{i | V | i} = 0$$ as discussed in the derivation of the first
+order result.  Rearranging we have:
+\begin{align*}
+  c_f^{(2)}(t)  &= -i \, \left( \int_0^t \, e^{ i \omega_{fi} t} \, dt \right) \;
+  \sum_{k \neq i} \frac{\braket{f | V | k}
+  \braket{k | V | i}}{E_i - E_k} \;  \quad + \quad X \\
+\end{align*}
+Recall from the first-order derivation that the integral
+$$\int_0^t \, e^{ i \omega_{fi} t} \, dt$$
+is a nascent $\delta$-function, and it enforces energy conservation
+between the initial and final state.  The sum across $k$ must be away
+from $i$ but is otherwise unconstrained, and includes contributions
+from intermediate states far from $E_i$ and $E_f$.  The $X$ term has
+the same nascent delta function, but an additional $k$-dependent
+factor:
+$$e^{ i \omega_{ik} t}$$
+which oscillates wildly for $k$ away from $i$ restricting the sum
+across $k$ and rendering its contribution negligible.  We conclude that
+$X=0$.  Comparing first order to second order, we conclude that:
+$$T_{fi}^{(2)} = \sum_{k \neq i} \frac{\braket{f|V|k}\braket{k|V|i}}{E_i-E_k}$$
+as anticipated.
 
 
 
 \end{document}
-
-
-
